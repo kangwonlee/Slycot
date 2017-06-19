@@ -10,11 +10,9 @@ class CFlow(object):
         self.cflow_path = cflow_path
         self.calls_dict = {}
         self.called_dict = {}
-        self.run_result = ''
 
     def run(self, cmd):
         cp = subprocess.run([self.cflow_path, cmd], stdout=subprocess.PIPE)
-        self.run_result = cp.stdout
 
         result_lines = cp.stdout.decode().splitlines()
 
