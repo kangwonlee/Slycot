@@ -54,7 +54,7 @@ def tree_path(path):
 
 def main():
     if 2 <= len(sys.argv):
-        lapack_path = sys.argv
+        lapack_path = sys.argv[1]
 
     cflow = tree_path(os.curdir)
 
@@ -62,6 +62,10 @@ def main():
     pprint.pprint(cflow.calls_dict)
     print('called dict '.ljust(60, '='))
     pprint.pprint(cflow.called_dict)
+
+
+    lapack_files_set = glob.glob(os.path.join(lapack_path, '*.c'))
+    print("# lapack files =", len(lapack_files_set))
 
 
 if '__main__' == __name__:
