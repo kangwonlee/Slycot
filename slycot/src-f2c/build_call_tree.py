@@ -16,21 +16,25 @@ class CFlow(object):
 
         result_lines = cp.stdout.decode().splitlines()
 
-        callee_list = None
+        value = None
         key = 'del_this'
 
         for line in result_lines:
             if not line.startswith(' '):
                # store result list
-               self.calls_dict[key] = str(callee_list)
+               self.update_calls_dict(key, value)
                # reset result list
                key = line.split()[0]
-               callee_list = [line]
+               callee_list = []
+               value = {'info':line, 'list':callee_list}
             else:
                callee_list.append(line.strip())
 
-        self.calls_dict.update({key:callee_list})
+        self.update_calls_dict(key, value)
         del self.calls_dict['del_this']
+
+    def update_calls_dict(self, key, value):
+        self.calls_dict.update({key: value})
 
 
 def main():
