@@ -1,6 +1,7 @@
 import subprocess
 import os
 import pprint
+import sys
 
 
 class CFlow(object):
@@ -28,7 +29,11 @@ class CFlow(object):
                callee_list = []
                value = {'info':line, 'list':callee_list}
             else:
-               callee_list.append(line.strip())
+               callee_name = line.strip()
+               callee_list.append(callee_name)
+               caller_set = self.called_dict.get(callee_name, set())
+               caller_set.add(key)
+               self.called_dict[callee_name] = caller_set
 
         self.update_calls_dict(key, value)
         del self.calls_dict['del_this']
@@ -40,7 +45,10 @@ class CFlow(object):
 def main():
     cflow = CFlow()
     cflow.run('SB02MT.c')
+    print('calls dict '.ljust(60, '#'))
     pprint.pprint(cflow.calls_dict)
+    print('called dict '.ljust(60, '='))
+    pprint.pprint(cflow.called_dict)
 
 
 if '__main__' == __name__:
