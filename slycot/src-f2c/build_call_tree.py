@@ -53,8 +53,9 @@ def tree_path(path):
     return cflow
 
 def main():
-    if 2 <= len(sys.argv):
+    if 3 <= len(sys.argv):
         lapack_path = sys.argv[1]
+        blas_path = sys.argv[2]
 
     cflow = tree_path(os.curdir)
 
@@ -66,6 +67,9 @@ def main():
 
     lapack_files_set = glob.glob(os.path.join(lapack_path, '*.c'))
     print("# lapack files =", len(lapack_files_set))
+
+    blas_files_set = glob.glob(os.path.join(blas_path, '*.c'))
+    print("# blas files =", len(blas_files_set))
 
 
 if '__main__' == __name__:
