@@ -24,12 +24,13 @@ class CFlow(object):
                # store result list
                self.calls_dict[key] = str(callee_list)
                # reset result list
-               key = line
-               callee_list = []
+               key = line.split()[0]
+               callee_list = [line]
             else:
                callee_list.append(line.strip())
 
         self.calls_dict.update({key:callee_list})
+        del self.calls_dict['del_this']
 
 
 def main():
