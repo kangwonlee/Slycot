@@ -71,9 +71,11 @@ def main():
 
     lapack_files_set = glob.glob(os.path.join(lapack_path, '*.c'))
     print("# lapack files =", len(lapack_files_set))
+    print(list(lapack_files_set)[:10])
 
     blas_files_set = glob.glob(os.path.join(blas_path, '*.c'))
     print("# blas files =", len(blas_files_set))
+    print(list(blas_files_set)[:10])
 
     slycot_dict = {}
     lapack_dict = {}
@@ -86,7 +88,7 @@ def main():
         if function_name.upper() + '.c' in slycot_files_set:
             slycot_dict[function_name] = cflow.called_dict[function_name]
             del cflow.called_dict[function_name]
-        elif function_c_file_name in lapack_files_set:
+        elif os.path.join(lapack_path,function_c_file_name) in lapack_files_set:
             lapack_dict[function_name] = cflow.called_dict[function_name]
             del cflow.called_dict[function_name]
         elif function_c_file_name in blas_files_set:
