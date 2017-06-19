@@ -2,6 +2,7 @@ import subprocess
 import os
 import pprint
 import sys
+import glob
 
 
 class CFlow(object):
@@ -41,10 +42,15 @@ class CFlow(object):
     def update_calls_dict(self, key, value):
         self.calls_dict.update({key: value})
 
+    def run_files(self, files):
+        for file in files:
+            self.run(file)
+
 
 def main():
     cflow = CFlow()
-    cflow.run('SB02MT.c')
+    files = set(glob.glob('*.c'))
+    cflow.run_files(files)
     print('calls dict '.ljust(60, '#'))
     pprint.pprint(cflow.calls_dict)
     print('called dict '.ljust(60, '='))
