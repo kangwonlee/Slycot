@@ -45,10 +45,19 @@ class CFlow(object):
             self.run(file)
 
 
-def main():
+def tree_path(path):
     cflow = CFlow()
-    files = set(glob.glob('*.c'))
+    files = set(glob.glob(os.path.join(path,'*.c')))
     cflow.run_files(files)
+
+    return cflow
+
+def main():
+    if 2 <= len(sys.argv):
+        lapack_path = sys.argv
+
+    cflow = tree_path(os.curdir)
+
     print('calls dict '.ljust(60, '#'))
     pprint.pprint(cflow.calls_dict)
     print('called dict '.ljust(60, '='))
