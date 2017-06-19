@@ -91,13 +91,15 @@ def main():
         elif os.path.join(lapack_path,function_c_file_name) in lapack_files_set:
             lapack_dict[function_name] = cflow.called_dict[function_name]
             del cflow.called_dict[function_name]
-        elif function_c_file_name in blas_files_set:
+        elif os.path.join(blas_path, function_c_file_name) in blas_files_set:
             blas_dict[function_name] = cflow.called_dict[function_name]
             del cflow.called_dict[function_name]
 
     print("# functions in slycot =", len(slycot_dict))
     print("# functions in lapack =", len(lapack_dict))
     print("# functions in blas =", len(blas_dict))
+    print("# functions unknown =", len(cflow.called_dict))
+    print(sorted(list(cflow.called_dict.keys())))
 
 
 if '__main__' == __name__:
