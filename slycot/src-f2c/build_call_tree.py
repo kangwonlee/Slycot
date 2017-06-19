@@ -65,11 +65,37 @@ def main():
     pprint.pprint(cflow.called_dict)
 
 
+    slycot_files_set = glob.glob('*.c')
+    print("# slycot files =", len(slycot_files_set))
+    print(list(slycot_files_set)[:10])
+
     lapack_files_set = glob.glob(os.path.join(lapack_path, '*.c'))
     print("# lapack files =", len(lapack_files_set))
 
     blas_files_set = glob.glob(os.path.join(blas_path, '*.c'))
     print("# blas files =", len(blas_files_set))
+
+    slycot_dict = {}
+    lapack_dict = {}
+    blas_dict = {}
+
+    function_name_set = set(cflow.called_dict.keys())
+
+    for function_name in function_name_set:
+        function_c_file_name = function_name + '.c'
+        if function_name.upper() + '.c' in slycot_files_set:
+            slycot_dict[function_name] = cflow.called_dict[function_name]
+            del cflow.called_dict[function_name]
+        elif function_c_file_name in lapack_files_set:
+            lapack_dict[function_name] = cflow.called_dict[function_name]
+            del cflow.called_dict[function_name]
+        elif function_c_file_name in blas_files_set:
+            blas_dict[function_name] = cflow.called_dict[function_name]
+            del cflow.called_dict[function_name]
+
+    print("# functions in slycot =", len(slycot_dict))
+    print("# functions in lapack =", len(lapack_dict))
+    print("# functions in blas =", len(blas_dict))
 
 
 if '__main__' == __name__:
