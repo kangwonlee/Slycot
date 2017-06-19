@@ -28,7 +28,7 @@ class CFlow(object):
                callee_list = []
                value = {'info':line, 'list':callee_list}
             else:
-               callee_name = line.strip()
+               callee_name = line.strip().rstrip('_()')
                callee_list.append(callee_name)
                caller_set = self.called_dict.get(callee_name, set())
                caller_set.add(key)
