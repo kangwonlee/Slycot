@@ -109,8 +109,7 @@ def main():
     slycot_function_list_filename = 'slycot_functions_list.txt'
     not_fully_expanded_function_list_filename = 'still_not_expanded.txt'
 
-    with open(slycot_function_list_filename, 'rt') as python_control_slycot_file:
-        slycot_filename_set = set([line.strip().upper() + '.c' for line in python_control_slycot_file.readlines()])
+    slycot_filename_set = get_slycot_filename_set(slycot_function_list_filename)
 
     # build top level call tree
     cflow = tree_path(slycot_filename_set)
@@ -186,6 +185,13 @@ def main():
     with open(not_fully_expanded_function_list_filename, 'w') as output_file:
         for function_name in sorted(list(not_fully_expanded_function_set.union(previously_unknown_set))):
             output_file.write('%s\n' % function_name)
+
+
+def get_slycot_filename_set(slycot_function_list_filename):
+    with open(slycot_function_list_filename, 'rt') as python_control_slycot_file:
+        slycot_filename_set = set([line.strip().upper() + '.c' for line in python_control_slycot_file.readlines()])
+
+    return slycot_filename_set
 
 
 def init_prev_unknown_set(not_fully_expanded_function_list_filename):
