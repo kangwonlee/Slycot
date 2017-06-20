@@ -1,0 +1,1577 @@
+ab07md_() <int ab07md_ (char *jobd, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *info, ftnlen jobd_len) at AB07MD.c:19>:
+    xerbla_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    min()
+    dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+ab09ax_() <int ab09ax_ (char *dico, char *job, char *ordsel, integer *n, integer *m, integer *p, integer *nr, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *hsv, doublereal *t, integer *ldt, doublereal *ti, integer *ldti, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen dico_len, ftnlen job_len, ftnlen ordsel_len) at AB09AX.c:23>:
+    ma02dd_()
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    mb03ud_()
+    dtrmm_() <int dtrmm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrmm.c:192>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dtpmv_()
+    dtrmv_()
+    dgetrf_() <int dgetrf_ (integer *m, integer *n, doublereal *a, integer *lda, integer *ipiv, integer *info) at [LAPACK]dgetrf.c:133>:
+        xerbla_()
+        dgetrf2_()
+        max()
+        ilaenv_()
+        min()
+        dlaswp_()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+        dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    dgetrs_() <int dgetrs_ (char *trans, integer *n, integer *nrhs, doublereal *a, integer *lda, integer *ipiv, doublereal *b, integer *ldb, integer *info, ftnlen trans_len) at [LAPACK]dgetrs.c:145>:
+        xerbla_()
+        dlaswp_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    min()
+    dlamch_()
+    sb03ou_() <int sb03ou_ (logical *discr, logical *ltrans, integer *n, integer *m, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *tau, doublereal *u, integer *ldu, doublereal *scale, doublereal *dwork, integer *ldwork, integer *info) at SB03OU.c:20>:
+        dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+        dgeqrf_() <int dgeqrf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgeqrf.c:161>:
+            dlarfb_()
+            dlarft_()
+            xerbla_()
+            ilaenv_()
+            max()
+            min()
+            dgeqr2_()
+        dgerqf_() <int dgerqf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgerqf.c:163>:
+            dlarfb_()
+            dlarft_()
+            xerbla_()
+            max()
+            min()
+            ilaenv_()
+            dgerq2_()
+        dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        xerbla_()
+        max()
+        min()
+        sb03ot_()
+    ma02ad_()
+    dgeqrf_() <int dgeqrf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgeqrf.c:161>:
+        dlarfb_()
+        dlarft_()
+        xerbla_()
+        ilaenv_()
+        max()
+        min()
+        dgeqr2_()
+    dorgqr_() <int dorgqr_ (integer *m, integer *n, integer *k, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dorgqr.c:153>:
+        dlarfb_()
+        dlarft_()
+        xerbla_()
+        ilaenv_()
+        max()
+        min()
+        dorg2r_()
+    dgemv_() <int dgemv_ (char *trans, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *x, integer *incx, doublereal *beta, doublereal *y, integer *incy, ftnlen trans_len) at [BLAS]dgemv.c:171>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+ab09bx_() <int ab09bx_ (char *dico, char *job, char *ordsel, integer *n, integer *m, integer *p, integer *nr, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *hsv, doublereal *t, integer *ldt, doublereal *ti, integer *ldti, doublereal *tol1, doublereal *tol2, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen dico_len, ftnlen job_len, ftnlen ordsel_len) at AB09BX.c:23>:
+    ma02ad_()
+    ma02dd_()
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    mb03ud_()
+    dtpmv_()
+    dtrmv_()
+    dgetrf_() <int dgetrf_ (integer *m, integer *n, doublereal *a, integer *lda, integer *ipiv, integer *info) at [LAPACK]dgetrf.c:133>:
+        xerbla_()
+        dgetrf2_()
+        max()
+        ilaenv_()
+        min()
+        dlaswp_()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+        dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    dgetrs_() <int dgetrs_ (char *trans, integer *n, integer *nrhs, doublereal *a, integer *lda, integer *ipiv, doublereal *b, integer *ldb, integer *info, ftnlen trans_len) at [LAPACK]dgetrs.c:145>:
+        xerbla_()
+        dlaswp_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    min()
+    dlamch_()
+    sb03ou_() <int sb03ou_ (logical *discr, logical *ltrans, integer *n, integer *m, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *tau, doublereal *u, integer *ldu, doublereal *scale, doublereal *dwork, integer *ldwork, integer *info) at SB03OU.c:20>:
+        dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+        dgeqrf_() <int dgeqrf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgeqrf.c:161>:
+            dlarfb_()
+            dlarft_()
+            xerbla_()
+            ilaenv_()
+            max()
+            min()
+            dgeqr2_()
+        dgerqf_() <int dgerqf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgerqf.c:163>:
+            dlarfb_()
+            dlarft_()
+            xerbla_()
+            max()
+            min()
+            ilaenv_()
+            dgerq2_()
+        dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        xerbla_()
+        max()
+        min()
+        sb03ot_()
+    ab09dd_()
+    dtrmm_() <int dtrmm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrmm.c:192>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dgeqrf_() <int dgeqrf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgeqrf.c:161>:
+        dlarfb_()
+        dlarft_()
+        xerbla_()
+        ilaenv_()
+        max()
+        min()
+        dgeqr2_()
+    dorgqr_() <int dorgqr_ (integer *m, integer *n, integer *k, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dorgqr.c:153>:
+        dlarfb_()
+        dlarft_()
+        xerbla_()
+        ilaenv_()
+        max()
+        min()
+        dorg2r_()
+    dgemv_() <int dgemv_ (char *trans, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *x, integer *incx, doublereal *beta, doublereal *y, integer *incy, ftnlen trans_len) at [BLAS]dgemv.c:171>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+dgecon_() <int dgecon_ (char *norm, integer *n, doublereal *a, integer *lda, doublereal *anorm, doublereal *rcond, doublereal *work, integer *iwork, integer *info, ftnlen norm_len) at [LAPACK]dgecon.c:145>:
+    dlacn2_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+    dlamch_()
+    dlatrs_()
+    idamax_()
+    abs()
+    drscl_()
+dgees_() <int dgees_ (char *jobvs, char *sort, L_fp select, integer *n, doublereal *a, integer *lda, integer *sdim, doublereal *wr, doublereal *wi, doublereal *vs, integer *ldvs, doublereal *work, integer *lwork, logical *bwork, integer *info, ftnlen jobvs_len, ftnlen sort_len) at [LAPACK]dgees.c:240>:
+    dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+    dgebak_()
+    dgebal_()
+    dlascl_() <int dlascl_ (char *type__, integer *kl, integer *ku, doublereal *cfrom, doublereal *cto, integer *m, integer *n, doublereal *a, integer *lda, integer *info, ftnlen type_len) at [LAPACK]dlascl.c:161>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        disnan_()
+        max()
+        xerbla_()
+        dlamch_()
+        abs()
+        min()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    dhseqr_()
+    dtrsen_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    ilaenv_()
+    dlamch_()
+    dlabad_()
+    dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+        min()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        abs()
+        disnan_()
+        dlassq_()
+    dgehrd_() <int dgehrd_ (integer *n, integer *ilo, integer *ihi, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgehrd.c:195>:
+        daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+        dgehd2_()
+        dlahr2_()
+        dlarfb_()
+        xerbla_()
+        max()
+        min()
+        ilaenv_()
+        dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+        dtrmm_() <int dtrmm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrmm.c:192>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    dorghr_()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+dgehrd_() <int dgehrd_ (integer *n, integer *ilo, integer *ihi, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgehrd.c:195>:
+    daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+    dgehd2_()
+    dlahr2_()
+    dlarfb_()
+    xerbla_()
+    max()
+    min()
+    ilaenv_()
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dtrmm_() <int dtrmm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrmm.c:192>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+dgemv_() <int dgemv_ (char *trans, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *x, integer *incx, doublereal *beta, doublereal *y, integer *incy, ftnlen trans_len) at [BLAS]dgemv.c:171>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+dgeqrf_() <int dgeqrf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgeqrf.c:161>:
+    dlarfb_()
+    dlarft_()
+    xerbla_()
+    ilaenv_()
+    max()
+    min()
+    dgeqr2_()
+dgerqf_() <int dgerqf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgerqf.c:163>:
+    dlarfb_()
+    dlarft_()
+    xerbla_()
+    max()
+    min()
+    ilaenv_()
+    dgerq2_()
+dgesvd_() <int dgesvd_ (char *jobu, char *jobvt, integer *m, integer *n, doublereal *a, integer *lda, doublereal *s, doublereal *u, integer *ldu, doublereal *vt, integer *ldvt, doublereal *work, integer *lwork, integer *info, ftnlen jobu_len, ftnlen jobvt_len) at [LAPACK]dgesvd.c:238>:
+    dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+        min()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        abs()
+        disnan_()
+        dlassq_()
+    dlascl_() <int dlascl_ (char *type__, integer *kl, integer *ku, doublereal *cfrom, doublereal *cto, integer *m, integer *n, doublereal *a, integer *lda, integer *info, ftnlen type_len) at [LAPACK]dlascl.c:161>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        disnan_()
+        max()
+        xerbla_()
+        dlamch_()
+        abs()
+        min()
+    dgeqrf_() <int dgeqrf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgeqrf.c:161>:
+        dlarfb_()
+        dlarft_()
+        xerbla_()
+        ilaenv_()
+        max()
+        min()
+        dgeqr2_()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dbdsqr_()
+    dorgbr_()
+    dorglq_()
+    dorgqr_() <int dorgqr_ (integer *m, integer *n, integer *k, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dorgqr.c:153>:
+        dlarfb_()
+        dlarft_()
+        xerbla_()
+        ilaenv_()
+        max()
+        min()
+        dorg2r_()
+    min()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    ilaenv_()
+    dgebrd_()
+    dgelqf_()
+    xerbla_()
+    dlamch_()
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dormbr_()
+dgetrf_() <int dgetrf_ (integer *m, integer *n, doublereal *a, integer *lda, integer *ipiv, integer *info) at [LAPACK]dgetrf.c:133>:
+    xerbla_()
+    dgetrf2_()
+    max()
+    ilaenv_()
+    min()
+    dlaswp_()
+    dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+dgetrs_() <int dgetrs_ (char *trans, integer *n, integer *nrhs, doublereal *a, integer *lda, integer *ipiv, doublereal *b, integer *ldb, integer *info, ftnlen trans_len) at [LAPACK]dgetrs.c:145>:
+    xerbla_()
+    dlaswp_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+dgges_() <int dgges_ (char *jobvsl, char *jobvsr, char *sort, L_fp selctg, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, integer *sdim, doublereal *alphar, doublereal *alphai, doublereal *beta, doublereal *vsl, integer *ldvsl, doublereal *vsr, integer *ldvsr, doublereal *work, integer *lwork, logical *bwork, integer *info, ftnlen jobvsl_len, ftnlen jobvsr_len, ftnlen sort_len) at [LAPACK]dgges.c:309>:
+    dggbak_()
+    dggbal_()
+    dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+        min()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        abs()
+        disnan_()
+        dlassq_()
+    dlascl_() <int dlascl_ (char *type__, integer *kl, integer *ku, doublereal *cfrom, doublereal *cto, integer *m, integer *n, doublereal *a, integer *lda, integer *info, ftnlen type_len) at [LAPACK]dlascl.c:161>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        disnan_()
+        max()
+        xerbla_()
+        dlamch_()
+        abs()
+        min()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dtgsen_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    ilaenv_()
+    xerbla_()
+    dlamch_()
+    dlabad_()
+    dgeqrf_() <int dgeqrf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgeqrf.c:161>:
+        dlarfb_()
+        dlarft_()
+        xerbla_()
+        ilaenv_()
+        max()
+        min()
+        dgeqr2_()
+    dormqr_()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dorgqr_() <int dorgqr_ (integer *m, integer *n, integer *k, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dorgqr.c:153>:
+        dlarfb_()
+        dlarft_()
+        xerbla_()
+        ilaenv_()
+        max()
+        min()
+        dorg2r_()
+    dgghrd_()
+    dhgeqz_()
+    abs()
+dlacon_() <int dlacon_ (integer *n, doublereal *v, doublereal *x, integer *isgn, doublereal *est, integer *kase) at [LAPACK]dlacon.c:139>:
+    i_dnnt()
+    abs()
+    dasum_()
+    idamax_()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    min()
+dlaexc_() <int dlaexc_ (logical *wantq, integer *n, doublereal *t, integer *ldt, doublereal *q, integer *ldq, integer *j1, integer *n1, integer *n2, doublereal *work, integer *info) at [LAPACK]dlaexc.c:165>:
+    dlasy2_()
+    dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+        min()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        abs()
+        disnan_()
+        dlassq_()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dlartg_()
+    dlarfx_()
+    drot_() <int drot_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy, doublereal *c__, doublereal *s) at [BLAS]drot.c:66>:
+    dlamch_()
+    max()
+    dlarfg_()
+    abs()
+    dlanv2_()
+dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+    min()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    abs()
+    disnan_()
+    dlassq_()
+dlanhs_() <doublereal dlanhs_ (char *norm, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlanhs.c:131>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    min()
+    abs()
+    disnan_()
+    dlassq_()
+dlansy_() <doublereal dlansy_ (char *norm, char *uplo, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len, ftnlen uplo_len) at [LAPACK]dlansy.c:145>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    abs()
+    disnan_()
+    dlassq_()
+dlapy2_() <doublereal dlapy2_ (doublereal *x, doublereal *y) at [LAPACK]dlapy2.c:81>:
+    abs()
+    max()
+    min()
+dlascl_() <int dlascl_ (char *type__, integer *kl, integer *ku, doublereal *cfrom, doublereal *cto, integer *m, integer *n, doublereal *a, integer *lda, integer *info, ftnlen type_len) at [LAPACK]dlascl.c:161>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    disnan_()
+    max()
+    xerbla_()
+    dlamch_()
+    abs()
+    min()
+dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    min()
+dnrm2_() <doublereal dnrm2_ (integer *n, doublereal *x, integer *incx) at [BLAS]dnrm2.c:69>:
+    abs()
+dorgqr_() <int dorgqr_ (integer *m, integer *n, integer *k, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dorgqr.c:153>:
+    dlarfb_()
+    dlarft_()
+    xerbla_()
+    ilaenv_()
+    max()
+    min()
+    dorg2r_()
+dormhr_() <int dormhr_ (char *side, char *trans, integer *m, integer *n, integer *ilo, integer *ihi, doublereal *a, integer *lda, doublereal *tau, doublereal *c__, integer *ldc, doublereal *work, integer *lwork, integer *info, ftnlen side_len, ftnlen trans_len) at [LAPACK]dormhr.c:201>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    min()
+    ilaenv_()
+    xerbla_()
+    dormqr_()
+dpocon_() <int dpocon_ (char *uplo, integer *n, doublereal *a, integer *lda, doublereal *anorm, doublereal *rcond, doublereal *work, integer *iwork, integer *info, ftnlen uplo_len) at [LAPACK]dpocon.c:142>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+    dlamch_()
+    dlacn2_()
+    dlatrs_()
+    idamax_()
+    abs()
+    drscl_()
+dpotrf_() <int dpotrf_ (char *uplo, integer *n, doublereal *a, integer *lda, integer *info, ftnlen uplo_len) at [LAPACK]dpotrf.c:132>:
+    xerbla_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    ilaenv_()
+    dpotrf2_()
+    min()
+    dsyrk_() <int dsyrk_ (char *uplo, char *trans, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *beta, doublereal *c__, integer *ldc, ftnlen uplo_len, ftnlen trans_len) at [BLAS]dsyrk.c:184>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+drot_() <int drot_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy, doublereal *c__, doublereal *s) at [BLAS]drot.c:66>:
+dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+dsycon_() <int dsycon_ (char *uplo, integer *n, doublereal *a, integer *lda, integer *ipiv, doublereal *anorm, doublereal *rcond, doublereal *work, integer *iwork, integer *info, ftnlen uplo_len) at [LAPACK]dsycon.c:151>:
+    xerbla_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    dlacn2_()
+    dsytrs_() <int dsytrs_ (char *uplo, integer *n, integer *nrhs, doublereal *a, integer *lda, integer *ipiv, doublereal *b, integer *ldb, integer *info, ftnlen uplo_len) at [LAPACK]dsytrs.c:144>:
+        dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+        dger_()
+        dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+        dgemv_() <int dgemv_ (char *trans, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *x, integer *incx, doublereal *beta, doublereal *y, integer *incy, ftnlen trans_len) at [BLAS]dgemv.c:171>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+dsyrk_() <int dsyrk_ (char *uplo, char *trans, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *beta, doublereal *c__, integer *ldc, ftnlen uplo_len, ftnlen trans_len) at [BLAS]dsyrk.c:184>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+dsytrf_() <int dsytrf_ (char *uplo, integer *n, doublereal *a, integer *lda, integer *ipiv, doublereal *work, integer *lwork, integer *info, ftnlen uplo_len) at [LAPACK]dsytrf.c:206>:
+    xerbla_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    ilaenv_()
+    dlasyf_()
+    dsytf2_()
+dsytrs_() <int dsytrs_ (char *uplo, integer *n, integer *nrhs, doublereal *a, integer *lda, integer *ipiv, doublereal *b, integer *ldb, integer *info, ftnlen uplo_len) at [LAPACK]dsytrs.c:144>:
+    dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+    dger_()
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+    dgemv_() <int dgemv_ (char *trans, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *x, integer *incx, doublereal *beta, doublereal *y, integer *incy, ftnlen trans_len) at [BLAS]dgemv.c:171>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+dtrmm_() <int dtrmm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrmm.c:192>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+mb01rd_() <int mb01rd_ (char *uplo, char *trans, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *r__, integer *ldr, doublereal *a, integer *lda, doublereal *x, integer *ldx, doublereal *dwork, integer *ldwork, integer *info, ftnlen uplo_len, ftnlen trans_len) at MB01RD.c:23>:
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+    dlascl_() <int dlascl_ (char *type__, integer *kl, integer *ku, doublereal *cfrom, doublereal *cto, integer *m, integer *n, doublereal *a, integer *lda, integer *info, ftnlen type_len) at [LAPACK]dlascl.c:161>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        disnan_()
+        max()
+        xerbla_()
+        dlamch_()
+        abs()
+        min()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    dtrmm_() <int dtrmm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrmm.c:192>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+mb01rw_() <int mb01rw_ (char *uplo, char *trans, integer *m, integer *n, doublereal *a, integer *lda, doublereal *z__, integer *ldz, doublereal *dwork, integer *info, ftnlen uplo_len, ftnlen trans_len) at MB01RW.c:21>:
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+    dgemv_() <int dgemv_ (char *trans, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *x, integer *incx, doublereal *beta, doublereal *y, integer *incy, ftnlen trans_len) at [BLAS]dgemv.c:171>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+mb01sd_() <int mb01sd_ (char *jobs, integer *m, integer *n, doublereal *a, integer *lda, doublereal *r__, doublereal *c__, ftnlen jobs_len) at MB01SD.c:15>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+mb02pd_() <int mb02pd_ (char *fact, char *trans, integer *n, integer *nrhs, doublereal *a, integer *lda, doublereal *af, integer *ldaf, integer *ipiv, char *equed, doublereal *r__, doublereal *c__, doublereal *b, integer *ldb, doublereal *x, integer *ldx, doublereal *rcond, doublereal *ferr, doublereal *berr, integer *iwork, doublereal *dwork, integer *info, ftnlen fact_len, ftnlen trans_len, ftnlen equed_len) at MB02PD.c:15>:
+    dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+        min()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        abs()
+        disnan_()
+        dlassq_()
+    dgecon_() <int dgecon_ (char *norm, integer *n, doublereal *a, integer *lda, doublereal *anorm, doublereal *rcond, doublereal *work, integer *iwork, integer *info, ftnlen norm_len) at [LAPACK]dgecon.c:145>:
+        dlacn2_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+        dlamch_()
+        dlatrs_()
+        idamax_()
+        abs()
+        drscl_()
+    dgerfs_()
+    dgetrf_() <int dgetrf_ (integer *m, integer *n, doublereal *a, integer *lda, integer *ipiv, integer *info) at [LAPACK]dgetrf.c:133>:
+        xerbla_()
+        dgetrf2_()
+        max()
+        ilaenv_()
+        min()
+        dlaswp_()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+        dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    dlamch_()
+    max()
+    min()
+    dgeequ_()
+    dlaqge_()
+    dlantr_()
+    dgetrs_() <int dgetrs_ (char *trans, integer *n, integer *nrhs, doublereal *a, integer *lda, integer *ipiv, doublereal *b, integer *ldb, integer *info, ftnlen trans_len) at [LAPACK]dgetrs.c:145>:
+        xerbla_()
+        dlaswp_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+mb02vd_() <int mb02vd_ (char *trans, integer *m, integer *n, doublereal *a, integer *lda, integer *ipiv, doublereal *b, integer *ldb, integer *info, ftnlen trans_len) at MB02VD.c:21>:
+    dgetrf_() <int dgetrf_ (integer *m, integer *n, doublereal *a, integer *lda, integer *ipiv, integer *info) at [LAPACK]dgetrf.c:133>:
+        xerbla_()
+        dgetrf2_()
+        max()
+        ilaenv_()
+        min()
+        dlaswp_()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+        dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    xerbla_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    ma02gd_()
+    dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+mb03qd_() <int mb03qd_ (char *dico, char *stdom, char *jobu, integer *n, integer *nlow, integer *nsup, doublereal *alpha, doublereal *a, integer *lda, doublereal *u, integer *ldu, integer *ndim, doublereal *dwork, integer *info, ftnlen dico_len, ftnlen stdom_len, ftnlen jobu_len) at MB03QD.c:20>:
+    xerbla_()
+    dtrexc_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    mb03qy_() <int mb03qy_ (integer *n, integer *l, doublereal *a, integer *lda, doublereal *u, integer *ldu, doublereal *e1, doublereal *e2, integer *info) at MB03QY.c:19>:
+        dlanv2_()
+        xerbla_()
+        drot_() <int drot_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy, doublereal *c__, doublereal *s) at [BLAS]drot.c:66>:
+    abs()
+    dlapy2_() <doublereal dlapy2_ (doublereal *x, doublereal *y) at [LAPACK]dlapy2.c:81>:
+        abs()
+        max()
+        min()
+mb03qy_() <int mb03qy_ (integer *n, integer *l, doublereal *a, integer *lda, doublereal *u, integer *ldu, doublereal *e1, doublereal *e2, integer *info) at MB03QY.c:19>:
+    dlanv2_()
+    xerbla_()
+    drot_() <int drot_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy, doublereal *c__, doublereal *s) at [BLAS]drot.c:66>:
+sb01bx_() <int sb01bx_ (logical *reig, integer *n, doublereal *xr, doublereal *xi, doublereal *wr, doublereal *wi, doublereal *s, doublereal *p) at SB01BX.c:15>:
+    abs()
+sb01by_() <int sb01by_ (integer *n, integer *m, doublereal *s, doublereal *p, doublereal *a, doublereal *b, doublereal *f, doublereal *tol, doublereal *dwork, integer *info) at SB01BY.c:21>:
+    dlasv2_()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dlatzm_()
+    dlarfg_()
+    abs()
+    drot_() <int drot_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy, doublereal *c__, doublereal *s) at [BLAS]drot.c:66>:
+    dlamc3_()
+    dlanv2_()
+    dlamch_()
+    min()
+sb02ms_() <logical sb02ms_ (doublereal *reig, doublereal *ieig) at SB02MS.c:15>:
+    dlapy2_() <doublereal dlapy2_ (doublereal *x, doublereal *y) at [LAPACK]dlapy2.c:81>:
+        abs()
+        max()
+        min()
+sb02mu_() <int sb02mu_ (char *dico, char *hinv, char *uplo, integer *n, doublereal *a, integer *lda, doublereal *g, integer *ldg, doublereal *q, integer *ldq, doublereal *s, integer *lds, integer *iwork, doublereal *dwork, integer *ldwork, integer *info, ftnlen dico_len, ftnlen hinv_len, ftnlen uplo_len) at SB02MU.c:21>:
+    dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+    dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+        min()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        abs()
+        disnan_()
+        dlassq_()
+    dgetrf_() <int dgetrf_ (integer *m, integer *n, doublereal *a, integer *lda, integer *ipiv, integer *info) at [LAPACK]dgetrf.c:133>:
+        xerbla_()
+        dgetrf2_()
+        max()
+        ilaenv_()
+        min()
+        dlaswp_()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+        dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    dgetrs_() <int dgetrs_ (char *trans, integer *n, integer *nrhs, doublereal *a, integer *lda, integer *ipiv, doublereal *b, integer *ldb, integer *info, ftnlen trans_len) at [LAPACK]dgetrs.c:145>:
+        xerbla_()
+        dlaswp_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    ilaenv_()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    dgecon_() <int dgecon_ (char *norm, integer *n, doublereal *a, integer *lda, doublereal *anorm, doublereal *rcond, doublereal *work, integer *iwork, integer *info, ftnlen norm_len) at [LAPACK]dgecon.c:145>:
+        dlacn2_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+        dlamch_()
+        dlatrs_()
+        idamax_()
+        abs()
+        drscl_()
+    dlamch_()
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dgetri_()
+sb02mv_() <logical sb02mv_ (doublereal *reig, doublereal *ieig) at SB02MV.c:15>:
+sb02mw_() <logical sb02mw_ (doublereal *reig, doublereal *ieig) at SB02MW.c:15>:
+    dlapy2_() <doublereal dlapy2_ (doublereal *x, doublereal *y) at [LAPACK]dlapy2.c:81>:
+        abs()
+        max()
+        min()
+sb02ou_() <logical sb02ou_ (doublereal *alphar, doublereal *alphai, doublereal *beta) at SB02OU.c:15>:
+sb02ov_() <logical sb02ov_ (doublereal *alphar, doublereal *alphai, doublereal *beta) at SB02OV.c:15>:
+    dlapy2_() <doublereal dlapy2_ (doublereal *x, doublereal *y) at [LAPACK]dlapy2.c:81>:
+        abs()
+        max()
+        min()
+    abs()
+sb02ow_() <logical sb02ow_ (doublereal *alphar, doublereal *alphai, doublereal *beta) at SB02OW.c:15>:
+sb02oy_() <int sb02oy_ (char *type__, char *dico, char *jobb, char *fact, char *uplo, char *jobl, char *jobe, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *q, integer *ldq, doublereal *r__, integer *ldr, doublereal *l, integer *ldl, doublereal *e, integer *lde, doublereal *af, integer *ldaf, doublereal *bf, integer *ldbf, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info, ftnlen type_len, ftnlen dico_len, ftnlen jobb_len, ftnlen fact_len, ftnlen uplo_len, ftnlen jobl_len, ftnlen jobe_len) at SB02OY.c:22>:
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    dtrcon_()
+    dormql_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    dsyrk_() <int dsyrk_ (char *uplo, char *trans, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *beta, doublereal *c__, integer *ldc, ftnlen uplo_len, ftnlen trans_len) at [BLAS]dsyrk.c:184>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dgeqlf_()
+    dlamch_()
+sb03mx_() <int sb03mx_ (char *trana, integer *n, doublereal *a, integer *lda, doublereal *c__, integer *ldc, doublereal *scale, doublereal *dwork, integer *info, ftnlen trana_len) at SB03MX.c:25>:
+    sb04px_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+    dlamch_()
+    dlabad_()
+    dlanhs_() <doublereal dlanhs_ (char *norm, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlanhs.c:131>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+        abs()
+        disnan_()
+        dlassq_()
+    dsymv_()
+    ddot_()
+    abs()
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+    dlaln2_()
+    sb03mv_()
+    min()
+sb03my_() <int sb03my_ (char *trana, integer *n, doublereal *a, integer *lda, doublereal *c__, integer *ldc, doublereal *scale, integer *info, ftnlen trana_len) at SB03MY.c:24>:
+    dlabad_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+    dlamch_()
+    dlanhs_() <doublereal dlanhs_ (char *norm, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlanhs.c:131>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+        abs()
+        disnan_()
+        dlassq_()
+    ddot_()
+    abs()
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+    dlaln2_()
+    sb03mw_()
+    dlasy2_()
+    min()
+sb03ou_() <int sb03ou_ (logical *discr, logical *ltrans, integer *n, integer *m, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *tau, doublereal *u, integer *ldu, doublereal *scale, doublereal *dwork, integer *ldwork, integer *info) at SB03OU.c:20>:
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    dgeqrf_() <int dgeqrf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgeqrf.c:161>:
+        dlarfb_()
+        dlarft_()
+        xerbla_()
+        ilaenv_()
+        max()
+        min()
+        dgeqr2_()
+    dgerqf_() <int dgerqf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgerqf.c:163>:
+        dlarfb_()
+        dlarft_()
+        xerbla_()
+        max()
+        min()
+        ilaenv_()
+        dgerq2_()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    max()
+    min()
+    sb03ot_()
+sb04mu_() <int sb04mu_ (integer *n, integer *m, integer *ind, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ipr, integer *info) at SB04MU.c:19>:
+    daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+    max()
+    min()
+    sb04mr_()
+sb04my_() <int sb04my_ (integer *n, integer *m, integer *ind, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ipr, integer *info) at SB04MY.c:19>:
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+    sb04mw_()
+sb04qu_() <int sb04qu_ (integer *n, integer *m, integer *ind, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ipr, integer *info) at SB04QU.c:20>:
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+    dtrmv_()
+    max()
+    sb04qr_()
+sb04qy_() <int sb04qy_ (integer *n, integer *m, integer *ind, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ipr, integer *info) at SB04QY.c:20>:
+    sb04mw_()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+    dtrmv_()
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+sb10ld_() <int sb10ld_ (integer *n, integer *m, integer *np, integer *ncon, integer *nmeas, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *ak, integer *ldak, doublereal *bk, integer *ldbk, doublereal *ck, integer *ldck, doublereal *dk, integer *lddk, doublereal *ac, integer *ldac, doublereal *bc, integer *ldbc, doublereal *cc, integer *ldcc, doublereal *dc, integer *lddc, integer *iwork, doublereal *dwork, integer *ldwork, integer *info) at SB10LD.c:21>:
+    dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+        min()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        abs()
+        disnan_()
+        dlassq_()
+    dgetrf_() <int dgetrf_ (integer *m, integer *n, doublereal *a, integer *lda, integer *ipiv, integer *info) at [LAPACK]dgetrf.c:133>:
+        xerbla_()
+        dgetrf2_()
+        max()
+        ilaenv_()
+        min()
+        dlaswp_()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+        dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dgetri_()
+    xerbla_()
+    max()
+    dlamch_()
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dgecon_() <int dgecon_ (char *norm, integer *n, doublereal *a, integer *lda, doublereal *anorm, doublereal *rcond, doublereal *work, integer *iwork, integer *info, ftnlen norm_len) at [LAPACK]dgecon.c:145>:
+        dlacn2_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+        dlamch_()
+        dlatrs_()
+        idamax_()
+        abs()
+        drscl_()
+sb10pd_() <int sb10pd_ (integer *n, integer *m, integer *np, integer *ncon, integer *nmeas, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *tu, integer *ldtu, doublereal *ty, integer *ldty, doublereal *rcond, doublereal *tol, doublereal *dwork, integer *ldwork, integer *info) at SB10PD.c:21>:
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    max()
+    dlamch_()
+    dgesvd_() <int dgesvd_ (char *jobu, char *jobvt, integer *m, integer *n, doublereal *a, integer *lda, doublereal *s, doublereal *u, integer *ldu, doublereal *vt, integer *ldvt, doublereal *work, integer *lwork, integer *info, ftnlen jobu_len, ftnlen jobvt_len) at [LAPACK]dgesvd.c:238>:
+        dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+            min()
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            abs()
+            disnan_()
+            dlassq_()
+        dlascl_() <int dlascl_ (char *type__, integer *kl, integer *ku, doublereal *cfrom, doublereal *cto, integer *m, integer *n, doublereal *a, integer *lda, integer *info, ftnlen type_len) at [LAPACK]dlascl.c:161>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            disnan_()
+            max()
+            xerbla_()
+            dlamch_()
+            abs()
+            min()
+        dgeqrf_() <int dgeqrf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgeqrf.c:161>:
+            dlarfb_()
+            dlarft_()
+            xerbla_()
+            ilaenv_()
+            max()
+            min()
+            dgeqr2_()
+        dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        dbdsqr_()
+        dorgbr_()
+        dorglq_()
+        dorgqr_() <int dorgqr_ (integer *m, integer *n, integer *k, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dorgqr.c:153>:
+            dlarfb_()
+            dlarft_()
+            xerbla_()
+            ilaenv_()
+            max()
+            min()
+            dorg2r_()
+        min()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        ilaenv_()
+        dgebrd_()
+        dgelqf_()
+        xerbla_()
+        dlamch_()
+        dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+        dormbr_()
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+sb10qd_() <int sb10qd_ (integer *n, integer *m, integer *np, integer *ncon, integer *nmeas, doublereal *gamma, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *f, integer *ldf, doublereal *h__, integer *ldh, doublereal *x, integer *ldx, doublereal *y, integer *ldy, doublereal *xycond, integer *iwork, doublereal *dwork, integer *ldwork, logical *bwork, integer *info) at SB10QD.c:21>:
+    sb02rd_()
+    mb01rx_()
+    dsyrk_() <int dsyrk_ (char *uplo, char *trans, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *beta, doublereal *c__, integer *ldc, ftnlen uplo_len, ftnlen trans_len) at [BLAS]dsyrk.c:184>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    dsytri_()
+    max()
+    dlamch_()
+    dlansy_() <doublereal dlansy_ (char *norm, char *uplo, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len, ftnlen uplo_len) at [LAPACK]dlansy.c:145>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        abs()
+        disnan_()
+        dlassq_()
+    dsytrf_() <int dsytrf_ (char *uplo, integer *n, doublereal *a, integer *lda, integer *ipiv, doublereal *work, integer *lwork, integer *info, ftnlen uplo_len) at [LAPACK]dsytrf.c:206>:
+        xerbla_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        ilaenv_()
+        dlasyf_()
+        dsytf2_()
+    dsycon_() <int dsycon_ (char *uplo, integer *n, doublereal *a, integer *lda, integer *ipiv, doublereal *anorm, doublereal *rcond, doublereal *work, integer *iwork, integer *info, ftnlen uplo_len) at [LAPACK]dsycon.c:151>:
+        xerbla_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        dlacn2_()
+        dsytrs_() <int dsytrs_ (char *uplo, integer *n, integer *nrhs, doublereal *a, integer *lda, integer *ipiv, doublereal *b, integer *ldb, integer *info, ftnlen uplo_len) at [LAPACK]dsytrs.c:144>:
+            dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+            dger_()
+            dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+            dgemv_() <int dgemv_ (char *trans, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *x, integer *incx, doublereal *beta, doublereal *y, integer *incy, ftnlen trans_len) at [BLAS]dgemv.c:171>:
+                lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+                max()
+                xerbla_()
+    dsymm_()
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    mb01ru_()
+sb10rd_() <int sb10rd_ (integer *n, integer *m, integer *np, integer *ncon, integer *nmeas, doublereal *gamma, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *f, integer *ldf, doublereal *h__, integer *ldh, doublereal *tu, integer *ldtu, doublereal *ty, integer *ldty, doublereal *x, integer *ldx, doublereal *y, integer *ldy, doublereal *ak, integer *ldak, doublereal *bk, integer *ldbk, doublereal *ck, integer *ldck, doublereal *dk, integer *lddk, integer *iwork, doublereal *dwork, integer *ldwork, integer *info) at SB10RD.c:21>:
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dsyrk_() <int dsyrk_ (char *uplo, char *trans, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *beta, doublereal *c__, integer *ldc, ftnlen uplo_len, ftnlen trans_len) at [BLAS]dsyrk.c:184>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+        min()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        abs()
+        disnan_()
+        dlassq_()
+    dgetrf_() <int dgetrf_ (integer *m, integer *n, doublereal *a, integer *lda, integer *ipiv, integer *info) at [LAPACK]dgetrf.c:133>:
+        xerbla_()
+        dgetrf2_()
+        max()
+        ilaenv_()
+        min()
+        dlaswp_()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+        dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dgetri_()
+    xerbla_()
+    dgetrs_() <int dgetrs_ (char *trans, integer *n, integer *nrhs, doublereal *a, integer *lda, integer *ipiv, doublereal *b, integer *ldb, integer *info, ftnlen trans_len) at [LAPACK]dgetrs.c:145>:
+        xerbla_()
+        dlaswp_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    dsycon_() <int dsycon_ (char *uplo, integer *n, doublereal *a, integer *lda, integer *ipiv, doublereal *anorm, doublereal *rcond, doublereal *work, integer *iwork, integer *info, ftnlen uplo_len) at [LAPACK]dsycon.c:151>:
+        xerbla_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        dlacn2_()
+        dsytrs_() <int dsytrs_ (char *uplo, integer *n, integer *nrhs, doublereal *a, integer *lda, integer *ipiv, doublereal *b, integer *ldb, integer *info, ftnlen uplo_len) at [LAPACK]dsytrs.c:144>:
+            dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+            dger_()
+            dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+            dgemv_() <int dgemv_ (char *trans, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *x, integer *incx, doublereal *beta, doublereal *y, integer *incy, ftnlen trans_len) at [BLAS]dgemv.c:171>:
+                lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+                max()
+                xerbla_()
+    dsytrs_() <int dsytrs_ (char *uplo, integer *n, integer *nrhs, doublereal *a, integer *lda, integer *ipiv, doublereal *b, integer *ldb, integer *info, ftnlen uplo_len) at [LAPACK]dsytrs.c:144>:
+        dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+        dger_()
+        dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+        dgemv_() <int dgemv_ (char *trans, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *x, integer *incx, doublereal *beta, doublereal *y, integer *incy, ftnlen trans_len) at [BLAS]dgemv.c:171>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    max()
+    dlamch_()
+    dlansy_() <doublereal dlansy_ (char *norm, char *uplo, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len, ftnlen uplo_len) at [LAPACK]dlansy.c:145>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        abs()
+        disnan_()
+        dlassq_()
+    dsytrf_() <int dsytrf_ (char *uplo, integer *n, doublereal *a, integer *lda, integer *ipiv, doublereal *work, integer *lwork, integer *info, ftnlen uplo_len) at [LAPACK]dsytrf.c:206>:
+        xerbla_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        ilaenv_()
+        dlasyf_()
+        dsytf2_()
+    mb01rx_()
+    ma02ad_()
+    dpotrf_() <int dpotrf_ (char *uplo, integer *n, doublereal *a, integer *lda, integer *info, ftnlen uplo_len) at [LAPACK]dpotrf.c:132>:
+        xerbla_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        ilaenv_()
+        dpotrf2_()
+        min()
+        dsyrk_() <int dsyrk_ (char *uplo, char *trans, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *beta, doublereal *c__, integer *ldc, ftnlen uplo_len, ftnlen trans_len) at [BLAS]dsyrk.c:184>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+        dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+        dtrsm_() <int dtrsm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrsm.c:196>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+    dgecon_() <int dgecon_ (char *norm, integer *n, doublereal *a, integer *lda, doublereal *anorm, doublereal *rcond, doublereal *work, integer *iwork, integer *info, ftnlen norm_len) at [LAPACK]dgecon.c:145>:
+        dlacn2_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+        dlamch_()
+        dlatrs_()
+        idamax_()
+        abs()
+        drscl_()
+    dtrmm_() <int dtrmm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrmm.c:192>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+sb10ud_() <int sb10ud_ (integer *n, integer *m, integer *np, integer *ncon, integer *nmeas, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *tu, integer *ldtu, doublereal *ty, integer *ldty, doublereal *rcond, doublereal *tol, doublereal *dwork, integer *ldwork, integer *info) at SB10UD.c:21>:
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    max()
+    dlamch_()
+    dgesvd_() <int dgesvd_ (char *jobu, char *jobvt, integer *m, integer *n, doublereal *a, integer *lda, doublereal *s, doublereal *u, integer *ldu, doublereal *vt, integer *ldvt, doublereal *work, integer *lwork, integer *info, ftnlen jobu_len, ftnlen jobvt_len) at [LAPACK]dgesvd.c:238>:
+        dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+            min()
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            abs()
+            disnan_()
+            dlassq_()
+        dlascl_() <int dlascl_ (char *type__, integer *kl, integer *ku, doublereal *cfrom, doublereal *cto, integer *m, integer *n, doublereal *a, integer *lda, integer *info, ftnlen type_len) at [LAPACK]dlascl.c:161>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            disnan_()
+            max()
+            xerbla_()
+            dlamch_()
+            abs()
+            min()
+        dgeqrf_() <int dgeqrf_ (integer *m, integer *n, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgeqrf.c:161>:
+            dlarfb_()
+            dlarft_()
+            xerbla_()
+            ilaenv_()
+            max()
+            min()
+            dgeqr2_()
+        dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        dbdsqr_()
+        dorgbr_()
+        dorglq_()
+        dorgqr_() <int dorgqr_ (integer *m, integer *n, integer *k, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dorgqr.c:153>:
+            dlarfb_()
+            dlarft_()
+            xerbla_()
+            ilaenv_()
+            max()
+            min()
+            dorg2r_()
+        min()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        ilaenv_()
+        dgebrd_()
+        dgelqf_()
+        xerbla_()
+        dlamch_()
+        dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            max()
+            xerbla_()
+        dormbr_()
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+sb10vd_() <int sb10vd_ (integer *n, integer *m, integer *np, integer *ncon, integer *nmeas, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *f, integer *ldf, doublereal *h__, integer *ldh, doublereal *x, integer *ldx, doublereal *y, integer *ldy, doublereal *xycond, integer *iwork, doublereal *dwork, integer *ldwork, logical *bwork, integer *info) at SB10VD.c:21>:
+    sb02rd_()
+    dsyrk_() <int dsyrk_ (char *uplo, char *trans, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *beta, doublereal *c__, integer *ldc, ftnlen uplo_len, ftnlen trans_len) at [BLAS]dsyrk.c:184>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    max()
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+sb10wd_() <int sb10wd_ (integer *n, integer *m, integer *np, integer *ncon, integer *nmeas, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *f, integer *ldf, doublereal *h__, integer *ldh, doublereal *tu, integer *ldtu, doublereal *ty, integer *ldty, doublereal *ak, integer *ldak, doublereal *bk, integer *ldbk, doublereal *ck, integer *ldck, doublereal *dk, integer *lddk, integer *info) at SB10WD.c:21>:
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    xerbla_()
+    max()
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+sg03ax_() <int sg03ax_ (char *trans, integer *n, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *x, integer *ldx, doublereal *scale, integer *info, ftnlen trans_len) at SG03AX.c:24>:
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    mb02uu_()
+    mb02uv_()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+    dgemv_() <int dgemv_ (char *trans, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *x, integer *incx, doublereal *beta, doublereal *y, integer *incy, ftnlen trans_len) at [BLAS]dgemv.c:171>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+sg03ay_() <int sg03ay_ (char *trans, integer *n, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *x, integer *ldx, doublereal *scale, integer *info, ftnlen trans_len) at SG03AY.c:24>:
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    mb02uu_()
+    mb02uv_()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+    dgemv_() <int dgemv_ (char *trans, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *x, integer *incx, doublereal *beta, doublereal *y, integer *incy, ftnlen trans_len) at [BLAS]dgemv.c:171>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+tb01id_() <int tb01id_ (char *job, integer *n, integer *m, integer *p, doublereal *maxred, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *scale, integer *info, ftnlen job_len) at TB01ID.c:19>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    xerbla_()
+    dasum_()
+    dlamch_()
+    abs()
+    idamax_()
+    min()
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+tb01kd_() <int tb01kd_ (char *dico, char *stdom, char *joba, integer *n, integer *m, integer *p, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, integer *ndim, doublereal *u, integer *ldu, doublereal *wr, doublereal *wi, doublereal *dwork, integer *ldwork, integer *info, ftnlen dico_len, ftnlen stdom_len, ftnlen joba_len) at TB01KD.c:21>:
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    xerbla_()
+    dtrsyl_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    tb01ld_()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+tb01pd_() <int tb01pd_ (char *job, char *equil, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, integer *nr, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info, ftnlen job_len, ftnlen equil_len) at TB01PD.c:19>:
+    tb01id_() <int tb01id_ (char *job, integer *n, integer *m, integer *p, doublereal *maxred, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *scale, integer *info, ftnlen job_len) at TB01ID.c:19>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+        dasum_()
+        dlamch_()
+        abs()
+        idamax_()
+        min()
+        dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+    tb01ud_() <int tb01ud_ (char *jobz, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, integer *ncont, integer *indcon, integer *nblk, doublereal *z__, integer *ldz, doublereal *tau, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info, ftnlen jobz_len) at TB01UD.c:23>:
+        dlamch_()
+        dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+            min()
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            abs()
+            disnan_()
+            dlassq_()
+        xerbla_()
+        dlapmt_()
+        dorgqr_() <int dorgqr_ (integer *m, integer *n, integer *k, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dorgqr.c:153>:
+            dlarfb_()
+            dlarft_()
+            xerbla_()
+            ilaenv_()
+            max()
+            min()
+            dorg2r_()
+        dormqr_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        min()
+        dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        mb01pd_()
+        dlapy2_() <doublereal dlapy2_ (doublereal *x, doublereal *y) at [LAPACK]dlapy2.c:81>:
+            abs()
+            max()
+            min()
+        mb03oy_()
+        dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    max()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    xerbla_()
+    min()
+    ab07md_() <int ab07md_ (char *jobd, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *info, ftnlen jobd_len) at AB07MD.c:19>:
+        xerbla_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        min()
+        dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+        dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    tb01xd_() <int tb01xd_ (char *jobd, integer *n, integer *m, integer *p, integer *kl, integer *ku, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *info, ftnlen jobd_len) at TB01XD.c:19>:
+        dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        min()
+        xerbla_()
+        dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+tb01ud_() <int tb01ud_ (char *jobz, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, integer *ncont, integer *indcon, integer *nblk, doublereal *z__, integer *ldz, doublereal *tau, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info, ftnlen jobz_len) at TB01UD.c:23>:
+    dlamch_()
+    dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+        min()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        abs()
+        disnan_()
+        dlassq_()
+    xerbla_()
+    dlapmt_()
+    dorgqr_() <int dorgqr_ (integer *m, integer *n, integer *k, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dorgqr.c:153>:
+        dlarfb_()
+        dlarft_()
+        xerbla_()
+        ilaenv_()
+        max()
+        min()
+        dorg2r_()
+    dormqr_()
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    min()
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    mb01pd_()
+    dlapy2_() <doublereal dlapy2_ (doublereal *x, doublereal *y) at [LAPACK]dlapy2.c:81>:
+        abs()
+        max()
+        min()
+    mb03oy_()
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+tb01wd_() <int tb01wd_ (integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *u, integer *ldu, doublereal *wr, doublereal *wi, doublereal *dwork, integer *ldwork, integer *info) at TB01WD.c:21>:
+    dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dgemv_() <int dgemv_ (char *trans, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *x, integer *incx, doublereal *beta, doublereal *y, integer *incy, ftnlen trans_len) at [BLAS]dgemv.c:171>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        xerbla_()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    xerbla_()
+    max()
+    dgees_() <int dgees_ (char *jobvs, char *sort, L_fp select, integer *n, doublereal *a, integer *lda, integer *sdim, doublereal *wr, doublereal *wi, doublereal *vs, integer *ldvs, doublereal *work, integer *lwork, logical *bwork, integer *info, ftnlen jobvs_len, ftnlen sort_len) at [LAPACK]dgees.c:240>:
+        dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+        dgebak_()
+        dgebal_()
+        dlascl_() <int dlascl_ (char *type__, integer *kl, integer *ku, doublereal *cfrom, doublereal *cto, integer *m, integer *n, doublereal *a, integer *lda, integer *info, ftnlen type_len) at [LAPACK]dlascl.c:161>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            disnan_()
+            max()
+            xerbla_()
+            dlamch_()
+            abs()
+            min()
+        dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        xerbla_()
+        dhseqr_()
+        dtrsen_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        ilaenv_()
+        dlamch_()
+        dlabad_()
+        dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+            min()
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            abs()
+            disnan_()
+            dlassq_()
+        dgehrd_() <int dgehrd_ (integer *n, integer *ilo, integer *ihi, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dgehrd.c:195>:
+            daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+            dgehd2_()
+            dlahr2_()
+            dlarfb_()
+            xerbla_()
+            max()
+            min()
+            ilaenv_()
+            dgemm_() <int dgemm_ (char *transa, char *transb, integer *m, integer *n, integer *k, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, integer *ldc, ftnlen transa_len, ftnlen transb_len) at [BLAS]dgemm.c:202>:
+                lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+                max()
+                xerbla_()
+            dtrmm_() <int dtrmm_ (char *side, char *uplo, char *transa, char *diag, integer *m, integer *n, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen side_len, ftnlen uplo_len, ftnlen transa_len, ftnlen diag_len) at [BLAS]dtrmm.c:192>:
+                lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+                max()
+                xerbla_()
+        dorghr_()
+        dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+tb01xd_() <int tb01xd_ (char *jobd, integer *n, integer *m, integer *p, integer *kl, integer *ku, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *info, ftnlen jobd_len) at TB01XD.c:19>:
+    dswap_() <int dswap_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dswap.c:66>:
+    lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+    max()
+    min()
+    xerbla_()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+tb04ay_() <int tb04ay_ (integer *n, integer *mwork, integer *pwork, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *ncont, integer *indexd, doublereal *dcoeff, integer *lddcoe, doublereal *ucoeff, integer *lduco1, integer *lduco2, doublereal *at, integer *n1, doublereal *tau, doublereal *tol1, doublereal *tol2, integer *iwork, doublereal *dwork, integer *ldwork, integer *info) at TB04AY.c:20>:
+    tb01ud_() <int tb01ud_ (char *jobz, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, integer *ncont, integer *indcon, integer *nblk, doublereal *z__, integer *ldz, doublereal *tau, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info, ftnlen jobz_len) at TB01UD.c:23>:
+        dlamch_()
+        dlange_() <doublereal dlange_ (char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, ftnlen norm_len) at [LAPACK]dlange.c:137>:
+            min()
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            abs()
+            disnan_()
+            dlassq_()
+        xerbla_()
+        dlapmt_()
+        dorgqr_() <int dorgqr_ (integer *m, integer *n, integer *k, doublereal *a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, integer *info) at [LAPACK]dorgqr.c:153>:
+            dlarfb_()
+            dlarft_()
+            xerbla_()
+            ilaenv_()
+            max()
+            min()
+            dorg2r_()
+        dormqr_()
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        max()
+        min()
+        dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        mb01pd_()
+        dlapy2_() <doublereal dlapy2_ (doublereal *x, doublereal *y) at [LAPACK]dlapy2.c:81>:
+            abs()
+            max()
+            min()
+        mb03oy_()
+        dlacpy_() <int dlacpy_ (char *uplo, integer *m, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, ftnlen uplo_len) at [LAPACK]dlacpy.c:121>:
+            lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+            min()
+        dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    tb01zd_()
+    daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+    max()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:
+    ddot_()
+td03ay_() <int td03ay_ (integer *mwork, integer *pwork, integer *index, doublereal *dcoeff, integer *lddcoe, doublereal *ucoeff, integer *lduco1, integer *lduco2, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *info) at TD03AY.c:20>:
+    daxpy_() <int daxpy_ (integer *n, doublereal *da, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]daxpy.c:67>:
+    dlaset_() <int dlaset_ (char *uplo, integer *m, integer *n, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, ftnlen uplo_len) at [LAPACK]dlaset.c:129>:
+        lsame_() <logical lsame_ (char *ca, char *cb, ftnlen ca_len, ftnlen cb_len) at [BLAS]lsame.c:68>:
+        min()
+    dlamch_()
+    abs()
+    idamax_()
+    dcopy_() <int dcopy_ (integer *n, doublereal *dx, integer *incx, doublereal *dy, integer *incy) at [BLAS]dcopy.c:66>:
+    dscal_() <int dscal_ (integer *n, doublereal *da, doublereal *dx, integer *incx) at [BLAS]dscal.c:68>:

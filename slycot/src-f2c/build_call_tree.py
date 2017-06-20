@@ -125,8 +125,12 @@ def main():
 
     big_set = slycot_function_path_set.union(lapack_function_path_set.union(blas_function_path_set))
     result = cflow.run_files_altogether(big_set)
+    result_replaced = result.replace(blas_path, '[BLAS]').replace(lapack_path, '[LAPACK]')
 
-    print(result.replace(blas_path, '[BLAS]').replace(lapack_path, '[LAPACK]'))
+    print(result_replaced)
+
+    with open('python-control-slycot_call_tree.txt', 'wt') as output_file:
+        output_file.write(result_replaced)
 
 
 def get_function_path(function_folder, c_function_name):
