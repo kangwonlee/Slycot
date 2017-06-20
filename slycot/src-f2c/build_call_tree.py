@@ -50,6 +50,7 @@ def tree_path(files):
 
     return cflow
 
+
 def main():
     if 3 <= len(sys.argv):
         lapack_path = sys.argv[1]
@@ -64,7 +65,6 @@ def main():
     # pprint.pprint(cflow.calls_dict)
     print('called dict (%4d)'.ljust(60, '=') % len(cflow.called_dict))
     # pprint.pprint(cflow.called_dict)
-
 
     slycot_files_set = glob.glob('*.c')
     print("# slycot files =", len(slycot_files_set))
@@ -89,18 +89,21 @@ def main():
     function_name_set = set(cflow.called_dict.keys())
 
     for function_name in function_name_set:
-        slycot_function_path = get_function_path_upper(function_name)
+        slycot_function_path = get_slycot_function_path_uppercase(function_name)
         lapack_function_path = get_function_path(lapack_path, function_name)
         blas_function_path = get_function_path(blas_path, function_name)
 
         if slycot_function_path in slycot_files_set:
             slycot_dict[function_name] = cflow.called_dict[function_name]
+            slycot_function_path_set.add(slycot_function_path)
             del cflow.called_dict[function_name]
         elif lapack_function_path in lapack_files_set:
             lapack_dict[function_name] = cflow.called_dict[function_name]
+            lapack_function_path_set.add(lapack_function_path)
             del cflow.called_dict[function_name]
         elif blas_function_path in blas_files_set:
             blas_dict[function_name] = cflow.called_dict[function_name]
+            blas_function_path_set.add(blas_function_path)
             del cflow.called_dict[function_name]
 
     print("# functions in slycot =", len(slycot_dict))
@@ -115,9 +118,8 @@ def get_function_path(function_folder, c_function_name):
     return os.path.join(function_folder, function_c_file_name)
 
 
-def get_function_path_upper(function_folder, c_function_name):
-    function_c_file_name_upper = c_function_name.upper() + '.c'
-    return os.path.join(function_folder, function_c_file_name_upper)
+def get_slycot_function_path_uppercase(c_function_name):
+    return c_function_name.upper() + '.c'
 
 
 if '__main__' == __name__:
