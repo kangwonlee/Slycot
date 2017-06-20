@@ -59,10 +59,10 @@ def main():
 
     cflow = tree_path(os.curdir)
 
-    print('calls dict '.ljust(60, '#'))
-    pprint.pprint(cflow.calls_dict)
-    print('called dict '.ljust(60, '='))
-    pprint.pprint(cflow.called_dict)
+    print('calls dict (%4d)'.ljust(60, '#') % len(cflow.calls_dict))
+    # pprint.pprint(cflow.calls_dict)
+    print('called dict (%4d)'.ljust(60, '=') % len(cflow.called_dict))
+    # pprint.pprint(cflow.called_dict)
 
 
     slycot_files_set = glob.glob('*.c')
@@ -103,4 +103,7 @@ def main():
 
 
 if '__main__' == __name__:
+    if 2 > len(sys.argv):
+        with open('call_tree.ini', 'rt') as argv:
+            sys.argv.extend([line.strip() for line in argv.readlines()])
     main()
