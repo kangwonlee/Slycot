@@ -123,14 +123,20 @@ def main():
     print("# functions unknown =", len(cflow.called_dict))
     print(sorted(list(cflow.called_dict.keys())))
 
-    big_set = slycot_function_path_set.union(lapack_function_path_set.union(blas_function_path_set))
-    result = cflow.run_files_altogether(big_set)
-    result_replaced = result.replace(blas_path, '[BLAS]').replace(lapack_path, '[LAPACK]')
+    result_replaced = build_extended_call_tree(slycot_function_path_set, lapack_function_path_set,
+                                               blas_function_path_set, blas_path, lapack_path, cflow)
 
     print(result_replaced)
 
+
+def build_extended_call_tree(slycot_function_path_set, lapack_function_path_set, blas_function_path_set,
+                             blas_path, lapack_path, cflow):
+    big_set = slycot_function_path_set.union(lapack_function_path_set.union(blas_function_path_set))
+    result = cflow.run_files_altogether(big_set)
+    result_replaced = result.replace(blas_path, '[BLAS]').replace(lapack_path, '[LAPACK]')
     with open('python-control-slycot_call_tree.txt', 'wt') as output_file:
         output_file.write(result_replaced)
+    return result_replaced
 
 
 def get_function_path(function_folder, c_function_name):
