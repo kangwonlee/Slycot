@@ -67,7 +67,9 @@ def main():
         lapack_path = sys.argv[1]
         blas_path = sys.argv[2]
 
-    with open('slycot_functions_list.txt', 'rt') as python_control_slycot_file:
+    slycot_function_list_filename = 'slycot_functions_list.txt'
+
+    with open(slycot_function_list_filename, 'rt') as python_control_slycot_file:
         slycot_set = set([line.strip().upper() +'.c' for line in python_control_slycot_file.readlines()])
 
     cflow = tree_path(slycot_set)
@@ -134,6 +136,8 @@ def main():
 
     print('may need to run for these (%d)' % len(not_fully_expanded_function_set),
           sorted(list(not_fully_expanded_function_set)))
+
+    with
 
 
 def find_not_fully_expanded_functions(result_replaced, slycot_set, unknown_set):
