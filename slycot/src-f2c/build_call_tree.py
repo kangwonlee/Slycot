@@ -51,6 +51,9 @@ class CFlow(object):
         return self.result_str
 
     def run_cmd_list(self, command_list):
+        if command_list[0] != self.cflow_path:
+            command_list.insert(0, self.cflow_path)
+
         cp = subprocess.run(command_list, stdout=subprocess.PIPE)
         self.result_str = cp.stdout.decode()
 
