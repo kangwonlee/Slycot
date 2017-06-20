@@ -86,6 +86,12 @@ class CFlowCodeSet(CFlow):
     def run_files_altogether_main(self, main_function_name, files):
         raise DeprecationWarning
 
+    def run_main(self, main_function_name):
+        cmd_list = ['--main', main_function_name]
+        self.run_cmd_list(cmd_list)
+
+        return self.result_str
+
 
 def tree_path(files):
     cflow = CFlow()
