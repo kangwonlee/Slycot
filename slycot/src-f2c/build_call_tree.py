@@ -68,6 +68,7 @@ def main():
         blas_path = sys.argv[2]
 
     slycot_function_list_filename = 'slycot_functions_list.txt'
+    not_fully_expanded_function_list_filename = 'still_not_expanded.txt'
 
     with open(slycot_function_list_filename, 'rt') as python_control_slycot_file:
         slycot_set = set([line.strip().upper() +'.c' for line in python_control_slycot_file.readlines()])
@@ -98,8 +99,13 @@ def main():
     slycot_function_path_set = set()
     lapack_function_path_set = set()
     blas_function_path_set = set()
+    unknown_set = set()
 
     function_name_set = set(cflow.called_dict.keys())
+
+    with open(not_fully_expanded_function_list_filename, 'r') as expand_these_file:
+        previously_unknown_set = set([line.strip() for line in expand_these_file.readlines()])
+    function_name_set.update(previously_unknown_set)
 
     for function_name in function_name_set:
         slycot_function_path = get_slycot_function_path_uppercase(function_name)
@@ -107,19 +113,13 @@ def main():
         blas_function_path = get_function_path(blas_path, function_name)
 
         if slycot_function_path in slycot_files_set:
-            slycot_dict[function_name] = cflow.called_dict[function_name]
             slycot_function_path_set.add(slycot_function_path)
-            del cflow.called_dict[function_name]
         elif lapack_function_path in lapack_files_set:
-            lapack_dict[function_name] = cflow.called_dict[function_name]
             lapack_function_path_set.add(lapack_function_path)
-            del cflow.called_dict[function_name]
         elif blas_function_path in blas_files_set:
-            blas_dict[function_name] = cflow.called_dict[function_name]
             blas_function_path_set.add(blas_function_path)
-            del cflow.called_dict[function_name]
-
-    unknown_set = set(cflow.called_dict.keys())
+        else:
+            unknown_set.add(function_name)
 
     print("# functions in slycot =", len(slycot_dict))
     print("# functions in lapack =", len(lapack_dict))
@@ -138,8 +138,8 @@ def main():
           sorted(list(not_fully_expanded_function_set)))
 
     # write not fully expanded functions to a separate file
-    with open('still_not_expanded.txt', 'w') as output_file:
-        for function_name in sorted(list(not_fully_expanded_function_set.difference(slycot_set))):
+    with open(not_fully_expanded_function_list_filename, 'w') as output_file:
+        for function_name in sorted(list(not_fully_expanded_function_set.union(previously_unknown_set))):
             output_file.write('%s\n' % function_name)
 
 
