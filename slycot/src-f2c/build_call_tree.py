@@ -137,7 +137,10 @@ def main():
     print('may need to run for these (%d)' % len(not_fully_expanded_function_set),
           sorted(list(not_fully_expanded_function_set)))
 
-    with
+    # write not fully expanded functions to a separate file
+    with open('still_not_expanded.txt', 'w') as output_file:
+        for function_name in sorted(list(not_fully_expanded_function_set.difference(slycot_set))):
+            output_file.write('%s\n' % function_name)
 
 
 def find_not_fully_expanded_functions(result_replaced, slycot_set, unknown_set):
