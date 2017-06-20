@@ -12,9 +12,7 @@ class CFlow(object):
         self.result_str = ''
 
     def run(self, cmd):
-        cp = subprocess.run([self.cflow_path, cmd], stdout=subprocess.PIPE)
-
-        self.result_str = cp.stdout.decode()
+        self.run_cmd_list([self.cflow_path, cmd])
 
         result_lines = self.result_str.splitlines()
 
@@ -48,9 +46,17 @@ class CFlow(object):
 
     def run_files_altogether(self, files):
         command_list = [self.cflow_path, ] + list(files)
-        cp = subprocess.run(command_list, stdout=subprocess.PIPE)
+        self.run_cmd_list(command_list)
 
+        return self.result_str
+
+    def run_cmd_list(self, command_list):
+        cp = subprocess.run(command_list, stdout=subprocess.PIPE)
         self.result_str = cp.stdout.decode()
+
+    def run_files_altogether_main(self, main_function_name, files):
+        command_list = [self.cflow_path, '--main', main_function_name] + list(files)
+        self.run_cmd_list(command_list)
 
         return self.result_str
 
