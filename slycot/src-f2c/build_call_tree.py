@@ -9,11 +9,14 @@ class CFlow(object):
         self.cflow_path = cflow_path
         self.calls_dict = {}
         self.called_dict = {}
+        self.result_str = ''
 
     def run(self, cmd):
         cp = subprocess.run([self.cflow_path, cmd], stdout=subprocess.PIPE)
 
-        result_lines = cp.stdout.decode().splitlines()
+        self.result_str = cp.stdout.decode()
+
+        result_lines = self.result_str.splitlines()
 
         value = None
         key = 'del_this'
@@ -42,6 +45,14 @@ class CFlow(object):
     def run_files(self, files):
         for file in files:
             self.run(file)
+
+    def run_files_altogether(self, files):
+        command_list = [self.cflow_path, ] + list(files)
+        cp = subprocess.run(command_list, stdout=subprocess.PIPE)
+
+        self.result_str = cp.stdout.decode()
+
+        return self.result_str
 
 
 def tree_path(files):
@@ -111,6 +122,11 @@ def main():
     print("# functions in blas =", len(blas_dict))
     print("# functions unknown =", len(cflow.called_dict))
     print(sorted(list(cflow.called_dict.keys())))
+
+    big_set = slycot_function_path_set.union(lapack_function_path_set.union(blas_function_path_set))
+    result = cflow.run_files_altogether(big_set)
+
+    print(result.replace(blas_path, '[BLAS]').replace(lapack_path, '[LAPACK]'))
 
 
 def get_function_path(function_folder, c_function_name):
