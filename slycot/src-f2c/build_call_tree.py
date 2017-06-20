@@ -117,16 +117,31 @@ def main():
             blas_function_path_set.add(blas_function_path)
             del cflow.called_dict[function_name]
 
+    unknown_set = set(cflow.called_dict.keys())
+
     print("# functions in slycot =", len(slycot_dict))
     print("# functions in lapack =", len(lapack_dict))
     print("# functions in blas =", len(blas_dict))
     print("# functions unknown =", len(cflow.called_dict))
-    print(sorted(list(cflow.called_dict.keys())))
+    print(sorted(list(unknown_set)))
 
     result_replaced = build_extended_call_tree(slycot_function_path_set, lapack_function_path_set,
                                                blas_function_path_set, blas_path, lapack_path, cflow)
 
     print(result_replaced)
+
+    may_need_to_add_set = set()
+
+    for line in result_replaced.splitlines():
+        line_split = line.split()
+        if 1 < len(line_split):
+            continue
+        else:
+            line_strip = line.strip().rstrip('()').rstrip('_')
+            if line_strip not in unknown_set:
+                may_need_to_add_set.add(line_strip)
+
+    print('may need to run for these (%d)' % len(may_need_to_add_set), sorted(list(may_need_to_add_set)))
 
 
 def build_extended_call_tree(slycot_function_path_set, lapack_function_path_set, blas_function_path_set,
