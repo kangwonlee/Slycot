@@ -187,6 +187,13 @@ def main():
             output_file.write('%s\n' % function_name)
 
 
+def get_slycot_function_set(slycot_function_list_filename):
+    with open(slycot_function_list_filename, 'rt') as python_control_slycot_file:
+        slycot_function_set = set([line.strip() for line in python_control_slycot_file.readlines()])
+
+    return slycot_function_set
+
+
 def get_slycot_filename_set(slycot_function_list_filename):
     with open(slycot_function_list_filename, 'rt') as python_control_slycot_file:
         slycot_filename_set = set([line.strip().upper() + '.c' for line in python_control_slycot_file.readlines()])
