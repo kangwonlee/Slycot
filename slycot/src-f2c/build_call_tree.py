@@ -1,5 +1,6 @@
 import glob
 import os
+import pprint
 import subprocess
 import sys
 
@@ -109,10 +110,10 @@ def main():
     not_fully_expanded_function_list_filename = 'still_not_expanded.txt'
 
     with open(slycot_function_list_filename, 'rt') as python_control_slycot_file:
-        slycot_set = set([line.strip().upper() +'.c' for line in python_control_slycot_file.readlines()])
+        slycot_filename_set = set([line.strip().upper() + '.c' for line in python_control_slycot_file.readlines()])
 
     # build top level call tree
-    cflow = tree_path(slycot_set)
+    cflow = tree_path(slycot_filename_set)
 
     print('calls dict (%4d)'.ljust(60, '#') % len(cflow.calls_dict))
     # pprint.pprint(cflow.calls_dict)
@@ -158,8 +159,10 @@ def main():
             lapack_function_path_set.add(lapack_function_path)
         elif blas_function_path in blas_files_set:
             blas_function_path_set.add(blas_function_path)
-        else:
+        elif function_name:
             unknown_set.add(function_name)
+        else:
+            print(function_name, cflow.calls_dict.get(function_name, "Not here either"))
 
     print("# functions in slycot =", len(slycot_dict))
     print("# functions in lapack =", len(lapack_dict))
@@ -168,12 +171,13 @@ def main():
     print(sorted(list(unknown_set)))
 
     # build extended function set
-    result_replaced = build_extended_call_tree(slycot_set, slycot_function_path_set, lapack_function_path_set,
-                                               blas_function_path_set, blas_path, lapack_path, cflow)
+    result_replaced = build_extended_call_tree(slycot_filename_set, slycot_function_path_set, lapack_function_path_set,
+                                               blas_function_path_set, blas_path, lapack_path)
 
-    print(result_replaced)
+    # print(result_replaced)
 
-    not_fully_expanded_function_set = find_not_fully_expanded_functions(result_replaced, slycot_set, unknown_set)
+    not_fully_expanded_function_set = find_not_fully_expanded_functions(result_replaced, slycot_filename_set,
+                                                                        unknown_set)
 
     print('may need to run for these (%d)' % len(not_fully_expanded_function_set),
           sorted(list(not_fully_expanded_function_set)))
@@ -207,10 +211,20 @@ def find_not_fully_expanded_functions(result_replaced, slycot_set, unknown_set):
     return may_need_to_add_set
 
 
-def build_extended_call_tree(slycot_set, slycot_function_path_set, lapack_function_path_set, blas_function_path_set,
-                             blas_path, lapack_path, cflow):
-    big_set = slycot_function_path_set.union(lapack_function_path_set.union(blas_function_path_set.union(slycot_set)))
-    result = cflow.run_files_altogether(big_set)
+def build_extended_call_tree(slycot_file_set, slycot_function_path_set, lapack_function_path_set,
+                             blas_function_path_set,
+                             blas_path, lapack_path):
+    # build extensive code set; possibly replaceable with set of {'[folder_i]/*.c'}
+    big_set = slycot_function_path_set.union(
+        lapack_function_path_set.union(blas_function_path_set.union(slycot_file_set)))
+    cflow_set = CFlowCodeSet(code_file_path_set=big_set)
+
+    result_list = map(cflow_set.run_main, slycot_file_set)
+    result = ''.join(result_list)
+
+    # see if all functions included
+    pprint.pprint(sorted(list(map(lambda x: (x, x in result), slycot_file_set))))
+
     result_replaced = result.replace(blas_path, '[BLAS]').replace(lapack_path, '[LAPACK]')
     with open('python-control-slycot_call_tree.txt', 'wt') as output_file:
         output_file.write(result_replaced)
