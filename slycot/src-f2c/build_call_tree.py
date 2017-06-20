@@ -223,7 +223,8 @@ def build_extended_call_tree(slycot_file_set, slycot_function_path_set, lapack_f
     result = ''.join(result_list)
 
     # see if all functions included
-    pprint.pprint(sorted(list(map(lambda x: (x, x in result), slycot_file_set))))
+    if not all(map(lambda x: x in result, slycot_file_set)):
+        pprint.pprint(sorted(list(map(lambda x: (x, x in result), slycot_file_set))))
 
     result_replaced = result.replace(blas_path, '[BLAS]').replace(lapack_path, '[LAPACK]')
     with open('python-control-slycot_call_tree.txt', 'wt') as output_file:
