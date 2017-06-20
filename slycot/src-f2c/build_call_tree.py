@@ -104,8 +104,9 @@ def main():
 
     function_name_set = set(cflow.called_dict.keys())
 
-    with open(not_fully_expanded_function_list_filename, 'r') as expand_these_file:
-        previously_unknown_set = set([line.strip() for line in expand_these_file.readlines()])
+    # initialize previously_unknown_set
+    previously_unknown_set = init_prev_unknown_set(not_fully_expanded_function_list_filename)
+
     function_name_set.update(previously_unknown_set)
 
     for function_name in function_name_set:
@@ -143,6 +144,15 @@ def main():
     with open(not_fully_expanded_function_list_filename, 'w') as output_file:
         for function_name in sorted(list(not_fully_expanded_function_set.union(previously_unknown_set))):
             output_file.write('%s\n' % function_name)
+
+
+def init_prev_unknown_set(not_fully_expanded_function_list_filename):
+    if os.path.exists(not_fully_expanded_function_list_filename):
+        with open(not_fully_expanded_function_list_filename, 'r') as expand_these_file:
+            previously_unknown_set = set([line.strip() for line in expand_these_file.readlines()])
+    else:
+        previously_unknown_set = set()
+    return previously_unknown_set
 
 
 def find_not_fully_expanded_functions(result_replaced, slycot_set, unknown_set):
