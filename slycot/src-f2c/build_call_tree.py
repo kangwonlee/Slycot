@@ -1,8 +1,7 @@
-import subprocess
-import os
-import pprint
-import sys
 import glob
+import os
+import subprocess
+import sys
 
 
 class CFlow(object):
@@ -83,17 +82,24 @@ def main():
     lapack_dict = {}
     blas_dict = {}
 
+    slycot_function_path_set = set()
+    lapack_function_path_set = set()
+    blas_function_path_set = set()
+
     function_name_set = set(cflow.called_dict.keys())
 
     for function_name in function_name_set:
-        function_c_file_name = function_name + '.c'
-        if function_name.upper() + '.c' in slycot_files_set:
+        slycot_function_path = get_function_path_upper(function_name)
+        lapack_function_path = get_function_path(lapack_path, function_name)
+        blas_function_path = get_function_path(blas_path, function_name)
+
+        if slycot_function_path in slycot_files_set:
             slycot_dict[function_name] = cflow.called_dict[function_name]
             del cflow.called_dict[function_name]
-        elif os.path.join(lapack_path,function_c_file_name) in lapack_files_set:
+        elif lapack_function_path in lapack_files_set:
             lapack_dict[function_name] = cflow.called_dict[function_name]
             del cflow.called_dict[function_name]
-        elif os.path.join(blas_path, function_c_file_name) in blas_files_set:
+        elif blas_function_path in blas_files_set:
             blas_dict[function_name] = cflow.called_dict[function_name]
             del cflow.called_dict[function_name]
 
@@ -102,6 +108,16 @@ def main():
     print("# functions in blas =", len(blas_dict))
     print("# functions unknown =", len(cflow.called_dict))
     print(sorted(list(cflow.called_dict.keys())))
+
+
+def get_function_path(function_folder, c_function_name):
+    function_c_file_name = c_function_name + '.c'
+    return os.path.join(function_folder, function_c_file_name)
+
+
+def get_function_path_upper(function_folder, c_function_name):
+    function_c_file_name_upper = c_function_name.upper() + '.c'
+    return os.path.join(function_folder, function_c_file_name_upper)
 
 
 if '__main__' == __name__:
