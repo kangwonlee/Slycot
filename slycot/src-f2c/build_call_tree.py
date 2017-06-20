@@ -61,6 +61,25 @@ class CFlow(object):
         return self.result_str
 
 
+class CFlowCodeSet(CFlow):
+    def __init__(self, cflow_path=os.path.join('/', 'usr', 'bin', 'cflow'), code_file_path_set=set()):
+        super(CFlowCodeSet, self).__init__(cflow_path)
+        self.code_file_path_set = set(code_file_path_set)
+
+    def run_cmd_list(self, command_list):
+        new_cmd_list = command_list + list(self.code_file_path_set)
+        super(CFlowCodeSet, self).run_cmd_list(new_cmd_list)
+
+    def run_files(self, files):
+        raise DeprecationWarning
+
+    def run_files_altogether(self, files):
+        raise DeprecationWarning
+
+    def run_files_altogether_main(self, main_function_name, files):
+        raise DeprecationWarning
+
+
 def tree_path(files):
     cflow = CFlow()
     cflow.run_files_altogether(files)
