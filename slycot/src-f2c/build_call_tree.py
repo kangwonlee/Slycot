@@ -14,12 +14,9 @@ class CFlow(object):
             ValueError('CFlow not a file')
         self.calls_dict = {}
         self.called_dict = {}
-        self.result_str = ''
 
     def run(self, cmd):
-        self.run_cmd_list([self.cflow_path, cmd])
-
-        result_lines = self.result_str.splitlines()
+        result_lines = self.run_cmd_list([self.cflow_path, cmd]).splitlines()
 
         value = None
         key = 'del_this'
@@ -51,22 +48,18 @@ class CFlow(object):
 
     def run_files_altogether(self, files):
         command_list = [self.cflow_path, ] + list(files)
-        self.run_cmd_list(command_list)
-
-        return self.result_str
+        return self.run_cmd_list(command_list)
 
     def run_cmd_list(self, command_list):
         if command_list[0] != self.cflow_path:
             command_list.insert(0, self.cflow_path)
 
         cp = subprocess.run(command_list, stdout=subprocess.PIPE)
-        self.result_str = cp.stdout.decode()
+        return cp.stdout.decode()
 
     def run_files_altogether_main(self, main_function_name, files):
         command_list = [self.cflow_path, '--main', main_function_name] + list(files)
-        self.run_cmd_list(command_list)
-
-        return self.result_str
+        return self.run_cmd_list(command_list)
 
 
 class CFlowCodeSet(CFlow):
@@ -76,7 +69,7 @@ class CFlowCodeSet(CFlow):
 
     def run_cmd_list(self, command_list):
         new_cmd_list = command_list + list(self.code_file_path_set)
-        super(CFlowCodeSet, self).run_cmd_list(new_cmd_list)
+        return super(CFlowCodeSet, self).run_cmd_list(new_cmd_list)
 
     def run_files(self, files):
         raise DeprecationWarning
@@ -89,9 +82,7 @@ class CFlowCodeSet(CFlow):
 
     def run_main(self, main_function_name):
         cmd_list = ['--main', main_function_name]
-        self.run_cmd_list(cmd_list)
-
-        return self.result_str
+        return self.run_cmd_list(cmd_list)
 
 
 def tree_path(files):
