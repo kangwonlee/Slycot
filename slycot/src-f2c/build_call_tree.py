@@ -130,8 +130,14 @@ def main():
 
     print(result_replaced)
 
-    may_need_to_add_set = set()
+    not_fully_expanded_function_set = find_not_fully_expanded_functions(result_replaced, slycot_set, unknown_set)
 
+    print('may need to run for these (%d)' % len(not_fully_expanded_function_set),
+          sorted(list(not_fully_expanded_function_set)))
+
+
+def find_not_fully_expanded_functions(result_replaced, slycot_set, unknown_set):
+    may_need_to_add_set = set()
     for line in result_replaced.splitlines():
         line_split = line.split()
         if 1 < len(line_split):
@@ -139,10 +145,9 @@ def main():
         else:
             not_fully_expanded_function_name = line.strip().rstrip('()').rstrip('_')
             if (not_fully_expanded_function_name not in unknown_set) and (
-                not_fully_expanded_function_name not in slycot_set):
+                        not_fully_expanded_function_name not in slycot_set):
                 may_need_to_add_set.add(not_fully_expanded_function_name)
-
-    print('may need to run for these (%d)' % len(may_need_to_add_set), sorted(list(may_need_to_add_set)))
+    return may_need_to_add_set
 
 
 def build_extended_call_tree(slycot_function_path_set, lapack_function_path_set, blas_function_path_set,
