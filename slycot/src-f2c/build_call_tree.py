@@ -137,9 +137,10 @@ def main():
         if 1 < len(line_split):
             continue
         else:
-            line_strip = line.strip().rstrip('()').rstrip('_')
-            if line_strip not in unknown_set:
-                may_need_to_add_set.add(line_strip)
+            not_fully_expanded_function_name = line.strip().rstrip('()').rstrip('_')
+            if (not_fully_expanded_function_name not in unknown_set) and (
+                not_fully_expanded_function_name not in slycot_set):
+                may_need_to_add_set.add(not_fully_expanded_function_name)
 
     print('may need to run for these (%d)' % len(may_need_to_add_set), sorted(list(may_need_to_add_set)))
 
