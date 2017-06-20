@@ -45,9 +45,8 @@ class CFlow(object):
             self.run(file)
 
 
-def tree_path(path):
+def tree_path(files):
     cflow = CFlow()
-    files = set(glob.glob(os.path.join(path,'*.c')))
     cflow.run_files(files)
 
     return cflow
@@ -57,7 +56,10 @@ def main():
         lapack_path = sys.argv[1]
         blas_path = sys.argv[2]
 
-    cflow = tree_path(os.curdir)
+    with open('slycot_functions_list.txt', 'rt') as python_control_slycot_file:
+        slycot_set = set([line.strip().upper() +'.c' for line in python_control_slycot_file.readlines()])
+
+    cflow = tree_path(slycot_set)
 
     print('calls dict (%4d)'.ljust(60, '#') % len(cflow.calls_dict))
     # pprint.pprint(cflow.calls_dict)
