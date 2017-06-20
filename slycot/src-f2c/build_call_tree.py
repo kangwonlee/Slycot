@@ -7,6 +7,10 @@ import sys
 class CFlow(object):
     def __init__(self, cflow_path=os.path.join('/', 'usr', 'bin', 'cflow')):
         self.cflow_path = cflow_path
+        if not os.path.exists(self.cflow_path):
+            ValueError('Invalid cflow path')
+        if not os.path.isfile(self.cflow_path):
+            ValueError('CFlow not a file')
         self.calls_dict = {}
         self.called_dict = {}
         self.result_str = ''
