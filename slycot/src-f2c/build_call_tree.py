@@ -60,6 +60,13 @@ class CFlow(object):
         return self.run_cmd_list(command_list)
 
     def run_cmd_list(self, command_list):
+        """
+        run cflow and return the stdout result
+
+        :param command_list:
+        :return:
+        """
+
         if command_list[0] != self.cflow_path:
             command_list.insert(0, self.cflow_path)
 
