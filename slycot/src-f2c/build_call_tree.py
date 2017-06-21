@@ -306,7 +306,7 @@ def build_extended_call_tree(slycot_function_set,
     cflow_set = CFlowCodeSet(code_file_path_set=big_set)
 
     print('cpu_count() =', mp.cpu_count())
-    with mp.Pool(mp.cpu_count()) as p:
+    with mp.Pool(min((mp.cpu_count()), 6)) as p:
         result_list = p.map(cflow_set.run_main, sorted(slycot_function_set))
 
     result = ''.join(result_list)
