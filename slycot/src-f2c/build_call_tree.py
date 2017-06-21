@@ -224,18 +224,33 @@ def init_prev_unknown_set(not_fully_expanded_function_list_filename):
     return previously_unknown_set
 
 
-def find_not_fully_expanded_functions(result_replaced, slycot_set, unknown_set):
-    may_need_to_add_set = set()
-    for line in result_replaced.splitlines():
+def find_not_fully_expanded_functions(call_tree_multi_line_string, slycot_set, unknown_set):
+    """
+    Identify final level functions from the call tree result sting
+    See if its location is attached.
+    If not, see if it is already in unknown_set
+
+    :param str call_tree_multi_line_string:
+    :param set|list|tuple slycot_set:
+    :param set|list|tuple unknown_set:
+    :return:
+    """
+
+    # initialize
+    seems_not_fully_expanded_set = set()
+
+    # call tree text line loop
+    for line in call_tree_multi_line_string.splitlines():
         line_split = line.split()
+        # location info available
         if 1 < len(line_split):
             continue
         else:
             not_fully_expanded_function_name = line.strip().rstrip('()').rstrip('_')
             if (not_fully_expanded_function_name not in unknown_set) and (
                         not_fully_expanded_function_name not in slycot_set):
-                may_need_to_add_set.add(not_fully_expanded_function_name)
-    return may_need_to_add_set
+                seems_not_fully_expanded_set.add(not_fully_expanded_function_name)
+    return seems_not_fully_expanded_set
 
 
 def build_extended_call_tree(slycot_function_set,
