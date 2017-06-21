@@ -144,39 +144,14 @@ def main():
     print("# blas files =", len(blas_files_set))
     print(list(blas_files_set)[:10])
 
-    slycot_function_path_set = set()
-    lapack_function_path_set = set()
-    blas_function_path_set = set()
-    unknown_set = set()
-
-    function_name_set = set(cflow.called_dict.keys())
-
     # initialize previously_unknown_set
     previously_unknown_set = init_prev_unknown_set(not_fully_expanded_function_list_filename)
 
-    function_name_set.update(previously_unknown_set)
+    # call tree top level functions
+    function_name_set = set(cflow.called_dict.keys())
 
-    for function_name in function_name_set:
-        slycot_function_path = get_slycot_function_path_uppercase(function_name)
-        lapack_function_path = get_function_path(lapack_path, function_name)
-        blas_function_path = get_function_path(blas_path, function_name)
-
-        if slycot_function_path in slycot_files_set:
-            slycot_function_path_set.add(slycot_function_path)
-        elif lapack_function_path in lapack_files_set:
-            lapack_function_path_set.add(lapack_function_path)
-        elif blas_function_path in blas_files_set:
-            blas_function_path_set.add(blas_function_path)
-        elif function_name:
-            unknown_set.add(function_name)
-        else:
-            print(function_name, cflow.calls_dict.get(function_name, "Not here either"))
-
-    print("# functions in slycot =", len(slycot_function_path_set))
-    print("# functions in lapack =", len(lapack_function_path_set))
-    print("# functions in blas =", len(blas_function_path_set))
-    print("# functions unknown =", len(unknown_set))
-    print(sorted(list(unknown_set)))
+    unknown_set = classify_library_association(function_name_set, slycot_files_set, lapack_files_set, lapack_path,
+                                               blas_files_set, blas_path, previously_unknown_set, cflow)
 
     # build extended function set
     result_replaced = build_extended_call_tree(slycot_function_set, blas_path, lapack_path, os.curdir)
@@ -193,6 +168,37 @@ def main():
     with open(not_fully_expanded_function_list_filename, 'w') as output_file:
         for function_name in sorted(list(not_fully_expanded_function_set.union(previously_unknown_set))):
             output_file.write('%s\n' % function_name)
+
+
+def classify_library_association(function_name_set, slycot_files_set, lapack_files_set, lapack_path, blas_files_set,
+                                 blas_path, previously_unknown_set, cflow):
+    slycot_function_path_set = set()
+    lapack_function_path_set = set()
+    blas_function_path_set = set()
+    unknown_set = set()
+    function_name_set.update(previously_unknown_set)
+    # classify which function in which library
+    for function_name in function_name_set:
+        slycot_function_path = get_slycot_function_path_uppercase(function_name)
+        lapack_function_path = get_function_path(lapack_path, function_name)
+        blas_function_path = get_function_path(blas_path, function_name)
+
+        if slycot_function_path in slycot_files_set:
+            slycot_function_path_set.add(slycot_function_path)
+        elif lapack_function_path in lapack_files_set:
+            lapack_function_path_set.add(lapack_function_path)
+        elif blas_function_path in blas_files_set:
+            blas_function_path_set.add(blas_function_path)
+        elif function_name:
+            unknown_set.add(function_name)
+        else:
+            print(function_name, cflow.calls_dict.get(function_name, "Not here either"))
+    print("# functions in slycot =", len(slycot_function_path_set))
+    print("# functions in lapack =", len(lapack_function_path_set))
+    print("# functions in blas =", len(blas_function_path_set))
+    print("# functions unknown =", len(unknown_set))
+    print(sorted(list(unknown_set)))
+    return unknown_set
 
 
 def get_slycot_function_set(slycot_function_list_filename):
