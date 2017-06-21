@@ -114,6 +114,8 @@ def main():
     if 3 <= len(sys.argv):
         lapack_path = sys.argv[1]
         blas_path = sys.argv[2]
+    else:
+        blas_path = lapack_path = os.curdir
 
     slycot_function_list_filename = 'slycot_functions_list.txt'
     not_fully_expanded_function_list_filename = 'still_not_expanded.txt'
