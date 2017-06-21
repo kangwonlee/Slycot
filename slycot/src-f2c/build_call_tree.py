@@ -15,7 +15,7 @@ class CFlow(object):
         self.calls_dict = {}
         self.called_dict = {}
 
-    def run(self, cmd):
+    def run_one_file(self, cmd):
         result_lines = self.run_cmd_list([self.cflow_path, cmd]).splitlines()
 
         self.build_call_trees(result_lines)
@@ -53,7 +53,7 @@ class CFlow(object):
 
     def run_files(self, files):
         for file in files:
-            self.run(file)
+            self.run_one_file(file)
 
     def run_files_altogether(self, files):
         command_list = [self.cflow_path, ] + list(files)
