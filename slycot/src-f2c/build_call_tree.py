@@ -18,24 +18,33 @@ class CFlow(object):
     def run(self, cmd):
         result_lines = self.run_cmd_list([self.cflow_path, cmd]).splitlines()
 
+        self.build_call_trees(result_lines)
+
+    def build_call_trees(self, result_lines):
+        """
+        populate call tree dictionaries based on cflow result
+
+        :param str result_lines: cflow stdout result
+        :return:
+        """
         value = None
         key = 'del_this'
+        callee_list = []
 
         for line in result_lines:
             if not line.startswith(' '):
-               # store result list
-               self.update_calls_dict(key, value)
-               # reset result list
-               key = line.split()[0]
-               callee_list = []
-               value = {'info':line, 'list':callee_list}
+                # store result list
+                self.update_calls_dict(key, value)
+                # reset result list
+                key = line.split()[0]
+                callee_list = []
+                value = {'info': line, 'list': callee_list}
             else:
-               callee_name = line.strip().rstrip('_()')
-               callee_list.append(callee_name)
-               caller_set = self.called_dict.get(callee_name, set())
-               caller_set.add(key)
-               self.called_dict[callee_name] = caller_set
-
+                callee_name = line.strip().rstrip('_()')
+                callee_list.append(callee_name)
+                caller_set = self.called_dict.get(callee_name, set())
+                caller_set.add(key)
+                self.called_dict[callee_name] = caller_set
         self.update_calls_dict(key, value)
         del self.calls_dict['del_this']
 
