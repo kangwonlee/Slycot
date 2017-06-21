@@ -1,4 +1,5 @@
 import glob
+import multiprocessing as mp
 import os
 import pprint
 import subprocess
@@ -304,7 +305,10 @@ def build_extended_call_tree(slycot_function_set,
     )
     cflow_set = CFlowCodeSet(code_file_path_set=big_set)
 
-    result_list = map(cflow_set.run_main, sorted(slycot_function_set))
+    print('cpu_count() =', mp.cpu_count())
+    with mp.Pool(mp.cpu_count()) as p:
+        result_list = p.map(cflow_set.run_main, sorted(slycot_function_set))
+
     result = ''.join(result_list)
 
     # see if all functions included
