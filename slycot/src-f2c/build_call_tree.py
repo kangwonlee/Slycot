@@ -131,21 +131,18 @@ def main():
     print('called dict (%4d)'.ljust(60, '=') % len(cflow.called_dict))
     # pprint.pprint(cflow.called_dict)
 
-    slycot_files_set = glob.glob('*.c')
+    # build set of file paths
+    slycot_files_set = set(glob.glob('*.c'))
     print("# slycot files =", len(slycot_files_set))
     print(list(slycot_files_set)[:10])
 
-    lapack_files_set = glob.glob(os.path.join(lapack_path, '*.c'))
+    lapack_files_set = set(glob.glob(os.path.join(lapack_path, '*.c')))
     print("# lapack files =", len(lapack_files_set))
     print(list(lapack_files_set)[:10])
 
-    blas_files_set = glob.glob(os.path.join(blas_path, '*.c'))
+    blas_files_set = set(glob.glob(os.path.join(blas_path, '*.c')))
     print("# blas files =", len(blas_files_set))
     print(list(blas_files_set)[:10])
-
-    slycot_dict = {}
-    lapack_dict = {}
-    blas_dict = {}
 
     slycot_function_path_set = set()
     lapack_function_path_set = set()
@@ -175,10 +172,10 @@ def main():
         else:
             print(function_name, cflow.calls_dict.get(function_name, "Not here either"))
 
-    print("# functions in slycot =", len(slycot_dict))
-    print("# functions in lapack =", len(lapack_dict))
-    print("# functions in blas =", len(blas_dict))
-    print("# functions unknown =", len(cflow.called_dict))
+    print("# functions in slycot =", len(slycot_function_path_set))
+    print("# functions in lapack =", len(lapack_function_path_set))
+    print("# functions in blas =", len(blas_function_path_set))
+    print("# functions unknown =", len(unknown_set))
     print(sorted(list(unknown_set)))
 
     # build extended function set
