@@ -16,22 +16,22 @@ class CFlow(object):
         self.called_dict = {}
 
     def run_one_file(self, cmd):
-        result_lines = self.run_cmd_list([self.cflow_path, cmd]).splitlines()
+        result_lines = self.run_cmd_list([self.cflow_path, cmd])
 
         self.build_call_trees(result_lines)
 
-    def build_call_trees(self, result_lines):
+    def build_call_trees(self, result_lines_str):
         """
         populate call tree dictionaries based on cflow result
 
-        :param str result_lines: cflow stdout result
+        :param str result_lines_str: cflow stdout result
         :return:
         """
         value = None
         key = 'del_this'
         callee_list = []
 
-        for line in result_lines:
+        for line in result_lines_str.splitlines():
             if not line.startswith(' '):
                 # store result list
                 self.update_calls_dict(key, value)
@@ -57,7 +57,8 @@ class CFlow(object):
 
     def run_files_altogether(self, files):
         command_list = [self.cflow_path, ] + list(files)
-        return self.run_cmd_list(command_list)
+        result = self.run_cmd_list(command_list)
+        return result
 
     def run_cmd_list(self, command_list):
         """
@@ -103,7 +104,8 @@ class CFlowCodeSet(CFlow):
 
 def tree_path(files):
     cflow = CFlow()
-    cflow.run_files_altogether(files)
+    # better way doing it?
+    cflow.build_call_trees(cflow.run_files_altogether(files))
 
     return cflow
 
