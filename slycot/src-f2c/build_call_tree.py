@@ -161,14 +161,14 @@ def main():
     else:
         blas_path = lapack_path = os.curdir
 
-    slycot_function_list_filename = 'slycot_functions_list.txt'
+    slycot_function_in_py_ctrl_list_filename = 'slycot_functions_list.txt'
     not_fully_expanded_function_list_filename = 'still_not_expanded.txt'
 
-    slycot_function_set = get_slycot_function_set(slycot_function_list_filename)
-    slycot_filename_set = get_slycot_filename_set(slycot_function_list_filename)
+    slycot_function_in_pyctrl_set = get_slycot_function_set(slycot_function_in_py_ctrl_list_filename)
+    slycot_filename_in_pyctrl_set = get_slycot_filename_set(slycot_function_in_py_ctrl_list_filename)
 
     # build top level call tree
-    cflow = tree_path(slycot_filename_set)
+    cflow = tree_path(slycot_filename_in_pyctrl_set)
 
     print('calls dict (%4d)'.ljust(60, '#') % len(cflow.calls_dict))
     # pprint.pprint(cflow.calls_dict)
@@ -194,11 +194,11 @@ def main():
     unknown_set = classify_library_association(top_level_function_name_set, previously_unknown_set, cflow)
 
     # build extended function set
-    result_replaced = build_extended_call_tree(slycot_function_set, blas_path, lapack_path, os.curdir)
+    result_replaced = build_extended_call_tree(slycot_function_in_pyctrl_set, blas_path, lapack_path, os.curdir)
 
     # print(result_replaced)
 
-    not_fully_expanded_function_set = find_not_fully_expanded_functions(result_replaced, slycot_filename_set,
+    not_fully_expanded_function_set = find_not_fully_expanded_functions(result_replaced, slycot_filename_in_pyctrl_set,
                                                                         unknown_set)
 
     print('may need to run for these (%d)' % len(not_fully_expanded_function_set),
