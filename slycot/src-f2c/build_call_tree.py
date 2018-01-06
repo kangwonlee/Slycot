@@ -7,8 +7,15 @@ import sys
 
 if 2 > len(sys.argv):
     # if # argument not sufficient
-    with open('call_tree.ini', 'rt') as argv:
-        sys.argv.extend([line.strip() for line in argv.readlines()])
+
+    if os.path.exists('call_tree.ini'):
+        # if file exists
+        with open('call_tree.ini', 'rt') as argv:
+            sys.argv.extend([line.strip() for line in argv.readlines()])
+    else:
+        # if file does not exist, show usage
+        print('$ python %s [LAPack path] [BLAS path]' % __file__)
+        sys.exit(-1)
 
 
 class FunctionName(object):
