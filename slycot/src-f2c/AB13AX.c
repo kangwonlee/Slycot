@@ -1,3 +1,4 @@
+#line 1 "AB13AX.f"
 /* AB13AX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB13AX.f"
 /* Table of constant values */
 
 static logical c_false = FALSE_;
@@ -201,82 +203,138 @@ doublereal ab13ax_(char *dico, integer *n, integer *m, integer *p, doublereal
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 170 "AB13AX.f"
     /* Parameter adjustments */
+#line 170 "AB13AX.f"
     a_dim1 = *lda;
+#line 170 "AB13AX.f"
     a_offset = 1 + a_dim1;
+#line 170 "AB13AX.f"
     a -= a_offset;
+#line 170 "AB13AX.f"
     b_dim1 = *ldb;
+#line 170 "AB13AX.f"
     b_offset = 1 + b_dim1;
+#line 170 "AB13AX.f"
     b -= b_offset;
+#line 170 "AB13AX.f"
     c_dim1 = *ldc;
+#line 170 "AB13AX.f"
     c_offset = 1 + c_dim1;
+#line 170 "AB13AX.f"
     c__ -= c_offset;
+#line 170 "AB13AX.f"
     --hsv;
+#line 170 "AB13AX.f"
     --dwork;
+#line 170 "AB13AX.f"
 
+#line 170 "AB13AX.f"
     /* Function Body */
+#line 170 "AB13AX.f"
     *info = 0;
+#line 171 "AB13AX.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 175 "AB13AX.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 176 "AB13AX.f"
 	*info = -1;
+#line 177 "AB13AX.f"
     } else if (*n < 0) {
+#line 178 "AB13AX.f"
 	*info = -2;
+#line 179 "AB13AX.f"
     } else if (*m < 0) {
+#line 180 "AB13AX.f"
 	*info = -3;
+#line 181 "AB13AX.f"
     } else if (*p < 0) {
+#line 182 "AB13AX.f"
 	*info = -4;
+#line 183 "AB13AX.f"
     } else if (*lda < max(1,*n)) {
+#line 184 "AB13AX.f"
 	*info = -6;
+#line 185 "AB13AX.f"
     } else if (*ldb < max(1,*n)) {
+#line 186 "AB13AX.f"
 	*info = -8;
+#line 187 "AB13AX.f"
     } else if (*ldc < max(1,*p)) {
+#line 188 "AB13AX.f"
 	*info = -10;
+#line 189 "AB13AX.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 189 "AB13AX.f"
 	i__3 = max(*n,*m);
+#line 189 "AB13AX.f"
 	i__1 = 1, i__2 = *n * (max(i__3,*p) + 5) + *n * (*n + 1) / 2;
+#line 189 "AB13AX.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 191 "AB13AX.f"
 	    *info = -13;
+#line 192 "AB13AX.f"
 	}
+#line 192 "AB13AX.f"
     }
 
+#line 194 "AB13AX.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 198 "AB13AX.f"
 	i__1 = -(*info);
+#line 198 "AB13AX.f"
 	xerbla_("AB13AX", &i__1, (ftnlen)6);
+#line 199 "AB13AX.f"
 	return ret_val;
+#line 200 "AB13AX.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 204 "AB13AX.f"
     i__1 = min(*n,*m);
+#line 204 "AB13AX.f"
     if (min(i__1,*p) == 0) {
+#line 205 "AB13AX.f"
 	ret_val = 0.;
+#line 206 "AB13AX.f"
 	dwork[1] = 1.;
+#line 207 "AB13AX.f"
 	return ret_val;
+#line 208 "AB13AX.f"
     }
 
 /*     Allocate N*MAX(N,M,P), N, and N*(N+1)/2 working storage for the */
 /*     matrices S, TAU, and R, respectively. S shares the storage with U. */
 
+#line 213 "AB13AX.f"
     ku = 1;
+#line 214 "AB13AX.f"
     ks = 1;
 /* Computing MAX */
+#line 215 "AB13AX.f"
     i__1 = max(*n,*m);
+#line 215 "AB13AX.f"
     mnmp = max(i__1,*p);
+#line 216 "AB13AX.f"
     ktau = ks + *n * mnmp;
+#line 217 "AB13AX.f"
     kr = ktau + *n;
+#line 218 "AB13AX.f"
     kw = kr;
 
 /*     Copy C in U. */
 
+#line 222 "AB13AX.f"
     dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[ku], &mnmp, (ftnlen)4);
 
 /*     If DISCR = .FALSE., solve for R the Lyapunov equation */
@@ -291,26 +349,36 @@ doublereal ab13ax_(char *dico, integer *n, integer *m, integer *p, doublereal
 /*     Additional workspace:  need   4*N; */
 /*                            prefer larger. */
 
+#line 236 "AB13AX.f"
     i__1 = *ldwork - kw + 1;
+#line 236 "AB13AX.f"
     sb03ou_(&discr, &c_false, n, p, &a[a_offset], lda, &dwork[ku], &mnmp, &
 	    dwork[ktau], &dwork[ku], n, &scaleo, &dwork[kw], &i__1, &ierr);
+#line 239 "AB13AX.f"
     if (ierr != 0) {
+#line 240 "AB13AX.f"
 	*info = 1;
+#line 241 "AB13AX.f"
 	return ret_val;
+#line 242 "AB13AX.f"
     }
 
+#line 244 "AB13AX.f"
     wrkopt = dwork[kw] + (doublereal) (kw - 1);
 
 /*     Pack the upper triangle of R in DWORK(KR). */
 /*     Workspace needed:      N*(MAX(N,M,P) + 1) + N*(N+1)/2. */
 
+#line 249 "AB13AX.f"
     ma02dd_("Pack", "Upper", n, &dwork[ku], n, &dwork[kr], (ftnlen)4, (ftnlen)
 	    5);
 
+#line 251 "AB13AX.f"
     kw = kr + *n * (*n + 1) / 2;
 
 /*     Copy B in S (over U). */
 
+#line 255 "AB13AX.f"
     dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[ks], n, (ftnlen)4);
 
 /*     If DISCR = .FALSE., solve for S the Lyapunov equation */
@@ -325,24 +393,35 @@ doublereal ab13ax_(char *dico, integer *n, integer *m, integer *p, doublereal
 /*     Additional workspace:  need   4*N; */
 /*                            prefer larger. */
 
+#line 269 "AB13AX.f"
     i__1 = *ldwork - kw + 1;
+#line 269 "AB13AX.f"
     sb03ou_(&discr, &c_true, n, m, &a[a_offset], lda, &dwork[ks], n, &dwork[
 	    ktau], &dwork[ks], n, &scalec, &dwork[kw], &i__1, &ierr);
 
 /* Computing MAX */
+#line 273 "AB13AX.f"
     d__1 = wrkopt, d__2 = dwork[kw] + (doublereal) (kw - 1);
+#line 273 "AB13AX.f"
     wrkopt = max(d__1,d__2);
 
 /*                             | x x | */
 /*     Compute R*S in the form | 0 x | in S. Note that R is packed. */
 
+#line 278 "AB13AX.f"
     j = ks;
+#line 279 "AB13AX.f"
     i__1 = *n;
+#line 279 "AB13AX.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 280 "AB13AX.f"
 	dtpmv_("Upper", "NoTranspose", "NonUnit", &i__, &dwork[kr], &dwork[j],
 		 &c__1, (ftnlen)5, (ftnlen)11, (ftnlen)7);
+#line 282 "AB13AX.f"
 	j += *n;
+#line 283 "AB13AX.f"
 /* L10: */
+#line 283 "AB13AX.f"
     }
 
 /*     Compute the singular values of the upper triangular matrix R*S. */
@@ -351,25 +430,38 @@ doublereal ab13ax_(char *dico, integer *n, integer *m, integer *p, doublereal
 /*     Additional workspace:  need   MAX(1,5*N); */
 /*                            prefer larger. */
 
+#line 291 "AB13AX.f"
     kw = ktau;
+#line 292 "AB13AX.f"
     i__1 = *ldwork - kw + 1;
+#line 292 "AB13AX.f"
     mb03ud_("NoVectors", "NoVectors", n, &dwork[ks], n, &dwork[1], &c__1, &
 	    hsv[1], &dwork[kw], &i__1, &ierr, (ftnlen)9, (ftnlen)9);
+#line 294 "AB13AX.f"
     if (ierr != 0) {
+#line 295 "AB13AX.f"
 	*info = 2;
+#line 296 "AB13AX.f"
 	return ret_val;
+#line 297 "AB13AX.f"
     }
 
 /*     Scale singular values. */
 
+#line 301 "AB13AX.f"
     d__1 = 1. / scalec / scaleo;
+#line 301 "AB13AX.f"
     dscal_(n, &d__1, &hsv[1], &c__1);
+#line 302 "AB13AX.f"
     ret_val = hsv[1];
 
 /* Computing MAX */
+#line 304 "AB13AX.f"
     d__1 = wrkopt, d__2 = dwork[kw] + (doublereal) (kw - 1);
+#line 304 "AB13AX.f"
     dwork[1] = max(d__1,d__2);
 
+#line 306 "AB13AX.f"
     return ret_val;
 /* *** Last line of AB13AX *** */
 } /* ab13ax_ */

@@ -1,0 +1,4 @@
+extern int mb03td_(char *typ, char *compu, logical *select, logical *lower, integer *n, doublereal *a, integer *lda, doublereal *g, integer *ldg, doublereal *u1, integer *ldu1, doublereal *u2, integer *ldu2, doublereal *wr, doublereal *wi, integer *m, doublereal *dwork, integer *ldwork, integer *info, ftnlen typ_len, ftnlen compu_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: mb03ts_ 14 16 12 12 4 7 4 7 4 7 4 7 4 4 4 4 7 4 */

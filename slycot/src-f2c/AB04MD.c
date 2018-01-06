@@ -1,3 +1,4 @@
+#line 1 "AB04MD.f"
 /* AB04MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB04MD.f"
 /* Table of constant values */
 
 static doublereal c_b9 = -1.;
@@ -255,67 +257,118 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 214 "AB04MD.f"
     /* Parameter adjustments */
+#line 214 "AB04MD.f"
     a_dim1 = *lda;
+#line 214 "AB04MD.f"
     a_offset = 1 + a_dim1;
+#line 214 "AB04MD.f"
     a -= a_offset;
+#line 214 "AB04MD.f"
     b_dim1 = *ldb;
+#line 214 "AB04MD.f"
     b_offset = 1 + b_dim1;
+#line 214 "AB04MD.f"
     b -= b_offset;
+#line 214 "AB04MD.f"
     c_dim1 = *ldc;
+#line 214 "AB04MD.f"
     c_offset = 1 + c_dim1;
+#line 214 "AB04MD.f"
     c__ -= c_offset;
+#line 214 "AB04MD.f"
     d_dim1 = *ldd;
+#line 214 "AB04MD.f"
     d_offset = 1 + d_dim1;
+#line 214 "AB04MD.f"
     d__ -= d_offset;
+#line 214 "AB04MD.f"
     --iwork;
+#line 214 "AB04MD.f"
     --dwork;
+#line 214 "AB04MD.f"
 
+#line 214 "AB04MD.f"
     /* Function Body */
+#line 214 "AB04MD.f"
     *info = 0;
+#line 215 "AB04MD.f"
     ltype = lsame_(type__, "D", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 219 "AB04MD.f"
     if (! ltype && ! lsame_(type__, "C", (ftnlen)1, (ftnlen)1)) {
+#line 220 "AB04MD.f"
 	*info = -1;
+#line 221 "AB04MD.f"
     } else if (*n < 0) {
+#line 222 "AB04MD.f"
 	*info = -2;
+#line 223 "AB04MD.f"
     } else if (*m < 0) {
+#line 224 "AB04MD.f"
 	*info = -3;
+#line 225 "AB04MD.f"
     } else if (*p < 0) {
+#line 226 "AB04MD.f"
 	*info = -4;
+#line 227 "AB04MD.f"
     } else if (*alpha == 0.) {
+#line 228 "AB04MD.f"
 	*info = -5;
+#line 229 "AB04MD.f"
     } else if (*beta == 0.) {
+#line 230 "AB04MD.f"
 	*info = -6;
+#line 231 "AB04MD.f"
     } else if (*lda < max(1,*n)) {
+#line 232 "AB04MD.f"
 	*info = -8;
+#line 233 "AB04MD.f"
     } else if (*ldb < max(1,*n)) {
+#line 234 "AB04MD.f"
 	*info = -10;
+#line 235 "AB04MD.f"
     } else if (*ldc < max(1,*p)) {
+#line 236 "AB04MD.f"
 	*info = -12;
+#line 237 "AB04MD.f"
     } else if (*ldd < max(1,*p)) {
+#line 238 "AB04MD.f"
 	*info = -14;
+#line 239 "AB04MD.f"
     } else if (*ldwork < max(1,*n)) {
+#line 240 "AB04MD.f"
 	*info = -17;
+#line 241 "AB04MD.f"
     }
 
+#line 243 "AB04MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 247 "AB04MD.f"
 	i__1 = -(*info);
+#line 247 "AB04MD.f"
 	xerbla_("AB04MD", &i__1, (ftnlen)6);
+#line 248 "AB04MD.f"
 	return 0;
+#line 249 "AB04MD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 253 "AB04MD.f"
     i__1 = max(*n,*m);
+#line 253 "AB04MD.f"
     if (max(i__1,*p) == 0) {
+#line 253 "AB04MD.f"
 	return 0;
+#line 253 "AB04MD.f"
     }
 
 /*     (Note: Comments in the code beginning "Workspace:" describe the */
@@ -324,83 +377,119 @@ static integer c__1 = 1;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 262 "AB04MD.f"
     if (ltype) {
 
 /*        Discrete-time to continuous-time with (ALPHA, BETA). */
 
+#line 266 "AB04MD.f"
 	palpha = *alpha;
+#line 267 "AB04MD.f"
 	pbeta = *beta;
+#line 268 "AB04MD.f"
     } else {
 
 /*        Continuous-time to discrete-time with (ALPHA, BETA) is */
 /*        equivalent with discrete-time to continuous-time with */
 /*        (-BETA, -ALPHA), if B and C change the sign. */
 
+#line 274 "AB04MD.f"
 	palpha = -(*beta);
+#line 275 "AB04MD.f"
 	pbeta = -(*alpha);
+#line 276 "AB04MD.f"
     }
 
+#line 278 "AB04MD.f"
     ab2 = palpha * pbeta * 2.;
+#line 279 "AB04MD.f"
     d__1 = sqrt((abs(ab2)));
+#line 279 "AB04MD.f"
     sqrab2 = d_sign(&d__1, &palpha);
 /*                          -1 */
 /*     Compute (alpha*I + A)  . */
 
+#line 283 "AB04MD.f"
     i__1 = *n;
+#line 283 "AB04MD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 284 "AB04MD.f"
 	a[i__ + i__ * a_dim1] += palpha;
+#line 285 "AB04MD.f"
 /* L10: */
+#line 285 "AB04MD.f"
     }
 
+#line 287 "AB04MD.f"
     dgetrf_(n, n, &a[a_offset], lda, &iwork[1], info);
 
+#line 289 "AB04MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 293 "AB04MD.f"
 	if (ltype) {
+#line 294 "AB04MD.f"
 	    *info = 1;
+#line 295 "AB04MD.f"
 	} else {
+#line 296 "AB04MD.f"
 	    *info = 2;
+#line 297 "AB04MD.f"
 	}
+#line 298 "AB04MD.f"
 	return 0;
+#line 299 "AB04MD.f"
     }
 /*                         -1 */
 /*     Compute  (alpha*I+A)  *B. */
 
+#line 303 "AB04MD.f"
     dgetrs_("No transpose", n, m, &a[a_offset], lda, &iwork[1], &b[b_offset], 
 	    ldb, info, (ftnlen)12);
 /*                               -1 */
 /*     Compute  D - C*(alpha*I+A)  *B. */
 
+#line 307 "AB04MD.f"
     dgemm_("No transpose", "No transpose", p, m, n, &c_b9, &c__[c_offset], 
 	    ldc, &b[b_offset], ldb, &c_b10, &d__[d_offset], ldd, (ftnlen)12, (
 	    ftnlen)12);
 
 /*     Scale B by  sqrt(2*alpha*beta). */
 
+#line 312 "AB04MD.f"
     dlascl_("General", &c__0, &c__0, &c_b10, &sqrab2, n, m, &b[b_offset], ldb,
 	     info, (ftnlen)7);
 /*                                                -1 */
 /*     Compute  sqrt(2*alpha*beta)*C*(alpha*I + A)  . */
 
+#line 316 "AB04MD.f"
     dtrsm_("Right", "Upper", "No transpose", "Non-unit", p, n, &sqrab2, &a[
 	    a_offset], lda, &c__[c_offset], ldc, (ftnlen)5, (ftnlen)5, (
 	    ftnlen)12, (ftnlen)8);
 
+#line 319 "AB04MD.f"
     dtrsm_("Right", "Lower", "No transpose", "Unit", p, n, &c_b10, &a[
 	    a_offset], lda, &c__[c_offset], ldc, (ftnlen)5, (ftnlen)5, (
 	    ftnlen)12, (ftnlen)4);
 
 /*     Apply column interchanges to the solution matrix. */
 
+#line 324 "AB04MD.f"
     for (i__ = *n - 1; i__ >= 1; --i__) {
+#line 325 "AB04MD.f"
 	ip = iwork[i__];
+#line 326 "AB04MD.f"
 	if (ip != i__) {
+#line 326 "AB04MD.f"
 	    dswap_(p, &c__[i__ * c_dim1 + 1], &c__1, &c__[ip * c_dim1 + 1], &
 		    c__1);
+#line 326 "AB04MD.f"
 	}
+#line 328 "AB04MD.f"
 /* L20: */
+#line 328 "AB04MD.f"
     }
 /*                               -1 */
 /*     Compute beta*(alpha*I + A)  *(A - alpha*I) as */
@@ -409,16 +498,25 @@ static integer c__1 = 1;
 
 /*     Workspace: need N;  prefer N*NB. */
 
+#line 336 "AB04MD.f"
     dgetri_(n, &a[a_offset], lda, &iwork[1], &dwork[1], ldwork, info);
 
+#line 338 "AB04MD.f"
     i__1 = *n;
+#line 338 "AB04MD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 339 "AB04MD.f"
 	d__1 = -ab2;
+#line 339 "AB04MD.f"
 	dscal_(n, &d__1, &a[i__ * a_dim1 + 1], &c__1);
+#line 340 "AB04MD.f"
 	a[i__ + i__ * a_dim1] += pbeta;
+#line 341 "AB04MD.f"
 /* L30: */
+#line 341 "AB04MD.f"
     }
 
+#line 343 "AB04MD.f"
     return 0;
 /* *** Last line of AB04MD *** */
 } /* ab04md_ */

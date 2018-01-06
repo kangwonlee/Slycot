@@ -1,3 +1,4 @@
+#line 1 "SB04ND.f"
 /* SB04ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB04ND.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -240,238 +242,396 @@ static integer c__2 = 2;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 203 "SB04ND.f"
     /* Parameter adjustments */
+#line 203 "SB04ND.f"
     a_dim1 = *lda;
+#line 203 "SB04ND.f"
     a_offset = 1 + a_dim1;
+#line 203 "SB04ND.f"
     a -= a_offset;
+#line 203 "SB04ND.f"
     b_dim1 = *ldb;
+#line 203 "SB04ND.f"
     b_offset = 1 + b_dim1;
+#line 203 "SB04ND.f"
     b -= b_offset;
+#line 203 "SB04ND.f"
     c_dim1 = *ldc;
+#line 203 "SB04ND.f"
     c_offset = 1 + c_dim1;
+#line 203 "SB04ND.f"
     c__ -= c_offset;
+#line 203 "SB04ND.f"
     --iwork;
+#line 203 "SB04ND.f"
     --dwork;
+#line 203 "SB04ND.f"
 
+#line 203 "SB04ND.f"
     /* Function Body */
+#line 203 "SB04ND.f"
     *info = 0;
+#line 204 "SB04ND.f"
     maxmn = max(*m,*n);
+#line 205 "SB04ND.f"
     labscb = lsame_(abschu, "B", (ftnlen)1, (ftnlen)1);
+#line 206 "SB04ND.f"
     labscs = lsame_(abschu, "S", (ftnlen)1, (ftnlen)1);
+#line 207 "SB04ND.f"
     lula = lsame_(ula, "U", (ftnlen)1, (ftnlen)1);
+#line 208 "SB04ND.f"
     lulb = lsame_(ulb, "U", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 212 "SB04ND.f"
     if (! labscb && ! labscs && ! lsame_(abschu, "A", (ftnlen)1, (ftnlen)1)) {
+#line 214 "SB04ND.f"
 	*info = -1;
+#line 215 "SB04ND.f"
     } else if (! lula && ! lsame_(ula, "L", (ftnlen)1, (ftnlen)1)) {
+#line 216 "SB04ND.f"
 	*info = -2;
+#line 217 "SB04ND.f"
     } else if (! lulb && ! lsame_(ulb, "L", (ftnlen)1, (ftnlen)1)) {
+#line 218 "SB04ND.f"
 	*info = -3;
+#line 219 "SB04ND.f"
     } else if (*n < 0) {
+#line 220 "SB04ND.f"
 	*info = -4;
+#line 221 "SB04ND.f"
     } else if (*m < 0) {
+#line 222 "SB04ND.f"
 	*info = -5;
+#line 223 "SB04ND.f"
     } else if (*lda < max(1,*n)) {
+#line 224 "SB04ND.f"
 	*info = -7;
+#line 225 "SB04ND.f"
     } else if (*ldb < max(1,*m)) {
+#line 226 "SB04ND.f"
 	*info = -9;
+#line 227 "SB04ND.f"
     } else if (*ldc < max(1,*n)) {
+#line 228 "SB04ND.f"
 	*info = -11;
+#line 229 "SB04ND.f"
     } else if (*ldwork < 0 || ! (labscs && lula && lulb) && *ldwork < (maxmn 
 	    << 1) * ((maxmn << 1) + 4)) {
+#line 231 "SB04ND.f"
 	*info = -15;
+#line 232 "SB04ND.f"
     }
 
+#line 234 "SB04ND.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 238 "SB04ND.f"
 	i__1 = -(*info);
+#line 238 "SB04ND.f"
 	xerbla_("SB04ND", &i__1, (ftnlen)6);
+#line 239 "SB04ND.f"
 	return 0;
+#line 240 "SB04ND.f"
     }
 
 /*     Quick return if possible. */
 
+#line 244 "SB04ND.f"
     if (maxmn == 0) {
+#line 244 "SB04ND.f"
 	return 0;
+#line 244 "SB04ND.f"
     }
 
+#line 247 "SB04ND.f"
     if (labscs && lula && lulb) {
 
 /*        If both matrices are in a real Schur form, use DTRSYL. */
 
+#line 251 "SB04ND.f"
 	dtrsyl_("NoTranspose", "NoTranspose", &c__1, n, m, &a[a_offset], lda, 
 		&b[b_offset], ldb, &c__[c_offset], ldc, &scale, info, (ftnlen)
 		11, (ftnlen)11);
+#line 253 "SB04ND.f"
 	if (scale != 1.) {
+#line 253 "SB04ND.f"
 	    *info = 1;
+#line 253 "SB04ND.f"
 	}
+#line 255 "SB04ND.f"
 	return 0;
+#line 256 "SB04ND.f"
     }
 
+#line 258 "SB04ND.f"
     ldw = maxmn << 1;
+#line 259 "SB04ND.f"
     jwork = ldw * ldw + ldw * 3 + 1;
+#line 260 "SB04ND.f"
     tol1 = *tol;
+#line 261 "SB04ND.f"
     if (tol1 <= 0.) {
+#line 261 "SB04ND.f"
 	tol1 = dlamch_("Epsilon", (ftnlen)7);
+#line 261 "SB04ND.f"
     }
 
 /*     Choose the smallest of both matrices as the one in Hessenberg */
 /*     form when possible. */
 
+#line 267 "SB04ND.f"
     *(unsigned char *)abschr = *(unsigned char *)abschu;
+#line 268 "SB04ND.f"
     if (labscs) {
+#line 269 "SB04ND.f"
 	if (*n > *m) {
+#line 270 "SB04ND.f"
 	    *(unsigned char *)abschr = 'A';
+#line 271 "SB04ND.f"
 	} else {
+#line 272 "SB04ND.f"
 	    *(unsigned char *)abschr = 'B';
+#line 273 "SB04ND.f"
 	}
+#line 274 "SB04ND.f"
     }
+#line 275 "SB04ND.f"
     if (lsame_(abschr, "B", (ftnlen)1, (ftnlen)1)) {
 
 /*        B is in Schur form: recursion on the columns of B. */
 
+#line 279 "SB04ND.f"
 	if (lulb) {
 
 /*           B is upper: forward recursion. */
 
+#line 283 "SB04ND.f"
 	    ibeg = 1;
+#line 284 "SB04ND.f"
 	    iend = *m;
+#line 285 "SB04ND.f"
 	    fwd = 1;
+#line 286 "SB04ND.f"
 	    incr = 0;
+#line 287 "SB04ND.f"
 	} else {
 
 /*           B is lower: backward recursion. */
 
+#line 291 "SB04ND.f"
 	    ibeg = *m;
+#line 292 "SB04ND.f"
 	    iend = 1;
+#line 293 "SB04ND.f"
 	    fwd = -1;
+#line 294 "SB04ND.f"
 	    incr = -1;
+#line 295 "SB04ND.f"
 	}
+#line 296 "SB04ND.f"
 	i__ = ibeg;
 /*        WHILE ( ( IEND - I ) * FWD .GE. 0 ) DO */
+#line 298 "SB04ND.f"
 L20:
+#line 298 "SB04ND.f"
 	if ((iend - i__) * fwd >= 0) {
 
 /*           Test for 1-by-1 or 2-by-2 diagonal block in the Schur */
 /*           form. */
 
+#line 303 "SB04ND.f"
 	    if (i__ == iend) {
+#line 304 "SB04ND.f"
 		istep = 1;
+#line 305 "SB04ND.f"
 	    } else {
+#line 306 "SB04ND.f"
 		if (b[i__ + fwd + i__ * b_dim1] == 0.) {
+#line 307 "SB04ND.f"
 		    istep = 1;
+#line 308 "SB04ND.f"
 		} else {
+#line 309 "SB04ND.f"
 		    istep = 2;
+#line 310 "SB04ND.f"
 		}
+#line 311 "SB04ND.f"
 	    }
 
+#line 313 "SB04ND.f"
 	    if (istep == 1) {
+#line 314 "SB04ND.f"
 		sb04nw_(abschr, ulb, n, m, &c__[c_offset], ldc, &i__, &b[
 			b_offset], ldb, &dwork[jwork], (ftnlen)1, (ftnlen)1);
+#line 316 "SB04ND.f"
 		sb04ny_("R", ula, n, &a[a_offset], lda, &b[i__ + i__ * b_dim1]
 			, &dwork[jwork], &tol1, &iwork[1], &dwork[1], &ldw, 
 			info, (ftnlen)1, (ftnlen)1);
+#line 318 "SB04ND.f"
 		if (*info == 1) {
+#line 318 "SB04ND.f"
 		    return 0;
+#line 318 "SB04ND.f"
 		}
+#line 320 "SB04ND.f"
 		dcopy_(n, &dwork[jwork], &c__1, &c__[i__ * c_dim1 + 1], &c__1)
 			;
+#line 321 "SB04ND.f"
 	    } else {
+#line 322 "SB04ND.f"
 		ipincr = i__ + incr;
+#line 323 "SB04ND.f"
 		sb04nv_(abschr, ulb, n, m, &c__[c_offset], ldc, &ipincr, &b[
 			b_offset], ldb, &dwork[jwork], (ftnlen)1, (ftnlen)1);
+#line 325 "SB04ND.f"
 		sb04nx_("R", ula, n, &a[a_offset], lda, &b[ipincr + ipincr * 
 			b_dim1], &b[ipincr + 1 + ipincr * b_dim1], &b[ipincr 
 			+ (ipincr + 1) * b_dim1], &b[ipincr + 1 + (ipincr + 1)
 			 * b_dim1], &dwork[jwork], &tol1, &iwork[1], &dwork[1]
 			, &ldw, info, (ftnlen)1, (ftnlen)1);
+#line 329 "SB04ND.f"
 		if (*info == 1) {
+#line 329 "SB04ND.f"
 		    return 0;
+#line 329 "SB04ND.f"
 		}
+#line 331 "SB04ND.f"
 		dcopy_(n, &dwork[jwork], &c__2, &c__[ipincr * c_dim1 + 1], &
 			c__1);
+#line 332 "SB04ND.f"
 		dcopy_(n, &dwork[jwork + 1], &c__2, &c__[(ipincr + 1) * 
 			c_dim1 + 1], &c__1);
+#line 333 "SB04ND.f"
 	    }
+#line 334 "SB04ND.f"
 	    i__ += fwd * istep;
+#line 335 "SB04ND.f"
 	    goto L20;
+#line 336 "SB04ND.f"
 	}
 /*        END WHILE 20 */
+#line 338 "SB04ND.f"
     } else {
 
 /*        A is in Schur form: recursion on the rows of A. */
 
+#line 342 "SB04ND.f"
 	if (lula) {
 
 /*           A is upper: backward recursion. */
 
+#line 346 "SB04ND.f"
 	    ibeg = *n;
+#line 347 "SB04ND.f"
 	    iend = 1;
+#line 348 "SB04ND.f"
 	    fwd = -1;
+#line 349 "SB04ND.f"
 	    incr = -1;
+#line 350 "SB04ND.f"
 	} else {
 
 /*           A is lower: forward recursion. */
 
+#line 354 "SB04ND.f"
 	    ibeg = 1;
+#line 355 "SB04ND.f"
 	    iend = *n;
+#line 356 "SB04ND.f"
 	    fwd = 1;
+#line 357 "SB04ND.f"
 	    incr = 0;
+#line 358 "SB04ND.f"
 	}
+#line 359 "SB04ND.f"
 	i__ = ibeg;
 /*        WHILE ( ( IEND - I ) * FWD .GE. 0 ) DO */
+#line 361 "SB04ND.f"
 L40:
+#line 361 "SB04ND.f"
 	if ((iend - i__) * fwd >= 0) {
 
 /*           Test for 1-by-1 or 2-by-2 diagonal block in the Schur */
 /*           form. */
 
+#line 366 "SB04ND.f"
 	    if (i__ == iend) {
+#line 367 "SB04ND.f"
 		istep = 1;
+#line 368 "SB04ND.f"
 	    } else {
+#line 369 "SB04ND.f"
 		if (a[i__ + (i__ + fwd) * a_dim1] == 0.) {
+#line 370 "SB04ND.f"
 		    istep = 1;
+#line 371 "SB04ND.f"
 		} else {
+#line 372 "SB04ND.f"
 		    istep = 2;
+#line 373 "SB04ND.f"
 		}
+#line 374 "SB04ND.f"
 	    }
 
+#line 376 "SB04ND.f"
 	    if (istep == 1) {
+#line 377 "SB04ND.f"
 		sb04nw_(abschr, ula, n, m, &c__[c_offset], ldc, &i__, &a[
 			a_offset], lda, &dwork[jwork], (ftnlen)1, (ftnlen)1);
+#line 379 "SB04ND.f"
 		sb04ny_("C", ulb, m, &b[b_offset], ldb, &a[i__ + i__ * a_dim1]
 			, &dwork[jwork], &tol1, &iwork[1], &dwork[1], &ldw, 
 			info, (ftnlen)1, (ftnlen)1);
+#line 381 "SB04ND.f"
 		if (*info == 1) {
+#line 381 "SB04ND.f"
 		    return 0;
+#line 381 "SB04ND.f"
 		}
+#line 383 "SB04ND.f"
 		dcopy_(m, &dwork[jwork], &c__1, &c__[i__ + c_dim1], ldc);
+#line 384 "SB04ND.f"
 	    } else {
+#line 385 "SB04ND.f"
 		ipincr = i__ + incr;
+#line 386 "SB04ND.f"
 		sb04nv_(abschr, ula, n, m, &c__[c_offset], ldc, &ipincr, &a[
 			a_offset], lda, &dwork[jwork], (ftnlen)1, (ftnlen)1);
+#line 388 "SB04ND.f"
 		sb04nx_("C", ulb, m, &b[b_offset], ldb, &a[ipincr + ipincr * 
 			a_dim1], &a[ipincr + 1 + ipincr * a_dim1], &a[ipincr 
 			+ (ipincr + 1) * a_dim1], &a[ipincr + 1 + (ipincr + 1)
 			 * a_dim1], &dwork[jwork], &tol1, &iwork[1], &dwork[1]
 			, &ldw, info, (ftnlen)1, (ftnlen)1);
+#line 392 "SB04ND.f"
 		if (*info == 1) {
+#line 392 "SB04ND.f"
 		    return 0;
+#line 392 "SB04ND.f"
 		}
+#line 394 "SB04ND.f"
 		dcopy_(m, &dwork[jwork], &c__2, &c__[ipincr + c_dim1], ldc);
+#line 395 "SB04ND.f"
 		dcopy_(m, &dwork[jwork + 1], &c__2, &c__[ipincr + 1 + c_dim1],
 			 ldc);
+#line 396 "SB04ND.f"
 	    }
+#line 397 "SB04ND.f"
 	    i__ += fwd * istep;
+#line 398 "SB04ND.f"
 	    goto L40;
+#line 399 "SB04ND.f"
 	}
 /*        END WHILE 40 */
+#line 401 "SB04ND.f"
     }
 
+#line 403 "SB04ND.f"
     return 0;
 /* *** Last line of SB04ND *** */
 } /* sb04nd_ */

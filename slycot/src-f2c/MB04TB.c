@@ -1,3 +1,4 @@
+#line 1 "MB04TB.f"
 /* MB04TB.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04TB.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -306,108 +308,186 @@ static doublereal c_b25 = 1.;
 
 /*     Check the scalar input parameters. */
 
+#line 263 "MB04TB.f"
     /* Parameter adjustments */
+#line 263 "MB04TB.f"
     a_dim1 = *lda;
+#line 263 "MB04TB.f"
     a_offset = 1 + a_dim1;
+#line 263 "MB04TB.f"
     a -= a_offset;
+#line 263 "MB04TB.f"
     b_dim1 = *ldb;
+#line 263 "MB04TB.f"
     b_offset = 1 + b_dim1;
+#line 263 "MB04TB.f"
     b -= b_offset;
+#line 263 "MB04TB.f"
     g_dim1 = *ldg;
+#line 263 "MB04TB.f"
     g_offset = 1 + g_dim1;
+#line 263 "MB04TB.f"
     g -= g_offset;
+#line 263 "MB04TB.f"
     q_dim1 = *ldq;
+#line 263 "MB04TB.f"
     q_offset = 1 + q_dim1;
+#line 263 "MB04TB.f"
     q -= q_offset;
+#line 263 "MB04TB.f"
     --csl;
+#line 263 "MB04TB.f"
     --csr;
+#line 263 "MB04TB.f"
     --taul;
+#line 263 "MB04TB.f"
     --taur;
+#line 263 "MB04TB.f"
     --dwork;
+#line 263 "MB04TB.f"
 
+#line 263 "MB04TB.f"
     /* Function Body */
+#line 263 "MB04TB.f"
     *info = 0;
+#line 264 "MB04TB.f"
     ltra = lsame_(trana, "T", (ftnlen)1, (ftnlen)1) || lsame_(trana, "C", (
 	    ftnlen)1, (ftnlen)1);
+#line 265 "MB04TB.f"
     ltrb = lsame_(tranb, "T", (ftnlen)1, (ftnlen)1) || lsame_(tranb, "C", (
 	    ftnlen)1, (ftnlen)1);
+#line 266 "MB04TB.f"
     if (! ltra && ! lsame_(trana, "N", (ftnlen)1, (ftnlen)1)) {
+#line 267 "MB04TB.f"
 	*info = -1;
+#line 268 "MB04TB.f"
     } else if (! ltrb && ! lsame_(tranb, "N", (ftnlen)1, (ftnlen)1)) {
+#line 269 "MB04TB.f"
 	*info = -2;
+#line 270 "MB04TB.f"
     } else if (*n < 0) {
+#line 271 "MB04TB.f"
 	*info = -3;
+#line 272 "MB04TB.f"
     } else if (*ilo < 1 || *ilo > max(1,*n)) {
+#line 273 "MB04TB.f"
 	*info = -4;
+#line 274 "MB04TB.f"
     } else if (*lda < max(1,*n)) {
+#line 275 "MB04TB.f"
 	*info = -6;
+#line 276 "MB04TB.f"
     } else if (*ldb < max(1,*n)) {
+#line 277 "MB04TB.f"
 	*info = -8;
+#line 278 "MB04TB.f"
     } else if (*ldg < max(1,*n)) {
+#line 279 "MB04TB.f"
 	*info = -10;
+#line 280 "MB04TB.f"
     } else if (*ldq < max(1,*n)) {
+#line 281 "MB04TB.f"
 	*info = -12;
+#line 282 "MB04TB.f"
     } else if (*ldwork < max(1,*n)) {
+#line 283 "MB04TB.f"
 	dwork[1] = (doublereal) max(1,*n);
+#line 284 "MB04TB.f"
 	*info = -18;
+#line 285 "MB04TB.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 289 "MB04TB.f"
     if (*info != 0) {
+#line 290 "MB04TB.f"
 	i__1 = -(*info);
+#line 290 "MB04TB.f"
 	xerbla_("MB04TB", &i__1, (ftnlen)6);
+#line 291 "MB04TB.f"
 	return 0;
+#line 292 "MB04TB.f"
     }
 
 /*     Set elements 1:ILO-1 of CSL, CSR, TAUL and TAUR to their default */
 /*     values. */
 
+#line 297 "MB04TB.f"
     i__1 = *ilo - 1;
+#line 297 "MB04TB.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 298 "MB04TB.f"
 	csl[(i__ << 1) - 1] = 1.;
+#line 299 "MB04TB.f"
 	csl[i__ * 2] = 0.;
+#line 300 "MB04TB.f"
 	csr[(i__ << 1) - 1] = 1.;
+#line 301 "MB04TB.f"
 	csr[i__ * 2] = 0.;
+#line 302 "MB04TB.f"
 	taul[i__] = 0.;
+#line 303 "MB04TB.f"
 	taur[i__] = 0.;
+#line 304 "MB04TB.f"
 /* L10: */
+#line 304 "MB04TB.f"
     }
 
 /*     Quick return if possible. */
 
+#line 308 "MB04TB.f"
     nh = *n - *ilo + 1;
+#line 309 "MB04TB.f"
     if (nh == 0) {
+#line 310 "MB04TB.f"
 	dwork[1] = 1.;
+#line 311 "MB04TB.f"
 	return 0;
+#line 312 "MB04TB.f"
     }
 
 /*     Determine the block size. */
 
 /* Writing concatenation */
+#line 316 "MB04TB.f"
     i__2[0] = 1, a__1[0] = trana;
+#line 316 "MB04TB.f"
     i__2[1] = 1, a__1[1] = tranb;
+#line 316 "MB04TB.f"
     s_cat(ch__1, a__1, i__2, &c__2, (ftnlen)2);
+#line 316 "MB04TB.f"
     nb = ue01md_(&c__1, "MB04TB", ch__1, n, ilo, &c_n1, (ftnlen)6, (ftnlen)2);
+#line 317 "MB04TB.f"
     nbmin = 2;
+#line 318 "MB04TB.f"
     wrkopt = *n;
+#line 319 "MB04TB.f"
     if (nb > 1 && nb < nh) {
 
 /*        Determine when to cross over from blocked to unblocked code. */
 
 /* Computing MAX */
 /* Writing concatenation */
+#line 323 "MB04TB.f"
 	i__2[0] = 1, a__1[0] = trana;
+#line 323 "MB04TB.f"
 	i__2[1] = 1, a__1[1] = tranb;
+#line 323 "MB04TB.f"
 	s_cat(ch__1, a__1, i__2, &c__2, (ftnlen)2);
+#line 323 "MB04TB.f"
 	i__1 = nb, i__3 = ue01md_(&c__3, "MB04TB", ch__1, n, ilo, &c_n1, (
 		ftnlen)6, (ftnlen)2);
+#line 323 "MB04TB.f"
 	nx = max(i__1,i__3);
+#line 325 "MB04TB.f"
 	if (nx < nh) {
 
 /*           Check whether workspace is large enough for blocked code. */
 
+#line 329 "MB04TB.f"
 	    wrkopt = (*n << 4) * nb + nb * 5;
+#line 330 "MB04TB.f"
 	    if (*ldwork < wrkopt) {
 
 /*              Not enough workspace available. Determine minimum value */
@@ -415,49 +495,80 @@ static doublereal c_b25 = 1.;
 
 /* Computing MAX */
 /* Writing concatenation */
+#line 335 "MB04TB.f"
 		i__2[0] = 1, a__1[0] = trana;
+#line 335 "MB04TB.f"
 		i__2[1] = 1, a__1[1] = tranb;
+#line 335 "MB04TB.f"
 		s_cat(ch__1, a__1, i__2, &c__2, (ftnlen)2);
+#line 335 "MB04TB.f"
 		i__1 = 2, i__3 = ue01md_(&c__2, "MB04TB", ch__1, n, ilo, &
 			c_n1, (ftnlen)6, (ftnlen)2);
+#line 335 "MB04TB.f"
 		nbmin = max(i__1,i__3);
+#line 337 "MB04TB.f"
 		nb = *ldwork / ((*n << 4) + 5);
+#line 338 "MB04TB.f"
 	    }
+#line 339 "MB04TB.f"
 	}
+#line 340 "MB04TB.f"
     }
 
+#line 342 "MB04TB.f"
     nnb = *n * nb;
+#line 343 "MB04TB.f"
     pyb = 1;
+#line 344 "MB04TB.f"
     pyq = pyb + (nnb << 1);
+#line 345 "MB04TB.f"
     pya = pyq + (nnb << 1);
+#line 346 "MB04TB.f"
     pyg = pya + (nnb << 1);
+#line 347 "MB04TB.f"
     pxq = pyg + (nnb << 1);
+#line 348 "MB04TB.f"
     pxa = pxq + (nnb << 1);
+#line 349 "MB04TB.f"
     pxg = pxa + (nnb << 1);
+#line 350 "MB04TB.f"
     pxb = pxg + (nnb << 1);
+#line 351 "MB04TB.f"
     pdw = pxb + (nnb << 1);
 
+#line 353 "MB04TB.f"
     if (nb < nbmin || nb >= nh) {
 
 /*        Use unblocked code. */
 
+#line 357 "MB04TB.f"
 	i__ = *ilo;
 
+#line 359 "MB04TB.f"
     } else if (ltra && ltrb) {
+#line 360 "MB04TB.f"
 	i__1 = *n - nx - 1;
+#line 360 "MB04TB.f"
 	i__3 = nb;
+#line 360 "MB04TB.f"
 	for (i__ = *ilo; i__3 < 0 ? i__ >= i__1 : i__ <= i__1; i__ += i__3) {
 /* Computing MIN */
+#line 361 "MB04TB.f"
 	    i__4 = nb, i__5 = *n - i__;
+#line 361 "MB04TB.f"
 	    ib = min(i__4,i__5);
+#line 362 "MB04TB.f"
 	    nib = *n * ib;
 
 /*           Reduce rows and columns i:i+nb-1 to symplectic URV form and */
 /*           return the matrices XA, XB, XG, XQ, YA, YB, YG and YQ which */
 /*           are needed to update the unreduced parts of the matrices. */
 
+#line 368 "MB04TB.f"
 	    i__4 = *n - i__ + 1;
+#line 368 "MB04TB.f"
 	    i__5 = i__ - 1;
+#line 368 "MB04TB.f"
 	    mb03xu_(&ltra, &ltrb, &i__4, &i__5, &ib, &a[i__ + a_dim1], lda, &
 		    b[i__ * b_dim1 + 1], ldb, &g[g_offset], ldg, &q[i__ + i__ 
 		    * q_dim1], ldq, &dwork[pxa], n, &dwork[pxb], n, &dwork[
@@ -467,23 +578,33 @@ static doublereal c_b25 = 1.;
 
 /*           Update the submatrix A(i+1+ib:n,1:n). */
 
+#line 377 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 377 "MB04TB.f"
 	    i__5 = *n - i__ - ib + 1;
+#line 377 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &
 		    dwork[pxa + nb + 1], n, &q[i__ + ib + i__ * q_dim1], ldq, 
 		    &c_b25, &a[i__ + ib + 1 + (i__ + ib) * a_dim1], lda, (
 		    ftnlen)12, (ftnlen)9);
+#line 380 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 380 "MB04TB.f"
 	    i__5 = *n - i__ - ib + 1;
+#line 380 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", &i__4, &i__5, &ib, &c_b25, 
 		    &dwork[pxa + nib + nb + 1], n, &a[i__ + (i__ + ib) * 
 		    a_dim1], lda, &c_b25, &a[i__ + ib + 1 + (i__ + ib) * 
 		    a_dim1], lda, (ftnlen)12, (ftnlen)12);
+#line 383 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 383 "MB04TB.f"
 	    dgemm_("Transpose", "Transpose", &i__4, n, &ib, &c_b25, &q[i__ + (
 		    i__ + ib + 1) * q_dim1], ldq, &dwork[pya], n, &c_b25, &a[
 		    i__ + ib + 1 + a_dim1], lda, (ftnlen)9, (ftnlen)9);
+#line 386 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 386 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, n, &ib, &c_b25, &b[i__ 
 		    + ib + 1 + i__ * b_dim1], ldb, &dwork[pya + nib], n, &
 		    c_b25, &a[i__ + ib + 1 + a_dim1], lda, (ftnlen)12, (
@@ -491,26 +612,38 @@ static doublereal c_b25 = 1.;
 
 /*           Update the submatrix Q(i+ib:n,i+1+ib:n). */
 
+#line 392 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 392 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 392 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &q[
 		    i__ + ib + i__ * q_dim1], ldq, &dwork[pxq + nb + 1], n, &
 		    c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], ldq, (
 		    ftnlen)12, (ftnlen)9);
+#line 395 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 395 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 395 "MB04TB.f"
 	    dgemm_("Transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &a[
 		    i__ + (i__ + ib) * a_dim1], lda, &dwork[pxq + nib + nb + 
 		    1], n, &c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], 
 		    ldq, (ftnlen)9, (ftnlen)9);
+#line 398 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 398 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 398 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", &i__4, &i__5, &ib, &c_b25, 
 		    &dwork[pyq + nb], n, &q[i__ + (i__ + ib + 1) * q_dim1], 
 		    ldq, &c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], ldq, 
 		    (ftnlen)12, (ftnlen)12);
+#line 401 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 401 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 401 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &
 		    dwork[pyq + nib + nb], n, &b[i__ + ib + 1 + i__ * b_dim1],
 		     ldb, &c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], ldq,
@@ -518,20 +651,28 @@ static doublereal c_b25 = 1.;
 
 /*           Update the matrix G. */
 
+#line 407 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 407 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, n, &ib, &c_b25, &q[i__ 
 		    + ib + i__ * q_dim1], ldq, &dwork[pxg], n, &c_b25, &g[i__ 
 		    + ib + g_dim1], ldg, (ftnlen)12, (ftnlen)9);
+#line 410 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 410 "MB04TB.f"
 	    dgemm_("Transpose", "Transpose", &i__4, n, &ib, &c_b25, &a[i__ + (
 		    i__ + ib) * a_dim1], lda, &dwork[pxg + nib], n, &c_b25, &
 		    g[i__ + ib + g_dim1], ldg, (ftnlen)9, (ftnlen)9);
+#line 413 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 413 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", n, &i__4, &ib, &c_b25, &
 		    dwork[pyg], n, &q[i__ + (i__ + ib + 1) * q_dim1], ldq, &
 		    c_b25, &g[(i__ + ib + 1) * g_dim1 + 1], ldg, (ftnlen)12, (
 		    ftnlen)12);
+#line 416 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 416 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", n, &i__4, &ib, &c_b25, &dwork[
 		    pyg + nib], n, &b[i__ + ib + 1 + i__ * b_dim1], ldb, &
 		    c_b25, &g[(i__ + ib + 1) * g_dim1 + 1], ldg, (ftnlen)12, (
@@ -539,45 +680,67 @@ static doublereal c_b25 = 1.;
 
 /*           Update the submatrix B(1:n,i+ib:n). */
 
+#line 422 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 422 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", n, &i__4, &ib, &c_b25, &dwork[
 		    pxb], n, &q[i__ + ib + i__ * q_dim1], ldq, &c_b25, &b[(
 		    i__ + ib) * b_dim1 + 1], ldb, (ftnlen)12, (ftnlen)9);
+#line 425 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 425 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", n, &i__4, &ib, &c_b25, &
 		    dwork[pxb + nib], n, &a[i__ + (i__ + ib) * a_dim1], lda, &
 		    c_b25, &b[(i__ + ib) * b_dim1 + 1], ldb, (ftnlen)12, (
 		    ftnlen)12);
+#line 428 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 428 "MB04TB.f"
 	    i__5 = *n - i__ - ib + 1;
+#line 428 "MB04TB.f"
 	    dgemm_("Transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &q[
 		    i__ + (i__ + ib + 1) * q_dim1], ldq, &dwork[pyb + nb], n, 
 		    &c_b25, &b[i__ + ib + 1 + (i__ + ib) * b_dim1], ldb, (
 		    ftnlen)9, (ftnlen)9);
+#line 431 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 431 "MB04TB.f"
 	    i__5 = *n - i__ - ib + 1;
+#line 431 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &b[
 		    i__ + ib + 1 + i__ * b_dim1], ldb, &dwork[pyb + nib + nb],
 		     n, &c_b25, &b[i__ + ib + 1 + (i__ + ib) * b_dim1], ldb, (
 		    ftnlen)12, (ftnlen)9);
+#line 434 "MB04TB.f"
 /* L20: */
+#line 434 "MB04TB.f"
 	}
 
+#line 436 "MB04TB.f"
     } else if (ltra) {
+#line 437 "MB04TB.f"
 	i__3 = *n - nx - 1;
+#line 437 "MB04TB.f"
 	i__1 = nb;
+#line 437 "MB04TB.f"
 	for (i__ = *ilo; i__1 < 0 ? i__ >= i__3 : i__ <= i__3; i__ += i__1) {
 /* Computing MIN */
+#line 438 "MB04TB.f"
 	    i__4 = nb, i__5 = *n - i__;
+#line 438 "MB04TB.f"
 	    ib = min(i__4,i__5);
+#line 439 "MB04TB.f"
 	    nib = *n * ib;
 
 /*           Reduce rows and columns i:i+nb-1 to symplectic URV form and */
 /*           return the matrices XA, XB, XG, XQ, YA, YB, YG and YQ which */
 /*           are needed to update the unreduced parts of the matrices. */
 
+#line 445 "MB04TB.f"
 	    i__4 = *n - i__ + 1;
+#line 445 "MB04TB.f"
 	    i__5 = i__ - 1;
+#line 445 "MB04TB.f"
 	    mb03xu_(&ltra, &ltrb, &i__4, &i__5, &ib, &a[i__ + a_dim1], lda, &
 		    b[i__ + b_dim1], ldb, &g[g_offset], ldg, &q[i__ + i__ * 
 		    q_dim1], ldq, &dwork[pxa], n, &dwork[pxb], n, &dwork[pxg],
@@ -587,23 +750,33 @@ static doublereal c_b25 = 1.;
 
 /*           Update the submatrix A(i+1+ib:n,1:n). */
 
+#line 454 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 454 "MB04TB.f"
 	    i__5 = *n - i__ - ib + 1;
+#line 454 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &
 		    dwork[pxa + nb + 1], n, &q[i__ + ib + i__ * q_dim1], ldq, 
 		    &c_b25, &a[i__ + ib + 1 + (i__ + ib) * a_dim1], lda, (
 		    ftnlen)12, (ftnlen)9);
+#line 457 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 457 "MB04TB.f"
 	    i__5 = *n - i__ - ib + 1;
+#line 457 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", &i__4, &i__5, &ib, &c_b25, 
 		    &dwork[pxa + nib + nb + 1], n, &a[i__ + (i__ + ib) * 
 		    a_dim1], lda, &c_b25, &a[i__ + ib + 1 + (i__ + ib) * 
 		    a_dim1], lda, (ftnlen)12, (ftnlen)12);
+#line 460 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 460 "MB04TB.f"
 	    dgemm_("Transpose", "Transpose", &i__4, n, &ib, &c_b25, &q[i__ + (
 		    i__ + ib + 1) * q_dim1], ldq, &dwork[pya], n, &c_b25, &a[
 		    i__ + ib + 1 + a_dim1], lda, (ftnlen)9, (ftnlen)9);
+#line 463 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 463 "MB04TB.f"
 	    dgemm_("Transpose", "Transpose", &i__4, n, &ib, &c_b25, &b[i__ + (
 		    i__ + ib + 1) * b_dim1], ldb, &dwork[pya + nib], n, &
 		    c_b25, &a[i__ + ib + 1 + a_dim1], lda, (ftnlen)9, (ftnlen)
@@ -611,26 +784,38 @@ static doublereal c_b25 = 1.;
 
 /*           Update the submatrix Q(i+ib:n,i+1+ib:n). */
 
+#line 469 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 469 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 469 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &q[
 		    i__ + ib + i__ * q_dim1], ldq, &dwork[pxq + nb + 1], n, &
 		    c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], ldq, (
 		    ftnlen)12, (ftnlen)9);
+#line 472 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 472 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 472 "MB04TB.f"
 	    dgemm_("Transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &a[
 		    i__ + (i__ + ib) * a_dim1], lda, &dwork[pxq + nib + nb + 
 		    1], n, &c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], 
 		    ldq, (ftnlen)9, (ftnlen)9);
+#line 475 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 475 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 475 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", &i__4, &i__5, &ib, &c_b25, 
 		    &dwork[pyq + nb], n, &q[i__ + (i__ + ib + 1) * q_dim1], 
 		    ldq, &c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], ldq, 
 		    (ftnlen)12, (ftnlen)12);
+#line 478 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 478 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 478 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", &i__4, &i__5, &ib, &c_b25, 
 		    &dwork[pyq + nib + nb], n, &b[i__ + (i__ + ib + 1) * 
 		    b_dim1], ldb, &c_b25, &q[i__ + ib + (i__ + ib + 1) * 
@@ -638,20 +823,28 @@ static doublereal c_b25 = 1.;
 
 /*           Update the matrix G. */
 
+#line 484 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 484 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, n, &ib, &c_b25, &q[i__ 
 		    + ib + i__ * q_dim1], ldq, &dwork[pxg], n, &c_b25, &g[i__ 
 		    + ib + g_dim1], ldg, (ftnlen)12, (ftnlen)9);
+#line 487 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 487 "MB04TB.f"
 	    dgemm_("Transpose", "Transpose", &i__4, n, &ib, &c_b25, &a[i__ + (
 		    i__ + ib) * a_dim1], lda, &dwork[pxg + nib], n, &c_b25, &
 		    g[i__ + ib + g_dim1], ldg, (ftnlen)9, (ftnlen)9);
+#line 490 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 490 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", n, &i__4, &ib, &c_b25, &
 		    dwork[pyg], n, &q[i__ + (i__ + ib + 1) * q_dim1], ldq, &
 		    c_b25, &g[(i__ + ib + 1) * g_dim1 + 1], ldg, (ftnlen)12, (
 		    ftnlen)12);
+#line 493 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 493 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", n, &i__4, &ib, &c_b25, &
 		    dwork[pyg + nib], n, &b[i__ + (i__ + ib + 1) * b_dim1], 
 		    ldb, &c_b25, &g[(i__ + ib + 1) * g_dim1 + 1], ldg, (
@@ -659,44 +852,66 @@ static doublereal c_b25 = 1.;
 
 /*           Update the submatrix B(i+ib:n,1:n). */
 
+#line 499 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 499 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, n, &ib, &c_b25, &q[i__ 
 		    + ib + i__ * q_dim1], ldq, &dwork[pxb], n, &c_b25, &b[i__ 
 		    + ib + b_dim1], ldb, (ftnlen)12, (ftnlen)9);
+#line 502 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 502 "MB04TB.f"
 	    dgemm_("Transpose", "Transpose", &i__4, n, &ib, &c_b25, &a[i__ + (
 		    i__ + ib) * a_dim1], lda, &dwork[pxb + nib], n, &c_b25, &
 		    b[i__ + ib + b_dim1], ldb, (ftnlen)9, (ftnlen)9);
+#line 505 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 505 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 505 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", &i__4, &i__5, &ib, &c_b25, 
 		    &dwork[pyb + nb], n, &q[i__ + (i__ + ib + 1) * q_dim1], 
 		    ldq, &c_b25, &b[i__ + ib + (i__ + ib + 1) * b_dim1], ldb, 
 		    (ftnlen)12, (ftnlen)12);
+#line 508 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 508 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 508 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", &i__4, &i__5, &ib, &c_b25, 
 		    &dwork[pyb + nib + nb], n, &b[i__ + (i__ + ib + 1) * 
 		    b_dim1], ldb, &c_b25, &b[i__ + ib + (i__ + ib + 1) * 
 		    b_dim1], ldb, (ftnlen)12, (ftnlen)12);
+#line 511 "MB04TB.f"
 /* L30: */
+#line 511 "MB04TB.f"
 	}
 
+#line 513 "MB04TB.f"
     } else if (ltrb) {
+#line 514 "MB04TB.f"
 	i__1 = *n - nx - 1;
+#line 514 "MB04TB.f"
 	i__3 = nb;
+#line 514 "MB04TB.f"
 	for (i__ = *ilo; i__3 < 0 ? i__ >= i__1 : i__ <= i__1; i__ += i__3) {
 /* Computing MIN */
+#line 515 "MB04TB.f"
 	    i__4 = nb, i__5 = *n - i__;
+#line 515 "MB04TB.f"
 	    ib = min(i__4,i__5);
+#line 516 "MB04TB.f"
 	    nib = *n * ib;
 
 /*           Reduce rows and columns i:i+nb-1 to symplectic URV form and */
 /*           return the matrices XA, XB, XG, XQ, YA, YB, YG and YQ which */
 /*           are needed to update the unreduced parts of the matrices. */
 
+#line 522 "MB04TB.f"
 	    i__4 = *n - i__ + 1;
+#line 522 "MB04TB.f"
 	    i__5 = i__ - 1;
+#line 522 "MB04TB.f"
 	    mb03xu_(&ltra, &ltrb, &i__4, &i__5, &ib, &a[i__ * a_dim1 + 1], 
 		    lda, &b[i__ * b_dim1 + 1], ldb, &g[g_offset], ldg, &q[i__ 
 		    + i__ * q_dim1], ldq, &dwork[pxa], n, &dwork[pxb], n, &
@@ -707,24 +922,34 @@ static doublereal c_b25 = 1.;
 
 /*           Update the submatrix A(1:n,i+1+ib:n). */
 
+#line 531 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 531 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 531 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &q[
 		    i__ + ib + i__ * q_dim1], ldq, &dwork[pxa + nb + 1], n, &
 		    c_b25, &a[i__ + ib + (i__ + ib + 1) * a_dim1], lda, (
 		    ftnlen)12, (ftnlen)9);
+#line 534 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 534 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 534 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &a[
 		    i__ + ib + i__ * a_dim1], lda, &dwork[pxa + nib + nb + 1],
 		     n, &c_b25, &a[i__ + ib + (i__ + ib + 1) * a_dim1], lda, (
 		    ftnlen)12, (ftnlen)9);
+#line 537 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 537 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", n, &i__4, &ib, &c_b25, &
 		    dwork[pya], n, &q[i__ + (i__ + ib + 1) * q_dim1], ldq, &
 		    c_b25, &a[(i__ + ib + 1) * a_dim1 + 1], lda, (ftnlen)12, (
 		    ftnlen)12);
+#line 540 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 540 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", n, &i__4, &ib, &c_b25, &dwork[
 		    pya + nib], n, &b[i__ + ib + 1 + i__ * b_dim1], ldb, &
 		    c_b25, &a[(i__ + ib + 1) * a_dim1 + 1], lda, (ftnlen)12, (
@@ -732,26 +957,38 @@ static doublereal c_b25 = 1.;
 
 /*           Update the submatrix Q(i+ib:n,i+1+ib:n). */
 
+#line 546 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 546 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 546 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &q[
 		    i__ + ib + i__ * q_dim1], ldq, &dwork[pxq + nb + 1], n, &
 		    c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], ldq, (
 		    ftnlen)12, (ftnlen)9);
+#line 549 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 549 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 549 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &a[
 		    i__ + ib + i__ * a_dim1], lda, &dwork[pxq + nib + nb + 1],
 		     n, &c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], ldq, (
 		    ftnlen)12, (ftnlen)9);
+#line 552 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 552 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 552 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", &i__4, &i__5, &ib, &c_b25, 
 		    &dwork[pyq + nb], n, &q[i__ + (i__ + ib + 1) * q_dim1], 
 		    ldq, &c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], ldq, 
 		    (ftnlen)12, (ftnlen)12);
+#line 555 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 555 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 555 "MB04TB.f"
 	    dgemm_("No Transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &
 		    dwork[pyq + nib + nb], n, &b[i__ + ib + 1 + i__ * b_dim1],
 		     ldb, &c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], ldq,
@@ -759,20 +996,28 @@ static doublereal c_b25 = 1.;
 
 /*           Update the matrix G. */
 
+#line 561 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 561 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, n, &ib, &c_b25, &q[i__ 
 		    + ib + i__ * q_dim1], ldq, &dwork[pxg], n, &c_b25, &g[i__ 
 		    + ib + g_dim1], ldg, (ftnlen)12, (ftnlen)9);
+#line 564 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 564 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, n, &ib, &c_b25, &a[i__ 
 		    + ib + i__ * a_dim1], lda, &dwork[pxg + nib], n, &c_b25, &
 		    g[i__ + ib + g_dim1], ldg, (ftnlen)12, (ftnlen)9);
+#line 567 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 567 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", n, &i__4, &ib, &c_b25, &
 		    dwork[pyg], n, &q[i__ + (i__ + ib + 1) * q_dim1], ldq, &
 		    c_b25, &g[(i__ + ib + 1) * g_dim1 + 1], ldg, (ftnlen)12, (
 		    ftnlen)12);
+#line 570 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 570 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", n, &i__4, &ib, &c_b25, &dwork[
 		    pyg + nib], n, &b[i__ + ib + 1 + i__ * b_dim1], ldb, &
 		    c_b25, &g[(i__ + ib + 1) * g_dim1 + 1], ldg, (ftnlen)12, (
@@ -780,44 +1025,66 @@ static doublereal c_b25 = 1.;
 
 /*           Update the submatrix B(1:n,i+ib:n). */
 
+#line 576 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 576 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", n, &i__4, &ib, &c_b25, &dwork[
 		    pxb], n, &q[i__ + ib + i__ * q_dim1], ldq, &c_b25, &b[(
 		    i__ + ib) * b_dim1 + 1], ldb, (ftnlen)12, (ftnlen)9);
+#line 579 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 579 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", n, &i__4, &ib, &c_b25, &dwork[
 		    pxb + nib], n, &a[i__ + ib + i__ * a_dim1], lda, &c_b25, &
 		    b[(i__ + ib) * b_dim1 + 1], ldb, (ftnlen)12, (ftnlen)9);
+#line 582 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 582 "MB04TB.f"
 	    i__5 = *n - i__ - ib + 1;
+#line 582 "MB04TB.f"
 	    dgemm_("Transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &q[
 		    i__ + (i__ + ib + 1) * q_dim1], ldq, &dwork[pyb + nb], n, 
 		    &c_b25, &b[i__ + ib + 1 + (i__ + ib) * b_dim1], ldb, (
 		    ftnlen)9, (ftnlen)9);
+#line 585 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 585 "MB04TB.f"
 	    i__5 = *n - i__ - ib + 1;
+#line 585 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &b[
 		    i__ + ib + 1 + i__ * b_dim1], ldb, &dwork[pyb + nib + nb],
 		     n, &c_b25, &b[i__ + ib + 1 + (i__ + ib) * b_dim1], ldb, (
 		    ftnlen)12, (ftnlen)9);
+#line 588 "MB04TB.f"
 /* L40: */
+#line 588 "MB04TB.f"
 	}
 
+#line 590 "MB04TB.f"
     } else {
+#line 591 "MB04TB.f"
 	i__3 = *n - nx - 1;
+#line 591 "MB04TB.f"
 	i__1 = nb;
+#line 591 "MB04TB.f"
 	for (i__ = *ilo; i__1 < 0 ? i__ >= i__3 : i__ <= i__3; i__ += i__1) {
 /* Computing MIN */
+#line 592 "MB04TB.f"
 	    i__4 = nb, i__5 = *n - i__;
+#line 592 "MB04TB.f"
 	    ib = min(i__4,i__5);
+#line 593 "MB04TB.f"
 	    nib = *n * ib;
 
 /*           Reduce rows and columns i:i+nb-1 to symplectic URV form and */
 /*           return the matrices XA, XB, XG, XQ, YA, YB, YG and YQ which */
 /*           are needed to update the unreduced parts of the matrices. */
 
+#line 599 "MB04TB.f"
 	    i__4 = *n - i__ + 1;
+#line 599 "MB04TB.f"
 	    i__5 = i__ - 1;
+#line 599 "MB04TB.f"
 	    mb03xu_(&ltra, &ltrb, &i__4, &i__5, &ib, &a[i__ * a_dim1 + 1], 
 		    lda, &b[i__ + b_dim1], ldb, &g[g_offset], ldg, &q[i__ + 
 		    i__ * q_dim1], ldq, &dwork[pxa], n, &dwork[pxb], n, &
@@ -828,24 +1095,34 @@ static doublereal c_b25 = 1.;
 
 /*           Update the submatrix A(1:n,i+1+ib:n). */
 
+#line 608 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 608 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 608 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &q[
 		    i__ + ib + i__ * q_dim1], ldq, &dwork[pxa + nb + 1], n, &
 		    c_b25, &a[i__ + ib + (i__ + ib + 1) * a_dim1], lda, (
 		    ftnlen)12, (ftnlen)9);
+#line 611 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 611 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 611 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &a[
 		    i__ + ib + i__ * a_dim1], lda, &dwork[pxa + nib + nb + 1],
 		     n, &c_b25, &a[i__ + ib + (i__ + ib + 1) * a_dim1], lda, (
 		    ftnlen)12, (ftnlen)9);
+#line 614 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 614 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", n, &i__4, &ib, &c_b25, &
 		    dwork[pya], n, &q[i__ + (i__ + ib + 1) * q_dim1], ldq, &
 		    c_b25, &a[(i__ + ib + 1) * a_dim1 + 1], lda, (ftnlen)12, (
 		    ftnlen)12);
+#line 617 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 617 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", n, &i__4, &ib, &c_b25, &
 		    dwork[pya + nib], n, &b[i__ + (i__ + ib + 1) * b_dim1], 
 		    ldb, &c_b25, &a[(i__ + ib + 1) * a_dim1 + 1], lda, (
@@ -853,26 +1130,38 @@ static doublereal c_b25 = 1.;
 
 /*           Update the submatrix Q(i+ib:n,i+1+ib:n). */
 
+#line 623 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 623 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 623 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &q[
 		    i__ + ib + i__ * q_dim1], ldq, &dwork[pxq + nb + 1], n, &
 		    c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], ldq, (
 		    ftnlen)12, (ftnlen)9);
+#line 626 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 626 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 626 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, &i__5, &ib, &c_b25, &a[
 		    i__ + ib + i__ * a_dim1], lda, &dwork[pxq + nib + nb + 1],
 		     n, &c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], ldq, (
 		    ftnlen)12, (ftnlen)9);
+#line 629 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 629 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 629 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", &i__4, &i__5, &ib, &c_b25, 
 		    &dwork[pyq + nb], n, &q[i__ + (i__ + ib + 1) * q_dim1], 
 		    ldq, &c_b25, &q[i__ + ib + (i__ + ib + 1) * q_dim1], ldq, 
 		    (ftnlen)12, (ftnlen)12);
+#line 632 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 632 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 632 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", &i__4, &i__5, &ib, &c_b25, 
 		    &dwork[pyq + nib + nb], n, &b[i__ + (i__ + ib + 1) * 
 		    b_dim1], ldb, &c_b25, &q[i__ + ib + (i__ + ib + 1) * 
@@ -880,20 +1169,28 @@ static doublereal c_b25 = 1.;
 
 /*           Update the matrix G. */
 
+#line 638 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 638 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, n, &ib, &c_b25, &q[i__ 
 		    + ib + i__ * q_dim1], ldq, &dwork[pxg], n, &c_b25, &g[i__ 
 		    + ib + g_dim1], ldg, (ftnlen)12, (ftnlen)9);
+#line 641 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 641 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, n, &ib, &c_b25, &a[i__ 
 		    + ib + i__ * a_dim1], lda, &dwork[pxg + nib], n, &c_b25, &
 		    g[i__ + ib + g_dim1], ldg, (ftnlen)12, (ftnlen)9);
+#line 644 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 644 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", n, &i__4, &ib, &c_b25, &
 		    dwork[pyg], n, &q[i__ + (i__ + ib + 1) * q_dim1], ldq, &
 		    c_b25, &g[(i__ + ib + 1) * g_dim1 + 1], ldg, (ftnlen)12, (
 		    ftnlen)12);
+#line 647 "MB04TB.f"
 	    i__4 = *n - i__ - ib;
+#line 647 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", n, &i__4, &ib, &c_b25, &
 		    dwork[pyg + nib], n, &b[i__ + (i__ + ib + 1) * b_dim1], 
 		    ldb, &c_b25, &g[(i__ + ib + 1) * g_dim1 + 1], ldg, (
@@ -901,38 +1198,54 @@ static doublereal c_b25 = 1.;
 
 /*           Update the submatrix B(i+ib:n,1:n). */
 
+#line 653 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 653 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, n, &ib, &c_b25, &q[i__ 
 		    + ib + i__ * q_dim1], ldq, &dwork[pxb], n, &c_b25, &b[i__ 
 		    + ib + b_dim1], ldb, (ftnlen)12, (ftnlen)9);
+#line 656 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 656 "MB04TB.f"
 	    dgemm_("No transpose", "Transpose", &i__4, n, &ib, &c_b25, &a[i__ 
 		    + ib + i__ * a_dim1], lda, &dwork[pxb + nib], n, &c_b25, &
 		    b[i__ + ib + b_dim1], ldb, (ftnlen)12, (ftnlen)9);
+#line 659 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 659 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 659 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", &i__4, &i__5, &ib, &c_b25, 
 		    &dwork[pyb + nb], n, &q[i__ + (i__ + ib + 1) * q_dim1], 
 		    ldq, &c_b25, &b[i__ + ib + (i__ + ib + 1) * b_dim1], ldb, 
 		    (ftnlen)12, (ftnlen)12);
+#line 662 "MB04TB.f"
 	    i__4 = *n - i__ - ib + 1;
+#line 662 "MB04TB.f"
 	    i__5 = *n - i__ - ib;
+#line 662 "MB04TB.f"
 	    dgemm_("No transpose", "No transpose", &i__4, &i__5, &ib, &c_b25, 
 		    &dwork[pyb + nib + nb], n, &b[i__ + (i__ + ib + 1) * 
 		    b_dim1], ldb, &c_b25, &b[i__ + ib + (i__ + ib + 1) * 
 		    b_dim1], ldb, (ftnlen)12, (ftnlen)12);
+#line 665 "MB04TB.f"
 /* L50: */
+#line 665 "MB04TB.f"
 	}
+#line 666 "MB04TB.f"
     }
 
 /*     Unblocked code to reduce the rest of the matrices. */
 
+#line 670 "MB04TB.f"
     mb04ts_(trana, tranb, n, &i__, &a[a_offset], lda, &b[b_offset], ldb, &g[
 	    g_offset], ldg, &q[q_offset], ldq, &csl[1], &csr[1], &taul[1], &
 	    taur[1], &dwork[1], ldwork, &ierr, (ftnlen)1, (ftnlen)1);
 
+#line 673 "MB04TB.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 675 "MB04TB.f"
     return 0;
 /* *** Last line of MB04TB *** */
 } /* mb04tb_ */

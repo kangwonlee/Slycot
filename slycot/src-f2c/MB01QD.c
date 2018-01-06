@@ -1,3 +1,4 @@
+#line 1 "MB01QD.f"
 /* MB01QD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01QD.f"
 /* Subroutine */ int mb01qd_(char *type__, integer *m, integer *n, integer *
 	kl, integer *ku, doublereal *cfrom, doublereal *cto, integer *nbl, 
 	integer *nrows, doublereal *a, integer *lda, integer *info, ftnlen 
@@ -155,266 +157,465 @@
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 139 "MB01QD.f"
     /* Parameter adjustments */
+#line 139 "MB01QD.f"
     --nrows;
+#line 139 "MB01QD.f"
     a_dim1 = *lda;
+#line 139 "MB01QD.f"
     a_offset = 1 + a_dim1;
+#line 139 "MB01QD.f"
     a -= a_offset;
+#line 139 "MB01QD.f"
 
+#line 139 "MB01QD.f"
     /* Function Body */
+#line 139 "MB01QD.f"
     if (lsame_(type__, "G", (ftnlen)1, (ftnlen)1)) {
+#line 140 "MB01QD.f"
 	itype = 0;
+#line 141 "MB01QD.f"
     } else if (lsame_(type__, "L", (ftnlen)1, (ftnlen)1)) {
+#line 142 "MB01QD.f"
 	itype = 1;
+#line 143 "MB01QD.f"
     } else if (lsame_(type__, "U", (ftnlen)1, (ftnlen)1)) {
+#line 144 "MB01QD.f"
 	itype = 2;
+#line 145 "MB01QD.f"
     } else if (lsame_(type__, "H", (ftnlen)1, (ftnlen)1)) {
+#line 146 "MB01QD.f"
 	itype = 3;
+#line 147 "MB01QD.f"
     } else if (lsame_(type__, "B", (ftnlen)1, (ftnlen)1)) {
+#line 148 "MB01QD.f"
 	itype = 4;
+#line 149 "MB01QD.f"
     } else if (lsame_(type__, "Q", (ftnlen)1, (ftnlen)1)) {
+#line 150 "MB01QD.f"
 	itype = 5;
+#line 151 "MB01QD.f"
     } else {
+#line 152 "MB01QD.f"
 	itype = 6;
+#line 153 "MB01QD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 157 "MB01QD.f"
     if (min(*m,*n) == 0) {
+#line 157 "MB01QD.f"
 	return 0;
+#line 157 "MB01QD.f"
     }
 
 /*     Get machine parameters. */
 
+#line 162 "MB01QD.f"
     smlnum = dlamch_("S", (ftnlen)1);
+#line 163 "MB01QD.f"
     bignum = 1. / smlnum;
 
+#line 165 "MB01QD.f"
     cfromc = *cfrom;
+#line 166 "MB01QD.f"
     ctoc = *cto;
 
+#line 168 "MB01QD.f"
 L10:
+#line 169 "MB01QD.f"
     cfrom1 = cfromc * smlnum;
+#line 170 "MB01QD.f"
     cto1 = ctoc / bignum;
+#line 171 "MB01QD.f"
     if (abs(cfrom1) > abs(ctoc) && ctoc != 0.) {
+#line 172 "MB01QD.f"
 	mul = smlnum;
+#line 173 "MB01QD.f"
 	done = FALSE_;
+#line 174 "MB01QD.f"
 	cfromc = cfrom1;
+#line 175 "MB01QD.f"
     } else if (abs(cto1) > abs(cfromc)) {
+#line 176 "MB01QD.f"
 	mul = bignum;
+#line 177 "MB01QD.f"
 	done = FALSE_;
+#line 178 "MB01QD.f"
 	ctoc = cto1;
+#line 179 "MB01QD.f"
     } else {
+#line 180 "MB01QD.f"
 	mul = ctoc / cfromc;
+#line 181 "MB01QD.f"
 	done = TRUE_;
+#line 182 "MB01QD.f"
     }
 
+#line 184 "MB01QD.f"
     noblc = *nbl == 0;
 
+#line 186 "MB01QD.f"
     if (itype == 0) {
 
 /*        Full matrix */
 
+#line 190 "MB01QD.f"
 	i__1 = *n;
+#line 190 "MB01QD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 191 "MB01QD.f"
 	    i__2 = *m;
+#line 191 "MB01QD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 192 "MB01QD.f"
 		a[i__ + j * a_dim1] *= mul;
+#line 193 "MB01QD.f"
 /* L20: */
+#line 193 "MB01QD.f"
 	    }
+#line 194 "MB01QD.f"
 /* L30: */
+#line 194 "MB01QD.f"
 	}
 
+#line 196 "MB01QD.f"
     } else if (itype == 1) {
 
+#line 198 "MB01QD.f"
 	if (noblc) {
 
 /*           Lower triangular matrix */
 
+#line 202 "MB01QD.f"
 	    i__1 = *n;
+#line 202 "MB01QD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 203 "MB01QD.f"
 		i__2 = *m;
+#line 203 "MB01QD.f"
 		for (i__ = j; i__ <= i__2; ++i__) {
+#line 204 "MB01QD.f"
 		    a[i__ + j * a_dim1] *= mul;
+#line 205 "MB01QD.f"
 /* L40: */
+#line 205 "MB01QD.f"
 		}
+#line 206 "MB01QD.f"
 /* L50: */
+#line 206 "MB01QD.f"
 	    }
 
+#line 208 "MB01QD.f"
 	} else {
 
 /*           Block lower triangular matrix */
 
+#line 212 "MB01QD.f"
 	    jfin = 0;
+#line 213 "MB01QD.f"
 	    i__1 = *nbl;
+#line 213 "MB01QD.f"
 	    for (k = 1; k <= i__1; ++k) {
+#line 214 "MB01QD.f"
 		jini = jfin + 1;
+#line 215 "MB01QD.f"
 		jfin += nrows[k];
+#line 216 "MB01QD.f"
 		i__2 = jfin;
+#line 216 "MB01QD.f"
 		for (j = jini; j <= i__2; ++j) {
+#line 217 "MB01QD.f"
 		    i__3 = *m;
+#line 217 "MB01QD.f"
 		    for (i__ = jini; i__ <= i__3; ++i__) {
+#line 218 "MB01QD.f"
 			a[i__ + j * a_dim1] *= mul;
+#line 219 "MB01QD.f"
 /* L60: */
+#line 219 "MB01QD.f"
 		    }
+#line 220 "MB01QD.f"
 /* L70: */
+#line 220 "MB01QD.f"
 		}
+#line 221 "MB01QD.f"
 /* L80: */
+#line 221 "MB01QD.f"
 	    }
+#line 222 "MB01QD.f"
 	}
 
+#line 224 "MB01QD.f"
     } else if (itype == 2) {
 
+#line 226 "MB01QD.f"
 	if (noblc) {
 
 /*           Upper triangular matrix */
 
+#line 230 "MB01QD.f"
 	    i__1 = *n;
+#line 230 "MB01QD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 231 "MB01QD.f"
 		i__2 = min(j,*m);
+#line 231 "MB01QD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 232 "MB01QD.f"
 		    a[i__ + j * a_dim1] *= mul;
+#line 233 "MB01QD.f"
 /* L90: */
+#line 233 "MB01QD.f"
 		}
+#line 234 "MB01QD.f"
 /* L100: */
+#line 234 "MB01QD.f"
 	    }
 
+#line 236 "MB01QD.f"
 	} else {
 
 /*           Block upper triangular matrix */
 
+#line 240 "MB01QD.f"
 	    jfin = 0;
+#line 241 "MB01QD.f"
 	    i__1 = *nbl;
+#line 241 "MB01QD.f"
 	    for (k = 1; k <= i__1; ++k) {
+#line 242 "MB01QD.f"
 		jini = jfin + 1;
+#line 243 "MB01QD.f"
 		jfin += nrows[k];
+#line 244 "MB01QD.f"
 		if (k == *nbl) {
+#line 244 "MB01QD.f"
 		    jfin = *n;
+#line 244 "MB01QD.f"
 		}
+#line 245 "MB01QD.f"
 		i__2 = jfin;
+#line 245 "MB01QD.f"
 		for (j = jini; j <= i__2; ++j) {
+#line 246 "MB01QD.f"
 		    i__3 = min(jfin,*m);
+#line 246 "MB01QD.f"
 		    for (i__ = 1; i__ <= i__3; ++i__) {
+#line 247 "MB01QD.f"
 			a[i__ + j * a_dim1] *= mul;
+#line 248 "MB01QD.f"
 /* L110: */
+#line 248 "MB01QD.f"
 		    }
+#line 249 "MB01QD.f"
 /* L120: */
+#line 249 "MB01QD.f"
 		}
+#line 250 "MB01QD.f"
 /* L130: */
+#line 250 "MB01QD.f"
 	    }
+#line 251 "MB01QD.f"
 	}
 
+#line 253 "MB01QD.f"
     } else if (itype == 3) {
 
+#line 255 "MB01QD.f"
 	if (noblc) {
 
 /*           Upper Hessenberg matrix */
 
+#line 259 "MB01QD.f"
 	    i__1 = *n;
+#line 259 "MB01QD.f"
 	    for (j = 1; j <= i__1; ++j) {
 /* Computing MIN */
+#line 260 "MB01QD.f"
 		i__3 = j + 1;
+#line 260 "MB01QD.f"
 		i__2 = min(i__3,*m);
+#line 260 "MB01QD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 261 "MB01QD.f"
 		    a[i__ + j * a_dim1] *= mul;
+#line 262 "MB01QD.f"
 /* L140: */
+#line 262 "MB01QD.f"
 		}
+#line 263 "MB01QD.f"
 /* L150: */
+#line 263 "MB01QD.f"
 	    }
 
+#line 265 "MB01QD.f"
 	} else {
 
 /*           Block upper Hessenberg matrix */
 
+#line 269 "MB01QD.f"
 	    jfin = 0;
+#line 270 "MB01QD.f"
 	    i__1 = *nbl;
+#line 270 "MB01QD.f"
 	    for (k = 1; k <= i__1; ++k) {
+#line 271 "MB01QD.f"
 		jini = jfin + 1;
+#line 272 "MB01QD.f"
 		jfin += nrows[k];
 
+#line 274 "MB01QD.f"
 		if (k == *nbl) {
+#line 275 "MB01QD.f"
 		    jfin = *n;
+#line 276 "MB01QD.f"
 		    ifin = *n;
+#line 277 "MB01QD.f"
 		} else {
+#line 278 "MB01QD.f"
 		    ifin = jfin + nrows[k + 1];
+#line 279 "MB01QD.f"
 		}
 
+#line 281 "MB01QD.f"
 		i__2 = jfin;
+#line 281 "MB01QD.f"
 		for (j = jini; j <= i__2; ++j) {
+#line 282 "MB01QD.f"
 		    i__3 = min(ifin,*m);
+#line 282 "MB01QD.f"
 		    for (i__ = 1; i__ <= i__3; ++i__) {
+#line 283 "MB01QD.f"
 			a[i__ + j * a_dim1] *= mul;
+#line 284 "MB01QD.f"
 /* L160: */
+#line 284 "MB01QD.f"
 		    }
+#line 285 "MB01QD.f"
 /* L170: */
+#line 285 "MB01QD.f"
 		}
+#line 286 "MB01QD.f"
 /* L180: */
+#line 286 "MB01QD.f"
 	    }
+#line 287 "MB01QD.f"
 	}
 
+#line 289 "MB01QD.f"
     } else if (itype == 4) {
 
 /*        Lower half of a symmetric band matrix */
 
+#line 293 "MB01QD.f"
 	k3 = *kl + 1;
+#line 294 "MB01QD.f"
 	k4 = *n + 1;
+#line 295 "MB01QD.f"
 	i__1 = *n;
+#line 295 "MB01QD.f"
 	for (j = 1; j <= i__1; ++j) {
 /* Computing MIN */
+#line 296 "MB01QD.f"
 	    i__3 = k3, i__4 = k4 - j;
+#line 296 "MB01QD.f"
 	    i__2 = min(i__3,i__4);
+#line 296 "MB01QD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 297 "MB01QD.f"
 		a[i__ + j * a_dim1] *= mul;
+#line 298 "MB01QD.f"
 /* L190: */
+#line 298 "MB01QD.f"
 	    }
+#line 299 "MB01QD.f"
 /* L200: */
+#line 299 "MB01QD.f"
 	}
 
+#line 301 "MB01QD.f"
     } else if (itype == 5) {
 
 /*        Upper half of a symmetric band matrix */
 
+#line 305 "MB01QD.f"
 	k1 = *ku + 2;
+#line 306 "MB01QD.f"
 	k3 = *ku + 1;
+#line 307 "MB01QD.f"
 	i__1 = *n;
+#line 307 "MB01QD.f"
 	for (j = 1; j <= i__1; ++j) {
 /* Computing MAX */
+#line 308 "MB01QD.f"
 	    i__2 = k1 - j;
+#line 308 "MB01QD.f"
 	    i__3 = k3;
+#line 308 "MB01QD.f"
 	    for (i__ = max(i__2,1); i__ <= i__3; ++i__) {
+#line 309 "MB01QD.f"
 		a[i__ + j * a_dim1] *= mul;
+#line 310 "MB01QD.f"
 /* L210: */
+#line 310 "MB01QD.f"
 	    }
+#line 311 "MB01QD.f"
 /* L220: */
+#line 311 "MB01QD.f"
 	}
 
+#line 313 "MB01QD.f"
     } else if (itype == 6) {
 
 /*        Band matrix */
 
+#line 317 "MB01QD.f"
 	k1 = *kl + *ku + 2;
+#line 318 "MB01QD.f"
 	k2 = *kl + 1;
+#line 319 "MB01QD.f"
 	k3 = (*kl << 1) + *ku + 1;
+#line 320 "MB01QD.f"
 	k4 = *kl + *ku + 1 + *m;
+#line 321 "MB01QD.f"
 	i__1 = *n;
+#line 321 "MB01QD.f"
 	for (j = 1; j <= i__1; ++j) {
 /* Computing MAX */
+#line 322 "MB01QD.f"
 	    i__3 = k1 - j;
 /* Computing MIN */
+#line 322 "MB01QD.f"
 	    i__4 = k3, i__5 = k4 - j;
+#line 322 "MB01QD.f"
 	    i__2 = min(i__4,i__5);
+#line 322 "MB01QD.f"
 	    for (i__ = max(i__3,k2); i__ <= i__2; ++i__) {
+#line 323 "MB01QD.f"
 		a[i__ + j * a_dim1] *= mul;
+#line 324 "MB01QD.f"
 /* L230: */
+#line 324 "MB01QD.f"
 	    }
+#line 325 "MB01QD.f"
 /* L240: */
+#line 325 "MB01QD.f"
 	}
 
+#line 327 "MB01QD.f"
     }
 
+#line 329 "MB01QD.f"
     if (! done) {
+#line 329 "MB01QD.f"
 	goto L10;
+#line 329 "MB01QD.f"
     }
 
+#line 332 "MB01QD.f"
     return 0;
 /* *** Last line of MB01QD *** */
 } /* mb01qd_ */

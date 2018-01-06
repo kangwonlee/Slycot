@@ -1,3 +1,4 @@
+#line 1 "SB02MD.f"
 /* SB02MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB02MD.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -406,107 +408,190 @@ static doublereal c_b47 = .5;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 352 "SB02MD.f"
     /* Parameter adjustments */
+#line 352 "SB02MD.f"
     a_dim1 = *lda;
+#line 352 "SB02MD.f"
     a_offset = 1 + a_dim1;
+#line 352 "SB02MD.f"
     a -= a_offset;
+#line 352 "SB02MD.f"
     g_dim1 = *ldg;
+#line 352 "SB02MD.f"
     g_offset = 1 + g_dim1;
+#line 352 "SB02MD.f"
     g -= g_offset;
+#line 352 "SB02MD.f"
     q_dim1 = *ldq;
+#line 352 "SB02MD.f"
     q_offset = 1 + q_dim1;
+#line 352 "SB02MD.f"
     q -= q_offset;
+#line 352 "SB02MD.f"
     --wr;
+#line 352 "SB02MD.f"
     --wi;
+#line 352 "SB02MD.f"
     s_dim1 = *lds;
+#line 352 "SB02MD.f"
     s_offset = 1 + s_dim1;
+#line 352 "SB02MD.f"
     s -= s_offset;
+#line 352 "SB02MD.f"
     u_dim1 = *ldu;
+#line 352 "SB02MD.f"
     u_offset = 1 + u_dim1;
+#line 352 "SB02MD.f"
     u -= u_offset;
+#line 352 "SB02MD.f"
     --iwork;
+#line 352 "SB02MD.f"
     --dwork;
+#line 352 "SB02MD.f"
     --bwork;
+#line 352 "SB02MD.f"
 
+#line 352 "SB02MD.f"
     /* Function Body */
+#line 352 "SB02MD.f"
     *info = 0;
+#line 353 "SB02MD.f"
     n2 = *n + *n;
+#line 354 "SB02MD.f"
     np1 = *n + 1;
+#line 355 "SB02MD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 356 "SB02MD.f"
     lscal = lsame_(scal, "G", (ftnlen)1, (ftnlen)1);
+#line 357 "SB02MD.f"
     lsort = lsame_(sort, "S", (ftnlen)1, (ftnlen)1);
+#line 358 "SB02MD.f"
     luplo = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 359 "SB02MD.f"
     if (discr) {
+#line 359 "SB02MD.f"
 	lhinv = lsame_(hinv, "D", (ftnlen)1, (ftnlen)1);
+#line 359 "SB02MD.f"
     }
 
 /*     Test the input scalar arguments. */
 
+#line 363 "SB02MD.f"
     if (! discr && ! lsame_(dico, "C", (ftnlen)1, (ftnlen)1)) {
+#line 364 "SB02MD.f"
 	*info = -1;
+#line 365 "SB02MD.f"
     } else if (discr) {
+#line 366 "SB02MD.f"
 	if (! lhinv && ! lsame_(hinv, "I", (ftnlen)1, (ftnlen)1)) {
+#line 366 "SB02MD.f"
 	    *info = -2;
+#line 366 "SB02MD.f"
 	}
+#line 368 "SB02MD.f"
     }
+#line 369 "SB02MD.f"
     if (! luplo && ! lsame_(uplo, "L", (ftnlen)1, (ftnlen)1)) {
+#line 370 "SB02MD.f"
 	*info = -3;
+#line 371 "SB02MD.f"
     } else if (! lscal && ! lsame_(scal, "N", (ftnlen)1, (ftnlen)1)) {
+#line 372 "SB02MD.f"
 	*info = -4;
+#line 373 "SB02MD.f"
     } else if (! lsort && ! lsame_(sort, "U", (ftnlen)1, (ftnlen)1)) {
+#line 374 "SB02MD.f"
 	*info = -5;
+#line 375 "SB02MD.f"
     } else if (*n < 0) {
+#line 376 "SB02MD.f"
 	*info = -6;
+#line 377 "SB02MD.f"
     } else if (*lda < max(1,*n)) {
+#line 378 "SB02MD.f"
 	*info = -8;
+#line 379 "SB02MD.f"
     } else if (*ldg < max(1,*n)) {
+#line 380 "SB02MD.f"
 	*info = -10;
+#line 381 "SB02MD.f"
     } else if (*ldq < max(1,*n)) {
+#line 382 "SB02MD.f"
 	*info = -12;
+#line 383 "SB02MD.f"
     } else if (*lds < max(1,n2)) {
+#line 384 "SB02MD.f"
 	*info = -17;
+#line 385 "SB02MD.f"
     } else if (*ldu < max(1,n2)) {
+#line 386 "SB02MD.f"
 	*info = -19;
+#line 387 "SB02MD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 387 "SB02MD.f"
 	i__1 = 2, i__2 = *n * 6;
 /* Computing MAX */
+#line 387 "SB02MD.f"
 	i__3 = 3, i__4 = *n * 6;
+#line 387 "SB02MD.f"
 	if (! discr && *ldwork < max(i__1,i__2) || discr && *ldwork < max(
 		i__3,i__4)) {
+#line 389 "SB02MD.f"
 	    *info = -22;
+#line 390 "SB02MD.f"
 	}
+#line 390 "SB02MD.f"
     }
 
+#line 392 "SB02MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 396 "SB02MD.f"
 	i__1 = -(*info);
+#line 396 "SB02MD.f"
 	xerbla_("SB02MD", &i__1, (ftnlen)6);
+#line 397 "SB02MD.f"
 	return 0;
+#line 398 "SB02MD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 402 "SB02MD.f"
     if (*n == 0) {
+#line 403 "SB02MD.f"
 	*rcond = 1.;
+#line 404 "SB02MD.f"
 	dwork[1] = 1.;
+#line 405 "SB02MD.f"
 	dwork[2] = 1.;
+#line 406 "SB02MD.f"
 	if (discr) {
+#line 406 "SB02MD.f"
 	    dwork[3] = 1.;
+#line 406 "SB02MD.f"
 	}
+#line 407 "SB02MD.f"
 	return 0;
+#line 408 "SB02MD.f"
     }
 
+#line 410 "SB02MD.f"
     if (lscal) {
 
 /*        Compute the norms of the matrices Q and G. */
 
+#line 414 "SB02MD.f"
 	qnorm = dlansy_("1-norm", uplo, n, &q[q_offset], ldq, &dwork[1], (
 		ftnlen)6, (ftnlen)1);
+#line 415 "SB02MD.f"
 	gnorm = dlansy_("1-norm", uplo, n, &g[g_offset], ldg, &dwork[1], (
 		ftnlen)6, (ftnlen)1);
+#line 416 "SB02MD.f"
     }
 
 /*     Initialise the Hamiltonian or symplectic matrix associated with */
@@ -515,161 +600,252 @@ static doublereal c_b47 = .5;
 /*                        max(2,4*N) if DICO = 'D'; */
 /*                 prefer larger if DICO = 'D'. */
 
+#line 424 "SB02MD.f"
     sb02mu_(dico, hinv, uplo, n, &a[a_offset], lda, &g[g_offset], ldg, &q[
 	    q_offset], ldq, &s[s_offset], lds, &iwork[1], &dwork[1], ldwork, 
 	    info, (ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 426 "SB02MD.f"
     if (*info != 0) {
+#line 427 "SB02MD.f"
 	*info = 1;
+#line 428 "SB02MD.f"
 	return 0;
+#line 429 "SB02MD.f"
     }
 
+#line 431 "SB02MD.f"
     wrkopt = dwork[1];
+#line 432 "SB02MD.f"
     if (discr) {
+#line 432 "SB02MD.f"
 	rconda = dwork[2];
+#line 432 "SB02MD.f"
     }
 
+#line 434 "SB02MD.f"
     iscl = 0;
+#line 435 "SB02MD.f"
     if (lscal) {
 
 /*        Scale the Hamiltonian or symplectic matrix. */
 
+#line 439 "SB02MD.f"
 	if (qnorm > gnorm && gnorm > 0.) {
+#line 440 "SB02MD.f"
 	    dlascl_("G", &c__0, &c__0, &qnorm, &gnorm, n, n, &s[np1 + s_dim1],
 		     &n2, &ierr, (ftnlen)1);
+#line 442 "SB02MD.f"
 	    dlascl_("G", &c__0, &c__0, &gnorm, &qnorm, n, n, &s[np1 * s_dim1 
 		    + 1], &n2, &ierr, (ftnlen)1);
+#line 444 "SB02MD.f"
 	    iscl = 1;
+#line 445 "SB02MD.f"
 	}
+#line 446 "SB02MD.f"
     }
 
 /*     Find the ordered Schur factorization of S,   S = U*H*U'. */
 /*     Workspace:  need   6*N; */
 /*                 prefer larger. */
 
+#line 452 "SB02MD.f"
     if (! discr) {
+#line 453 "SB02MD.f"
 	if (lsort) {
+#line 454 "SB02MD.f"
 	    dgees_("Vectors", "Sorted", (L_fp)sb02mv_, &n2, &s[s_offset], lds,
 		     &nrot, &wr[1], &wi[1], &u[u_offset], ldu, &dwork[1], 
 		    ldwork, &bwork[1], info, (ftnlen)7, (ftnlen)6);
+#line 456 "SB02MD.f"
 	} else {
+#line 457 "SB02MD.f"
 	    dgees_("Vectors", "Sorted", (L_fp)sb02mr_, &n2, &s[s_offset], lds,
 		     &nrot, &wr[1], &wi[1], &u[u_offset], ldu, &dwork[1], 
 		    ldwork, &bwork[1], info, (ftnlen)7, (ftnlen)6);
+#line 459 "SB02MD.f"
 	}
+#line 460 "SB02MD.f"
     } else {
+#line 461 "SB02MD.f"
 	if (lsort) {
+#line 462 "SB02MD.f"
 	    dgees_("Vectors", "Sorted", (L_fp)sb02mw_, &n2, &s[s_offset], lds,
 		     &nrot, &wr[1], &wi[1], &u[u_offset], ldu, &dwork[1], 
 		    ldwork, &bwork[1], info, (ftnlen)7, (ftnlen)6);
+#line 464 "SB02MD.f"
 	} else {
+#line 465 "SB02MD.f"
 	    dgees_("Vectors", "Sorted", (L_fp)sb02ms_, &n2, &s[s_offset], lds,
 		     &nrot, &wr[1], &wi[1], &u[u_offset], ldu, &dwork[1], 
 		    ldwork, &bwork[1], info, (ftnlen)7, (ftnlen)6);
+#line 467 "SB02MD.f"
 	}
+#line 468 "SB02MD.f"
 	if (lhinv) {
+#line 469 "SB02MD.f"
 	    dswap_(n, &wr[1], &c__1, &wr[np1], &c__1);
+#line 470 "SB02MD.f"
 	    dswap_(n, &wi[1], &c__1, &wi[np1], &c__1);
+#line 471 "SB02MD.f"
 	}
+#line 472 "SB02MD.f"
     }
+#line 473 "SB02MD.f"
     if (*info > n2) {
+#line 474 "SB02MD.f"
 	*info = 3;
+#line 475 "SB02MD.f"
     } else if (*info > 0) {
+#line 476 "SB02MD.f"
 	*info = 2;
+#line 477 "SB02MD.f"
     } else if (nrot != *n) {
+#line 478 "SB02MD.f"
 	*info = 4;
+#line 479 "SB02MD.f"
     }
+#line 480 "SB02MD.f"
     if (*info != 0) {
+#line 480 "SB02MD.f"
 	return 0;
+#line 480 "SB02MD.f"
     }
 
+#line 483 "SB02MD.f"
     wrkopt = max(wrkopt,dwork[1]);
 
 /*     Check if U(1,1) is singular.  Use the (2,1) block of S as a */
 /*     workspace for factoring U(1,1). */
 
+#line 488 "SB02MD.f"
     unorm = dlange_("1-norm", n, n, &u[u_offset], ldu, &dwork[1], (ftnlen)6);
 
+#line 490 "SB02MD.f"
     dlacpy_("Full", n, n, &u[u_offset], ldu, &s[np1 + s_dim1], lds, (ftnlen)4)
 	    ;
+#line 491 "SB02MD.f"
     dgetrf_(n, n, &s[np1 + s_dim1], lds, &iwork[1], info);
 
+#line 493 "SB02MD.f"
     if (*info > 0) {
 
 /*        Singular matrix.  Set INFO and RCOND for error return. */
 
+#line 497 "SB02MD.f"
 	*info = 5;
+#line 498 "SB02MD.f"
 	*rcond = 0.;
+#line 499 "SB02MD.f"
 	goto L100;
+#line 500 "SB02MD.f"
     }
 
 /*     Estimate the reciprocal condition of U(1,1). */
 /*     Workspace: 6*N. */
 
+#line 505 "SB02MD.f"
     dgecon_("1-norm", n, &s[np1 + s_dim1], lds, &unorm, rcond, &dwork[1], &
 	    iwork[np1], info, (ftnlen)6);
 
+#line 508 "SB02MD.f"
     if (*rcond < dlamch_("Epsilon", (ftnlen)7)) {
 
 /*        Nearly singular matrix.  Set INFO for error return. */
 
+#line 512 "SB02MD.f"
 	*info = 5;
+#line 513 "SB02MD.f"
 	return 0;
+#line 514 "SB02MD.f"
     }
 
 /*     Transpose U(2,1) in Q and compute the solution. */
 
+#line 518 "SB02MD.f"
     i__1 = *n;
+#line 518 "SB02MD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 519 "SB02MD.f"
 	dcopy_(n, &u[np1 + i__ * u_dim1], &c__1, &q[i__ + q_dim1], ldq);
+#line 520 "SB02MD.f"
 /* L60: */
+#line 520 "SB02MD.f"
     }
 
+#line 522 "SB02MD.f"
     dgetrs_("Transpose", n, n, &s[np1 + s_dim1], lds, &iwork[1], &q[q_offset],
 	     ldq, info, (ftnlen)9);
 
 /*     Set S(2,1) to zero. */
 
+#line 527 "SB02MD.f"
     dlaset_("Full", n, n, &c_b42, &c_b42, &s[np1 + s_dim1], lds, (ftnlen)4);
 
 /*     Make sure the solution matrix X is symmetric. */
 
+#line 531 "SB02MD.f"
     i__1 = *n - 1;
+#line 531 "SB02MD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 532 "SB02MD.f"
 	i__2 = *n - i__;
+#line 532 "SB02MD.f"
 	daxpy_(&i__2, &c_b45, &q[i__ + (i__ + 1) * q_dim1], ldq, &q[i__ + 1 + 
 		i__ * q_dim1], &c__1);
+#line 533 "SB02MD.f"
 	i__2 = *n - i__;
+#line 533 "SB02MD.f"
 	dscal_(&i__2, &c_b47, &q[i__ + 1 + i__ * q_dim1], &c__1);
+#line 534 "SB02MD.f"
 	i__2 = *n - i__;
+#line 534 "SB02MD.f"
 	dcopy_(&i__2, &q[i__ + 1 + i__ * q_dim1], &c__1, &q[i__ + (i__ + 1) * 
 		q_dim1], ldq);
+#line 535 "SB02MD.f"
 /* L80: */
+#line 535 "SB02MD.f"
     }
 
+#line 537 "SB02MD.f"
     if (lscal) {
 
 /*        Undo scaling for the solution matrix. */
 
+#line 541 "SB02MD.f"
 	if (iscl == 1) {
+#line 541 "SB02MD.f"
 	    dlascl_("G", &c__0, &c__0, &gnorm, &qnorm, n, n, &q[q_offset], 
 		    ldq, &ierr, (ftnlen)1);
+#line 541 "SB02MD.f"
 	}
+#line 543 "SB02MD.f"
     }
 
 /*     Set the optimal workspace, the scaling factor, and reciprocal */
 /*     condition number (if any). */
 
+#line 548 "SB02MD.f"
     dwork[1] = wrkopt;
+#line 549 "SB02MD.f"
 L100:
+#line 550 "SB02MD.f"
     if (iscl == 1) {
+#line 551 "SB02MD.f"
 	dwork[2] = qnorm / gnorm;
+#line 552 "SB02MD.f"
     } else {
+#line 553 "SB02MD.f"
 	dwork[2] = 1.;
+#line 554 "SB02MD.f"
     }
+#line 555 "SB02MD.f"
     if (discr) {
+#line 555 "SB02MD.f"
 	dwork[3] = rconda;
+#line 555 "SB02MD.f"
     }
 
+#line 557 "SB02MD.f"
     return 0;
 /* *** Last line of SB02MD *** */
 } /* sb02md_ */

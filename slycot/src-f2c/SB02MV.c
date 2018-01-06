@@ -1,3 +1,4 @@
+#line 1 "SB02MV.f"
 /* SB02MV.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB02MV.f"
 logical sb02mv_(doublereal *reig, doublereal *ieig)
 {
     /* System generated locals */
@@ -83,8 +85,10 @@ logical sb02mv_(doublereal *reig, doublereal *ieig)
 /*     .. Scalar Arguments .. */
 /*     .. Executable Statements .. */
 
+#line 71 "SB02MV.f"
     ret_val = *reig < 0.;
 
+#line 73 "SB02MV.f"
     return ret_val;
 /* *** Last line of SB02MV *** */
 } /* sb02mv_ */

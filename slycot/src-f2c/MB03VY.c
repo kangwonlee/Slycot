@@ -1,3 +1,4 @@
+#line 1 "MB03VY.f"
 /* MB03VY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03VY.f"
 /* Table of constant values */
 
 static doublereal c_b5 = 0.;
@@ -179,92 +181,157 @@ static doublereal c_b6 = 1.;
 
 /*     Test the input scalar arguments. */
 
+#line 155 "MB03VY.f"
     /* Parameter adjustments */
+#line 155 "MB03VY.f"
     a_dim1 = *lda1;
+#line 155 "MB03VY.f"
     a_dim2 = *lda2;
+#line 155 "MB03VY.f"
     a_offset = 1 + a_dim1 * (1 + a_dim2);
+#line 155 "MB03VY.f"
     a -= a_offset;
+#line 155 "MB03VY.f"
     tau_dim1 = *ldtau;
+#line 155 "MB03VY.f"
     tau_offset = 1 + tau_dim1;
+#line 155 "MB03VY.f"
     tau -= tau_offset;
+#line 155 "MB03VY.f"
     --dwork;
+#line 155 "MB03VY.f"
 
+#line 155 "MB03VY.f"
     /* Function Body */
+#line 155 "MB03VY.f"
     *info = 0;
+#line 156 "MB03VY.f"
     if (*n < 0) {
+#line 157 "MB03VY.f"
 	*info = -1;
+#line 158 "MB03VY.f"
     } else if (*p < 1) {
+#line 159 "MB03VY.f"
 	*info = -2;
+#line 160 "MB03VY.f"
     } else if (*ilo < 1 || *ilo > max(1,*n)) {
+#line 161 "MB03VY.f"
 	*info = -3;
+#line 162 "MB03VY.f"
     } else if (*ihi < min(*ilo,*n) || *ihi > *n) {
+#line 163 "MB03VY.f"
 	*info = -4;
+#line 164 "MB03VY.f"
     } else if (*lda1 < max(1,*n)) {
+#line 165 "MB03VY.f"
 	*info = -6;
+#line 166 "MB03VY.f"
     } else if (*lda2 < max(1,*n)) {
+#line 167 "MB03VY.f"
 	*info = -7;
+#line 168 "MB03VY.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 168 "MB03VY.f"
 	i__1 = 1, i__2 = *n - 1;
+#line 168 "MB03VY.f"
 	if (*ldtau < max(i__1,i__2)) {
+#line 169 "MB03VY.f"
 	    *info = -9;
+#line 170 "MB03VY.f"
 	}
+#line 170 "MB03VY.f"
     }
+#line 171 "MB03VY.f"
     if (*info != 0) {
+#line 172 "MB03VY.f"
 	i__1 = -(*info);
+#line 172 "MB03VY.f"
 	xerbla_("MB03VY", &i__1, (ftnlen)6);
+#line 173 "MB03VY.f"
 	return 0;
+#line 174 "MB03VY.f"
     }
 
 /*     Quick return if possible. */
 
+#line 178 "MB03VY.f"
     if (*n == 0) {
+#line 179 "MB03VY.f"
 	dwork[1] = 1.;
+#line 180 "MB03VY.f"
 	return 0;
+#line 181 "MB03VY.f"
     }
 
 /*     Generate the orthogonal matrix Q_1. */
 
+#line 185 "MB03VY.f"
     dorghr_(n, ilo, ihi, &a[a_offset], lda1, &tau[tau_offset], &dwork[1], 
 	    ldwork, info);
+#line 186 "MB03VY.f"
     wrkopt = dwork[1];
 
+#line 188 "MB03VY.f"
     nh = *ihi - *ilo + 1;
 
+#line 190 "MB03VY.f"
     i__1 = *p;
+#line 190 "MB03VY.f"
     for (j = 2; j <= i__1; ++j) {
 
 /*        Generate the orthogonal matrix Q_j. */
 /*        Set the first ILO-1 and the last N-IHI rows and columns of Q_j */
 /*        to those of the unit matrix. */
 
+#line 196 "MB03VY.f"
 	i__2 = *ilo - 1;
+#line 196 "MB03VY.f"
 	dlaset_("Full", n, &i__2, &c_b5, &c_b6, &a[(j * a_dim2 + 1) * a_dim1 
 		+ 1], lda1, (ftnlen)4);
+#line 197 "MB03VY.f"
 	i__2 = *ilo - 1;
+#line 197 "MB03VY.f"
 	dlaset_("Full", &i__2, &nh, &c_b5, &c_b5, &a[(*ilo + j * a_dim2) * 
 		a_dim1 + 1], lda1, (ftnlen)4);
+#line 199 "MB03VY.f"
 	if (nh > 1) {
+#line 199 "MB03VY.f"
 	    i__2 = nh - 1;
+#line 199 "MB03VY.f"
 	    dorgqr_(&nh, &nh, &i__2, &a[*ilo + (*ilo + j * a_dim2) * a_dim1], 
 		    lda1, &tau[*ilo + j * tau_dim1], &dwork[1], ldwork, info);
+#line 199 "MB03VY.f"
 	}
+#line 202 "MB03VY.f"
 	if (*ihi < *n) {
+#line 203 "MB03VY.f"
 	    i__2 = *n - *ihi;
+#line 203 "MB03VY.f"
 	    dlaset_("Full", &i__2, &nh, &c_b5, &c_b5, &a[*ihi + 1 + (*ilo + j 
 		    * a_dim2) * a_dim1], lda1, (ftnlen)4);
+#line 205 "MB03VY.f"
 	    i__2 = *n - *ihi;
+#line 205 "MB03VY.f"
 	    dlaset_("Full", ihi, &i__2, &c_b5, &c_b5, &a[(*ihi + 1 + j * 
 		    a_dim2) * a_dim1 + 1], lda1, (ftnlen)4);
+#line 207 "MB03VY.f"
 	    i__2 = *n - *ihi;
+#line 207 "MB03VY.f"
 	    i__3 = *n - *ihi;
+#line 207 "MB03VY.f"
 	    dlaset_("Full", &i__2, &i__3, &c_b5, &c_b6, &a[*ihi + 1 + (*ihi + 
 		    1 + j * a_dim2) * a_dim1], lda1, (ftnlen)4);
+#line 209 "MB03VY.f"
 	}
+#line 210 "MB03VY.f"
 /* L20: */
+#line 210 "MB03VY.f"
     }
 
+#line 212 "MB03VY.f"
     dwork[1] = max(wrkopt,dwork[1]);
+#line 213 "MB03VY.f"
     return 0;
 
 /* *** Last line of MB03VY *** */

@@ -1,3 +1,4 @@
+#line 1 "MB01XY.f"
 /* MB01XY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01XY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -150,86 +152,139 @@ static doublereal c_b11 = 1.;
 
 /*     Test the input scalar arguments. */
 
+#line 128 "MB01XY.f"
     /* Parameter adjustments */
+#line 128 "MB01XY.f"
     a_dim1 = *lda;
+#line 128 "MB01XY.f"
     a_offset = 1 + a_dim1;
+#line 128 "MB01XY.f"
     a -= a_offset;
+#line 128 "MB01XY.f"
 
+#line 128 "MB01XY.f"
     /* Function Body */
+#line 128 "MB01XY.f"
     *info = 0;
+#line 129 "MB01XY.f"
     upper = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 130 "MB01XY.f"
     if (! upper && ! lsame_(uplo, "L", (ftnlen)1, (ftnlen)1)) {
+#line 131 "MB01XY.f"
 	*info = -1;
+#line 132 "MB01XY.f"
     } else if (*n < 0) {
+#line 133 "MB01XY.f"
 	*info = -2;
+#line 134 "MB01XY.f"
     } else if (*lda < max(1,*n)) {
+#line 135 "MB01XY.f"
 	*info = -4;
+#line 136 "MB01XY.f"
     }
 
+#line 138 "MB01XY.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 142 "MB01XY.f"
 	i__1 = -(*info);
+#line 142 "MB01XY.f"
 	xerbla_("MB01XY", &i__1, (ftnlen)6);
+#line 143 "MB01XY.f"
 	return 0;
+#line 144 "MB01XY.f"
     }
 
 /*     Quick return, if possible. */
 
+#line 148 "MB01XY.f"
     if (*n == 0) {
+#line 148 "MB01XY.f"
 	return 0;
+#line 148 "MB01XY.f"
     }
 
+#line 151 "MB01XY.f"
     if (upper) {
 
 /*        Compute the product U' * U. */
 
+#line 155 "MB01XY.f"
 	a[*n + *n * a_dim1] = ddot_(n, &a[*n * a_dim1 + 1], &c__1, &a[*n * 
 		a_dim1 + 1], &c__1);
 
+#line 157 "MB01XY.f"
 	for (i__ = *n - 1; i__ >= 2; --i__) {
+#line 158 "MB01XY.f"
 	    aii = a[i__ + i__ * a_dim1];
+#line 159 "MB01XY.f"
 	    a[i__ + i__ * a_dim1] = ddot_(&i__, &a[i__ * a_dim1 + 1], &c__1, &
 		    a[i__ * a_dim1 + 1], &c__1);
+#line 160 "MB01XY.f"
 	    i__1 = i__ - 1;
+#line 160 "MB01XY.f"
 	    i__2 = *n - i__;
+#line 160 "MB01XY.f"
 	    dgemv_("Transpose", &i__1, &i__2, &c_b11, &a[(i__ + 1) * a_dim1 + 
 		    1], lda, &a[i__ * a_dim1 + 1], &c__1, &aii, &a[i__ + (i__ 
 		    + 1) * a_dim1], lda, (ftnlen)9);
+#line 162 "MB01XY.f"
 /* L10: */
+#line 162 "MB01XY.f"
 	}
 
+#line 164 "MB01XY.f"
 	if (*n > 1) {
+#line 165 "MB01XY.f"
 	    aii = a[a_dim1 + 1];
+#line 166 "MB01XY.f"
 	    dscal_(n, &aii, &a[a_dim1 + 1], lda);
+#line 167 "MB01XY.f"
 	}
 
+#line 169 "MB01XY.f"
     } else {
 
 /*        Compute the product L * L'. */
 
+#line 173 "MB01XY.f"
 	a[*n + *n * a_dim1] = ddot_(n, &a[*n + a_dim1], lda, &a[*n + a_dim1], 
 		lda);
 
+#line 175 "MB01XY.f"
 	for (i__ = *n - 1; i__ >= 2; --i__) {
+#line 176 "MB01XY.f"
 	    aii = a[i__ + i__ * a_dim1];
+#line 177 "MB01XY.f"
 	    a[i__ + i__ * a_dim1] = ddot_(&i__, &a[i__ + a_dim1], lda, &a[i__ 
 		    + a_dim1], lda);
+#line 178 "MB01XY.f"
 	    i__1 = *n - i__;
+#line 178 "MB01XY.f"
 	    i__2 = i__ - 1;
+#line 178 "MB01XY.f"
 	    dgemv_("No Transpose", &i__1, &i__2, &c_b11, &a[i__ + 1 + a_dim1],
 		     lda, &a[i__ + a_dim1], lda, &aii, &a[i__ + 1 + i__ * 
 		    a_dim1], &c__1, (ftnlen)12);
+#line 180 "MB01XY.f"
 /* L20: */
+#line 180 "MB01XY.f"
 	}
 
+#line 182 "MB01XY.f"
 	if (*n > 1) {
+#line 183 "MB01XY.f"
 	    aii = a[a_dim1 + 1];
+#line 184 "MB01XY.f"
 	    dscal_(n, &aii, &a[a_dim1 + 1], &c__1);
+#line 185 "MB01XY.f"
 	}
+#line 186 "MB01XY.f"
     }
 
+#line 188 "MB01XY.f"
     return 0;
 
 /* *** Last line of MB01XY *** */

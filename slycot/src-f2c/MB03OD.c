@@ -1,3 +1,4 @@
+#line 1 "MB03OD.f"
 /* MB03OD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03OD.f"
 /* Table of constant values */
 
 static integer c__2 = 2;
@@ -225,65 +227,116 @@ static integer c__1 = 1;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 200 "MB03OD.f"
     /* Parameter adjustments */
+#line 200 "MB03OD.f"
     a_dim1 = *lda;
+#line 200 "MB03OD.f"
     a_offset = 1 + a_dim1;
+#line 200 "MB03OD.f"
     a -= a_offset;
+#line 200 "MB03OD.f"
     --jpvt;
+#line 200 "MB03OD.f"
     --tau;
+#line 200 "MB03OD.f"
     --sval;
+#line 200 "MB03OD.f"
     --dwork;
+#line 200 "MB03OD.f"
 
+#line 200 "MB03OD.f"
     /* Function Body */
+#line 200 "MB03OD.f"
     ljobqr = lsame_(jobqr, "Q", (ftnlen)1, (ftnlen)1);
+#line 201 "MB03OD.f"
     mn = min(*m,*n);
+#line 202 "MB03OD.f"
     ismin = 1;
+#line 203 "MB03OD.f"
     ismax = mn + 1;
+#line 204 "MB03OD.f"
     if (ljobqr) {
+#line 205 "MB03OD.f"
 	minwrk = *n * 3 + 1;
+#line 206 "MB03OD.f"
     } else {
 /* Computing MAX */
+#line 207 "MB03OD.f"
 	i__1 = 1, i__2 = mn << 1;
+#line 207 "MB03OD.f"
 	minwrk = max(i__1,i__2);
+#line 208 "MB03OD.f"
     }
+#line 209 "MB03OD.f"
     maxwrk = minwrk;
 
 /*     Test the input scalar arguments. */
 
+#line 213 "MB03OD.f"
     *info = 0;
+#line 214 "MB03OD.f"
     if (! ljobqr && ! lsame_(jobqr, "N", (ftnlen)1, (ftnlen)1)) {
+#line 215 "MB03OD.f"
 	*info = -1;
+#line 216 "MB03OD.f"
     } else if (*m < 0) {
+#line 217 "MB03OD.f"
 	*info = -2;
+#line 218 "MB03OD.f"
     } else if (*n < 0) {
+#line 219 "MB03OD.f"
 	*info = -3;
+#line 220 "MB03OD.f"
     } else if (*lda < max(1,*m)) {
+#line 221 "MB03OD.f"
 	*info = -5;
+#line 222 "MB03OD.f"
     } else if (*rcond < 0.) {
+#line 223 "MB03OD.f"
 	*info = -7;
+#line 224 "MB03OD.f"
     } else if (*svlmax < 0.) {
+#line 225 "MB03OD.f"
 	*info = -8;
+#line 226 "MB03OD.f"
     } else if (*ldwork < minwrk) {
+#line 227 "MB03OD.f"
 	*info = -13;
+#line 228 "MB03OD.f"
     }
 
+#line 230 "MB03OD.f"
     if (*info != 0) {
+#line 231 "MB03OD.f"
 	i__1 = -(*info);
+#line 231 "MB03OD.f"
 	xerbla_("MB03OD", &i__1, (ftnlen)6);
+#line 232 "MB03OD.f"
 	return 0;
+#line 233 "MB03OD.f"
     }
 
 /*     Quick return if possible */
 
+#line 237 "MB03OD.f"
     if (mn == 0) {
+#line 238 "MB03OD.f"
 	*rank = 0;
+#line 239 "MB03OD.f"
 	sval[1] = 0.;
+#line 240 "MB03OD.f"
 	sval[2] = 0.;
+#line 241 "MB03OD.f"
 	sval[3] = 0.;
+#line 242 "MB03OD.f"
 	dwork[1] = 1.;
+#line 243 "MB03OD.f"
 	return 0;
+#line 244 "MB03OD.f"
     }
 
+#line 246 "MB03OD.f"
     if (ljobqr) {
 
 /*        Compute QR factorization with column pivoting of A: */
@@ -292,63 +345,109 @@ static integer c__1 = 1;
 /*                  prefer 2*N + (N+1)*NB. */
 /*        Details of Householder rotations stored in TAU. */
 
+#line 254 "MB03OD.f"
 	dgeqp3_(m, n, &a[a_offset], lda, &jpvt[1], &tau[1], &dwork[1], ldwork,
 		 info);
 /* Computing MAX */
+#line 255 "MB03OD.f"
 	i__1 = maxwrk, i__2 = (integer) dwork[1];
+#line 255 "MB03OD.f"
 	maxwrk = max(i__1,i__2);
+#line 256 "MB03OD.f"
     }
 
 /*     Determine RANK using incremental condition estimation */
 
+#line 260 "MB03OD.f"
     dwork[ismin] = 1.;
+#line 261 "MB03OD.f"
     dwork[ismax] = 1.;
+#line 262 "MB03OD.f"
     smax = (d__1 = a[a_dim1 + 1], abs(d__1));
+#line 263 "MB03OD.f"
     smin = smax;
+#line 264 "MB03OD.f"
     if (smax == 0. || *svlmax * *rcond > smax) {
+#line 265 "MB03OD.f"
 	*rank = 0;
+#line 266 "MB03OD.f"
 	sval[1] = smax;
+#line 267 "MB03OD.f"
 	sval[2] = 0.;
+#line 268 "MB03OD.f"
 	sval[3] = 0.;
+#line 269 "MB03OD.f"
     } else {
+#line 270 "MB03OD.f"
 	*rank = 1;
+#line 271 "MB03OD.f"
 	sminpr = smin;
 
+#line 273 "MB03OD.f"
 L10:
+#line 274 "MB03OD.f"
 	if (*rank < mn) {
+#line 275 "MB03OD.f"
 	    i__ = *rank + 1;
+#line 276 "MB03OD.f"
 	    dlaic1_(&c__2, rank, &dwork[ismin], &smin, &a[i__ * a_dim1 + 1], &
 		    a[i__ + i__ * a_dim1], &sminpr, &s1, &c1);
+#line 278 "MB03OD.f"
 	    dlaic1_(&c__1, rank, &dwork[ismax], &smax, &a[i__ * a_dim1 + 1], &
 		    a[i__ + i__ * a_dim1], &smaxpr, &s2, &c2);
 
+#line 281 "MB03OD.f"
 	    if (*svlmax * *rcond <= smaxpr) {
+#line 282 "MB03OD.f"
 		if (*svlmax * *rcond <= sminpr) {
+#line 283 "MB03OD.f"
 		    if (smaxpr * *rcond <= sminpr) {
+#line 284 "MB03OD.f"
 			i__1 = *rank;
+#line 284 "MB03OD.f"
 			for (i__ = 1; i__ <= i__1; ++i__) {
+#line 285 "MB03OD.f"
 			    dwork[ismin + i__ - 1] = s1 * dwork[ismin + i__ - 
 				    1];
+#line 286 "MB03OD.f"
 			    dwork[ismax + i__ - 1] = s2 * dwork[ismax + i__ - 
 				    1];
+#line 287 "MB03OD.f"
 /* L20: */
+#line 287 "MB03OD.f"
 			}
+#line 288 "MB03OD.f"
 			dwork[ismin + *rank] = c1;
+#line 289 "MB03OD.f"
 			dwork[ismax + *rank] = c2;
+#line 290 "MB03OD.f"
 			smin = sminpr;
+#line 291 "MB03OD.f"
 			smax = smaxpr;
+#line 292 "MB03OD.f"
 			++(*rank);
+#line 293 "MB03OD.f"
 			goto L10;
+#line 294 "MB03OD.f"
 		    }
+#line 295 "MB03OD.f"
 		}
+#line 296 "MB03OD.f"
 	    }
+#line 297 "MB03OD.f"
 	}
+#line 298 "MB03OD.f"
 	sval[1] = smax;
+#line 299 "MB03OD.f"
 	sval[2] = smin;
+#line 300 "MB03OD.f"
 	sval[3] = sminpr;
+#line 301 "MB03OD.f"
     }
 
+#line 303 "MB03OD.f"
     dwork[1] = (doublereal) maxwrk;
+#line 304 "MB03OD.f"
     return 0;
 /* *** Last line of MB03OD *** */
 } /* mb03od_ */

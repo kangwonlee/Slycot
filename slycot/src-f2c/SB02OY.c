@@ -1,3 +1,4 @@
+#line 1 "SB02OY.f"
 /* SB02OY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB02OY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -397,531 +399,912 @@ static doublereal c_b46 = -1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 359 "SB02OY.f"
     /* Parameter adjustments */
+#line 359 "SB02OY.f"
     a_dim1 = *lda;
+#line 359 "SB02OY.f"
     a_offset = 1 + a_dim1;
+#line 359 "SB02OY.f"
     a -= a_offset;
+#line 359 "SB02OY.f"
     b_dim1 = *ldb;
+#line 359 "SB02OY.f"
     b_offset = 1 + b_dim1;
+#line 359 "SB02OY.f"
     b -= b_offset;
+#line 359 "SB02OY.f"
     q_dim1 = *ldq;
+#line 359 "SB02OY.f"
     q_offset = 1 + q_dim1;
+#line 359 "SB02OY.f"
     q -= q_offset;
+#line 359 "SB02OY.f"
     r_dim1 = *ldr;
+#line 359 "SB02OY.f"
     r_offset = 1 + r_dim1;
+#line 359 "SB02OY.f"
     r__ -= r_offset;
+#line 359 "SB02OY.f"
     l_dim1 = *ldl;
+#line 359 "SB02OY.f"
     l_offset = 1 + l_dim1;
+#line 359 "SB02OY.f"
     l -= l_offset;
+#line 359 "SB02OY.f"
     e_dim1 = *lde;
+#line 359 "SB02OY.f"
     e_offset = 1 + e_dim1;
+#line 359 "SB02OY.f"
     e -= e_offset;
+#line 359 "SB02OY.f"
     af_dim1 = *ldaf;
+#line 359 "SB02OY.f"
     af_offset = 1 + af_dim1;
+#line 359 "SB02OY.f"
     af -= af_offset;
+#line 359 "SB02OY.f"
     bf_dim1 = *ldbf;
+#line 359 "SB02OY.f"
     bf_offset = 1 + bf_dim1;
+#line 359 "SB02OY.f"
     bf -= bf_offset;
+#line 359 "SB02OY.f"
     --iwork;
+#line 359 "SB02OY.f"
     --dwork;
+#line 359 "SB02OY.f"
 
+#line 359 "SB02OY.f"
     /* Function Body */
+#line 359 "SB02OY.f"
     *info = 0;
+#line 360 "SB02OY.f"
     optc = lsame_(type__, "O", (ftnlen)1, (ftnlen)1);
+#line 361 "SB02OY.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 362 "SB02OY.f"
     ljobb = lsame_(jobb, "B", (ftnlen)1, (ftnlen)1);
+#line 363 "SB02OY.f"
     lfacn = lsame_(fact, "N", (ftnlen)1, (ftnlen)1);
+#line 364 "SB02OY.f"
     lfacq = lsame_(fact, "C", (ftnlen)1, (ftnlen)1);
+#line 365 "SB02OY.f"
     lfacr = lsame_(fact, "D", (ftnlen)1, (ftnlen)1);
+#line 366 "SB02OY.f"
     lfacb = lsame_(fact, "B", (ftnlen)1, (ftnlen)1);
+#line 367 "SB02OY.f"
     luplo = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 368 "SB02OY.f"
     ljobe = lsame_(jobe, "I", (ftnlen)1, (ftnlen)1);
+#line 369 "SB02OY.f"
     n2 = *n + *n;
+#line 370 "SB02OY.f"
     if (ljobb) {
+#line 371 "SB02OY.f"
 	ljobl = lsame_(jobl, "Z", (ftnlen)1, (ftnlen)1);
+#line 372 "SB02OY.f"
 	nm = *n + *m;
+#line 373 "SB02OY.f"
 	nnm = n2 + *m;
+#line 374 "SB02OY.f"
     } else {
+#line 375 "SB02OY.f"
 	nm = *n;
+#line 376 "SB02OY.f"
 	nnm = n2;
+#line 377 "SB02OY.f"
     }
+#line 378 "SB02OY.f"
     np1 = *n + 1;
+#line 379 "SB02OY.f"
     n2p1 = n2 + 1;
 
 /*     Test the input scalar arguments. */
 
+#line 383 "SB02OY.f"
     if (! optc && ! lsame_(type__, "S", (ftnlen)1, (ftnlen)1)) {
+#line 384 "SB02OY.f"
 	*info = -1;
+#line 385 "SB02OY.f"
     } else if (! discr && ! lsame_(dico, "C", (ftnlen)1, (ftnlen)1)) {
+#line 386 "SB02OY.f"
 	*info = -2;
+#line 387 "SB02OY.f"
     } else if (! ljobb && ! lsame_(jobb, "G", (ftnlen)1, (ftnlen)1)) {
+#line 388 "SB02OY.f"
 	*info = -3;
+#line 389 "SB02OY.f"
     } else if (! lfacq && ! lfacr && ! lfacb && ! lfacn) {
+#line 391 "SB02OY.f"
 	*info = -4;
+#line 392 "SB02OY.f"
     } else if (! ljobb || lfacn) {
+#line 393 "SB02OY.f"
 	if (! luplo && ! lsame_(uplo, "L", (ftnlen)1, (ftnlen)1)) {
+#line 393 "SB02OY.f"
 	    *info = -5;
+#line 393 "SB02OY.f"
 	}
+#line 395 "SB02OY.f"
     } else if (ljobb) {
+#line 396 "SB02OY.f"
 	if (! ljobl && ! lsame_(jobl, "N", (ftnlen)1, (ftnlen)1)) {
+#line 396 "SB02OY.f"
 	    *info = -6;
+#line 396 "SB02OY.f"
 	}
+#line 398 "SB02OY.f"
     } else if (! ljobe && ! lsame_(jobe, "N", (ftnlen)1, (ftnlen)1)) {
+#line 399 "SB02OY.f"
 	*info = -7;
+#line 400 "SB02OY.f"
     } else if (*n < 0) {
+#line 401 "SB02OY.f"
 	*info = -8;
+#line 402 "SB02OY.f"
     } else if (ljobb) {
+#line 403 "SB02OY.f"
 	if (*m < 0) {
+#line 403 "SB02OY.f"
 	    *info = -9;
+#line 403 "SB02OY.f"
 	}
+#line 405 "SB02OY.f"
     } else if (! lfacn || ! optc) {
+#line 406 "SB02OY.f"
 	if (*p < 0) {
+#line 407 "SB02OY.f"
 	    *info = -10;
+#line 408 "SB02OY.f"
 	} else if (ljobb) {
+#line 409 "SB02OY.f"
 	    if (! optc && *p != *m) {
+#line 409 "SB02OY.f"
 		*info = -10;
+#line 409 "SB02OY.f"
 	    }
+#line 411 "SB02OY.f"
 	}
+#line 412 "SB02OY.f"
     } else if (*lda < max(1,*n)) {
+#line 413 "SB02OY.f"
 	*info = -12;
+#line 414 "SB02OY.f"
     } else if (*ldb < max(1,*n)) {
+#line 415 "SB02OY.f"
 	*info = -14;
+#line 416 "SB02OY.f"
     } else if ((lfacn || lfacr) && *ldq < max(1,*n) || (lfacq || lfacb) && *
 	    ldq < max(1,*p)) {
+#line 418 "SB02OY.f"
 	*info = -16;
+#line 419 "SB02OY.f"
     } else if (*ldr < 1) {
+#line 420 "SB02OY.f"
 	*info = -18;
+#line 421 "SB02OY.f"
     } else if (ljobb) {
+#line 422 "SB02OY.f"
 	if ((lfacn || lfacq) && *ldr < *m || (lfacr || lfacb) && *ldr < *p) {
+#line 424 "SB02OY.f"
 	    *info = -18;
+#line 425 "SB02OY.f"
 	} else if (! ljobl && *ldl < max(1,*n) || ljobl && *ldl < 1) {
+#line 427 "SB02OY.f"
 	    *info = -20;
+#line 428 "SB02OY.f"
 	}
+#line 429 "SB02OY.f"
     }
+#line 430 "SB02OY.f"
     if (! ljobe && *lde < max(1,*n) || ljobe && *lde < 1) {
+#line 432 "SB02OY.f"
 	*info = -22;
+#line 433 "SB02OY.f"
     } else if (*ldaf < max(1,nnm)) {
+#line 434 "SB02OY.f"
 	*info = -24;
+#line 435 "SB02OY.f"
     } else if ((ljobb || discr || ! ljobe) && *ldbf < nnm || *ldbf < 1) {
+#line 437 "SB02OY.f"
 	*info = -26;
+#line 438 "SB02OY.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 438 "SB02OY.f"
 	i__1 = nnm, i__2 = *m * 3;
+#line 438 "SB02OY.f"
 	if (ljobb && *ldwork < max(i__1,i__2) || *ldwork < 1) {
+#line 440 "SB02OY.f"
 	    *info = -30;
+#line 441 "SB02OY.f"
 	}
+#line 441 "SB02OY.f"
     }
 
+#line 443 "SB02OY.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 447 "SB02OY.f"
 	i__1 = -(*info);
+#line 447 "SB02OY.f"
 	xerbla_("SB02OY", &i__1, (ftnlen)6);
+#line 448 "SB02OY.f"
 	return 0;
+#line 449 "SB02OY.f"
     }
 
 /*     Quick return if possible. */
 
+#line 453 "SB02OY.f"
     dwork[1] = 1.;
+#line 454 "SB02OY.f"
     if (*n == 0) {
+#line 454 "SB02OY.f"
 	return 0;
+#line 454 "SB02OY.f"
     }
 
 /*     Construct the extended matrices in AF and BF, by block-columns. */
 
+#line 459 "SB02OY.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &af[af_offset], ldaf, (ftnlen)4);
 
+#line 461 "SB02OY.f"
     if (! lfacq && ! lfacb) {
+#line 462 "SB02OY.f"
 	dlacpy_(uplo, n, n, &q[q_offset], ldq, &af[np1 + af_dim1], ldaf, (
 		ftnlen)1);
+#line 463 "SB02OY.f"
 	if (luplo) {
 
 /*           Construct the lower triangle of Q. */
 
+#line 467 "SB02OY.f"
 	    i__1 = *n - 1;
+#line 467 "SB02OY.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 468 "SB02OY.f"
 		i__2 = *n - j;
+#line 468 "SB02OY.f"
 		dcopy_(&i__2, &q[j + (j + 1) * q_dim1], ldq, &af[np1 + j + j *
 			 af_dim1], &c__1);
+#line 469 "SB02OY.f"
 /* L20: */
+#line 469 "SB02OY.f"
 	    }
 
+#line 471 "SB02OY.f"
 	} else {
 
 /*           Construct the upper triangle of Q. */
 
+#line 475 "SB02OY.f"
 	    i__1 = *n;
+#line 475 "SB02OY.f"
 	    for (j = 2; j <= i__1; ++j) {
+#line 476 "SB02OY.f"
 		i__2 = j - 1;
+#line 476 "SB02OY.f"
 		dcopy_(&i__2, &q[j + q_dim1], ldq, &af[np1 + j * af_dim1], &
 			c__1);
+#line 477 "SB02OY.f"
 /* L40: */
+#line 477 "SB02OY.f"
 	    }
 
+#line 479 "SB02OY.f"
 	}
+#line 480 "SB02OY.f"
     } else {
+#line 481 "SB02OY.f"
 	dsyrk_("Upper", "Transpose", n, p, &c_b26, &q[q_offset], ldq, &c_b27, 
 		&af[np1 + af_dim1], ldaf, (ftnlen)5, (ftnlen)9);
 
+#line 484 "SB02OY.f"
 	i__1 = *n;
+#line 484 "SB02OY.f"
 	for (j = 2; j <= i__1; ++j) {
+#line 485 "SB02OY.f"
 	    i__2 = j - 1;
+#line 485 "SB02OY.f"
 	    dcopy_(&i__2, &af[np1 + j * af_dim1], &c__1, &af[*n + j + af_dim1]
 		    , ldaf);
+#line 486 "SB02OY.f"
 /* L60: */
+#line 486 "SB02OY.f"
 	}
 
+#line 488 "SB02OY.f"
     }
 
+#line 490 "SB02OY.f"
     if (ljobb) {
+#line 491 "SB02OY.f"
 	if (ljobl) {
+#line 492 "SB02OY.f"
 	    dlaset_("Full", m, n, &c_b27, &c_b27, &af[n2p1 + af_dim1], ldaf, (
 		    ftnlen)4);
+#line 493 "SB02OY.f"
 	} else {
 
+#line 495 "SB02OY.f"
 	    i__1 = *n;
+#line 495 "SB02OY.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 496 "SB02OY.f"
 		dcopy_(m, &l[i__ + l_dim1], ldl, &af[n2p1 + i__ * af_dim1], &
 			c__1);
+#line 497 "SB02OY.f"
 /* L80: */
+#line 497 "SB02OY.f"
 	    }
 
+#line 499 "SB02OY.f"
 	}
+#line 500 "SB02OY.f"
     }
 
+#line 502 "SB02OY.f"
     if (discr || ljobb) {
+#line 503 "SB02OY.f"
 	dlaset_("Full", n, n, &c_b27, &c_b27, &af[np1 * af_dim1 + 1], ldaf, (
 		ftnlen)4);
+#line 504 "SB02OY.f"
     } else {
+#line 505 "SB02OY.f"
 	if (luplo) {
 
 /*           Construct (1,2) block of AF using the upper triangle of G. */
 
+#line 509 "SB02OY.f"
 	    i__1 = *n;
+#line 509 "SB02OY.f"
 	    for (j = 1; j <= i__1; ++j) {
 
+#line 511 "SB02OY.f"
 		i__2 = j;
+#line 511 "SB02OY.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 512 "SB02OY.f"
 		    af[i__ + (*n + j) * af_dim1] = -b[i__ + j * b_dim1];
+#line 513 "SB02OY.f"
 /* L100: */
+#line 513 "SB02OY.f"
 		}
 
+#line 515 "SB02OY.f"
 		i__2 = *n;
+#line 515 "SB02OY.f"
 		for (i__ = j + 1; i__ <= i__2; ++i__) {
+#line 516 "SB02OY.f"
 		    af[i__ + (*n + j) * af_dim1] = -b[j + i__ * b_dim1];
+#line 517 "SB02OY.f"
 /* L120: */
+#line 517 "SB02OY.f"
 		}
 
+#line 519 "SB02OY.f"
 /* L140: */
+#line 519 "SB02OY.f"
 	    }
 
+#line 521 "SB02OY.f"
 	} else {
 
 /*           Construct (1,2) block of AF using the lower triangle of G. */
 
+#line 525 "SB02OY.f"
 	    i__1 = *n;
+#line 525 "SB02OY.f"
 	    for (j = 1; j <= i__1; ++j) {
 
+#line 527 "SB02OY.f"
 		i__2 = j - 1;
+#line 527 "SB02OY.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 528 "SB02OY.f"
 		    af[i__ + (*n + j) * af_dim1] = -b[j + i__ * b_dim1];
+#line 529 "SB02OY.f"
 /* L160: */
+#line 529 "SB02OY.f"
 		}
 
+#line 531 "SB02OY.f"
 		i__2 = *n;
+#line 531 "SB02OY.f"
 		for (i__ = j; i__ <= i__2; ++i__) {
+#line 532 "SB02OY.f"
 		    af[i__ + (*n + j) * af_dim1] = -b[i__ + j * b_dim1];
+#line 533 "SB02OY.f"
 /* L180: */
+#line 533 "SB02OY.f"
 		}
 
+#line 535 "SB02OY.f"
 /* L200: */
+#line 535 "SB02OY.f"
 	    }
 
+#line 537 "SB02OY.f"
 	}
+#line 538 "SB02OY.f"
     }
 
+#line 540 "SB02OY.f"
     if (discr) {
+#line 541 "SB02OY.f"
 	if (ljobe) {
+#line 542 "SB02OY.f"
 	    dlaset_("Full", &nm, n, &c_b27, &c_b46, &af[np1 + np1 * af_dim1], 
 		    ldaf, (ftnlen)4);
+#line 543 "SB02OY.f"
 	} else {
 
+#line 545 "SB02OY.f"
 	    i__1 = *n;
+#line 545 "SB02OY.f"
 	    for (j = 1; j <= i__1; ++j) {
 
+#line 547 "SB02OY.f"
 		i__2 = *n;
+#line 547 "SB02OY.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 548 "SB02OY.f"
 		    af[*n + i__ + (*n + j) * af_dim1] = -e[j + i__ * e_dim1];
+#line 549 "SB02OY.f"
 /* L220: */
+#line 549 "SB02OY.f"
 		}
 
+#line 551 "SB02OY.f"
 /* L240: */
+#line 551 "SB02OY.f"
 	    }
 
+#line 553 "SB02OY.f"
 	    if (ljobb) {
+#line 553 "SB02OY.f"
 		dlaset_("Full", m, n, &c_b27, &c_b27, &af[n2p1 + np1 * 
 			af_dim1], ldaf, (ftnlen)4);
+#line 553 "SB02OY.f"
 	    }
+#line 556 "SB02OY.f"
 	}
+#line 557 "SB02OY.f"
     } else {
 
+#line 559 "SB02OY.f"
 	i__1 = *n;
+#line 559 "SB02OY.f"
 	for (j = 1; j <= i__1; ++j) {
 
+#line 561 "SB02OY.f"
 	    i__2 = *n;
+#line 561 "SB02OY.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 562 "SB02OY.f"
 		af[*n + i__ + (*n + j) * af_dim1] = a[j + i__ * a_dim1];
+#line 563 "SB02OY.f"
 /* L260: */
+#line 563 "SB02OY.f"
 	    }
 
+#line 565 "SB02OY.f"
 /* L280: */
+#line 565 "SB02OY.f"
 	}
 
+#line 567 "SB02OY.f"
 	if (ljobb) {
+#line 568 "SB02OY.f"
 	    if (optc) {
 
+#line 570 "SB02OY.f"
 		i__1 = *n;
+#line 570 "SB02OY.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 571 "SB02OY.f"
 		    dcopy_(m, &b[j + b_dim1], ldb, &af[n2p1 + (*n + j) * 
 			    af_dim1], &c__1);
+#line 572 "SB02OY.f"
 /* L300: */
+#line 572 "SB02OY.f"
 		}
 
+#line 574 "SB02OY.f"
 	    } else {
+#line 575 "SB02OY.f"
 		dlacpy_("Full", p, n, &q[q_offset], ldq, &af[n2p1 + np1 * 
 			af_dim1], ldaf, (ftnlen)4);
+#line 576 "SB02OY.f"
 	    }
+#line 577 "SB02OY.f"
 	}
+#line 578 "SB02OY.f"
     }
 
+#line 580 "SB02OY.f"
     if (ljobb) {
 
+#line 582 "SB02OY.f"
 	if (optc) {
+#line 583 "SB02OY.f"
 	    dlacpy_("Full", n, m, &b[b_offset], ldb, &af[n2p1 * af_dim1 + 1], 
 		    ldaf, (ftnlen)4);
+#line 584 "SB02OY.f"
 	} else {
 
+#line 586 "SB02OY.f"
 	    i__1 = *p;
+#line 586 "SB02OY.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 587 "SB02OY.f"
 		dcopy_(n, &q[i__ + q_dim1], ldq, &af[(n2 + i__) * af_dim1 + 1]
 			, &c__1);
+#line 588 "SB02OY.f"
 /* L320: */
+#line 588 "SB02OY.f"
 	    }
 
+#line 590 "SB02OY.f"
 	}
 
+#line 592 "SB02OY.f"
 	if (ljobl) {
+#line 593 "SB02OY.f"
 	    dlaset_("Full", n, m, &c_b27, &c_b27, &af[np1 + n2p1 * af_dim1], 
 		    ldaf, (ftnlen)4);
+#line 594 "SB02OY.f"
 	} else {
+#line 595 "SB02OY.f"
 	    dlacpy_("Full", n, m, &l[l_offset], ldl, &af[np1 + n2p1 * af_dim1]
 		    , ldaf, (ftnlen)4);
+#line 596 "SB02OY.f"
 	}
 
+#line 598 "SB02OY.f"
 	if (! lfacr && ! lfacb) {
+#line 599 "SB02OY.f"
 	    dlacpy_(uplo, m, m, &r__[r_offset], ldr, &af[n2p1 + n2p1 * 
 		    af_dim1], ldaf, (ftnlen)1);
+#line 600 "SB02OY.f"
 	    if (luplo) {
 
 /*              Construct the lower triangle of R. */
 
+#line 604 "SB02OY.f"
 		i__1 = *m - 1;
+#line 604 "SB02OY.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 605 "SB02OY.f"
 		    i__2 = *m - j;
+#line 605 "SB02OY.f"
 		    dcopy_(&i__2, &r__[j + (j + 1) * r_dim1], ldr, &af[n2p1 + 
 			    j + (n2 + j) * af_dim1], &c__1);
+#line 606 "SB02OY.f"
 /* L340: */
+#line 606 "SB02OY.f"
 		}
 
+#line 608 "SB02OY.f"
 	    } else {
 
 /*              Construct the upper triangle of R. */
 
+#line 612 "SB02OY.f"
 		i__1 = *m;
+#line 612 "SB02OY.f"
 		for (j = 2; j <= i__1; ++j) {
+#line 613 "SB02OY.f"
 		    i__2 = j - 1;
+#line 613 "SB02OY.f"
 		    dcopy_(&i__2, &r__[j + r_dim1], ldr, &af[n2p1 + (n2 + j) *
 			     af_dim1], &c__1);
+#line 614 "SB02OY.f"
 /* L360: */
+#line 614 "SB02OY.f"
 		}
 
+#line 616 "SB02OY.f"
 	    }
+#line 617 "SB02OY.f"
 	} else if (optc) {
+#line 618 "SB02OY.f"
 	    dsyrk_("Upper", "Transpose", m, p, &c_b26, &r__[r_offset], ldr, &
 		    c_b27, &af[n2p1 + n2p1 * af_dim1], ldaf, (ftnlen)5, (
 		    ftnlen)9);
 
+#line 621 "SB02OY.f"
 	    i__1 = *m;
+#line 621 "SB02OY.f"
 	    for (j = 2; j <= i__1; ++j) {
+#line 622 "SB02OY.f"
 		i__2 = j - 1;
+#line 622 "SB02OY.f"
 		dcopy_(&i__2, &af[n2p1 + (n2 + j) * af_dim1], &c__1, &af[n2 + 
 			j + n2p1 * af_dim1], ldaf);
+#line 623 "SB02OY.f"
 /* L380: */
+#line 623 "SB02OY.f"
 	    }
 
+#line 625 "SB02OY.f"
 	} else {
 
+#line 627 "SB02OY.f"
 	    i__1 = *m;
+#line 627 "SB02OY.f"
 	    for (j = 1; j <= i__1; ++j) {
 
+#line 629 "SB02OY.f"
 		i__2 = *p;
+#line 629 "SB02OY.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 630 "SB02OY.f"
 		    af[n2 + i__ + (n2 + j) * af_dim1] = r__[i__ + j * r_dim1] 
 			    + r__[j + i__ * r_dim1];
+#line 631 "SB02OY.f"
 /* L400: */
+#line 631 "SB02OY.f"
 		}
 
+#line 633 "SB02OY.f"
 /* L420: */
+#line 633 "SB02OY.f"
 	    }
 
+#line 635 "SB02OY.f"
 	}
+#line 636 "SB02OY.f"
     }
 
+#line 638 "SB02OY.f"
     if (! ljobb && ! discr && ljobe) {
+#line 638 "SB02OY.f"
 	return 0;
+#line 638 "SB02OY.f"
     }
 
 /*     Construct the first two block columns of BF. */
 
+#line 643 "SB02OY.f"
     if (ljobe) {
+#line 644 "SB02OY.f"
 	i__1 = *n + nm;
+#line 644 "SB02OY.f"
 	dlaset_("Full", &i__1, n, &c_b27, &c_b26, &bf[bf_offset], ldbf, (
 		ftnlen)4);
+#line 645 "SB02OY.f"
     } else {
+#line 646 "SB02OY.f"
 	dlacpy_("Full", n, n, &e[e_offset], lde, &bf[bf_offset], ldbf, (
 		ftnlen)4);
+#line 647 "SB02OY.f"
 	dlaset_("Full", &nm, n, &c_b27, &c_b27, &bf[np1 + bf_dim1], ldbf, (
 		ftnlen)4);
+#line 648 "SB02OY.f"
     }
 
+#line 650 "SB02OY.f"
     if (! discr || ljobb) {
+#line 651 "SB02OY.f"
 	dlaset_("Full", n, n, &c_b27, &c_b27, &bf[np1 * bf_dim1 + 1], ldbf, (
 		ftnlen)4);
+#line 652 "SB02OY.f"
     } else {
+#line 653 "SB02OY.f"
 	if (luplo) {
 
 /*           Construct (1,2) block of BF using the upper triangle of G. */
 
+#line 657 "SB02OY.f"
 	    i__1 = *n;
+#line 657 "SB02OY.f"
 	    for (j = 1; j <= i__1; ++j) {
 
+#line 659 "SB02OY.f"
 		i__2 = j;
+#line 659 "SB02OY.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 660 "SB02OY.f"
 		    bf[i__ + (*n + j) * bf_dim1] = b[i__ + j * b_dim1];
+#line 661 "SB02OY.f"
 /* L440: */
+#line 661 "SB02OY.f"
 		}
 
+#line 663 "SB02OY.f"
 		i__2 = *n;
+#line 663 "SB02OY.f"
 		for (i__ = j + 1; i__ <= i__2; ++i__) {
+#line 664 "SB02OY.f"
 		    bf[i__ + (*n + j) * bf_dim1] = b[j + i__ * b_dim1];
+#line 665 "SB02OY.f"
 /* L460: */
+#line 665 "SB02OY.f"
 		}
 
+#line 667 "SB02OY.f"
 /* L480: */
+#line 667 "SB02OY.f"
 	    }
 
+#line 669 "SB02OY.f"
 	} else {
 
 /*           Construct (1,2) block of BF using the lower triangle of G. */
 
+#line 673 "SB02OY.f"
 	    i__1 = *n;
+#line 673 "SB02OY.f"
 	    for (j = 1; j <= i__1; ++j) {
 
+#line 675 "SB02OY.f"
 		i__2 = j - 1;
+#line 675 "SB02OY.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 676 "SB02OY.f"
 		    bf[i__ + (*n + j) * bf_dim1] = b[j + i__ * b_dim1];
+#line 677 "SB02OY.f"
 /* L500: */
+#line 677 "SB02OY.f"
 		}
 
+#line 679 "SB02OY.f"
 		i__2 = *n;
+#line 679 "SB02OY.f"
 		for (i__ = j; i__ <= i__2; ++i__) {
+#line 680 "SB02OY.f"
 		    bf[i__ + (*n + j) * bf_dim1] = b[i__ + j * b_dim1];
+#line 681 "SB02OY.f"
 /* L520: */
+#line 681 "SB02OY.f"
 		}
 
+#line 683 "SB02OY.f"
 /* L540: */
+#line 683 "SB02OY.f"
 	    }
 
+#line 685 "SB02OY.f"
 	}
+#line 686 "SB02OY.f"
     }
 
+#line 688 "SB02OY.f"
     if (discr) {
 
+#line 690 "SB02OY.f"
 	i__1 = *n;
+#line 690 "SB02OY.f"
 	for (j = 1; j <= i__1; ++j) {
 
+#line 692 "SB02OY.f"
 	    i__2 = *n;
+#line 692 "SB02OY.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 693 "SB02OY.f"
 		bf[*n + i__ + (*n + j) * bf_dim1] = -a[j + i__ * a_dim1];
+#line 694 "SB02OY.f"
 /* L560: */
+#line 694 "SB02OY.f"
 	    }
 
+#line 696 "SB02OY.f"
 /* L580: */
+#line 696 "SB02OY.f"
 	}
 
+#line 698 "SB02OY.f"
 	if (ljobb) {
 
+#line 700 "SB02OY.f"
 	    if (optc) {
 
+#line 702 "SB02OY.f"
 		i__1 = *n;
+#line 702 "SB02OY.f"
 		for (j = 1; j <= i__1; ++j) {
 
+#line 704 "SB02OY.f"
 		    i__2 = *m;
+#line 704 "SB02OY.f"
 		    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 705 "SB02OY.f"
 			bf[n2 + i__ + (*n + j) * bf_dim1] = -b[j + i__ * 
 				b_dim1];
+#line 706 "SB02OY.f"
 /* L600: */
+#line 706 "SB02OY.f"
 		    }
 
+#line 708 "SB02OY.f"
 /* L620: */
+#line 708 "SB02OY.f"
 		}
 
+#line 710 "SB02OY.f"
 	    } else {
 
+#line 712 "SB02OY.f"
 		i__1 = *n;
+#line 712 "SB02OY.f"
 		for (j = 1; j <= i__1; ++j) {
 
+#line 714 "SB02OY.f"
 		    i__2 = *p;
+#line 714 "SB02OY.f"
 		    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 715 "SB02OY.f"
 			bf[n2 + i__ + (*n + j) * bf_dim1] = -q[i__ + j * 
 				q_dim1];
+#line 716 "SB02OY.f"
 /* L640: */
+#line 716 "SB02OY.f"
 		    }
 
+#line 718 "SB02OY.f"
 /* L660: */
+#line 718 "SB02OY.f"
 		}
 
+#line 720 "SB02OY.f"
 	    }
+#line 721 "SB02OY.f"
 	}
 
+#line 723 "SB02OY.f"
     } else {
+#line 724 "SB02OY.f"
 	if (ljobe) {
+#line 725 "SB02OY.f"
 	    dlaset_("Full", &nm, n, &c_b27, &c_b46, &bf[np1 + np1 * bf_dim1], 
 		    ldbf, (ftnlen)4);
+#line 726 "SB02OY.f"
 	} else {
 
+#line 728 "SB02OY.f"
 	    i__1 = *n;
+#line 728 "SB02OY.f"
 	    for (j = 1; j <= i__1; ++j) {
 
+#line 730 "SB02OY.f"
 		i__2 = *n;
+#line 730 "SB02OY.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 731 "SB02OY.f"
 		    bf[*n + i__ + (*n + j) * bf_dim1] = -e[j + i__ * e_dim1];
+#line 732 "SB02OY.f"
 /* L680: */
+#line 732 "SB02OY.f"
 		}
 
+#line 734 "SB02OY.f"
 /* L700: */
+#line 734 "SB02OY.f"
 	    }
 
+#line 736 "SB02OY.f"
 	    if (ljobb) {
+#line 736 "SB02OY.f"
 		dlaset_("Full", m, n, &c_b27, &c_b27, &bf[n2p1 + np1 * 
 			bf_dim1], ldbf, (ftnlen)4);
+#line 736 "SB02OY.f"
 	    }
+#line 739 "SB02OY.f"
 	}
+#line 740 "SB02OY.f"
     }
 
+#line 742 "SB02OY.f"
     if (! ljobb) {
+#line 742 "SB02OY.f"
 	return 0;
+#line 742 "SB02OY.f"
     }
 
 /*     Compress the pencil lambda x BF - AF, using QL factorization. */
@@ -933,24 +1316,35 @@ static doublereal c_b46 = -1.;
 
 /*     Workspace: need 2*M;  prefer M + M*NB. */
 
+#line 754 "SB02OY.f"
     itau = 1;
+#line 755 "SB02OY.f"
     jwork = itau + *m;
+#line 756 "SB02OY.f"
     i__1 = *ldwork - jwork + 1;
+#line 756 "SB02OY.f"
     dgeqlf_(&nnm, m, &af[n2p1 * af_dim1 + 1], ldaf, &dwork[itau], &dwork[
 	    jwork], &i__1, info);
+#line 758 "SB02OY.f"
     wrkopt = (integer) dwork[jwork];
 
 /*     Workspace: need 2*N+M;  prefer M + 2*N*NB. */
 
+#line 762 "SB02OY.f"
     i__1 = *ldwork - jwork + 1;
+#line 762 "SB02OY.f"
     dormql_("Left", "Transpose", &nnm, &n2, m, &af[n2p1 * af_dim1 + 1], ldaf, 
 	    &dwork[itau], &af[af_offset], ldaf, &dwork[jwork], &i__1, info, (
 	    ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 765 "SB02OY.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 765 "SB02OY.f"
     wrkopt = max(i__1,i__2);
 
+#line 767 "SB02OY.f"
     i__1 = *ldwork - jwork + 1;
+#line 767 "SB02OY.f"
     dormql_("Left", "Transpose", &nnm, &n2, m, &af[n2p1 * af_dim1 + 1], ldaf, 
 	    &dwork[itau], &bf[bf_offset], ldbf, &dwork[jwork], &i__1, info, (
 	    ftnlen)4, (ftnlen)9);
@@ -959,25 +1353,38 @@ static doublereal c_b46 = -1.;
 /*     if singular, then the extended matrix pencil is also singular. */
 /*     Workspace 3*M. */
 
+#line 775 "SB02OY.f"
     toldef = *tol;
+#line 776 "SB02OY.f"
     if (toldef <= 0.) {
+#line 776 "SB02OY.f"
 	toldef = dlamch_("Epsilon", (ftnlen)7);
+#line 776 "SB02OY.f"
     }
 
+#line 779 "SB02OY.f"
     dtrcon_("1-norm", "Lower", "Non unit", m, &af[n2p1 + n2p1 * af_dim1], 
 	    ldaf, &rcond, &dwork[1], &iwork[1], info, (ftnlen)6, (ftnlen)5, (
 	    ftnlen)8);
 /* Computing MAX */
+#line 781 "SB02OY.f"
     i__1 = wrkopt, i__2 = *m * 3;
+#line 781 "SB02OY.f"
     wrkopt = max(i__1,i__2);
 
+#line 783 "SB02OY.f"
     if (rcond <= toldef) {
+#line 783 "SB02OY.f"
 	*info = 1;
+#line 783 "SB02OY.f"
     }
 
+#line 786 "SB02OY.f"
     dwork[1] = (doublereal) wrkopt;
+#line 787 "SB02OY.f"
     dwork[2] = rcond;
 
+#line 789 "SB02OY.f"
     return 0;
 /* *** Last line of SB02OY *** */
 } /* sb02oy_ */

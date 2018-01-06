@@ -1,3 +1,4 @@
+#line 1 "MB3PYZ.f"
 /* MB3PYZ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB3PYZ.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -255,86 +257,148 @@ static integer c__2 = 2;
 
 /*     Test the input scalar arguments. */
 
+#line 225 "MB3PYZ.f"
     /* Parameter adjustments */
+#line 225 "MB3PYZ.f"
     a_dim1 = *lda;
+#line 225 "MB3PYZ.f"
     a_offset = 1 + a_dim1;
+#line 225 "MB3PYZ.f"
     a -= a_offset;
+#line 225 "MB3PYZ.f"
     --sval;
+#line 225 "MB3PYZ.f"
     --jpvt;
+#line 225 "MB3PYZ.f"
     --tau;
+#line 225 "MB3PYZ.f"
     --dwork;
+#line 225 "MB3PYZ.f"
     --zwork;
+#line 225 "MB3PYZ.f"
 
+#line 225 "MB3PYZ.f"
     /* Function Body */
+#line 225 "MB3PYZ.f"
     *info = 0;
+#line 226 "MB3PYZ.f"
     if (*m < 0) {
+#line 227 "MB3PYZ.f"
 	*info = -1;
+#line 228 "MB3PYZ.f"
     } else if (*n < 0) {
+#line 229 "MB3PYZ.f"
 	*info = -2;
+#line 230 "MB3PYZ.f"
     } else if (*lda < max(1,*m)) {
+#line 231 "MB3PYZ.f"
 	*info = -4;
+#line 232 "MB3PYZ.f"
     } else if (*rcond < 0. || *rcond > 1.) {
+#line 233 "MB3PYZ.f"
 	*info = -5;
+#line 234 "MB3PYZ.f"
     } else if (*svlmax < 0.) {
+#line 235 "MB3PYZ.f"
 	*info = -6;
+#line 236 "MB3PYZ.f"
     }
 
+#line 238 "MB3PYZ.f"
     if (*info != 0) {
+#line 239 "MB3PYZ.f"
 	i__1 = -(*info);
+#line 239 "MB3PYZ.f"
 	xerbla_("MB3PYZ", &i__1, (ftnlen)6);
+#line 240 "MB3PYZ.f"
 	return 0;
+#line 241 "MB3PYZ.f"
     }
 
 /*     Quick return if possible. */
 
+#line 245 "MB3PYZ.f"
     k = min(*m,*n);
+#line 246 "MB3PYZ.f"
     if (k == 0) {
+#line 247 "MB3PYZ.f"
 	*rank = 0;
+#line 248 "MB3PYZ.f"
 	sval[1] = 0.;
+#line 249 "MB3PYZ.f"
 	sval[2] = 0.;
+#line 250 "MB3PYZ.f"
 	sval[3] = 0.;
+#line 251 "MB3PYZ.f"
 	return 0;
+#line 252 "MB3PYZ.f"
     }
 
+#line 254 "MB3PYZ.f"
     ismin = 1;
+#line 255 "MB3PYZ.f"
     ismax = ismin + *m;
+#line 256 "MB3PYZ.f"
     jwork = ismax + *m;
 
 /*     Initialize partial row norms and pivoting vector. The first m */
 /*     elements of DWORK store the exact row norms. */
 
+#line 261 "MB3PYZ.f"
     i__1 = *m;
+#line 261 "MB3PYZ.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 262 "MB3PYZ.f"
 	dwork[i__] = dznrm2_(n, &a[i__ + a_dim1], lda);
+#line 263 "MB3PYZ.f"
 	dwork[*m + i__] = dwork[i__];
+#line 264 "MB3PYZ.f"
 	jpvt[i__] = i__;
+#line 265 "MB3PYZ.f"
 /* L10: */
+#line 265 "MB3PYZ.f"
     }
 
 /*     Compute factorization and determine RANK using incremental */
 /*     condition estimation. */
 
+#line 270 "MB3PYZ.f"
     *rank = 0;
 
+#line 272 "MB3PYZ.f"
 L20:
+#line 273 "MB3PYZ.f"
     if (*rank < k) {
+#line 274 "MB3PYZ.f"
 	i__ = k - *rank;
 
 /*        Determine ith pivot row and swap if necessary. */
 
+#line 278 "MB3PYZ.f"
 	mki = *m - *rank;
+#line 279 "MB3PYZ.f"
 	nki = *n - *rank;
+#line 280 "MB3PYZ.f"
 	pvt = idamax_(&mki, &dwork[1], &c__1);
 
+#line 282 "MB3PYZ.f"
 	if (pvt != mki) {
+#line 283 "MB3PYZ.f"
 	    zswap_(n, &a[pvt + a_dim1], lda, &a[mki + a_dim1], lda);
+#line 284 "MB3PYZ.f"
 	    itemp = jpvt[pvt];
+#line 285 "MB3PYZ.f"
 	    jpvt[pvt] = jpvt[mki];
+#line 286 "MB3PYZ.f"
 	    jpvt[mki] = itemp;
+#line 287 "MB3PYZ.f"
 	    dwork[pvt] = dwork[mki];
+#line 288 "MB3PYZ.f"
 	    dwork[*m + pvt] = dwork[*m + mki];
+#line 289 "MB3PYZ.f"
 	}
 
+#line 291 "MB3PYZ.f"
 	if (nki > 1) {
 
 /*           Save A(m-k+i,n-k+i) and generate elementary reflector H(i) */
@@ -343,138 +407,234 @@ L20:
 /*               H(conj(tau),v) A(m-k+i,1:n-k+i)^H  = [0 ; *], */
 /*           using H(tau,v)^H = H(conj(tau),v). */
 
+#line 299 "MB3PYZ.f"
 	    zlacgv_(&nki, &a[mki + a_dim1], lda);
+#line 300 "MB3PYZ.f"
 	    i__1 = mki + nki * a_dim1;
+#line 300 "MB3PYZ.f"
 	    aii.r = a[i__1].r, aii.i = a[i__1].i;
+#line 301 "MB3PYZ.f"
 	    zlarfg_(&nki, &a[mki + nki * a_dim1], &a[mki + a_dim1], lda, &tau[
 		    i__]);
+#line 303 "MB3PYZ.f"
 	}
 
+#line 305 "MB3PYZ.f"
 	if (*rank == 0) {
 
 /*           Initialize; exit if matrix is zero (RANK = 0). */
 
+#line 309 "MB3PYZ.f"
 	    smax = z_abs(&a[*m + *n * a_dim1]);
+#line 310 "MB3PYZ.f"
 	    if (smax == 0.) {
+#line 311 "MB3PYZ.f"
 		sval[1] = 0.;
+#line 312 "MB3PYZ.f"
 		sval[2] = 0.;
+#line 313 "MB3PYZ.f"
 		sval[3] = 0.;
+#line 314 "MB3PYZ.f"
 		return 0;
+#line 315 "MB3PYZ.f"
 	    }
+#line 316 "MB3PYZ.f"
 	    smin = smax;
+#line 317 "MB3PYZ.f"
 	    smaxpr = smax;
+#line 318 "MB3PYZ.f"
 	    sminpr = smin;
+#line 319 "MB3PYZ.f"
 	    c1.r = 1., c1.i = 0.;
+#line 320 "MB3PYZ.f"
 	    c2.r = 1., c2.i = 0.;
+#line 321 "MB3PYZ.f"
 	} else {
 
 /*           One step of incremental condition estimation. */
 
+#line 325 "MB3PYZ.f"
 	    zcopy_(rank, &a[mki + (nki + 1) * a_dim1], lda, &zwork[jwork], &
 		    c__1);
+#line 326 "MB3PYZ.f"
 	    zlaic1_(&c__2, rank, &zwork[ismin], &smin, &zwork[jwork], &a[mki 
 		    + nki * a_dim1], &sminpr, &s1, &c1);
+#line 328 "MB3PYZ.f"
 	    zlaic1_(&c__1, rank, &zwork[ismax], &smax, &zwork[jwork], &a[mki 
 		    + nki * a_dim1], &smaxpr, &s2, &c2);
+#line 330 "MB3PYZ.f"
 	}
 
+#line 332 "MB3PYZ.f"
 	if (*svlmax * *rcond <= smaxpr) {
+#line 333 "MB3PYZ.f"
 	    if (*svlmax * *rcond <= sminpr) {
+#line 334 "MB3PYZ.f"
 		if (smaxpr * *rcond <= sminpr) {
 
+#line 336 "MB3PYZ.f"
 		    if (mki > 1) {
 
 /*                    Continue factorization, as rank is at least RANK. */
 /*                    Apply H(i) to A(1:m-k+i-1,1:n-k+i) from the right. */
 
+#line 341 "MB3PYZ.f"
 			i__1 = mki + nki * a_dim1;
+#line 341 "MB3PYZ.f"
 			aii.r = a[i__1].r, aii.i = a[i__1].i;
+#line 342 "MB3PYZ.f"
 			i__1 = mki + nki * a_dim1;
+#line 342 "MB3PYZ.f"
 			a[i__1].r = 1., a[i__1].i = 0.;
+#line 343 "MB3PYZ.f"
 			i__1 = mki - 1;
+#line 343 "MB3PYZ.f"
 			zlarf_("Right", &i__1, &nki, &a[mki + a_dim1], lda, &
 				tau[i__], &a[a_offset], lda, &zwork[jwork], (
 				ftnlen)5);
+#line 345 "MB3PYZ.f"
 			i__1 = mki + nki * a_dim1;
+#line 345 "MB3PYZ.f"
 			a[i__1].r = aii.r, a[i__1].i = aii.i;
 
 /*                    Update partial row norms. */
 
+#line 349 "MB3PYZ.f"
 			i__1 = mki - 1;
+#line 349 "MB3PYZ.f"
 			for (j = 1; j <= i__1; ++j) {
+#line 350 "MB3PYZ.f"
 			    if (dwork[j] != 0.) {
 /* Computing 2nd power */
+#line 351 "MB3PYZ.f"
 				d__1 = z_abs(&a[j + nki * a_dim1]) / dwork[j];
+#line 351 "MB3PYZ.f"
 				temp = 1. - d__1 * d__1;
+#line 353 "MB3PYZ.f"
 				temp = max(temp,0.);
 /* Computing 2nd power */
+#line 354 "MB3PYZ.f"
 				d__1 = dwork[j] / dwork[*m + j];
+#line 354 "MB3PYZ.f"
 				temp2 = temp * .05 * (d__1 * d__1) + 1.;
+#line 356 "MB3PYZ.f"
 				if (temp2 == 1.) {
+#line 357 "MB3PYZ.f"
 				    i__2 = nki - 1;
+#line 357 "MB3PYZ.f"
 				    dwork[j] = dznrm2_(&i__2, &a[j + a_dim1], 
 					    lda);
+#line 359 "MB3PYZ.f"
 				    dwork[*m + j] = dwork[j];
+#line 360 "MB3PYZ.f"
 				} else {
+#line 361 "MB3PYZ.f"
 				    dwork[j] *= sqrt(temp);
+#line 362 "MB3PYZ.f"
 				}
+#line 363 "MB3PYZ.f"
 			    }
+#line 364 "MB3PYZ.f"
 /* L30: */
+#line 364 "MB3PYZ.f"
 			}
 
+#line 366 "MB3PYZ.f"
 		    }
 
+#line 368 "MB3PYZ.f"
 		    i__1 = *rank;
+#line 368 "MB3PYZ.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 369 "MB3PYZ.f"
 			i__2 = ismin + i__ - 1;
+#line 369 "MB3PYZ.f"
 			i__3 = ismin + i__ - 1;
+#line 369 "MB3PYZ.f"
 			z__1.r = s1.r * zwork[i__3].r - s1.i * zwork[i__3].i, 
 				z__1.i = s1.r * zwork[i__3].i + s1.i * zwork[
 				i__3].r;
+#line 369 "MB3PYZ.f"
 			zwork[i__2].r = z__1.r, zwork[i__2].i = z__1.i;
+#line 370 "MB3PYZ.f"
 			i__2 = ismax + i__ - 1;
+#line 370 "MB3PYZ.f"
 			i__3 = ismax + i__ - 1;
+#line 370 "MB3PYZ.f"
 			z__1.r = s2.r * zwork[i__3].r - s2.i * zwork[i__3].i, 
 				z__1.i = s2.r * zwork[i__3].i + s2.i * zwork[
 				i__3].r;
+#line 370 "MB3PYZ.f"
 			zwork[i__2].r = z__1.r, zwork[i__2].i = z__1.i;
+#line 371 "MB3PYZ.f"
 /* L40: */
+#line 371 "MB3PYZ.f"
 		    }
 
+#line 373 "MB3PYZ.f"
 		    i__1 = ismin + *rank;
+#line 373 "MB3PYZ.f"
 		    zwork[i__1].r = c1.r, zwork[i__1].i = c1.i;
+#line 374 "MB3PYZ.f"
 		    i__1 = ismax + *rank;
+#line 374 "MB3PYZ.f"
 		    zwork[i__1].r = c2.r, zwork[i__1].i = c2.i;
+#line 375 "MB3PYZ.f"
 		    smin = sminpr;
+#line 376 "MB3PYZ.f"
 		    smax = smaxpr;
+#line 377 "MB3PYZ.f"
 		    ++(*rank);
+#line 378 "MB3PYZ.f"
 		    i__1 = nki - 1;
+#line 378 "MB3PYZ.f"
 		    zlacgv_(&i__1, &a[mki + a_dim1], lda);
+#line 379 "MB3PYZ.f"
 		    goto L20;
+#line 380 "MB3PYZ.f"
 		}
+#line 381 "MB3PYZ.f"
 	    }
+#line 382 "MB3PYZ.f"
 	}
+#line 383 "MB3PYZ.f"
     }
 
 /*     Restore the changed part of the (M-RANK)-th row and set SVAL. */
 
+#line 387 "MB3PYZ.f"
     if (*rank < k && nki > 1) {
+#line 388 "MB3PYZ.f"
 	i__1 = nki - 1;
+#line 388 "MB3PYZ.f"
 	zlacgv_(&i__1, &a[mki + a_dim1], lda);
+#line 389 "MB3PYZ.f"
 	i__1 = nki - 1;
+#line 389 "MB3PYZ.f"
 	i__2 = mki + nki * a_dim1;
+#line 389 "MB3PYZ.f"
 	z__2.r = -a[i__2].r, z__2.i = -a[i__2].i;
+#line 389 "MB3PYZ.f"
 	i__3 = i__;
+#line 389 "MB3PYZ.f"
 	z__1.r = z__2.r * tau[i__3].r - z__2.i * tau[i__3].i, z__1.i = z__2.r 
 		* tau[i__3].i + z__2.i * tau[i__3].r;
+#line 389 "MB3PYZ.f"
 	zscal_(&i__1, &z__1, &a[mki + a_dim1], lda);
+#line 390 "MB3PYZ.f"
 	i__1 = mki + nki * a_dim1;
+#line 390 "MB3PYZ.f"
 	a[i__1].r = aii.r, a[i__1].i = aii.i;
+#line 391 "MB3PYZ.f"
     }
+#line 392 "MB3PYZ.f"
     sval[1] = smax;
+#line 393 "MB3PYZ.f"
     sval[2] = smin;
+#line 394 "MB3PYZ.f"
     sval[3] = sminpr;
 
+#line 396 "MB3PYZ.f"
     return 0;
 /* *** Last line of MB3PYZ *** */
 } /* mb3pyz_ */

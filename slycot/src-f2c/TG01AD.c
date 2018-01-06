@@ -1,3 +1,4 @@
+#line 1 "TG01AD.f"
 /* TG01AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TG01AD.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -263,385 +265,699 @@ static doublereal c_b56 = .5;
 
 /*     Test the input parameters. */
 
+#line 224 "TG01AD.f"
     /* Parameter adjustments */
+#line 224 "TG01AD.f"
     a_dim1 = *lda;
+#line 224 "TG01AD.f"
     a_offset = 1 + a_dim1;
+#line 224 "TG01AD.f"
     a -= a_offset;
+#line 224 "TG01AD.f"
     e_dim1 = *lde;
+#line 224 "TG01AD.f"
     e_offset = 1 + e_dim1;
+#line 224 "TG01AD.f"
     e -= e_offset;
+#line 224 "TG01AD.f"
     b_dim1 = *ldb;
+#line 224 "TG01AD.f"
     b_offset = 1 + b_dim1;
+#line 224 "TG01AD.f"
     b -= b_offset;
+#line 224 "TG01AD.f"
     c_dim1 = *ldc;
+#line 224 "TG01AD.f"
     c_offset = 1 + c_dim1;
+#line 224 "TG01AD.f"
     c__ -= c_offset;
+#line 224 "TG01AD.f"
     --lscale;
+#line 224 "TG01AD.f"
     --rscale;
+#line 224 "TG01AD.f"
     --dwork;
+#line 224 "TG01AD.f"
 
+#line 224 "TG01AD.f"
     /* Function Body */
+#line 224 "TG01AD.f"
     *info = 0;
+#line 225 "TG01AD.f"
     withb = lsame_(job, "A", (ftnlen)1, (ftnlen)1) || lsame_(job, "B", (
 	    ftnlen)1, (ftnlen)1);
+#line 226 "TG01AD.f"
     withc = lsame_(job, "A", (ftnlen)1, (ftnlen)1) || lsame_(job, "C", (
 	    ftnlen)1, (ftnlen)1);
 
+#line 228 "TG01AD.f"
     if (! withb && ! withc && ! lsame_(job, "N", (ftnlen)1, (ftnlen)1)) {
+#line 230 "TG01AD.f"
 	*info = -1;
+#line 231 "TG01AD.f"
     } else if (*l < 0) {
+#line 232 "TG01AD.f"
 	*info = -2;
+#line 233 "TG01AD.f"
     } else if (*n < 0) {
+#line 234 "TG01AD.f"
 	*info = -3;
+#line 235 "TG01AD.f"
     } else if (*m < 0) {
+#line 236 "TG01AD.f"
 	*info = -4;
+#line 237 "TG01AD.f"
     } else if (*p < 0) {
+#line 238 "TG01AD.f"
 	*info = -5;
+#line 239 "TG01AD.f"
     } else if (*thresh < 0.) {
+#line 240 "TG01AD.f"
 	*info = -6;
+#line 241 "TG01AD.f"
     } else if (*lda < max(1,*l)) {
+#line 242 "TG01AD.f"
 	*info = -8;
+#line 243 "TG01AD.f"
     } else if (*lde < max(1,*l)) {
+#line 244 "TG01AD.f"
 	*info = -10;
+#line 245 "TG01AD.f"
     } else if (*ldb < 1 || *m > 0 && *ldb < *l) {
+#line 246 "TG01AD.f"
 	*info = -12;
+#line 247 "TG01AD.f"
     } else if (*ldc < max(1,*p)) {
+#line 248 "TG01AD.f"
 	*info = -14;
+#line 249 "TG01AD.f"
     }
+#line 250 "TG01AD.f"
     if (*info != 0) {
+#line 251 "TG01AD.f"
 	i__1 = -(*info);
+#line 251 "TG01AD.f"
 	xerbla_("TG01AD", &i__1, (ftnlen)6);
+#line 252 "TG01AD.f"
 	return 0;
+#line 253 "TG01AD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 257 "TG01AD.f"
     if (*l == 0 || *n == 0) {
+#line 258 "TG01AD.f"
 	dum[0] = 1.;
+#line 259 "TG01AD.f"
 	if (*l > 0) {
+#line 260 "TG01AD.f"
 	    dcopy_(l, dum, &c__0, &lscale[1], &c__1);
+#line 261 "TG01AD.f"
 	} else if (*n > 0) {
+#line 262 "TG01AD.f"
 	    dcopy_(n, dum, &c__0, &rscale[1], &c__1);
+#line 263 "TG01AD.f"
 	}
+#line 264 "TG01AD.f"
 	return 0;
+#line 265 "TG01AD.f"
     }
 
 /*     Initialize balancing and allocate work storage. */
 
+#line 269 "TG01AD.f"
     kw1 = *n;
+#line 270 "TG01AD.f"
     kw2 = kw1 + *l;
+#line 271 "TG01AD.f"
     kw3 = kw2 + *l;
+#line 272 "TG01AD.f"
     kw4 = kw3 + *n;
+#line 273 "TG01AD.f"
     kw5 = kw4 + *l;
+#line 274 "TG01AD.f"
     dum[0] = 0.;
+#line 275 "TG01AD.f"
     dcopy_(l, dum, &c__0, &lscale[1], &c__1);
+#line 276 "TG01AD.f"
     dcopy_(n, dum, &c__0, &rscale[1], &c__1);
+#line 277 "TG01AD.f"
     i__1 = (*l + *n) * 3;
+#line 277 "TG01AD.f"
     dcopy_(&i__1, dum, &c__0, &dwork[1], &c__1);
 
 /*     Compute right side vector in resulting linear equations. */
 
+#line 281 "TG01AD.f"
     basl = d_lg10(&c_b18);
+#line 282 "TG01AD.f"
     i__1 = *l;
+#line 282 "TG01AD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 283 "TG01AD.f"
 	i__2 = *n;
+#line 283 "TG01AD.f"
 	for (j = 1; j <= i__2; ++j) {
+#line 284 "TG01AD.f"
 	    te = (d__1 = e[i__ + j * e_dim1], abs(d__1));
+#line 285 "TG01AD.f"
 	    ta = (d__1 = a[i__ + j * a_dim1], abs(d__1));
+#line 286 "TG01AD.f"
 	    if (ta > *thresh) {
+#line 287 "TG01AD.f"
 		ta = d_lg10(&ta) / basl;
+#line 288 "TG01AD.f"
 	    } else {
+#line 289 "TG01AD.f"
 		ta = 0.;
+#line 290 "TG01AD.f"
 	    }
+#line 291 "TG01AD.f"
 	    if (te > *thresh) {
+#line 292 "TG01AD.f"
 		te = d_lg10(&te) / basl;
+#line 293 "TG01AD.f"
 	    } else {
+#line 294 "TG01AD.f"
 		te = 0.;
+#line 295 "TG01AD.f"
 	    }
+#line 296 "TG01AD.f"
 	    dwork[i__ + kw4] = dwork[i__ + kw4] - ta - te;
+#line 297 "TG01AD.f"
 	    dwork[j + kw5] = dwork[j + kw5] - ta - te;
+#line 298 "TG01AD.f"
 /* L10: */
+#line 298 "TG01AD.f"
 	}
+#line 299 "TG01AD.f"
 /* L20: */
+#line 299 "TG01AD.f"
     }
 
+#line 301 "TG01AD.f"
     if (*m == 0) {
+#line 302 "TG01AD.f"
 	withb = FALSE_;
+#line 303 "TG01AD.f"
 	tb = 0.;
+#line 304 "TG01AD.f"
     }
+#line 305 "TG01AD.f"
     if (*p == 0) {
+#line 306 "TG01AD.f"
 	withc = FALSE_;
+#line 307 "TG01AD.f"
 	tc = 0.;
+#line 308 "TG01AD.f"
     }
 
+#line 310 "TG01AD.f"
     if (withb) {
+#line 311 "TG01AD.f"
 	i__1 = *l;
+#line 311 "TG01AD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 312 "TG01AD.f"
 	    j = idamax_(m, &b[i__ + b_dim1], ldb);
+#line 313 "TG01AD.f"
 	    tb = (d__1 = b[i__ + j * b_dim1], abs(d__1));
+#line 314 "TG01AD.f"
 	    if (tb > *thresh) {
+#line 315 "TG01AD.f"
 		tb = d_lg10(&tb) / basl;
+#line 316 "TG01AD.f"
 		dwork[i__ + kw4] -= tb;
+#line 317 "TG01AD.f"
 	    }
+#line 318 "TG01AD.f"
 /* L30: */
+#line 318 "TG01AD.f"
 	}
+#line 319 "TG01AD.f"
     }
 
+#line 321 "TG01AD.f"
     if (withc) {
+#line 322 "TG01AD.f"
 	i__1 = *n;
+#line 322 "TG01AD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 323 "TG01AD.f"
 	    i__ = idamax_(p, &c__[j * c_dim1 + 1], &c__1);
+#line 324 "TG01AD.f"
 	    tc = (d__1 = c__[i__ + j * c_dim1], abs(d__1));
+#line 325 "TG01AD.f"
 	    if (tc > *thresh) {
+#line 326 "TG01AD.f"
 		tc = d_lg10(&tc) / basl;
+#line 327 "TG01AD.f"
 		dwork[j + kw5] -= tc;
+#line 328 "TG01AD.f"
 	    }
+#line 329 "TG01AD.f"
 /* L40: */
+#line 329 "TG01AD.f"
 	}
+#line 330 "TG01AD.f"
     }
 
+#line 332 "TG01AD.f"
     coef = 1. / (doublereal) (*l + *n);
+#line 333 "TG01AD.f"
     coef2 = coef * coef;
+#line 334 "TG01AD.f"
     coef5 = coef2 * .5;
+#line 335 "TG01AD.f"
     nrp2 = max(*l,*n) + 2;
+#line 336 "TG01AD.f"
     beta = 0.;
+#line 337 "TG01AD.f"
     it = 1;
 
 /*     Start generalized conjugate gradient iteration. */
 
+#line 341 "TG01AD.f"
 L50:
 
+#line 343 "TG01AD.f"
     gamma = ddot_(l, &dwork[kw4 + 1], &c__1, &dwork[kw4 + 1], &c__1) + ddot_(
 	    n, &dwork[kw5 + 1], &c__1, &dwork[kw5 + 1], &c__1);
 
+#line 346 "TG01AD.f"
     ew = 0.;
+#line 347 "TG01AD.f"
     i__1 = *l;
+#line 347 "TG01AD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 348 "TG01AD.f"
 	ew += dwork[i__ + kw4];
+#line 349 "TG01AD.f"
 /* L60: */
+#line 349 "TG01AD.f"
     }
 
+#line 351 "TG01AD.f"
     ewc = 0.;
+#line 352 "TG01AD.f"
     i__1 = *n;
+#line 352 "TG01AD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 353 "TG01AD.f"
 	ewc += dwork[i__ + kw5];
+#line 354 "TG01AD.f"
 /* L70: */
+#line 354 "TG01AD.f"
     }
 
 /* Computing 2nd power */
+#line 356 "TG01AD.f"
     d__1 = ew;
 /* Computing 2nd power */
+#line 356 "TG01AD.f"
     d__2 = ewc;
 /* Computing 2nd power */
+#line 356 "TG01AD.f"
     d__3 = ew - ewc;
+#line 356 "TG01AD.f"
     gamma = coef * gamma - coef2 * (d__1 * d__1 + d__2 * d__2) - coef5 * (
 	    d__3 * d__3);
+#line 358 "TG01AD.f"
     if (gamma == 0.) {
+#line 358 "TG01AD.f"
 	goto L160;
+#line 358 "TG01AD.f"
     }
+#line 360 "TG01AD.f"
     if (it != 1) {
+#line 360 "TG01AD.f"
 	beta = gamma / pgamma;
+#line 360 "TG01AD.f"
     }
+#line 362 "TG01AD.f"
     t = coef5 * (ewc - ew * 3.);
+#line 363 "TG01AD.f"
     tc = coef5 * (ew - ewc * 3.);
 
+#line 365 "TG01AD.f"
     i__1 = *n + *l;
+#line 365 "TG01AD.f"
     dscal_(&i__1, &beta, &dwork[1], &c__1);
 
+#line 367 "TG01AD.f"
     daxpy_(l, &coef, &dwork[kw4 + 1], &c__1, &dwork[kw1 + 1], &c__1);
+#line 368 "TG01AD.f"
     daxpy_(n, &coef, &dwork[kw5 + 1], &c__1, &dwork[1], &c__1);
 
+#line 370 "TG01AD.f"
     i__1 = *n;
+#line 370 "TG01AD.f"
     for (j = 1; j <= i__1; ++j) {
+#line 371 "TG01AD.f"
 	dwork[j] += tc;
+#line 372 "TG01AD.f"
 /* L80: */
+#line 372 "TG01AD.f"
     }
 
+#line 374 "TG01AD.f"
     i__1 = *l;
+#line 374 "TG01AD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 375 "TG01AD.f"
 	dwork[i__ + kw1] += t;
+#line 376 "TG01AD.f"
 /* L90: */
+#line 376 "TG01AD.f"
     }
 
 /*     Apply matrix to vector. */
 
+#line 380 "TG01AD.f"
     i__1 = *l;
+#line 380 "TG01AD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 381 "TG01AD.f"
 	kount = 0;
+#line 382 "TG01AD.f"
 	sum = 0.;
+#line 383 "TG01AD.f"
 	i__2 = *n;
+#line 383 "TG01AD.f"
 	for (j = 1; j <= i__2; ++j) {
+#line 384 "TG01AD.f"
 	    if ((d__1 = a[i__ + j * a_dim1], abs(d__1)) > *thresh) {
+#line 385 "TG01AD.f"
 		++kount;
+#line 386 "TG01AD.f"
 		sum += dwork[j];
+#line 387 "TG01AD.f"
 	    }
+#line 388 "TG01AD.f"
 	    if ((d__1 = e[i__ + j * e_dim1], abs(d__1)) > *thresh) {
+#line 389 "TG01AD.f"
 		++kount;
+#line 390 "TG01AD.f"
 		sum += dwork[j];
+#line 391 "TG01AD.f"
 	    }
+#line 392 "TG01AD.f"
 /* L100: */
+#line 392 "TG01AD.f"
 	}
+#line 393 "TG01AD.f"
 	if (withb) {
+#line 394 "TG01AD.f"
 	    j = idamax_(m, &b[i__ + b_dim1], ldb);
+#line 395 "TG01AD.f"
 	    if ((d__1 = b[i__ + j * b_dim1], abs(d__1)) > *thresh) {
+#line 395 "TG01AD.f"
 		++kount;
+#line 395 "TG01AD.f"
 	    }
+#line 396 "TG01AD.f"
 	}
+#line 397 "TG01AD.f"
 	dwork[i__ + kw2] = (doublereal) kount * dwork[i__ + kw1] + sum;
+#line 398 "TG01AD.f"
 /* L110: */
+#line 398 "TG01AD.f"
     }
 
+#line 400 "TG01AD.f"
     i__1 = *n;
+#line 400 "TG01AD.f"
     for (j = 1; j <= i__1; ++j) {
+#line 401 "TG01AD.f"
 	kount = 0;
+#line 402 "TG01AD.f"
 	sum = 0.;
+#line 403 "TG01AD.f"
 	i__2 = *l;
+#line 403 "TG01AD.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 404 "TG01AD.f"
 	    if ((d__1 = a[i__ + j * a_dim1], abs(d__1)) > *thresh) {
+#line 405 "TG01AD.f"
 		++kount;
+#line 406 "TG01AD.f"
 		sum += dwork[i__ + kw1];
+#line 407 "TG01AD.f"
 	    }
+#line 408 "TG01AD.f"
 	    if ((d__1 = e[i__ + j * e_dim1], abs(d__1)) > *thresh) {
+#line 409 "TG01AD.f"
 		++kount;
+#line 410 "TG01AD.f"
 		sum += dwork[i__ + kw1];
+#line 411 "TG01AD.f"
 	    }
+#line 412 "TG01AD.f"
 /* L120: */
+#line 412 "TG01AD.f"
 	}
+#line 413 "TG01AD.f"
 	if (withc) {
+#line 414 "TG01AD.f"
 	    i__ = idamax_(p, &c__[j * c_dim1 + 1], &c__1);
+#line 415 "TG01AD.f"
 	    if ((d__1 = c__[i__ + j * c_dim1], abs(d__1)) > *thresh) {
+#line 415 "TG01AD.f"
 		++kount;
+#line 415 "TG01AD.f"
 	    }
+#line 416 "TG01AD.f"
 	}
+#line 417 "TG01AD.f"
 	dwork[j + kw3] = (doublereal) kount * dwork[j] + sum;
+#line 418 "TG01AD.f"
 /* L130: */
+#line 418 "TG01AD.f"
     }
 
+#line 420 "TG01AD.f"
     sum = ddot_(l, &dwork[kw1 + 1], &c__1, &dwork[kw2 + 1], &c__1) + ddot_(n, 
 	    &dwork[1], &c__1, &dwork[kw3 + 1], &c__1);
+#line 422 "TG01AD.f"
     alpha = gamma / sum;
 
 /*     Determine correction to current iteration. */
 
+#line 426 "TG01AD.f"
     cmax = 0.;
+#line 427 "TG01AD.f"
     i__1 = *l;
+#line 427 "TG01AD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 428 "TG01AD.f"
 	cor = alpha * dwork[i__ + kw1];
+#line 429 "TG01AD.f"
 	if (abs(cor) > cmax) {
+#line 429 "TG01AD.f"
 	    cmax = abs(cor);
+#line 429 "TG01AD.f"
 	}
+#line 431 "TG01AD.f"
 	lscale[i__] += cor;
+#line 432 "TG01AD.f"
 /* L140: */
+#line 432 "TG01AD.f"
     }
 
+#line 434 "TG01AD.f"
     i__1 = *n;
+#line 434 "TG01AD.f"
     for (j = 1; j <= i__1; ++j) {
+#line 435 "TG01AD.f"
 	cor = alpha * dwork[j];
+#line 436 "TG01AD.f"
 	if (abs(cor) > cmax) {
+#line 436 "TG01AD.f"
 	    cmax = abs(cor);
+#line 436 "TG01AD.f"
 	}
+#line 438 "TG01AD.f"
 	rscale[j] += cor;
+#line 439 "TG01AD.f"
 /* L150: */
+#line 439 "TG01AD.f"
     }
+#line 440 "TG01AD.f"
     if (cmax < .5) {
+#line 440 "TG01AD.f"
 	goto L160;
+#line 440 "TG01AD.f"
     }
 
+#line 443 "TG01AD.f"
     d__1 = -alpha;
+#line 443 "TG01AD.f"
     daxpy_(l, &d__1, &dwork[kw2 + 1], &c__1, &dwork[kw4 + 1], &c__1);
+#line 444 "TG01AD.f"
     d__1 = -alpha;
+#line 444 "TG01AD.f"
     daxpy_(n, &d__1, &dwork[kw3 + 1], &c__1, &dwork[kw5 + 1], &c__1);
 
+#line 446 "TG01AD.f"
     pgamma = gamma;
+#line 447 "TG01AD.f"
     ++it;
+#line 448 "TG01AD.f"
     if (it <= nrp2) {
+#line 448 "TG01AD.f"
 	goto L50;
+#line 448 "TG01AD.f"
     }
 
 /*     End generalized conjugate gradient iteration. */
 
+#line 453 "TG01AD.f"
 L160:
+#line 454 "TG01AD.f"
     sfmin = dlamch_("Safe minimum", (ftnlen)12);
+#line 455 "TG01AD.f"
     sfmax = 1. / sfmin;
+#line 456 "TG01AD.f"
     lsfmin = (integer) (d_lg10(&sfmin) / basl + 1.);
+#line 457 "TG01AD.f"
     lsfmax = (integer) (d_lg10(&sfmax) / basl);
 
 /*     Compute left diagonal scaling matrix. */
 
+#line 461 "TG01AD.f"
     i__1 = *l;
+#line 461 "TG01AD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 462 "TG01AD.f"
 	irab = idamax_(n, &a[i__ + a_dim1], lda);
+#line 463 "TG01AD.f"
 	rab = (d__1 = a[i__ + irab * a_dim1], abs(d__1));
+#line 464 "TG01AD.f"
 	irab = idamax_(n, &e[i__ + e_dim1], lde);
 /* Computing MAX */
+#line 465 "TG01AD.f"
 	d__2 = rab, d__3 = (d__1 = e[i__ + irab * e_dim1], abs(d__1));
+#line 465 "TG01AD.f"
 	rab = max(d__2,d__3);
+#line 466 "TG01AD.f"
 	if (withb) {
+#line 467 "TG01AD.f"
 	    irab = idamax_(m, &b[i__ + b_dim1], ldb);
 /* Computing MAX */
+#line 468 "TG01AD.f"
 	    d__2 = rab, d__3 = (d__1 = b[i__ + irab * b_dim1], abs(d__1));
+#line 468 "TG01AD.f"
 	    rab = max(d__2,d__3);
+#line 469 "TG01AD.f"
 	}
+#line 470 "TG01AD.f"
 	d__1 = rab + sfmin;
+#line 470 "TG01AD.f"
 	lrab = (integer) (d_lg10(&d__1) / basl + 1.);
+#line 471 "TG01AD.f"
 	ir = (integer) (lscale[i__] + d_sign(&c_b56, &lscale[i__]));
 /* Computing MIN */
+#line 472 "TG01AD.f"
 	i__2 = max(ir,lsfmin), i__2 = min(i__2,lsfmax), i__3 = lsfmax - lrab;
+#line 472 "TG01AD.f"
 	ir = min(i__2,i__3);
+#line 473 "TG01AD.f"
 	lscale[i__] = pow_di(&c_b18, &ir);
+#line 474 "TG01AD.f"
 /* L170: */
+#line 474 "TG01AD.f"
     }
 
 /*     Compute right diagonal scaling matrix. */
 
+#line 478 "TG01AD.f"
     i__1 = *n;
+#line 478 "TG01AD.f"
     for (j = 1; j <= i__1; ++j) {
+#line 479 "TG01AD.f"
 	icab = idamax_(l, &a[j * a_dim1 + 1], &c__1);
+#line 480 "TG01AD.f"
 	cab = (d__1 = a[icab + j * a_dim1], abs(d__1));
+#line 481 "TG01AD.f"
 	icab = idamax_(l, &e[j * e_dim1 + 1], &c__1);
 /* Computing MAX */
+#line 482 "TG01AD.f"
 	d__2 = cab, d__3 = (d__1 = e[icab + j * e_dim1], abs(d__1));
+#line 482 "TG01AD.f"
 	cab = max(d__2,d__3);
+#line 483 "TG01AD.f"
 	if (withc) {
+#line 484 "TG01AD.f"
 	    icab = idamax_(p, &c__[j * c_dim1 + 1], &c__1);
 /* Computing MAX */
+#line 485 "TG01AD.f"
 	    d__2 = cab, d__3 = (d__1 = c__[icab + j * c_dim1], abs(d__1));
+#line 485 "TG01AD.f"
 	    cab = max(d__2,d__3);
+#line 486 "TG01AD.f"
 	}
+#line 487 "TG01AD.f"
 	d__1 = cab + sfmin;
+#line 487 "TG01AD.f"
 	lcab = (integer) (d_lg10(&d__1) / basl + 1.);
+#line 488 "TG01AD.f"
 	jc = (integer) (rscale[j] + d_sign(&c_b56, &rscale[j]));
 /* Computing MIN */
+#line 489 "TG01AD.f"
 	i__2 = max(jc,lsfmin), i__2 = min(i__2,lsfmax), i__3 = lsfmax - lcab;
+#line 489 "TG01AD.f"
 	jc = min(i__2,i__3);
+#line 490 "TG01AD.f"
 	rscale[j] = pow_di(&c_b18, &jc);
+#line 491 "TG01AD.f"
 /* L180: */
+#line 491 "TG01AD.f"
     }
 
 /*     Row scaling of matrices A, E and B. */
 
+#line 495 "TG01AD.f"
     i__1 = *l;
+#line 495 "TG01AD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 496 "TG01AD.f"
 	dscal_(n, &lscale[i__], &a[i__ + a_dim1], lda);
+#line 497 "TG01AD.f"
 	dscal_(n, &lscale[i__], &e[i__ + e_dim1], lde);
+#line 498 "TG01AD.f"
 	if (withb) {
+#line 498 "TG01AD.f"
 	    dscal_(m, &lscale[i__], &b[i__ + b_dim1], ldb);
+#line 498 "TG01AD.f"
 	}
+#line 500 "TG01AD.f"
 /* L190: */
+#line 500 "TG01AD.f"
     }
 
 /*     Column scaling of matrices A, E and C. */
 
+#line 504 "TG01AD.f"
     i__1 = *n;
+#line 504 "TG01AD.f"
     for (j = 1; j <= i__1; ++j) {
+#line 505 "TG01AD.f"
 	dscal_(l, &rscale[j], &a[j * a_dim1 + 1], &c__1);
+#line 506 "TG01AD.f"
 	dscal_(l, &rscale[j], &e[j * e_dim1 + 1], &c__1);
+#line 507 "TG01AD.f"
 	if (withc) {
+#line 507 "TG01AD.f"
 	    dscal_(p, &rscale[j], &c__[j * c_dim1 + 1], &c__1);
+#line 507 "TG01AD.f"
 	}
+#line 509 "TG01AD.f"
 /* L200: */
+#line 509 "TG01AD.f"
     }
 
+#line 511 "TG01AD.f"
     return 0;
 /* *** Last line of TG01AD *** */
 } /* tg01ad_ */

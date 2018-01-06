@@ -1,3 +1,4 @@
+#line 1 "AG07BD.f"
 /* AG07BD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AG07BD.f"
 /* Table of constant values */
 
 static doublereal c_b10 = 0.;
@@ -217,141 +219,239 @@ static doublereal c_b24 = -1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 194 "AG07BD.f"
     /* Parameter adjustments */
+#line 194 "AG07BD.f"
     a_dim1 = *lda;
+#line 194 "AG07BD.f"
     a_offset = 1 + a_dim1;
+#line 194 "AG07BD.f"
     a -= a_offset;
+#line 194 "AG07BD.f"
     e_dim1 = *lde;
+#line 194 "AG07BD.f"
     e_offset = 1 + e_dim1;
+#line 194 "AG07BD.f"
     e -= e_offset;
+#line 194 "AG07BD.f"
     b_dim1 = *ldb;
+#line 194 "AG07BD.f"
     b_offset = 1 + b_dim1;
+#line 194 "AG07BD.f"
     b -= b_offset;
+#line 194 "AG07BD.f"
     c_dim1 = *ldc;
+#line 194 "AG07BD.f"
     c_offset = 1 + c_dim1;
+#line 194 "AG07BD.f"
     c__ -= c_offset;
+#line 194 "AG07BD.f"
     d_dim1 = *ldd;
+#line 194 "AG07BD.f"
     d_offset = 1 + d_dim1;
+#line 194 "AG07BD.f"
     d__ -= d_offset;
+#line 194 "AG07BD.f"
     ai_dim1 = *ldai;
+#line 194 "AG07BD.f"
     ai_offset = 1 + ai_dim1;
+#line 194 "AG07BD.f"
     ai -= ai_offset;
+#line 194 "AG07BD.f"
     ei_dim1 = *ldei;
+#line 194 "AG07BD.f"
     ei_offset = 1 + ei_dim1;
+#line 194 "AG07BD.f"
     ei -= ei_offset;
+#line 194 "AG07BD.f"
     bi_dim1 = *ldbi;
+#line 194 "AG07BD.f"
     bi_offset = 1 + bi_dim1;
+#line 194 "AG07BD.f"
     bi -= bi_offset;
+#line 194 "AG07BD.f"
     ci_dim1 = *ldci;
+#line 194 "AG07BD.f"
     ci_offset = 1 + ci_dim1;
+#line 194 "AG07BD.f"
     ci -= ci_offset;
+#line 194 "AG07BD.f"
     di_dim1 = *lddi;
+#line 194 "AG07BD.f"
     di_offset = 1 + di_dim1;
+#line 194 "AG07BD.f"
     di -= di_offset;
+#line 194 "AG07BD.f"
 
+#line 194 "AG07BD.f"
     /* Function Body */
+#line 194 "AG07BD.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 198 "AG07BD.f"
     unite = lsame_(jobe, "I", (ftnlen)1, (ftnlen)1);
+#line 199 "AG07BD.f"
     if (! (lsame_(jobe, "G", (ftnlen)1, (ftnlen)1) || unite)) {
+#line 200 "AG07BD.f"
 	*info = -1;
+#line 201 "AG07BD.f"
     } else if (*n < 0) {
+#line 202 "AG07BD.f"
 	*info = -2;
+#line 203 "AG07BD.f"
     } else if (*m < 0) {
+#line 204 "AG07BD.f"
 	*info = -3;
+#line 205 "AG07BD.f"
     } else if (*lda < max(1,*n)) {
+#line 206 "AG07BD.f"
 	*info = -5;
+#line 207 "AG07BD.f"
     } else if (*lde < 1 || ! unite && *lde < *n) {
+#line 208 "AG07BD.f"
 	*info = -7;
+#line 209 "AG07BD.f"
     } else if (*ldb < max(1,*n)) {
+#line 210 "AG07BD.f"
 	*info = -9;
+#line 211 "AG07BD.f"
     } else if (*ldc < max(1,*m)) {
+#line 212 "AG07BD.f"
 	*info = -11;
+#line 213 "AG07BD.f"
     } else if (*ldd < max(1,*m)) {
+#line 214 "AG07BD.f"
 	*info = -13;
+#line 215 "AG07BD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 215 "AG07BD.f"
 	i__1 = 1, i__2 = *n + *m;
+#line 215 "AG07BD.f"
 	if (*ldai < max(i__1,i__2)) {
+#line 216 "AG07BD.f"
 	    *info = -15;
+#line 217 "AG07BD.f"
 	} else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 217 "AG07BD.f"
 	    i__1 = 1, i__2 = *n + *m;
+#line 217 "AG07BD.f"
 	    if (*ldei < max(i__1,i__2)) {
+#line 218 "AG07BD.f"
 		*info = -17;
+#line 219 "AG07BD.f"
 	    } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 219 "AG07BD.f"
 		i__1 = 1, i__2 = *n + *m;
+#line 219 "AG07BD.f"
 		if (*ldbi < max(i__1,i__2)) {
+#line 220 "AG07BD.f"
 		    *info = -19;
+#line 221 "AG07BD.f"
 		} else if (*ldci < max(1,*m)) {
+#line 222 "AG07BD.f"
 		    *info = -21;
+#line 223 "AG07BD.f"
 		} else if (*lddi < max(1,*m)) {
+#line 224 "AG07BD.f"
 		    *info = -23;
+#line 225 "AG07BD.f"
 		}
+#line 225 "AG07BD.f"
 	    }
+#line 225 "AG07BD.f"
 	}
+#line 225 "AG07BD.f"
     }
 
+#line 227 "AG07BD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 231 "AG07BD.f"
 	i__1 = -(*info);
+#line 231 "AG07BD.f"
 	xerbla_("AG07BD", &i__1, (ftnlen)6);
+#line 232 "AG07BD.f"
 	return 0;
+#line 233 "AG07BD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 237 "AG07BD.f"
     if (*m == 0) {
+#line 237 "AG07BD.f"
 	return 0;
+#line 237 "AG07BD.f"
     }
 
 /*     Form Ai. */
 
+#line 242 "AG07BD.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &ai[ai_offset], ldai, (ftnlen)4);
+#line 243 "AG07BD.f"
     dlacpy_("Full", m, n, &c__[c_offset], ldc, &ai[*n + 1 + ai_dim1], ldai, (
 	    ftnlen)4);
+#line 244 "AG07BD.f"
     dlacpy_("Full", n, m, &b[b_offset], ldb, &ai[(*n + 1) * ai_dim1 + 1], 
 	    ldai, (ftnlen)4);
+#line 245 "AG07BD.f"
     dlacpy_("Full", m, m, &d__[d_offset], ldd, &ai[*n + 1 + (*n + 1) * 
 	    ai_dim1], ldai, (ftnlen)4);
 
 /*     Form Ei. */
 
+#line 249 "AG07BD.f"
     if (unite) {
+#line 250 "AG07BD.f"
 	i__1 = *n + *m;
+#line 250 "AG07BD.f"
 	dlaset_("Full", &i__1, n, &c_b10, &c_b11, &ei[ei_offset], ldei, (
 		ftnlen)4);
+#line 251 "AG07BD.f"
     } else {
+#line 252 "AG07BD.f"
 	dlacpy_("Full", n, n, &e[e_offset], lde, &ei[ei_offset], ldei, (
 		ftnlen)4);
+#line 253 "AG07BD.f"
 	dlaset_("Full", m, n, &c_b10, &c_b10, &ei[*n + 1 + ei_dim1], ldei, (
 		ftnlen)4);
+#line 254 "AG07BD.f"
     }
+#line 255 "AG07BD.f"
     i__1 = *n + *m;
+#line 255 "AG07BD.f"
     dlaset_("Full", &i__1, m, &c_b10, &c_b10, &ei[(*n + 1) * ei_dim1 + 1], 
 	    ldei, (ftnlen)4);
 
 /*     Form Bi. */
 
+#line 259 "AG07BD.f"
     dlaset_("Full", n, m, &c_b10, &c_b10, &bi[bi_offset], ldbi, (ftnlen)4);
+#line 260 "AG07BD.f"
     dlaset_("Full", m, m, &c_b10, &c_b24, &bi[*n + 1 + bi_dim1], ldbi, (
 	    ftnlen)4);
 
 /*     Form Ci. */
 
+#line 264 "AG07BD.f"
     dlaset_("Full", m, n, &c_b10, &c_b10, &ci[ci_offset], ldci, (ftnlen)4);
+#line 265 "AG07BD.f"
     dlaset_("Full", m, m, &c_b10, &c_b11, &ci[(*n + 1) * ci_dim1 + 1], ldci, (
 	    ftnlen)4);
 
 /*     Set Di. */
 
+#line 269 "AG07BD.f"
     dlaset_("Full", m, m, &c_b10, &c_b10, &di[di_offset], lddi, (ftnlen)4);
 
+#line 271 "AG07BD.f"
     return 0;
 /* *** Last line of AG07BD *** */
 } /* ag07bd_ */

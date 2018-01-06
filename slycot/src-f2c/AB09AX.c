@@ -1,3 +1,4 @@
+#line 1 "AB09AX.f"
 /* AB09AX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB09AX.f"
 /* Table of constant values */
 
 static logical c_true = TRUE_;
@@ -350,102 +352,177 @@ static doublereal c_b50 = 0.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 288 "AB09AX.f"
     /* Parameter adjustments */
+#line 288 "AB09AX.f"
     a_dim1 = *lda;
+#line 288 "AB09AX.f"
     a_offset = 1 + a_dim1;
+#line 288 "AB09AX.f"
     a -= a_offset;
+#line 288 "AB09AX.f"
     b_dim1 = *ldb;
+#line 288 "AB09AX.f"
     b_offset = 1 + b_dim1;
+#line 288 "AB09AX.f"
     b -= b_offset;
+#line 288 "AB09AX.f"
     c_dim1 = *ldc;
+#line 288 "AB09AX.f"
     c_offset = 1 + c_dim1;
+#line 288 "AB09AX.f"
     c__ -= c_offset;
+#line 288 "AB09AX.f"
     --hsv;
+#line 288 "AB09AX.f"
     t_dim1 = *ldt;
+#line 288 "AB09AX.f"
     t_offset = 1 + t_dim1;
+#line 288 "AB09AX.f"
     t -= t_offset;
+#line 288 "AB09AX.f"
     ti_dim1 = *ldti;
+#line 288 "AB09AX.f"
     ti_offset = 1 + ti_dim1;
+#line 288 "AB09AX.f"
     ti -= ti_offset;
+#line 288 "AB09AX.f"
     --iwork;
+#line 288 "AB09AX.f"
     --dwork;
+#line 288 "AB09AX.f"
 
+#line 288 "AB09AX.f"
     /* Function Body */
+#line 288 "AB09AX.f"
     *info = 0;
+#line 289 "AB09AX.f"
     *iwarn = 0;
+#line 290 "AB09AX.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 291 "AB09AX.f"
     bal = lsame_(job, "B", (ftnlen)1, (ftnlen)1);
+#line 292 "AB09AX.f"
     fixord = lsame_(ordsel, "F", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 296 "AB09AX.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 297 "AB09AX.f"
 	*info = -1;
+#line 298 "AB09AX.f"
     } else if (! (bal || lsame_(job, "N", (ftnlen)1, (ftnlen)1))) {
+#line 299 "AB09AX.f"
 	*info = -2;
+#line 300 "AB09AX.f"
     } else if (! (fixord || lsame_(ordsel, "A", (ftnlen)1, (ftnlen)1))) {
+#line 301 "AB09AX.f"
 	*info = -3;
+#line 302 "AB09AX.f"
     } else if (*n < 0) {
+#line 303 "AB09AX.f"
 	*info = -4;
+#line 304 "AB09AX.f"
     } else if (*m < 0) {
+#line 305 "AB09AX.f"
 	*info = -5;
+#line 306 "AB09AX.f"
     } else if (*p < 0) {
+#line 307 "AB09AX.f"
 	*info = -6;
+#line 308 "AB09AX.f"
     } else if (fixord && (*nr < 0 || *nr > *n)) {
+#line 309 "AB09AX.f"
 	*info = -7;
+#line 310 "AB09AX.f"
     } else if (*lda < max(1,*n)) {
+#line 311 "AB09AX.f"
 	*info = -9;
+#line 312 "AB09AX.f"
     } else if (*ldb < max(1,*n)) {
+#line 313 "AB09AX.f"
 	*info = -11;
+#line 314 "AB09AX.f"
     } else if (*ldc < max(1,*p)) {
+#line 315 "AB09AX.f"
 	*info = -13;
+#line 316 "AB09AX.f"
     } else if (*ldt < max(1,*n)) {
+#line 317 "AB09AX.f"
 	*info = -16;
+#line 318 "AB09AX.f"
     } else if (*ldti < max(1,*n)) {
+#line 319 "AB09AX.f"
 	*info = -18;
+#line 320 "AB09AX.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 320 "AB09AX.f"
 	i__3 = max(*n,*m);
+#line 320 "AB09AX.f"
 	i__1 = 1, i__2 = *n * (max(i__3,*p) + 5) + *n * (*n + 1) / 2;
+#line 320 "AB09AX.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 322 "AB09AX.f"
 	    *info = -22;
+#line 323 "AB09AX.f"
 	}
+#line 323 "AB09AX.f"
     }
 
+#line 325 "AB09AX.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 329 "AB09AX.f"
 	i__1 = -(*info);
+#line 329 "AB09AX.f"
 	xerbla_("AB09AX", &i__1, (ftnlen)6);
+#line 330 "AB09AX.f"
 	return 0;
+#line 331 "AB09AX.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 335 "AB09AX.f"
     i__1 = min(*n,*m);
+#line 335 "AB09AX.f"
     if (min(i__1,*p) == 0 || fixord && *nr == 0) {
+#line 336 "AB09AX.f"
 	*nr = 0;
+#line 337 "AB09AX.f"
 	dwork[1] = 1.;
+#line 338 "AB09AX.f"
 	return 0;
+#line 339 "AB09AX.f"
     }
 
+#line 341 "AB09AX.f"
     rtol = (doublereal) (*n) * dlamch_("Epsilon", (ftnlen)7);
 
 /*     Allocate N*MAX(N,M,P) and N working storage for the matrices U */
 /*     and TAU, respectively. */
 
+#line 346 "AB09AX.f"
     ku = 1;
 /* Computing MAX */
+#line 347 "AB09AX.f"
     i__1 = max(*n,*m);
+#line 347 "AB09AX.f"
     ktau = ku + *n * max(i__1,*p);
+#line 348 "AB09AX.f"
     kw = ktau + *n;
+#line 349 "AB09AX.f"
     ldw = *ldwork - kw + 1;
 
 /*     Copy B in U. */
 
+#line 353 "AB09AX.f"
     dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[ku], n, (ftnlen)4);
 
 /*     If DISCR = .FALSE., solve for Su the Lyapunov equation */
@@ -459,16 +536,23 @@ static doublereal c_b50 = 0.;
 /*     Workspace:  need   N*(MAX(N,M,P) + 5); */
 /*                 prefer larger. */
 
+#line 366 "AB09AX.f"
     sb03ou_(&discr, &c_true, n, m, &a[a_offset], lda, &dwork[ku], n, &dwork[
 	    ktau], &ti[ti_offset], ldti, &scalec, &dwork[kw], &ldw, &ierr);
+#line 368 "AB09AX.f"
     if (ierr != 0) {
+#line 369 "AB09AX.f"
 	*info = 1;
+#line 370 "AB09AX.f"
 	return 0;
+#line 371 "AB09AX.f"
     }
+#line 372 "AB09AX.f"
     wrkopt = (integer) dwork[kw] + kw - 1;
 
 /*     Copy C in U. */
 
+#line 376 "AB09AX.f"
     dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[ku], p, (ftnlen)4);
 
 /*     If DISCR = .FALSE., solve for Ru the Lyapunov equation */
@@ -482,36 +566,54 @@ static doublereal c_b50 = 0.;
 /*     Workspace:  need   N*(MAX(N,M,P) + 5); */
 /*                 prefer larger. */
 
+#line 389 "AB09AX.f"
     sb03ou_(&discr, &c_false, n, p, &a[a_offset], lda, &dwork[ku], p, &dwork[
 	    ktau], &t[t_offset], ldt, &scaleo, &dwork[kw], &ldw, &ierr);
 /* Computing MAX */
+#line 391 "AB09AX.f"
     i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 391 "AB09AX.f"
     wrkopt = max(i__1,i__2);
 
 /*     Allocate N*(N+1)/2 (or, if possible, N*N) working storage for the */
 /*     matrix V, a packed (or unpacked) copy of Su, and save Su in V. */
 /*     (The locations for TAU are reused here.) */
 
+#line 397 "AB09AX.f"
     kv = ktau;
+#line 398 "AB09AX.f"
     if (*ldwork - kv + 1 < *n * (*n + 5)) {
+#line 399 "AB09AX.f"
 	packed = TRUE_;
+#line 400 "AB09AX.f"
 	ma02dd_("Pack", "Upper", n, &ti[ti_offset], ldti, &dwork[kv], (ftnlen)
 		4, (ftnlen)5);
+#line 401 "AB09AX.f"
 	kw = kv + *n * (*n + 1) / 2;
+#line 402 "AB09AX.f"
     } else {
+#line 403 "AB09AX.f"
 	packed = FALSE_;
+#line 404 "AB09AX.f"
 	dlacpy_("Upper", n, n, &ti[ti_offset], ldti, &dwork[kv], n, (ftnlen)5)
 		;
+#line 405 "AB09AX.f"
 	kw = kv + *n * *n;
+#line 406 "AB09AX.f"
     }
 /*                               | x x | */
 /*     Compute Ru*Su in the form | 0 x | in TI. */
 
+#line 410 "AB09AX.f"
     i__1 = *n;
+#line 410 "AB09AX.f"
     for (j = 1; j <= i__1; ++j) {
+#line 411 "AB09AX.f"
 	dtrmv_("Upper", "NoTranspose", "NonUnit", &j, &t[t_offset], ldt, &ti[
 		j * ti_dim1 + 1], &c__1, (ftnlen)5, (ftnlen)11, (ftnlen)7);
+#line 413 "AB09AX.f"
 /* L10: */
+#line 413 "AB09AX.f"
     }
 
 /*     Compute the singular value decomposition Ru*Su = V*S*UT */
@@ -520,20 +622,30 @@ static doublereal c_b50 = 0.;
 /*     Workspace:  need   N*MAX(N,M,P) + N*(N+1)/2 + 5*N; */
 /*                 prefer larger. */
 
+#line 421 "AB09AX.f"
     i__1 = *ldwork - kw + 1;
+#line 421 "AB09AX.f"
     mb03ud_("Vectors", "Vectors", n, &ti[ti_offset], ldti, &dwork[ku], n, &
 	    hsv[1], &dwork[kw], &i__1, &ierr, (ftnlen)7, (ftnlen)7);
+#line 423 "AB09AX.f"
     if (ierr != 0) {
+#line 424 "AB09AX.f"
 	*info = 2;
+#line 425 "AB09AX.f"
 	return 0;
+#line 426 "AB09AX.f"
     }
 /* Computing MAX */
+#line 427 "AB09AX.f"
     i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 427 "AB09AX.f"
     wrkopt = max(i__1,i__2);
 
 /*     Scale singular values. */
 
+#line 431 "AB09AX.f"
     d__1 = 1. / scalec / scaleo;
+#line 431 "AB09AX.f"
     dscal_(n, &d__1, &hsv[1], &c__1);
 
 /*     Partition S, U and V conformally as: */
@@ -542,63 +654,105 @@ static doublereal c_b50 = 0.;
 
 /*     Compute the order of reduced system, as the order of S1. */
 
+#line 439 "AB09AX.f"
     atol = rtol * hsv[1];
+#line 440 "AB09AX.f"
     if (fixord) {
+#line 441 "AB09AX.f"
 	if (*nr > 0) {
+#line 442 "AB09AX.f"
 	    if (hsv[*nr] <= atol) {
+#line 443 "AB09AX.f"
 		*nr = 0;
+#line 444 "AB09AX.f"
 		*iwarn = 1;
+#line 445 "AB09AX.f"
 		fixord = FALSE_;
+#line 446 "AB09AX.f"
 	    }
+#line 447 "AB09AX.f"
 	}
+#line 448 "AB09AX.f"
     } else {
+#line 449 "AB09AX.f"
 	atol = max(*tol,atol);
+#line 450 "AB09AX.f"
 	*nr = 0;
+#line 451 "AB09AX.f"
     }
+#line 452 "AB09AX.f"
     if (! fixord) {
+#line 453 "AB09AX.f"
 	i__1 = *n;
+#line 453 "AB09AX.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 454 "AB09AX.f"
 	    if (hsv[j] <= atol) {
+#line 454 "AB09AX.f"
 		goto L30;
+#line 454 "AB09AX.f"
 	    }
+#line 455 "AB09AX.f"
 	    ++(*nr);
+#line 456 "AB09AX.f"
 /* L20: */
+#line 456 "AB09AX.f"
 	}
+#line 457 "AB09AX.f"
 L30:
+#line 458 "AB09AX.f"
 	;
+#line 458 "AB09AX.f"
     }
 
+#line 460 "AB09AX.f"
     if (*nr == 0) {
+#line 461 "AB09AX.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 462 "AB09AX.f"
 	return 0;
+#line 463 "AB09AX.f"
     }
 
 /*     Compute the truncation matrices. */
 
 /*     Compute TI' =  Ru'*V1 in U. */
 
+#line 469 "AB09AX.f"
     dtrmm_("Left", "Upper", "Transpose", "NonUnit", n, nr, &c_b31, &t[
 	    t_offset], ldt, &dwork[ku], n, (ftnlen)4, (ftnlen)5, (ftnlen)9, (
 	    ftnlen)7);
 
 /*     Compute T = Su*U1 (with Su packed, if not enough workspace). */
 
+#line 474 "AB09AX.f"
     ma02ad_("Full", nr, n, &ti[ti_offset], ldti, &t[t_offset], ldt, (ftnlen)4)
 	    ;
+#line 475 "AB09AX.f"
     if (packed) {
+#line 476 "AB09AX.f"
 	i__1 = *nr;
+#line 476 "AB09AX.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 477 "AB09AX.f"
 	    dtpmv_("Upper", "NoTranspose", "NonUnit", n, &dwork[kv], &t[j * 
 		    t_dim1 + 1], &c__1, (ftnlen)5, (ftnlen)11, (ftnlen)7);
+#line 479 "AB09AX.f"
 /* L40: */
+#line 479 "AB09AX.f"
 	}
+#line 480 "AB09AX.f"
     } else {
+#line 481 "AB09AX.f"
 	dtrmm_("Left", "Upper", "NoTranspose", "NonUnit", n, nr, &c_b31, &
 		dwork[kv], n, &t[t_offset], ldt, (ftnlen)4, (ftnlen)5, (
 		ftnlen)11, (ftnlen)7);
+#line 483 "AB09AX.f"
     }
 
+#line 485 "AB09AX.f"
     if (bal) {
+#line 486 "AB09AX.f"
 	ij = ku;
 
 /*        Square-Root B & T method. */
@@ -607,14 +761,23 @@ L30:
 /*                    -1/2           -1/2 */
 /*                T*S1     and TI'*S1 */
 
+#line 494 "AB09AX.f"
 	i__1 = *nr;
+#line 494 "AB09AX.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 495 "AB09AX.f"
 	    temp = 1. / sqrt(hsv[j]);
+#line 496 "AB09AX.f"
 	    dscal_(n, &temp, &t[j * t_dim1 + 1], &c__1);
+#line 497 "AB09AX.f"
 	    dscal_(n, &temp, &dwork[ij], &c__1);
+#line 498 "AB09AX.f"
 	    ij += *n;
+#line 499 "AB09AX.f"
 /* L50: */
+#line 499 "AB09AX.f"
 	}
+#line 500 "AB09AX.f"
     } else {
 
 /*        Balancing-Free B & T method. */
@@ -625,70 +788,103 @@ L30:
 /*                    prefer N*MAX(N,M,P) + NR*(NB+1) */
 /*                           (NB determined by ILAENV for DGEQRF). */
 
+#line 510 "AB09AX.f"
 	kw = ktau + *nr;
+#line 511 "AB09AX.f"
 	ldw = *ldwork - kw + 1;
+#line 512 "AB09AX.f"
 	dgeqrf_(n, nr, &t[t_offset], ldt, &dwork[ktau], &dwork[kw], &ldw, &
 		ierr);
+#line 513 "AB09AX.f"
 	dorgqr_(n, nr, nr, &t[t_offset], ldt, &dwork[ktau], &dwork[kw], &ldw, 
 		&ierr);
+#line 515 "AB09AX.f"
 	dgeqrf_(n, nr, &dwork[ku], n, &dwork[ktau], &dwork[kw], &ldw, &ierr);
 /* Computing MAX */
+#line 517 "AB09AX.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 517 "AB09AX.f"
 	wrkopt = max(i__1,i__2);
+#line 518 "AB09AX.f"
 	dorgqr_(n, nr, nr, &dwork[ku], n, &dwork[ktau], &dwork[kw], &ldw, &
 		ierr);
 /* Computing MAX */
+#line 520 "AB09AX.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 520 "AB09AX.f"
 	wrkopt = max(i__1,i__2);
+#line 521 "AB09AX.f"
     }
 
 /*     Transpose TI' to obtain TI. */
 
+#line 525 "AB09AX.f"
     ma02ad_("Full", n, nr, &dwork[ku], n, &ti[ti_offset], ldti, (ftnlen)4);
 
+#line 527 "AB09AX.f"
     if (! bal) {
 /*                      -1 */
 /*        Compute (TI*T)  *TI in TI. */
 
+#line 531 "AB09AX.f"
 	dgemm_("NoTranspose", "NoTranspose", nr, nr, n, &c_b31, &ti[ti_offset]
 		, ldti, &t[t_offset], ldt, &c_b50, &dwork[ku], n, (ftnlen)11, 
 		(ftnlen)11);
+#line 533 "AB09AX.f"
 	dgetrf_(nr, nr, &dwork[ku], n, &iwork[1], &ierr);
+#line 534 "AB09AX.f"
 	dgetrs_("NoTranspose", nr, n, &dwork[ku], n, &iwork[1], &ti[ti_offset]
 		, ldti, &ierr, (ftnlen)11);
+#line 536 "AB09AX.f"
     }
 
 /*     Compute TI*A*T (A is in RSF). */
 
+#line 540 "AB09AX.f"
     ij = ku;
+#line 541 "AB09AX.f"
     i__1 = *n;
+#line 541 "AB09AX.f"
     for (j = 1; j <= i__1; ++j) {
 /* Computing MIN */
+#line 542 "AB09AX.f"
 	i__2 = j + 1;
+#line 542 "AB09AX.f"
 	k = min(i__2,*n);
+#line 543 "AB09AX.f"
 	dgemv_("NoTranspose", nr, &k, &c_b31, &ti[ti_offset], ldti, &a[j * 
 		a_dim1 + 1], &c__1, &c_b50, &dwork[ij], &c__1, (ftnlen)11);
+#line 545 "AB09AX.f"
 	ij += *n;
+#line 546 "AB09AX.f"
 /* L60: */
+#line 546 "AB09AX.f"
     }
+#line 547 "AB09AX.f"
     dgemm_("NoTranspose", "NoTranspose", nr, nr, n, &c_b31, &dwork[ku], n, &t[
 	    t_offset], ldt, &c_b50, &a[a_offset], lda, (ftnlen)11, (ftnlen)11)
 	    ;
 
 /*     Compute TI*B and C*T. */
 
+#line 552 "AB09AX.f"
     dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[ku], n, (ftnlen)4);
+#line 553 "AB09AX.f"
     dgemm_("NoTranspose", "NoTranspose", nr, m, n, &c_b31, &ti[ti_offset], 
 	    ldti, &dwork[ku], n, &c_b50, &b[b_offset], ldb, (ftnlen)11, (
 	    ftnlen)11);
 
+#line 556 "AB09AX.f"
     dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[ku], p, (ftnlen)4);
+#line 557 "AB09AX.f"
     dgemm_("NoTranspose", "NoTranspose", p, nr, n, &c_b31, &dwork[ku], p, &t[
 	    t_offset], ldt, &c_b50, &c__[c_offset], ldc, (ftnlen)11, (ftnlen)
 	    11);
 
+#line 560 "AB09AX.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 562 "AB09AX.f"
     return 0;
 /* *** Last line of AB09AX *** */
 } /* ab09ax_ */

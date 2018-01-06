@@ -1,3 +1,4 @@
+#line 1 "MB04TX.f"
 /* MB04TX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04TX.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -232,42 +234,75 @@ static integer c__1 = 1;
 /*     .. External Subroutines .. */
 /*     .. Executable Statements .. */
 
+#line 209 "MB04TX.f"
     /* Parameter adjustments */
+#line 209 "MB04TX.f"
     --inuk;
+#line 209 "MB04TX.f"
     --imuk;
+#line 209 "MB04TX.f"
     a_dim1 = *lda;
+#line 209 "MB04TX.f"
     a_offset = 1 + a_dim1;
+#line 209 "MB04TX.f"
     a -= a_offset;
+#line 209 "MB04TX.f"
     e_dim1 = *lde;
+#line 209 "MB04TX.f"
     e_offset = 1 + e_dim1;
+#line 209 "MB04TX.f"
     e -= e_offset;
+#line 209 "MB04TX.f"
     q_dim1 = *ldq;
+#line 209 "MB04TX.f"
     q_offset = 1 + q_dim1;
+#line 209 "MB04TX.f"
     q -= q_offset;
+#line 209 "MB04TX.f"
     z_dim1 = *ldz;
+#line 209 "MB04TX.f"
     z_offset = 1 + z_dim1;
+#line 209 "MB04TX.f"
     z__ -= z_offset;
+#line 209 "MB04TX.f"
     --mnei;
+#line 209 "MB04TX.f"
 
+#line 209 "MB04TX.f"
     /* Function Body */
+#line 209 "MB04TX.f"
     mnei[1] = 0;
+#line 210 "MB04TX.f"
     mnei[2] = 0;
+#line 211 "MB04TX.f"
     mnei[3] = 0;
+#line 212 "MB04TX.f"
     mnei[4] = 0;
+#line 213 "MB04TX.f"
     if (*m <= 0 || *n <= 0) {
+#line 213 "MB04TX.f"
 	return 0;
+#line 213 "MB04TX.f"
     }
 
 /*     Initialisation. */
 
+#line 218 "MB04TX.f"
     ismuk = 0;
+#line 219 "MB04TX.f"
     isnuk = 0;
 
+#line 221 "MB04TX.f"
     i__1 = *nblcks;
+#line 221 "MB04TX.f"
     for (k = 1; k <= i__1; ++k) {
+#line 222 "MB04TX.f"
 	ismuk += imuk[k];
+#line 223 "MB04TX.f"
 	isnuk += inuk[k];
+#line 224 "MB04TX.f"
 /* L20: */
+#line 224 "MB04TX.f"
     }
 
 /*     MEPS, NEPS are the dimensions of the pencil s*E(eps)-A(eps). */
@@ -275,24 +310,34 @@ static integer c__1 = 1;
 /*     NEPS = Sum(k=1,...,nblcks) MU(k). */
 /*     MINF, NINF are the dimensions of the pencil s*E(inf)-A(inf). */
 
+#line 231 "MB04TX.f"
     meps = isnuk;
+#line 232 "MB04TX.f"
     neps = ismuk;
+#line 233 "MB04TX.f"
     minf = 0;
+#line 234 "MB04TX.f"
     ninf = 0;
 
 /*     MUKP1 = mu(k+1).  N.B. It is assumed that mu(NBLCKS + 1) = 0. */
 
+#line 238 "MB04TX.f"
     mukp1 = 0;
 
+#line 240 "MB04TX.f"
     for (k = *nblcks; k >= 1; --k) {
+#line 241 "MB04TX.f"
 	nuk = inuk[k];
+#line 242 "MB04TX.f"
 	muk = imuk[k];
 
 /*        Reduce submatrix E(k,k+1) to square matrix. */
 /*        NOTE that always NU(k) >= MU(k+1) >= 0. */
 
 /*        WHILE ( NU(k) >  MU(k+1) ) DO */
+#line 248 "MB04TX.f"
 L40:
+#line 248 "MB04TX.f"
 	if (nuk > mukp1) {
 
 /*           sk1p1 = sum(i=k+1,...,p-1) NU(i) */
@@ -300,10 +345,14 @@ L40:
 /*           ismuk = sum(i=1,...,k) MU(i) */
 /*           tp1   = sum(i=1,...,p-1) MU(i) = ismuk + tk1p1. */
 
+#line 255 "MB04TX.f"
 	    sk1p1 = 0;
+#line 256 "MB04TX.f"
 	    tk1p1 = 0;
 
+#line 258 "MB04TX.f"
 	    i__1 = *nblcks;
+#line 258 "MB04TX.f"
 	    for (ip = k + 1; ip <= i__1; ++ip) {
 
 /*              Annihilate the elements originally present in the last */
@@ -314,19 +363,28 @@ L40:
 /*              Use original bottom diagonal element of A(k,k) as pivot. */
 /*              Start position of pivot in A = (ra,ca). */
 
+#line 268 "MB04TX.f"
 		tp1 = ismuk + tk1p1;
+#line 269 "MB04TX.f"
 		ra = isnuk + sk1p1;
+#line 270 "MB04TX.f"
 		ca = tp1;
 
+#line 272 "MB04TX.f"
 		mup = imuk[ip];
+#line 273 "MB04TX.f"
 		nup = inuk[ip];
+#line 274 "MB04TX.f"
 		mup1 = nup;
 
+#line 276 "MB04TX.f"
 		i__2 = ca + mup - nup - 1;
+#line 276 "MB04TX.f"
 		for (cja = ca; cja <= i__2; ++cja) {
 
 /*                 CJA = current column index of pivot in A. */
 
+#line 280 "MB04TX.f"
 		    drotg_(&a[ra + cja * a_dim1], &a[ra + (cja + 1) * a_dim1],
 			     &sc, &ss);
 
@@ -334,18 +392,28 @@ L40:
 /*                 Interchange columns simultaneously. */
 /*                 Update column transformation matrix Z, if needed. */
 
+#line 286 "MB04TX.f"
 		    i__3 = ra - 1;
+#line 286 "MB04TX.f"
 		    mb04tu_(&i__3, &a[cja * a_dim1 + 1], &c__1, &a[(cja + 1) *
 			     a_dim1 + 1], &c__1, &sc, &ss);
+#line 288 "MB04TX.f"
 		    a[ra + (cja + 1) * a_dim1] = a[ra + cja * a_dim1];
+#line 289 "MB04TX.f"
 		    a[ra + cja * a_dim1] = 0.;
+#line 290 "MB04TX.f"
 		    mb04tu_(&ra, &e[cja * e_dim1 + 1], &c__1, &e[(cja + 1) * 
 			    e_dim1 + 1], &c__1, &sc, &ss);
+#line 291 "MB04TX.f"
 		    if (*updatz) {
+#line 291 "MB04TX.f"
 			mb04tu_(n, &z__[cja * z_dim1 + 1], &c__1, &z__[(cja + 
 				1) * z_dim1 + 1], &c__1, &sc, &ss);
+#line 291 "MB04TX.f"
 		    }
+#line 293 "MB04TX.f"
 /* L60: */
+#line 293 "MB04TX.f"
 		}
 
 /*              Annihilate the remaining elements originally present in */
@@ -357,15 +425,21 @@ L40:
 /*              (re,ce) and (ra,ca) are the starting positions of the */
 /*              pivots in E and A. */
 
+#line 304 "MB04TX.f"
 		ce = tp1 + mup;
+#line 305 "MB04TX.f"
 		ca = ce - mup1 - 1;
 
+#line 307 "MB04TX.f"
 		i__2 = ra + mup1;
+#line 307 "MB04TX.f"
 		for (rje = ra + 1; rje <= i__2; ++rje) {
 
 /*                 (RJE,CJE) = current position pivot in E. */
 
+#line 311 "MB04TX.f"
 		    cje = ce + 1;
+#line 312 "MB04TX.f"
 		    cja = ca + 1;
 
 /*                 Determine the row transformations. */
@@ -373,19 +447,29 @@ L40:
 /*                 Interchange the rows simultaneously. */
 /*                 Update row transformation matrix Q, if needed. */
 
+#line 319 "MB04TX.f"
 		    drotg_(&e[rje + cje * e_dim1], &e[rje - 1 + cje * e_dim1],
 			     &sc, &ss);
+#line 320 "MB04TX.f"
 		    i__3 = *n - cje;
+#line 320 "MB04TX.f"
 		    mb04tu_(&i__3, &e[rje + (cje + 1) * e_dim1], lde, &e[rje 
 			    - 1 + (cje + 1) * e_dim1], lde, &sc, &ss);
+#line 322 "MB04TX.f"
 		    e[rje - 1 + cje * e_dim1] = e[rje + cje * e_dim1];
+#line 323 "MB04TX.f"
 		    e[rje + cje * e_dim1] = 0.;
+#line 324 "MB04TX.f"
 		    i__3 = *n - cja + 1;
+#line 324 "MB04TX.f"
 		    mb04tu_(&i__3, &a[rje + cja * a_dim1], lda, &a[rje - 1 + 
 			    cja * a_dim1], lda, &sc, &ss);
+#line 326 "MB04TX.f"
 		    if (*updatq) {
+#line 326 "MB04TX.f"
 			mb04tu_(m, &q[rje * q_dim1 + 1], &c__1, &q[(rje - 1) *
 				 q_dim1 + 1], &c__1, &sc, &ss);
+#line 326 "MB04TX.f"
 		    }
 
 /*                 Determine the column transformations. */
@@ -393,26 +477,41 @@ L40:
 /*                 Interchange the columns simultaneously. */
 /*                 Update column transformation matrix Z, if needed. */
 
+#line 334 "MB04TX.f"
 		    drotg_(&a[rje + cja * a_dim1], &a[rje + (cja + 1) * 
 			    a_dim1], &sc, &ss);
+#line 335 "MB04TX.f"
 		    i__3 = rje - 1;
+#line 335 "MB04TX.f"
 		    mb04tu_(&i__3, &a[cja * a_dim1 + 1], &c__1, &a[(cja + 1) *
 			     a_dim1 + 1], &c__1, &sc, &ss);
+#line 337 "MB04TX.f"
 		    a[rje + (cja + 1) * a_dim1] = a[rje + cja * a_dim1];
+#line 338 "MB04TX.f"
 		    a[rje + cja * a_dim1] = 0.;
+#line 339 "MB04TX.f"
 		    mb04tu_(&rje, &e[cja * e_dim1 + 1], &c__1, &e[(cja + 1) * 
 			    e_dim1 + 1], &c__1, &sc, &ss);
+#line 340 "MB04TX.f"
 		    if (*updatz) {
+#line 340 "MB04TX.f"
 			mb04tu_(n, &z__[cja * z_dim1 + 1], &c__1, &z__[(cja + 
 				1) * z_dim1 + 1], &c__1, &sc, &ss);
+#line 340 "MB04TX.f"
 		    }
+#line 342 "MB04TX.f"
 /* L80: */
+#line 342 "MB04TX.f"
 		}
 
+#line 344 "MB04TX.f"
 		sk1p1 += nup;
+#line 345 "MB04TX.f"
 		tk1p1 += mup;
 
+#line 347 "MB04TX.f"
 /* L100: */
+#line 347 "MB04TX.f"
 	    }
 
 /*           Reduce A=A(eps,inf) and E=E(eps,inf) by ignoring their last */
@@ -420,47 +519,72 @@ L40:
 /*           belong to the pencil s*E(inf)-A(inf). */
 /*           Redefine blocks in new A and E. */
 
+#line 354 "MB04TX.f"
 	    --muk;
+#line 355 "MB04TX.f"
 	    --nuk;
+#line 356 "MB04TX.f"
 	    --ismuk;
+#line 357 "MB04TX.f"
 	    --isnuk;
+#line 358 "MB04TX.f"
 	    --meps;
+#line 359 "MB04TX.f"
 	    --neps;
+#line 360 "MB04TX.f"
 	    ++minf;
+#line 361 "MB04TX.f"
 	    ++ninf;
 
+#line 363 "MB04TX.f"
 	    goto L40;
+#line 364 "MB04TX.f"
 	}
 /*        END WHILE 40 */
 
+#line 367 "MB04TX.f"
 	imuk[k] = muk;
+#line 368 "MB04TX.f"
 	inuk[k] = nuk;
 
 /*        Now submatrix E(k,k+1) is square. */
 
 /*        Consider next submatrix (k:=k-1). */
 
+#line 374 "MB04TX.f"
 	isnuk -= nuk;
+#line 375 "MB04TX.f"
 	ismuk -= muk;
+#line 376 "MB04TX.f"
 	mukp1 = muk;
+#line 377 "MB04TX.f"
 /* L120: */
+#line 377 "MB04TX.f"
     }
 
 /*     If mu(NBLCKS) = 0, then the last submatrix counted in NBLCKS is */
 /*     a 0-by-0 (empty) matrix. This "matrix" must be removed. */
 
+#line 382 "MB04TX.f"
     if (imuk[*nblcks] == 0) {
+#line 382 "MB04TX.f"
 	--(*nblcks);
+#line 382 "MB04TX.f"
     }
 
 /*     Store dimensions of the pencils s*E(eps)-A(eps) and */
 /*     s*E(inf)-A(inf) in array MNEI. */
 
+#line 387 "MB04TX.f"
     mnei[1] = meps;
+#line 388 "MB04TX.f"
     mnei[2] = neps;
+#line 389 "MB04TX.f"
     mnei[3] = minf;
+#line 390 "MB04TX.f"
     mnei[4] = ninf;
 
+#line 392 "MB04TX.f"
     return 0;
 /* *** Last line of MB04TX *** */
 } /* mb04tx_ */

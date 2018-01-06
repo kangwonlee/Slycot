@@ -1,3 +1,4 @@
+#line 1 "MC01WD.f"
 /* MC01WD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC01WD.f"
 /* Subroutine */ int mc01wd_(integer *dp, doublereal *p, doublereal *u1, 
 	doublereal *u2, doublereal *q, integer *info)
 {
@@ -144,38 +146,67 @@
 
 /*     Test the input scalar arguments. */
 
+#line 129 "MC01WD.f"
     /* Parameter adjustments */
+#line 129 "MC01WD.f"
     --q;
+#line 129 "MC01WD.f"
     --p;
+#line 129 "MC01WD.f"
 
+#line 129 "MC01WD.f"
     /* Function Body */
+#line 129 "MC01WD.f"
     if (*dp < 0) {
+#line 130 "MC01WD.f"
 	*info = -1;
+#line 131 "MC01WD.f"
 	i__1 = -(*info);
+#line 131 "MC01WD.f"
 	xerbla_("MC01WD", &i__1, (ftnlen)6);
+#line 132 "MC01WD.f"
 	return 0;
+#line 133 "MC01WD.f"
     }
 
+#line 135 "MC01WD.f"
     *info = 0;
+#line 136 "MC01WD.f"
     n = *dp + 1;
+#line 137 "MC01WD.f"
     q[n] = p[n];
+#line 138 "MC01WD.f"
     if (n > 1) {
+#line 139 "MC01WD.f"
 	b = q[n];
+#line 140 "MC01WD.f"
 	q[n - 1] = p[n - 1] - *u2 * b;
+#line 141 "MC01WD.f"
 	if (n > 2) {
+#line 142 "MC01WD.f"
 	    a = q[n - 1];
 
+#line 144 "MC01WD.f"
 	    for (i__ = n - 2; i__ >= 1; --i__) {
+#line 145 "MC01WD.f"
 		c__ = p[i__] - *u2 * a - *u1 * b;
+#line 146 "MC01WD.f"
 		q[i__] = c__;
+#line 147 "MC01WD.f"
 		b = a;
+#line 148 "MC01WD.f"
 		a = c__;
+#line 149 "MC01WD.f"
 /* L20: */
+#line 149 "MC01WD.f"
 	    }
 
+#line 151 "MC01WD.f"
 	}
+#line 152 "MC01WD.f"
     }
 
+#line 154 "MC01WD.f"
     return 0;
 /* *** Last line of MC01WD *** */
 } /* mc01wd_ */

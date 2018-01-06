@@ -1,3 +1,4 @@
+#line 1 "FB01VD.f"
 /* FB01VD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "FB01VD.f"
 /* Table of constant values */
 
 static doublereal c_b5 = 1.;
@@ -306,77 +308,140 @@ static doublereal c_b40 = -1.;
 
 /*     Test the input scalar arguments. */
 
+#line 259 "FB01VD.f"
     /* Parameter adjustments */
+#line 259 "FB01VD.f"
     p_dim1 = *ldp;
+#line 259 "FB01VD.f"
     p_offset = 1 + p_dim1;
+#line 259 "FB01VD.f"
     p -= p_offset;
+#line 259 "FB01VD.f"
     a_dim1 = *lda;
+#line 259 "FB01VD.f"
     a_offset = 1 + a_dim1;
+#line 259 "FB01VD.f"
     a -= a_offset;
+#line 259 "FB01VD.f"
     b_dim1 = *ldb;
+#line 259 "FB01VD.f"
     b_offset = 1 + b_dim1;
+#line 259 "FB01VD.f"
     b -= b_offset;
+#line 259 "FB01VD.f"
     c_dim1 = *ldc;
+#line 259 "FB01VD.f"
     c_offset = 1 + c_dim1;
+#line 259 "FB01VD.f"
     c__ -= c_offset;
+#line 259 "FB01VD.f"
     q_dim1 = *ldq;
+#line 259 "FB01VD.f"
     q_offset = 1 + q_dim1;
+#line 259 "FB01VD.f"
     q -= q_offset;
+#line 259 "FB01VD.f"
     r_dim1 = *ldr;
+#line 259 "FB01VD.f"
     r_offset = 1 + r_dim1;
+#line 259 "FB01VD.f"
     r__ -= r_offset;
+#line 259 "FB01VD.f"
     k_dim1 = *ldk;
+#line 259 "FB01VD.f"
     k_offset = 1 + k_dim1;
+#line 259 "FB01VD.f"
     k -= k_offset;
+#line 259 "FB01VD.f"
     --iwork;
+#line 259 "FB01VD.f"
     --dwork;
+#line 259 "FB01VD.f"
 
+#line 259 "FB01VD.f"
     /* Function Body */
+#line 259 "FB01VD.f"
     *info = 0;
+#line 260 "FB01VD.f"
     n1 = max(1,*n);
+#line 261 "FB01VD.f"
     if (*n < 0) {
+#line 262 "FB01VD.f"
 	*info = -1;
+#line 263 "FB01VD.f"
     } else if (*m < 0) {
+#line 264 "FB01VD.f"
 	*info = -2;
+#line 265 "FB01VD.f"
     } else if (*l < 0) {
+#line 266 "FB01VD.f"
 	*info = -3;
+#line 267 "FB01VD.f"
     } else if (*ldp < n1) {
+#line 268 "FB01VD.f"
 	*info = -5;
+#line 269 "FB01VD.f"
     } else if (*lda < n1) {
+#line 270 "FB01VD.f"
 	*info = -7;
+#line 271 "FB01VD.f"
     } else if (*ldb < n1) {
+#line 272 "FB01VD.f"
 	*info = -9;
+#line 273 "FB01VD.f"
     } else if (*ldc < max(1,*l)) {
+#line 274 "FB01VD.f"
 	*info = -11;
+#line 275 "FB01VD.f"
     } else if (*ldq < max(1,*m)) {
+#line 276 "FB01VD.f"
 	*info = -13;
+#line 277 "FB01VD.f"
     } else if (*ldr < max(1,*l)) {
+#line 278 "FB01VD.f"
 	*info = -15;
+#line 279 "FB01VD.f"
     } else if (*ldk < n1) {
+#line 280 "FB01VD.f"
 	*info = -17;
+#line 281 "FB01VD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 281 "FB01VD.f"
 	i__1 = 1, i__2 = *l * *n + *l * 3, i__1 = max(i__1,i__2), i__2 = *n * 
 		*n, i__1 = max(i__1,i__2), i__2 = *n * *m;
+#line 281 "FB01VD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 282 "FB01VD.f"
 	    *info = -21;
+#line 283 "FB01VD.f"
 	}
+#line 283 "FB01VD.f"
     }
 
+#line 285 "FB01VD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 289 "FB01VD.f"
 	i__1 = -(*info);
+#line 289 "FB01VD.f"
 	xerbla_("FB01VD", &i__1, (ftnlen)6);
+#line 290 "FB01VD.f"
 	return 0;
+#line 291 "FB01VD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 295 "FB01VD.f"
     if (max(*n,*l) == 0) {
+#line 296 "FB01VD.f"
 	dwork[1] = 1.;
+#line 297 "FB01VD.f"
 	return 0;
+#line 298 "FB01VD.f"
     }
 
 /*     Efficiently compute RINOV = CPC' + R in R and put CP in DWORK and */
@@ -387,73 +452,113 @@ static doublereal c_b40 = -1.;
 /*     minimal amount of real workspace needed at that point in the */
 /*     code.) */
 
+#line 308 "FB01VD.f"
     mb01rd_("Upper", "No transpose", l, n, &c_b5, &c_b5, &r__[r_offset], ldr, 
 	    &c__[c_offset], ldc, &p[p_offset], ldp, &dwork[1], ldwork, info, (
 	    ftnlen)5, (ftnlen)12);
+#line 310 "FB01VD.f"
     ldw = max(1,*l);
 
+#line 312 "FB01VD.f"
     i__1 = *l;
+#line 312 "FB01VD.f"
     for (j = 1; j <= i__1; ++j) {
+#line 313 "FB01VD.f"
 	dcopy_(n, &dwork[j], &ldw, &k[j * k_dim1 + 1], &c__1);
+#line 314 "FB01VD.f"
 /* L10: */
+#line 314 "FB01VD.f"
     }
 
+#line 316 "FB01VD.f"
     dlacpy_("Full", l, n, &c__[c_offset], ldc, &dwork[1], &ldw, (ftnlen)4);
+#line 317 "FB01VD.f"
     dtrmm_("Right", "Upper", "Transpose", "Non-unit", l, n, &c_b5, &p[
 	    p_offset], ldp, &dwork[1], &ldw, (ftnlen)5, (ftnlen)5, (ftnlen)9, 
 	    (ftnlen)8);
+#line 319 "FB01VD.f"
     i__1 = *ldp + 1;
+#line 319 "FB01VD.f"
     dscal_(n, &c_b15, &p[p_offset], &i__1);
 
+#line 321 "FB01VD.f"
     i__1 = *l;
+#line 321 "FB01VD.f"
     for (j = 1; j <= i__1; ++j) {
+#line 322 "FB01VD.f"
 	daxpy_(n, &c_b5, &k[j * k_dim1 + 1], &c__1, &dwork[j], &ldw);
+#line 323 "FB01VD.f"
 	dcopy_(n, &dwork[j], &ldw, &k[j * k_dim1 + 1], &c__1);
+#line 324 "FB01VD.f"
 /* L20: */
+#line 324 "FB01VD.f"
     }
 
 /*     Calculate the Cholesky decomposition U'U of the innovation */
 /*     covariance matrix RINOV, and its reciprocal condition number. */
 /*     Workspace: need L*N + 3*L. */
 
+#line 330 "FB01VD.f"
     jwork = *l * *n + 1;
+#line 331 "FB01VD.f"
     rnorm = dlansy_("1-norm", "Upper", l, &r__[r_offset], ldr, &dwork[jwork], 
 	    (ftnlen)6, (ftnlen)5);
 
+#line 333 "FB01VD.f"
     toldef = *tol;
+#line 334 "FB01VD.f"
     if (toldef <= 0.) {
+#line 334 "FB01VD.f"
 	toldef = (doublereal) (*l * *l) * dlamch_("Epsilon", (ftnlen)7);
+#line 334 "FB01VD.f"
     }
+#line 336 "FB01VD.f"
     dpotrf_("Upper", l, &r__[r_offset], ldr, info, (ftnlen)5);
+#line 337 "FB01VD.f"
     if (*info != 0) {
+#line 337 "FB01VD.f"
 	return 0;
+#line 337 "FB01VD.f"
     }
 
+#line 340 "FB01VD.f"
     dpocon_("Upper", l, &r__[r_offset], ldr, &rnorm, &rcond, &dwork[jwork], &
 	    iwork[1], info, (ftnlen)5);
 
+#line 343 "FB01VD.f"
     if (rcond < toldef) {
 
 /*        Error return: RINOV is numerically singular. */
 
+#line 347 "FB01VD.f"
 	*info = *l + 1;
+#line 348 "FB01VD.f"
 	dwork[1] = rcond;
+#line 349 "FB01VD.f"
 	return 0;
+#line 350 "FB01VD.f"
     }
 
+#line 352 "FB01VD.f"
     if (*l > 1) {
+#line 352 "FB01VD.f"
 	i__1 = *l - 1;
+#line 352 "FB01VD.f"
 	i__2 = *l - 1;
+#line 352 "FB01VD.f"
 	dlaset_("Lower", &i__1, &i__2, &c_b26, &c_b26, &r__[r_dim1 + 2], ldr, 
 		(ftnlen)5);
+#line 352 "FB01VD.f"
     }
 /*                                                          -1 */
 /*     Calculate the Kalman filter gain matrix  K = PC'RINOV . */
 /*     Workspace: need L*N. */
 
+#line 358 "FB01VD.f"
     dtrsm_("Right", "Upper", "No transpose", "Non-unit", n, l, &c_b5, &r__[
 	    r_offset], ldr, &k[k_offset], ldk, (ftnlen)5, (ftnlen)5, (ftnlen)
 	    12, (ftnlen)8);
+#line 360 "FB01VD.f"
     dtrsm_("Right", "Upper", "Transpose", "Non-unit", n, l, &c_b5, &r__[
 	    r_offset], ldr, &k[k_offset], ldk, (ftnlen)5, (ftnlen)5, (ftnlen)
 	    9, (ftnlen)8);
@@ -462,16 +567,24 @@ static doublereal c_b40 = -1.;
 /*     The upper triangular part of the symmetric matrix P-KCP is formed. */
 /*     Workspace: need max(L*N,N*N). */
 
+#line 367 "FB01VD.f"
     jwork = 1;
 
+#line 369 "FB01VD.f"
     i__1 = *n;
+#line 369 "FB01VD.f"
     for (j = 1; j <= i__1; ++j) {
+#line 370 "FB01VD.f"
 	dgemv_("No transpose", &j, l, &c_b40, &k[k_offset], ldk, &dwork[jwork]
 		, &c__1, &c_b5, &p[j * p_dim1 + 1], &c__1, (ftnlen)12);
+#line 372 "FB01VD.f"
 	jwork += *l;
+#line 373 "FB01VD.f"
 /* L30: */
+#line 373 "FB01VD.f"
     }
 
+#line 375 "FB01VD.f"
     mb01rd_("Upper", "No transpose", n, n, &c_b26, &c_b5, &p[p_offset], ldp, &
 	    a[a_offset], lda, &p[p_offset], ldp, &dwork[1], ldwork, info, (
 	    ftnlen)5, (ftnlen)12);
@@ -479,16 +592,21 @@ static doublereal c_b40 = -1.;
 /*     Second part of the Riccati equation update: add BQB'. */
 /*     Workspace: need N*M. */
 
+#line 381 "FB01VD.f"
     mb01rd_("Upper", "No transpose", n, m, &c_b5, &c_b5, &p[p_offset], ldp, &
 	    b[b_offset], ldb, &q[q_offset], ldq, &dwork[1], ldwork, info, (
 	    ftnlen)5, (ftnlen)12);
+#line 383 "FB01VD.f"
     i__1 = *ldq + 1;
+#line 383 "FB01VD.f"
     dscal_(m, &c_b15, &q[q_offset], &i__1);
 
 /*     Set the reciprocal of the condition number estimate. */
 
+#line 387 "FB01VD.f"
     dwork[1] = rcond;
 
+#line 389 "FB01VD.f"
     return 0;
 /* *** Last line of FB01VD *** */
 } /* fb01vd_ */

@@ -1,0 +1,10 @@
+extern int sb10md_(integer *nc, integer *mp, integer *lendat, integer *f, integer *ord, integer *mnb, integer *nblock, integer *itype, doublereal *qutol, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *omega, integer *totord, doublereal *ad, integer *ldad, doublereal *bd, integer *ldbd, doublereal *cd, integer *ldcd, doublereal *dd, integer *lddd, doublereal *mju, integer *iwork, integer *liwork, doublereal *dwork, integer *ldwork, doublecomplex *zwork, integer *lzwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: tb05ad_ 14 27 13 13 4 4 4 9 7 4 7 4 7 4 7 9 4 7 7 9 4 4 7 4 9 4 4 124 124 */
+/*:ref: ab13md_ 14 18 13 4 9 4 4 4 4 7 7 7 7 4 7 4 9 4 4 124 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: sb10yd_ 14 19 4 4 4 7 7 7 4 7 4 7 7 7 7 4 7 4 9 4 4 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */

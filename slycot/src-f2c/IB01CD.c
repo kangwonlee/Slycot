@@ -1,3 +1,4 @@
+#line 1 "IB01CD.f"
 /* IB01CD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "IB01CD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -582,105 +584,202 @@ static doublereal c_b58 = 0.;
 
 /*     Check the input parameters. */
 
+#line 535 "IB01CD.f"
     /* Parameter adjustments */
+#line 535 "IB01CD.f"
     a_dim1 = *lda;
+#line 535 "IB01CD.f"
     a_offset = 1 + a_dim1;
+#line 535 "IB01CD.f"
     a -= a_offset;
+#line 535 "IB01CD.f"
     b_dim1 = *ldb;
+#line 535 "IB01CD.f"
     b_offset = 1 + b_dim1;
+#line 535 "IB01CD.f"
     b -= b_offset;
+#line 535 "IB01CD.f"
     c_dim1 = *ldc;
+#line 535 "IB01CD.f"
     c_offset = 1 + c_dim1;
+#line 535 "IB01CD.f"
     c__ -= c_offset;
+#line 535 "IB01CD.f"
     d_dim1 = *ldd;
+#line 535 "IB01CD.f"
     d_offset = 1 + d_dim1;
+#line 535 "IB01CD.f"
     d__ -= d_offset;
+#line 535 "IB01CD.f"
     u_dim1 = *ldu;
+#line 535 "IB01CD.f"
     u_offset = 1 + u_dim1;
+#line 535 "IB01CD.f"
     u -= u_offset;
+#line 535 "IB01CD.f"
     y_dim1 = *ldy;
+#line 535 "IB01CD.f"
     y_offset = 1 + y_dim1;
+#line 535 "IB01CD.f"
     y -= y_offset;
+#line 535 "IB01CD.f"
     --x0;
+#line 535 "IB01CD.f"
     v_dim1 = *ldv;
+#line 535 "IB01CD.f"
     v_offset = 1 + v_dim1;
+#line 535 "IB01CD.f"
     v -= v_offset;
+#line 535 "IB01CD.f"
     --iwork;
+#line 535 "IB01CD.f"
     --dwork;
+#line 535 "IB01CD.f"
 
+#line 535 "IB01CD.f"
     /* Function Body */
+#line 535 "IB01CD.f"
     withx0 = lsame_(jobx0, "X", (ftnlen)1, (ftnlen)1);
+#line 536 "IB01CD.f"
     compbd = lsame_(comuse, "C", (ftnlen)1, (ftnlen)1);
+#line 537 "IB01CD.f"
     usebd = lsame_(comuse, "U", (ftnlen)1, (ftnlen)1);
+#line 538 "IB01CD.f"
     withd = lsame_(job, "D", (ftnlen)1, (ftnlen)1);
+#line 539 "IB01CD.f"
     withb = lsame_(job, "B", (ftnlen)1, (ftnlen)1) || withd;
+#line 540 "IB01CD.f"
     maxdim = withx0 && usebd || compbd;
+#line 541 "IB01CD.f"
     maxdia = withx0 || compbd;
 
+#line 543 "IB01CD.f"
     *iwarn = 0;
+#line 544 "IB01CD.f"
     *info = 0;
+#line 545 "IB01CD.f"
     ldw = max(1,*n);
+#line 546 "IB01CD.f"
     lm = *l * *m;
+#line 547 "IB01CD.f"
     ln = *l * *n;
+#line 548 "IB01CD.f"
     nn = *n * *n;
+#line 549 "IB01CD.f"
     nm = *n * *m;
+#line 550 "IB01CD.f"
     n2m = *n * nm;
+#line 551 "IB01CD.f"
     if (compbd) {
+#line 552 "IB01CD.f"
 	ncol = nm;
+#line 553 "IB01CD.f"
 	if (withx0) {
+#line 553 "IB01CD.f"
 	    ncol += *n;
+#line 553 "IB01CD.f"
 	}
+#line 555 "IB01CD.f"
 	minsmp = ncol;
+#line 556 "IB01CD.f"
 	if (withd) {
+#line 557 "IB01CD.f"
 	    minsmp += *m;
+#line 558 "IB01CD.f"
 	    iq = minsmp;
+#line 559 "IB01CD.f"
 	} else if (! withx0) {
+#line 560 "IB01CD.f"
 	    iq = minsmp;
+#line 561 "IB01CD.f"
 	    ++minsmp;
+#line 562 "IB01CD.f"
 	} else {
+#line 563 "IB01CD.f"
 	    iq = minsmp;
+#line 564 "IB01CD.f"
 	}
+#line 565 "IB01CD.f"
     } else {
+#line 566 "IB01CD.f"
 	ncol = *n;
+#line 567 "IB01CD.f"
 	if (withx0) {
+#line 568 "IB01CD.f"
 	    minsmp = *n;
+#line 569 "IB01CD.f"
 	} else {
+#line 570 "IB01CD.f"
 	    minsmp = 0;
+#line 571 "IB01CD.f"
 	}
+#line 572 "IB01CD.f"
 	iq = minsmp;
+#line 573 "IB01CD.f"
     }
 
+#line 575 "IB01CD.f"
     if (! (withx0 || lsame_(jobx0, "N", (ftnlen)1, (ftnlen)1))) {
+#line 576 "IB01CD.f"
 	*info = -1;
+#line 577 "IB01CD.f"
     } else if (! (compbd || usebd || lsame_(comuse, "N", (ftnlen)1, (ftnlen)1)
 	    )) {
+#line 579 "IB01CD.f"
 	*info = -2;
+#line 580 "IB01CD.f"
     } else if (! withb) {
+#line 581 "IB01CD.f"
 	*info = -3;
+#line 582 "IB01CD.f"
     } else if (*n < 0) {
+#line 583 "IB01CD.f"
 	*info = -4;
+#line 584 "IB01CD.f"
     } else if (*m < 0) {
+#line 585 "IB01CD.f"
 	*info = -5;
+#line 586 "IB01CD.f"
     } else if (*l <= 0) {
+#line 587 "IB01CD.f"
 	*info = -6;
+#line 588 "IB01CD.f"
     } else if (*nsmp < minsmp) {
+#line 589 "IB01CD.f"
 	*info = -7;
+#line 590 "IB01CD.f"
     } else if (*lda < 1 || maxdia && *lda < ldw) {
+#line 591 "IB01CD.f"
 	*info = -9;
+#line 592 "IB01CD.f"
     } else if (*ldb < 1 || *m > 0 && maxdim && *ldb < ldw) {
+#line 594 "IB01CD.f"
 	*info = -11;
+#line 595 "IB01CD.f"
     } else if (*ldc < 1 || *n > 0 && maxdia && *ldc < *l) {
+#line 597 "IB01CD.f"
 	*info = -13;
+#line 598 "IB01CD.f"
     } else if (*ldd < 1 || *m > 0 && maxdim && withd && *ldd < *l) {
+#line 600 "IB01CD.f"
 	*info = -15;
+#line 601 "IB01CD.f"
     } else if (*ldu < 1 || *m > 0 && maxdim && *ldu < *nsmp) {
+#line 603 "IB01CD.f"
 	*info = -17;
+#line 604 "IB01CD.f"
     } else if (*ldy < 1 || maxdia && *ldy < *nsmp) {
+#line 605 "IB01CD.f"
 	*info = -19;
+#line 606 "IB01CD.f"
     } else if (*ldv < 1 || maxdia && *ldv < ldw) {
+#line 607 "IB01CD.f"
 	*info = -22;
+#line 608 "IB01CD.f"
     } else if (*tol > 1.) {
+#line 609 "IB01CD.f"
 	*info = -23;
+#line 610 "IB01CD.f"
     }
 
 /*     Compute workspace. */
@@ -690,146 +789,250 @@ static doublereal c_b58 = 0.;
 /*       NB refers to the optimal block size for the immediately */
 /*       following subroutine, as returned by ILAENV.) */
 
+#line 619 "IB01CD.f"
     if (! maxdia || max(*n,*m) == 0) {
+#line 620 "IB01CD.f"
 	minwrk = 2;
+#line 621 "IB01CD.f"
     } else {
+#line 622 "IB01CD.f"
 	nsmpl = *nsmp * *l;
+#line 623 "IB01CD.f"
 	iq *= *l;
+#line 624 "IB01CD.f"
 	ncp1 = ncol + 1;
+#line 625 "IB01CD.f"
 	isize = nsmpl * ncp1;
+#line 626 "IB01CD.f"
 	if (compbd) {
+#line 627 "IB01CD.f"
 	    if (*n > 0 && withx0) {
+#line 628 "IB01CD.f"
 		ic = (nn << 1) + *n;
+#line 629 "IB01CD.f"
 	    } else {
+#line 630 "IB01CD.f"
 		ic = 0;
+#line 631 "IB01CD.f"
 	    }
+#line 632 "IB01CD.f"
 	} else {
+#line 633 "IB01CD.f"
 	    ic = nn << 1;
+#line 634 "IB01CD.f"
 	}
+#line 635 "IB01CD.f"
 	minwls = ncol * ncp1;
+#line 636 "IB01CD.f"
 	if (compbd) {
+#line 637 "IB01CD.f"
 	    if (withd) {
+#line 637 "IB01CD.f"
 		minwls += lm * ncp1;
+#line 637 "IB01CD.f"
 	    }
+#line 639 "IB01CD.f"
 	    if (*m > 0 && withd) {
 /* Computing MAX */
+#line 640 "IB01CD.f"
 		i__1 = ncol << 1;
+#line 640 "IB01CD.f"
 		ia = *m + max(i__1,*m);
+#line 641 "IB01CD.f"
 	    } else {
+#line 642 "IB01CD.f"
 		ia = ncol << 1;
+#line 643 "IB01CD.f"
 	    }
+#line 644 "IB01CD.f"
 	    itau = n2m + max(ic,ia);
+#line 645 "IB01CD.f"
 	    if (withx0) {
+#line 645 "IB01CD.f"
 		itau += ln;
+#line 645 "IB01CD.f"
 	    }
 /* Computing MAX */
+#line 647 "IB01CD.f"
 	    i__1 = *n + max(ic,ia), i__2 = ncol * 6;
+#line 647 "IB01CD.f"
 	    ldw2 = isize + max(i__1,i__2);
 /* Computing MAX */
+#line 648 "IB01CD.f"
 	    i__1 = iq * ncp1 + itau, i__2 = ncol * 6;
+#line 648 "IB01CD.f"
 	    ldw3 = minwls + max(i__1,i__2);
+#line 649 "IB01CD.f"
 	    if (*m > 0 && withd) {
 /* Computing MAX */
+#line 650 "IB01CD.f"
 		i__1 = ldw2, i__2 = isize + (*m << 1) * *m + *m * 6;
+#line 650 "IB01CD.f"
 		ldw2 = max(i__1,i__2);
 /* Computing MAX */
+#line 651 "IB01CD.f"
 		i__1 = ldw3, i__2 = minwls + (*m << 1) * *m + *m * 6;
+#line 651 "IB01CD.f"
 		ldw3 = max(i__1,i__2);
+#line 652 "IB01CD.f"
 		ia = 3;
+#line 653 "IB01CD.f"
 	    } else {
+#line 654 "IB01CD.f"
 		ia = 2;
+#line 655 "IB01CD.f"
 	    }
+#line 656 "IB01CD.f"
 	} else {
+#line 657 "IB01CD.f"
 	    itau = ic + ln;
 /* Computing MAX */
+#line 658 "IB01CD.f"
 	    i__1 = ic, i__2 = *n << 2;
+#line 658 "IB01CD.f"
 	    ldw2 = isize + (*n << 1) + max(i__1,i__2);
 /* Computing MAX */
+#line 659 "IB01CD.f"
 	    i__1 = iq * ncp1 + itau, i__2 = *n << 2;
+#line 659 "IB01CD.f"
 	    ldw3 = minwls + (*n << 1) + max(i__1,i__2);
+#line 660 "IB01CD.f"
 	    ia = 2;
+#line 661 "IB01CD.f"
 	}
 /* Computing MAX */
+#line 662 "IB01CD.f"
 	i__1 = *n * 5, i__1 = max(i__1,ia), i__2 = min(ldw2,ldw3);
+#line 662 "IB01CD.f"
 	minwrk = ia + nn + nm + ln + max(i__1,i__2);
 
+#line 664 "IB01CD.f"
 	if (*info == 0 && *ldwork >= minwrk) {
 /* Computing MAX */
+#line 665 "IB01CD.f"
 	    i__1 = *n * 5;
+#line 665 "IB01CD.f"
 	    maxwrk = max(i__1,ia);
+#line 666 "IB01CD.f"
 	    if (compbd) {
+#line 667 "IB01CD.f"
 		if (*m > 0 && withd) {
 /* Computing MAX */
 /* Computing MAX */
+#line 668 "IB01CD.f"
 		    i__5 = *nsmp - *m;
+#line 668 "IB01CD.f"
 		    i__3 = *m * ilaenv_(&c__1, "DGEQRF", " ", nsmp, m, &c_n1, 
 			    &c_n1, (ftnlen)6, (ftnlen)1), i__4 = ncol + ncol *
 			     ilaenv_(&c__1, "DGEQRF", " ", &i__5, &ncol, &
 			    c_n1, &c_n1, (ftnlen)6, (ftnlen)1);
+#line 668 "IB01CD.f"
 		    i__1 = maxwrk, i__2 = isize + *n + *m + max(i__3,i__4);
+#line 668 "IB01CD.f"
 		    maxwrk = max(i__1,i__2);
 /* Computing MAX */
 /* Computing MAX */
+#line 673 "IB01CD.f"
 		    i__5 = *nsmp - *m;
+#line 673 "IB01CD.f"
 		    i__3 = ncp1 * ilaenv_(&c__1, "DORMQR", "LT", nsmp, &ncp1, 
 			    m, &c_n1, (ftnlen)6, (ftnlen)2), i__4 = ncol + 
 			    ilaenv_(&c__1, "DORMQR", "LT", &i__5, &c__1, &
 			    ncol, &c_n1, (ftnlen)6, (ftnlen)2);
+#line 673 "IB01CD.f"
 		    i__1 = maxwrk, i__2 = isize + *n + *m + max(i__3,i__4);
+#line 673 "IB01CD.f"
 		    maxwrk = max(i__1,i__2);
+#line 678 "IB01CD.f"
 		} else {
 /* Computing MAX */
 /* Computing MAX */
+#line 679 "IB01CD.f"
 		    i__3 = ncol * ilaenv_(&c__1, "DGEQRF", " ", &nsmpl, &ncol,
 			     &c_n1, &c_n1, (ftnlen)6, (ftnlen)1), i__4 = 
 			    ilaenv_(&c__1, "DORMQR", "LT", &nsmpl, &c__1, &
 			    ncol, &c_n1, (ftnlen)6, (ftnlen)2);
+#line 679 "IB01CD.f"
 		    i__1 = maxwrk, i__2 = isize + *n + ncol + max(i__3,i__4);
+#line 679 "IB01CD.f"
 		    maxwrk = max(i__1,i__2);
+#line 684 "IB01CD.f"
 		}
+#line 685 "IB01CD.f"
 	    } else {
 /* Computing MAX */
 /* Computing MAX */
+#line 686 "IB01CD.f"
 		i__3 = *n * ilaenv_(&c__1, "DGEQRF", " ", &nsmpl, n, &c_n1, &
 			c_n1, (ftnlen)6, (ftnlen)1), i__4 = ilaenv_(&c__1, 
 			"DORMQR", "LT", &nsmpl, &c__1, n, &c_n1, (ftnlen)6, (
 			ftnlen)2);
+#line 686 "IB01CD.f"
 		i__1 = maxwrk, i__2 = isize + (*n << 1) + max(i__3,i__4);
+#line 686 "IB01CD.f"
 		maxwrk = max(i__1,i__2);
+#line 691 "IB01CD.f"
 	    }
+#line 692 "IB01CD.f"
 	    maxwrk = ia + nn + nm + ln + maxwrk;
+#line 693 "IB01CD.f"
 	    maxwrk = max(maxwrk,minwrk);
+#line 694 "IB01CD.f"
 	}
+#line 695 "IB01CD.f"
     }
 
+#line 697 "IB01CD.f"
     if (*info == 0 && *ldwork < minwrk) {
+#line 698 "IB01CD.f"
 	*info = -26;
+#line 699 "IB01CD.f"
 	dwork[1] = (doublereal) minwrk;
+#line 700 "IB01CD.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 704 "IB01CD.f"
     if (*info != 0) {
+#line 705 "IB01CD.f"
 	i__1 = -(*info);
+#line 705 "IB01CD.f"
 	xerbla_("IB01CD", &i__1, (ftnlen)6);
+#line 706 "IB01CD.f"
 	return 0;
+#line 707 "IB01CD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 711 "IB01CD.f"
     if (! maxdia || max(*n,*m) == 0) {
+#line 712 "IB01CD.f"
 	dwork[2] = 1.;
+#line 713 "IB01CD.f"
 	if (compbd && *m > 0 && withd) {
+#line 714 "IB01CD.f"
 	    dwork[1] = 3.;
+#line 715 "IB01CD.f"
 	    dwork[3] = 1.;
+#line 716 "IB01CD.f"
 	} else {
+#line 717 "IB01CD.f"
 	    dwork[1] = 2.;
+#line 718 "IB01CD.f"
 	}
+#line 719 "IB01CD.f"
 	if (*n > 0 && usebd) {
+#line 720 "IB01CD.f"
 	    dum[0] = 0.;
+#line 721 "IB01CD.f"
 	    dcopy_(n, dum, &c__0, &x0[1], &c__1);
+#line 722 "IB01CD.f"
 	}
+#line 723 "IB01CD.f"
 	return 0;
+#line 724 "IB01CD.f"
     }
 
 /*     Compute the Schur factorization of  A  and transform the other */
@@ -840,42 +1043,72 @@ static doublereal c_b58 = 0.;
 /*                        g = 2,  if  JOBX0 = 'X'  and  COMUSE <> 'C'; */
 /*                 prefer larger. */
 
+#line 734 "IB01CD.f"
     ++ia;
+#line 735 "IB01CD.f"
     ic = ia + nn;
+#line 736 "IB01CD.f"
     ib = ic + ln;
+#line 737 "IB01CD.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &dwork[ia], &ldw, (ftnlen)4);
+#line 738 "IB01CD.f"
     dlacpy_("Full", l, n, &c__[c_offset], ldc, &dwork[ic], l, (ftnlen)4);
 
+#line 740 "IB01CD.f"
     if (usebd) {
+#line 741 "IB01CD.f"
 	mtmp = *m;
+#line 742 "IB01CD.f"
 	dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[ib], &ldw, (ftnlen)4);
+#line 743 "IB01CD.f"
     } else {
+#line 744 "IB01CD.f"
 	mtmp = 0;
+#line 745 "IB01CD.f"
     }
+#line 746 "IB01CD.f"
     iwr = ib + nm;
+#line 747 "IB01CD.f"
     iwi = iwr + *n;
+#line 748 "IB01CD.f"
     jwork = iwi + *n;
 
+#line 750 "IB01CD.f"
     i__1 = *ldwork - jwork + 1;
+#line 750 "IB01CD.f"
     tb01wd_(n, &mtmp, l, &dwork[ia], &ldw, &dwork[ib], &ldw, &dwork[ic], l, &
 	    v[v_offset], ldv, &dwork[iwr], &dwork[iwi], &dwork[jwork], &i__1, 
 	    &ierr);
+#line 753 "IB01CD.f"
     if (ierr > 0) {
+#line 754 "IB01CD.f"
 	*info = 1;
+#line 755 "IB01CD.f"
 	return 0;
+#line 756 "IB01CD.f"
     }
 /* Computing MAX */
+#line 757 "IB01CD.f"
     i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 757 "IB01CD.f"
     maxwrk = max(i__1,i__2);
 
+#line 759 "IB01CD.f"
     i__1 = iwi - 1;
+#line 759 "IB01CD.f"
     for (i__ = iwr; i__ <= i__1; ++i__) {
+#line 760 "IB01CD.f"
 	if (dlapy2_(&dwork[i__], &dwork[i__ + *n]) >= 1.) {
+#line 760 "IB01CD.f"
 	    *iwarn = 6;
+#line 760 "IB01CD.f"
 	}
+#line 762 "IB01CD.f"
 /* L10: */
+#line 762 "IB01CD.f"
     }
 
+#line 764 "IB01CD.f"
     jwork = iwr;
 
 /*     Estimate  x(0)  and/or the system matrices  B and D. */
@@ -883,62 +1116,96 @@ static doublereal c_b58 = 0.;
 /*                           max( g, min( LDW2, LDW3 ) ) (see LDWORK); */
 /*                prefer larger. */
 
+#line 771 "IB01CD.f"
     if (compbd) {
+#line 772 "IB01CD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 772 "IB01CD.f"
 	ib01qd_(jobx0, job, n, m, l, nsmp, &dwork[ia], &ldw, &dwork[ic], l, &
 		u[u_offset], ldu, &y[y_offset], ldy, &x0[1], &dwork[ib], &ldw,
 		 &d__[d_offset], ldd, tol, &iwork[1], &dwork[jwork], &i__1, &
 		iwarnl, info, (ftnlen)1, (ftnlen)1);
 
+#line 777 "IB01CD.f"
 	if (*info == 0) {
+#line 778 "IB01CD.f"
 	    if (*m > 0 && withd) {
+#line 778 "IB01CD.f"
 		rcondu = dwork[jwork + 2];
+#line 778 "IB01CD.f"
 	    }
 
 /*           Compute the system input matrix  B  corresponding to the */
 /*           original system. */
 
+#line 784 "IB01CD.f"
 	    dgemm_("NoTranspose", "NoTranspose", n, m, n, &c_b57, &v[v_offset]
 		    , ldv, &dwork[ib], &ldw, &c_b58, &b[b_offset], ldb, (
 		    ftnlen)11, (ftnlen)11);
+#line 786 "IB01CD.f"
 	}
+#line 787 "IB01CD.f"
     } else {
+#line 788 "IB01CD.f"
 	if (withd) {
+#line 789 "IB01CD.f"
 	    *(unsigned char *)jobd = 'N';
+#line 790 "IB01CD.f"
 	} else {
+#line 791 "IB01CD.f"
 	    *(unsigned char *)jobd = 'Z';
+#line 792 "IB01CD.f"
 	}
 
+#line 794 "IB01CD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 794 "IB01CD.f"
 	ib01rd_(jobd, n, &mtmp, l, nsmp, &dwork[ia], &ldw, &dwork[ib], &ldw, &
 		dwork[ic], l, &d__[d_offset], ldd, &u[u_offset], ldu, &y[
 		y_offset], ldy, &x0[1], tol, &iwork[1], &dwork[jwork], &i__1, 
 		&iwarnl, info, (ftnlen)1);
+#line 798 "IB01CD.f"
     }
+#line 799 "IB01CD.f"
     *iwarn = max(*iwarn,iwarnl);
 
+#line 801 "IB01CD.f"
     if (*info == 0) {
+#line 802 "IB01CD.f"
 	rcond = dwork[jwork + 1];
 /* Computing MAX */
+#line 803 "IB01CD.f"
 	i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 803 "IB01CD.f"
 	maxwrk = max(i__1,i__2);
+#line 804 "IB01CD.f"
 	if (withx0) {
 
 /*           Transform the initial state estimate to obtain the initial */
 /*           state corresponding to the original system. */
 /*           Workspace: need g + N*N + L*N + N*M + N. */
 
+#line 810 "IB01CD.f"
 	    dgemv_("NoTranspose", n, n, &c_b57, &v[v_offset], ldv, &x0[1], &
 		    c__1, &c_b58, &dwork[jwork], &c__1, (ftnlen)11);
+#line 812 "IB01CD.f"
 	    dcopy_(n, &dwork[jwork], &c__1, &x0[1], &c__1);
+#line 813 "IB01CD.f"
 	}
 
+#line 815 "IB01CD.f"
 	dwork[1] = (doublereal) maxwrk;
+#line 816 "IB01CD.f"
 	dwork[2] = rcond;
+#line 817 "IB01CD.f"
 	if (compbd && *m > 0 && withd) {
+#line 817 "IB01CD.f"
 	    dwork[3] = rcondu;
+#line 817 "IB01CD.f"
 	}
+#line 819 "IB01CD.f"
     }
+#line 820 "IB01CD.f"
     return 0;
 
 /* *** End of IB01CD *** */

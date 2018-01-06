@@ -1,3 +1,4 @@
+#line 1 "SB16CD.f"
 /* SB16CD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB16CD.f"
 /* Table of constant values */
 
 static doublereal c_b17 = 1.;
@@ -430,107 +432,192 @@ static doublereal c_b18 = 0.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 388 "SB16CD.f"
     /* Parameter adjustments */
+#line 388 "SB16CD.f"
     a_dim1 = *lda;
+#line 388 "SB16CD.f"
     a_offset = 1 + a_dim1;
+#line 388 "SB16CD.f"
     a -= a_offset;
+#line 388 "SB16CD.f"
     b_dim1 = *ldb;
+#line 388 "SB16CD.f"
     b_offset = 1 + b_dim1;
+#line 388 "SB16CD.f"
     b -= b_offset;
+#line 388 "SB16CD.f"
     c_dim1 = *ldc;
+#line 388 "SB16CD.f"
     c_offset = 1 + c_dim1;
+#line 388 "SB16CD.f"
     c__ -= c_offset;
+#line 388 "SB16CD.f"
     d_dim1 = *ldd;
+#line 388 "SB16CD.f"
     d_offset = 1 + d_dim1;
+#line 388 "SB16CD.f"
     d__ -= d_offset;
+#line 388 "SB16CD.f"
     f_dim1 = *ldf;
+#line 388 "SB16CD.f"
     f_offset = 1 + f_dim1;
+#line 388 "SB16CD.f"
     f -= f_offset;
+#line 388 "SB16CD.f"
     g_dim1 = *ldg;
+#line 388 "SB16CD.f"
     g_offset = 1 + g_dim1;
+#line 388 "SB16CD.f"
     g -= g_offset;
+#line 388 "SB16CD.f"
     --hsv;
+#line 388 "SB16CD.f"
     --iwork;
+#line 388 "SB16CD.f"
     --dwork;
+#line 388 "SB16CD.f"
 
+#line 388 "SB16CD.f"
     /* Function Body */
+#line 388 "SB16CD.f"
     *info = 0;
+#line 389 "SB16CD.f"
     *iwarn = 0;
+#line 390 "SB16CD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 391 "SB16CD.f"
     withd = lsame_(jobd, "D", (ftnlen)1, (ftnlen)1);
+#line 392 "SB16CD.f"
     bal = lsame_(jobmr, "B", (ftnlen)1, (ftnlen)1);
+#line 393 "SB16CD.f"
     left = lsame_(jobcf, "L", (ftnlen)1, (ftnlen)1);
+#line 394 "SB16CD.f"
     fixord = lsame_(ordsel, "F", (ftnlen)1, (ftnlen)1);
+#line 395 "SB16CD.f"
     if (left) {
+#line 396 "SB16CD.f"
 	mp = *m;
+#line 397 "SB16CD.f"
     } else {
+#line 398 "SB16CD.f"
 	mp = *p;
+#line 399 "SB16CD.f"
     }
 /* Computing MAX */
+#line 400 "SB16CD.f"
     i__1 = 1, i__2 = (*n << 1) * *n + *n * 5, i__1 = max(i__1,i__2), i__2 = *
 	    n * max(*m,*p), i__1 = max(i__1,i__2), i__2 = *n * (*n + max(*n,
 	    mp) + min(*n,mp) + 6);
+#line 400 "SB16CD.f"
     lw = (*n << 1) * *n + max(i__1,i__2);
 
 /*     Test the input scalar arguments. */
 
+#line 405 "SB16CD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 406 "SB16CD.f"
 	*info = -1;
+#line 407 "SB16CD.f"
     } else if (! (withd || lsame_(jobd, "Z", (ftnlen)1, (ftnlen)1))) {
+#line 408 "SB16CD.f"
 	*info = -2;
+#line 409 "SB16CD.f"
     } else if (! (bal || lsame_(jobmr, "F", (ftnlen)1, (ftnlen)1))) {
+#line 410 "SB16CD.f"
 	*info = -3;
+#line 411 "SB16CD.f"
     } else if (! (left || lsame_(jobcf, "R", (ftnlen)1, (ftnlen)1))) {
+#line 412 "SB16CD.f"
 	*info = -4;
+#line 413 "SB16CD.f"
     } else if (! (fixord || lsame_(ordsel, "A", (ftnlen)1, (ftnlen)1))) {
+#line 414 "SB16CD.f"
 	*info = -5;
+#line 415 "SB16CD.f"
     } else if (*n < 0) {
+#line 416 "SB16CD.f"
 	*info = -6;
+#line 417 "SB16CD.f"
     } else if (*m < 0) {
+#line 418 "SB16CD.f"
 	*info = -7;
+#line 419 "SB16CD.f"
     } else if (*p < 0) {
+#line 420 "SB16CD.f"
 	*info = -8;
+#line 421 "SB16CD.f"
     } else if (fixord && (*ncr < 0 || *ncr > *n)) {
+#line 422 "SB16CD.f"
 	*info = -9;
+#line 423 "SB16CD.f"
     } else if (*lda < max(1,*n)) {
+#line 424 "SB16CD.f"
 	*info = -11;
+#line 425 "SB16CD.f"
     } else if (*ldb < max(1,*n)) {
+#line 426 "SB16CD.f"
 	*info = -13;
+#line 427 "SB16CD.f"
     } else if (*ldc < max(1,*p)) {
+#line 428 "SB16CD.f"
 	*info = -15;
+#line 429 "SB16CD.f"
     } else if (*ldd < 1 || withd && *ldd < *p) {
+#line 430 "SB16CD.f"
 	*info = -17;
+#line 431 "SB16CD.f"
     } else if (*ldf < max(1,*m)) {
+#line 432 "SB16CD.f"
 	*info = -19;
+#line 433 "SB16CD.f"
     } else if (*ldg < max(1,*n)) {
+#line 434 "SB16CD.f"
 	*info = -21;
+#line 435 "SB16CD.f"
     } else if (*ldwork < lw) {
+#line 436 "SB16CD.f"
 	*info = -26;
+#line 437 "SB16CD.f"
     }
 
+#line 439 "SB16CD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 443 "SB16CD.f"
 	i__1 = -(*info);
+#line 443 "SB16CD.f"
 	xerbla_("SB16CD", &i__1, (ftnlen)6);
+#line 444 "SB16CD.f"
 	return 0;
+#line 445 "SB16CD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 449 "SB16CD.f"
     i__1 = min(*n,*m);
+#line 449 "SB16CD.f"
     if (min(i__1,*p) == 0 || fixord && *ncr == 0) {
+#line 451 "SB16CD.f"
 	*ncr = 0;
+#line 452 "SB16CD.f"
 	dwork[1] = 1.;
+#line 453 "SB16CD.f"
 	return 0;
+#line 454 "SB16CD.f"
     }
 
 /*     Allocate working storage. */
 
+#line 458 "SB16CD.f"
     kt = 1;
+#line 459 "SB16CD.f"
     kti = kt + *n * *n;
+#line 460 "SB16CD.f"
     kw = kti + *n * *n;
 
 /*     Compute in DWORK(KTI) and DWORK(KT) the Cholesky factors Su and Ru */
@@ -543,15 +630,21 @@ static doublereal c_b18 = 0.;
 /*                                                        if JOBCF = 'R'. */
 /*                  prefer larger. */
 
+#line 472 "SB16CD.f"
     i__1 = *ldwork - kw + 1;
+#line 472 "SB16CD.f"
     sb16cy_(dico, jobcf, n, m, p, &a[a_offset], lda, &b[b_offset], ldb, &c__[
 	    c_offset], ldc, &f[f_offset], ldf, &g[g_offset], ldg, &scalec, &
 	    scaleo, &dwork[kti], n, &dwork[kt], n, &dwork[kw], &i__1, info, (
 	    ftnlen)1, (ftnlen)1);
 
+#line 476 "SB16CD.f"
     if (*info != 0) {
+#line 476 "SB16CD.f"
 	return 0;
+#line 476 "SB16CD.f"
     }
+#line 478 "SB16CD.f"
     wrkopt = (integer) dwork[kw] + kw - 1;
 
 /*     Compute a B&T approximation (Ar,Br,Cr) of (A,B,C) and */
@@ -562,28 +655,40 @@ static doublereal c_b18 = 0.;
 /*     Integer workspace:  0,  if JOBMR = 'B'; */
 /*                         N,  if JOBMR = 'F'. */
 
+#line 488 "SB16CD.f"
     i__1 = *ldwork - kw + 1;
+#line 488 "SB16CD.f"
     ab09ix_(dico, jobmr, "NotSchur", ordsel, n, m, p, ncr, &scalec, &scaleo, &
 	    a[a_offset], lda, &b[b_offset], ldb, &c__[c_offset], ldc, &d__[
 	    d_offset], ldd, &dwork[kti], n, &dwork[kt], n, &nmr, &hsv[1], tol,
 	     tol, &iwork[1], &dwork[kw], &i__1, iwarn, &ierr, (ftnlen)1, (
 	    ftnlen)1, (ftnlen)8, (ftnlen)1);
+#line 492 "SB16CD.f"
     if (ierr != 0) {
+#line 493 "SB16CD.f"
 	*info = 6;
+#line 494 "SB16CD.f"
 	return 0;
+#line 495 "SB16CD.f"
     }
 /* Computing MAX */
+#line 496 "SB16CD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 496 "SB16CD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Compute reduced gains Bc = Gr = TI*G and Cc = Fr = F*T. */
 /*     Workspace:  need   N*(2*N+MAX(M,P)). */
 
+#line 501 "SB16CD.f"
     dlacpy_("Full", n, p, &g[g_offset], ldg, &dwork[kw], n, (ftnlen)4);
+#line 502 "SB16CD.f"
     dgemm_("NoTranspose", "NoTranspose", ncr, p, n, &c_b17, &dwork[kti], n, &
 	    dwork[kw], n, &c_b18, &g[g_offset], ldg, (ftnlen)11, (ftnlen)11);
 
+#line 505 "SB16CD.f"
     dlacpy_("Full", m, n, &f[f_offset], ldf, &dwork[kw], m, (ftnlen)4);
+#line 506 "SB16CD.f"
     dgemm_("NoTranspose", "NoTranspose", m, ncr, n, &c_b17, &dwork[kw], m, &
 	    dwork[kt], n, &c_b18, &f[f_offset], ldf, (ftnlen)11, (ftnlen)11);
 
@@ -592,21 +697,29 @@ static doublereal c_b18 = 0.;
 
 /*     Workspace:    need  P*N. */
 
+#line 514 "SB16CD.f"
     dlacpy_("Full", p, ncr, &c__[c_offset], ldc, &dwork[1], p, (ftnlen)4);
+#line 515 "SB16CD.f"
     if (withd) {
+#line 515 "SB16CD.f"
 	dgemm_("NoTranspose", "NoTranspose", p, ncr, m, &c_b17, &d__[d_offset]
 		, ldd, &f[f_offset], ldf, &c_b17, &dwork[1], p, (ftnlen)11, (
 		ftnlen)11);
+#line 515 "SB16CD.f"
     }
+#line 517 "SB16CD.f"
     dgemm_("NoTranspose", "NoTranspose", ncr, ncr, p, &c_b17, &g[g_offset], 
 	    ldg, &dwork[1], p, &c_b17, &a[a_offset], lda, (ftnlen)11, (ftnlen)
 	    11);
+#line 519 "SB16CD.f"
     dgemm_("NoTranspose", "NoTranspose", ncr, ncr, m, &c_b17, &b[b_offset], 
 	    ldb, &f[f_offset], ldf, &c_b17, &a[a_offset], lda, (ftnlen)11, (
 	    ftnlen)11);
 
+#line 522 "SB16CD.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 524 "SB16CD.f"
     return 0;
 /* *** Last line of SB16CD *** */
 } /* sb16cd_ */

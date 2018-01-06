@@ -1,3 +1,4 @@
+#line 1 "SB01BD.f"
 /* SB01BD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB01BD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -349,93 +351,163 @@ static logical c_false = FALSE_;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 296 "SB01BD.f"
     /* Parameter adjustments */
+#line 296 "SB01BD.f"
     a_dim1 = *lda;
+#line 296 "SB01BD.f"
     a_offset = 1 + a_dim1;
+#line 296 "SB01BD.f"
     a -= a_offset;
+#line 296 "SB01BD.f"
     b_dim1 = *ldb;
+#line 296 "SB01BD.f"
     b_offset = 1 + b_dim1;
+#line 296 "SB01BD.f"
     b -= b_offset;
+#line 296 "SB01BD.f"
     --wr;
+#line 296 "SB01BD.f"
     --wi;
+#line 296 "SB01BD.f"
     f_dim1 = *ldf;
+#line 296 "SB01BD.f"
     f_offset = 1 + f_dim1;
+#line 296 "SB01BD.f"
     f -= f_offset;
+#line 296 "SB01BD.f"
     z_dim1 = *ldz;
+#line 296 "SB01BD.f"
     z_offset = 1 + z_dim1;
+#line 296 "SB01BD.f"
     z__ -= z_offset;
+#line 296 "SB01BD.f"
     --dwork;
+#line 296 "SB01BD.f"
 
+#line 296 "SB01BD.f"
     /* Function Body */
+#line 296 "SB01BD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 297 "SB01BD.f"
     *iwarn = 0;
+#line 298 "SB01BD.f"
     *info = 0;
 
 /*     Check the scalar input parameters. */
 
+#line 302 "SB01BD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 303 "SB01BD.f"
 	*info = -1;
+#line 304 "SB01BD.f"
     } else if (*n < 0) {
+#line 305 "SB01BD.f"
 	*info = -2;
+#line 306 "SB01BD.f"
     } else if (*m < 0) {
+#line 307 "SB01BD.f"
 	*info = -3;
+#line 308 "SB01BD.f"
     } else if (*np < 0) {
+#line 309 "SB01BD.f"
 	*info = -4;
+#line 310 "SB01BD.f"
     } else if (discr && *alpha < 0.) {
+#line 311 "SB01BD.f"
 	*info = -5;
+#line 312 "SB01BD.f"
     } else if (*lda < max(1,*n)) {
+#line 313 "SB01BD.f"
 	*info = -7;
+#line 314 "SB01BD.f"
     } else if (*ldb < max(1,*n)) {
+#line 315 "SB01BD.f"
 	*info = -9;
+#line 316 "SB01BD.f"
     } else if (*ldf < max(1,*m)) {
+#line 317 "SB01BD.f"
 	*info = -16;
+#line 318 "SB01BD.f"
     } else if (*ldz < max(1,*n)) {
+#line 319 "SB01BD.f"
 	*info = -18;
+#line 320 "SB01BD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 320 "SB01BD.f"
 	i__1 = 1, i__2 = *m * 5, i__1 = max(i__1,i__2), i__2 = *n * 5, i__1 = 
 		max(i__1,i__2), i__2 = (*n << 1) + (*m << 2);
+#line 320 "SB01BD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 321 "SB01BD.f"
 	    *info = -21;
+#line 322 "SB01BD.f"
 	}
+#line 322 "SB01BD.f"
     }
+#line 323 "SB01BD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 327 "SB01BD.f"
 	i__1 = -(*info);
+#line 327 "SB01BD.f"
 	xerbla_("SB01BD", &i__1, (ftnlen)6);
+#line 328 "SB01BD.f"
 	return 0;
+#line 329 "SB01BD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 333 "SB01BD.f"
     if (*n == 0) {
+#line 334 "SB01BD.f"
 	*nfp = 0;
+#line 335 "SB01BD.f"
 	*nap = 0;
+#line 336 "SB01BD.f"
 	*nup = 0;
+#line 337 "SB01BD.f"
 	dwork[1] = 1.;
+#line 338 "SB01BD.f"
 	return 0;
+#line 339 "SB01BD.f"
     }
 
 /*     Compute the norms of A and B, and set default tolerances */
 /*     if necessary. */
 
+#line 344 "SB01BD.f"
     anorm = dlange_("1-norm", n, n, &a[a_offset], lda, &dwork[1], (ftnlen)6);
+#line 345 "SB01BD.f"
     bnorm = dlange_("1-norm", n, m, &b[b_offset], ldb, &dwork[1], (ftnlen)6);
+#line 346 "SB01BD.f"
     if (*tol <= 0.) {
+#line 347 "SB01BD.f"
 	x = dlamch_("Epsilon", (ftnlen)7);
+#line 348 "SB01BD.f"
 	toler = (doublereal) (*n) * max(anorm,bnorm) * x;
+#line 349 "SB01BD.f"
 	tolerb = (doublereal) (*n) * bnorm * x;
+#line 350 "SB01BD.f"
     } else {
+#line 351 "SB01BD.f"
 	toler = *tol;
+#line 352 "SB01BD.f"
 	tolerb = *tol;
+#line 353 "SB01BD.f"
     }
 
 /*     Allocate working storage. */
 
+#line 357 "SB01BD.f"
     kwr = 1;
+#line 358 "SB01BD.f"
     kwi = kwr + *n;
+#line 359 "SB01BD.f"
     kw = kwi + *n;
 
 /*     Reduce A to real Schur form using an orthogonal similarity */
@@ -444,14 +516,21 @@ static logical c_false = FALSE_;
 /*     Workspace:  need   5*N; */
 /*                 prefer larger. */
 
+#line 367 "SB01BD.f"
     i__1 = *ldwork - kw + 1;
+#line 367 "SB01BD.f"
     dgees_("Vectors", "No ordering", (L_fp)select_, n, &a[a_offset], lda, &
 	    ncur, &dwork[kwr], &dwork[kwi], &z__[z_offset], ldz, &dwork[kw], &
 	    i__1, bwork, info, (ftnlen)7, (ftnlen)11);
+#line 370 "SB01BD.f"
     wrkopt = kw - 1 + (integer) dwork[kw];
+#line 371 "SB01BD.f"
     if (*info != 0) {
+#line 372 "SB01BD.f"
 	*info = 1;
+#line 373 "SB01BD.f"
 	return 0;
+#line 374 "SB01BD.f"
     }
 
 /*     Reduce A to an ordered real Schur form using an orthogonal */
@@ -464,72 +543,114 @@ static logical c_false = FALSE_;
 
 /*     Workspace needed:  N. */
 
+#line 386 "SB01BD.f"
     mb03qd_(dico, "Stable", "Update", n, &c__1, n, alpha, &a[a_offset], lda, &
 	    z__[z_offset], ldz, nfp, &dwork[1], info, (ftnlen)1, (ftnlen)6, (
 	    ftnlen)6);
+#line 388 "SB01BD.f"
     if (*info != 0) {
+#line 388 "SB01BD.f"
 	return 0;
+#line 388 "SB01BD.f"
     }
 
 /*     Set F = 0. */
 
+#line 393 "SB01BD.f"
     dlaset_("Full", m, n, &c_b14, &c_b14, &f[f_offset], ldf, (ftnlen)4);
 
 /*     Return if B is negligible (uncontrollable system). */
 
+#line 397 "SB01BD.f"
     if (bnorm <= tolerb) {
+#line 398 "SB01BD.f"
 	*nap = 0;
+#line 399 "SB01BD.f"
 	*nup = *n;
+#line 400 "SB01BD.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 401 "SB01BD.f"
 	return 0;
+#line 402 "SB01BD.f"
     }
 
 /*     Compute the bound for the numerical stability condition. */
 
+#line 406 "SB01BD.f"
     rmax = anorm * 100. / bnorm;
 
 /*     Perform eigenvalue assignment if there exist "bad" eigenvalues. */
 
+#line 410 "SB01BD.f"
     *nap = 0;
+#line 411 "SB01BD.f"
     *nup = 0;
+#line 412 "SB01BD.f"
     if (*nfp < *n) {
+#line 413 "SB01BD.f"
 	kg = 1;
+#line 414 "SB01BD.f"
 	kfi = kg + (*m << 1);
+#line 415 "SB01BD.f"
 	kw = kfi + (*m << 1);
 
 /*        Set the limits for the bottom diagonal block. */
 
+#line 419 "SB01BD.f"
 	nlow = *nfp + 1;
+#line 420 "SB01BD.f"
 	nsup = *n;
 
 /*        Separate and count real and complex eigenvalues to be assigned. */
 
+#line 424 "SB01BD.f"
 	npr = 0;
+#line 425 "SB01BD.f"
 	i__1 = *np;
+#line 425 "SB01BD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 426 "SB01BD.f"
 	    if (wi[i__] == 0.) {
+#line 427 "SB01BD.f"
 		++npr;
+#line 428 "SB01BD.f"
 		k = i__ - npr;
+#line 429 "SB01BD.f"
 		if (k > 0) {
+#line 430 "SB01BD.f"
 		    s = wr[i__];
+#line 431 "SB01BD.f"
 		    i__2 = npr;
+#line 431 "SB01BD.f"
 		    for (j = npr + k - 1; j >= i__2; --j) {
+#line 432 "SB01BD.f"
 			wr[j + 1] = wr[j];
+#line 433 "SB01BD.f"
 			wi[j + 1] = wi[j];
+#line 434 "SB01BD.f"
 /* L5: */
+#line 434 "SB01BD.f"
 		    }
+#line 435 "SB01BD.f"
 		    wr[npr] = s;
+#line 436 "SB01BD.f"
 		    wi[npr] = 0.;
+#line 437 "SB01BD.f"
 		}
+#line 438 "SB01BD.f"
 	    }
+#line 439 "SB01BD.f"
 /* L10: */
+#line 439 "SB01BD.f"
 	}
+#line 440 "SB01BD.f"
 	npc = *np - npr;
 
 /*        The first NPR elements of WR and WI contain the real */
 /*        eigenvalues, the last NPC elements contain the complex */
 /*        eigenvalues. Set the pointer to complex eigenvalues. */
 
+#line 446 "SB01BD.f"
 	ipc = npr + 1;
 
 /*        Main loop for assigning one or two eigenvalues. */
@@ -540,175 +661,256 @@ static logical c_false = FALSE_;
 
 /*        WHILE (NLOW <= NSUP and INFO = 0) DO */
 
+#line 456 "SB01BD.f"
 L20:
+#line 456 "SB01BD.f"
 	if (nlow <= nsup && *info == 0) {
 
 /*           Determine the dimension of the last block. */
 
+#line 460 "SB01BD.f"
 	    ib = 1;
+#line 461 "SB01BD.f"
 	    if (nlow < nsup) {
+#line 462 "SB01BD.f"
 		if (a[nsup + (nsup - 1) * a_dim1] != 0.) {
+#line 462 "SB01BD.f"
 		    ib = 2;
+#line 462 "SB01BD.f"
 		}
+#line 463 "SB01BD.f"
 	    }
 
 /*           Compute G, the current last IB rows of Z'*B. */
 
+#line 467 "SB01BD.f"
 	    nl = nsup - ib + 1;
+#line 468 "SB01BD.f"
 	    dgemm_("Transpose", "NoTranspose", &ib, m, n, &c_b21, &z__[nl * 
 		    z_dim1 + 1], ldz, &b[b_offset], ldb, &c_b14, &dwork[kg], &
 		    ib, (ftnlen)9, (ftnlen)11);
 
 /*           Check the controllability for a simple block. */
 
+#line 473 "SB01BD.f"
 	    if (dlange_("1", &ib, m, &dwork[kg], &ib, &dwork[kw], (ftnlen)1) 
 		    <= tolerb) {
 
 /*              Deflate the uncontrollable block and resume the */
 /*              main loop. */
 
+#line 479 "SB01BD.f"
 		nsup -= ib;
+#line 480 "SB01BD.f"
 		*nup += ib;
+#line 481 "SB01BD.f"
 		goto L20;
+#line 482 "SB01BD.f"
 	    }
 
 /*           Test for termination with INFO = 3. */
 
+#line 486 "SB01BD.f"
 	    if (*nap == *np) {
+#line 487 "SB01BD.f"
 		*info = 3;
 
 /*              Test for compatibility. Terminate if an attempt occurs */
 /*              to place a complex conjugate pair on a 1x1 block. */
 
+#line 492 "SB01BD.f"
 	    } else if (ib == 1 && npr == 0 && nlow == nsup) {
+#line 493 "SB01BD.f"
 		*info = 4;
+#line 494 "SB01BD.f"
 	    } else {
 
 /*              Set the simple block flag. */
 
+#line 498 "SB01BD.f"
 		simplb = TRUE_;
 
 /*              Form a 2-by-2 block if necessary from two 1-by-1 blocks. */
 /*              Consider special case IB = 1, NPR = 1 and */
 /*              NPR+NPC > NSUP-NLOW+1 to avoid incompatibility. */
 
+#line 504 "SB01BD.f"
 		if (ib == 1 && npr == 0 || ib == 1 && npr == 1 && nsup > nlow 
 			&& npr + npc > nsup - nlow + 1) {
+#line 507 "SB01BD.f"
 		    if (nsup > 2) {
+#line 508 "SB01BD.f"
 			if (a[nsup - 1 + (nsup - 2) * a_dim1] != 0.) {
 
 /*                       Interchange with the adjacent 2x2 block. */
 
 /*                       Workspace needed: N. */
 
+#line 514 "SB01BD.f"
 			    i__1 = nsup - 2;
+#line 514 "SB01BD.f"
 			    dlaexc_(&c_true, n, &a[a_offset], lda, &z__[
 				    z_offset], ldz, &i__1, &c__2, &c__1, &
 				    dwork[kw], info);
+#line 516 "SB01BD.f"
 			    if (*info != 0) {
+#line 517 "SB01BD.f"
 				*info = 2;
+#line 518 "SB01BD.f"
 				return 0;
+#line 519 "SB01BD.f"
 			    }
+#line 520 "SB01BD.f"
 			} else {
 
 /*                       Form a non-simple block by extending the last */
 /*                       block with a 1x1 block. */
 
+#line 525 "SB01BD.f"
 			    simplb = FALSE_;
+#line 526 "SB01BD.f"
 			}
+#line 527 "SB01BD.f"
 		    } else {
+#line 528 "SB01BD.f"
 			simplb = FALSE_;
+#line 529 "SB01BD.f"
 		    }
+#line 530 "SB01BD.f"
 		    ib = 2;
+#line 531 "SB01BD.f"
 		}
+#line 532 "SB01BD.f"
 		nl = nsup - ib + 1;
 
 /*              Compute G, the current last IB rows of Z'*B. */
 
+#line 536 "SB01BD.f"
 		dgemm_("Transpose", "NoTranspose", &ib, m, n, &c_b21, &z__[nl 
 			* z_dim1 + 1], ldz, &b[b_offset], ldb, &c_b14, &dwork[
 			kg], &ib, (ftnlen)9, (ftnlen)11);
 
 /*              Check the controllability for the current block. */
 
+#line 541 "SB01BD.f"
 		if (dlange_("1", &ib, m, &dwork[kg], &ib, &dwork[kw], (ftnlen)
 			1) <= tolerb) {
 
 /*                 Deflate the uncontrollable block and resume the */
 /*                 main loop. */
 
+#line 547 "SB01BD.f"
 		    nsup -= ib;
+#line 548 "SB01BD.f"
 		    *nup += ib;
+#line 549 "SB01BD.f"
 		    goto L20;
+#line 550 "SB01BD.f"
 		}
 
+#line 552 "SB01BD.f"
 		if (*nap + ib > *np) {
 
 /*                 No sufficient eigenvalues to be assigned. */
 
+#line 556 "SB01BD.f"
 		    *info = 3;
+#line 557 "SB01BD.f"
 		} else {
+#line 558 "SB01BD.f"
 		    if (ib == 1) {
 
 /*                    A 1-by-1 block. */
 
 /*                    Assign the real eigenvalue nearest to A(NSUP,NSUP). */
 
+#line 564 "SB01BD.f"
 			x = a[nsup + nsup * a_dim1];
+#line 565 "SB01BD.f"
 			sb01bx_(&c_true, &npr, &x, &x, &wr[1], &x, &s, &p);
+#line 566 "SB01BD.f"
 			--npr;
+#line 567 "SB01BD.f"
 			ceig = FALSE_;
+#line 568 "SB01BD.f"
 		    } else {
 
 /*                    A 2-by-2 block. */
 
+#line 572 "SB01BD.f"
 			if (simplb) {
 
 /*                       Simple 2-by-2 block with complex eigenvalues. */
 /*                       Compute the eigenvalues of the last block. */
 
+#line 577 "SB01BD.f"
 			    mb03qy_(n, &nl, &a[a_offset], lda, &z__[z_offset],
 				     ldz, &x, &y, info);
+#line 578 "SB01BD.f"
 			    if (npc > 1) {
+#line 579 "SB01BD.f"
 				sb01bx_(&c_false, &npc, &x, &y, &wr[ipc], &wi[
 					ipc], &s, &p);
+#line 581 "SB01BD.f"
 				npc += -2;
+#line 582 "SB01BD.f"
 				ceig = TRUE_;
+#line 583 "SB01BD.f"
 			    } else {
 
 /*                          Choose the nearest two real eigenvalues. */
 
+#line 587 "SB01BD.f"
 				sb01bx_(&c_true, &npr, &x, &x, &wr[1], &x, &s,
 					 &p);
+#line 588 "SB01BD.f"
 				i__1 = npr - 1;
+#line 588 "SB01BD.f"
 				sb01bx_(&c_true, &i__1, &x, &x, &wr[1], &x, &
 					y, &p);
+#line 590 "SB01BD.f"
 				p = s * y;
+#line 591 "SB01BD.f"
 				s += y;
+#line 592 "SB01BD.f"
 				npr += -2;
+#line 593 "SB01BD.f"
 				ceig = FALSE_;
+#line 594 "SB01BD.f"
 			    }
+#line 595 "SB01BD.f"
 			} else {
 
 /*                       Non-simple 2x2 block with real eigenvalues. */
 /*                       Choose the nearest pair of complex eigenvalues. */
 
+#line 600 "SB01BD.f"
 			    x = (a[nl + nl * a_dim1] + a[nsup + nsup * a_dim1]
 				    ) / 2.;
+#line 601 "SB01BD.f"
 			    sb01bx_(&c_false, &npc, &x, &c_b14, &wr[ipc], &wi[
 				    ipc], &s, &p);
+#line 603 "SB01BD.f"
 			    npc += -2;
+#line 604 "SB01BD.f"
 			}
+#line 605 "SB01BD.f"
 		    }
 
 /*                 Form the IBxIB matrix A2 from the current diagonal */
 /*                 block. */
 
+#line 610 "SB01BD.f"
 		    a2[0] = a[nl + nl * a_dim1];
+#line 611 "SB01BD.f"
 		    if (ib > 1) {
+#line 612 "SB01BD.f"
 			a2[2] = a[nl + nsup * a_dim1];
+#line 613 "SB01BD.f"
 			a2[1] = a[nsup + nl * a_dim1];
+#line 614 "SB01BD.f"
 			a2[3] = a[nsup + nsup * a_dim1];
+#line 615 "SB01BD.f"
 		    }
 
 /*                 Determine the M-by-IB feedback matrix FI which */
@@ -716,37 +918,54 @@ L20:
 
 /*                 Workspace needed: 5*M. */
 
+#line 622 "SB01BD.f"
 		    sb01by_(&ib, m, &s, &p, a2, &dwork[kg], &dwork[kfi], &
 			    toler, &dwork[kw], &ierr);
+#line 624 "SB01BD.f"
 		    if (ierr != 0) {
+#line 625 "SB01BD.f"
 			if (ib == 1 || simplb) {
 
 /*                       The simple 1x1 block is uncontrollable. */
 
+#line 629 "SB01BD.f"
 			    nsup -= ib;
+#line 630 "SB01BD.f"
 			    if (ceig) {
+#line 631 "SB01BD.f"
 				npc += ib;
+#line 632 "SB01BD.f"
 			    } else {
+#line 633 "SB01BD.f"
 				npr += ib;
+#line 634 "SB01BD.f"
 			    }
+#line 635 "SB01BD.f"
 			    *nup += ib;
+#line 636 "SB01BD.f"
 			} else {
 
 /*                       The non-simple 2x2 block is uncontrollable. */
 /*                       Eliminate its uncontrollable part by using */
 /*                       the information in elements FI(1,1) and F(1,2). */
 
+#line 642 "SB01BD.f"
 			    c__ = dwork[kfi];
+#line 643 "SB01BD.f"
 			    s = dwork[kfi + ib];
 
 /*                       Apply the transformation to A and accumulate it */
 /*                       in Z. */
 
+#line 648 "SB01BD.f"
 			    i__1 = *n - nl + 1;
+#line 648 "SB01BD.f"
 			    drot_(&i__1, &a[nl + nl * a_dim1], lda, &a[nsup + 
 				    nl * a_dim1], lda, &c__, &s);
+#line 650 "SB01BD.f"
 			    drot_(n, &a[nl * a_dim1 + 1], &c__1, &a[nsup * 
 				    a_dim1 + 1], &c__1, &c__, &s);
+#line 651 "SB01BD.f"
 			    drot_(n, &z__[nl * z_dim1 + 1], &c__1, &z__[nsup *
 				     z_dim1 + 1], &c__1, &c__, &s);
 
@@ -754,17 +973,24 @@ L20:
 /*                       block, redefine the upper limit for the bottom */
 /*                       block and resume the main loop. */
 
+#line 657 "SB01BD.f"
 			    a[nsup + nl * a_dim1] = 0.;
+#line 658 "SB01BD.f"
 			    nsup = nl;
+#line 659 "SB01BD.f"
 			    ++(*nup);
+#line 660 "SB01BD.f"
 			    npc += 2;
+#line 661 "SB01BD.f"
 			}
+#line 662 "SB01BD.f"
 		    } else {
 
 /*                    Successful assignment of IB eigenvalues. */
 
 /*                    Update the feedback matrix F <-- F + [0 FI]*Z'. */
 
+#line 668 "SB01BD.f"
 			dgemm_("NoTranspose", "Transpose", m, n, &ib, &c_b21, 
 				&dwork[kfi], m, &z__[nl * z_dim1 + 1], ldz, &
 				c_b21, &f[f_offset], ldf, (ftnlen)11, (ftnlen)
@@ -772,17 +998,22 @@ L20:
 
 /*                    Check for possible numerical instability. */
 
+#line 674 "SB01BD.f"
 			if (dlange_("1", m, &ib, &dwork[kfi], m, &dwork[kw], (
 				ftnlen)1) > rmax) {
+#line 674 "SB01BD.f"
 			    ++(*iwarn);
+#line 674 "SB01BD.f"
 			}
 
 /*                    Update the state matrix A <-- A + Z'*B*[0 FI]. */
 /*                    Workspace needed: 2*N+4*M. */
 
+#line 680 "SB01BD.f"
 			dgemm_("NoTranspose", "NoTranspose", n, &ib, m, &
 				c_b21, &b[b_offset], ldb, &dwork[kfi], m, &
 				c_b14, &dwork[kw], n, (ftnlen)11, (ftnlen)11);
+#line 683 "SB01BD.f"
 			dgemm_("Transpose", "NoTranspose", &nsup, &ib, n, &
 				c_b21, &z__[z_offset], ldz, &dwork[kw], n, &
 				c_b21, &a[nl * a_dim1 + 1], lda, (ftnlen)9, (
@@ -790,110 +1021,177 @@ L20:
 
 /*                    Try to split the 2x2 block. */
 
+#line 689 "SB01BD.f"
 			if (ib == 2) {
+#line 689 "SB01BD.f"
 			    mb03qy_(n, &nl, &a[a_offset], lda, &z__[z_offset],
 				     ldz, &x, &y, info);
+#line 689 "SB01BD.f"
 			}
+#line 692 "SB01BD.f"
 			*nap += ib;
+#line 693 "SB01BD.f"
 			if (nlow + ib <= nsup) {
 
 /*                       Move the last block(s) to the leading */
 /*                       position(s) of the bottom block. */
 
+#line 698 "SB01BD.f"
 			    ncur1 = nsup - ib;
+#line 699 "SB01BD.f"
 			    nmoves = 1;
+#line 700 "SB01BD.f"
 			    if (ib == 2 && a[nsup + (nsup - 1) * a_dim1] == 
 				    0.) {
+#line 701 "SB01BD.f"
 				ib = 1;
+#line 702 "SB01BD.f"
 				nmoves = 2;
+#line 703 "SB01BD.f"
 			    }
 
 /*                       WHILE (NMOVES > 0) DO */
+#line 706 "SB01BD.f"
 L30:
+#line 706 "SB01BD.f"
 			    if (nmoves > 0) {
+#line 707 "SB01BD.f"
 				ncur = ncur1;
 
 /*                          WHILE (NCUR >= NLOW) DO */
+#line 710 "SB01BD.f"
 L40:
+#line 710 "SB01BD.f"
 				if (ncur >= nlow) {
 
 /*                             Loop for the last block positioning. */
 
+#line 714 "SB01BD.f"
 				    ib1 = 1;
+#line 715 "SB01BD.f"
 				    if (ncur > nlow) {
+#line 716 "SB01BD.f"
 					if (a[ncur + (ncur - 1) * a_dim1] != 
 						0.) {
+#line 716 "SB01BD.f"
 					    ib1 = 2;
+#line 716 "SB01BD.f"
 					}
+#line 717 "SB01BD.f"
 				    }
+#line 718 "SB01BD.f"
 				    i__1 = ncur - ib1 + 1;
+#line 718 "SB01BD.f"
 				    dlaexc_(&c_true, n, &a[a_offset], lda, &
 					    z__[z_offset], ldz, &i__1, &ib1, &
 					    ib, &dwork[kw], info);
+#line 721 "SB01BD.f"
 				    if (*info != 0) {
+#line 722 "SB01BD.f"
 					*info = 2;
+#line 723 "SB01BD.f"
 					return 0;
+#line 724 "SB01BD.f"
 				    }
+#line 725 "SB01BD.f"
 				    ncur -= ib1;
+#line 726 "SB01BD.f"
 				    goto L40;
+#line 727 "SB01BD.f"
 				}
 
 /*                          END WHILE 40 */
 
+#line 731 "SB01BD.f"
 				--nmoves;
+#line 732 "SB01BD.f"
 				++ncur1;
+#line 733 "SB01BD.f"
 				nlow += ib;
+#line 734 "SB01BD.f"
 				goto L30;
+#line 735 "SB01BD.f"
 			    }
 
 /*                       END WHILE 30 */
 
+#line 739 "SB01BD.f"
 			} else {
+#line 740 "SB01BD.f"
 			    nlow += ib;
+#line 741 "SB01BD.f"
 			}
+#line 742 "SB01BD.f"
 		    }
+#line 743 "SB01BD.f"
 		}
+#line 744 "SB01BD.f"
 	    }
+#line 745 "SB01BD.f"
 	    if (*info == 0) {
+#line 745 "SB01BD.f"
 		goto L20;
+#line 745 "SB01BD.f"
 	    }
 
 /*        END WHILE 20 */
 
+#line 749 "SB01BD.f"
 	}
 
 /* Computing MAX */
+#line 751 "SB01BD.f"
 	i__1 = wrkopt, i__2 = *m * 5, i__1 = max(i__1,i__2), i__2 = (*n << 1) 
 		+ (*m << 2);
+#line 751 "SB01BD.f"
 	wrkopt = max(i__1,i__2);
+#line 752 "SB01BD.f"
     }
 
 /*     Annihilate the elements below the first subdiagonal of A. */
 
+#line 756 "SB01BD.f"
     if (*n > 2) {
+#line 756 "SB01BD.f"
 	i__1 = *n - 2;
+#line 756 "SB01BD.f"
 	i__2 = *n - 2;
+#line 756 "SB01BD.f"
 	dlaset_("L", &i__1, &i__2, &c_b14, &c_b14, &a[a_dim1 + 3], lda, (
 		ftnlen)1);
+#line 756 "SB01BD.f"
     }
+#line 758 "SB01BD.f"
     if (*nap > 0) {
 
 /*        Move the assigned eigenvalues in the first NAP positions of */
 /*        WR and WI. */
 
+#line 763 "SB01BD.f"
 	k = ipc - npr - 1;
+#line 764 "SB01BD.f"
 	if (k > 0) {
+#line 764 "SB01BD.f"
 	    dswap_(&k, &wr[npr + 1], &c__1, &wr[1], &c__1);
+#line 764 "SB01BD.f"
 	}
+#line 765 "SB01BD.f"
 	j = *nap - k;
+#line 766 "SB01BD.f"
 	if (j > 0) {
+#line 767 "SB01BD.f"
 	    dswap_(&j, &wr[ipc + npc], &c__1, &wr[k + 1], &c__1);
+#line 768 "SB01BD.f"
 	    dswap_(&j, &wi[ipc + npc], &c__1, &wi[k + 1], &c__1);
+#line 769 "SB01BD.f"
 	}
+#line 770 "SB01BD.f"
     }
 
+#line 772 "SB01BD.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 774 "SB01BD.f"
     return 0;
 /* *** Last line of SB01BD *** */
 } /* sb01bd_ */

@@ -1,0 +1,6 @@
+extern int mb01vd_(char *trana, char *tranb, integer *ma, integer *na, integer *mb, integer *nb, doublereal *alpha, doublereal *beta, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, integer *mc, integer *nc, integer *info, ftnlen trana_len, ftnlen tranb_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */

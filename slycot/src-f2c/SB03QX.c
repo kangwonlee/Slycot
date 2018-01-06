@@ -1,3 +1,4 @@
+#line 1 "SB03QX.f"
 /* SB03QX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB03QX.f"
 /* Table of constant values */
 
 static doublereal c_b24 = 0.;
@@ -246,224 +248,373 @@ static doublereal c_b26 = .5;
 
 /*     Decode and Test input parameters. */
 
+#line 211 "SB03QX.f"
     /* Parameter adjustments */
+#line 211 "SB03QX.f"
     t_dim1 = *ldt;
+#line 211 "SB03QX.f"
     t_offset = 1 + t_dim1;
+#line 211 "SB03QX.f"
     t -= t_offset;
+#line 211 "SB03QX.f"
     u_dim1 = *ldu;
+#line 211 "SB03QX.f"
     u_offset = 1 + u_dim1;
+#line 211 "SB03QX.f"
     u -= u_offset;
+#line 211 "SB03QX.f"
     r_dim1 = *ldr;
+#line 211 "SB03QX.f"
     r_offset = 1 + r_dim1;
+#line 211 "SB03QX.f"
     r__ -= r_offset;
+#line 211 "SB03QX.f"
     --iwork;
+#line 211 "SB03QX.f"
     --dwork;
+#line 211 "SB03QX.f"
 
+#line 211 "SB03QX.f"
     /* Function Body */
+#line 211 "SB03QX.f"
     notrna = lsame_(trana, "N", (ftnlen)1, (ftnlen)1);
+#line 212 "SB03QX.f"
     update = lsame_(lyapun, "O", (ftnlen)1, (ftnlen)1);
 
+#line 214 "SB03QX.f"
     nn = *n * *n;
+#line 215 "SB03QX.f"
     *info = 0;
+#line 216 "SB03QX.f"
     if (! (notrna || lsame_(trana, "T", (ftnlen)1, (ftnlen)1) || lsame_(trana,
 	     "C", (ftnlen)1, (ftnlen)1))) {
+#line 218 "SB03QX.f"
 	*info = -1;
+#line 219 "SB03QX.f"
     } else if (! (lsame_(uplo, "L", (ftnlen)1, (ftnlen)1) || lsame_(uplo, 
 	    "U", (ftnlen)1, (ftnlen)1))) {
+#line 221 "SB03QX.f"
 	*info = -2;
+#line 222 "SB03QX.f"
     } else if (! (update || lsame_(lyapun, "R", (ftnlen)1, (ftnlen)1))) {
+#line 223 "SB03QX.f"
 	*info = -3;
+#line 224 "SB03QX.f"
     } else if (*n < 0) {
+#line 225 "SB03QX.f"
 	*info = -4;
+#line 226 "SB03QX.f"
     } else if (*xanorm < 0.) {
+#line 227 "SB03QX.f"
 	*info = -5;
+#line 228 "SB03QX.f"
     } else if (*ldt < max(1,*n)) {
+#line 229 "SB03QX.f"
 	*info = -7;
+#line 230 "SB03QX.f"
     } else if (*ldu < 1 || update && *ldu < *n) {
+#line 231 "SB03QX.f"
 	*info = -9;
+#line 232 "SB03QX.f"
     } else if (*ldr < max(1,*n)) {
+#line 233 "SB03QX.f"
 	*info = -11;
+#line 234 "SB03QX.f"
     } else if (*ldwork < nn << 1) {
+#line 235 "SB03QX.f"
 	*info = -15;
+#line 236 "SB03QX.f"
     }
 
+#line 238 "SB03QX.f"
     if (*info != 0) {
+#line 239 "SB03QX.f"
 	i__1 = -(*info);
+#line 239 "SB03QX.f"
 	xerbla_("SB03QX", &i__1, (ftnlen)6);
+#line 240 "SB03QX.f"
 	return 0;
+#line 241 "SB03QX.f"
     }
 
 /*     Quick return if possible. */
 
+#line 245 "SB03QX.f"
     *ferr = 0.;
+#line 246 "SB03QX.f"
     if (*n == 0 || *xanorm == 0.) {
+#line 246 "SB03QX.f"
 	return 0;
+#line 246 "SB03QX.f"
     }
 
+#line 249 "SB03QX.f"
     itmp = nn + 1;
 
+#line 251 "SB03QX.f"
     if (notrna) {
+#line 252 "SB03QX.f"
 	*(unsigned char *)tranat = 'T';
+#line 253 "SB03QX.f"
     } else {
+#line 254 "SB03QX.f"
 	*(unsigned char *)tranat = 'N';
+#line 255 "SB03QX.f"
     }
 
 /*     Fill in the remaining triangle of the symmetric residual matrix. */
 
+#line 259 "SB03QX.f"
     ma02ed_(uplo, n, &r__[r_offset], ldr, (ftnlen)1);
 
+#line 261 "SB03QX.f"
     kase = 0;
 
 /*     REPEAT */
+#line 264 "SB03QX.f"
 L10:
+#line 265 "SB03QX.f"
     dlacon_(&nn, &dwork[itmp], &dwork[1], &iwork[1], &est, &kase);
+#line 266 "SB03QX.f"
     if (kase != 0) {
 
 /*        Select the triangular part of symmetric matrix to be used. */
 
+#line 270 "SB03QX.f"
 	if (dlansy_("1-norm", "Upper", n, &dwork[1], n, &dwork[itmp], (ftnlen)
 		6, (ftnlen)5) >= dlansy_("1-norm", "Lower", n, &dwork[1], n, &
 		dwork[itmp], (ftnlen)6, (ftnlen)5)) {
+#line 274 "SB03QX.f"
 	    *(unsigned char *)uplow = 'U';
+#line 275 "SB03QX.f"
 	    lower = FALSE_;
+#line 276 "SB03QX.f"
 	} else {
+#line 277 "SB03QX.f"
 	    *(unsigned char *)uplow = 'L';
+#line 278 "SB03QX.f"
 	    lower = TRUE_;
+#line 279 "SB03QX.f"
 	}
 
+#line 281 "SB03QX.f"
 	if (kase == 2) {
+#line 282 "SB03QX.f"
 	    ij = 0;
+#line 283 "SB03QX.f"
 	    if (lower) {
 
 /*              Scale the lower triangular part of symmetric matrix */
 /*              by the residual matrix. */
 
+#line 288 "SB03QX.f"
 		i__1 = *n;
+#line 288 "SB03QX.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 289 "SB03QX.f"
 		    i__2 = *n;
+#line 289 "SB03QX.f"
 		    for (i__ = j; i__ <= i__2; ++i__) {
+#line 290 "SB03QX.f"
 			++ij;
+#line 291 "SB03QX.f"
 			dwork[ij] *= r__[i__ + j * r_dim1];
+#line 292 "SB03QX.f"
 /* L20: */
+#line 292 "SB03QX.f"
 		    }
+#line 293 "SB03QX.f"
 		    ij += j;
+#line 294 "SB03QX.f"
 /* L30: */
+#line 294 "SB03QX.f"
 		}
+#line 295 "SB03QX.f"
 	    } else {
 
 /*              Scale the upper triangular part of symmetric matrix */
 /*              by the residual matrix. */
 
+#line 300 "SB03QX.f"
 		i__1 = *n;
+#line 300 "SB03QX.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 301 "SB03QX.f"
 		    i__2 = j;
+#line 301 "SB03QX.f"
 		    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 302 "SB03QX.f"
 			++ij;
+#line 303 "SB03QX.f"
 			dwork[ij] *= r__[i__ + j * r_dim1];
+#line 304 "SB03QX.f"
 /* L40: */
+#line 304 "SB03QX.f"
 		    }
+#line 305 "SB03QX.f"
 		    ij = ij + *n - j;
+#line 306 "SB03QX.f"
 /* L50: */
+#line 306 "SB03QX.f"
 		}
+#line 307 "SB03QX.f"
 	    }
+#line 308 "SB03QX.f"
 	}
 
+#line 310 "SB03QX.f"
 	if (update) {
 
 /*           Transform the right-hand side: RHS := U'*RHS*U. */
 
+#line 314 "SB03QX.f"
 	    mb01ru_(uplow, "Transpose", n, n, &c_b24, &c_b25, &dwork[1], n, &
 		    u[u_offset], ldu, &dwork[1], n, &dwork[itmp], &nn, &info2,
 		     (ftnlen)1, (ftnlen)9);
+#line 316 "SB03QX.f"
 	    i__1 = *n + 1;
+#line 316 "SB03QX.f"
 	    dscal_(n, &c_b26, &dwork[1], &i__1);
+#line 317 "SB03QX.f"
 	}
+#line 318 "SB03QX.f"
 	ma02ed_(uplow, n, &dwork[1], n, (ftnlen)1);
 
+#line 320 "SB03QX.f"
 	if (kase == 2) {
 
 /*           Solve op(T)'*Y + Y*op(T) = scale*RHS. */
 
+#line 324 "SB03QX.f"
 	    sb03my_(trana, n, &t[t_offset], ldt, &dwork[1], n, &scale, &info2,
 		     (ftnlen)1);
+#line 325 "SB03QX.f"
 	} else {
 
 /*           Solve op(T)*W + W*op(T)' = scale*RHS. */
 
+#line 329 "SB03QX.f"
 	    sb03my_(tranat, n, &t[t_offset], ldt, &dwork[1], n, &scale, &
 		    info2, (ftnlen)1);
+#line 330 "SB03QX.f"
 	}
 
+#line 332 "SB03QX.f"
 	if (info2 > 0) {
+#line 332 "SB03QX.f"
 	    *info = *n + 1;
+#line 332 "SB03QX.f"
 	}
 
+#line 335 "SB03QX.f"
 	if (update) {
 
 /*           Transform back to obtain the solution: Z := U*Z*U', with */
 /*           Z = Y or Z = W. */
 
+#line 340 "SB03QX.f"
 	    mb01ru_(uplow, "No transpose", n, n, &c_b24, &c_b25, &dwork[1], n,
 		     &u[u_offset], ldu, &dwork[1], n, &dwork[itmp], &nn, &
 		    info2, (ftnlen)1, (ftnlen)12);
+#line 342 "SB03QX.f"
 	    i__1 = *n + 1;
+#line 342 "SB03QX.f"
 	    dscal_(n, &c_b26, &dwork[1], &i__1);
+#line 343 "SB03QX.f"
 	}
 
+#line 345 "SB03QX.f"
 	if (kase == 1) {
+#line 346 "SB03QX.f"
 	    ij = 0;
+#line 347 "SB03QX.f"
 	    if (lower) {
 
 /*              Scale the lower triangular part of symmetric matrix */
 /*              by the residual matrix. */
 
+#line 352 "SB03QX.f"
 		i__1 = *n;
+#line 352 "SB03QX.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 353 "SB03QX.f"
 		    i__2 = *n;
+#line 353 "SB03QX.f"
 		    for (i__ = j; i__ <= i__2; ++i__) {
+#line 354 "SB03QX.f"
 			++ij;
+#line 355 "SB03QX.f"
 			dwork[ij] *= r__[i__ + j * r_dim1];
+#line 356 "SB03QX.f"
 /* L60: */
+#line 356 "SB03QX.f"
 		    }
+#line 357 "SB03QX.f"
 		    ij += j;
+#line 358 "SB03QX.f"
 /* L70: */
+#line 358 "SB03QX.f"
 		}
+#line 359 "SB03QX.f"
 	    } else {
 
 /*              Scale the upper triangular part of symmetric matrix */
 /*              by the residual matrix. */
 
+#line 364 "SB03QX.f"
 		i__1 = *n;
+#line 364 "SB03QX.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 365 "SB03QX.f"
 		    i__2 = j;
+#line 365 "SB03QX.f"
 		    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 366 "SB03QX.f"
 			++ij;
+#line 367 "SB03QX.f"
 			dwork[ij] *= r__[i__ + j * r_dim1];
+#line 368 "SB03QX.f"
 /* L80: */
+#line 368 "SB03QX.f"
 		    }
+#line 369 "SB03QX.f"
 		    ij = ij + *n - j;
+#line 370 "SB03QX.f"
 /* L90: */
+#line 370 "SB03QX.f"
 		}
+#line 371 "SB03QX.f"
 	    }
+#line 372 "SB03QX.f"
 	}
 
 /*        Fill in the remaining triangle of the symmetric matrix. */
 
+#line 376 "SB03QX.f"
 	ma02ed_(uplow, n, &dwork[1], n, (ftnlen)1);
+#line 377 "SB03QX.f"
 	goto L10;
+#line 378 "SB03QX.f"
     }
 
 /*     UNTIL KASE = 0 */
 
 /*     Compute the estimate of the relative error. */
 
+#line 384 "SB03QX.f"
     temp = *xanorm * scale;
+#line 385 "SB03QX.f"
     if (temp > est) {
+#line 386 "SB03QX.f"
 	*ferr = est / temp;
+#line 387 "SB03QX.f"
     } else {
+#line 388 "SB03QX.f"
 	*ferr = 1.;
+#line 389 "SB03QX.f"
     }
 
+#line 391 "SB03QX.f"
     return 0;
 
 /* *** Last line of SB03QX *** */

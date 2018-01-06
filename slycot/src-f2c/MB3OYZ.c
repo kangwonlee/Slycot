@@ -1,3 +1,4 @@
+#line 1 "MB3OYZ.f"
 /* MB3OYZ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB3OYZ.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -255,231 +257,398 @@ static integer c__2 = 2;
 
 /*     Test the input scalar arguments. */
 
+#line 221 "MB3OYZ.f"
     /* Parameter adjustments */
+#line 221 "MB3OYZ.f"
     a_dim1 = *lda;
+#line 221 "MB3OYZ.f"
     a_offset = 1 + a_dim1;
+#line 221 "MB3OYZ.f"
     a -= a_offset;
+#line 221 "MB3OYZ.f"
     --sval;
+#line 221 "MB3OYZ.f"
     --jpvt;
+#line 221 "MB3OYZ.f"
     --tau;
+#line 221 "MB3OYZ.f"
     --dwork;
+#line 221 "MB3OYZ.f"
     --zwork;
+#line 221 "MB3OYZ.f"
 
+#line 221 "MB3OYZ.f"
     /* Function Body */
+#line 221 "MB3OYZ.f"
     *info = 0;
+#line 222 "MB3OYZ.f"
     if (*m < 0) {
+#line 223 "MB3OYZ.f"
 	*info = -1;
+#line 224 "MB3OYZ.f"
     } else if (*n < 0) {
+#line 225 "MB3OYZ.f"
 	*info = -2;
+#line 226 "MB3OYZ.f"
     } else if (*lda < max(1,*m)) {
+#line 227 "MB3OYZ.f"
 	*info = -4;
+#line 228 "MB3OYZ.f"
     } else if (*rcond < 0. || *rcond > 1.) {
+#line 229 "MB3OYZ.f"
 	*info = -5;
+#line 230 "MB3OYZ.f"
     } else if (*svlmax < 0.) {
+#line 231 "MB3OYZ.f"
 	*info = -6;
+#line 232 "MB3OYZ.f"
     }
 
+#line 234 "MB3OYZ.f"
     if (*info != 0) {
+#line 235 "MB3OYZ.f"
 	i__1 = -(*info);
+#line 235 "MB3OYZ.f"
 	xerbla_("MB3OYZ", &i__1, (ftnlen)6);
+#line 236 "MB3OYZ.f"
 	return 0;
+#line 237 "MB3OYZ.f"
     }
 
 /*     Quick return if possible. */
 
+#line 241 "MB3OYZ.f"
     mn = min(*m,*n);
+#line 242 "MB3OYZ.f"
     if (mn == 0) {
+#line 243 "MB3OYZ.f"
 	*rank = 0;
+#line 244 "MB3OYZ.f"
 	sval[1] = 0.;
+#line 245 "MB3OYZ.f"
 	sval[2] = 0.;
+#line 246 "MB3OYZ.f"
 	sval[3] = 0.;
+#line 247 "MB3OYZ.f"
 	return 0;
+#line 248 "MB3OYZ.f"
     }
 
+#line 250 "MB3OYZ.f"
     ismin = 1;
+#line 251 "MB3OYZ.f"
     ismax = ismin + *n;
 
 /*     Initialize partial column norms and pivoting vector. The first n */
 /*     elements of DWORK store the exact column norms. */
 
+#line 256 "MB3OYZ.f"
     i__1 = *n;
+#line 256 "MB3OYZ.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 257 "MB3OYZ.f"
 	dwork[i__] = dznrm2_(m, &a[i__ * a_dim1 + 1], &c__1);
+#line 258 "MB3OYZ.f"
 	dwork[*n + i__] = dwork[i__];
+#line 259 "MB3OYZ.f"
 	jpvt[i__] = i__;
+#line 260 "MB3OYZ.f"
 /* L10: */
+#line 260 "MB3OYZ.f"
     }
 
 /*     Compute factorization and determine RANK using incremental */
 /*     condition estimation. */
 
+#line 265 "MB3OYZ.f"
     *rank = 0;
 
+#line 267 "MB3OYZ.f"
 L20:
+#line 268 "MB3OYZ.f"
     if (*rank < mn) {
+#line 269 "MB3OYZ.f"
 	i__ = *rank + 1;
 
 /*        Determine ith pivot column and swap if necessary. */
 
+#line 273 "MB3OYZ.f"
 	i__1 = *n - i__ + 1;
+#line 273 "MB3OYZ.f"
 	pvt = i__ - 1 + idamax_(&i__1, &dwork[i__], &c__1);
 
+#line 275 "MB3OYZ.f"
 	if (pvt != i__) {
+#line 276 "MB3OYZ.f"
 	    zswap_(m, &a[pvt * a_dim1 + 1], &c__1, &a[i__ * a_dim1 + 1], &
 		    c__1);
+#line 277 "MB3OYZ.f"
 	    itemp = jpvt[pvt];
+#line 278 "MB3OYZ.f"
 	    jpvt[pvt] = jpvt[i__];
+#line 279 "MB3OYZ.f"
 	    jpvt[i__] = itemp;
+#line 280 "MB3OYZ.f"
 	    dwork[pvt] = dwork[i__];
+#line 281 "MB3OYZ.f"
 	    dwork[*n + pvt] = dwork[*n + i__];
+#line 282 "MB3OYZ.f"
 	}
 
 /*        Save A(I,I) and generate elementary reflector H(i) */
 /*        such that H(i)'*[A(i,i);*] = [*;0]. */
 
+#line 287 "MB3OYZ.f"
 	if (i__ < *m) {
+#line 288 "MB3OYZ.f"
 	    i__1 = i__ + i__ * a_dim1;
+#line 288 "MB3OYZ.f"
 	    aii.r = a[i__1].r, aii.i = a[i__1].i;
+#line 289 "MB3OYZ.f"
 	    i__1 = *m - i__ + 1;
+#line 289 "MB3OYZ.f"
 	    zlarfg_(&i__1, &a[i__ + i__ * a_dim1], &a[i__ + 1 + i__ * a_dim1],
 		     &c__1, &tau[i__]);
+#line 290 "MB3OYZ.f"
 	} else {
+#line 291 "MB3OYZ.f"
 	    i__1 = *m;
+#line 291 "MB3OYZ.f"
 	    tau[i__1].r = 0., tau[i__1].i = 0.;
+#line 292 "MB3OYZ.f"
 	}
 
+#line 294 "MB3OYZ.f"
 	if (*rank == 0) {
 
 /*           Initialize; exit if matrix is zero (RANK = 0). */
 
+#line 298 "MB3OYZ.f"
 	    smax = z_abs(&a[a_dim1 + 1]);
+#line 299 "MB3OYZ.f"
 	    if (smax == 0.) {
+#line 300 "MB3OYZ.f"
 		sval[1] = 0.;
+#line 301 "MB3OYZ.f"
 		sval[2] = 0.;
+#line 302 "MB3OYZ.f"
 		sval[3] = 0.;
+#line 303 "MB3OYZ.f"
 		return 0;
+#line 304 "MB3OYZ.f"
 	    }
+#line 305 "MB3OYZ.f"
 	    smin = smax;
+#line 306 "MB3OYZ.f"
 	    smaxpr = smax;
+#line 307 "MB3OYZ.f"
 	    sminpr = smin;
+#line 308 "MB3OYZ.f"
 	    c1.r = 1., c1.i = 0.;
+#line 309 "MB3OYZ.f"
 	    c2.r = 1., c2.i = 0.;
+#line 310 "MB3OYZ.f"
 	} else {
 
 /*           One step of incremental condition estimation. */
 
+#line 314 "MB3OYZ.f"
 	    zlaic1_(&c__2, rank, &zwork[ismin], &smin, &a[i__ * a_dim1 + 1], &
 		    a[i__ + i__ * a_dim1], &sminpr, &s1, &c1);
+#line 316 "MB3OYZ.f"
 	    zlaic1_(&c__1, rank, &zwork[ismax], &smax, &a[i__ * a_dim1 + 1], &
 		    a[i__ + i__ * a_dim1], &smaxpr, &s2, &c2);
+#line 318 "MB3OYZ.f"
 	}
 
+#line 320 "MB3OYZ.f"
 	if (*svlmax * *rcond <= smaxpr) {
+#line 321 "MB3OYZ.f"
 	    if (*svlmax * *rcond <= sminpr) {
+#line 322 "MB3OYZ.f"
 		if (smaxpr * *rcond <= sminpr) {
 
 /*                 Continue factorization, as rank is at least RANK. */
 
+#line 326 "MB3OYZ.f"
 		    if (i__ < *n) {
 
 /*                    Apply H(i)' to A(i:m,i+1:n) from the left. */
 
+#line 330 "MB3OYZ.f"
 			i__1 = i__ + i__ * a_dim1;
+#line 330 "MB3OYZ.f"
 			aii.r = a[i__1].r, aii.i = a[i__1].i;
+#line 331 "MB3OYZ.f"
 			i__1 = i__ + i__ * a_dim1;
+#line 331 "MB3OYZ.f"
 			a[i__1].r = 1., a[i__1].i = 0.;
+#line 332 "MB3OYZ.f"
 			i__1 = *m - i__ + 1;
+#line 332 "MB3OYZ.f"
 			i__2 = *n - i__;
+#line 332 "MB3OYZ.f"
 			d_cnjg(&z__1, &tau[i__]);
+#line 332 "MB3OYZ.f"
 			zlarf_("Left", &i__1, &i__2, &a[i__ + i__ * a_dim1], &
 				c__1, &z__1, &a[i__ + (i__ + 1) * a_dim1], 
 				lda, &zwork[(*n << 1) + 1], (ftnlen)4);
+#line 335 "MB3OYZ.f"
 			i__1 = i__ + i__ * a_dim1;
+#line 335 "MB3OYZ.f"
 			a[i__1].r = aii.r, a[i__1].i = aii.i;
+#line 336 "MB3OYZ.f"
 		    }
 
 /*                 Update partial column norms. */
 
+#line 340 "MB3OYZ.f"
 		    i__1 = *n;
+#line 340 "MB3OYZ.f"
 		    for (j = i__ + 1; j <= i__1; ++j) {
+#line 341 "MB3OYZ.f"
 			if (dwork[j] != 0.) {
 /* Computing 2nd power */
+#line 342 "MB3OYZ.f"
 			    d__1 = z_abs(&a[i__ + j * a_dim1]) / dwork[j];
+#line 342 "MB3OYZ.f"
 			    temp = 1. - d__1 * d__1;
+#line 344 "MB3OYZ.f"
 			    temp = max(temp,0.);
 /* Computing 2nd power */
+#line 345 "MB3OYZ.f"
 			    d__1 = dwork[j] / dwork[*n + j];
+#line 345 "MB3OYZ.f"
 			    temp2 = temp * .05 * (d__1 * d__1) + 1.;
+#line 347 "MB3OYZ.f"
 			    if (temp2 == 1.) {
+#line 348 "MB3OYZ.f"
 				if (*m - i__ > 0) {
+#line 349 "MB3OYZ.f"
 				    i__2 = *m - i__;
+#line 349 "MB3OYZ.f"
 				    dwork[j] = dznrm2_(&i__2, &a[i__ + 1 + j *
 					     a_dim1], &c__1);
+#line 350 "MB3OYZ.f"
 				    dwork[*n + j] = dwork[j];
+#line 351 "MB3OYZ.f"
 				} else {
+#line 352 "MB3OYZ.f"
 				    dwork[j] = 0.;
+#line 353 "MB3OYZ.f"
 				    dwork[*n + j] = 0.;
+#line 354 "MB3OYZ.f"
 				}
+#line 355 "MB3OYZ.f"
 			    } else {
+#line 356 "MB3OYZ.f"
 				dwork[j] *= sqrt(temp);
+#line 357 "MB3OYZ.f"
 			    }
+#line 358 "MB3OYZ.f"
 			}
+#line 359 "MB3OYZ.f"
 /* L30: */
+#line 359 "MB3OYZ.f"
 		    }
 
+#line 361 "MB3OYZ.f"
 		    i__1 = *rank;
+#line 361 "MB3OYZ.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 362 "MB3OYZ.f"
 			i__2 = ismin + i__ - 1;
+#line 362 "MB3OYZ.f"
 			i__3 = ismin + i__ - 1;
+#line 362 "MB3OYZ.f"
 			z__1.r = s1.r * zwork[i__3].r - s1.i * zwork[i__3].i, 
 				z__1.i = s1.r * zwork[i__3].i + s1.i * zwork[
 				i__3].r;
+#line 362 "MB3OYZ.f"
 			zwork[i__2].r = z__1.r, zwork[i__2].i = z__1.i;
+#line 363 "MB3OYZ.f"
 			i__2 = ismax + i__ - 1;
+#line 363 "MB3OYZ.f"
 			i__3 = ismax + i__ - 1;
+#line 363 "MB3OYZ.f"
 			z__1.r = s2.r * zwork[i__3].r - s2.i * zwork[i__3].i, 
 				z__1.i = s2.r * zwork[i__3].i + s2.i * zwork[
 				i__3].r;
+#line 363 "MB3OYZ.f"
 			zwork[i__2].r = z__1.r, zwork[i__2].i = z__1.i;
+#line 364 "MB3OYZ.f"
 /* L40: */
+#line 364 "MB3OYZ.f"
 		    }
 
+#line 366 "MB3OYZ.f"
 		    i__1 = ismin + *rank;
+#line 366 "MB3OYZ.f"
 		    zwork[i__1].r = c1.r, zwork[i__1].i = c1.i;
+#line 367 "MB3OYZ.f"
 		    i__1 = ismax + *rank;
+#line 367 "MB3OYZ.f"
 		    zwork[i__1].r = c2.r, zwork[i__1].i = c2.i;
+#line 368 "MB3OYZ.f"
 		    smin = sminpr;
+#line 369 "MB3OYZ.f"
 		    smax = smaxpr;
+#line 370 "MB3OYZ.f"
 		    ++(*rank);
+#line 371 "MB3OYZ.f"
 		    goto L20;
+#line 372 "MB3OYZ.f"
 		}
+#line 373 "MB3OYZ.f"
 	    }
+#line 374 "MB3OYZ.f"
 	}
+#line 375 "MB3OYZ.f"
     }
 
 /*     Restore the changed part of the (RANK+1)-th column and set SVAL. */
 
+#line 379 "MB3OYZ.f"
     if (*rank < *n) {
+#line 380 "MB3OYZ.f"
 	if (i__ < *m) {
+#line 381 "MB3OYZ.f"
 	    i__1 = *m - i__;
+#line 381 "MB3OYZ.f"
 	    i__2 = i__ + i__ * a_dim1;
+#line 381 "MB3OYZ.f"
 	    z__2.r = -a[i__2].r, z__2.i = -a[i__2].i;
+#line 381 "MB3OYZ.f"
 	    i__3 = i__;
+#line 381 "MB3OYZ.f"
 	    z__1.r = z__2.r * tau[i__3].r - z__2.i * tau[i__3].i, z__1.i = 
 		    z__2.r * tau[i__3].i + z__2.i * tau[i__3].r;
+#line 381 "MB3OYZ.f"
 	    zscal_(&i__1, &z__1, &a[i__ + 1 + i__ * a_dim1], &c__1);
+#line 382 "MB3OYZ.f"
 	    i__1 = i__ + i__ * a_dim1;
+#line 382 "MB3OYZ.f"
 	    a[i__1].r = aii.r, a[i__1].i = aii.i;
+#line 383 "MB3OYZ.f"
 	}
+#line 384 "MB3OYZ.f"
     }
+#line 385 "MB3OYZ.f"
     if (*rank == 0) {
+#line 386 "MB3OYZ.f"
 	smin = 0.;
+#line 387 "MB3OYZ.f"
 	sminpr = 0.;
+#line 388 "MB3OYZ.f"
     }
+#line 389 "MB3OYZ.f"
     sval[1] = smax;
+#line 390 "MB3OYZ.f"
     sval[2] = smin;
+#line 391 "MB3OYZ.f"
     sval[3] = sminpr;
 
+#line 393 "MB3OYZ.f"
     return 0;
 /* *** Last line of MB3OYZ *** */
 } /* mb3oyz_ */

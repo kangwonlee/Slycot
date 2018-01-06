@@ -1,3 +1,4 @@
+#line 1 "MC03NX.f"
 /* MC03NX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC03NX.f"
 /* Table of constant values */
 
 static doublereal c_b3 = 0.;
@@ -143,54 +145,90 @@ static integer c__1 = 1;
 /*     .. External Subroutines .. */
 /*     .. Executable Statements .. */
 
+#line 116 "MC03NX.f"
     /* Parameter adjustments */
+#line 116 "MC03NX.f"
     p_dim1 = *ldp1;
+#line 116 "MC03NX.f"
     p_dim2 = *ldp2;
+#line 116 "MC03NX.f"
     p_offset = 1 + p_dim1 * (1 + p_dim2);
+#line 116 "MC03NX.f"
     p -= p_offset;
+#line 116 "MC03NX.f"
     a_dim1 = *lda;
+#line 116 "MC03NX.f"
     a_offset = 1 + a_dim1;
+#line 116 "MC03NX.f"
     a -= a_offset;
+#line 116 "MC03NX.f"
     e_dim1 = *lde;
+#line 116 "MC03NX.f"
     e_offset = 1 + e_dim1;
+#line 116 "MC03NX.f"
     e -= e_offset;
+#line 116 "MC03NX.f"
 
+#line 116 "MC03NX.f"
     /* Function Body */
+#line 116 "MC03NX.f"
     if (*mp <= 0 || *np <= 0) {
+#line 116 "MC03NX.f"
 	return 0;
+#line 116 "MC03NX.f"
     }
 
 /*     Initialisation of matrices A and E. */
 
+#line 121 "MC03NX.f"
     h1 = *dp * *mp;
+#line 122 "MC03NX.f"
     hb = h1 - *mp;
+#line 123 "MC03NX.f"
     he = hb + *np;
+#line 124 "MC03NX.f"
     dlaset_("Full", &h1, &he, &c_b3, &c_b4, &a[a_offset], lda, (ftnlen)4);
+#line 125 "MC03NX.f"
     dlaset_("Full", mp, &hb, &c_b3, &c_b3, &e[e_offset], lde, (ftnlen)4);
+#line 126 "MC03NX.f"
     dlacpy_("Full", &hb, &hb, &a[a_offset], lda, &e[*mp + 1 + e_dim1], lde, (
 	    ftnlen)4);
 
 /*     Insert the matrices P(0), P(1), ..., P(dp) at the right places */
 /*     in the matrices A and E. */
 
+#line 131 "MC03NX.f"
     ++hb;
+#line 132 "MC03NX.f"
     dlacpy_("Full", mp, np, &p[(p_dim2 + 1) * p_dim1 + 1], ldp1, &a[hb + hb * 
 	    a_dim1], lda, (ftnlen)4);
+#line 133 "MC03NX.f"
     hi = 1;
 
+#line 135 "MC03NX.f"
     for (k = *dp + 1; k >= 2; --k) {
+#line 136 "MC03NX.f"
 	dlacpy_("Full", mp, np, &p[(k * p_dim2 + 1) * p_dim1 + 1], ldp1, &e[
 		hi + hb * e_dim1], lde, (ftnlen)4);
+#line 137 "MC03NX.f"
 	hi += *mp;
+#line 138 "MC03NX.f"
 /* L20: */
+#line 138 "MC03NX.f"
     }
 
+#line 140 "MC03NX.f"
     i__1 = he;
+#line 140 "MC03NX.f"
     for (j = hb; j <= i__1; ++j) {
+#line 141 "MC03NX.f"
 	dscal_(&h1, &c_b13, &e[j * e_dim1 + 1], &c__1);
+#line 142 "MC03NX.f"
 /* L40: */
+#line 142 "MC03NX.f"
     }
 
+#line 144 "MC03NX.f"
     return 0;
 /* *** Last line of MC03NX *** */
 } /* mc03nx_ */

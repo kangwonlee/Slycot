@@ -1,3 +1,4 @@
+#line 1 "TB04BD.f"
 /* TB04BD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TB04BD.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -336,143 +338,250 @@ static integer c__1 = 1;
 
 /*     Test the input scalar parameters. */
 
+#line 285 "TB04BD.f"
     /* Parameter adjustments */
+#line 285 "TB04BD.f"
     a_dim1 = *lda;
+#line 285 "TB04BD.f"
     a_offset = 1 + a_dim1;
+#line 285 "TB04BD.f"
     a -= a_offset;
+#line 285 "TB04BD.f"
     b_dim1 = *ldb;
+#line 285 "TB04BD.f"
     b_offset = 1 + b_dim1;
+#line 285 "TB04BD.f"
     b -= b_offset;
+#line 285 "TB04BD.f"
     c_dim1 = *ldc;
+#line 285 "TB04BD.f"
     c_offset = 1 + c_dim1;
+#line 285 "TB04BD.f"
     c__ -= c_offset;
+#line 285 "TB04BD.f"
     d_dim1 = *ldd;
+#line 285 "TB04BD.f"
     d_offset = 1 + d_dim1;
+#line 285 "TB04BD.f"
     d__ -= d_offset;
+#line 285 "TB04BD.f"
     ign_dim1 = *ldign;
+#line 285 "TB04BD.f"
     ign_offset = 1 + ign_dim1;
+#line 285 "TB04BD.f"
     ign -= ign_offset;
+#line 285 "TB04BD.f"
     igd_dim1 = *ldigd;
+#line 285 "TB04BD.f"
     igd_offset = 1 + igd_dim1;
+#line 285 "TB04BD.f"
     igd -= igd_offset;
+#line 285 "TB04BD.f"
     --gn;
+#line 285 "TB04BD.f"
     --gd;
+#line 285 "TB04BD.f"
     --iwork;
+#line 285 "TB04BD.f"
     --dwork;
+#line 285 "TB04BD.f"
 
+#line 285 "TB04BD.f"
     /* Function Body */
+#line 285 "TB04BD.f"
     *info = 0;
+#line 286 "TB04BD.f"
     withd = lsame_(jobd, "D", (ftnlen)1, (ftnlen)1);
+#line 287 "TB04BD.f"
     ascend = lsame_(order, "I", (ftnlen)1, (ftnlen)1);
+#line 288 "TB04BD.f"
     if (! withd && ! lsame_(jobd, "Z", (ftnlen)1, (ftnlen)1)) {
+#line 289 "TB04BD.f"
 	*info = -1;
+#line 290 "TB04BD.f"
     } else if (! ascend && ! lsame_(order, "D", (ftnlen)1, (ftnlen)1)) {
+#line 291 "TB04BD.f"
 	*info = -2;
+#line 292 "TB04BD.f"
     } else if (! (lsame_(equil, "S", (ftnlen)1, (ftnlen)1) || lsame_(equil, 
 	    "N", (ftnlen)1, (ftnlen)1))) {
+#line 294 "TB04BD.f"
 	*info = -3;
+#line 295 "TB04BD.f"
     } else if (*n < 0) {
+#line 296 "TB04BD.f"
 	*info = -4;
+#line 297 "TB04BD.f"
     } else if (*m < 0) {
+#line 298 "TB04BD.f"
 	*info = -5;
+#line 299 "TB04BD.f"
     } else if (*p < 0) {
+#line 300 "TB04BD.f"
 	*info = -6;
+#line 301 "TB04BD.f"
     } else if (*md < 1) {
+#line 302 "TB04BD.f"
 	*info = -7;
+#line 303 "TB04BD.f"
     } else if (*lda < max(1,*n)) {
+#line 304 "TB04BD.f"
 	*info = -9;
+#line 305 "TB04BD.f"
     } else if (*ldb < max(1,*n)) {
+#line 306 "TB04BD.f"
 	*info = -11;
+#line 307 "TB04BD.f"
     } else if (*ldc < max(1,*p)) {
+#line 308 "TB04BD.f"
 	*info = -13;
+#line 309 "TB04BD.f"
     } else if (*ldd < 1 || withd && *ldd < *p) {
+#line 310 "TB04BD.f"
 	*info = -15;
+#line 311 "TB04BD.f"
     } else if (*ldign < max(1,*p)) {
+#line 312 "TB04BD.f"
 	*info = -17;
+#line 313 "TB04BD.f"
     } else if (*ldigd < max(1,*p)) {
+#line 314 "TB04BD.f"
 	*info = -19;
+#line 315 "TB04BD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 315 "TB04BD.f"
 	i__3 = *n + max(*n,*p), i__4 = *n * ((*n << 1) + 5);
+#line 315 "TB04BD.f"
 	i__1 = 1, i__2 = *n * (*n + *p) + max(i__3,i__4);
+#line 315 "TB04BD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 318 "TB04BD.f"
 	    *info = -25;
+#line 319 "TB04BD.f"
 	}
+#line 319 "TB04BD.f"
     }
 
+#line 321 "TB04BD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 325 "TB04BD.f"
 	i__1 = -(*info);
+#line 325 "TB04BD.f"
 	xerbla_("TB04BD", &i__1, (ftnlen)6);
+#line 326 "TB04BD.f"
 	return 0;
+#line 327 "TB04BD.f"
     }
 
 /*     Initialize GN and GD to zero. */
 
+#line 331 "TB04BD.f"
     z__[0] = 0.;
+#line 332 "TB04BD.f"
     i__1 = *p * *m * *md;
+#line 332 "TB04BD.f"
     dcopy_(&i__1, z__, &c__0, &gn[1], &c__1);
+#line 333 "TB04BD.f"
     i__1 = *p * *m * *md;
+#line 333 "TB04BD.f"
     dcopy_(&i__1, z__, &c__0, &gd[1], &c__1);
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 337 "TB04BD.f"
     i__1 = min(*n,*p);
+#line 337 "TB04BD.f"
     if (min(i__1,*m) == 0) {
+#line 338 "TB04BD.f"
 	if (min(*p,*m) > 0) {
+#line 339 "TB04BD.f"
 	    k = 1;
 
+#line 341 "TB04BD.f"
 	    i__1 = *m;
+#line 341 "TB04BD.f"
 	    for (j = 1; j <= i__1; ++j) {
 
+#line 343 "TB04BD.f"
 		i__2 = *p;
+#line 343 "TB04BD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 344 "TB04BD.f"
 		    ign[i__ + j * ign_dim1] = 0;
+#line 345 "TB04BD.f"
 		    igd[i__ + j * igd_dim1] = 0;
+#line 346 "TB04BD.f"
 		    if (withd) {
+#line 346 "TB04BD.f"
 			gn[k] = d__[i__ + j * d_dim1];
+#line 346 "TB04BD.f"
 		    }
+#line 348 "TB04BD.f"
 		    gd[k] = 1.;
+#line 349 "TB04BD.f"
 		    k += *md;
+#line 350 "TB04BD.f"
 /* L10: */
+#line 350 "TB04BD.f"
 		}
 
+#line 352 "TB04BD.f"
 /* L20: */
+#line 352 "TB04BD.f"
 	    }
 
+#line 354 "TB04BD.f"
 	}
+#line 355 "TB04BD.f"
 	dwork[1] = 1.;
+#line 356 "TB04BD.f"
 	return 0;
+#line 357 "TB04BD.f"
     }
 
 /*     Prepare the computation of the default tolerance. */
 
+#line 361 "TB04BD.f"
     toldef = *tol;
+#line 362 "TB04BD.f"
     if (toldef <= 0.) {
+#line 363 "TB04BD.f"
 	epsn = (doublereal) (*n) * dlamch_("Epsilon", (ftnlen)7);
+#line 364 "TB04BD.f"
 	anorm = dlange_("Frobenius", n, n, &a[a_offset], lda, &dwork[1], (
 		ftnlen)9);
+#line 365 "TB04BD.f"
     }
 
 /*     Initializations. */
 
+#line 369 "TB04BD.f"
     ia = 1;
+#line 370 "TB04BD.f"
     ic = ia + *n * *n;
+#line 371 "TB04BD.f"
     itau = ic + *p * *n;
+#line 372 "TB04BD.f"
     jwork = itau + *n;
+#line 373 "TB04BD.f"
     iac = itau;
 
+#line 375 "TB04BD.f"
     k = 1;
+#line 376 "TB04BD.f"
     dij = 0.;
 
 /*     (Note: Comments in the code beginning "Workspace:" describe the */
 /*     minimal amount of real workspace needed at that point in the */
 /*     code, as well as the preferred amount for good performance.) */
 
+#line 382 "TB04BD.f"
     if (lsame_(equil, "S", (ftnlen)1, (ftnlen)1)) {
 
 /*        Scale simultaneously the matrices A, B and C: */
@@ -480,77 +589,113 @@ static integer c__1 = 1;
 /*        diagonal scaling matrix. */
 /*        Workspace: need   N. */
 
+#line 389 "TB04BD.f"
 	maxred = 100.;
+#line 390 "TB04BD.f"
 	tb01id_("All", n, m, p, &maxred, &a[a_offset], lda, &b[b_offset], ldb,
 		 &c__[c_offset], ldc, &dwork[1], &ierr, (ftnlen)3);
+#line 392 "TB04BD.f"
     }
 
 /*     Compute the transfer function matrix of the system (A,B,C,D). */
 
+#line 396 "TB04BD.f"
     i__1 = *m;
+#line 396 "TB04BD.f"
     for (j = 1; j <= i__1; ++j) {
 
 /*        Save A and C. */
 /*        Workspace: need   W1 = N*(N+P). */
 
+#line 401 "TB04BD.f"
 	dlacpy_("Full", n, n, &a[a_offset], lda, &dwork[ia], n, (ftnlen)4);
+#line 402 "TB04BD.f"
 	dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[ic], p, (ftnlen)4);
 
 /*        Remove the uncontrollable part of the system (A,B(J),C). */
 /*        Workspace: need   W1+N+MAX(N,P); */
 /*                   prefer larger. */
 
+#line 408 "TB04BD.f"
 	i__2 = *ldwork - jwork + 1;
+#line 408 "TB04BD.f"
 	tb01zd_("No Z", n, p, &dwork[ia], n, &b[j * b_dim1 + 1], &dwork[ic], 
 		p, &ncont, z__, &c__1, &dwork[itau], tol, &dwork[jwork], &
 		i__2, &ierr, (ftnlen)4);
+#line 411 "TB04BD.f"
 	if (j == 1) {
+#line 411 "TB04BD.f"
 	    wrkopt = (integer) dwork[jwork] + jwork - 1;
+#line 411 "TB04BD.f"
 	}
 
+#line 414 "TB04BD.f"
 	ib = iac + ncont * ncont;
+#line 415 "TB04BD.f"
 	icc = ib + ncont;
+#line 416 "TB04BD.f"
 	itau1 = icc + ncont;
+#line 417 "TB04BD.f"
 	irp = itau1;
+#line 418 "TB04BD.f"
 	iip = irp + ncont;
+#line 419 "TB04BD.f"
 	ias = iip + ncont;
+#line 420 "TB04BD.f"
 	jwork1 = ias + ncont * ncont;
 
+#line 422 "TB04BD.f"
 	i__2 = *p;
+#line 422 "TB04BD.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 423 "TB04BD.f"
 	    if (withd) {
+#line 423 "TB04BD.f"
 		dij = d__[i__ + j * d_dim1];
+#line 423 "TB04BD.f"
 	    }
+#line 425 "TB04BD.f"
 	    if (ncont > 0) {
 
 /*              Form the matrices of the state-space representation of */
 /*              the dual system for the controllable part. */
 /*              Workspace: need   W2 = W1+N*(N+2). */
 
+#line 431 "TB04BD.f"
 		ma02ad_("Full", &ncont, &ncont, &dwork[ia], n, &dwork[iac], &
 			ncont, (ftnlen)4);
+#line 433 "TB04BD.f"
 		dcopy_(&ncont, &b[j * b_dim1 + 1], &c__1, &dwork[ib], &c__1);
+#line 434 "TB04BD.f"
 		dcopy_(&ncont, &dwork[ic + i__ - 1], p, &dwork[icc], &c__1);
 
 /*              Remove the unobservable part of the system (A,B(J),C(I)). */
 /*              Workspace: need   W2+2*N; */
 /*                         prefer larger. */
 
+#line 440 "TB04BD.f"
 		i__3 = *ldwork - iip + 1;
+#line 440 "TB04BD.f"
 		tb01zd_("No Z", &ncont, &c__1, &dwork[iac], &ncont, &dwork[
 			icc], &dwork[ib], &c__1, &ip, z__, &c__1, &dwork[
 			itau1], tol, &dwork[iip], &i__3, &ierr, (ftnlen)4);
+#line 444 "TB04BD.f"
 		if (i__ == 1) {
 /* Computing MAX */
+#line 444 "TB04BD.f"
 		    i__3 = wrkopt, i__4 = (integer) dwork[iip] + iip - 1;
+#line 444 "TB04BD.f"
 		    wrkopt = max(i__3,i__4);
+#line 444 "TB04BD.f"
 		}
 
+#line 447 "TB04BD.f"
 		if (ip > 0) {
 
 /*                 Save the state matrix of the minimal part. */
 /*                 Workspace: need   W3 = W2+N*(N+2). */
 
+#line 452 "TB04BD.f"
 		    dlacpy_("Full", &ip, &ip, &dwork[iac], &ncont, &dwork[ias]
 			    , &ip, (ftnlen)4);
 
@@ -558,162 +703,251 @@ static integer c__1 = 1;
 /*                 Workspace: need   W3+N; */
 /*                            prefer larger. */
 
+#line 459 "TB04BD.f"
 		    i__3 = *ldwork - jwork1 + 1;
+#line 459 "TB04BD.f"
 		    dhseqr_("Eigenvalues", "No vectors", &ip, &c__1, &ip, &
 			    dwork[iac], &ncont, &dwork[irp], &dwork[iip], z__,
 			     &c__1, &dwork[jwork1], &i__3, &ierr, (ftnlen)11, 
 			    (ftnlen)10);
+#line 463 "TB04BD.f"
 		    if (ierr != 0) {
+#line 464 "TB04BD.f"
 			*info = 2;
+#line 465 "TB04BD.f"
 			return 0;
+#line 466 "TB04BD.f"
 		    }
 /* Computing MAX */
+#line 467 "TB04BD.f"
 		    i__3 = wrkopt, i__4 = (integer) dwork[jwork1] + jwork1 - 
 			    1;
+#line 467 "TB04BD.f"
 		    wrkopt = max(i__3,i__4);
 
 /*                 Compute the zeros of the transfer function. */
 
+#line 472 "TB04BD.f"
 		    ipm1 = ip - 1;
+#line 473 "TB04BD.f"
 		    dijnz = withd && dij != 0.;
+#line 474 "TB04BD.f"
 		    fndeig = dijnz || ipm1 > 0;
+#line 475 "TB04BD.f"
 		    if (! fndeig) {
+#line 476 "TB04BD.f"
 			iz = 0;
+#line 477 "TB04BD.f"
 		    } else if (dijnz) {
 
 /*                    Add the contribution due to D(i,j). */
 /*                    Note that the matrix whose eigenvalues have to */
 /*                    be computed remains in an upper Hessenberg form. */
 
+#line 483 "TB04BD.f"
 			iz = ip;
+#line 484 "TB04BD.f"
 			dlacpy_("Full", &iz, &iz, &dwork[ias], &ip, &dwork[
 				iac], &ncont, (ftnlen)4);
+#line 486 "TB04BD.f"
 			d__1 = -dwork[icc] / dij;
+#line 486 "TB04BD.f"
 			daxpy_(&iz, &d__1, &dwork[ib], &c__1, &dwork[iac], &
 				ncont);
+#line 488 "TB04BD.f"
 		    } else {
+#line 489 "TB04BD.f"
 			if (*tol <= 0.) {
 /* Computing MAX */
+#line 489 "TB04BD.f"
 			    d__1 = anorm, d__2 = dlange_("Frobenius", &ip, &
 				    c__1, &dwork[ib], &c__1, &dwork[1], (
 				    ftnlen)9);
+#line 489 "TB04BD.f"
 			    toldef = epsn * max(d__1,d__2);
+#line 489 "TB04BD.f"
 			}
 
+#line 495 "TB04BD.f"
 			i__3 = ipm1;
+#line 495 "TB04BD.f"
 			for (im = 1; im <= i__3; ++im) {
+#line 496 "TB04BD.f"
 			    if ((d__1 = dwork[ib + im - 1], abs(d__1)) > 
 				    toldef) {
+#line 496 "TB04BD.f"
 				goto L40;
+#line 496 "TB04BD.f"
 			    }
+#line 497 "TB04BD.f"
 /* L30: */
+#line 497 "TB04BD.f"
 			}
 
+#line 499 "TB04BD.f"
 			iz = 0;
+#line 500 "TB04BD.f"
 			goto L50;
 
+#line 502 "TB04BD.f"
 L40:
 
 /*                    Restore (part of) the saved state matrix. */
 
+#line 506 "TB04BD.f"
 			iz = ip - im;
+#line 507 "TB04BD.f"
 			dlacpy_("Full", &iz, &iz, &dwork[ias + im * (ip + 1)],
 				 &ip, &dwork[iac], &ncont, (ftnlen)4);
 
 /*                    Apply the output injection. */
 
+#line 512 "TB04BD.f"
 			d__1 = -dwork[ias + im * (ip + 1) - ip] / dwork[ib + 
 				im - 1];
+#line 512 "TB04BD.f"
 			daxpy_(&iz, &d__1, &dwork[ib + im], &c__1, &dwork[iac]
 				, &ncont);
+#line 515 "TB04BD.f"
 		    }
 
+#line 517 "TB04BD.f"
 		    if (fndeig) {
 
 /*                    Find the zeros. */
 /*                    Workspace: need   W3+N; */
 /*                               prefer larger. */
 
+#line 523 "TB04BD.f"
 			i__3 = *ldwork - jwork1 + 1;
+#line 523 "TB04BD.f"
 			dhseqr_("Eigenvalues", "No vectors", &iz, &c__1, &iz, 
 				&dwork[iac], &ncont, &gn[k], &gd[k], z__, &
 				c__1, &dwork[jwork1], &i__3, &ierr, (ftnlen)
 				11, (ftnlen)10);
+#line 527 "TB04BD.f"
 			if (ierr != 0) {
+#line 528 "TB04BD.f"
 			    *info = 1;
+#line 529 "TB04BD.f"
 			    return 0;
+#line 530 "TB04BD.f"
 			}
+#line 531 "TB04BD.f"
 		    }
 
 /*                 Compute the gain. */
 
+#line 535 "TB04BD.f"
 L50:
+#line 536 "TB04BD.f"
 		    if (dijnz) {
+#line 537 "TB04BD.f"
 			x = dij;
+#line 538 "TB04BD.f"
 		    } else {
+#line 539 "TB04BD.f"
 			tb04bx_(&ip, &iz, &dwork[ias], &ip, &dwork[icc], &
 				dwork[ib], &dij, &dwork[irp], &dwork[iip], &
 				gn[k], &gd[k], &x, &iwork[1]);
+#line 542 "TB04BD.f"
 		    }
 
 /*                 Form the numerator coefficients in increasing or */
 /*                 decreasing powers of the indeterminate. */
 /*                 IAS is used here as pointer to the workspace. */
 
+#line 548 "TB04BD.f"
 		    if (ascend) {
+#line 549 "TB04BD.f"
 			mc01pd_(&iz, &gn[k], &gd[k], &dwork[ib], &dwork[ias], 
 				&ierr);
+#line 551 "TB04BD.f"
 		    } else {
+#line 552 "TB04BD.f"
 			mc01py_(&iz, &gn[k], &gd[k], &dwork[ib], &dwork[ias], 
 				&ierr);
+#line 554 "TB04BD.f"
 		    }
+#line 555 "TB04BD.f"
 		    jj = k;
 
+#line 557 "TB04BD.f"
 		    i__3 = ib + iz;
+#line 557 "TB04BD.f"
 		    for (l = ib; l <= i__3; ++l) {
+#line 558 "TB04BD.f"
 			gn[jj] = dwork[l] * x;
+#line 559 "TB04BD.f"
 			++jj;
+#line 560 "TB04BD.f"
 /* L60: */
+#line 560 "TB04BD.f"
 		    }
 
 /*                 Form the denominator coefficients. */
 
+#line 564 "TB04BD.f"
 		    if (ascend) {
+#line 565 "TB04BD.f"
 			mc01pd_(&ip, &dwork[irp], &dwork[iip], &gd[k], &dwork[
 				ias], &ierr);
+#line 567 "TB04BD.f"
 		    } else {
+#line 568 "TB04BD.f"
 			mc01py_(&ip, &dwork[irp], &dwork[iip], &gd[k], &dwork[
 				ias], &ierr);
+#line 570 "TB04BD.f"
 		    }
+#line 571 "TB04BD.f"
 		    ign[i__ + j * ign_dim1] = iz;
+#line 572 "TB04BD.f"
 		    igd[i__ + j * igd_dim1] = ip;
+#line 573 "TB04BD.f"
 		} else {
 
 /*                 Null element. */
 
+#line 577 "TB04BD.f"
 		    ign[i__ + j * ign_dim1] = 0;
+#line 578 "TB04BD.f"
 		    igd[i__ + j * igd_dim1] = 0;
+#line 579 "TB04BD.f"
 		    gn[k] = dij;
+#line 580 "TB04BD.f"
 		    gd[k] = 1.;
+#line 581 "TB04BD.f"
 		}
 
+#line 583 "TB04BD.f"
 	    } else {
 
 /*              Null element. */
 
+#line 587 "TB04BD.f"
 		ign[i__ + j * ign_dim1] = 0;
+#line 588 "TB04BD.f"
 		igd[i__ + j * igd_dim1] = 0;
+#line 589 "TB04BD.f"
 		gn[k] = dij;
+#line 590 "TB04BD.f"
 		gd[k] = 1.;
+#line 591 "TB04BD.f"
 	    }
 
+#line 593 "TB04BD.f"
 	    k += *md;
+#line 594 "TB04BD.f"
 /* L70: */
+#line 594 "TB04BD.f"
 	}
 
+#line 596 "TB04BD.f"
 /* L80: */
+#line 596 "TB04BD.f"
     }
 
+#line 598 "TB04BD.f"
     return 0;
 /* *** Last line of TB04BD *** */
 } /* tb04bd_ */

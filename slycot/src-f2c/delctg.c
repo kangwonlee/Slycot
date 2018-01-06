@@ -1,3 +1,4 @@
+#line 1 "delctg.f"
 /* delctg.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "delctg.f"
 logical delctg_(doublereal *par1, doublereal *par2, doublereal *par3)
 {
     /* System generated locals */
@@ -39,7 +41,9 @@ logical delctg_(doublereal *par1, doublereal *par2, doublereal *par3)
 /*     Void logical function for DGGES. */
 
 
+#line 25 "delctg.f"
     ret_val = TRUE_;
+#line 26 "delctg.f"
     return ret_val;
 } /* delctg_ */
 

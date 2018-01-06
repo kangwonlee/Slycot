@@ -1,3 +1,4 @@
+#line 1 "FB01QD.f"
 /* FB01QD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "FB01QD.f"
 /* Table of constant values */
 
 static doublereal c_b13 = 1.;
@@ -356,96 +358,172 @@ static doublereal c_b13 = 1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 324 "FB01QD.f"
     /* Parameter adjustments */
+#line 324 "FB01QD.f"
     s_dim1 = *lds;
+#line 324 "FB01QD.f"
     s_offset = 1 + s_dim1;
+#line 324 "FB01QD.f"
     s -= s_offset;
+#line 324 "FB01QD.f"
     a_dim1 = *lda;
+#line 324 "FB01QD.f"
     a_offset = 1 + a_dim1;
+#line 324 "FB01QD.f"
     a -= a_offset;
+#line 324 "FB01QD.f"
     b_dim1 = *ldb;
+#line 324 "FB01QD.f"
     b_offset = 1 + b_dim1;
+#line 324 "FB01QD.f"
     b -= b_offset;
+#line 324 "FB01QD.f"
     q_dim1 = *ldq;
+#line 324 "FB01QD.f"
     q_offset = 1 + q_dim1;
+#line 324 "FB01QD.f"
     q -= q_offset;
+#line 324 "FB01QD.f"
     c_dim1 = *ldc;
+#line 324 "FB01QD.f"
     c_offset = 1 + c_dim1;
+#line 324 "FB01QD.f"
     c__ -= c_offset;
+#line 324 "FB01QD.f"
     r_dim1 = *ldr;
+#line 324 "FB01QD.f"
     r_offset = 1 + r_dim1;
+#line 324 "FB01QD.f"
     r__ -= r_offset;
+#line 324 "FB01QD.f"
     k_dim1 = *ldk;
+#line 324 "FB01QD.f"
     k_offset = 1 + k_dim1;
+#line 324 "FB01QD.f"
     k -= k_offset;
+#line 324 "FB01QD.f"
     --iwork;
+#line 324 "FB01QD.f"
     --dwork;
+#line 324 "FB01QD.f"
 
+#line 324 "FB01QD.f"
     /* Function Body */
+#line 324 "FB01QD.f"
     pn = *p + *n;
+#line 325 "FB01QD.f"
     n1 = max(1,*n);
+#line 326 "FB01QD.f"
     *info = 0;
+#line 327 "FB01QD.f"
     ljobk = lsame_(jobk, "K", (ftnlen)1, (ftnlen)1);
+#line 328 "FB01QD.f"
     lmultb = lsame_(multbq, "P", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 332 "FB01QD.f"
     if (! ljobk && ! lsame_(jobk, "N", (ftnlen)1, (ftnlen)1)) {
+#line 333 "FB01QD.f"
 	*info = -1;
+#line 334 "FB01QD.f"
     } else if (! lmultb && ! lsame_(multbq, "N", (ftnlen)1, (ftnlen)1)) {
+#line 335 "FB01QD.f"
 	*info = -2;
+#line 336 "FB01QD.f"
     } else if (*n < 0) {
+#line 337 "FB01QD.f"
 	*info = -3;
+#line 338 "FB01QD.f"
     } else if (*m < 0) {
+#line 339 "FB01QD.f"
 	*info = -4;
+#line 340 "FB01QD.f"
     } else if (*p < 0) {
+#line 341 "FB01QD.f"
 	*info = -5;
+#line 342 "FB01QD.f"
     } else if (*lds < n1) {
+#line 343 "FB01QD.f"
 	*info = -7;
+#line 344 "FB01QD.f"
     } else if (*lda < n1) {
+#line 345 "FB01QD.f"
 	*info = -9;
+#line 346 "FB01QD.f"
     } else if (*ldb < n1) {
+#line 347 "FB01QD.f"
 	*info = -11;
+#line 348 "FB01QD.f"
     } else if (*ldq < 1 || ! lmultb && *ldq < *m) {
+#line 349 "FB01QD.f"
 	*info = -13;
+#line 350 "FB01QD.f"
     } else if (*ldc < max(1,*p)) {
+#line 351 "FB01QD.f"
 	*info = -15;
+#line 352 "FB01QD.f"
     } else if (*ldr < max(1,*p)) {
+#line 353 "FB01QD.f"
 	*info = -17;
+#line 354 "FB01QD.f"
     } else if (*ldk < n1) {
+#line 355 "FB01QD.f"
 	*info = -19;
+#line 356 "FB01QD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 356 "FB01QD.f"
 	i__1 = 2, i__2 = pn * *n + (*p << 1), i__1 = max(i__1,i__2), i__2 = *
 		n * (*n + *m + 2), i__1 = max(i__1,i__2), i__2 = *p * 3;
 /* Computing MAX */
+#line 356 "FB01QD.f"
 	i__3 = 1, i__4 = pn * *n + (*p << 1), i__3 = max(i__3,i__4), i__4 = *
 		n * (*n + *m + 2);
+#line 356 "FB01QD.f"
 	if (ljobk && *ldwork < max(i__1,i__2) || ! ljobk && *ldwork < max(
 		i__3,i__4)) {
+#line 360 "FB01QD.f"
 	    *info = -23;
+#line 361 "FB01QD.f"
 	}
+#line 361 "FB01QD.f"
     }
 
+#line 363 "FB01QD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 367 "FB01QD.f"
 	i__1 = -(*info);
+#line 367 "FB01QD.f"
 	xerbla_("FB01QD", &i__1, (ftnlen)6);
+#line 368 "FB01QD.f"
 	return 0;
+#line 369 "FB01QD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 373 "FB01QD.f"
     if (*n == 0) {
+#line 374 "FB01QD.f"
 	if (ljobk) {
+#line 375 "FB01QD.f"
 	    dwork[1] = 2.;
+#line 376 "FB01QD.f"
 	    dwork[2] = 1.;
+#line 377 "FB01QD.f"
 	} else {
+#line 378 "FB01QD.f"
 	    dwork[1] = 1.;
+#line 379 "FB01QD.f"
 	}
+#line 380 "FB01QD.f"
 	return 0;
+#line 381 "FB01QD.f"
     }
 
 /*     Construction of the needed part of the pre-array in DWORK. */
@@ -462,9 +540,12 @@ static doublereal c_b13 = 1.;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 397 "FB01QD.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &dwork[1], &pn, (ftnlen)4);
+#line 398 "FB01QD.f"
     dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[*n + 1], &pn, (ftnlen)4)
 	    ;
+#line 399 "FB01QD.f"
     dtrmm_("Right", "Lower", "No transpose", "Non-unit", &pn, n, &c_b13, &s[
 	    s_offset], lds, &dwork[1], &pn, (ftnlen)5, (ftnlen)5, (ftnlen)12, 
 	    (ftnlen)8);
@@ -474,72 +555,102 @@ static doublereal c_b13 = 1.;
 /*     Step 1: annihilate the matrix C x S. */
 /*     Workspace: need (N+P)*N + 2*P. */
 
+#line 407 "FB01QD.f"
     itau = pn * *n + 1;
+#line 408 "FB01QD.f"
     jwork = itau + *p;
 
+#line 410 "FB01QD.f"
     mb04ld_("Full", p, n, n, &r__[r_offset], ldr, &dwork[*n + 1], &pn, &dwork[
 	    1], &pn, &k[k_offset], ldk, &dwork[itau], &dwork[jwork], (ftnlen)
 	    4);
+#line 412 "FB01QD.f"
     wrkopt = pn * *n + (*p << 1);
 
 /*     Now, the workspace for C x S is no longer needed. */
 /*     Adjust the leading dimension of DWORK, to save space for the */
 /*     following computations. */
 
+#line 418 "FB01QD.f"
     dlacpy_("Full", n, n, &dwork[1], &pn, &dwork[1], n, (ftnlen)4);
+#line 419 "FB01QD.f"
     i12 = *n * *n + 1;
 
 /*     Storing B x Q in the (1,2) block of DWORK. */
 /*     Workspace: need N*(N+M). */
 
+#line 424 "FB01QD.f"
     dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[i12], n, (ftnlen)4);
+#line 425 "FB01QD.f"
     if (! lmultb) {
+#line 425 "FB01QD.f"
 	dtrmm_("Right", "Lower", "No transpose", "Non-unit", n, m, &c_b13, &q[
 		q_offset], ldq, &dwork[i12], n, (ftnlen)5, (ftnlen)5, (ftnlen)
 		12, (ftnlen)8);
+#line 425 "FB01QD.f"
     }
 /* Computing MAX */
+#line 428 "FB01QD.f"
     i__1 = wrkopt, i__2 = *n * (*n + *m);
+#line 428 "FB01QD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Step 2: LQ triangularization of the matrix [ A x S  B x Q ], where */
 /*     A x S was modified at Step 1. */
 /*     Workspace: need N*(N+M+2);  prefer N*(N+M+1)+N*NB. */
 
+#line 434 "FB01QD.f"
     itau = *n * (*n + *m) + 1;
+#line 435 "FB01QD.f"
     jwork = itau + *n;
 
+#line 437 "FB01QD.f"
     i__1 = *n + *m;
+#line 437 "FB01QD.f"
     i__2 = *ldwork - jwork + 1;
+#line 437 "FB01QD.f"
     dgelqf_(n, &i__1, &dwork[1], n, &dwork[itau], &dwork[jwork], &i__2, info);
 /* Computing MAX */
+#line 439 "FB01QD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 439 "FB01QD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Output S and K (if needed) and set the optimal workspace */
 /*     dimension (and the reciprocal of the condition number estimate). */
 
+#line 444 "FB01QD.f"
     dlacpy_("Lower", n, n, &dwork[1], n, &s[s_offset], lds, (ftnlen)5);
 
+#line 446 "FB01QD.f"
     if (ljobk) {
 
 /*        Compute K. */
 /*        Workspace: need 3*P. */
 
+#line 451 "FB01QD.f"
 	mb02od_("Right", "Lower", "No transpose", "Non-unit", "1-norm", n, p, 
 		&c_b13, &r__[r_offset], ldr, &k[k_offset], ldk, &rcond, tol, &
 		iwork[1], &dwork[1], info, (ftnlen)5, (ftnlen)5, (ftnlen)12, (
 		ftnlen)8, (ftnlen)6);
+#line 454 "FB01QD.f"
 	if (*info == 0) {
 /* Computing MAX */
+#line 455 "FB01QD.f"
 	    i__1 = wrkopt, i__2 = *p * 3;
+#line 455 "FB01QD.f"
 	    wrkopt = max(i__1,i__2);
+#line 456 "FB01QD.f"
 	    dwork[2] = rcond;
+#line 457 "FB01QD.f"
 	}
+#line 458 "FB01QD.f"
     }
 
+#line 460 "FB01QD.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 462 "FB01QD.f"
     return 0;
 /* *** Last line of FB01QD *** */
 } /* fb01qd_ */

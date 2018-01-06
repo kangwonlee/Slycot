@@ -1,3 +1,4 @@
+#line 1 "AB05QD.f"
 /* AB05QD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB05QD.f"
 /* Table of constant values */
 
 static doublereal c_b9 = 0.;
@@ -273,243 +275,422 @@ static doublereal c_b9 = 0.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 251 "AB05QD.f"
     /* Parameter adjustments */
+#line 251 "AB05QD.f"
     a1_dim1 = *lda1;
+#line 251 "AB05QD.f"
     a1_offset = 1 + a1_dim1;
+#line 251 "AB05QD.f"
     a1 -= a1_offset;
+#line 251 "AB05QD.f"
     b1_dim1 = *ldb1;
+#line 251 "AB05QD.f"
     b1_offset = 1 + b1_dim1;
+#line 251 "AB05QD.f"
     b1 -= b1_offset;
+#line 251 "AB05QD.f"
     c1_dim1 = *ldc1;
+#line 251 "AB05QD.f"
     c1_offset = 1 + c1_dim1;
+#line 251 "AB05QD.f"
     c1 -= c1_offset;
+#line 251 "AB05QD.f"
     d1_dim1 = *ldd1;
+#line 251 "AB05QD.f"
     d1_offset = 1 + d1_dim1;
+#line 251 "AB05QD.f"
     d1 -= d1_offset;
+#line 251 "AB05QD.f"
     a2_dim1 = *lda2;
+#line 251 "AB05QD.f"
     a2_offset = 1 + a2_dim1;
+#line 251 "AB05QD.f"
     a2 -= a2_offset;
+#line 251 "AB05QD.f"
     b2_dim1 = *ldb2;
+#line 251 "AB05QD.f"
     b2_offset = 1 + b2_dim1;
+#line 251 "AB05QD.f"
     b2 -= b2_offset;
+#line 251 "AB05QD.f"
     c2_dim1 = *ldc2;
+#line 251 "AB05QD.f"
     c2_offset = 1 + c2_dim1;
+#line 251 "AB05QD.f"
     c2 -= c2_offset;
+#line 251 "AB05QD.f"
     d2_dim1 = *ldd2;
+#line 251 "AB05QD.f"
     d2_offset = 1 + d2_dim1;
+#line 251 "AB05QD.f"
     d2 -= d2_offset;
+#line 251 "AB05QD.f"
     a_dim1 = *lda;
+#line 251 "AB05QD.f"
     a_offset = 1 + a_dim1;
+#line 251 "AB05QD.f"
     a -= a_offset;
+#line 251 "AB05QD.f"
     b_dim1 = *ldb;
+#line 251 "AB05QD.f"
     b_offset = 1 + b_dim1;
+#line 251 "AB05QD.f"
     b -= b_offset;
+#line 251 "AB05QD.f"
     c_dim1 = *ldc;
+#line 251 "AB05QD.f"
     c_offset = 1 + c_dim1;
+#line 251 "AB05QD.f"
     c__ -= c_offset;
+#line 251 "AB05QD.f"
     d_dim1 = *ldd;
+#line 251 "AB05QD.f"
     d_offset = 1 + d_dim1;
+#line 251 "AB05QD.f"
     d__ -= d_offset;
+#line 251 "AB05QD.f"
 
+#line 251 "AB05QD.f"
     /* Function Body */
+#line 251 "AB05QD.f"
     lover = lsame_(over, "O", (ftnlen)1, (ftnlen)1);
+#line 252 "AB05QD.f"
     *n = *n1 + *n2;
+#line 253 "AB05QD.f"
     *m = *m1 + *m2;
+#line 254 "AB05QD.f"
     *p = *p1 + *p2;
+#line 255 "AB05QD.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 259 "AB05QD.f"
     if (! lover && ! lsame_(over, "N", (ftnlen)1, (ftnlen)1)) {
+#line 260 "AB05QD.f"
 	*info = -1;
+#line 261 "AB05QD.f"
     } else if (*n1 < 0) {
+#line 262 "AB05QD.f"
 	*info = -2;
+#line 263 "AB05QD.f"
     } else if (*m1 < 0) {
+#line 264 "AB05QD.f"
 	*info = -3;
+#line 265 "AB05QD.f"
     } else if (*p1 < 0) {
+#line 266 "AB05QD.f"
 	*info = -4;
+#line 267 "AB05QD.f"
     } else if (*n2 < 0) {
+#line 268 "AB05QD.f"
 	*info = -5;
+#line 269 "AB05QD.f"
     } else if (*m2 < 0) {
+#line 270 "AB05QD.f"
 	*info = -6;
+#line 271 "AB05QD.f"
     } else if (*p2 < 0) {
+#line 272 "AB05QD.f"
 	*info = -7;
+#line 273 "AB05QD.f"
     } else if (*lda1 < max(1,*n1)) {
+#line 274 "AB05QD.f"
 	*info = -9;
+#line 275 "AB05QD.f"
     } else if (*ldb1 < max(1,*n1)) {
+#line 276 "AB05QD.f"
 	*info = -11;
+#line 277 "AB05QD.f"
     } else if (*n1 > 0 && *ldc1 < max(1,*p1) || *n1 == 0 && *ldc1 < 1) {
+#line 279 "AB05QD.f"
 	*info = -13;
+#line 280 "AB05QD.f"
     } else if (*ldd1 < max(1,*p1)) {
+#line 281 "AB05QD.f"
 	*info = -15;
+#line 282 "AB05QD.f"
     } else if (*lda2 < max(1,*n2)) {
+#line 283 "AB05QD.f"
 	*info = -17;
+#line 284 "AB05QD.f"
     } else if (*ldb2 < max(1,*n2)) {
+#line 285 "AB05QD.f"
 	*info = -19;
+#line 286 "AB05QD.f"
     } else if (*n2 > 0 && *ldc2 < max(1,*p2) || *n2 == 0 && *ldc2 < 1) {
+#line 288 "AB05QD.f"
 	*info = -21;
+#line 289 "AB05QD.f"
     } else if (*ldd2 < max(1,*p2)) {
+#line 290 "AB05QD.f"
 	*info = -23;
+#line 291 "AB05QD.f"
     } else if (*lda < max(1,*n)) {
+#line 292 "AB05QD.f"
 	*info = -28;
+#line 293 "AB05QD.f"
     } else if (*ldb < max(1,*n)) {
+#line 294 "AB05QD.f"
 	*info = -30;
+#line 295 "AB05QD.f"
     } else if (*n > 0 && *ldc < max(1,*p) || *n == 0 && *ldc < 1) {
+#line 297 "AB05QD.f"
 	*info = -32;
+#line 298 "AB05QD.f"
     } else if (*ldd < max(1,*p)) {
+#line 299 "AB05QD.f"
 	*info = -34;
+#line 300 "AB05QD.f"
     }
 
+#line 302 "AB05QD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 306 "AB05QD.f"
 	i__1 = -(*info);
+#line 306 "AB05QD.f"
 	xerbla_("AB05QD", &i__1, (ftnlen)6);
+#line 307 "AB05QD.f"
 	return 0;
+#line 308 "AB05QD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 312 "AB05QD.f"
     i__1 = *n, i__2 = min(*m,*p);
+#line 312 "AB05QD.f"
     if (max(i__1,i__2) == 0) {
+#line 312 "AB05QD.f"
 	return 0;
+#line 312 "AB05QD.f"
     }
 /*                       ( A1   0  ) */
 /*     Construct     A = (         ) . */
 /*                       ( 0    A2 ) */
 
+#line 318 "AB05QD.f"
     if (lover && *lda1 <= *lda) {
+#line 319 "AB05QD.f"
 	if (*lda1 < *lda) {
 
+#line 321 "AB05QD.f"
 	    for (j = *n1; j >= 1; --j) {
+#line 322 "AB05QD.f"
 		for (i__ = *n1; i__ >= 1; --i__) {
+#line 323 "AB05QD.f"
 		    a[i__ + j * a_dim1] = a1[i__ + j * a1_dim1];
+#line 324 "AB05QD.f"
 /* L10: */
+#line 324 "AB05QD.f"
 		}
+#line 325 "AB05QD.f"
 /* L20: */
+#line 325 "AB05QD.f"
 	    }
 
+#line 327 "AB05QD.f"
 	}
+#line 328 "AB05QD.f"
     } else {
+#line 329 "AB05QD.f"
 	dlacpy_("F", n1, n1, &a1[a1_offset], lda1, &a[a_offset], lda, (ftnlen)
 		1);
+#line 330 "AB05QD.f"
     }
 
+#line 332 "AB05QD.f"
     if (*n2 > 0) {
+#line 333 "AB05QD.f"
 	dlaset_("F", n1, n2, &c_b9, &c_b9, &a[(*n1 + 1) * a_dim1 + 1], lda, (
 		ftnlen)1);
+#line 334 "AB05QD.f"
 	dlaset_("F", n2, n1, &c_b9, &c_b9, &a[*n1 + 1 + a_dim1], lda, (ftnlen)
 		1);
+#line 335 "AB05QD.f"
 	dlacpy_("F", n2, n2, &a2[a2_offset], lda2, &a[*n1 + 1 + (*n1 + 1) * 
 		a_dim1], lda, (ftnlen)1);
+#line 336 "AB05QD.f"
     }
 
 /*                        ( B1  0  ) */
 /*     Construct      B = (        ) . */
 /*                        ( 0   B2 ) */
 
+#line 342 "AB05QD.f"
     if (lover && *ldb1 <= *ldb) {
+#line 343 "AB05QD.f"
 	if (*ldb1 < *ldb) {
 
+#line 345 "AB05QD.f"
 	    for (j = *m1; j >= 1; --j) {
+#line 346 "AB05QD.f"
 		for (i__ = *n1; i__ >= 1; --i__) {
+#line 347 "AB05QD.f"
 		    b[i__ + j * b_dim1] = b1[i__ + j * b1_dim1];
+#line 348 "AB05QD.f"
 /* L30: */
+#line 348 "AB05QD.f"
 		}
+#line 349 "AB05QD.f"
 /* L40: */
+#line 349 "AB05QD.f"
 	    }
 
+#line 351 "AB05QD.f"
 	}
+#line 352 "AB05QD.f"
     } else {
+#line 353 "AB05QD.f"
 	dlacpy_("F", n1, m1, &b1[b1_offset], ldb1, &b[b_offset], ldb, (ftnlen)
 		1);
+#line 354 "AB05QD.f"
     }
 
+#line 356 "AB05QD.f"
     if (*m2 > 0) {
+#line 356 "AB05QD.f"
 	dlaset_("F", n1, m2, &c_b9, &c_b9, &b[(*m1 + 1) * b_dim1 + 1], ldb, (
 		ftnlen)1);
+#line 356 "AB05QD.f"
     }
+#line 358 "AB05QD.f"
     if (*n2 > 0) {
+#line 359 "AB05QD.f"
 	dlaset_("F", n2, m1, &c_b9, &c_b9, &b[*n1 + 1 + b_dim1], ldb, (ftnlen)
 		1);
+#line 360 "AB05QD.f"
 	if (*m2 > 0) {
+#line 360 "AB05QD.f"
 	    dlacpy_("F", n2, m2, &b2[b2_offset], ldb2, &b[*n1 + 1 + (*m1 + 1) 
 		    * b_dim1], ldb, (ftnlen)1);
+#line 360 "AB05QD.f"
 	}
+#line 362 "AB05QD.f"
     }
 
 /*                         ( C1   0  ) */
 /*     Construct      C =  (         ) . */
 /*                         ( 0    C2 ) */
 
+#line 368 "AB05QD.f"
     if (lover && *ldc1 <= *ldc) {
+#line 369 "AB05QD.f"
 	if (*ldc1 < *ldc) {
 
+#line 371 "AB05QD.f"
 	    for (j = *n1; j >= 1; --j) {
+#line 372 "AB05QD.f"
 		for (i__ = *p1; i__ >= 1; --i__) {
+#line 373 "AB05QD.f"
 		    c__[i__ + j * c_dim1] = c1[i__ + j * c1_dim1];
+#line 374 "AB05QD.f"
 /* L50: */
+#line 374 "AB05QD.f"
 		}
+#line 375 "AB05QD.f"
 /* L60: */
+#line 375 "AB05QD.f"
 	    }
 
+#line 377 "AB05QD.f"
 	}
+#line 378 "AB05QD.f"
     } else {
+#line 379 "AB05QD.f"
 	dlacpy_("F", p1, n1, &c1[c1_offset], ldc1, &c__[c_offset], ldc, (
 		ftnlen)1);
+#line 380 "AB05QD.f"
     }
 
+#line 382 "AB05QD.f"
     if (*n2 > 0) {
+#line 382 "AB05QD.f"
 	dlaset_("F", p1, n2, &c_b9, &c_b9, &c__[(*n1 + 1) * c_dim1 + 1], ldc, 
 		(ftnlen)1);
+#line 382 "AB05QD.f"
     }
+#line 384 "AB05QD.f"
     if (*p2 > 0) {
+#line 385 "AB05QD.f"
 	if (*n1 > 0) {
+#line 385 "AB05QD.f"
 	    dlaset_("F", p2, n1, &c_b9, &c_b9, &c__[*p1 + 1 + c_dim1], ldc, (
 		    ftnlen)1);
+#line 385 "AB05QD.f"
 	}
+#line 387 "AB05QD.f"
 	if (*n2 > 0) {
+#line 387 "AB05QD.f"
 	    dlacpy_("F", p2, n2, &c2[c2_offset], ldc2, &c__[*p1 + 1 + (*n1 + 
 		    1) * c_dim1], ldc, (ftnlen)1);
+#line 387 "AB05QD.f"
 	}
+#line 389 "AB05QD.f"
     }
 
 /*                          ( D1  0  ) */
 /*     Construct       D =  (        ) . */
 /*                          ( 0   D2 ) */
 
+#line 395 "AB05QD.f"
     if (lover && *ldd1 <= *ldd) {
+#line 396 "AB05QD.f"
 	if (*ldd1 < *ldd) {
 
+#line 398 "AB05QD.f"
 	    for (j = *m1; j >= 1; --j) {
+#line 399 "AB05QD.f"
 		for (i__ = *p1; i__ >= 1; --i__) {
+#line 400 "AB05QD.f"
 		    d__[i__ + j * d_dim1] = d1[i__ + j * d1_dim1];
+#line 401 "AB05QD.f"
 /* L70: */
+#line 401 "AB05QD.f"
 		}
+#line 402 "AB05QD.f"
 /* L80: */
+#line 402 "AB05QD.f"
 	    }
 
+#line 404 "AB05QD.f"
 	}
+#line 405 "AB05QD.f"
     } else {
+#line 406 "AB05QD.f"
 	dlacpy_("F", p1, m1, &d1[d1_offset], ldd1, &d__[d_offset], ldd, (
 		ftnlen)1);
+#line 407 "AB05QD.f"
     }
 
+#line 409 "AB05QD.f"
     if (*m2 > 0) {
+#line 409 "AB05QD.f"
 	dlaset_("F", p1, m2, &c_b9, &c_b9, &d__[(*m1 + 1) * d_dim1 + 1], ldd, 
 		(ftnlen)1);
+#line 409 "AB05QD.f"
     }
+#line 411 "AB05QD.f"
     if (*p2 > 0) {
+#line 412 "AB05QD.f"
 	dlaset_("F", p2, m1, &c_b9, &c_b9, &d__[*p1 + 1 + d_dim1], ldd, (
 		ftnlen)1);
+#line 413 "AB05QD.f"
 	if (*m2 > 0) {
+#line 413 "AB05QD.f"
 	    dlacpy_("F", p2, m2, &d2[d2_offset], ldd2, &d__[*p1 + 1 + (*m1 + 
 		    1) * d_dim1], ldd, (ftnlen)1);
+#line 413 "AB05QD.f"
 	}
+#line 415 "AB05QD.f"
     }
 
+#line 417 "AB05QD.f"
     return 0;
 /* *** Last line of AB05QD *** */
 } /* ab05qd_ */

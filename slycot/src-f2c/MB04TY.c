@@ -1,3 +1,4 @@
+#line 1 "MB04TY.f"
 /* MB04TY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04TY.f"
 /* Subroutine */ int mb04ty_(logical *updatq, logical *updatz, integer *m, 
 	integer *n, integer *nblcks, integer *inuk, integer *imuk, doublereal 
 	*a, integer *lda, doublereal *e, integer *lde, doublereal *q, integer 
@@ -201,66 +203,108 @@
 /*     .. External Subroutines .. */
 /*     .. Executable Statements .. */
 
+#line 180 "MB04TY.f"
     /* Parameter adjustments */
+#line 180 "MB04TY.f"
     --inuk;
+#line 180 "MB04TY.f"
     --imuk;
+#line 180 "MB04TY.f"
     a_dim1 = *lda;
+#line 180 "MB04TY.f"
     a_offset = 1 + a_dim1;
+#line 180 "MB04TY.f"
     a -= a_offset;
+#line 180 "MB04TY.f"
     e_dim1 = *lde;
+#line 180 "MB04TY.f"
     e_offset = 1 + e_dim1;
+#line 180 "MB04TY.f"
     e -= e_offset;
+#line 180 "MB04TY.f"
     q_dim1 = *ldq;
+#line 180 "MB04TY.f"
     q_offset = 1 + q_dim1;
+#line 180 "MB04TY.f"
     q -= q_offset;
+#line 180 "MB04TY.f"
     z_dim1 = *ldz;
+#line 180 "MB04TY.f"
     z_offset = 1 + z_dim1;
+#line 180 "MB04TY.f"
     z__ -= z_offset;
+#line 180 "MB04TY.f"
 
+#line 180 "MB04TY.f"
     /* Function Body */
+#line 180 "MB04TY.f"
     *info = 0;
+#line 181 "MB04TY.f"
     if (*m <= 0 || *n <= 0) {
+#line 181 "MB04TY.f"
 	return 0;
+#line 181 "MB04TY.f"
     }
 
 /*     ISMUK  = sum(i=1,...,k) MU(i), */
 /*     ISNUK1 = sum(i=1,...,k-1) NU(i). */
 
+#line 187 "MB04TY.f"
     ismuk = 0;
+#line 188 "MB04TY.f"
     isnuk1 = 0;
 
+#line 190 "MB04TY.f"
     i__1 = *nblcks;
+#line 190 "MB04TY.f"
     for (k = 1; k <= i__1; ++k) {
+#line 191 "MB04TY.f"
 	ismuk += imuk[k];
+#line 192 "MB04TY.f"
 	isnuk1 += inuk[k];
+#line 193 "MB04TY.f"
 /* L20: */
+#line 193 "MB04TY.f"
     }
 
 /*     Note:  ISNUK1 has not yet the correct value. */
 
+#line 197 "MB04TY.f"
     mukp1 = 0;
 
+#line 199 "MB04TY.f"
     for (k = *nblcks; k >= 1; --k) {
+#line 200 "MB04TY.f"
 	muk = imuk[k];
+#line 201 "MB04TY.f"
 	nuk = inuk[k];
+#line 202 "MB04TY.f"
 	isnuk1 -= nuk;
 
 /*        Determine left upper absolute co-ordinates of E(k) in E-matrix */
 /*        and of A(k) in A-matrix. */
 
+#line 207 "MB04TY.f"
 	ifire = isnuk1 + 1;
+#line 208 "MB04TY.f"
 	ifice = ismuk + 1;
+#line 209 "MB04TY.f"
 	ifica = ifice - muk;
 
 /*        Reduce E(k) to upper triangular form using Givens */
 /*        transformations on rows only. Apply the same transformations */
 /*        to the rows of A(k). */
 
+#line 215 "MB04TY.f"
 	if (mukp1 > nuk) {
+#line 216 "MB04TY.f"
 	    *info = 1;
+#line 217 "MB04TY.f"
 	    return 0;
+#line 218 "MB04TY.f"
 	}
 
+#line 220 "MB04TY.f"
 	mb04tw_(updatq, m, n, &nuk, &mukp1, &ifire, &ifice, &ifica, &a[
 		a_offset], lda, &e[e_offset], lde, &q[q_offset], ldq);
 
@@ -268,19 +312,29 @@
 /*        transformations on columns only. Apply the same transformations */
 /*        to the columns in the E-matrix. */
 
+#line 227 "MB04TY.f"
 	if (nuk > muk) {
+#line 228 "MB04TY.f"
 	    *info = 2;
+#line 229 "MB04TY.f"
 	    return 0;
+#line 230 "MB04TY.f"
 	}
 
+#line 232 "MB04TY.f"
 	mb04tv_(updatz, n, &nuk, &muk, &ifire, &ifica, &a[a_offset], lda, &e[
 		e_offset], lde, &z__[z_offset], ldz);
 
+#line 235 "MB04TY.f"
 	ismuk -= muk;
+#line 236 "MB04TY.f"
 	mukp1 = muk;
+#line 237 "MB04TY.f"
 /* L40: */
+#line 237 "MB04TY.f"
     }
 
+#line 239 "MB04TY.f"
     return 0;
 /* *** Last line of MB04TY *** */
 } /* mb04ty_ */

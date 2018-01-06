@@ -1,3 +1,4 @@
+#line 1 "MB03ZD.f"
 /* MB03ZD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03ZD.f"
 /* Table of constant values */
 
 static doublereal c_b26 = 1.;
@@ -391,689 +393,1125 @@ static doublereal c_b272 = 0.;
 
 /*     Decode and check input parameters. */
 
+#line 338 "MB03ZD.f"
     /* Parameter adjustments */
+#line 338 "MB03ZD.f"
     --select;
+#line 338 "MB03ZD.f"
     --scale;
+#line 338 "MB03ZD.f"
     s_dim1 = *lds;
+#line 338 "MB03ZD.f"
     s_offset = 1 + s_dim1;
+#line 338 "MB03ZD.f"
     s -= s_offset;
+#line 338 "MB03ZD.f"
     t_dim1 = *ldt;
+#line 338 "MB03ZD.f"
     t_offset = 1 + t_dim1;
+#line 338 "MB03ZD.f"
     t -= t_offset;
+#line 338 "MB03ZD.f"
     g_dim1 = *ldg;
+#line 338 "MB03ZD.f"
     g_offset = 1 + g_dim1;
+#line 338 "MB03ZD.f"
     g -= g_offset;
+#line 338 "MB03ZD.f"
     u1_dim1 = *ldu1;
+#line 338 "MB03ZD.f"
     u1_offset = 1 + u1_dim1;
+#line 338 "MB03ZD.f"
     u1 -= u1_offset;
+#line 338 "MB03ZD.f"
     u2_dim1 = *ldu2;
+#line 338 "MB03ZD.f"
     u2_offset = 1 + u2_dim1;
+#line 338 "MB03ZD.f"
     u2 -= u2_offset;
+#line 338 "MB03ZD.f"
     v1_dim1 = *ldv1;
+#line 338 "MB03ZD.f"
     v1_offset = 1 + v1_dim1;
+#line 338 "MB03ZD.f"
     v1 -= v1_offset;
+#line 338 "MB03ZD.f"
     v2_dim1 = *ldv2;
+#line 338 "MB03ZD.f"
     v2_offset = 1 + v2_dim1;
+#line 338 "MB03ZD.f"
     v2 -= v2_offset;
+#line 338 "MB03ZD.f"
     --wr;
+#line 338 "MB03ZD.f"
     --wi;
+#line 338 "MB03ZD.f"
     us_dim1 = *ldus;
+#line 338 "MB03ZD.f"
     us_offset = 1 + us_dim1;
+#line 338 "MB03ZD.f"
     us -= us_offset;
+#line 338 "MB03ZD.f"
     uu_dim1 = *lduu;
+#line 338 "MB03ZD.f"
     uu_offset = 1 + uu_dim1;
+#line 338 "MB03ZD.f"
     uu -= uu_offset;
+#line 338 "MB03ZD.f"
     --lwork;
+#line 338 "MB03ZD.f"
     --iwork;
+#line 338 "MB03ZD.f"
     --dwork;
+#line 338 "MB03ZD.f"
 
+#line 338 "MB03ZD.f"
     /* Function Body */
+#line 338 "MB03ZD.f"
     lall = lsame_(which, "A", (ftnlen)1, (ftnlen)1);
+#line 339 "MB03ZD.f"
     if (lall) {
+#line 340 "MB03ZD.f"
 	lext = lsame_(meth, "L", (ftnlen)1, (ftnlen)1);
+#line 341 "MB03ZD.f"
     } else {
+#line 342 "MB03ZD.f"
 	lext = FALSE_;
+#line 343 "MB03ZD.f"
     }
+#line 344 "MB03ZD.f"
     lus = lsame_(stab, "S", (ftnlen)1, (ftnlen)1) || lsame_(stab, "B", (
 	    ftnlen)1, (ftnlen)1);
+#line 345 "MB03ZD.f"
     luu = lsame_(stab, "U", (ftnlen)1, (ftnlen)1) || lsame_(stab, "B", (
 	    ftnlen)1, (ftnlen)1);
+#line 346 "MB03ZD.f"
     lbal = lsame_(balanc, "P", (ftnlen)1, (ftnlen)1) || lsame_(balanc, "S", (
 	    ftnlen)1, (ftnlen)1) || lsame_(balanc, "B", (ftnlen)1, (ftnlen)1);
+#line 348 "MB03ZD.f"
     lbef = FALSE_;
+#line 349 "MB03ZD.f"
     if (lbal) {
+#line 349 "MB03ZD.f"
 	lbef = lsame_(ortbal, "B", (ftnlen)1, (ftnlen)1);
+#line 349 "MB03ZD.f"
     }
 
+#line 352 "MB03ZD.f"
     wrkmin = 1;
+#line 353 "MB03ZD.f"
     wrkopt = wrkmin;
 
+#line 355 "MB03ZD.f"
     *info = 0;
 
+#line 357 "MB03ZD.f"
     if (! lall && ! lsame_(which, "S", (ftnlen)1, (ftnlen)1)) {
+#line 358 "MB03ZD.f"
 	*info = -1;
+#line 359 "MB03ZD.f"
     } else if (lall && (! lext && ! lsame_(meth, "S", (ftnlen)1, (ftnlen)1))) 
 	    {
+#line 361 "MB03ZD.f"
 	*info = -2;
+#line 362 "MB03ZD.f"
     } else if (! lus && ! luu) {
+#line 363 "MB03ZD.f"
 	*info = -3;
+#line 364 "MB03ZD.f"
     } else if (! lbal && ! lsame_(balanc, "N", (ftnlen)1, (ftnlen)1)) {
+#line 365 "MB03ZD.f"
 	*info = -4;
+#line 366 "MB03ZD.f"
     } else if (lbal && (! lbef && ! lsame_(ortbal, "A", (ftnlen)1, (ftnlen)1))
 	    ) {
+#line 368 "MB03ZD.f"
 	*info = -5;
+#line 369 "MB03ZD.f"
     } else {
+#line 370 "MB03ZD.f"
 	if (lall) {
+#line 371 "MB03ZD.f"
 	    *m = *n;
+#line 372 "MB03ZD.f"
 	} else {
 
 /*           Set M to the dimension of the specified invariant subspace. */
 
+#line 376 "MB03ZD.f"
 	    *m = 0;
+#line 377 "MB03ZD.f"
 	    pair = FALSE_;
+#line 378 "MB03ZD.f"
 	    i__1 = *n;
+#line 378 "MB03ZD.f"
 	    for (k = 1; k <= i__1; ++k) {
+#line 379 "MB03ZD.f"
 		if (pair) {
+#line 380 "MB03ZD.f"
 		    pair = FALSE_;
+#line 381 "MB03ZD.f"
 		} else {
+#line 382 "MB03ZD.f"
 		    if (k < *n) {
+#line 383 "MB03ZD.f"
 			if (s[k + 1 + k * s_dim1] == 0.) {
+#line 384 "MB03ZD.f"
 			    if (select[k]) {
+#line 384 "MB03ZD.f"
 				++(*m);
+#line 384 "MB03ZD.f"
 			    }
+#line 386 "MB03ZD.f"
 			} else {
+#line 387 "MB03ZD.f"
 			    pair = TRUE_;
+#line 388 "MB03ZD.f"
 			    if (select[k] || select[k + 1]) {
+#line 388 "MB03ZD.f"
 				*m += 2;
+#line 388 "MB03ZD.f"
 			    }
+#line 390 "MB03ZD.f"
 			}
+#line 391 "MB03ZD.f"
 		    } else {
+#line 392 "MB03ZD.f"
 			if (select[*n]) {
+#line 392 "MB03ZD.f"
 			    ++(*m);
+#line 392 "MB03ZD.f"
 			}
+#line 394 "MB03ZD.f"
 		    }
+#line 395 "MB03ZD.f"
 		}
+#line 396 "MB03ZD.f"
 /* L10: */
+#line 396 "MB03ZD.f"
 	    }
+#line 397 "MB03ZD.f"
 	}
 
 /*        Compute workspace requirements. */
 
+#line 401 "MB03ZD.f"
 	if (! lext) {
 /* Computing MAX */
 /* Computing MAX */
+#line 402 "MB03ZD.f"
 	    i__3 = *m << 3, i__4 = *n << 2;
+#line 402 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (*m << 2) * *m + max(i__3,i__4);
+#line 402 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 403 "MB03ZD.f"
 	} else {
+#line 404 "MB03ZD.f"
 	    if (lus && luu) {
 /* Computing MAX */
+#line 405 "MB03ZD.f"
 		i__1 = wrkopt, i__2 = (*n << 3) + 1;
+#line 405 "MB03ZD.f"
 		wrkopt = max(i__1,i__2);
+#line 406 "MB03ZD.f"
 	    } else {
 /* Computing MAX */
+#line 407 "MB03ZD.f"
 		i__1 = wrkopt, i__2 = (*n << 1) * *n + (*n << 1), i__1 = max(
 			i__1,i__2), i__2 = *n << 3;
+#line 407 "MB03ZD.f"
 		wrkopt = max(i__1,i__2);
+#line 408 "MB03ZD.f"
 	    }
+#line 409 "MB03ZD.f"
 	}
 
+#line 411 "MB03ZD.f"
 	if (*n < 0) {
+#line 412 "MB03ZD.f"
 	    *info = -7;
+#line 413 "MB03ZD.f"
 	} else if (*mm < *m || lext && *mm < *n << 1) {
+#line 414 "MB03ZD.f"
 	    *info = -8;
+#line 415 "MB03ZD.f"
 	} else if (lbal && (*ilo < 1 || *ilo > *n + 1)) {
+#line 416 "MB03ZD.f"
 	    *info = -9;
+#line 417 "MB03ZD.f"
 	} else if (*lds < max(1,*n)) {
+#line 418 "MB03ZD.f"
 	    *info = -12;
+#line 419 "MB03ZD.f"
 	} else if (*ldt < max(1,*n)) {
+#line 420 "MB03ZD.f"
 	    *info = -14;
+#line 421 "MB03ZD.f"
 	} else if (*ldg < 1 || lext && *ldg < *n) {
+#line 422 "MB03ZD.f"
 	    *info = -16;
+#line 423 "MB03ZD.f"
 	} else if (*ldu1 < max(1,*n)) {
+#line 424 "MB03ZD.f"
 	    *info = -18;
+#line 425 "MB03ZD.f"
 	} else if (*ldu2 < max(1,*n)) {
+#line 426 "MB03ZD.f"
 	    *info = -20;
+#line 427 "MB03ZD.f"
 	} else if (*ldv1 < max(1,*n)) {
+#line 428 "MB03ZD.f"
 	    *info = -22;
+#line 429 "MB03ZD.f"
 	} else if (*ldv2 < max(1,*n)) {
+#line 430 "MB03ZD.f"
 	    *info = -24;
+#line 431 "MB03ZD.f"
 	} else if (*ldus < 1 || lus && *ldus < *n << 1) {
+#line 432 "MB03ZD.f"
 	    *info = -29;
+#line 433 "MB03ZD.f"
 	} else if (*lduu < 1 || luu && *lduu < *n << 1) {
+#line 434 "MB03ZD.f"
 	    *info = -31;
+#line 435 "MB03ZD.f"
 	} else if (*ldwork < wrkmin) {
+#line 436 "MB03ZD.f"
 	    *info = -35;
+#line 437 "MB03ZD.f"
 	    dwork[1] = (doublereal) wrkmin;
+#line 438 "MB03ZD.f"
 	}
+#line 439 "MB03ZD.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 443 "MB03ZD.f"
     if (*info != 0) {
+#line 444 "MB03ZD.f"
 	i__1 = -(*info);
+#line 444 "MB03ZD.f"
 	xerbla_("MB03ZD", &i__1, (ftnlen)6);
+#line 445 "MB03ZD.f"
 	return 0;
+#line 446 "MB03ZD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 450 "MB03ZD.f"
     if (min(*m,*n) == 0) {
+#line 451 "MB03ZD.f"
 	dwork[1] = 1.;
+#line 452 "MB03ZD.f"
 	return 0;
+#line 453 "MB03ZD.f"
     }
+#line 454 "MB03ZD.f"
     wrkopt = wrkmin;
 
+#line 456 "MB03ZD.f"
     if (! lext) {
 
 /*        Workspace requirements: 4*M*M + MAX( 8*M, 4*N ). */
 
+#line 460 "MB03ZD.f"
 	pw = 1;
+#line 461 "MB03ZD.f"
 	pdw = pw + (*m << 2) * *m;
+#line 462 "MB03ZD.f"
 	i__1 = *m << 1;
+#line 462 "MB03ZD.f"
 	i__2 = *ldwork - pdw + 1;
+#line 462 "MB03ZD.f"
 	mb03za_("No Update", "Update", "Update", "Init", which, &select[1], n,
 		 &s[s_offset], lds, &t[t_offset], ldt, &g[g_offset], ldg, &u1[
 		u1_offset], ldu1, &u2[u2_offset], ldu2, &v1[v1_offset], ldv1, 
 		&v2[v2_offset], ldv2, &dwork[pw], &i__1, &wr[1], &wi[1], m, &
 		dwork[pdw], &i__2, &ierr, (ftnlen)9, (ftnlen)6, (ftnlen)6, (
 		ftnlen)4, (ftnlen)1);
+#line 466 "MB03ZD.f"
 	if (ierr != 0) {
+#line 466 "MB03ZD.f"
 	    goto L250;
+#line 466 "MB03ZD.f"
 	}
 
+#line 469 "MB03ZD.f"
 	pdw = pw + (*m << 1) * *m;
+#line 470 "MB03ZD.f"
 	i__1 = *m << 1;
+#line 470 "MB03ZD.f"
 	i__2 = *ldwork - pdw + 1;
+#line 470 "MB03ZD.f"
 	mb01ux_("Right", "Upper", "No Transpose", n, m, &c_b26, &dwork[pw], &
 		i__1, &v1[v1_offset], ldv1, &dwork[pdw], &i__2, &ierr, (
 		ftnlen)5, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 473 "MB03ZD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[pdw] + pdw - 1;
+#line 473 "MB03ZD.f"
 	wrkopt = max(i__1,i__2);
 
+#line 475 "MB03ZD.f"
 	if (lus) {
+#line 475 "MB03ZD.f"
 	    dlacpy_("All", n, m, &v1[v1_offset], ldv1, &us[us_offset], ldus, (
 		    ftnlen)3);
+#line 475 "MB03ZD.f"
 	}
+#line 477 "MB03ZD.f"
 	if (luu) {
+#line 477 "MB03ZD.f"
 	    dlacpy_("All", n, m, &v1[v1_offset], ldv1, &uu[uu_offset], lduu, (
 		    ftnlen)3);
+#line 477 "MB03ZD.f"
 	}
 
+#line 480 "MB03ZD.f"
 	i__1 = *m << 1;
+#line 480 "MB03ZD.f"
 	i__2 = *ldwork - pdw + 1;
+#line 480 "MB03ZD.f"
 	mb01ux_("Right", "Upper", "No Transpose", n, m, &c_b26, &dwork[pw + *
 		m], &i__1, &u1[u1_offset], ldu1, &dwork[pdw], &i__2, &ierr, (
 		ftnlen)5, (ftnlen)5, (ftnlen)12);
 
+#line 484 "MB03ZD.f"
 	if (lus) {
+#line 485 "MB03ZD.f"
 	    i__1 = *m;
+#line 485 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 486 "MB03ZD.f"
 		daxpy_(n, &c_b34, &u1[j * u1_dim1 + 1], &c__1, &us[j * 
 			us_dim1 + 1], &c__1);
+#line 487 "MB03ZD.f"
 /* L20: */
+#line 487 "MB03ZD.f"
 	    }
+#line 488 "MB03ZD.f"
 	}
+#line 489 "MB03ZD.f"
 	if (luu) {
+#line 490 "MB03ZD.f"
 	    i__1 = *m;
+#line 490 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 491 "MB03ZD.f"
 		daxpy_(n, &c_b26, &u1[j * u1_dim1 + 1], &c__1, &uu[j * 
 			uu_dim1 + 1], &c__1);
+#line 492 "MB03ZD.f"
 /* L30: */
+#line 492 "MB03ZD.f"
 	    }
+#line 493 "MB03ZD.f"
 	}
 
+#line 495 "MB03ZD.f"
 	i__1 = *m << 1;
+#line 495 "MB03ZD.f"
 	i__2 = *ldwork - pdw + 1;
+#line 495 "MB03ZD.f"
 	mb01ux_("Right", "Upper", "No Transpose", n, m, &c_b34, &dwork[pw], &
 		i__1, &v2[v2_offset], ldv2, &dwork[pdw], &i__2, &ierr, (
 		ftnlen)5, (ftnlen)5, (ftnlen)12);
 
+#line 499 "MB03ZD.f"
 	if (lus) {
+#line 499 "MB03ZD.f"
 	    dlacpy_("All", n, m, &v2[v2_offset], ldv2, &us[*n + 1 + us_dim1], 
 		    ldus, (ftnlen)3);
+#line 499 "MB03ZD.f"
 	}
+#line 501 "MB03ZD.f"
 	if (luu) {
+#line 501 "MB03ZD.f"
 	    dlacpy_("All", n, m, &v2[v2_offset], ldv2, &uu[*n + 1 + uu_dim1], 
 		    lduu, (ftnlen)3);
+#line 501 "MB03ZD.f"
 	}
 
+#line 504 "MB03ZD.f"
 	i__1 = *m << 1;
+#line 504 "MB03ZD.f"
 	i__2 = *ldwork - pdw + 1;
+#line 504 "MB03ZD.f"
 	mb01ux_("Right", "Upper", "No Transpose", n, m, &c_b26, &dwork[pw + *
 		m], &i__1, &u2[u2_offset], ldu2, &dwork[pdw], &i__2, &ierr, (
 		ftnlen)5, (ftnlen)5, (ftnlen)12);
 
+#line 508 "MB03ZD.f"
 	if (lus) {
+#line 509 "MB03ZD.f"
 	    i__1 = *m;
+#line 509 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 510 "MB03ZD.f"
 		daxpy_(n, &c_b26, &u2[j * u2_dim1 + 1], &c__1, &us[*n + 1 + j 
 			* us_dim1], &c__1);
+#line 511 "MB03ZD.f"
 /* L40: */
+#line 511 "MB03ZD.f"
 	    }
+#line 512 "MB03ZD.f"
 	}
+#line 513 "MB03ZD.f"
 	if (luu) {
+#line 514 "MB03ZD.f"
 	    i__1 = *m;
+#line 514 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 515 "MB03ZD.f"
 		daxpy_(n, &c_b34, &u2[j * u2_dim1 + 1], &c__1, &uu[*n + 1 + j 
 			* uu_dim1], &c__1);
+#line 516 "MB03ZD.f"
 /* L50: */
+#line 516 "MB03ZD.f"
 	    }
+#line 517 "MB03ZD.f"
 	}
 
 /*        Orthonormalize obtained bases and apply inverse balancing */
 /*        transformation. */
 
+#line 522 "MB03ZD.f"
 	if (lbal && lbef) {
+#line 523 "MB03ZD.f"
 	    if (lus) {
+#line 523 "MB03ZD.f"
 		mb04di_(balanc, "Positive", n, ilo, &scale[1], m, &us[
 			us_offset], ldus, &us[*n + 1 + us_dim1], ldus, &ierr, 
 			(ftnlen)1, (ftnlen)8);
+#line 523 "MB03ZD.f"
 	    }
+#line 526 "MB03ZD.f"
 	    if (luu) {
+#line 526 "MB03ZD.f"
 		mb04di_(balanc, "Positive", n, ilo, &scale[1], m, &uu[
 			uu_offset], lduu, &uu[*n + 1 + uu_dim1], lduu, &ierr, 
 			(ftnlen)1, (ftnlen)8);
+#line 526 "MB03ZD.f"
 	    }
+#line 529 "MB03ZD.f"
 	}
 
+#line 531 "MB03ZD.f"
 	if (lus) {
+#line 532 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 532 "MB03ZD.f"
 	    i__2 = *ldwork - *m;
+#line 532 "MB03ZD.f"
 	    dgeqrf_(&i__1, m, &us[us_offset], ldus, &dwork[1], &dwork[*m + 1],
 		     &i__2, &ierr);
 /* Computing MAX */
+#line 534 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[*m + 1] + *m;
+#line 534 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 535 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 535 "MB03ZD.f"
 	    i__2 = *ldwork - *m;
+#line 535 "MB03ZD.f"
 	    dorgqr_(&i__1, m, m, &us[us_offset], ldus, &dwork[1], &dwork[*m + 
 		    1], &i__2, &ierr);
 /* Computing MAX */
+#line 537 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[*m + 1] + *m;
+#line 537 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 538 "MB03ZD.f"
 	}
+#line 539 "MB03ZD.f"
 	if (luu) {
+#line 540 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 540 "MB03ZD.f"
 	    i__2 = *ldwork - *m;
+#line 540 "MB03ZD.f"
 	    dgeqrf_(&i__1, m, &uu[uu_offset], lduu, &dwork[1], &dwork[*m + 1],
 		     &i__2, &ierr);
 /* Computing MAX */
+#line 542 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[*m + 1] + *m;
+#line 542 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 543 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 543 "MB03ZD.f"
 	    i__2 = *ldwork - *m;
+#line 543 "MB03ZD.f"
 	    dorgqr_(&i__1, m, m, &uu[uu_offset], lduu, &dwork[1], &dwork[*m + 
 		    1], &i__2, &ierr);
 /* Computing MAX */
+#line 545 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[*m + 1] + *m;
+#line 545 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 546 "MB03ZD.f"
 	}
 
+#line 548 "MB03ZD.f"
 	if (lbal && ! lbef) {
+#line 549 "MB03ZD.f"
 	    if (lus) {
+#line 549 "MB03ZD.f"
 		mb04di_(balanc, "Positive", n, ilo, &scale[1], m, &us[
 			us_offset], ldus, &us[*n + 1 + us_dim1], ldus, &ierr, 
 			(ftnlen)1, (ftnlen)8);
+#line 549 "MB03ZD.f"
 	    }
+#line 552 "MB03ZD.f"
 	    if (luu) {
+#line 552 "MB03ZD.f"
 		mb04di_(balanc, "Positive", n, ilo, &scale[1], m, &uu[
 			uu_offset], lduu, &uu[*n + 1 + uu_dim1], lduu, &ierr, 
 			(ftnlen)1, (ftnlen)8);
+#line 552 "MB03ZD.f"
 	    }
+#line 555 "MB03ZD.f"
 	}
 
+#line 557 "MB03ZD.f"
     } else {
 
+#line 559 "MB03ZD.f"
 	i__1 = *n << 1;
+#line 559 "MB03ZD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 560 "MB03ZD.f"
 	    lwork[i__] = TRUE_;
+#line 561 "MB03ZD.f"
 /* L60: */
+#line 561 "MB03ZD.f"
 	}
 
+#line 563 "MB03ZD.f"
 	if (lus && ! luu) {
 
 /*           Workspace requirements: MAX( 2*N*N + 2*N, 8*N ) */
 
+#line 567 "MB03ZD.f"
 	    mb03za_("Update", "Update", "Update", "Init", which, &select[1], 
 		    n, &s[s_offset], lds, &t[t_offset], ldt, &g[g_offset], 
 		    ldg, &u1[u1_offset], ldu1, &u2[u2_offset], ldu2, &v1[
 		    v1_offset], ldv1, &v2[v2_offset], ldv2, &us[us_offset], 
 		    ldus, &wr[1], &wi[1], m, &dwork[1], ldwork, &ierr, (
 		    ftnlen)6, (ftnlen)6, (ftnlen)6, (ftnlen)4, (ftnlen)1);
+#line 571 "MB03ZD.f"
 	    if (ierr != 0) {
+#line 571 "MB03ZD.f"
 		goto L250;
+#line 571 "MB03ZD.f"
 	    }
 
+#line 574 "MB03ZD.f"
 	    mb01ux_("Left", "Lower", "Transpose", n, n, &c_b26, &us[*n + 1 + (
 		    *n + 1) * us_dim1], ldus, &g[g_offset], ldg, &dwork[1], 
 		    ldwork, &ierr, (ftnlen)4, (ftnlen)5, (ftnlen)9);
 /* Computing MAX */
+#line 577 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 577 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
 
+#line 579 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &us[(*n + 
 		    1) * us_dim1 + 1], ldus, &g[g_offset], ldg, &dwork[1], 
 		    ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 582 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 582 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
 
+#line 584 "MB03ZD.f"
 	    i__1 = *n;
+#line 584 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 585 "MB03ZD.f"
 		daxpy_(&j, &c_b26, &g[j + g_dim1], ldg, &g[j * g_dim1 + 1], &
 			c__1);
+#line 586 "MB03ZD.f"
 /* L70: */
+#line 586 "MB03ZD.f"
 	    }
+#line 587 "MB03ZD.f"
 	    pdw = (*n << 1) * *n + 1;
 
 /*           DW <- -[V1;V2]*W11 */
 
+#line 591 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 591 "MB03ZD.f"
 	    dlacpy_("All", n, n, &v1[v1_offset], ldv1, &dwork[1], &i__1, (
 		    ftnlen)3);
+#line 592 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 592 "MB03ZD.f"
 	    dlacpy_("All", n, n, &v2[v2_offset], ldv2, &dwork[*n + 1], &i__1, 
 		    (ftnlen)3);
+#line 593 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 593 "MB03ZD.f"
 	    i__2 = *n << 1;
+#line 593 "MB03ZD.f"
 	    i__3 = *ldwork - pdw + 1;
+#line 593 "MB03ZD.f"
 	    mb01ux_("Right", "Upper", "No Transpose", &i__1, n, &c_b34, &us[
 		    us_offset], ldus, &dwork[1], &i__2, &dwork[pdw], &i__3, &
 		    ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 596 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[pdw] + pdw - 1;
+#line 596 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
 
 /*           DW2 <- DW2 - U2*W21 */
 
+#line 600 "MB03ZD.f"
 	    dlacpy_("All", n, n, &u2[u2_offset], ldu2, &us[us_offset], ldus, (
 		    ftnlen)3);
+#line 601 "MB03ZD.f"
 	    i__1 = *ldwork - pdw + 1;
+#line 601 "MB03ZD.f"
 	    mb01ux_("Right", "Upper", "No Transpose", n, n, &c_b26, &us[*n + 
 		    1 + us_dim1], ldus, &us[us_offset], ldus, &dwork[pdw], &
 		    i__1, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
+#line 604 "MB03ZD.f"
 	    i__1 = *n;
+#line 604 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 605 "MB03ZD.f"
 		daxpy_(n, &c_b26, &us[j * us_dim1 + 1], &c__1, &dwork[*n + (j 
 			- 1 << 1) * *n + 1], &c__1);
+#line 606 "MB03ZD.f"
 /* L80: */
+#line 606 "MB03ZD.f"
 	    }
 
 /*           US11 <- -U1*W21 - DW1 */
 
+#line 610 "MB03ZD.f"
 	    dlacpy_("All", n, n, &u1[u1_offset], ldu1, &us[us_offset], ldus, (
 		    ftnlen)3);
+#line 611 "MB03ZD.f"
 	    i__1 = *ldwork - pdw + 1;
+#line 611 "MB03ZD.f"
 	    mb01ux_("Right", "Upper", "No Transpose", n, n, &c_b34, &us[*n + 
 		    1 + us_dim1], ldus, &us[us_offset], ldus, &dwork[pdw], &
 		    i__1, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
+#line 614 "MB03ZD.f"
 	    i__1 = *n;
+#line 614 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 615 "MB03ZD.f"
 		daxpy_(n, &c_b34, &dwork[(j - 1 << 1) * *n + 1], &c__1, &us[j 
 			* us_dim1 + 1], &c__1);
+#line 616 "MB03ZD.f"
 /* L90: */
+#line 616 "MB03ZD.f"
 	    }
 
 /*           US21 <- DW2 */
 
+#line 620 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 620 "MB03ZD.f"
 	    dlacpy_("All", n, n, &dwork[*n + 1], &i__1, &us[*n + 1 + us_dim1],
 		     ldus, (ftnlen)3);
 
+#line 622 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &us[(*n + 
 		    1) * us_dim1 + 1], ldus, &v1[v1_offset], ldv1, &dwork[1], 
 		    ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 625 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 625 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 626 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &us[(*n + 
 		    1) * us_dim1 + 1], ldus, &v2[v2_offset], ldv2, &dwork[1], 
 		    ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
+#line 629 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &us[*n + 
 		    1 + (*n + 1) * us_dim1], ldus, &u1[u1_offset], ldu1, &
 		    dwork[1], ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12)
 		    ;
+#line 632 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &us[*n + 
 		    1 + (*n + 1) * us_dim1], ldus, &u2[u2_offset], ldu2, &
 		    dwork[1], ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12)
 		    ;
+#line 635 "MB03ZD.f"
 	    dlacpy_("All", n, n, &v1[v1_offset], ldv1, &us[(*n + 1) * us_dim1 
 		    + 1], ldus, (ftnlen)3);
+#line 636 "MB03ZD.f"
 	    dlacpy_("All", n, n, &v2[v2_offset], ldv2, &us[*n + 1 + (*n + 1) *
 		     us_dim1], ldus, (ftnlen)3);
+#line 637 "MB03ZD.f"
 	    i__1 = *n;
+#line 637 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 638 "MB03ZD.f"
 		daxpy_(n, &c_b34, &u1[j * u1_dim1 + 1], &c__1, &us[(*n + j) * 
 			us_dim1 + 1], &c__1);
+#line 639 "MB03ZD.f"
 /* L100: */
+#line 639 "MB03ZD.f"
 	    }
+#line 640 "MB03ZD.f"
 	    i__1 = *n;
+#line 640 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 641 "MB03ZD.f"
 		daxpy_(n, &c_b34, &u2[j * u2_dim1 + 1], &c__1, &us[*n + 1 + (*
 			n + j) * us_dim1], &c__1);
+#line 642 "MB03ZD.f"
 /* L110: */
+#line 642 "MB03ZD.f"
 	    }
 
+#line 644 "MB03ZD.f"
 	    mb03td_("Hamiltonian", "Update", &lwork[1], &lwork[*n + 1], n, &s[
 		    s_offset], lds, &g[g_offset], ldg, &us[(*n + 1) * us_dim1 
 		    + 1], ldus, &us[*n + 1 + (*n + 1) * us_dim1], ldus, &wr[1]
 		    , &wi[1], m, &dwork[1], ldwork, &ierr, (ftnlen)11, (
 		    ftnlen)6);
+#line 647 "MB03ZD.f"
 	    if (ierr != 0) {
+#line 648 "MB03ZD.f"
 		*info = 4;
+#line 649 "MB03ZD.f"
 		return 0;
+#line 650 "MB03ZD.f"
 	    }
+#line 651 "MB03ZD.f"
 	    dlascl_("General", &c__0, &c__0, &c_b26, &c_b34, n, n, &us[*n + 1 
 		    + (*n + 1) * us_dim1], ldus, &ierr, (ftnlen)7);
 
+#line 654 "MB03ZD.f"
 	} else if (! lus && luu) {
 
 /*           Workspace requirements: MAX( 2*N*N + 2*N, 8*N ) */
 
+#line 658 "MB03ZD.f"
 	    mb03za_("Update", "Update", "Update", "Init", which, &select[1], 
 		    n, &s[s_offset], lds, &t[t_offset], ldt, &g[g_offset], 
 		    ldg, &u1[u1_offset], ldu1, &u2[u2_offset], ldu2, &v1[
 		    v1_offset], ldv1, &v2[v2_offset], ldv2, &uu[uu_offset], 
 		    lduu, &wr[1], &wi[1], m, &dwork[1], ldwork, &ierr, (
 		    ftnlen)6, (ftnlen)6, (ftnlen)6, (ftnlen)4, (ftnlen)1);
+#line 662 "MB03ZD.f"
 	    if (ierr != 0) {
+#line 662 "MB03ZD.f"
 		goto L250;
+#line 662 "MB03ZD.f"
 	    }
+#line 664 "MB03ZD.f"
 	    mb01ux_("Left", "Lower", "Transpose", n, n, &c_b26, &uu[*n + 1 + (
 		    *n + 1) * uu_dim1], lduu, &g[g_offset], ldg, &dwork[1], 
 		    ldwork, &ierr, (ftnlen)4, (ftnlen)5, (ftnlen)9);
 /* Computing MAX */
+#line 667 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 667 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 668 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &uu[(*n + 
 		    1) * uu_dim1 + 1], lduu, &g[g_offset], ldg, &dwork[1], 
 		    ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 671 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 671 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 672 "MB03ZD.f"
 	    i__1 = *n;
+#line 672 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 673 "MB03ZD.f"
 		daxpy_(&j, &c_b26, &g[j + g_dim1], ldg, &g[j * g_dim1 + 1], &
 			c__1);
+#line 674 "MB03ZD.f"
 /* L120: */
+#line 674 "MB03ZD.f"
 	    }
+#line 675 "MB03ZD.f"
 	    pdw = (*n << 1) * *n + 1;
 
 /*           DW <- -[V1;V2]*W11 */
 
+#line 679 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 679 "MB03ZD.f"
 	    dlacpy_("All", n, n, &v1[v1_offset], ldv1, &dwork[1], &i__1, (
 		    ftnlen)3);
+#line 680 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 680 "MB03ZD.f"
 	    dlacpy_("All", n, n, &v2[v2_offset], ldv2, &dwork[*n + 1], &i__1, 
 		    (ftnlen)3);
+#line 681 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 681 "MB03ZD.f"
 	    i__2 = *n << 1;
+#line 681 "MB03ZD.f"
 	    i__3 = *ldwork - pdw + 1;
+#line 681 "MB03ZD.f"
 	    mb01ux_("Right", "Upper", "No Transpose", &i__1, n, &c_b34, &uu[
 		    uu_offset], lduu, &dwork[1], &i__2, &dwork[pdw], &i__3, &
 		    ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 684 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[pdw] + pdw - 1;
+#line 684 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
 
 /*           DW2 <- DW2 - U2*W21 */
 
+#line 688 "MB03ZD.f"
 	    dlacpy_("All", n, n, &u2[u2_offset], ldu2, &uu[uu_offset], lduu, (
 		    ftnlen)3);
+#line 689 "MB03ZD.f"
 	    i__1 = *ldwork - pdw + 1;
+#line 689 "MB03ZD.f"
 	    mb01ux_("Right", "Upper", "No Transpose", n, n, &c_b34, &uu[*n + 
 		    1 + uu_dim1], lduu, &uu[uu_offset], lduu, &dwork[pdw], &
 		    i__1, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
+#line 692 "MB03ZD.f"
 	    i__1 = *n;
+#line 692 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 693 "MB03ZD.f"
 		daxpy_(n, &c_b26, &uu[j * uu_dim1 + 1], &c__1, &dwork[*n + (j 
 			- 1 << 1) * *n + 1], &c__1);
+#line 694 "MB03ZD.f"
 /* L130: */
+#line 694 "MB03ZD.f"
 	    }
 
 /*           UU11 <- U1*W21 - DW1 */
 
+#line 698 "MB03ZD.f"
 	    dlacpy_("All", n, n, &u1[u1_offset], ldu1, &uu[uu_offset], lduu, (
 		    ftnlen)3);
+#line 699 "MB03ZD.f"
 	    i__1 = *ldwork - pdw + 1;
+#line 699 "MB03ZD.f"
 	    mb01ux_("Right", "Upper", "No Transpose", n, n, &c_b26, &uu[*n + 
 		    1 + uu_dim1], lduu, &uu[uu_offset], lduu, &dwork[pdw], &
 		    i__1, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
+#line 702 "MB03ZD.f"
 	    i__1 = *n;
+#line 702 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 703 "MB03ZD.f"
 		daxpy_(n, &c_b34, &dwork[(j - 1 << 1) * *n + 1], &c__1, &uu[j 
 			* uu_dim1 + 1], &c__1);
+#line 704 "MB03ZD.f"
 /* L140: */
+#line 704 "MB03ZD.f"
 	    }
 
 /*           UU21 <- DW2 */
 
+#line 708 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 708 "MB03ZD.f"
 	    dlacpy_("All", n, n, &dwork[*n + 1], &i__1, &uu[*n + 1 + uu_dim1],
 		     lduu, (ftnlen)3);
 
+#line 710 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &uu[(*n + 
 		    1) * uu_dim1 + 1], lduu, &v1[v1_offset], ldv1, &dwork[1], 
 		    ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 713 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 713 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 714 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &uu[(*n + 
 		    1) * uu_dim1 + 1], lduu, &v2[v2_offset], ldv2, &dwork[1], 
 		    ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
+#line 717 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &uu[*n + 
 		    1 + (*n + 1) * uu_dim1], lduu, &u1[u1_offset], ldu1, &
 		    dwork[1], ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12)
 		    ;
+#line 720 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &uu[*n + 
 		    1 + (*n + 1) * uu_dim1], lduu, &u2[u2_offset], ldu2, &
 		    dwork[1], ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12)
 		    ;
+#line 723 "MB03ZD.f"
 	    dlacpy_("All", n, n, &v1[v1_offset], ldv1, &uu[(*n + 1) * uu_dim1 
 		    + 1], lduu, (ftnlen)3);
+#line 724 "MB03ZD.f"
 	    dlacpy_("All", n, n, &v2[v2_offset], ldv2, &uu[*n + 1 + (*n + 1) *
 		     uu_dim1], lduu, (ftnlen)3);
+#line 725 "MB03ZD.f"
 	    i__1 = *n;
+#line 725 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 726 "MB03ZD.f"
 		daxpy_(n, &c_b26, &u1[j * u1_dim1 + 1], &c__1, &uu[(*n + j) * 
 			uu_dim1 + 1], &c__1);
+#line 727 "MB03ZD.f"
 /* L150: */
+#line 727 "MB03ZD.f"
 	    }
+#line 728 "MB03ZD.f"
 	    i__1 = *n;
+#line 728 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 729 "MB03ZD.f"
 		daxpy_(n, &c_b26, &u2[j * u2_dim1 + 1], &c__1, &uu[*n + 1 + (*
 			n + j) * uu_dim1], &c__1);
+#line 730 "MB03ZD.f"
 /* L160: */
+#line 730 "MB03ZD.f"
 	    }
 
+#line 732 "MB03ZD.f"
 	    mb03td_("Hamiltonian", "Update", &lwork[1], &lwork[*n + 1], n, &s[
 		    s_offset], lds, &g[g_offset], ldg, &uu[(*n + 1) * uu_dim1 
 		    + 1], lduu, &uu[*n + 1 + (*n + 1) * uu_dim1], lduu, &wr[1]
 		    , &wi[1], m, &dwork[1], ldwork, &ierr, (ftnlen)11, (
 		    ftnlen)6);
+#line 735 "MB03ZD.f"
 	    if (ierr != 0) {
+#line 736 "MB03ZD.f"
 		*info = 4;
+#line 737 "MB03ZD.f"
 		return 0;
+#line 738 "MB03ZD.f"
 	    }
+#line 739 "MB03ZD.f"
 	    dlascl_("General", &c__0, &c__0, &c_b26, &c_b34, n, n, &uu[*n + 1 
 		    + (*n + 1) * uu_dim1], lduu, &ierr, (ftnlen)7);
+#line 741 "MB03ZD.f"
 	} else {
 
 /*           Workspace requirements: 8*N */
 
+#line 745 "MB03ZD.f"
 	    mb03za_("Update", "Update", "Update", "Init", which, &select[1], 
 		    n, &s[s_offset], lds, &t[t_offset], ldt, &g[g_offset], 
 		    ldg, &u1[u1_offset], ldu1, &u2[u2_offset], ldu2, &v1[
 		    v1_offset], ldv1, &v2[v2_offset], ldv2, &us[us_offset], 
 		    ldus, &wr[1], &wi[1], m, &dwork[1], ldwork, &ierr, (
 		    ftnlen)6, (ftnlen)6, (ftnlen)6, (ftnlen)4, (ftnlen)1);
+#line 749 "MB03ZD.f"
 	    if (ierr != 0) {
+#line 749 "MB03ZD.f"
 		goto L250;
+#line 749 "MB03ZD.f"
 	    }
+#line 751 "MB03ZD.f"
 	    mb01ux_("Left", "Lower", "Transpose", n, n, &c_b26, &us[*n + 1 + (
 		    *n + 1) * us_dim1], ldus, &g[g_offset], ldg, &dwork[1], 
 		    ldwork, &ierr, (ftnlen)4, (ftnlen)5, (ftnlen)9);
 /* Computing MAX */
+#line 754 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 754 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 755 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &us[(*n + 
 		    1) * us_dim1 + 1], ldus, &g[g_offset], ldg, &dwork[1], 
 		    ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 758 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 758 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 759 "MB03ZD.f"
 	    i__1 = *n;
+#line 759 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 760 "MB03ZD.f"
 		daxpy_(&j, &c_b26, &g[j + g_dim1], ldg, &g[j * g_dim1 + 1], &
 			c__1);
+#line 761 "MB03ZD.f"
 /* L170: */
+#line 761 "MB03ZD.f"
 	    }
 
 /*           UU = [ V1 -V2; U1 -U2 ]*diag(W11,W21) */
 
+#line 765 "MB03ZD.f"
 	    dlacpy_("All", n, n, &v1[v1_offset], ldv1, &uu[uu_offset], lduu, (
 		    ftnlen)3);
+#line 766 "MB03ZD.f"
 	    dlacpy_("All", n, n, &v2[v2_offset], ldv2, &uu[*n + 1 + uu_dim1], 
 		    lduu, (ftnlen)3);
+#line 767 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 767 "MB03ZD.f"
 	    mb01ux_("Right", "Upper", "No Transpose", &i__1, n, &c_b26, &us[
 		    us_offset], ldus, &uu[uu_offset], lduu, &dwork[1], ldwork,
 		     &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 769 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 769 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 770 "MB03ZD.f"
 	    dlacpy_("All", n, n, &u1[u1_offset], ldu1, &uu[(*n + 1) * uu_dim1 
 		    + 1], lduu, (ftnlen)3);
+#line 771 "MB03ZD.f"
 	    dlacpy_("All", n, n, &u2[u2_offset], ldu2, &uu[*n + 1 + (*n + 1) *
 		     uu_dim1], lduu, (ftnlen)3);
+#line 772 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 772 "MB03ZD.f"
 	    mb01ux_("Right", "Upper", "No Transpose", &i__1, n, &c_b26, &us[*
 		    n + 1 + us_dim1], ldus, &uu[(*n + 1) * uu_dim1 + 1], lduu,
 		     &dwork[1], ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)
 		    12);
+#line 775 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 775 "MB03ZD.f"
 	    dlascl_("General", &c__0, &c__0, &c_b26, &c_b34, n, &i__1, &uu[*n 
 		    + 1 + uu_dim1], lduu, &ierr, (ftnlen)7);
 
+#line 778 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 778 "MB03ZD.f"
 	    dlacpy_("All", &i__1, n, &uu[uu_offset], lduu, &us[us_offset], 
 		    ldus, (ftnlen)3);
+#line 779 "MB03ZD.f"
 	    i__1 = *n;
+#line 779 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 780 "MB03ZD.f"
 		i__2 = *n << 1;
+#line 780 "MB03ZD.f"
 		daxpy_(&i__2, &c_b34, &uu[(*n + j) * uu_dim1 + 1], &c__1, &us[
 			j * us_dim1 + 1], &c__1);
+#line 781 "MB03ZD.f"
 /* L180: */
+#line 781 "MB03ZD.f"
 	    }
+#line 782 "MB03ZD.f"
 	    i__1 = *n;
+#line 782 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 783 "MB03ZD.f"
 		i__2 = *n << 1;
+#line 783 "MB03ZD.f"
 		daxpy_(&i__2, &c_b26, &uu[(*n + j) * uu_dim1 + 1], &c__1, &uu[
 			j * uu_dim1 + 1], &c__1);
+#line 784 "MB03ZD.f"
 /* L190: */
+#line 784 "MB03ZD.f"
 	    }
 
 /*           V1 <- V1*W12-U1*W22 */
@@ -1081,175 +1519,281 @@ static doublereal c_b272 = 0.;
 /*           V2 <- V2*W12-U2*W22 */
 /*           U2 <- V2*W12+U2*W22 */
 
+#line 791 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &us[(*n + 
 		    1) * us_dim1 + 1], ldus, &v1[v1_offset], ldv1, &dwork[1], 
 		    ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
+#line 794 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &us[(*n + 
 		    1) * us_dim1 + 1], ldus, &v2[v2_offset], ldv2, &dwork[1], 
 		    ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12);
+#line 797 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &us[*n + 
 		    1 + (*n + 1) * us_dim1], ldus, &u1[u1_offset], ldu1, &
 		    dwork[1], ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12)
 		    ;
+#line 800 "MB03ZD.f"
 	    mb01ux_("Right", "Lower", "No Transpose", n, n, &c_b26, &us[*n + 
 		    1 + (*n + 1) * us_dim1], ldus, &u2[u2_offset], ldu2, &
 		    dwork[1], ldwork, &ierr, (ftnlen)5, (ftnlen)5, (ftnlen)12)
 		    ;
+#line 803 "MB03ZD.f"
 	    i__1 = *n;
+#line 803 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 804 "MB03ZD.f"
 		i__2 = *n;
+#line 804 "MB03ZD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 805 "MB03ZD.f"
 		    temp = v1[i__ + j * v1_dim1];
+#line 806 "MB03ZD.f"
 		    v1[i__ + j * v1_dim1] = temp - u1[i__ + j * u1_dim1];
+#line 807 "MB03ZD.f"
 		    u1[i__ + j * u1_dim1] = temp + u1[i__ + j * u1_dim1];
+#line 808 "MB03ZD.f"
 /* L200: */
+#line 808 "MB03ZD.f"
 		}
+#line 809 "MB03ZD.f"
 /* L210: */
+#line 809 "MB03ZD.f"
 	    }
+#line 810 "MB03ZD.f"
 	    i__1 = *n;
+#line 810 "MB03ZD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 811 "MB03ZD.f"
 		i__2 = *n;
+#line 811 "MB03ZD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 812 "MB03ZD.f"
 		    temp = v2[i__ + j * v2_dim1];
+#line 813 "MB03ZD.f"
 		    v2[i__ + j * v2_dim1] = temp - u2[i__ + j * u2_dim1];
+#line 814 "MB03ZD.f"
 		    u2[i__ + j * u2_dim1] = temp + u2[i__ + j * u2_dim1];
+#line 815 "MB03ZD.f"
 /* L220: */
+#line 815 "MB03ZD.f"
 		}
+#line 816 "MB03ZD.f"
 /* L230: */
+#line 816 "MB03ZD.f"
 	    }
 
+#line 818 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 818 "MB03ZD.f"
 	    dlaset_("All", &i__1, n, &c_b272, &c_b26, &us[(*n + 1) * us_dim1 
 		    + 1], ldus, (ftnlen)3);
+#line 819 "MB03ZD.f"
 	    mb03td_("Hamiltonian", "Update", &lwork[1], &lwork[*n + 1], n, &s[
 		    s_offset], lds, &g[g_offset], ldg, &us[(*n + 1) * us_dim1 
 		    + 1], ldus, &us[*n + 1 + (*n + 1) * us_dim1], ldus, &wr[1]
 		    , &wi[1], m, &dwork[1], ldwork, &ierr, (ftnlen)11, (
 		    ftnlen)6);
+#line 822 "MB03ZD.f"
 	    if (ierr != 0) {
+#line 823 "MB03ZD.f"
 		*info = 4;
+#line 824 "MB03ZD.f"
 		return 0;
+#line 825 "MB03ZD.f"
 	    }
+#line 826 "MB03ZD.f"
 	    dgemm_("No Transpose", "No Transpose", n, n, n, &c_b26, &u1[
 		    u1_offset], ldu1, &us[(*n + 1) * us_dim1 + 1], ldus, &
 		    c_b272, &uu[(*n + 1) * uu_dim1 + 1], lduu, (ftnlen)12, (
 		    ftnlen)12);
+#line 829 "MB03ZD.f"
 	    dgemm_("No Transpose", "No Transpose", n, n, n, &c_b34, &u2[
 		    u2_offset], ldu2, &us[*n + 1 + (*n + 1) * us_dim1], ldus, 
 		    &c_b26, &uu[(*n + 1) * uu_dim1 + 1], lduu, (ftnlen)12, (
 		    ftnlen)12);
+#line 832 "MB03ZD.f"
 	    dgemm_("No Transpose", "No Transpose", n, n, n, &c_b34, &u1[
 		    u1_offset], ldu1, &us[*n + 1 + (*n + 1) * us_dim1], ldus, 
 		    &c_b272, &uu[*n + 1 + (*n + 1) * uu_dim1], lduu, (ftnlen)
 		    12, (ftnlen)12);
+#line 835 "MB03ZD.f"
 	    dgemm_("No Transpose", "No Transpose", n, n, n, &c_b34, &u2[
 		    u2_offset], ldu2, &us[(*n + 1) * us_dim1 + 1], ldus, &
 		    c_b26, &uu[*n + 1 + (*n + 1) * uu_dim1], lduu, (ftnlen)12,
 		     (ftnlen)12);
+#line 838 "MB03ZD.f"
 	    dlacpy_("All", n, n, &us[(*n + 1) * us_dim1 + 1], ldus, &u1[
 		    u1_offset], ldu1, (ftnlen)3);
+#line 839 "MB03ZD.f"
 	    dlacpy_("All", n, n, &us[*n + 1 + (*n + 1) * us_dim1], ldus, &u2[
 		    u2_offset], ldu2, (ftnlen)3);
+#line 840 "MB03ZD.f"
 	    dgemm_("No Transpose", "No Transpose", n, n, n, &c_b26, &v1[
 		    v1_offset], ldv1, &u1[u1_offset], ldu1, &c_b272, &us[(*n 
 		    + 1) * us_dim1 + 1], ldus, (ftnlen)12, (ftnlen)12);
+#line 842 "MB03ZD.f"
 	    dgemm_("No Transpose", "No Transpose", n, n, n, &c_b34, &v2[
 		    v2_offset], ldv2, &u2[u2_offset], ldu2, &c_b26, &us[(*n + 
 		    1) * us_dim1 + 1], ldus, (ftnlen)12, (ftnlen)12);
+#line 844 "MB03ZD.f"
 	    dgemm_("No Transpose", "No Transpose", n, n, n, &c_b34, &v1[
 		    v1_offset], ldv1, &u2[u2_offset], ldu2, &c_b272, &us[*n + 
 		    1 + (*n + 1) * us_dim1], ldus, (ftnlen)12, (ftnlen)12);
+#line 846 "MB03ZD.f"
 	    dgemm_("No Transpose", "No Transpose", n, n, n, &c_b34, &v2[
 		    v2_offset], ldv2, &u1[u1_offset], ldu1, &c_b26, &us[*n + 
 		    1 + (*n + 1) * us_dim1], ldus, (ftnlen)12, (ftnlen)12);
+#line 848 "MB03ZD.f"
 	}
 
 /*        Orthonormalize obtained bases and apply inverse balancing */
 /*        transformation. */
 
+#line 853 "MB03ZD.f"
 	if (lbal && lbef) {
+#line 854 "MB03ZD.f"
 	    if (lus) {
+#line 854 "MB03ZD.f"
 		mb04di_(balanc, "Positive", n, ilo, &scale[1], n, &us[
 			us_offset], ldus, &us[*n + 1 + us_dim1], ldus, &ierr, 
 			(ftnlen)1, (ftnlen)8);
+#line 854 "MB03ZD.f"
 	    }
+#line 857 "MB03ZD.f"
 	    if (luu) {
+#line 857 "MB03ZD.f"
 		mb04di_(balanc, "Positive", n, ilo, &scale[1], n, &uu[
 			uu_offset], lduu, &uu[*n + 1 + uu_dim1], lduu, &ierr, 
 			(ftnlen)1, (ftnlen)8);
+#line 857 "MB03ZD.f"
 	    }
+#line 860 "MB03ZD.f"
 	}
 
 /*        Workspace requirements: 8*N+1 */
 
+#line 864 "MB03ZD.f"
 	i__1 = *n << 1;
+#line 864 "MB03ZD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 865 "MB03ZD.f"
 	    iwork[j] = 0;
+#line 866 "MB03ZD.f"
 /* L240: */
+#line 866 "MB03ZD.f"
 	}
+#line 867 "MB03ZD.f"
 	if (lus) {
+#line 868 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 868 "MB03ZD.f"
 	    i__2 = *n << 1;
+#line 868 "MB03ZD.f"
 	    i__3 = *ldwork - (*n << 1);
+#line 868 "MB03ZD.f"
 	    dgeqp3_(&i__1, &i__2, &us[us_offset], ldus, &iwork[1], &dwork[1], 
 		    &dwork[(*n << 1) + 1], &i__3, &ierr);
 /* Computing MAX */
+#line 870 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[(*n << 1) + 1] + (*n << 1);
+#line 870 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 871 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 871 "MB03ZD.f"
 	    i__2 = *n << 1;
+#line 871 "MB03ZD.f"
 	    i__3 = *ldwork - (*n << 1);
+#line 871 "MB03ZD.f"
 	    dorgqr_(&i__1, &i__2, n, &us[us_offset], ldus, &dwork[1], &dwork[(
 		    *n << 1) + 1], &i__3, &ierr);
 /* Computing MAX */
+#line 873 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[(*n << 1) + 1] + (*n << 1);
+#line 873 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 874 "MB03ZD.f"
 	}
+#line 875 "MB03ZD.f"
 	if (luu) {
+#line 876 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 876 "MB03ZD.f"
 	    i__2 = *n << 1;
+#line 876 "MB03ZD.f"
 	    i__3 = *ldwork - (*n << 1);
+#line 876 "MB03ZD.f"
 	    dgeqp3_(&i__1, &i__2, &uu[uu_offset], lduu, &iwork[1], &dwork[1], 
 		    &dwork[(*n << 1) + 1], &i__3, &ierr);
 /* Computing MAX */
+#line 878 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[(*n << 1) + 1] + (*n << 1);
+#line 878 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 879 "MB03ZD.f"
 	    i__1 = *n << 1;
+#line 879 "MB03ZD.f"
 	    i__2 = *n << 1;
+#line 879 "MB03ZD.f"
 	    i__3 = *ldwork - (*n << 1);
+#line 879 "MB03ZD.f"
 	    dorgqr_(&i__1, &i__2, n, &uu[uu_offset], lduu, &dwork[1], &dwork[(
 		    *n << 1) + 1], &i__3, &ierr);
 /* Computing MAX */
+#line 881 "MB03ZD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[(*n << 1) + 1] + (*n << 1);
+#line 881 "MB03ZD.f"
 	    wrkopt = max(i__1,i__2);
+#line 882 "MB03ZD.f"
 	}
 
+#line 884 "MB03ZD.f"
 	if (lbal && ! lbef) {
+#line 885 "MB03ZD.f"
 	    if (lus) {
+#line 885 "MB03ZD.f"
 		mb04di_(balanc, "Positive", n, ilo, &scale[1], n, &us[
 			us_offset], ldus, &us[*n + 1 + us_dim1], ldus, &ierr, 
 			(ftnlen)1, (ftnlen)8);
+#line 885 "MB03ZD.f"
 	    }
+#line 888 "MB03ZD.f"
 	    if (luu) {
+#line 888 "MB03ZD.f"
 		mb04di_(balanc, "Positive", n, ilo, &scale[1], n, &uu[
 			uu_offset], lduu, &uu[*n + 1 + uu_dim1], lduu, &ierr, 
 			(ftnlen)1, (ftnlen)8);
+#line 888 "MB03ZD.f"
 	    }
+#line 891 "MB03ZD.f"
 	}
+#line 892 "MB03ZD.f"
     }
 
+#line 894 "MB03ZD.f"
     dscal_(m, &c_b34, &wr[1], &c__1);
+#line 895 "MB03ZD.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 897 "MB03ZD.f"
     return 0;
+#line 898 "MB03ZD.f"
 L250:
+#line 899 "MB03ZD.f"
     if (ierr == 1) {
+#line 900 "MB03ZD.f"
 	*info = 2;
+#line 901 "MB03ZD.f"
     } else if (ierr == 2 || ierr == 4) {
+#line 902 "MB03ZD.f"
 	*info = 1;
+#line 903 "MB03ZD.f"
     } else if (ierr == 3) {
+#line 904 "MB03ZD.f"
 	*info = 3;
+#line 905 "MB03ZD.f"
     }
+#line 906 "MB03ZD.f"
     return 0;
 /* *** Last line of MB03ZD *** */
 } /* mb03zd_ */

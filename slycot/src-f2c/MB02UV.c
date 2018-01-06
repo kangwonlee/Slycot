@@ -1,3 +1,4 @@
+#line 1 "MB02UV.f"
 /* MB02UV.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02UV.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -128,133 +130,227 @@ static doublereal c_b9 = -1.;
 /*     .. Executable Statements .. */
 
 /*     Set constants to control owerflow. */
+#line 104 "MB02UV.f"
     /* Parameter adjustments */
+#line 104 "MB02UV.f"
     a_dim1 = *lda;
+#line 104 "MB02UV.f"
     a_offset = 1 + a_dim1;
+#line 104 "MB02UV.f"
     a -= a_offset;
+#line 104 "MB02UV.f"
     --ipiv;
+#line 104 "MB02UV.f"
     --jpiv;
+#line 104 "MB02UV.f"
 
+#line 104 "MB02UV.f"
     /* Function Body */
+#line 104 "MB02UV.f"
     *info = 0;
+#line 105 "MB02UV.f"
     eps = dlamch_("Precision", (ftnlen)9);
+#line 106 "MB02UV.f"
     smlnum = dlamch_("Safe minimum", (ftnlen)12) / eps;
+#line 107 "MB02UV.f"
     bignum = 1. / smlnum;
+#line 108 "MB02UV.f"
     dlabad_(&smlnum, &bignum);
 
 /*     Find max element in matrix A. */
 
+#line 112 "MB02UV.f"
     ipv = 1;
+#line 113 "MB02UV.f"
     jpv = 1;
+#line 114 "MB02UV.f"
     xmax = 0.;
+#line 115 "MB02UV.f"
     i__1 = *n;
+#line 115 "MB02UV.f"
     for (jp = 1; jp <= i__1; ++jp) {
+#line 116 "MB02UV.f"
 	i__2 = *n;
+#line 116 "MB02UV.f"
 	for (ip = 1; ip <= i__2; ++ip) {
+#line 117 "MB02UV.f"
 	    if ((d__1 = a[ip + jp * a_dim1], abs(d__1)) > xmax) {
+#line 118 "MB02UV.f"
 		xmax = (d__1 = a[ip + jp * a_dim1], abs(d__1));
+#line 119 "MB02UV.f"
 		ipv = ip;
+#line 120 "MB02UV.f"
 		jpv = jp;
+#line 121 "MB02UV.f"
 	    }
+#line 122 "MB02UV.f"
 /* L20: */
+#line 122 "MB02UV.f"
 	}
+#line 123 "MB02UV.f"
 /* L40: */
+#line 123 "MB02UV.f"
     }
 /* Computing MAX */
+#line 124 "MB02UV.f"
     d__1 = eps * xmax;
+#line 124 "MB02UV.f"
     smin = max(d__1,smlnum);
 
 /*     Swap rows. */
 
+#line 128 "MB02UV.f"
     if (ipv != 1) {
+#line 128 "MB02UV.f"
 	dswap_(n, &a[ipv + a_dim1], lda, &a[a_dim1 + 1], lda);
+#line 128 "MB02UV.f"
     }
+#line 129 "MB02UV.f"
     ipiv[1] = ipv;
 
 /*     Swap columns. */
 
+#line 133 "MB02UV.f"
     if (jpv != 1) {
+#line 133 "MB02UV.f"
 	dswap_(n, &a[jpv * a_dim1 + 1], &c__1, &a[a_dim1 + 1], &c__1);
+#line 133 "MB02UV.f"
     }
+#line 134 "MB02UV.f"
     jpiv[1] = jpv;
 
 /*     Check for singularity. */
 
+#line 138 "MB02UV.f"
     if ((d__1 = a[a_dim1 + 1], abs(d__1)) < smin) {
+#line 139 "MB02UV.f"
 	*info = 1;
+#line 140 "MB02UV.f"
 	a[a_dim1 + 1] = smin;
+#line 141 "MB02UV.f"
     }
+#line 142 "MB02UV.f"
     if (*n > 1) {
+#line 143 "MB02UV.f"
 	i__1 = *n - 1;
+#line 143 "MB02UV.f"
 	d__1 = 1. / a[a_dim1 + 1];
+#line 143 "MB02UV.f"
 	dscal_(&i__1, &d__1, &a[a_dim1 + 2], &c__1);
+#line 144 "MB02UV.f"
 	i__1 = *n - 1;
+#line 144 "MB02UV.f"
 	i__2 = *n - 1;
+#line 144 "MB02UV.f"
 	dger_(&i__1, &i__2, &c_b9, &a[a_dim1 + 2], &c__1, &a[(a_dim1 << 1) + 
 		1], lda, &a[(a_dim1 << 1) + 2], lda);
+#line 146 "MB02UV.f"
     }
 
 /*     Factorize the rest of A with complete pivoting. */
 /*     Set pivots less than SMIN to SMIN. */
 
+#line 151 "MB02UV.f"
     i__1 = *n - 1;
+#line 151 "MB02UV.f"
     for (i__ = 2; i__ <= i__1; ++i__) {
 
 /*        Find max element in remaining matrix. */
 
+#line 155 "MB02UV.f"
 	ipv = i__;
+#line 156 "MB02UV.f"
 	jpv = i__;
+#line 157 "MB02UV.f"
 	xmax = 0.;
+#line 158 "MB02UV.f"
 	i__2 = *n;
+#line 158 "MB02UV.f"
 	for (jp = i__; jp <= i__2; ++jp) {
+#line 159 "MB02UV.f"
 	    i__3 = *n;
+#line 159 "MB02UV.f"
 	    for (ip = i__; ip <= i__3; ++ip) {
+#line 160 "MB02UV.f"
 		if ((d__1 = a[ip + jp * a_dim1], abs(d__1)) > xmax) {
+#line 161 "MB02UV.f"
 		    xmax = (d__1 = a[ip + jp * a_dim1], abs(d__1));
+#line 162 "MB02UV.f"
 		    ipv = ip;
+#line 163 "MB02UV.f"
 		    jpv = jp;
+#line 164 "MB02UV.f"
 		}
+#line 165 "MB02UV.f"
 /* L60: */
+#line 165 "MB02UV.f"
 	    }
+#line 166 "MB02UV.f"
 /* L80: */
+#line 166 "MB02UV.f"
 	}
 
 /*        Swap rows. */
 
+#line 170 "MB02UV.f"
 	if (ipv != i__) {
+#line 170 "MB02UV.f"
 	    dswap_(n, &a[ipv + a_dim1], lda, &a[i__ + a_dim1], lda);
+#line 170 "MB02UV.f"
 	}
+#line 171 "MB02UV.f"
 	ipiv[i__] = ipv;
 
 /*        Swap columns. */
 
+#line 175 "MB02UV.f"
 	if (jpv != i__) {
+#line 175 "MB02UV.f"
 	    dswap_(n, &a[jpv * a_dim1 + 1], &c__1, &a[i__ * a_dim1 + 1], &
 		    c__1);
+#line 175 "MB02UV.f"
 	}
+#line 176 "MB02UV.f"
 	jpiv[i__] = jpv;
 
 /*        Check for almost singularity. */
 
+#line 180 "MB02UV.f"
 	if ((d__1 = a[i__ + i__ * a_dim1], abs(d__1)) < smin) {
+#line 181 "MB02UV.f"
 	    *info = i__;
+#line 182 "MB02UV.f"
 	    a[i__ + i__ * a_dim1] = smin;
+#line 183 "MB02UV.f"
 	}
+#line 184 "MB02UV.f"
 	i__2 = *n - i__;
+#line 184 "MB02UV.f"
 	d__1 = 1. / a[i__ + i__ * a_dim1];
+#line 184 "MB02UV.f"
 	dscal_(&i__2, &d__1, &a[i__ + 1 + i__ * a_dim1], &c__1);
+#line 185 "MB02UV.f"
 	i__2 = *n - i__;
+#line 185 "MB02UV.f"
 	i__3 = *n - i__;
+#line 185 "MB02UV.f"
 	dger_(&i__2, &i__3, &c_b9, &a[i__ + 1 + i__ * a_dim1], &c__1, &a[i__ 
 		+ (i__ + 1) * a_dim1], lda, &a[i__ + 1 + (i__ + 1) * a_dim1], 
 		lda);
+#line 187 "MB02UV.f"
 /* L100: */
+#line 187 "MB02UV.f"
     }
+#line 188 "MB02UV.f"
     if ((d__1 = a[*n + *n * a_dim1], abs(d__1)) < smin) {
+#line 189 "MB02UV.f"
 	*info = *n;
+#line 190 "MB02UV.f"
 	a[*n + *n * a_dim1] = smin;
+#line 191 "MB02UV.f"
     }
 
+#line 193 "MB02UV.f"
     return 0;
 /* *** Last line of MB02UV *** */
 } /* mb02uv_ */

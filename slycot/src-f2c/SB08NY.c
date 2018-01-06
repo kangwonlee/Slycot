@@ -1,3 +1,4 @@
+#line 1 "SB08NY.f"
 /* SB08NY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB08NY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -92,20 +94,33 @@ static integer c__1 = 1;
 /*     .. External Functions .. */
 /*     .. Executable Statements .. */
 
+#line 75 "SB08NY.f"
     /* Parameter adjustments */
+#line 75 "SB08NY.f"
     --b;
+#line 75 "SB08NY.f"
     --a;
+#line 75 "SB08NY.f"
 
+#line 75 "SB08NY.f"
     /* Function Body */
+#line 75 "SB08NY.f"
     i__1 = *da + 1;
+#line 75 "SB08NY.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 76 "SB08NY.f"
 	i__2 = *da - i__ + 2;
+#line 76 "SB08NY.f"
 	b[i__] = ddot_(&i__2, &a[1], &c__1, &a[i__], &c__1);
+#line 77 "SB08NY.f"
 /* L20: */
+#line 77 "SB08NY.f"
     }
 
+#line 79 "SB08NY.f"
     *epsb = dlamch_("Epsilon", (ftnlen)7) * 3. * b[1];
 
+#line 81 "SB08NY.f"
     return 0;
 /* *** Last line of SB08NY *** */
 } /* sb08ny_ */

@@ -1,3 +1,4 @@
+#line 1 "NF01BB.f"
 /* NF01BB.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "NF01BB.f"
 /* Table of constant values */
 
 static doublereal c_b3 = -1.;
@@ -86,33 +88,60 @@ static integer c__1 = 1;
 
 /*     .. Executable Statements .. */
 
+#line 55 "NF01BB.f"
     /* Parameter adjustments */
+#line 55 "NF01BB.f"
     --ipar;
+#line 55 "NF01BB.f"
     u_dim1 = *ldu;
+#line 55 "NF01BB.f"
     u_offset = 1 + u_dim1;
+#line 55 "NF01BB.f"
     u -= u_offset;
+#line 55 "NF01BB.f"
     y_dim1 = *ldy;
+#line 55 "NF01BB.f"
     y_offset = 1 + y_dim1;
+#line 55 "NF01BB.f"
     y -= y_offset;
+#line 55 "NF01BB.f"
     --x;
+#line 55 "NF01BB.f"
     --e;
+#line 55 "NF01BB.f"
     j_dim1 = *ldj;
+#line 55 "NF01BB.f"
     j_offset = 1 + j_dim1;
+#line 55 "NF01BB.f"
     j -= j_offset;
+#line 55 "NF01BB.f"
     --jte;
+#line 55 "NF01BB.f"
     --dwork;
+#line 55 "NF01BB.f"
 
+#line 55 "NF01BB.f"
     /* Function Body */
+#line 55 "NF01BB.f"
     l = ipar[2];
+#line 56 "NF01BB.f"
     m = ipar[5];
+#line 57 "NF01BB.f"
     n = ipar[6];
+#line 58 "NF01BB.f"
     if (l == 0) {
+#line 59 "NF01BB.f"
 	nsmp = *nfun;
+#line 60 "NF01BB.f"
     } else {
+#line 61 "NF01BB.f"
 	nsmp = *nfun / l;
+#line 62 "NF01BB.f"
     }
 
+#line 64 "NF01BB.f"
     *info = 0;
+#line 65 "NF01BB.f"
     if (*iflag == 1) {
 
 /*        Call NF01AD to compute the output y of the Wiener system (in E) */
@@ -128,24 +157,35 @@ static integer c__1 = 1;
 /*                            where NN = IPAR(7) (number of neurons); */
 /*                   prefer:  larger. */
 
+#line 80 "NF01BB.f"
 	i__1 = *lipar - 2;
+#line 80 "NF01BB.f"
 	nf01ad_(&nsmp, &m, &l, &ipar[6], &i__1, &x[1], lx, &u[u_offset], ldu, 
 		&e[1], &nsmp, &dwork[1], ldwork, info);
 
+#line 83 "NF01BB.f"
 	i__1 = l;
+#line 83 "NF01BB.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 84 "NF01BB.f"
 	    daxpy_(&nsmp, &c_b3, &y[i__ * y_dim1 + 1], &c__1, &e[(i__ - 1) * 
 		    nsmp + 1], &c__1);
+#line 85 "NF01BB.f"
 /* L10: */
+#line 85 "NF01BB.f"
 	}
 
 /* Computing MAX */
 /* Computing MAX */
+#line 87 "NF01BB.f"
 	i__3 = n * (n + l), i__4 = n + m + l;
+#line 87 "NF01BB.f"
 	i__1 = ipar[7] << 1, i__2 = (n + l) * (n + m) + (n << 1) + max(i__3,
 		i__4);
+#line 87 "NF01BB.f"
 	dwork[1] = (doublereal) (*nfun + max(i__1,i__2));
 
+#line 90 "NF01BB.f"
     } else if (*iflag == 2) {
 
 /*        Call NF01BD to compute the Jacobian in a compressed form. */
@@ -157,54 +197,85 @@ static integer c__1 = 1;
 /*                                                              if M = 0; */
 /*                   prefer:  larger. */
 
+#line 101 "NF01BB.f"
 	i__1 = *lipar - 2;
+#line 101 "NF01BB.f"
 	nf01bd_("C", &nsmp, &m, &l, &ipar[6], &i__1, &x[1], lx, &u[u_offset], 
 		ldu, &e[1], &j[j_offset], ldj, &jte[1], &dwork[1], ldwork, 
 		info, (ftnlen)1);
+#line 103 "NF01BB.f"
 	*nfevl = ipar[6] * (m + l + 1) + l * m;
 /* Computing MAX */
 /* Computing MAX */
+#line 104 "NF01BB.f"
 	i__3 = n * (n + l), i__4 = n + m + l;
+#line 104 "NF01BB.f"
 	i__1 = ipar[7] << 1, i__2 = (n + l) * (n + m) + (n << 1) + max(i__3,
 		i__4);
+#line 104 "NF01BB.f"
 	dwork[1] = (doublereal) ((*nfun << 1) + max(i__1,i__2));
 
+#line 107 "NF01BB.f"
     } else if (*iflag == 3) {
 
 /*        Set the parameter LDJ, the length of the array J, and the sizes */
 /*        of the workspace for FCN (IFLAG = 1 or 2), and JTJ. */
 
+#line 112 "NF01BB.f"
 	st = ipar[1];
+#line 113 "NF01BB.f"
 	bsn = ipar[4];
+#line 114 "NF01BB.f"
 	nn = ipar[7];
 
+#line 116 "NF01BB.f"
 	*ldj = *nfun;
+#line 117 "NF01BB.f"
 	ipar[1] = *nfun * (bsn + st);
+#line 118 "NF01BB.f"
 	if (m > 0) {
 /* Computing MAX */
+#line 119 "NF01BB.f"
 	    i__1 = n * (n + l), i__2 = n + m + l;
+#line 119 "NF01BB.f"
 	    jwork = max(i__1,i__2);
+#line 120 "NF01BB.f"
 	} else {
 /* Computing MAX */
+#line 121 "NF01BB.f"
 	    i__1 = n * (n + l);
+#line 121 "NF01BB.f"
 	    jwork = max(i__1,l);
+#line 122 "NF01BB.f"
 	}
 /* Computing MAX */
+#line 123 "NF01BB.f"
 	i__1 = (n + l) * (n + m) + (n << 1) + jwork, i__2 = nn << 1;
+#line 123 "NF01BB.f"
 	ipar[2] = *ldj + max(i__1,i__2);
+#line 124 "NF01BB.f"
 	ipar[3] = *ldj + ipar[2];
+#line 125 "NF01BB.f"
 	ipar[4] = 0;
+#line 126 "NF01BB.f"
 	ipar[5] = *nfun;
 
+#line 128 "NF01BB.f"
     } else if (*iflag == 0) {
 
 /*        Special call for printing intermediate results. */
 
+#line 132 "NF01BB.f"
 	err = dnrm2_(nfun, &e[1], &c__1);
+#line 133 "NF01BB.f"
 	s_wsfe(&io___11);
+#line 133 "NF01BB.f"
 	do_fio(&c__1, (char *)&err, (ftnlen)sizeof(doublereal));
+#line 133 "NF01BB.f"
 	e_wsfe();
+#line 134 "NF01BB.f"
     }
+#line 135 "NF01BB.f"
     return 0;
 
 /* *** Last line of NF01BB *** */

@@ -1,0 +1,6 @@
+extern int ab05md_(char *uplo, char *over, integer *n1, integer *m1, integer *p1, integer *n2, integer *p2, doublereal *a1, integer *lda1, doublereal *b1, integer *ldb1, doublereal *c1, integer *ldc1, doublereal *d1, integer *ldd1, doublereal *a2, integer *lda2, doublereal *b2, integer *ldb2, doublereal *c2, integer *ldc2, doublereal *d2, integer *ldd2, integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *dwork, integer *ldwork, integer *info, ftnlen uplo_len, ftnlen over_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */

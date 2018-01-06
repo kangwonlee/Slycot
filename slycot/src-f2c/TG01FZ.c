@@ -1,3 +1,4 @@
+#line 1 "TG01FZ.f"
 /* TG01FZ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TG01FZ.f"
 /* Table of constant values */
 
 static doublecomplex c_b1 = {1.,0.};
@@ -375,205 +377,360 @@ static integer c_n1 = -1;
 
 /*     Decode COMPQ. */
 
+#line 335 "TG01FZ.f"
     /* Parameter adjustments */
+#line 335 "TG01FZ.f"
     a_dim1 = *lda;
+#line 335 "TG01FZ.f"
     a_offset = 1 + a_dim1;
+#line 335 "TG01FZ.f"
     a -= a_offset;
+#line 335 "TG01FZ.f"
     e_dim1 = *lde;
+#line 335 "TG01FZ.f"
     e_offset = 1 + e_dim1;
+#line 335 "TG01FZ.f"
     e -= e_offset;
+#line 335 "TG01FZ.f"
     b_dim1 = *ldb;
+#line 335 "TG01FZ.f"
     b_offset = 1 + b_dim1;
+#line 335 "TG01FZ.f"
     b -= b_offset;
+#line 335 "TG01FZ.f"
     c_dim1 = *ldc;
+#line 335 "TG01FZ.f"
     c_offset = 1 + c_dim1;
+#line 335 "TG01FZ.f"
     c__ -= c_offset;
+#line 335 "TG01FZ.f"
     q_dim1 = *ldq;
+#line 335 "TG01FZ.f"
     q_offset = 1 + q_dim1;
+#line 335 "TG01FZ.f"
     q -= q_offset;
+#line 335 "TG01FZ.f"
     z_dim1 = *ldz;
+#line 335 "TG01FZ.f"
     z_offset = 1 + z_dim1;
+#line 335 "TG01FZ.f"
     z__ -= z_offset;
+#line 335 "TG01FZ.f"
     --iwork;
+#line 335 "TG01FZ.f"
     --dwork;
+#line 335 "TG01FZ.f"
     --zwork;
+#line 335 "TG01FZ.f"
 
+#line 335 "TG01FZ.f"
     /* Function Body */
+#line 335 "TG01FZ.f"
     if (lsame_(compq, "N", (ftnlen)1, (ftnlen)1)) {
+#line 336 "TG01FZ.f"
 	ilq = FALSE_;
+#line 337 "TG01FZ.f"
 	icompq = 1;
+#line 338 "TG01FZ.f"
     } else if (lsame_(compq, "U", (ftnlen)1, (ftnlen)1)) {
+#line 339 "TG01FZ.f"
 	ilq = TRUE_;
+#line 340 "TG01FZ.f"
 	icompq = 2;
+#line 341 "TG01FZ.f"
     } else if (lsame_(compq, "I", (ftnlen)1, (ftnlen)1)) {
+#line 342 "TG01FZ.f"
 	ilq = TRUE_;
+#line 343 "TG01FZ.f"
 	icompq = 3;
+#line 344 "TG01FZ.f"
     } else {
+#line 345 "TG01FZ.f"
 	icompq = 0;
+#line 346 "TG01FZ.f"
     }
 
 /*     Decode COMPZ. */
 
+#line 350 "TG01FZ.f"
     if (lsame_(compz, "N", (ftnlen)1, (ftnlen)1)) {
+#line 351 "TG01FZ.f"
 	ilz = FALSE_;
+#line 352 "TG01FZ.f"
 	icompz = 1;
+#line 353 "TG01FZ.f"
     } else if (lsame_(compz, "U", (ftnlen)1, (ftnlen)1)) {
+#line 354 "TG01FZ.f"
 	ilz = TRUE_;
+#line 355 "TG01FZ.f"
 	icompz = 2;
+#line 356 "TG01FZ.f"
     } else if (lsame_(compz, "I", (ftnlen)1, (ftnlen)1)) {
+#line 357 "TG01FZ.f"
 	ilz = TRUE_;
+#line 358 "TG01FZ.f"
 	icompz = 3;
+#line 359 "TG01FZ.f"
     } else {
+#line 360 "TG01FZ.f"
 	icompz = 0;
+#line 361 "TG01FZ.f"
     }
+#line 362 "TG01FZ.f"
     reda = lsame_(joba, "R", (ftnlen)1, (ftnlen)1);
+#line 363 "TG01FZ.f"
     redtr = lsame_(joba, "T", (ftnlen)1, (ftnlen)1);
+#line 364 "TG01FZ.f"
     withb = *m > 0;
+#line 365 "TG01FZ.f"
     withc = *p > 0;
+#line 366 "TG01FZ.f"
     lquery = *lzwork == -1;
 
 /*     Test the input parameters. */
 
+#line 370 "TG01FZ.f"
     ln = min(*l,*n);
+#line 371 "TG01FZ.f"
     *info = 0;
 /* Computing MAX */
 /* Computing MAX */
+#line 372 "TG01FZ.f"
     i__3 = *n * 3 - 1, i__3 = max(i__3,*m);
+#line 372 "TG01FZ.f"
     i__1 = 1, i__2 = *n + *p, i__1 = max(i__1,i__2), i__2 = ln + max(i__3,*l);
+#line 372 "TG01FZ.f"
     wrkopt = max(i__1,i__2);
+#line 373 "TG01FZ.f"
     if (icompq <= 0) {
+#line 374 "TG01FZ.f"
 	*info = -1;
+#line 375 "TG01FZ.f"
     } else if (icompz <= 0) {
+#line 376 "TG01FZ.f"
 	*info = -2;
+#line 377 "TG01FZ.f"
     } else if (! lsame_(joba, "N", (ftnlen)1, (ftnlen)1) && ! reda && ! redtr)
 	     {
+#line 379 "TG01FZ.f"
 	*info = -3;
+#line 380 "TG01FZ.f"
     } else if (*l < 0) {
+#line 381 "TG01FZ.f"
 	*info = -4;
+#line 382 "TG01FZ.f"
     } else if (*n < 0) {
+#line 383 "TG01FZ.f"
 	*info = -5;
+#line 384 "TG01FZ.f"
     } else if (*m < 0) {
+#line 385 "TG01FZ.f"
 	*info = -6;
+#line 386 "TG01FZ.f"
     } else if (*p < 0) {
+#line 387 "TG01FZ.f"
 	*info = -7;
+#line 388 "TG01FZ.f"
     } else if (*lda < max(1,*l)) {
+#line 389 "TG01FZ.f"
 	*info = -9;
+#line 390 "TG01FZ.f"
     } else if (*lde < max(1,*l)) {
+#line 391 "TG01FZ.f"
 	*info = -11;
+#line 392 "TG01FZ.f"
     } else if (*ldb < 1 || withb && *ldb < *l) {
+#line 393 "TG01FZ.f"
 	*info = -13;
+#line 394 "TG01FZ.f"
     } else if (*ldc < max(1,*p)) {
+#line 395 "TG01FZ.f"
 	*info = -15;
+#line 396 "TG01FZ.f"
     } else if (ilq && *ldq < *l || *ldq < 1) {
+#line 397 "TG01FZ.f"
 	*info = -17;
+#line 398 "TG01FZ.f"
     } else if (ilz && *ldz < *n || *ldz < 1) {
+#line 399 "TG01FZ.f"
 	*info = -19;
+#line 400 "TG01FZ.f"
     } else if (*tol >= 1.) {
+#line 401 "TG01FZ.f"
 	*info = -22;
+#line 402 "TG01FZ.f"
     } else {
+#line 403 "TG01FZ.f"
 	if (lquery) {
 /* Computing MIN */
+#line 404 "TG01FZ.f"
 	    i__1 = 64, i__2 = ilaenv_(&c__1, "ZUNMQR", "LC", l, n, &ln, &c_n1,
 		     (ftnlen)6, (ftnlen)2);
+#line 404 "TG01FZ.f"
 	    nb = min(i__1,i__2);
 /* Computing MAX */
+#line 405 "TG01FZ.f"
 	    i__1 = wrkopt, i__2 = ln + *n * nb;
+#line 405 "TG01FZ.f"
 	    wrkopt = max(i__1,i__2);
+#line 406 "TG01FZ.f"
 	    if (withb) {
 /* Computing MIN */
+#line 407 "TG01FZ.f"
 		i__1 = 64, i__2 = ilaenv_(&c__1, "ZUNMQR", "LC", l, m, &ln, &
 			c_n1, (ftnlen)6, (ftnlen)2);
+#line 407 "TG01FZ.f"
 		nb = min(i__1,i__2);
 /* Computing MAX */
+#line 408 "TG01FZ.f"
 		i__1 = wrkopt, i__2 = ln + *m * nb;
+#line 408 "TG01FZ.f"
 		wrkopt = max(i__1,i__2);
+#line 409 "TG01FZ.f"
 	    }
+#line 410 "TG01FZ.f"
 	    if (ilq) {
 /* Computing MIN */
+#line 411 "TG01FZ.f"
 		i__1 = 64, i__2 = ilaenv_(&c__1, "ZUNMQR", "RN", l, l, &ln, &
 			c_n1, (ftnlen)6, (ftnlen)2);
+#line 411 "TG01FZ.f"
 		nb = min(i__1,i__2);
 /* Computing MAX */
+#line 412 "TG01FZ.f"
 		i__1 = wrkopt, i__2 = ln + *l * nb;
+#line 412 "TG01FZ.f"
 		wrkopt = max(i__1,i__2);
+#line 413 "TG01FZ.f"
 	    }
+#line 414 "TG01FZ.f"
 	    nb = ilaenv_(&c__1, "ZGERQF", " ", l, n, &c_n1, &c_n1, (ftnlen)6, 
 		    (ftnlen)1);
 /* Computing MAX */
+#line 415 "TG01FZ.f"
 	    i__1 = wrkopt, i__2 = ln + *n * nb;
+#line 415 "TG01FZ.f"
 	    wrkopt = max(i__1,i__2);
 /* Computing MIN */
+#line 416 "TG01FZ.f"
 	    i__1 = 64, i__2 = ilaenv_(&c__1, "ZUNMRQ", "RC", l, n, n, &c_n1, (
 		    ftnlen)6, (ftnlen)2);
+#line 416 "TG01FZ.f"
 	    nb = min(i__1,i__2);
 /* Computing MAX */
+#line 417 "TG01FZ.f"
 	    i__1 = wrkopt, i__2 = *n + max(1,*l) * nb;
+#line 417 "TG01FZ.f"
 	    wrkopt = max(i__1,i__2);
+#line 418 "TG01FZ.f"
 	    if (withc) {
 /* Computing MIN */
+#line 419 "TG01FZ.f"
 		i__1 = 64, i__2 = ilaenv_(&c__1, "ZUNMRQ", "RC", p, n, n, &
 			c_n1, (ftnlen)6, (ftnlen)2);
+#line 419 "TG01FZ.f"
 		nb = min(i__1,i__2);
 /* Computing MAX */
+#line 420 "TG01FZ.f"
 		i__1 = wrkopt, i__2 = *n + max(1,*p) * nb;
+#line 420 "TG01FZ.f"
 		wrkopt = max(i__1,i__2);
+#line 421 "TG01FZ.f"
 	    }
+#line 422 "TG01FZ.f"
 	    if (ilz) {
 /* Computing MIN */
+#line 423 "TG01FZ.f"
 		i__1 = 64, i__2 = ilaenv_(&c__1, "ZUNMRQ", "RC", n, n, n, &
 			c_n1, (ftnlen)6, (ftnlen)2);
+#line 423 "TG01FZ.f"
 		nb = min(i__1,i__2);
 /* Computing MAX */
+#line 424 "TG01FZ.f"
 		i__1 = wrkopt, i__2 = *n + max(1,*n) * nb;
+#line 424 "TG01FZ.f"
 		wrkopt = max(i__1,i__2);
+#line 425 "TG01FZ.f"
 	    }
+#line 426 "TG01FZ.f"
 	} else if (*lzwork < wrkopt) {
+#line 427 "TG01FZ.f"
 	    *info = -26;
+#line 428 "TG01FZ.f"
 	}
+#line 429 "TG01FZ.f"
     }
+#line 430 "TG01FZ.f"
     if (*info != 0) {
+#line 431 "TG01FZ.f"
 	i__1 = -(*info);
+#line 431 "TG01FZ.f"
 	xerbla_("TG01FZ", &i__1, (ftnlen)6);
+#line 432 "TG01FZ.f"
 	return 0;
+#line 433 "TG01FZ.f"
     } else if (lquery) {
+#line 434 "TG01FZ.f"
 	zwork[1].r = (doublereal) wrkopt, zwork[1].i = 0.;
+#line 435 "TG01FZ.f"
 	return 0;
+#line 436 "TG01FZ.f"
     }
 
 /*     Initialize Q and Z if necessary. */
 
+#line 440 "TG01FZ.f"
     if (icompq == 3) {
+#line 440 "TG01FZ.f"
 	zlaset_("Full", l, l, &c_b2, &c_b1, &q[q_offset], ldq, (ftnlen)4);
+#line 440 "TG01FZ.f"
     }
+#line 442 "TG01FZ.f"
     if (icompz == 3) {
+#line 442 "TG01FZ.f"
 	zlaset_("Full", n, n, &c_b2, &c_b1, &z__[z_offset], ldz, (ftnlen)4);
+#line 442 "TG01FZ.f"
     }
 
 /*     Quick return if possible. */
 
+#line 447 "TG01FZ.f"
     if (*l == 0 || *n == 0) {
+#line 448 "TG01FZ.f"
 	zwork[1].r = 1., zwork[1].i = 0.;
+#line 449 "TG01FZ.f"
 	*ranke = 0;
+#line 450 "TG01FZ.f"
 	if (reda || redtr) {
+#line 450 "TG01FZ.f"
 	    *rnka22 = 0;
+#line 450 "TG01FZ.f"
 	}
+#line 451 "TG01FZ.f"
 	return 0;
+#line 452 "TG01FZ.f"
     }
 
+#line 454 "TG01FZ.f"
     toldef = *tol;
+#line 455 "TG01FZ.f"
     if (toldef <= 0.) {
 
 /*        Use the default tolerance for rank determination. */
 
+#line 459 "TG01FZ.f"
 	toldef = (doublereal) (*l * *n) * dlamch_("EPSILON", (ftnlen)7);
+#line 460 "TG01FZ.f"
     }
 
 /*     Set the estimate of maximum singular value of E to */
 /*     max(||E||,||A||) to detect negligible A or E matrices. */
 
 /* Computing MAX */
+#line 465 "TG01FZ.f"
     d__1 = zlange_("F", l, n, &e[e_offset], lde, &dwork[1], (ftnlen)1), d__2 =
 	     zlange_("F", l, n, &a[a_offset], lda, &dwork[1], (ftnlen)1);
+#line 465 "TG01FZ.f"
     svlmax = max(d__1,d__2);
 
 /*     Compute the rank-revealing QR decomposition of E, */
@@ -587,96 +744,147 @@ static integer c_n1 = -1;
 /*     Complex Workspace: MIN(L,N) + 3*N - 1. */
 /*     Real Workspace:    2*N. */
 
+#line 479 "TG01FZ.f"
     lwr = *lzwork - ln;
+#line 480 "TG01FZ.f"
     kw = ln + 1;
 
+#line 482 "TG01FZ.f"
     mb3oyz_(l, n, &e[e_offset], lde, &toldef, &svlmax, ranke, sval, &iwork[1],
 	     &zwork[1], &dwork[1], &zwork[kw], info);
 
 /*     Apply transformation on the rest of matrices. */
 
+#line 487 "TG01FZ.f"
     if (*ranke > 0) {
 
 /*        A <-- Qr' * A. */
 /*        Complex Workspace: need   MIN(L,N) + N; */
 /*                           prefer MIN(L,N) + N*NB. */
 
+#line 493 "TG01FZ.f"
 	zunmqr_("Left", "ConjTranspose", l, n, ranke, &e[e_offset], lde, &
 		zwork[1], &a[a_offset], lda, &zwork[kw], &lwr, info, (ftnlen)
 		4, (ftnlen)13);
 /* Computing MAX */
+#line 495 "TG01FZ.f"
 	i__3 = kw;
+#line 495 "TG01FZ.f"
 	i__1 = wrkopt, i__2 = ln + (integer) zwork[i__3].r;
+#line 495 "TG01FZ.f"
 	wrkopt = max(i__1,i__2);
 
 /*        B <-- Qr' * B. */
 /*        Complex Workspace: need   MIN(L,N) + M; */
 /*                           prefer MIN(L,N) + M*NB. */
 
+#line 501 "TG01FZ.f"
 	if (withb) {
+#line 502 "TG01FZ.f"
 	    zunmqr_("Left", "ConjTranspose", l, m, ranke, &e[e_offset], lde, &
 		    zwork[1], &b[b_offset], ldb, &zwork[kw], &lwr, info, (
 		    ftnlen)4, (ftnlen)13);
 /* Computing MAX */
+#line 504 "TG01FZ.f"
 	    i__3 = kw;
+#line 504 "TG01FZ.f"
 	    i__1 = wrkopt, i__2 = ln + (integer) zwork[i__3].r;
+#line 504 "TG01FZ.f"
 	    wrkopt = max(i__1,i__2);
+#line 505 "TG01FZ.f"
 	}
 
 /*        Q <-- Q * Qr. */
 /*        Complex Workspace: need   MIN(L,N) + L; */
 /*                           prefer MIN(L,N) + L*NB. */
 
+#line 511 "TG01FZ.f"
 	if (ilq) {
+#line 512 "TG01FZ.f"
 	    zunmqr_("Right", "No Transpose", l, l, ranke, &e[e_offset], lde, &
 		    zwork[1], &q[q_offset], ldq, &zwork[kw], &lwr, info, (
 		    ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 514 "TG01FZ.f"
 	    i__3 = kw;
+#line 514 "TG01FZ.f"
 	    i__1 = wrkopt, i__2 = ln + (integer) zwork[i__3].r;
+#line 514 "TG01FZ.f"
 	    wrkopt = max(i__1,i__2);
+#line 515 "TG01FZ.f"
 	}
 
 /*        Set lower triangle of E to zero. */
 
+#line 519 "TG01FZ.f"
 	if (*l >= 2) {
+#line 519 "TG01FZ.f"
 	    i__1 = *l - 1;
+#line 519 "TG01FZ.f"
 	    zlaset_("Lower", &i__1, ranke, &c_b2, &c_b2, &e[e_dim1 + 2], lde, 
 		    (ftnlen)5);
+#line 519 "TG01FZ.f"
 	}
 
 /*        Compute A*P, C*P and Z*P by forward permuting the columns of */
 /*        A, C and Z based on information in IWORK. */
 
+#line 525 "TG01FZ.f"
 	i__1 = *n;
+#line 525 "TG01FZ.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 526 "TG01FZ.f"
 	    iwork[j] = -iwork[j];
+#line 527 "TG01FZ.f"
 /* L10: */
+#line 527 "TG01FZ.f"
 	}
+#line 528 "TG01FZ.f"
 	i__1 = *n;
+#line 528 "TG01FZ.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 529 "TG01FZ.f"
 	    if (iwork[i__] < 0) {
+#line 530 "TG01FZ.f"
 		j = i__;
+#line 531 "TG01FZ.f"
 		iwork[j] = -iwork[j];
+#line 532 "TG01FZ.f"
 L20:
+#line 533 "TG01FZ.f"
 		k = iwork[j];
+#line 534 "TG01FZ.f"
 		if (iwork[k] < 0) {
+#line 535 "TG01FZ.f"
 		    zswap_(l, &a[j * a_dim1 + 1], &c__1, &a[k * a_dim1 + 1], &
 			    c__1);
+#line 536 "TG01FZ.f"
 		    if (withc) {
+#line 536 "TG01FZ.f"
 			zswap_(p, &c__[j * c_dim1 + 1], &c__1, &c__[k * 
 				c_dim1 + 1], &c__1);
+#line 536 "TG01FZ.f"
 		    }
+#line 538 "TG01FZ.f"
 		    if (ilz) {
+#line 538 "TG01FZ.f"
 			zswap_(n, &z__[j * z_dim1 + 1], &c__1, &z__[k * 
 				z_dim1 + 1], &c__1);
+#line 538 "TG01FZ.f"
 		    }
+#line 540 "TG01FZ.f"
 		    iwork[k] = -iwork[k];
+#line 541 "TG01FZ.f"
 		    j = k;
+#line 542 "TG01FZ.f"
 		    goto L20;
+#line 543 "TG01FZ.f"
 		}
+#line 544 "TG01FZ.f"
 	    }
+#line 545 "TG01FZ.f"
 /* L30: */
+#line 545 "TG01FZ.f"
 	}
 
 /*        Determine a unitary matrix Y such that */
@@ -685,69 +893,107 @@ L20:
 
 /*        Compute E <-- E*Y', A <-- A*Y', C <-- C*Y', Z <-- Z*Y'. */
 
+#line 553 "TG01FZ.f"
 	if (*ranke < *n) {
 
 /*           Complex Workspace: need   2*N; */
 /*                              prefer N + N*NB. */
 
+#line 558 "TG01FZ.f"
 	    kw = *ranke + 1;
+#line 559 "TG01FZ.f"
 	    i__1 = *lzwork - kw + 1;
+#line 559 "TG01FZ.f"
 	    ztzrzf_(ranke, n, &e[e_offset], lde, &zwork[1], &zwork[kw], &i__1,
 		     info);
 /* Computing MAX */
+#line 561 "TG01FZ.f"
 	    i__3 = kw;
+#line 561 "TG01FZ.f"
 	    i__1 = wrkopt, i__2 = (integer) zwork[i__3].r + kw - 1;
+#line 561 "TG01FZ.f"
 	    wrkopt = max(i__1,i__2);
 
 /*           Complex Workspace: need   N + MAX(L,P,N); */
 /*                              prefer N + MAX(L,P,N)*NB. */
 
+#line 566 "TG01FZ.f"
 	    lh = *n - *ranke;
+#line 567 "TG01FZ.f"
 	    i__1 = *lzwork - kw + 1;
+#line 567 "TG01FZ.f"
 	    zunmrz_("Right", "Conjugate transpose", l, n, ranke, &lh, &e[
 		    e_offset], lde, &zwork[1], &a[a_offset], lda, &zwork[kw], 
 		    &i__1, info, (ftnlen)5, (ftnlen)19);
 /* Computing MAX */
+#line 570 "TG01FZ.f"
 	    i__3 = kw;
+#line 570 "TG01FZ.f"
 	    i__1 = wrkopt, i__2 = (integer) zwork[i__3].r + kw - 1;
+#line 570 "TG01FZ.f"
 	    wrkopt = max(i__1,i__2);
+#line 571 "TG01FZ.f"
 	    if (withc) {
+#line 572 "TG01FZ.f"
 		i__1 = *lzwork - kw + 1;
+#line 572 "TG01FZ.f"
 		zunmrz_("Right", "Conjugate transpose", p, n, ranke, &lh, &e[
 			e_offset], lde, &zwork[1], &c__[c_offset], ldc, &
 			zwork[kw], &i__1, info, (ftnlen)5, (ftnlen)19);
 /* Computing MAX */
+#line 575 "TG01FZ.f"
 		i__3 = kw;
+#line 575 "TG01FZ.f"
 		i__1 = wrkopt, i__2 = (integer) zwork[i__3].r + kw - 1;
+#line 575 "TG01FZ.f"
 		wrkopt = max(i__1,i__2);
+#line 576 "TG01FZ.f"
 	    }
+#line 577 "TG01FZ.f"
 	    if (ilz) {
+#line 578 "TG01FZ.f"
 		i__1 = *lzwork - kw + 1;
+#line 578 "TG01FZ.f"
 		zunmrz_("Right", "Conjugate transpose", n, n, ranke, &lh, &e[
 			e_offset], lde, &zwork[1], &z__[z_offset], ldz, &
 			zwork[kw], &i__1, info, (ftnlen)5, (ftnlen)19);
 /* Computing MAX */
+#line 581 "TG01FZ.f"
 		i__3 = kw;
+#line 581 "TG01FZ.f"
 		i__1 = wrkopt, i__2 = (integer) zwork[i__3].r + kw - 1;
+#line 581 "TG01FZ.f"
 		wrkopt = max(i__1,i__2);
+#line 582 "TG01FZ.f"
 	    }
 
 /*           Set E12 and E22 to zero. */
 
+#line 586 "TG01FZ.f"
 	    zlaset_("Full", l, &lh, &c_b2, &c_b2, &e[kw * e_dim1 + 1], lde, (
 		    ftnlen)4);
+#line 587 "TG01FZ.f"
 	}
+#line 588 "TG01FZ.f"
     } else {
+#line 589 "TG01FZ.f"
 	zlaset_("Full", l, n, &c_b2, &c_b2, &e[e_offset], lde, (ftnlen)4);
+#line 590 "TG01FZ.f"
     }
 
 /*     Reduce A22 if necessary. */
 
+#line 594 "TG01FZ.f"
     if (reda || redtr) {
+#line 595 "TG01FZ.f"
 	la22 = *l - *ranke;
+#line 596 "TG01FZ.f"
 	na22 = *n - *ranke;
+#line 597 "TG01FZ.f"
 	if (min(la22,na22) == 0) {
+#line 598 "TG01FZ.f"
 	    *rnka22 = 0;
+#line 599 "TG01FZ.f"
 	} else {
 
 /*           Compute the rank-revealing QR decomposition of A22, */
@@ -761,19 +1007,23 @@ L20:
 /*           Complex Workspace: MIN(L,N) + 3*N - 1. */
 /*           Real Workspace:    2*N. */
 
+#line 612 "TG01FZ.f"
 	    ir1 = *ranke + 1;
+#line 613 "TG01FZ.f"
 	    mb3oyz_(&la22, &na22, &a[ir1 + ir1 * a_dim1], lda, &toldef, &
 		    svlmax, rnka22, sval, &iwork[1], &zwork[1], &dwork[1], &
 		    zwork[kw], info);
 
 /*           Apply transformation on the rest of matrices. */
 
+#line 619 "TG01FZ.f"
 	    if (*rnka22 > 0) {
 
 /*              A <-- diag(I, Q2') * A */
 /*              Complex Workspace: need   MIN(L,N) + N; */
 /*                                 prefer MIN(L,N) + N*NB. */
 
+#line 625 "TG01FZ.f"
 		zunmqr_("Left", "ConjTranspose", &la22, ranke, rnka22, &a[ir1 
 			+ ir1 * a_dim1], lda, &zwork[1], &a[ir1 + a_dim1], 
 			lda, &zwork[kw], &lwr, info, (ftnlen)4, (ftnlen)13);
@@ -782,70 +1032,108 @@ L20:
 /*              Complex Workspace: need   MIN(L,N) + M; */
 /*                                 prefer MIN(L,N) + M*NB. */
 
+#line 633 "TG01FZ.f"
 		if (withb) {
+#line 633 "TG01FZ.f"
 		    zunmqr_("Left", "ConjTranspose", &la22, m, rnka22, &a[ir1 
 			    + ir1 * a_dim1], lda, &zwork[1], &b[ir1 + b_dim1],
 			     ldb, &zwork[kw], &lwr, info, (ftnlen)4, (ftnlen)
 			    13);
+#line 633 "TG01FZ.f"
 		}
 
 /*              Q <-- Q * diag(I, Q2) */
 /*              Complex Workspace: need   MIN(L,N) + L; */
 /*                                 prefer MIN(L,N) + L*NB. */
 
+#line 642 "TG01FZ.f"
 		if (ilq) {
+#line 642 "TG01FZ.f"
 		    zunmqr_("Right", "No transpose", l, &la22, rnka22, &a[ir1 
 			    + ir1 * a_dim1], lda, &zwork[1], &q[ir1 * q_dim1 
 			    + 1], ldq, &zwork[kw], &lwr, info, (ftnlen)5, (
 			    ftnlen)12);
+#line 642 "TG01FZ.f"
 		}
 
 /*              Set lower triangle of A22 to zero. */
 
+#line 649 "TG01FZ.f"
 		if (la22 >= 2) {
+#line 649 "TG01FZ.f"
 		    i__1 = la22 - 1;
+#line 649 "TG01FZ.f"
 		    zlaset_("Lower", &i__1, rnka22, &c_b2, &c_b2, &a[ir1 + 1 
 			    + ir1 * a_dim1], lda, (ftnlen)5);
+#line 649 "TG01FZ.f"
 		}
 
 /*              Compute A*diag(I,P2), C*diag(I,P2) and Z*diag(I,P2) */
 /*              by forward permuting the columns of A, C and Z based */
 /*              on information in IWORK. */
 
+#line 657 "TG01FZ.f"
 		i__1 = na22;
+#line 657 "TG01FZ.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 658 "TG01FZ.f"
 		    iwork[j] = -iwork[j];
+#line 659 "TG01FZ.f"
 /* L40: */
+#line 659 "TG01FZ.f"
 		}
+#line 660 "TG01FZ.f"
 		i__1 = na22;
+#line 660 "TG01FZ.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 661 "TG01FZ.f"
 		    if (iwork[i__] < 0) {
+#line 662 "TG01FZ.f"
 			j = i__;
+#line 663 "TG01FZ.f"
 			iwork[j] = -iwork[j];
+#line 664 "TG01FZ.f"
 L50:
+#line 665 "TG01FZ.f"
 			k = iwork[j];
+#line 666 "TG01FZ.f"
 			if (iwork[k] < 0) {
+#line 667 "TG01FZ.f"
 			    zswap_(ranke, &a[(*ranke + j) * a_dim1 + 1], &
 				    c__1, &a[(*ranke + k) * a_dim1 + 1], &
 				    c__1);
+#line 669 "TG01FZ.f"
 			    if (withc) {
+#line 669 "TG01FZ.f"
 				zswap_(p, &c__[(*ranke + j) * c_dim1 + 1], &
 					c__1, &c__[(*ranke + k) * c_dim1 + 1],
 					 &c__1);
+#line 669 "TG01FZ.f"
 			    }
+#line 672 "TG01FZ.f"
 			    if (ilz) {
+#line 672 "TG01FZ.f"
 				zswap_(n, &z__[(*ranke + j) * z_dim1 + 1], &
 					c__1, &z__[(*ranke + k) * z_dim1 + 1],
 					 &c__1);
+#line 672 "TG01FZ.f"
 			    }
+#line 675 "TG01FZ.f"
 			    iwork[k] = -iwork[k];
+#line 676 "TG01FZ.f"
 			    j = k;
+#line 677 "TG01FZ.f"
 			    goto L50;
+#line 678 "TG01FZ.f"
 			}
+#line 679 "TG01FZ.f"
 		    }
+#line 680 "TG01FZ.f"
 /* L60: */
+#line 680 "TG01FZ.f"
 		}
 
+#line 682 "TG01FZ.f"
 		if (reda && *rnka22 < na22) {
 
 /*                 Determine a unitary matrix Y2 such that */
@@ -858,59 +1146,90 @@ L50:
 /*                 Complex Workspace: need   2*N; */
 /*                                    prefer N + N*NB. */
 
+#line 694 "TG01FZ.f"
 		    kw = *ranke + 1;
+#line 695 "TG01FZ.f"
 		    i__1 = *lzwork - kw + 1;
+#line 695 "TG01FZ.f"
 		    ztzrzf_(rnka22, &na22, &a[ir1 + ir1 * a_dim1], lda, &
 			    zwork[1], &zwork[kw], &i__1, info);
 /* Computing MAX */
+#line 697 "TG01FZ.f"
 		    i__3 = kw;
+#line 697 "TG01FZ.f"
 		    i__1 = wrkopt, i__2 = (integer) zwork[i__3].r + kw - 1;
+#line 697 "TG01FZ.f"
 		    wrkopt = max(i__1,i__2);
 
 /*                 Complex Workspace: need   N + MAX(P,N); */
 /*                                    prefer N + MAX(P,N)*NB. */
 
+#line 702 "TG01FZ.f"
 		    lh = na22 - *rnka22;
+#line 703 "TG01FZ.f"
 		    if (withc) {
+#line 704 "TG01FZ.f"
 			i__1 = *lzwork - kw + 1;
+#line 704 "TG01FZ.f"
 			zunmrz_("Right", "Conjugate transpose", p, n, rnka22, 
 				&lh, &a[ir1 + ir1 * a_dim1], lda, &zwork[1], &
 				c__[c_offset], ldc, &zwork[kw], &i__1, info, (
 				ftnlen)5, (ftnlen)19);
 /* Computing MAX */
+#line 707 "TG01FZ.f"
 			i__3 = kw;
+#line 707 "TG01FZ.f"
 			i__1 = wrkopt, i__2 = (integer) zwork[i__3].r + kw - 
 				1;
+#line 707 "TG01FZ.f"
 			wrkopt = max(i__1,i__2);
+#line 708 "TG01FZ.f"
 		    }
+#line 709 "TG01FZ.f"
 		    if (ilz) {
+#line 710 "TG01FZ.f"
 			i__1 = *lzwork - kw + 1;
+#line 710 "TG01FZ.f"
 			zunmrz_("Right", "Conjugate transpose", n, n, rnka22, 
 				&lh, &a[ir1 + ir1 * a_dim1], lda, &zwork[1], &
 				z__[z_offset], ldz, &zwork[kw], &i__1, info, (
 				ftnlen)5, (ftnlen)19);
 /* Computing MAX */
+#line 713 "TG01FZ.f"
 			i__3 = kw;
+#line 713 "TG01FZ.f"
 			i__1 = wrkopt, i__2 = (integer) zwork[i__3].r + kw - 
 				1;
+#line 713 "TG01FZ.f"
 			wrkopt = max(i__1,i__2);
+#line 714 "TG01FZ.f"
 		    }
+#line 715 "TG01FZ.f"
 		    ire1 = *ranke + *rnka22 + 1;
 
 /*                 Set R12 and R22 to zero. */
 
+#line 719 "TG01FZ.f"
 		    zlaset_("Full", &la22, &lh, &c_b2, &c_b2, &a[ir1 + ire1 * 
 			    a_dim1], lda, (ftnlen)4);
+#line 721 "TG01FZ.f"
 		}
+#line 722 "TG01FZ.f"
 	    } else {
+#line 723 "TG01FZ.f"
 		zlaset_("Full", &la22, &na22, &c_b2, &c_b2, &a[ir1 + ir1 * 
 			a_dim1], lda, (ftnlen)4);
+#line 725 "TG01FZ.f"
 	    }
+#line 726 "TG01FZ.f"
 	}
+#line 727 "TG01FZ.f"
     }
 
+#line 729 "TG01FZ.f"
     zwork[1].r = (doublereal) wrkopt, zwork[1].i = 0.;
 
+#line 731 "TG01FZ.f"
     return 0;
 /* *** Last line of TG01FZ *** */
 } /* tg01fz_ */

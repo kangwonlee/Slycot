@@ -1,3 +1,4 @@
+#line 1 "SB10FD.f"
 /* SB10FD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB10FD.f"
 /* Subroutine */ int sb10fd_(integer *n, integer *m, integer *np, integer *
 	ncon, integer *nmeas, doublereal *gamma, doublereal *a, integer *lda, 
 	doublereal *b, integer *ldb, doublereal *c__, integer *ldc, 
@@ -350,222 +352,374 @@
 
 /*     Decode and Test input parameters. */
 
+#line 315 "SB10FD.f"
     /* Parameter adjustments */
+#line 315 "SB10FD.f"
     a_dim1 = *lda;
+#line 315 "SB10FD.f"
     a_offset = 1 + a_dim1;
+#line 315 "SB10FD.f"
     a -= a_offset;
+#line 315 "SB10FD.f"
     b_dim1 = *ldb;
+#line 315 "SB10FD.f"
     b_offset = 1 + b_dim1;
+#line 315 "SB10FD.f"
     b -= b_offset;
+#line 315 "SB10FD.f"
     c_dim1 = *ldc;
+#line 315 "SB10FD.f"
     c_offset = 1 + c_dim1;
+#line 315 "SB10FD.f"
     c__ -= c_offset;
+#line 315 "SB10FD.f"
     d_dim1 = *ldd;
+#line 315 "SB10FD.f"
     d_offset = 1 + d_dim1;
+#line 315 "SB10FD.f"
     d__ -= d_offset;
+#line 315 "SB10FD.f"
     ak_dim1 = *ldak;
+#line 315 "SB10FD.f"
     ak_offset = 1 + ak_dim1;
+#line 315 "SB10FD.f"
     ak -= ak_offset;
+#line 315 "SB10FD.f"
     bk_dim1 = *ldbk;
+#line 315 "SB10FD.f"
     bk_offset = 1 + bk_dim1;
+#line 315 "SB10FD.f"
     bk -= bk_offset;
+#line 315 "SB10FD.f"
     ck_dim1 = *ldck;
+#line 315 "SB10FD.f"
     ck_offset = 1 + ck_dim1;
+#line 315 "SB10FD.f"
     ck -= ck_offset;
+#line 315 "SB10FD.f"
     dk_dim1 = *lddk;
+#line 315 "SB10FD.f"
     dk_offset = 1 + dk_dim1;
+#line 315 "SB10FD.f"
     dk -= dk_offset;
+#line 315 "SB10FD.f"
     --rcond;
+#line 315 "SB10FD.f"
     --iwork;
+#line 315 "SB10FD.f"
     --dwork;
+#line 315 "SB10FD.f"
     --bwork;
+#line 315 "SB10FD.f"
 
+#line 315 "SB10FD.f"
     /* Function Body */
+#line 315 "SB10FD.f"
     m1 = *m - *ncon;
+#line 316 "SB10FD.f"
     m2 = *ncon;
+#line 317 "SB10FD.f"
     np1 = *np - *nmeas;
+#line 318 "SB10FD.f"
     np2 = *nmeas;
 
+#line 320 "SB10FD.f"
     *info = 0;
+#line 321 "SB10FD.f"
     if (*n < 0) {
+#line 322 "SB10FD.f"
 	*info = -1;
+#line 323 "SB10FD.f"
     } else if (*m < 0) {
+#line 324 "SB10FD.f"
 	*info = -2;
+#line 325 "SB10FD.f"
     } else if (*np < 0) {
+#line 326 "SB10FD.f"
 	*info = -3;
+#line 327 "SB10FD.f"
     } else if (*ncon < 0 || m1 < 0 || m2 > np1) {
+#line 328 "SB10FD.f"
 	*info = -4;
+#line 329 "SB10FD.f"
     } else if (*nmeas < 0 || np1 < 0 || np2 > m1) {
+#line 330 "SB10FD.f"
 	*info = -5;
+#line 331 "SB10FD.f"
     } else if (*gamma < 0.) {
+#line 332 "SB10FD.f"
 	*info = -6;
+#line 333 "SB10FD.f"
     } else if (*lda < max(1,*n)) {
+#line 334 "SB10FD.f"
 	*info = -8;
+#line 335 "SB10FD.f"
     } else if (*ldb < max(1,*n)) {
+#line 336 "SB10FD.f"
 	*info = -10;
+#line 337 "SB10FD.f"
     } else if (*ldc < max(1,*np)) {
+#line 338 "SB10FD.f"
 	*info = -12;
+#line 339 "SB10FD.f"
     } else if (*ldd < max(1,*np)) {
+#line 340 "SB10FD.f"
 	*info = -14;
+#line 341 "SB10FD.f"
     } else if (*ldak < max(1,*n)) {
+#line 342 "SB10FD.f"
 	*info = -16;
+#line 343 "SB10FD.f"
     } else if (*ldbk < max(1,*n)) {
+#line 344 "SB10FD.f"
 	*info = -18;
+#line 345 "SB10FD.f"
     } else if (*ldck < max(1,m2)) {
+#line 346 "SB10FD.f"
 	*info = -20;
+#line 347 "SB10FD.f"
     } else if (*lddk < max(1,m2)) {
+#line 348 "SB10FD.f"
 	*info = -22;
+#line 349 "SB10FD.f"
     } else {
 
 /*        Compute workspace. */
 
+#line 353 "SB10FD.f"
 	nd1 = np1 - m2;
+#line 354 "SB10FD.f"
 	nd2 = m1 - np2;
 /* Computing MAX */
+#line 355 "SB10FD.f"
 	i__1 = (*n + m2) * 3 + *n + np1, i__2 = (*n + m2) * 5;
+#line 355 "SB10FD.f"
 	lw1 = (*n + np1 + 1) * (*n + m2) + max(i__1,i__2);
 /* Computing MAX */
+#line 357 "SB10FD.f"
 	i__1 = (*n + np2) * 3 + *n + m1, i__2 = (*n + np2) * 5;
+#line 357 "SB10FD.f"
 	lw2 = (*n + np2) * (*n + m1 + 1) + max(i__1,i__2);
 /* Computing MAX */
+#line 359 "SB10FD.f"
 	i__1 = np1 * max(*n,m1), i__2 = m2 * 3 + np1, i__1 = max(i__1,i__2), 
 		i__2 = m2 * 5;
+#line 359 "SB10FD.f"
 	lw3 = m2 + np1 * np1 + max(i__1,i__2);
 /* Computing MAX */
+#line 360 "SB10FD.f"
 	i__1 = max(*n,np1) * m1, i__2 = np2 * 3 + m1, i__1 = max(i__1,i__2), 
 		i__2 = np2 * 5;
+#line 360 "SB10FD.f"
 	lw4 = np2 + m1 * m1 + max(i__1,i__2);
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
+#line 361 "SB10FD.f"
 	i__5 = *n * *m, i__6 = *n * 10 * *n + *n * 12 + 5;
+#line 361 "SB10FD.f"
 	i__3 = m1 << 1, i__4 = *n * 3 * *n + max(i__5,i__6);
 /* Computing MAX */
 /* Computing MAX */
+#line 361 "SB10FD.f"
 	i__9 = *n * *np, i__10 = *n * 10 * *n + *n * 12 + 5;
+#line 361 "SB10FD.f"
 	i__7 = np1 << 1, i__8 = *n * 3 * *n + max(i__9,i__10);
+#line 361 "SB10FD.f"
 	i__1 = 1, i__2 = *m * *m + max(i__3,i__4), i__1 = max(i__1,i__2), 
 		i__2 = *np * *np + max(i__7,i__8);
+#line 361 "SB10FD.f"
 	lw5 = (*n << 1) * *n + *n * (*m + *np) + max(i__1,i__2);
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
+#line 366 "SB10FD.f"
 	i__5 = nd1 << 1, i__6 = (nd1 + nd2) * np2;
 /* Computing MAX */
+#line 366 "SB10FD.f"
 	i__7 = nd2 << 1, i__8 = nd2 * m2;
 /* Computing MAX */
 /* Computing MAX */
+#line 366 "SB10FD.f"
 	i__11 = m2 * m2 + m2 * 3, i__12 = np2 * ((np2 << 1) + m2 + max(np2,*n)
 		);
+#line 366 "SB10FD.f"
 	i__9 = (*n << 1) * m2, i__10 = m2 * np2 + max(i__11,i__12);
+#line 366 "SB10FD.f"
 	i__3 = nd1 * nd1 + max(i__5,i__6), i__4 = nd2 * nd2 + max(i__7,i__8), 
 		i__3 = max(i__3,i__4), i__4 = *n * 3, i__3 = max(i__3,i__4), 
 		i__4 = *n * ((np2 << 1) + m2) + max(i__9,i__10);
+#line 366 "SB10FD.f"
 	i__1 = 1, i__2 = m2 * np2 + np2 * np2 + m2 * m2 + max(i__3,i__4);
+#line 366 "SB10FD.f"
 	lw6 = (*n << 1) * *n + *n * (*m + *np) + max(i__1,i__2);
 /* Computing MAX */
+#line 374 "SB10FD.f"
 	i__1 = max(1,lw1), i__1 = max(i__1,lw2), i__1 = max(i__1,lw3), i__1 = 
 		max(i__1,lw4), i__1 = max(i__1,lw5);
+#line 374 "SB10FD.f"
 	minwrk = *n * *m + *np * (*n + *m) + m2 * m2 + np2 * np2 + max(i__1,
 		lw6);
+#line 376 "SB10FD.f"
 	if (*ldwork < minwrk) {
+#line 376 "SB10FD.f"
 	    *info = -27;
+#line 376 "SB10FD.f"
 	}
+#line 378 "SB10FD.f"
     }
+#line 379 "SB10FD.f"
     if (*info != 0) {
+#line 380 "SB10FD.f"
 	i__1 = -(*info);
+#line 380 "SB10FD.f"
 	xerbla_("SB10FD", &i__1, (ftnlen)6);
+#line 381 "SB10FD.f"
 	return 0;
+#line 382 "SB10FD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 386 "SB10FD.f"
     if (*n == 0 || *m == 0 || *np == 0 || m1 == 0 || m2 == 0 || np1 == 0 || 
 	    np2 == 0) {
+#line 388 "SB10FD.f"
 	rcond[1] = 1.;
+#line 389 "SB10FD.f"
 	rcond[2] = 1.;
+#line 390 "SB10FD.f"
 	rcond[3] = 1.;
+#line 391 "SB10FD.f"
 	rcond[4] = 1.;
+#line 392 "SB10FD.f"
 	dwork[1] = 1.;
+#line 393 "SB10FD.f"
 	return 0;
+#line 394 "SB10FD.f"
     }
 
+#line 396 "SB10FD.f"
     toll = *tol;
+#line 397 "SB10FD.f"
     if (toll <= 0.) {
 
 /*        Set the default value of the tolerance. */
 
+#line 401 "SB10FD.f"
 	toll = sqrt(dlamch_("Epsilon", (ftnlen)7));
+#line 402 "SB10FD.f"
     }
 
 /*     Workspace usage. */
 
+#line 406 "SB10FD.f"
     iwc = *n * *m + 1;
+#line 407 "SB10FD.f"
     iwd = iwc + *np * *n;
+#line 408 "SB10FD.f"
     iwtu = iwd + *np * *m;
+#line 409 "SB10FD.f"
     iwty = iwtu + m2 * m2;
+#line 410 "SB10FD.f"
     iwrk = iwty + np2 * np2;
 
+#line 412 "SB10FD.f"
     dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[1], n, (ftnlen)4);
+#line 413 "SB10FD.f"
     dlacpy_("Full", np, n, &c__[c_offset], ldc, &dwork[iwc], np, (ftnlen)4);
+#line 414 "SB10FD.f"
     dlacpy_("Full", np, m, &d__[d_offset], ldd, &dwork[iwd], np, (ftnlen)4);
 
 /*     Transform the system so that D12 and D21 satisfy the formulas */
 /*     in the computation of the Hinf (sub)optimal controller. */
 
+#line 419 "SB10FD.f"
     i__1 = *ldwork - iwrk + 1;
+#line 419 "SB10FD.f"
     sb10pd_(n, m, np, ncon, nmeas, &a[a_offset], lda, &dwork[1], n, &dwork[
 	    iwc], np, &dwork[iwd], np, &dwork[iwtu], &m2, &dwork[iwty], &np2, 
 	    &rcond[1], &toll, &dwork[iwrk], &i__1, &info2);
+#line 423 "SB10FD.f"
     if (info2 > 0) {
+#line 424 "SB10FD.f"
 	*info = info2;
+#line 425 "SB10FD.f"
 	return 0;
+#line 426 "SB10FD.f"
     }
+#line 427 "SB10FD.f"
     lwamax = (integer) dwork[iwrk] + iwrk - 1;
 
+#line 429 "SB10FD.f"
     iwx = iwrk;
+#line 430 "SB10FD.f"
     iwy = iwx + *n * *n;
+#line 431 "SB10FD.f"
     iwf = iwy + *n * *n;
+#line 432 "SB10FD.f"
     iwh = iwf + *m * *n;
+#line 433 "SB10FD.f"
     iwrk = iwh + *n * *np;
 
 /*     Compute the (sub)optimal state feedback and output injection */
 /*     matrices. */
 
+#line 438 "SB10FD.f"
     i__1 = *ldwork - iwrk + 1;
+#line 438 "SB10FD.f"
     sb10qd_(n, m, np, ncon, nmeas, gamma, &a[a_offset], lda, &dwork[1], n, &
 	    dwork[iwc], np, &dwork[iwd], np, &dwork[iwf], m, &dwork[iwh], n, &
 	    dwork[iwx], n, &dwork[iwy], n, &rcond[3], &iwork[1], &dwork[iwrk],
 	     &i__1, &bwork[1], &info2);
+#line 443 "SB10FD.f"
     if (info2 > 0) {
+#line 444 "SB10FD.f"
 	*info = info2 + 5;
+#line 445 "SB10FD.f"
 	return 0;
+#line 446 "SB10FD.f"
     }
 /* Computing MAX */
+#line 447 "SB10FD.f"
     i__1 = (integer) dwork[iwrk] + iwrk - 1;
+#line 447 "SB10FD.f"
     lwamax = max(i__1,lwamax);
 
 /*     Compute the Hinf (sub)optimal controller. */
 
+#line 451 "SB10FD.f"
     i__1 = *ldwork - iwrk + 1;
+#line 451 "SB10FD.f"
     sb10rd_(n, m, np, ncon, nmeas, gamma, &a[a_offset], lda, &dwork[1], n, &
 	    dwork[iwc], np, &dwork[iwd], np, &dwork[iwf], m, &dwork[iwh], n, &
 	    dwork[iwtu], &m2, &dwork[iwty], &np2, &dwork[iwx], n, &dwork[iwy],
 	     n, &ak[ak_offset], ldak, &bk[bk_offset], ldbk, &ck[ck_offset], 
 	    ldck, &dk[dk_offset], lddk, &iwork[1], &dwork[iwrk], &i__1, &
 	    info2);
+#line 457 "SB10FD.f"
     if (info2 == 1) {
+#line 458 "SB10FD.f"
 	*info = 6;
+#line 459 "SB10FD.f"
 	return 0;
+#line 460 "SB10FD.f"
     } else if (info2 == 2) {
+#line 461 "SB10FD.f"
 	*info = 9;
+#line 462 "SB10FD.f"
 	return 0;
+#line 463 "SB10FD.f"
     }
 /* Computing MAX */
+#line 464 "SB10FD.f"
     i__1 = (integer) dwork[iwrk] + iwrk - 1;
+#line 464 "SB10FD.f"
     lwamax = max(i__1,lwamax);
 
+#line 466 "SB10FD.f"
     dwork[1] = (doublereal) lwamax;
+#line 467 "SB10FD.f"
     return 0;
 /* *** Last line of SB10FD *** */
 } /* sb10fd_ */

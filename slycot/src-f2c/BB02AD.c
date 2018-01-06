@@ -1,3 +1,4 @@
+#line 1 "BB02AD.f"
 /* BB02AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "BB02AD.f"
 /* Table of constant values */
 
 static doublereal c_b7 = 0.;
@@ -577,849 +579,1577 @@ static doublereal c_b118 = 4.877;
 
 /*     .. Data Statements .. */
 /*     . default values for dimensions . */
+#line 396 "BB02AD.f"
     /* Parameter adjustments */
+#line 396 "BB02AD.f"
     --nr;
+#line 396 "BB02AD.f"
     --dpar;
+#line 396 "BB02AD.f"
     --ipar;
+#line 396 "BB02AD.f"
     --bpar;
+#line 396 "BB02AD.f"
     --vec;
+#line 396 "BB02AD.f"
     a_dim1 = *lda;
+#line 396 "BB02AD.f"
     a_offset = 1 + a_dim1;
+#line 396 "BB02AD.f"
     a -= a_offset;
+#line 396 "BB02AD.f"
     b_dim1 = *ldb;
+#line 396 "BB02AD.f"
     b_offset = 1 + b_dim1;
+#line 396 "BB02AD.f"
     b -= b_offset;
+#line 396 "BB02AD.f"
     c_dim1 = *ldc;
+#line 396 "BB02AD.f"
     c_offset = 1 + c_dim1;
+#line 396 "BB02AD.f"
     c__ -= c_offset;
+#line 396 "BB02AD.f"
     --q;
+#line 396 "BB02AD.f"
     --r__;
+#line 396 "BB02AD.f"
     s_dim1 = *lds;
+#line 396 "BB02AD.f"
     s_offset = 1 + s_dim1;
+#line 396 "BB02AD.f"
     s -= s_offset;
+#line 396 "BB02AD.f"
     x_dim1 = *ldx;
+#line 396 "BB02AD.f"
     x_offset = 1 + x_dim1;
+#line 396 "BB02AD.f"
     x -= x_offset;
+#line 396 "BB02AD.f"
     --dwork;
+#line 396 "BB02AD.f"
 
+#line 396 "BB02AD.f"
     /* Function Body */
 /*     . comments on examples . */
 
 /*     .. Executable Statements .. */
 
+#line 431 "BB02AD.f"
     *info = 0;
+#line 432 "BB02AD.f"
     for (i__ = 1; i__ <= 10; ++i__) {
+#line 433 "BB02AD.f"
 	vec[i__] = FALSE_;
+#line 434 "BB02AD.f"
 /* L1: */
+#line 434 "BB02AD.f"
     }
 
+#line 436 "BB02AD.f"
     if (nr[1] >= 3) {
+#line 437 "BB02AD.f"
 	if (lsame_(def, "D", (ftnlen)1, (ftnlen)1)) {
+#line 437 "BB02AD.f"
 	    ipar[1] = ndef[nr[1] + (nr[2] << 2) - 5];
+#line 437 "BB02AD.f"
 	}
+#line 438 "BB02AD.f"
 	ipar[2] = 1;
+#line 439 "BB02AD.f"
 	ipar[3] = ipar[1];
+#line 440 "BB02AD.f"
     } else {
+#line 441 "BB02AD.f"
 	ipar[1] = ndef[nr[1] + (nr[2] << 2) - 5];
+#line 442 "BB02AD.f"
 	ipar[2] = mdef[nr[1] + (nr[2] << 1) - 3];
+#line 443 "BB02AD.f"
 	ipar[3] = pdef[nr[1] + (nr[2] << 1) - 3];
+#line 444 "BB02AD.f"
     }
 
+#line 446 "BB02AD.f"
     if (nr[1] >= 2 && ! (lsame_(def, "D", (ftnlen)1, (ftnlen)1) || lsame_(def,
 	     "N", (ftnlen)1, (ftnlen)1))) {
+#line 448 "BB02AD.f"
 	*info = -1;
+#line 449 "BB02AD.f"
     } else if (nr[1] < 1 || nr[1] > 4 || nr[2] < 0 || nr[2] > nex[nr[1] - 1]) 
 	    {
+#line 451 "BB02AD.f"
 	*info = -2;
+#line 452 "BB02AD.f"
     } else if (ipar[1] < 1) {
+#line 453 "BB02AD.f"
 	*info = -4;
+#line 454 "BB02AD.f"
     } else if (ipar[1] > *lda) {
+#line 455 "BB02AD.f"
 	*info = -12;
+#line 456 "BB02AD.f"
     } else if (ipar[1] > *ldb) {
+#line 457 "BB02AD.f"
 	*info = -14;
+#line 458 "BB02AD.f"
     } else if (ipar[3] > *ldc) {
+#line 459 "BB02AD.f"
 	*info = -16;
+#line 460 "BB02AD.f"
     } else if (bpar[2] && (! bpar[1] && ipar[3] > *ldq || bpar[1] && ipar[1] 
 	    > *ldq)) {
+#line 463 "BB02AD.f"
 	*info = -18;
+#line 464 "BB02AD.f"
     } else if (bpar[5] && (bpar[4] && ipar[1] > *ldr || ! bpar[4] && ipar[2] 
 	    > *ldr)) {
+#line 466 "BB02AD.f"
 	*info = -20;
+#line 467 "BB02AD.f"
     } else if (*lds < 1 || bpar[7] && ipar[1] > *lds) {
+#line 468 "BB02AD.f"
 	*info = -22;
+#line 469 "BB02AD.f"
     } else if (*ldx < 1) {
+#line 470 "BB02AD.f"
 	*info = -24;
+#line 471 "BB02AD.f"
     } else if (nr[1] == 1 && (nr[2] == 1 || nr[2] == 3 || nr[2] == 4) || nr[1]
 	     == 2 && (nr[2] == 1 || nr[2] >= 3) || nr[1] == 4) {
 /*    .. solution X available .. */
+#line 476 "BB02AD.f"
 	if (ipar[1] > *ldx) {
+#line 477 "BB02AD.f"
 	    *info = -24;
+#line 478 "BB02AD.f"
 	} else {
+#line 479 "BB02AD.f"
 	    dlaset_("A", &ipar[1], &ipar[1], &c_b7, &c_b7, &x[x_offset], ldx, 
 		    (ftnlen)1);
+#line 480 "BB02AD.f"
 	}
+#line 481 "BB02AD.f"
     } else if (*ldwork < *n * *n) {
+#line 482 "BB02AD.f"
 	*info = -26;
+#line 483 "BB02AD.f"
     }
+#line 484 "BB02AD.f"
     if (*info != 0) {
+#line 485 "BB02AD.f"
 	i__1 = -(*info);
+#line 485 "BB02AD.f"
 	xerbla_("BB02AD", &i__1, (ftnlen)6);
+#line 486 "BB02AD.f"
 	return 0;
+#line 487 "BB02AD.f"
     }
 
+#line 489 "BB02AD.f"
     nsymm = ipar[1] * (ipar[1] + 1) / 2;
+#line 490 "BB02AD.f"
     msymm = ipar[2] * (ipar[2] + 1) / 2;
+#line 491 "BB02AD.f"
     psymm = ipar[3] * (ipar[3] + 1) / 2;
 
+#line 493 "BB02AD.f"
     dlaset_("A", &ipar[1], &ipar[1], &c_b7, &c_b7, &a[a_offset], lda, (ftnlen)
 	    1);
+#line 494 "BB02AD.f"
     dlaset_("A", &ipar[1], &ipar[2], &c_b7, &c_b7, &b[b_offset], ldb, (ftnlen)
 	    1);
+#line 495 "BB02AD.f"
     dlaset_("A", &ipar[3], &ipar[1], &c_b7, &c_b7, &c__[c_offset], ldc, (
 	    ftnlen)1);
+#line 496 "BB02AD.f"
     dlaset_("L", &psymm, &c__1, &c_b7, &c_b7, &q[1], &c__1, (ftnlen)1);
+#line 497 "BB02AD.f"
     dlaset_("L", &msymm, &c__1, &c_b7, &c_b7, &r__[1], &c__1, (ftnlen)1);
+#line 498 "BB02AD.f"
     if (bpar[7]) {
+#line 498 "BB02AD.f"
 	dlaset_("A", &ipar[1], &ipar[2], &c_b7, &c_b7, &s[s_offset], lds, (
 		ftnlen)1);
+#line 498 "BB02AD.f"
     }
 
+#line 501 "BB02AD.f"
     if (nr[1] == 1) {
 
+#line 503 "BB02AD.f"
 	if (nr[2] == 1) {
+#line 504 "BB02AD.f"
 	    a[a_dim1 + 1] = 2.;
+#line 505 "BB02AD.f"
 	    a[a_dim1 + 2] = 1.;
+#line 506 "BB02AD.f"
 	    a[(a_dim1 << 1) + 1] = -1.;
+#line 507 "BB02AD.f"
 	    b[b_dim1 + 1] = 1.;
+#line 508 "BB02AD.f"
 	    q[1] = 1.;
+#line 509 "BB02AD.f"
 	    c__[(c_dim1 << 1) + 1] = 1.;
+#line 510 "BB02AD.f"
 	    r__[1] = 0.;
+#line 511 "BB02AD.f"
 	    dlaset_("A", &ipar[1], &ipar[1], &c_b7, &c_b34, &x[x_offset], ldx,
 		     (ftnlen)1);
+#line 512 "BB02AD.f"
 	    s_copy(ident, "0000", (ftnlen)4, (ftnlen)4);
 
+#line 514 "BB02AD.f"
 	} else if (nr[2] == 2) {
+#line 515 "BB02AD.f"
 	    a[(a_dim1 << 1) + 1] = 1.;
+#line 516 "BB02AD.f"
 	    a[(a_dim1 << 1) + 2] = -1.;
+#line 517 "BB02AD.f"
 	    b[b_dim1 + 1] = 1.;
+#line 518 "BB02AD.f"
 	    b[b_dim1 + 2] = 2.;
+#line 519 "BB02AD.f"
 	    b[(b_dim1 << 1) + 2] = 1.;
+#line 520 "BB02AD.f"
 	    r__[1] = 9.;
+#line 521 "BB02AD.f"
 	    r__[2] = 3.;
+#line 522 "BB02AD.f"
 	    r__[3] = 1.;
+#line 523 "BB02AD.f"
 	    dlaset_("A", &psymm, &c__1, &c_b38, &c_b38, &q[1], &psymm, (
 		    ftnlen)1);
+#line 524 "BB02AD.f"
 	    q[3] = 7.;
+#line 525 "BB02AD.f"
 	    drscl_(&msymm, &c_b40, &q[1], &c__1);
+#line 526 "BB02AD.f"
 	    if (bpar[7]) {
+#line 527 "BB02AD.f"
 		s[s_dim1 + 1] = 3.;
+#line 528 "BB02AD.f"
 		s[s_dim1 + 2] = -1.;
+#line 529 "BB02AD.f"
 		s[(s_dim1 << 1) + 1] = 1.;
+#line 530 "BB02AD.f"
 		s[(s_dim1 << 1) + 2] = 7.;
+#line 531 "BB02AD.f"
 	    }
+#line 532 "BB02AD.f"
 	    s_copy(ident, "0100", (ftnlen)4, (ftnlen)4);
 
+#line 534 "BB02AD.f"
 	} else if (nr[2] == 3) {
+#line 535 "BB02AD.f"
 	    a[(a_dim1 << 1) + 1] = 1.;
+#line 536 "BB02AD.f"
 	    b[b_dim1 + 2] = 1.;
+#line 537 "BB02AD.f"
 	    q[1] = 1.;
+#line 538 "BB02AD.f"
 	    q[2] = 2.;
+#line 539 "BB02AD.f"
 	    q[3] = 4.;
+#line 540 "BB02AD.f"
 	    x[x_dim1 + 1] = 1.;
+#line 541 "BB02AD.f"
 	    x[x_dim1 + 2] = 2.;
+#line 542 "BB02AD.f"
 	    x[(x_dim1 << 1) + 1] = 2.;
+#line 543 "BB02AD.f"
 	    x[(x_dim1 << 1) + 2] = sqrt(5.) + 2.;
+#line 544 "BB02AD.f"
 	    s_copy(ident, "0101", (ftnlen)4, (ftnlen)4);
 
+#line 546 "BB02AD.f"
 	} else if (nr[2] == 4) {
+#line 547 "BB02AD.f"
 	    a[(a_dim1 << 1) + 1] = .1;
+#line 548 "BB02AD.f"
 	    a[a_dim1 * 3 + 2] = .01;
+#line 549 "BB02AD.f"
 	    b[b_dim1 + 1] = 1.;
+#line 550 "BB02AD.f"
 	    b[(b_dim1 << 1) + 3] = 1.;
+#line 551 "BB02AD.f"
 	    r__[3] = 1.;
+#line 552 "BB02AD.f"
 	    q[1] = 1e5;
+#line 553 "BB02AD.f"
 	    q[4] = 1e3;
+#line 554 "BB02AD.f"
 	    q[6] = -10.;
+#line 555 "BB02AD.f"
 	    x[x_dim1 + 1] = 1e5;
+#line 556 "BB02AD.f"
 	    x[(x_dim1 << 1) + 2] = 1e3;
+#line 557 "BB02AD.f"
 	    s_copy(ident, "0100", (ftnlen)4, (ftnlen)4);
 
+#line 559 "BB02AD.f"
 	} else if (nr[2] >= 5 && nr[2] <= 8 || nr[2] == 10 || nr[2] == 11 || 
 		nr[2] == 13) {
+#line 562 "BB02AD.f"
 	    if (nr[2] < 10) {
+#line 563 "BB02AD.f"
 		ici__1.icierr = 0;
+#line 563 "BB02AD.f"
 		ici__1.icirnum = 1;
+#line 563 "BB02AD.f"
 		ici__1.icirlen = 11;
+#line 563 "BB02AD.f"
 		ici__1.iciunit = chpar;
+#line 563 "BB02AD.f"
 		ici__1.icifmt = "(A,I1,A,I1,A)";
+#line 563 "BB02AD.f"
 		s_wsfi(&ici__1);
+#line 563 "BB02AD.f"
 		do_fio(&c__1, "BB02", (ftnlen)4);
+#line 563 "BB02AD.f"
 		do_fio(&c__1, (char *)&nr[1], (ftnlen)sizeof(integer));
+#line 563 "BB02AD.f"
 		do_fio(&c__1, "0", (ftnlen)1);
+#line 563 "BB02AD.f"
 		do_fio(&c__1, (char *)&nr[2], (ftnlen)sizeof(integer));
+#line 563 "BB02AD.f"
 		do_fio(&c__1, ".dat", (ftnlen)4);
+#line 563 "BB02AD.f"
 		e_wsfi();
+#line 565 "BB02AD.f"
 		o__1.oerr = 1;
+#line 565 "BB02AD.f"
 		o__1.ounit = 1;
+#line 565 "BB02AD.f"
 		o__1.ofnmlen = 11;
+#line 565 "BB02AD.f"
 		o__1.ofnm = chpar;
+#line 565 "BB02AD.f"
 		o__1.orl = 0;
+#line 565 "BB02AD.f"
 		o__1.osta = "OLD";
+#line 565 "BB02AD.f"
 		o__1.oacc = 0;
+#line 565 "BB02AD.f"
 		o__1.ofm = 0;
+#line 565 "BB02AD.f"
 		o__1.oblnk = 0;
+#line 565 "BB02AD.f"
 		ios = f_open(&o__1);
+#line 566 "BB02AD.f"
 	    } else {
+#line 567 "BB02AD.f"
 		ici__1.icierr = 0;
+#line 567 "BB02AD.f"
 		ici__1.icirnum = 1;
+#line 567 "BB02AD.f"
 		ici__1.icirlen = 11;
+#line 567 "BB02AD.f"
 		ici__1.iciunit = chpar;
+#line 567 "BB02AD.f"
 		ici__1.icifmt = "(A,I1,I2,A)";
+#line 567 "BB02AD.f"
 		s_wsfi(&ici__1);
+#line 567 "BB02AD.f"
 		do_fio(&c__1, "BB02", (ftnlen)4);
+#line 567 "BB02AD.f"
 		do_fio(&c__1, (char *)&nr[1], (ftnlen)sizeof(integer));
+#line 567 "BB02AD.f"
 		do_fio(&c__1, (char *)&nr[2], (ftnlen)sizeof(integer));
+#line 567 "BB02AD.f"
 		do_fio(&c__1, ".dat", (ftnlen)4);
+#line 567 "BB02AD.f"
 		e_wsfi();
+#line 569 "BB02AD.f"
 		o__1.oerr = 1;
+#line 569 "BB02AD.f"
 		o__1.ounit = 1;
+#line 569 "BB02AD.f"
 		o__1.ofnmlen = 11;
+#line 569 "BB02AD.f"
 		o__1.ofnm = chpar;
+#line 569 "BB02AD.f"
 		o__1.orl = 0;
+#line 569 "BB02AD.f"
 		o__1.osta = "OLD";
+#line 569 "BB02AD.f"
 		o__1.oacc = 0;
+#line 569 "BB02AD.f"
 		o__1.ofm = 0;
+#line 569 "BB02AD.f"
 		o__1.oblnk = 0;
+#line 569 "BB02AD.f"
 		ios = f_open(&o__1);
+#line 570 "BB02AD.f"
 	    }
+#line 571 "BB02AD.f"
 	    if (ios != 0) {
+#line 572 "BB02AD.f"
 		*info = 1;
+#line 573 "BB02AD.f"
 	    } else {
+#line 574 "BB02AD.f"
 		if (! (nr[2] == 13)) {
+#line 575 "BB02AD.f"
 		    i__1 = ipar[1];
+#line 575 "BB02AD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 576 "BB02AD.f"
 			ios = s_rsle(&io___12);
+#line 576 "BB02AD.f"
 			if (ios != 0) {
+#line 576 "BB02AD.f"
 			    goto L100001;
+#line 576 "BB02AD.f"
 			}
+#line 576 "BB02AD.f"
 			i__2 = ipar[1];
+#line 576 "BB02AD.f"
 			for (j = 1; j <= i__2; ++j) {
+#line 576 "BB02AD.f"
 			    ios = do_lio(&c__5, &c__1, (char *)&a[i__ + j * 
 				    a_dim1], (ftnlen)sizeof(doublereal));
+#line 576 "BB02AD.f"
 			    if (ios != 0) {
+#line 576 "BB02AD.f"
 				goto L100001;
+#line 576 "BB02AD.f"
 			    }
+#line 576 "BB02AD.f"
 			}
+#line 576 "BB02AD.f"
 			ios = e_rsle();
+#line 576 "BB02AD.f"
 L100001:
+#line 577 "BB02AD.f"
 			if (ios != 0) {
+#line 577 "BB02AD.f"
 			    *info = 1;
+#line 577 "BB02AD.f"
 			}
+#line 578 "BB02AD.f"
 /* L10: */
+#line 578 "BB02AD.f"
 		    }
+#line 579 "BB02AD.f"
 		    i__1 = ipar[1];
+#line 579 "BB02AD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 580 "BB02AD.f"
 			ios = s_rsle(&io___14);
+#line 580 "BB02AD.f"
 			if (ios != 0) {
+#line 580 "BB02AD.f"
 			    goto L100002;
+#line 580 "BB02AD.f"
 			}
+#line 580 "BB02AD.f"
 			i__2 = ipar[2];
+#line 580 "BB02AD.f"
 			for (j = 1; j <= i__2; ++j) {
+#line 580 "BB02AD.f"
 			    ios = do_lio(&c__5, &c__1, (char *)&b[i__ + j * 
 				    b_dim1], (ftnlen)sizeof(doublereal));
+#line 580 "BB02AD.f"
 			    if (ios != 0) {
+#line 580 "BB02AD.f"
 				goto L100002;
+#line 580 "BB02AD.f"
 			    }
+#line 580 "BB02AD.f"
 			}
+#line 580 "BB02AD.f"
 			ios = e_rsle();
+#line 580 "BB02AD.f"
 L100002:
+#line 581 "BB02AD.f"
 			if (ios != 0) {
+#line 581 "BB02AD.f"
 			    *info = 1;
+#line 581 "BB02AD.f"
 			}
+#line 582 "BB02AD.f"
 /* L20: */
+#line 582 "BB02AD.f"
 		    }
+#line 583 "BB02AD.f"
 		}
+#line 584 "BB02AD.f"
 		if (nr[2] == 5) {
+#line 585 "BB02AD.f"
 		    q[1] = 1.87;
+#line 586 "BB02AD.f"
 		    q[4] = -.244;
+#line 587 "BB02AD.f"
 		    q[5] = .744;
+#line 588 "BB02AD.f"
 		    q[6] = .205;
+#line 589 "BB02AD.f"
 		    q[8] = .589;
+#line 590 "BB02AD.f"
 		    q[10] = 1.048;
+#line 591 "BB02AD.f"
 		} else if (nr[2] == 6) {
+#line 592 "BB02AD.f"
 		    q[1] = .01;
+#line 593 "BB02AD.f"
 		    q[5] = .01;
+#line 594 "BB02AD.f"
 		    q[8] = .01;
+#line 595 "BB02AD.f"
 		    q[10] = .01;
+#line 596 "BB02AD.f"
 		} else if (nr[2] == 7) {
+#line 597 "BB02AD.f"
 		    dlaset_("U", &ipar[3], &ipar[1], &c_b34, &c_b34, &c__[
 			    c_offset], ldc, (ftnlen)1);
+#line 598 "BB02AD.f"
 		    c__[c_dim1 * 3 + 1] = 2.;
+#line 599 "BB02AD.f"
 		    c__[(c_dim1 << 2) + 1] = 4.;
+#line 600 "BB02AD.f"
 		    c__[(c_dim1 << 2) + 2] = 2.;
+#line 601 "BB02AD.f"
 		    q[1] = 2.;
+#line 602 "BB02AD.f"
 		    q[2] = -1.;
+#line 603 "BB02AD.f"
 		    q[5] = 2.;
+#line 604 "BB02AD.f"
 		    q[6] = -1.;
+#line 605 "BB02AD.f"
 		    q[8] = 2.;
+#line 606 "BB02AD.f"
 		} else if (nr[2] == 10) {
+#line 607 "BB02AD.f"
 		    c__[c_dim1 + 1] = 1.;
+#line 608 "BB02AD.f"
 		    c__[c_dim1 * 5 + 2] = 1.;
+#line 609 "BB02AD.f"
 		    q[1] = 50.;
+#line 610 "BB02AD.f"
 		    q[3] = 50.;
+#line 611 "BB02AD.f"
 		} else if (nr[2] == 11) {
+#line 612 "BB02AD.f"
 		    a[a_dim1 * 10 + 10] = 1.;
+#line 613 "BB02AD.f"
 		    a[a_dim1 * 11 + 11] = 1.;
+#line 614 "BB02AD.f"
 		    c__[c_dim1 * 6 + 1] = 15.;
+#line 615 "BB02AD.f"
 		    c__[c_dim1 * 7 + 2] = 7.;
+#line 616 "BB02AD.f"
 		    c__[(c_dim1 << 3) + 2] = -5.357;
+#line 617 "BB02AD.f"
 		    c__[c_dim1 * 9 + 2] = -3.943;
+#line 618 "BB02AD.f"
 		    c__[c_dim1 * 10 + 3] = 1.;
+#line 619 "BB02AD.f"
 		    c__[c_dim1 * 11 + 4] = 1.;
+#line 620 "BB02AD.f"
 		    q[1] = .5;
+#line 621 "BB02AD.f"
 		    q[5] = 5.;
+#line 622 "BB02AD.f"
 		    q[8] = .5;
+#line 623 "BB02AD.f"
 		    q[10] = 5.;
+#line 624 "BB02AD.f"
 		    r__[1] = 400.;
+#line 625 "BB02AD.f"
 		    r__[3] = 700.;
+#line 626 "BB02AD.f"
 		    s_copy(ident, "0000", (ftnlen)4, (ftnlen)4);
 
+#line 628 "BB02AD.f"
 		} else if (nr[2] == 13) {
+#line 629 "BB02AD.f"
 		    i__1 = ipar[1] - 6;
+#line 629 "BB02AD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 630 "BB02AD.f"
 			ios = s_rsle(&io___15);
+#line 630 "BB02AD.f"
 			if (ios != 0) {
+#line 630 "BB02AD.f"
 			    goto L100003;
+#line 630 "BB02AD.f"
 			}
+#line 630 "BB02AD.f"
 			i__2 = ipar[1] - 6;
+#line 630 "BB02AD.f"
 			for (j = 1; j <= i__2; ++j) {
+#line 630 "BB02AD.f"
 			    ios = do_lio(&c__5, &c__1, (char *)&a[i__ + j * 
 				    a_dim1], (ftnlen)sizeof(doublereal));
+#line 630 "BB02AD.f"
 			    if (ios != 0) {
+#line 630 "BB02AD.f"
 				goto L100003;
+#line 630 "BB02AD.f"
 			    }
+#line 630 "BB02AD.f"
 			}
+#line 630 "BB02AD.f"
 			ios = e_rsle();
+#line 630 "BB02AD.f"
 L100003:
+#line 632 "BB02AD.f"
 			if (ios != 0) {
+#line 632 "BB02AD.f"
 			    *info = 1;
+#line 632 "BB02AD.f"
 			}
+#line 633 "BB02AD.f"
 /* L24: */
+#line 633 "BB02AD.f"
 		    }
+#line 634 "BB02AD.f"
 		    i__1 = ipar[1] - 6;
+#line 634 "BB02AD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 635 "BB02AD.f"
 			ios = s_rsle(&io___16);
+#line 635 "BB02AD.f"
 			if (ios != 0) {
+#line 635 "BB02AD.f"
 			    goto L100004;
+#line 635 "BB02AD.f"
 			}
+#line 635 "BB02AD.f"
 			i__2 = ipar[2];
+#line 635 "BB02AD.f"
 			for (j = 1; j <= i__2; ++j) {
+#line 635 "BB02AD.f"
 			    ios = do_lio(&c__5, &c__1, (char *)&b[i__ + j * 
 				    b_dim1], (ftnlen)sizeof(doublereal));
+#line 635 "BB02AD.f"
 			    if (ios != 0) {
+#line 635 "BB02AD.f"
 				goto L100004;
+#line 635 "BB02AD.f"
 			    }
+#line 635 "BB02AD.f"
 			}
+#line 635 "BB02AD.f"
 			ios = e_rsle();
+#line 635 "BB02AD.f"
 L100004:
+#line 637 "BB02AD.f"
 			if (ios != 0) {
+#line 637 "BB02AD.f"
 			    *info = 1;
+#line 637 "BB02AD.f"
 			}
+#line 638 "BB02AD.f"
 /* L25: */
+#line 638 "BB02AD.f"
 		    }
+#line 639 "BB02AD.f"
 		    i__1 = ipar[2];
+#line 639 "BB02AD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 640 "BB02AD.f"
 			ios = s_rsle(&io___17);
+#line 640 "BB02AD.f"
 			if (ios != 0) {
+#line 640 "BB02AD.f"
 			    goto L100005;
+#line 640 "BB02AD.f"
 			}
+#line 640 "BB02AD.f"
 			i__2 = ipar[1] - 6;
+#line 640 "BB02AD.f"
 			for (j = 1; j <= i__2; ++j) {
+#line 640 "BB02AD.f"
 			    ios = do_lio(&c__5, &c__1, (char *)&c__[i__ + j * 
 				    c_dim1], (ftnlen)sizeof(doublereal));
+#line 640 "BB02AD.f"
 			    if (ios != 0) {
+#line 640 "BB02AD.f"
 				goto L100005;
+#line 640 "BB02AD.f"
 			    }
+#line 640 "BB02AD.f"
 			}
+#line 640 "BB02AD.f"
 			ios = e_rsle();
+#line 640 "BB02AD.f"
 L100005:
+#line 642 "BB02AD.f"
 			if (ios != 0) {
+#line 642 "BB02AD.f"
 			    *info = 1;
+#line 642 "BB02AD.f"
 			}
+#line 643 "BB02AD.f"
 /* L26: */
+#line 643 "BB02AD.f"
 		    }
+#line 644 "BB02AD.f"
 		    for (i__ = 1; i__ <= 6; ++i__) {
+#line 645 "BB02AD.f"
 			a[i__ + 20 + (i__ + 20) * a_dim1] = 1.;
+#line 646 "BB02AD.f"
 			c__[i__ + 6 + (i__ + 20) * c_dim1] = 1.;
+#line 647 "BB02AD.f"
 /* L27: */
+#line 647 "BB02AD.f"
 		    }
+#line 648 "BB02AD.f"
 		    j = 58;
+#line 649 "BB02AD.f"
 		    for (i__ = 7; i__ <= 12; ++i__) {
+#line 650 "BB02AD.f"
 			ios = s_rsle(&io___18);
+#line 650 "BB02AD.f"
 			if (ios != 0) {
+#line 650 "BB02AD.f"
 			    goto L100006;
+#line 650 "BB02AD.f"
 			}
+#line 650 "BB02AD.f"
 			ios = do_lio(&c__5, &c__1, (char *)&q[j], (ftnlen)
 				sizeof(doublereal));
+#line 650 "BB02AD.f"
 			if (ios != 0) {
+#line 650 "BB02AD.f"
 			    goto L100006;
+#line 650 "BB02AD.f"
 			}
+#line 650 "BB02AD.f"
 			ios = e_rsle();
+#line 650 "BB02AD.f"
 L100006:
+#line 651 "BB02AD.f"
 			if (ios != 0) {
+#line 651 "BB02AD.f"
 			    *info = 1;
+#line 651 "BB02AD.f"
 			}
+#line 652 "BB02AD.f"
 			j += 13 - i__;
+#line 653 "BB02AD.f"
 /* L28: */
+#line 653 "BB02AD.f"
 		    }
+#line 654 "BB02AD.f"
 		    j = 1;
+#line 655 "BB02AD.f"
 		    for (i__ = 1; i__ <= 6; ++i__) {
+#line 656 "BB02AD.f"
 			ios = s_rsle(&io___19);
+#line 656 "BB02AD.f"
 			if (ios != 0) {
+#line 656 "BB02AD.f"
 			    goto L100007;
+#line 656 "BB02AD.f"
 			}
+#line 656 "BB02AD.f"
 			ios = do_lio(&c__5, &c__1, (char *)&r__[j], (ftnlen)
 				sizeof(doublereal));
+#line 656 "BB02AD.f"
 			if (ios != 0) {
+#line 656 "BB02AD.f"
 			    goto L100007;
+#line 656 "BB02AD.f"
 			}
+#line 656 "BB02AD.f"
 			ios = e_rsle();
+#line 656 "BB02AD.f"
 L100007:
+#line 657 "BB02AD.f"
 			if (ios != 0) {
+#line 657 "BB02AD.f"
 			    *info = 1;
+#line 657 "BB02AD.f"
 			}
+#line 658 "BB02AD.f"
 			j += 7 - i__;
+#line 659 "BB02AD.f"
 /* L29: */
+#line 659 "BB02AD.f"
 		    }
+#line 660 "BB02AD.f"
 		    for (i__ = 1; i__ <= 6; ++i__) {
+#line 661 "BB02AD.f"
 			for (j = 1; j <= 20; ++j) {
+#line 662 "BB02AD.f"
 			    a[i__ + 20 + j * a_dim1] = -c__[i__ + j * c_dim1];
+#line 663 "BB02AD.f"
 /* L30: */
+#line 663 "BB02AD.f"
 			}
+#line 664 "BB02AD.f"
 /* L31: */
+#line 664 "BB02AD.f"
 		    }
+#line 665 "BB02AD.f"
 		    s_copy(ident, "0000", (ftnlen)4, (ftnlen)4);
+#line 666 "BB02AD.f"
 		}
+#line 667 "BB02AD.f"
 	    }
+#line 668 "BB02AD.f"
 	    cl__1.cerr = 0;
+#line 668 "BB02AD.f"
 	    cl__1.cunit = 1;
+#line 668 "BB02AD.f"
 	    cl__1.csta = 0;
+#line 668 "BB02AD.f"
 	    f_clos(&cl__1);
+#line 669 "BB02AD.f"
 	    if (nr[2] == 5 || nr[2] == 6) {
+#line 670 "BB02AD.f"
 		s_copy(ident, "0101", (ftnlen)4, (ftnlen)4);
+#line 671 "BB02AD.f"
 	    } else if (nr[2] == 7 || nr[2] == 10) {
+#line 672 "BB02AD.f"
 		s_copy(ident, "0001", (ftnlen)4, (ftnlen)4);
+#line 673 "BB02AD.f"
 	    } else if (nr[2] == 8) {
+#line 674 "BB02AD.f"
 		s_copy(ident, "0111", (ftnlen)4, (ftnlen)4);
+#line 675 "BB02AD.f"
 	    }
 
+#line 677 "BB02AD.f"
 	} else if (nr[2] == 9) {
+#line 678 "BB02AD.f"
 	    a[(a_dim1 << 1) + 1] = 1.;
+#line 679 "BB02AD.f"
 	    a[a_dim1 * 3 + 2] = 1.;
+#line 680 "BB02AD.f"
 	    a[a_dim1 * 5 + 4] = 1.;
+#line 681 "BB02AD.f"
 	    a[a_dim1 * 6 + 5] = 1.;
+#line 682 "BB02AD.f"
 	    b[b_dim1 + 3] = 1.;
+#line 683 "BB02AD.f"
 	    b[(b_dim1 << 1) + 6] = 1.;
+#line 684 "BB02AD.f"
 	    c__[c_dim1 + 1] = 1.;
+#line 685 "BB02AD.f"
 	    c__[(c_dim1 << 1) + 1] = 1.;
+#line 686 "BB02AD.f"
 	    c__[(c_dim1 << 2) + 2] = 1.;
+#line 687 "BB02AD.f"
 	    c__[c_dim1 * 5 + 2] = -1.;
+#line 688 "BB02AD.f"
 	    r__[1] = 3.;
+#line 689 "BB02AD.f"
 	    r__[3] = 1.;
+#line 690 "BB02AD.f"
 	    if (bpar[7]) {
+#line 691 "BB02AD.f"
 		s[s_dim1 + 1] = 1.;
+#line 692 "BB02AD.f"
 		s[s_dim1 + 2] = 1.;
+#line 693 "BB02AD.f"
 		s[s_dim1 + 4] = 1.;
+#line 694 "BB02AD.f"
 		s[s_dim1 + 5] = -1.;
+#line 695 "BB02AD.f"
 	    }
+#line 696 "BB02AD.f"
 	    s_copy(ident, "0010", (ftnlen)4, (ftnlen)4);
+#line 697 "BB02AD.f"
 	} else if (nr[2] == 12) {
+#line 698 "BB02AD.f"
 	    for (i__ = 1; i__ <= 10; ++i__) {
+#line 699 "BB02AD.f"
 		a[i__ + (i__ + 1) * a_dim1] = 1.;
+#line 700 "BB02AD.f"
 /* L32: */
+#line 700 "BB02AD.f"
 	    }
+#line 701 "BB02AD.f"
 	    a[a_dim1 * 7 + 6] = 0.;
+#line 702 "BB02AD.f"
 	    a[a_dim1 * 9 + 8] = 0.;
+#line 703 "BB02AD.f"
 	    a[a_dim1 * 12 + 12] = 1.;
+#line 704 "BB02AD.f"
 	    a[a_dim1 * 13 + 13] = 1.;
+#line 705 "BB02AD.f"
 	    a[a_dim1 + 12] = -3.318;
+#line 706 "BB02AD.f"
 	    a[a_dim1 + 13] = -1.5484;
+#line 707 "BB02AD.f"
 	    a[a_dim1 * 6 + 6] = .7788;
+#line 708 "BB02AD.f"
 	    a[a_dim1 * 7 + 8] = -.4724;
+#line 709 "BB02AD.f"
 	    a[a_dim1 * 7 + 13] = .3981;
+#line 710 "BB02AD.f"
 	    a[(a_dim1 << 3) + 8] = 1.3746;
+#line 711 "BB02AD.f"
 	    a[(a_dim1 << 3) + 13] = .5113;
+#line 712 "BB02AD.f"
 	    a[a_dim1 * 9 + 13] = 5.7865;
+#line 713 "BB02AD.f"
 	    a[a_dim1 * 11 + 11] = .8071;
+#line 714 "BB02AD.f"
 	    b[b_dim1 + 6] = 1.;
+#line 715 "BB02AD.f"
 	    b[(b_dim1 << 1) + 8] = 1.;
+#line 716 "BB02AD.f"
 	    c__[c_dim1 + 1] = 3.318;
+#line 717 "BB02AD.f"
 	    c__[c_dim1 + 2] = 1.5484;
+#line 718 "BB02AD.f"
 	    c__[c_dim1 * 7 + 2] = -.3981;
+#line 719 "BB02AD.f"
 	    c__[(c_dim1 << 3) + 2] = -.5113;
+#line 720 "BB02AD.f"
 	    c__[c_dim1 * 9 + 2] = -5.7865;
+#line 721 "BB02AD.f"
 	    c__[c_dim1 * 12 + 3] = 1.;
+#line 722 "BB02AD.f"
 	    c__[c_dim1 * 13 + 4] = 1.;
+#line 723 "BB02AD.f"
 	    q[1] = .5;
+#line 724 "BB02AD.f"
 	    q[5] = 5.;
+#line 725 "BB02AD.f"
 	    q[8] = .5;
+#line 726 "BB02AD.f"
 	    q[10] = 5.;
+#line 727 "BB02AD.f"
 	    r__[1] = 400.;
+#line 728 "BB02AD.f"
 	    r__[3] = 700.;
+#line 729 "BB02AD.f"
 	    s_copy(ident, "0000", (ftnlen)4, (ftnlen)4);
+#line 730 "BB02AD.f"
 	}
 
+#line 732 "BB02AD.f"
     } else if (nr[1] == 2) {
+#line 733 "BB02AD.f"
 	if (nr[2] == 1) {
+#line 734 "BB02AD.f"
 	    if (lsame_(def, "D", (ftnlen)1, (ftnlen)1)) {
+#line 734 "BB02AD.f"
 		dpar[1] = 1e6;
+#line 734 "BB02AD.f"
 	    }
+#line 735 "BB02AD.f"
 	    a[a_dim1 + 1] = 4.;
+#line 736 "BB02AD.f"
 	    a[a_dim1 + 2] = -4.5;
+#line 737 "BB02AD.f"
 	    a[(a_dim1 << 1) + 1] = 3.;
+#line 738 "BB02AD.f"
 	    a[(a_dim1 << 1) + 2] = -3.5;
+#line 739 "BB02AD.f"
 	    dlaset_("A", &ipar[1], &ipar[2], &c_b112, &c_b34, &b[b_offset], 
 		    ldb, (ftnlen)1);
+#line 740 "BB02AD.f"
 	    r__[1] = dpar[1];
+#line 741 "BB02AD.f"
 	    q[1] = 9.;
+#line 742 "BB02AD.f"
 	    q[2] = 6.;
+#line 743 "BB02AD.f"
 	    q[3] = 4.;
+#line 744 "BB02AD.f"
 	    temp = (sqrt(dpar[1] * 4. + 1.) + 1.) / 2.;
+#line 745 "BB02AD.f"
 	    x[x_dim1 + 1] = temp * q[1];
+#line 746 "BB02AD.f"
 	    x[x_dim1 + 2] = temp * q[2];
+#line 747 "BB02AD.f"
 	    x[(x_dim1 << 1) + 1] = x[x_dim1 + 2];
+#line 748 "BB02AD.f"
 	    x[(x_dim1 << 1) + 2] = temp * q[3];
+#line 749 "BB02AD.f"
 	    s_copy(ident, "0100", (ftnlen)4, (ftnlen)4);
 
+#line 751 "BB02AD.f"
 	} else if (nr[2] == 2) {
+#line 752 "BB02AD.f"
 	    if (lsame_(def, "D", (ftnlen)1, (ftnlen)1)) {
+#line 752 "BB02AD.f"
 		dpar[1] = 1e6;
+#line 752 "BB02AD.f"
 	    }
+#line 753 "BB02AD.f"
 	    if (dpar[1] == 0.) {
+#line 754 "BB02AD.f"
 		*info = 2;
+#line 755 "BB02AD.f"
 	    } else {
+#line 756 "BB02AD.f"
 		a[a_dim1 + 1] = .9512;
+#line 757 "BB02AD.f"
 		a[(a_dim1 << 1) + 2] = .9048;
+#line 758 "BB02AD.f"
 		dlaset_("A", &c__1, &ipar[2], &c_b118, &c_b118, &b[b_offset], 
 			ldb, (ftnlen)1);
+#line 759 "BB02AD.f"
 		b[b_dim1 + 2] = -1.1895;
+#line 760 "BB02AD.f"
 		b[(b_dim1 << 1) + 2] = 3.569;
+#line 761 "BB02AD.f"
 		r__[1] = 1. / (dpar[1] * 3.);
+#line 762 "BB02AD.f"
 		r__[3] = dpar[1] * 3.;
+#line 763 "BB02AD.f"
 		q[1] = .005;
+#line 764 "BB02AD.f"
 		q[3] = .02;
+#line 765 "BB02AD.f"
 		s_copy(ident, "0100", (ftnlen)4, (ftnlen)4);
+#line 766 "BB02AD.f"
 	    }
 
+#line 768 "BB02AD.f"
 	} else if (nr[2] == 3) {
+#line 769 "BB02AD.f"
 	    if (lsame_(def, "D", (ftnlen)1, (ftnlen)1)) {
+#line 769 "BB02AD.f"
 		dpar[1] = 1e6;
+#line 769 "BB02AD.f"
 	    }
+#line 770 "BB02AD.f"
 	    a[(a_dim1 << 1) + 1] = dpar[1];
+#line 771 "BB02AD.f"
 	    b[b_dim1 + 2] = 1.;
+#line 772 "BB02AD.f"
 	    x[x_dim1 + 1] = 1.;
+#line 773 "BB02AD.f"
 	    x[(x_dim1 << 1) + 2] = dpar[1] * dpar[1] + 1.;
+#line 774 "BB02AD.f"
 	    s_copy(ident, "0111", (ftnlen)4, (ftnlen)4);
 
+#line 776 "BB02AD.f"
 	} else if (nr[2] == 4) {
+#line 777 "BB02AD.f"
 	    if (lsame_(def, "D", (ftnlen)1, (ftnlen)1)) {
+#line 777 "BB02AD.f"
 		dpar[1] = 1e6;
+#line 777 "BB02AD.f"
 	    }
+#line 778 "BB02AD.f"
 	    a[(a_dim1 << 1) + 2] = 1.;
+#line 779 "BB02AD.f"
 	    a[a_dim1 * 3 + 3] = 3.;
+#line 780 "BB02AD.f"
 	    r__[1] = dpar[1];
+#line 781 "BB02AD.f"
 	    r__[4] = dpar[1];
+#line 782 "BB02AD.f"
 	    r__[6] = dpar[1];
 /*     .. set C = V .. */
+#line 784 "BB02AD.f"
 	    temp = .66666666666666663;
+#line 785 "BB02AD.f"
 	    d__1 = -temp;
+#line 785 "BB02AD.f"
 	    d__2 = 1. - temp;
+#line 785 "BB02AD.f"
 	    dlaset_("A", &ipar[3], &ipar[1], &d__1, &d__2, &c__[c_offset], 
 		    ldc, (ftnlen)1);
 /*     .. and compute A <- C' A C */
+#line 787 "BB02AD.f"
 	    dsymm_("L", "L", &ipar[1], &ipar[1], &c_b34, &c__[c_offset], ldc, 
 		    &a[a_offset], lda, &c_b7, &dwork[1], &ipar[1], (ftnlen)1, 
 		    (ftnlen)1);
+#line 789 "BB02AD.f"
 	    dsymm_("R", "L", &ipar[1], &ipar[1], &c_b34, &c__[c_offset], ldc, 
 		    &dwork[1], &ipar[1], &c_b7, &a[a_offset], lda, (ftnlen)1, 
 		    (ftnlen)1);
+#line 791 "BB02AD.f"
 	    q[1] = dpar[1];
+#line 792 "BB02AD.f"
 	    q[4] = dpar[1];
+#line 793 "BB02AD.f"
 	    q[6] = dpar[1];
+#line 794 "BB02AD.f"
 	    x[x_dim1 + 1] = dpar[1];
+#line 795 "BB02AD.f"
 	    x[(x_dim1 << 1) + 2] = dpar[1] * (sqrt(5.) + 1.) / 2.;
+#line 796 "BB02AD.f"
 	    x[x_dim1 * 3 + 3] = dpar[1] * (sqrt(85.) + 9.) / 2.;
+#line 797 "BB02AD.f"
 	    dsymm_("L", "L", &ipar[1], &ipar[1], &c_b34, &c__[c_offset], ldc, 
 		    &x[x_offset], ldx, &c_b7, &dwork[1], &ipar[1], (ftnlen)1, 
 		    (ftnlen)1);
+#line 799 "BB02AD.f"
 	    dsymm_("R", "L", &ipar[1], &ipar[1], &c_b34, &c__[c_offset], ldc, 
 		    &dwork[1], &ipar[1], &c_b7, &x[x_offset], ldx, (ftnlen)1, 
 		    (ftnlen)1);
+#line 801 "BB02AD.f"
 	    s_copy(ident, "1000", (ftnlen)4, (ftnlen)4);
 
+#line 803 "BB02AD.f"
 	} else if (nr[2] == 5) {
+#line 804 "BB02AD.f"
 	    if (lsame_(def, "D", (ftnlen)1, (ftnlen)1)) {
+#line 805 "BB02AD.f"
 		dpar[4] = .25;
+#line 806 "BB02AD.f"
 		dpar[3] = 1.;
+#line 807 "BB02AD.f"
 		dpar[2] = 1.;
+#line 808 "BB02AD.f"
 		dpar[1] = 1e8;
+#line 809 "BB02AD.f"
 	    }
+#line 810 "BB02AD.f"
 	    if (dpar[1] == 0.) {
+#line 811 "BB02AD.f"
 		*info = 2;
+#line 812 "BB02AD.f"
 	    } else {
+#line 813 "BB02AD.f"
 		temp = dpar[2] / dpar[1];
+#line 814 "BB02AD.f"
 		beta = dpar[3] * temp;
+#line 815 "BB02AD.f"
 		alpha = 1. - temp;
+#line 816 "BB02AD.f"
 		a[a_dim1 + 1] = alpha;
+#line 817 "BB02AD.f"
 		i__1 = ipar[1] - 1;
+#line 817 "BB02AD.f"
 		i__2 = ipar[1] - 1;
+#line 817 "BB02AD.f"
 		dlaset_("A", &i__1, &i__2, &c_b7, &c_b34, &a[a_dim1 + 2], lda,
 			 (ftnlen)1);
+#line 819 "BB02AD.f"
 		b[b_dim1 + 1] = beta;
+#line 820 "BB02AD.f"
 		c__[(c_dim1 << 2) + 1] = 1.;
+#line 821 "BB02AD.f"
 		r__[1] = dpar[4];
+#line 822 "BB02AD.f"
 		if (beta == 0.) {
+#line 823 "BB02AD.f"
 		    *info = 2;
+#line 824 "BB02AD.f"
 		} else {
+#line 825 "BB02AD.f"
 		    dlaset_("A", &ipar[1], &ipar[1], &c_b7, &c_b34, &x[
 			    x_offset], ldx, (ftnlen)1);
+#line 826 "BB02AD.f"
 		    beta *= beta;
+#line 827 "BB02AD.f"
 		    temp = dpar[4] * (alpha + 1.) * (alpha - 1.) + beta;
+#line 828 "BB02AD.f"
 		    x[x_dim1 + 1] = temp + sqrt(temp * temp + beta * 4. * 
 			    dpar[4]);
+#line 829 "BB02AD.f"
 		    x[x_dim1 + 1] = x[x_dim1 + 1] / 2. / beta;
+#line 830 "BB02AD.f"
 		}
+#line 831 "BB02AD.f"
 		s_copy(ident, "0010", (ftnlen)4, (ftnlen)4);
+#line 832 "BB02AD.f"
 	    }
+#line 833 "BB02AD.f"
 	}
 
+#line 835 "BB02AD.f"
     } else if (nr[1] == 4) {
+#line 836 "BB02AD.f"
 	if (nr[2] == 1) {
+#line 837 "BB02AD.f"
 	    if (lsame_(def, "D", (ftnlen)1, (ftnlen)1)) {
+#line 837 "BB02AD.f"
 		dpar[1] = 1.;
+#line 837 "BB02AD.f"
 	    }
+#line 838 "BB02AD.f"
 	    i__1 = ipar[1] - 1;
+#line 838 "BB02AD.f"
 	    i__2 = ipar[1] - 1;
+#line 838 "BB02AD.f"
 	    dlaset_("A", &i__1, &i__2, &c_b7, &c_b34, &a[(a_dim1 << 1) + 1], 
 		    lda, (ftnlen)1);
+#line 839 "BB02AD.f"
 	    b[ipar[1] + b_dim1] = 1.;
+#line 840 "BB02AD.f"
 	    r__[1] = dpar[1];
+#line 841 "BB02AD.f"
 	    i__1 = ipar[1];
+#line 841 "BB02AD.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 842 "BB02AD.f"
 		x[i__ + i__ * x_dim1] = (doublereal) i__;
+#line 843 "BB02AD.f"
 /* L40: */
+#line 843 "BB02AD.f"
 	    }
+#line 844 "BB02AD.f"
 	    s_copy(ident, "0110", (ftnlen)4, (ftnlen)4);
+#line 845 "BB02AD.f"
 	}
+#line 846 "BB02AD.f"
     }
 
+#line 848 "BB02AD.f"
     if (*info != 0) {
+#line 848 "BB02AD.f"
 	goto L2001;
+#line 848 "BB02AD.f"
     }
 /*     .. set up data in required format .. */
 
+#line 851 "BB02AD.f"
     if (bpar[4]) {
 /*     .. G is to be returned in product form .. */
+#line 853 "BB02AD.f"
 	rdimm = ipar[1];
+#line 854 "BB02AD.f"
 	if (*(unsigned char *)&ident[3] == '0') {
 /*       .. invert R using Cholesky factorization, .. */
+#line 856 "BB02AD.f"
 	    dpptrf_("L", &ipar[2], &r__[1], info, (ftnlen)1);
+#line 857 "BB02AD.f"
 	    if (*info == 0) {
+#line 858 "BB02AD.f"
 		dpptri_("L", &ipar[2], &r__[1], info, (ftnlen)1);
+#line 859 "BB02AD.f"
 		if (*(unsigned char *)ident == '0') {
 /*           .. B is not identity matrix .. */
+#line 861 "BB02AD.f"
 		    i__1 = ipar[1];
+#line 861 "BB02AD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 862 "BB02AD.f"
 			dspmv_("L", &ipar[2], &c_b34, &r__[1], &b[i__ + 
 				b_dim1], ldb, &c_b7, &dwork[(i__ - 1) * ipar[
 				1] + 1], &c__1, (ftnlen)1);
+#line 864 "BB02AD.f"
 /* L100: */
+#line 864 "BB02AD.f"
 		    }
+#line 865 "BB02AD.f"
 		    dgemv_("T", &ipar[2], &ipar[1], &c_b34, &dwork[1], &ipar[
 			    1], &b[b_dim1 + 1], ldb, &c_b7, &r__[1], &c__1, (
 			    ftnlen)1);
+#line 867 "BB02AD.f"
 		    isymm = ipar[1] + 1;
+#line 868 "BB02AD.f"
 		    i__1 = ipar[1];
+#line 868 "BB02AD.f"
 		    for (i__ = 2; i__ <= i__1; ++i__) {
+#line 869 "BB02AD.f"
 			dgemv_("T", &ipar[2], &ipar[1], &c_b34, &dwork[1], &
 				ipar[1], &b[i__ + b_dim1], ldb, &c_b7, &b[
 				b_dim1 + 1], ldb, (ftnlen)1);
+#line 871 "BB02AD.f"
 			i__2 = ipar[1] - i__ + 1;
+#line 871 "BB02AD.f"
 			dcopy_(&i__2, &b[i__ * b_dim1 + 1], ldb, &r__[isymm], 
 				&c__1);
+#line 872 "BB02AD.f"
 			isymm += ipar[1] - i__ + 1;
+#line 873 "BB02AD.f"
 /* L110: */
+#line 873 "BB02AD.f"
 		    }
+#line 874 "BB02AD.f"
 		}
+#line 875 "BB02AD.f"
 	    } else {
+#line 876 "BB02AD.f"
 		if (*info > 0) {
+#line 877 "BB02AD.f"
 		    *info = 3;
+#line 878 "BB02AD.f"
 		    goto L2001;
+#line 879 "BB02AD.f"
 		}
+#line 880 "BB02AD.f"
 	    }
+#line 881 "BB02AD.f"
 	} else {
 /*       .. R = identity .. */
+#line 883 "BB02AD.f"
 	    if (*(unsigned char *)ident == '0') {
 /*         .. B not identity matrix .. */
+#line 885 "BB02AD.f"
 		if (ipar[2] == 1) {
+#line 886 "BB02AD.f"
 		    dlaset_("L", &nsymm, &c__1, &c_b7, &c_b7, &r__[1], &c__1, 
 			    (ftnlen)1);
+#line 887 "BB02AD.f"
 		    dspr_("L", &ipar[1], &c_b34, &b[b_offset], &c__1, &r__[1],
 			     (ftnlen)1);
+#line 888 "BB02AD.f"
 		} else {
+#line 889 "BB02AD.f"
 		    dsyrk_("L", "N", &ipar[1], &ipar[2], &c_b34, &b[b_offset],
 			     ldb, &c_b7, &dwork[1], &ipar[1], (ftnlen)1, (
 			    ftnlen)1);
+#line 891 "BB02AD.f"
 		    ma02dd_("Pack", "Lower", &ipar[1], &dwork[1], &ipar[1], &
 			    r__[1], (ftnlen)4, (ftnlen)5);
+#line 892 "BB02AD.f"
 		}
+#line 893 "BB02AD.f"
 	    } else {
 /*         .. B = R = identity .. */
+#line 895 "BB02AD.f"
 		isymm = 1;
+#line 896 "BB02AD.f"
 		for (i__ = ipar[1]; i__ >= 1; --i__) {
+#line 897 "BB02AD.f"
 		    r__[isymm] = 1.;
+#line 898 "BB02AD.f"
 		    isymm += i__;
+#line 899 "BB02AD.f"
 /* L120: */
+#line 899 "BB02AD.f"
 		}
+#line 900 "BB02AD.f"
 	    }
+#line 901 "BB02AD.f"
 	}
+#line 902 "BB02AD.f"
     } else {
+#line 903 "BB02AD.f"
 	rdimm = ipar[2];
+#line 904 "BB02AD.f"
 	if (*(unsigned char *)ident == '1') {
+#line 904 "BB02AD.f"
 	    dlaset_("A", &ipar[1], &ipar[2], &c_b7, &c_b34, &b[b_offset], ldb,
 		     (ftnlen)1);
+#line 904 "BB02AD.f"
 	}
+#line 906 "BB02AD.f"
 	if (*(unsigned char *)&ident[3] == '1') {
+#line 907 "BB02AD.f"
 	    isymm = 1;
+#line 908 "BB02AD.f"
 	    for (i__ = ipar[2]; i__ >= 1; --i__) {
+#line 909 "BB02AD.f"
 		r__[isymm] = 1.;
+#line 910 "BB02AD.f"
 		isymm += i__;
+#line 911 "BB02AD.f"
 /* L130: */
+#line 911 "BB02AD.f"
 	    }
+#line 912 "BB02AD.f"
 	}
+#line 913 "BB02AD.f"
     }
 
+#line 915 "BB02AD.f"
     if (bpar[1]) {
 /*     .. Q is to be returned in product form .. */
+#line 917 "BB02AD.f"
 	qdimm = ipar[1];
+#line 918 "BB02AD.f"
 	if (*(unsigned char *)&ident[2] == '0') {
+#line 919 "BB02AD.f"
 	    if (*(unsigned char *)&ident[1] == '0') {
 /*         .. C is not identity matrix .. */
+#line 921 "BB02AD.f"
 		i__1 = ipar[1];
+#line 921 "BB02AD.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 922 "BB02AD.f"
 		    dspmv_("L", &ipar[3], &c_b34, &q[1], &c__[i__ * c_dim1 + 
 			    1], &c__1, &c_b7, &dwork[(i__ - 1) * ipar[1] + 1],
 			     &c__1, (ftnlen)1);
+#line 924 "BB02AD.f"
 /* L140: */
+#line 924 "BB02AD.f"
 		}
 /*         .. use Q(1:IPAR(1)) as workspace and compute the first column */
 /*            of Q at the end .. */
+#line 927 "BB02AD.f"
 		isymm = ipar[1] + 1;
+#line 928 "BB02AD.f"
 		i__1 = ipar[1];
+#line 928 "BB02AD.f"
 		for (i__ = 2; i__ <= i__1; ++i__) {
+#line 929 "BB02AD.f"
 		    dgemv_("T", &ipar[3], &ipar[1], &c_b34, &dwork[1], &ipar[
 			    1], &c__[i__ * c_dim1 + 1], &c__1, &c_b7, &q[1], &
 			    c__1, (ftnlen)1);
+#line 931 "BB02AD.f"
 		    i__2 = ipar[1] - i__ + 1;
+#line 931 "BB02AD.f"
 		    dcopy_(&i__2, &q[i__], &c__1, &q[isymm], &c__1);
+#line 932 "BB02AD.f"
 		    isymm += ipar[1] - i__ + 1;
+#line 933 "BB02AD.f"
 /* L150: */
+#line 933 "BB02AD.f"
 		}
+#line 934 "BB02AD.f"
 		dgemv_("T", &ipar[3], &ipar[1], &c_b34, &dwork[1], &ipar[1], &
 			c__[c_dim1 + 1], &c__1, &c_b7, &q[1], &c__1, (ftnlen)
 			1);
+#line 936 "BB02AD.f"
 	    }
+#line 937 "BB02AD.f"
 	} else {
 /*       .. Q = identity .. */
+#line 939 "BB02AD.f"
 	    if (*(unsigned char *)&ident[1] == '0') {
 /*         .. C is not identity matrix .. */
+#line 941 "BB02AD.f"
 		if (ipar[3] == 1) {
+#line 942 "BB02AD.f"
 		    dlaset_("L", &nsymm, &c__1, &c_b7, &c_b7, &q[1], &c__1, (
 			    ftnlen)1);
+#line 943 "BB02AD.f"
 		    dspr_("L", &ipar[1], &c_b34, &c__[c_offset], ldc, &q[1], (
 			    ftnlen)1);
+#line 944 "BB02AD.f"
 		} else {
+#line 945 "BB02AD.f"
 		    dsyrk_("L", "T", &ipar[1], &ipar[3], &c_b34, &c__[
 			    c_offset], ldc, &c_b7, &dwork[1], &ipar[1], (
 			    ftnlen)1, (ftnlen)1);
+#line 947 "BB02AD.f"
 		    ma02dd_("Pack", "Lower", &ipar[1], &dwork[1], &ipar[1], &
 			    q[1], (ftnlen)4, (ftnlen)5);
+#line 948 "BB02AD.f"
 		}
+#line 949 "BB02AD.f"
 	    } else {
 /*         .. C = Q = identity .. */
+#line 951 "BB02AD.f"
 		isymm = 1;
+#line 952 "BB02AD.f"
 		for (i__ = ipar[1]; i__ >= 1; --i__) {
+#line 953 "BB02AD.f"
 		    q[isymm] = 1.;
+#line 954 "BB02AD.f"
 		    isymm += i__;
+#line 955 "BB02AD.f"
 /* L160: */
+#line 955 "BB02AD.f"
 		}
+#line 956 "BB02AD.f"
 	    }
+#line 957 "BB02AD.f"
 	}
+#line 958 "BB02AD.f"
     } else {
+#line 959 "BB02AD.f"
 	qdimm = ipar[3];
+#line 960 "BB02AD.f"
 	if (*(unsigned char *)&ident[1] == '1') {
+#line 960 "BB02AD.f"
 	    dlaset_("A", &ipar[3], &ipar[1], &c_b7, &c_b34, &c__[c_offset], 
 		    ldc, (ftnlen)1);
+#line 960 "BB02AD.f"
 	}
+#line 962 "BB02AD.f"
 	if (*(unsigned char *)&ident[2] == '1') {
+#line 963 "BB02AD.f"
 	    isymm = 1;
+#line 964 "BB02AD.f"
 	    for (i__ = ipar[3]; i__ >= 1; --i__) {
+#line 965 "BB02AD.f"
 		q[isymm] = 1.;
+#line 966 "BB02AD.f"
 		isymm += i__;
+#line 967 "BB02AD.f"
 /* L170: */
+#line 967 "BB02AD.f"
 	    }
+#line 968 "BB02AD.f"
 	}
+#line 969 "BB02AD.f"
     }
 
 /*     .. unpack symmetric matrices if required .. */
+#line 972 "BB02AD.f"
     if (bpar[2]) {
+#line 973 "BB02AD.f"
 	isymm = qdimm * (qdimm + 1) / 2;
+#line 974 "BB02AD.f"
 	dcopy_(&isymm, &q[1], &c__1, &dwork[1], &c__1);
+#line 975 "BB02AD.f"
 	ma02dd_("Unpack", "Lower", &qdimm, &q[1], ldq, &dwork[1], (ftnlen)6, (
 		ftnlen)5);
+#line 976 "BB02AD.f"
 	ma02ed_("Lower", &qdimm, &q[1], ldq, (ftnlen)5);
+#line 977 "BB02AD.f"
     } else if (bpar[3]) {
+#line 978 "BB02AD.f"
 	ma02dd_("Unpack", "Lower", &qdimm, &dwork[1], &qdimm, &q[1], (ftnlen)
 		6, (ftnlen)5);
+#line 979 "BB02AD.f"
 	ma02ed_("Lower", &qdimm, &dwork[1], &qdimm, (ftnlen)5);
+#line 980 "BB02AD.f"
 	ma02dd_("Pack", "Upper", &qdimm, &dwork[1], &qdimm, &q[1], (ftnlen)4, 
 		(ftnlen)5);
+#line 981 "BB02AD.f"
     }
+#line 982 "BB02AD.f"
     if (bpar[5]) {
+#line 983 "BB02AD.f"
 	isymm = rdimm * (rdimm + 1) / 2;
+#line 984 "BB02AD.f"
 	dcopy_(&isymm, &r__[1], &c__1, &dwork[1], &c__1);
+#line 985 "BB02AD.f"
 	ma02dd_("Unpack", "Lower", &rdimm, &r__[1], ldr, &dwork[1], (ftnlen)6,
 		 (ftnlen)5);
+#line 986 "BB02AD.f"
 	ma02ed_("Lower", &rdimm, &r__[1], ldr, (ftnlen)5);
+#line 987 "BB02AD.f"
     } else if (bpar[6]) {
+#line 988 "BB02AD.f"
 	ma02dd_("Unpack", "Lower", &rdimm, &dwork[1], &rdimm, &r__[1], (
 		ftnlen)6, (ftnlen)5);
+#line 989 "BB02AD.f"
 	ma02ed_("Lower", &rdimm, &dwork[1], &rdimm, (ftnlen)5);
+#line 990 "BB02AD.f"
 	ma02dd_("Pack", "Upper", &rdimm, &dwork[1], &rdimm, &r__[1], (ftnlen)
 		4, (ftnlen)5);
+#line 991 "BB02AD.f"
     }
 
 /*     ...set VEC... */
+#line 994 "BB02AD.f"
     vec[1] = TRUE_;
+#line 995 "BB02AD.f"
     vec[2] = TRUE_;
+#line 996 "BB02AD.f"
     vec[3] = TRUE_;
+#line 997 "BB02AD.f"
     vec[4] = TRUE_;
+#line 998 "BB02AD.f"
     vec[5] = ! bpar[4];
+#line 999 "BB02AD.f"
     vec[6] = ! bpar[1];
+#line 1000 "BB02AD.f"
     vec[7] = TRUE_;
+#line 1001 "BB02AD.f"
     vec[8] = TRUE_;
+#line 1002 "BB02AD.f"
     vec[9] = bpar[7];
+#line 1003 "BB02AD.f"
     if (nr[1] == 1 && (nr[2] == 1 || nr[2] == 3 || nr[2] == 4) || nr[1] == 2 
 	    && (nr[2] == 1 || nr[2] >= 3) || nr[1] == 4) {
+#line 1007 "BB02AD.f"
 	vec[10] = TRUE_;
+#line 1008 "BB02AD.f"
     }
+#line 1009 "BB02AD.f"
     s_copy(chpar, notes + (nr[1] + (nr[2] << 2) - 5) * 255, (ftnlen)255, (
 	    ftnlen)255);
+#line 1010 "BB02AD.f"
     *n = ipar[1];
+#line 1011 "BB02AD.f"
     *m = ipar[2];
+#line 1012 "BB02AD.f"
     *p = ipar[3];
 
+#line 1014 "BB02AD.f"
 L2001:
+#line 1015 "BB02AD.f"
     return 0;
 /* *** Last line of BB02AD *** */
 } /* bb02ad_ */

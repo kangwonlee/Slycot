@@ -1,3 +1,4 @@
+#line 1 "MC01ND.f"
 /* MC01ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC01ND.f"
 /* Subroutine */ int mc01nd_(integer *dp, doublereal *xr, doublereal *xi, 
 	doublereal *p, doublereal *vr, doublereal *vi, integer *info)
 {
@@ -121,50 +123,80 @@
 
 /*     Test the input scalar arguments. */
 
+#line 108 "MC01ND.f"
     /* Parameter adjustments */
+#line 108 "MC01ND.f"
     --p;
+#line 108 "MC01ND.f"
 
+#line 108 "MC01ND.f"
     /* Function Body */
+#line 108 "MC01ND.f"
     if (*dp < 0) {
+#line 109 "MC01ND.f"
 	*info = -1;
 
 /*        Error return. */
 
+#line 113 "MC01ND.f"
 	i__1 = -(*info);
+#line 113 "MC01ND.f"
 	xerbla_("MC01ND", &i__1, (ftnlen)6);
+#line 114 "MC01ND.f"
 	return 0;
+#line 115 "MC01ND.f"
     }
 
+#line 117 "MC01ND.f"
     *info = 0;
+#line 118 "MC01ND.f"
     *vr = p[*dp + 1];
+#line 119 "MC01ND.f"
     *vi = 0.;
 
+#line 121 "MC01ND.f"
     if (*dp == 0) {
+#line 121 "MC01ND.f"
 	return 0;
+#line 121 "MC01ND.f"
     }
 
+#line 124 "MC01ND.f"
     if (*xi == 0.) {
 
 /*        X real. */
 
+#line 128 "MC01ND.f"
 	for (i__ = *dp; i__ >= 1; --i__) {
+#line 129 "MC01ND.f"
 	    *vr = *vr * *xr + p[i__];
+#line 130 "MC01ND.f"
 /* L20: */
+#line 130 "MC01ND.f"
 	}
 
+#line 132 "MC01ND.f"
     } else {
 
 /*        X complex. */
 
+#line 136 "MC01ND.f"
 	for (i__ = *dp; i__ >= 1; --i__) {
+#line 137 "MC01ND.f"
 	    t = *vr * *xr - *vi * *xi + p[i__];
+#line 138 "MC01ND.f"
 	    *vi = *vi * *xr + *vr * *xi;
+#line 139 "MC01ND.f"
 	    *vr = t;
+#line 140 "MC01ND.f"
 /* L40: */
+#line 140 "MC01ND.f"
 	}
 
+#line 142 "MC01ND.f"
     }
 
+#line 144 "MC01ND.f"
     return 0;
 /* *** Last line of MC01ND *** */
 } /* mc01nd_ */

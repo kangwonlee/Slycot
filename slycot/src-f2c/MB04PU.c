@@ -1,3 +1,4 @@
+#line 1 "MB04PU.f"
 /* MB04PU.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04PU.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -221,94 +223,150 @@ static doublereal c_b14 = -1.;
 
 /*     Check the scalar input parameters. */
 
+#line 186 "MB04PU.f"
     /* Parameter adjustments */
+#line 186 "MB04PU.f"
     a_dim1 = *lda;
+#line 186 "MB04PU.f"
     a_offset = 1 + a_dim1;
+#line 186 "MB04PU.f"
     a -= a_offset;
+#line 186 "MB04PU.f"
     qg_dim1 = *ldqg;
+#line 186 "MB04PU.f"
     qg_offset = 1 + qg_dim1;
+#line 186 "MB04PU.f"
     qg -= qg_offset;
+#line 186 "MB04PU.f"
     --cs;
+#line 186 "MB04PU.f"
     --tau;
+#line 186 "MB04PU.f"
     --dwork;
+#line 186 "MB04PU.f"
 
+#line 186 "MB04PU.f"
     /* Function Body */
+#line 186 "MB04PU.f"
     *info = 0;
+#line 187 "MB04PU.f"
     if (*n < 0) {
+#line 188 "MB04PU.f"
 	*info = -1;
+#line 189 "MB04PU.f"
     } else if (*ilo < 1 || *ilo > max(1,*n)) {
+#line 190 "MB04PU.f"
 	*info = -2;
+#line 191 "MB04PU.f"
     } else if (*lda < max(1,*n)) {
+#line 192 "MB04PU.f"
 	*info = -4;
+#line 193 "MB04PU.f"
     } else if (*ldqg < max(1,*n)) {
+#line 194 "MB04PU.f"
 	*info = -6;
+#line 195 "MB04PU.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 195 "MB04PU.f"
 	i__1 = 1, i__2 = *n - 1;
+#line 195 "MB04PU.f"
 	if (*ldwork < max(i__1,i__2)) {
 /* Computing MAX */
+#line 196 "MB04PU.f"
 	    i__1 = 1, i__2 = *n - 1;
+#line 196 "MB04PU.f"
 	    dwork[1] = (doublereal) max(i__1,i__2);
+#line 197 "MB04PU.f"
 	    *info = -10;
+#line 198 "MB04PU.f"
 	}
+#line 198 "MB04PU.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 202 "MB04PU.f"
     if (*info != 0) {
+#line 203 "MB04PU.f"
 	i__1 = -(*info);
+#line 203 "MB04PU.f"
 	xerbla_("MB04PU", &i__1, (ftnlen)6);
+#line 204 "MB04PU.f"
 	return 0;
+#line 205 "MB04PU.f"
     }
 
 /*     Quick return if possible. */
 
+#line 209 "MB04PU.f"
     if (*n <= *ilo) {
+#line 210 "MB04PU.f"
 	dwork[1] = 1.;
+#line 211 "MB04PU.f"
 	return 0;
+#line 212 "MB04PU.f"
     }
 
+#line 214 "MB04PU.f"
     i__1 = *n - 1;
+#line 214 "MB04PU.f"
     for (i__ = *ilo; i__ <= i__1; ++i__) {
 
 /*        Generate elementary reflector H(i) to annihilate QG(i+2:n,i). */
 
+#line 218 "MB04PU.f"
 	alpha = qg[i__ + 1 + i__ * qg_dim1];
+#line 219 "MB04PU.f"
 	i__2 = *n - i__;
 /* Computing MIN */
+#line 219 "MB04PU.f"
 	i__3 = i__ + 2;
+#line 219 "MB04PU.f"
 	dlarfg_(&i__2, &alpha, &qg[min(i__3,*n) + i__ * qg_dim1], &c__1, &nu);
+#line 220 "MB04PU.f"
 	if (nu != 0.) {
+#line 221 "MB04PU.f"
 	    qg[i__ + 1 + i__ * qg_dim1] = 1.;
 
 /*           Apply H(i) from both sides to QG(i+1:n,i+1:n). */
 /*           Compute  x := nu * QG(i+1:n,i+1:n) * v. */
 
+#line 226 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 226 "MB04PU.f"
 	    dsymv_("Lower", &i__2, &nu, &qg[i__ + 1 + (i__ + 1) * qg_dim1], 
 		    ldqg, &qg[i__ + 1 + i__ * qg_dim1], &c__1, &c_b7, &dwork[
 		    1], &c__1, (ftnlen)5);
 
 /*           Compute  w := x - 1/2 * nu * (x'*v) * v. */
 
+#line 231 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 231 "MB04PU.f"
 	    mu = nu * -.5 * ddot_(&i__2, &dwork[1], &c__1, &qg[i__ + 1 + i__ *
 		     qg_dim1], &c__1);
+#line 232 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 232 "MB04PU.f"
 	    daxpy_(&i__2, &mu, &qg[i__ + 1 + i__ * qg_dim1], &c__1, &dwork[1],
 		     &c__1);
 
 /*           Apply the transformation as a rank-2 update: */
 /*                QG := QG - v * w' - w * v'. */
 
+#line 237 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 237 "MB04PU.f"
 	    dsyr2_("Lower", &i__2, &c_b14, &qg[i__ + 1 + i__ * qg_dim1], &
 		    c__1, &dwork[1], &c__1, &qg[i__ + 1 + (i__ + 1) * qg_dim1]
 		    , ldqg, (ftnlen)5);
 
 /*           Apply H(i) from the right hand side to QG(1:i,i+2:n+1). */
 
+#line 242 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 242 "MB04PU.f"
 	    dlarf_("Right", &i__, &i__2, &qg[i__ + 1 + i__ * qg_dim1], &c__1, 
 		    &nu, &qg[(i__ + 2) * qg_dim1 + 1], ldqg, &dwork[1], (
 		    ftnlen)5);
@@ -316,141 +374,196 @@ static doublereal c_b14 = -1.;
 /*           Apply H(i) from both sides to QG(i+1:n,i+2:n+1). */
 /*           Compute  x := nu * QG(i+1:n,i+2:n+1) * v. */
 
+#line 248 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 248 "MB04PU.f"
 	    dsymv_("Upper", &i__2, &nu, &qg[i__ + 1 + (i__ + 2) * qg_dim1], 
 		    ldqg, &qg[i__ + 1 + i__ * qg_dim1], &c__1, &c_b7, &dwork[
 		    1], &c__1, (ftnlen)5);
 
 /*           Compute  w := x - 1/2 * nu * (x'*v) * v. */
 
+#line 253 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 253 "MB04PU.f"
 	    mu = nu * -.5 * ddot_(&i__2, &dwork[1], &c__1, &qg[i__ + 1 + i__ *
 		     qg_dim1], &c__1);
+#line 254 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 254 "MB04PU.f"
 	    daxpy_(&i__2, &mu, &qg[i__ + 1 + i__ * qg_dim1], &c__1, &dwork[1],
 		     &c__1);
 
 /*           Apply the transformation as a rank-2 update: */
 /*              QG(i+1:n,i+2:n+1) := QG(i+1:n,i+2:n+1) - v * w' - w * v'. */
 
+#line 259 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 259 "MB04PU.f"
 	    dsyr2_("Upper", &i__2, &c_b14, &qg[i__ + 1 + i__ * qg_dim1], &
 		    c__1, &dwork[1], &c__1, &qg[i__ + 1 + (i__ + 2) * qg_dim1]
 		    , ldqg, (ftnlen)5);
 
 /*           Apply H(i) from the left hand side to A(i+1:n,i:n). */
 
+#line 264 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 264 "MB04PU.f"
 	    i__3 = *n - i__ + 1;
+#line 264 "MB04PU.f"
 	    dlarf_("Left", &i__2, &i__3, &qg[i__ + 1 + i__ * qg_dim1], &c__1, 
 		    &nu, &a[i__ + 1 + i__ * a_dim1], lda, &dwork[1], (ftnlen)
 		    4);
 
 /*           Apply H(i) from the right hand side to A(1:n,i+1:n). */
 
+#line 269 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 269 "MB04PU.f"
 	    dlarf_("Right", n, &i__2, &qg[i__ + 1 + i__ * qg_dim1], &c__1, &
 		    nu, &a[(i__ + 1) * a_dim1 + 1], lda, &dwork[1], (ftnlen)5)
 		    ;
+#line 271 "MB04PU.f"
 	}
+#line 272 "MB04PU.f"
 	qg[i__ + 1 + i__ * qg_dim1] = nu;
 
 /*        Generate symplectic Givens rotation G(i) to annihilate */
 /*        QG(i+1,i). */
 
+#line 277 "MB04PU.f"
 	temp = a[i__ + 1 + i__ * a_dim1];
+#line 278 "MB04PU.f"
 	dlartg_(&temp, &alpha, &c__, &s, &a[i__ + 1 + i__ * a_dim1]);
 
 /*        Apply G(i) to [A(I+1,I+2:N); QG(I+2:N,I+1)']. */
 
+#line 282 "MB04PU.f"
 	i__2 = *n - i__ - 1;
+#line 282 "MB04PU.f"
 	drot_(&i__2, &a[i__ + 1 + (i__ + 2) * a_dim1], lda, &qg[i__ + 2 + (
 		i__ + 1) * qg_dim1], &c__1, &c__, &s);
 
 /*        Apply G(i) to [A(1:I,I+1) QG(1:I,I+2)]. */
 
+#line 286 "MB04PU.f"
 	drot_(&i__, &a[(i__ + 1) * a_dim1 + 1], &c__1, &qg[(i__ + 2) * 
 		qg_dim1 + 1], &c__1, &c__, &s);
 
 /*        Apply G(i) to [A(I+2:N,I+1) QG(I+1, I+3:N+1)'] from the right. */
 
+#line 290 "MB04PU.f"
 	i__2 = *n - i__ - 1;
+#line 290 "MB04PU.f"
 	drot_(&i__2, &a[i__ + 2 + (i__ + 1) * a_dim1], &c__1, &qg[i__ + 1 + (
 		i__ + 3) * qg_dim1], ldqg, &c__, &s);
 
 /*        Fix the diagonal part. */
 
+#line 294 "MB04PU.f"
 	temp = a[i__ + 1 + (i__ + 1) * a_dim1];
+#line 295 "MB04PU.f"
 	ttemp = qg[i__ + 1 + (i__ + 2) * qg_dim1];
+#line 296 "MB04PU.f"
 	a[i__ + 1 + (i__ + 1) * a_dim1] = c__ * temp + s * qg[i__ + 1 + (i__ 
 		+ 1) * qg_dim1];
+#line 297 "MB04PU.f"
 	qg[i__ + 1 + (i__ + 2) * qg_dim1] = c__ * ttemp - s * temp;
+#line 298 "MB04PU.f"
 	qg[i__ + 1 + (i__ + 1) * qg_dim1] = -s * temp + c__ * qg[i__ + 1 + (
 		i__ + 1) * qg_dim1];
+#line 299 "MB04PU.f"
 	ttemp = -s * ttemp - c__ * temp;
+#line 300 "MB04PU.f"
 	temp = a[i__ + 1 + (i__ + 1) * a_dim1];
+#line 301 "MB04PU.f"
 	qg[i__ + 1 + (i__ + 1) * qg_dim1] = c__ * qg[i__ + 1 + (i__ + 1) * 
 		qg_dim1] + s * ttemp;
+#line 302 "MB04PU.f"
 	a[i__ + 1 + (i__ + 1) * a_dim1] = c__ * temp + s * qg[i__ + 1 + (i__ 
 		+ 2) * qg_dim1];
+#line 303 "MB04PU.f"
 	qg[i__ + 1 + (i__ + 2) * qg_dim1] = -s * temp + c__ * qg[i__ + 1 + (
 		i__ + 2) * qg_dim1];
+#line 304 "MB04PU.f"
 	cs[(i__ << 1) - 1] = c__;
+#line 305 "MB04PU.f"
 	cs[i__ * 2] = s;
 
 /*        Generate elementary reflector F(i) to annihilate A(i+2:n,i). */
 
+#line 309 "MB04PU.f"
 	i__2 = *n - i__;
 /* Computing MIN */
+#line 309 "MB04PU.f"
 	i__3 = i__ + 2;
+#line 309 "MB04PU.f"
 	dlarfg_(&i__2, &a[i__ + 1 + i__ * a_dim1], &a[min(i__3,*n) + i__ * 
 		a_dim1], &c__1, &nu);
+#line 310 "MB04PU.f"
 	if (nu != 0.) {
+#line 311 "MB04PU.f"
 	    temp = a[i__ + 1 + i__ * a_dim1];
+#line 312 "MB04PU.f"
 	    a[i__ + 1 + i__ * a_dim1] = 1.;
 
 /*           Apply F(i) from the left hand side to A(i+1:n,i+1:n). */
 
+#line 316 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 316 "MB04PU.f"
 	    i__3 = *n - i__;
+#line 316 "MB04PU.f"
 	    dlarf_("Left", &i__2, &i__3, &a[i__ + 1 + i__ * a_dim1], &c__1, &
 		    nu, &a[i__ + 1 + (i__ + 1) * a_dim1], lda, &dwork[1], (
 		    ftnlen)4);
 
 /*           Apply G(i) from the right hand side to A(1:n,i+1:n). */
 
+#line 321 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 321 "MB04PU.f"
 	    dlarf_("Right", n, &i__2, &a[i__ + 1 + i__ * a_dim1], &c__1, &nu, 
 		    &a[(i__ + 1) * a_dim1 + 1], lda, &dwork[1], (ftnlen)5);
 
 /*           Apply G(i) from both sides to QG(i+1:n,i+1:n). */
 /*           Compute  x := nu * QG(i+1:n,i+1:n) * v. */
 
+#line 327 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 327 "MB04PU.f"
 	    dsymv_("Lower", &i__2, &nu, &qg[i__ + 1 + (i__ + 1) * qg_dim1], 
 		    ldqg, &a[i__ + 1 + i__ * a_dim1], &c__1, &c_b7, &dwork[1],
 		     &c__1, (ftnlen)5);
 
 /*           Compute  w := x - 1/2 * tau * (x'*v) * v. */
 
+#line 332 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 332 "MB04PU.f"
 	    mu = nu * -.5 * ddot_(&i__2, &dwork[1], &c__1, &a[i__ + 1 + i__ * 
 		    a_dim1], &c__1);
+#line 333 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 333 "MB04PU.f"
 	    daxpy_(&i__2, &mu, &a[i__ + 1 + i__ * a_dim1], &c__1, &dwork[1], &
 		    c__1);
 
 /*           Apply the transformation as a rank-2 update: */
 /*                QG := QG - v * w' - w * v'. */
 
+#line 338 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 338 "MB04PU.f"
 	    dsyr2_("Lower", &i__2, &c_b14, &a[i__ + 1 + i__ * a_dim1], &c__1, 
 		    &dwork[1], &c__1, &qg[i__ + 1 + (i__ + 1) * qg_dim1], 
 		    ldqg, (ftnlen)5);
 
 /*           Apply G(i) from the right hand side to QG(1:i,i+2:n+1). */
 
+#line 343 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 343 "MB04PU.f"
 	    dlarf_("Right", &i__, &i__2, &a[i__ + 1 + i__ * a_dim1], &c__1, &
 		    nu, &qg[(i__ + 2) * qg_dim1 + 1], ldqg, &dwork[1], (
 		    ftnlen)5);
@@ -458,35 +571,51 @@ static doublereal c_b14 = -1.;
 /*           Apply G(i) from both sides to QG(i+1:n,i+2:n+1). */
 /*           Compute  x := nu * QG(i+1:n,i+2:n+1) * v. */
 
+#line 349 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 349 "MB04PU.f"
 	    dsymv_("Upper", &i__2, &nu, &qg[i__ + 1 + (i__ + 2) * qg_dim1], 
 		    ldqg, &a[i__ + 1 + i__ * a_dim1], &c__1, &c_b7, &dwork[1],
 		     &c__1, (ftnlen)5);
 
 /*           Compute  w := x - 1/2 * tau * (x'*v) * v. */
 
+#line 354 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 354 "MB04PU.f"
 	    mu = nu * -.5 * ddot_(&i__2, &dwork[1], &c__1, &a[i__ + 1 + i__ * 
 		    a_dim1], &c__1);
+#line 355 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 355 "MB04PU.f"
 	    daxpy_(&i__2, &mu, &a[i__ + 1 + i__ * a_dim1], &c__1, &dwork[1], &
 		    c__1);
 
 /*           Apply the transformation as a rank-2 update: */
 /*              QG(i+1:n,i+2:n+1) := QG(i+1:n,i+2:n+1) - v * w' - w * v'. */
 
+#line 360 "MB04PU.f"
 	    i__2 = *n - i__;
+#line 360 "MB04PU.f"
 	    dsyr2_("Upper", &i__2, &c_b14, &a[i__ + 1 + i__ * a_dim1], &c__1, 
 		    &dwork[1], &c__1, &qg[i__ + 1 + (i__ + 2) * qg_dim1], 
 		    ldqg, (ftnlen)5);
+#line 362 "MB04PU.f"
 	    a[i__ + 1 + i__ * a_dim1] = temp;
+#line 363 "MB04PU.f"
 	}
+#line 364 "MB04PU.f"
 	tau[i__] = nu;
+#line 365 "MB04PU.f"
 /* L10: */
+#line 365 "MB04PU.f"
     }
 /* Computing MAX */
+#line 366 "MB04PU.f"
     i__1 = 1, i__2 = *n - 1;
+#line 366 "MB04PU.f"
     dwork[1] = (doublereal) max(i__1,i__2);
+#line 367 "MB04PU.f"
     return 0;
 /* *** Last line of MB04PU *** */
 } /* mb04pu_ */

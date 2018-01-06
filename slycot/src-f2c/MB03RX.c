@@ -1,3 +1,4 @@
+#line 1 "MB03RX.f"
 /* MB03RX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03RX.f"
 /* Subroutine */ int mb03rx_(char *jobv, integer *n, integer *kl, integer *ku,
 	 doublereal *a, integer *lda, doublereal *x, integer *ldx, doublereal 
 	*wr, doublereal *wi, doublereal *dwork, ftnlen jobv_len)
@@ -177,28 +179,46 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 159 "MB03RX.f"
     /* Parameter adjustments */
+#line 159 "MB03RX.f"
     a_dim1 = *lda;
+#line 159 "MB03RX.f"
     a_offset = 1 + a_dim1;
+#line 159 "MB03RX.f"
     a -= a_offset;
+#line 159 "MB03RX.f"
     x_dim1 = *ldx;
+#line 159 "MB03RX.f"
     x_offset = 1 + x_dim1;
+#line 159 "MB03RX.f"
     x -= x_offset;
+#line 159 "MB03RX.f"
     --wr;
+#line 159 "MB03RX.f"
     --wi;
+#line 159 "MB03RX.f"
     --dwork;
+#line 159 "MB03RX.f"
 
+#line 159 "MB03RX.f"
     /* Function Body */
+#line 159 "MB03RX.f"
     if (*ku > *kl) {
 
 /*        Try to move the block in position (KU,KU) to position (KL,KL). */
 
+#line 163 "MB03RX.f"
 	ifst = *ku;
 /*        REPEAT */
+#line 165 "MB03RX.f"
 L10:
+#line 166 "MB03RX.f"
 	ilst = *kl;
+#line 167 "MB03RX.f"
 	dtrexc_(jobv, n, &a[a_offset], lda, &x[x_offset], ldx, &ifst, &ilst, &
 		dwork[1], &ierr, (ftnlen)1);
+#line 168 "MB03RX.f"
 	if (ierr != 0) {
 
 /*           During calculations, two adjacent blocks were too close */
@@ -207,15 +227,25 @@ L10:
 /*           number of repeat cycles is usually 1, and at most the number */
 /*           of blocks between the current position and the position KL. */
 
+#line 176 "MB03RX.f"
 	    ifst = ilst - 1;
+#line 177 "MB03RX.f"
 	    if (ifst > 1) {
+#line 178 "MB03RX.f"
 		if (a[ifst + (ifst - 1) * a_dim1] != 0.) {
+#line 178 "MB03RX.f"
 		    ifst = ilst - 2;
+#line 178 "MB03RX.f"
 		}
+#line 180 "MB03RX.f"
 	    }
+#line 181 "MB03RX.f"
 	    if (ilst > *kl) {
+#line 181 "MB03RX.f"
 		goto L10;
+#line 181 "MB03RX.f"
 	    }
+#line 183 "MB03RX.f"
 	}
 /*        UNTIL ( ILST.EQ.KL on output from DTREXC ) */
 
@@ -223,42 +253,68 @@ L10:
 /*        Note that KU must be incremented if the moved block was 2-by-2 */
 /*        and it has been replaced by two 1-by-1 blocks. */
 
+#line 190 "MB03RX.f"
 	if (wi[*ku] != 0.) {
+#line 191 "MB03RX.f"
 	    if (a[*ku + 1 + *ku * a_dim1] == 0.) {
+#line 191 "MB03RX.f"
 		++(*ku);
+#line 191 "MB03RX.f"
 	    }
+#line 193 "MB03RX.f"
 	}
 
+#line 195 "MB03RX.f"
 	l = *kl;
 /*        WHILE ( L.LT.KU .OR. ( L.EQ.KU .AND. L.LT.N ) ) DO */
+#line 197 "MB03RX.f"
 L20:
+#line 197 "MB03RX.f"
 	if (l < *ku || l == *ku && l < *n) {
+#line 198 "MB03RX.f"
 	    if (a[l + 1 + l * a_dim1] != 0.) {
 
 /*              A 2x2 block. */
 
+#line 202 "MB03RX.f"
 		wr[l] = a[l + l * a_dim1];
+#line 203 "MB03RX.f"
 		wr[l + 1] = wr[l];
+#line 204 "MB03RX.f"
 		wi[l] = sqrt((d__1 = a[l + (l + 1) * a_dim1], abs(d__1))) * 
 			sqrt((d__2 = a[l + 1 + l * a_dim1], abs(d__2)));
+#line 206 "MB03RX.f"
 		wi[l + 1] = -wi[l];
+#line 207 "MB03RX.f"
 		l += 2;
+#line 208 "MB03RX.f"
 	    } else {
 
 /*              An 1x1 block. */
 
+#line 212 "MB03RX.f"
 		wr[l] = a[l + l * a_dim1];
+#line 213 "MB03RX.f"
 		wi[l] = 0.;
+#line 214 "MB03RX.f"
 		++l;
+#line 215 "MB03RX.f"
 	    }
+#line 216 "MB03RX.f"
 	    goto L20;
+#line 217 "MB03RX.f"
 	} else if (l == *n) {
+#line 218 "MB03RX.f"
 	    wr[l] = a[l + l * a_dim1];
+#line 219 "MB03RX.f"
 	    wi[l] = 0.;
+#line 220 "MB03RX.f"
 	}
 /*        END WHILE 20 */
+#line 222 "MB03RX.f"
     }
 
+#line 224 "MB03RX.f"
     return 0;
 /* *** Last line of MB03RX *** */
 } /* mb03rx_ */

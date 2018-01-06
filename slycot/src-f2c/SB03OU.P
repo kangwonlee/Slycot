@@ -1,0 +1,8 @@
+extern int sb03ou_(logical *discr, logical *ltrans, integer *n, integer *m, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *tau, doublereal *u, integer *ldu, doublereal *scale, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dgerqf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dgeqrf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: sb03ot_ 14 10 12 12 4 7 4 7 4 7 7 4 */

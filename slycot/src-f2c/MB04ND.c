@@ -1,3 +1,4 @@
+#line 1 "MB04ND.f"
 /* MB04ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04ND.f"
 /* Subroutine */ int mb04nd_(char *uplo, integer *n, integer *m, integer *p, 
 	doublereal *r__, integer *ldr, doublereal *a, integer *lda, 
 	doublereal *b, integer *ldb, doublereal *c__, integer *ldc, 
@@ -189,42 +191,71 @@
 
 /*     For efficiency reasons, the parameters are not checked. */
 
+#line 173 "MB04ND.f"
     /* Parameter adjustments */
+#line 173 "MB04ND.f"
     r_dim1 = *ldr;
+#line 173 "MB04ND.f"
     r_offset = 1 + r_dim1;
+#line 173 "MB04ND.f"
     r__ -= r_offset;
+#line 173 "MB04ND.f"
     a_dim1 = *lda;
+#line 173 "MB04ND.f"
     a_offset = 1 + a_dim1;
+#line 173 "MB04ND.f"
     a -= a_offset;
+#line 173 "MB04ND.f"
     b_dim1 = *ldb;
+#line 173 "MB04ND.f"
     b_offset = 1 + b_dim1;
+#line 173 "MB04ND.f"
     b -= b_offset;
+#line 173 "MB04ND.f"
     c_dim1 = *ldc;
+#line 173 "MB04ND.f"
     c_offset = 1 + c_dim1;
+#line 173 "MB04ND.f"
     c__ -= c_offset;
+#line 173 "MB04ND.f"
     --tau;
+#line 173 "MB04ND.f"
     --dwork;
+#line 173 "MB04ND.f"
 
+#line 173 "MB04ND.f"
     /* Function Body */
+#line 173 "MB04ND.f"
     if (min(*n,*p) == 0) {
+#line 173 "MB04ND.f"
 	return 0;
+#line 173 "MB04ND.f"
     }
 
+#line 176 "MB04ND.f"
     luplo = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 177 "MB04ND.f"
     if (luplo) {
 
+#line 179 "MB04ND.f"
 	for (i__ = *n; i__ >= 1; --i__) {
 
 /*           Annihilate the I-th row of A and apply the transformations */
 /*           to the entire block matrix, exploiting its structure. */
 
 /* Computing MIN */
+#line 184 "MB04ND.f"
 	    i__1 = *n - i__ + 1;
+#line 184 "MB04ND.f"
 	    im = min(i__1,*p);
 /* Computing MAX */
+#line 185 "MB04ND.f"
 	    i__1 = *p - *n + i__;
+#line 185 "MB04ND.f"
 	    ip = max(i__1,1);
+#line 186 "MB04ND.f"
 	    i__1 = im + 1;
+#line 186 "MB04ND.f"
 	    dlarfg_(&i__1, &r__[i__ + i__ * r_dim1], &a[i__ + ip * a_dim1], 
 		    lda, &tau[i__]);
 
@@ -236,11 +267,15 @@
 /*           [ R(1:I-1,I)  A(1:I-1,IP:P) ] = */
 /*           [ R(1:I-1,I)  A(1:I-1,IP:P) ] - tau * w * [ 1 v' ]. */
 
+#line 196 "MB04ND.f"
 	    if (i__ > 0) {
+#line 196 "MB04ND.f"
 		i__1 = i__ - 1;
+#line 196 "MB04ND.f"
 		mb04ny_(&i__1, &im, &a[i__ + ip * a_dim1], lda, &tau[i__], &
 			r__[i__ * r_dim1 + 1], ldr, &a[ip * a_dim1 + 1], lda, 
 			&dwork[1]);
+#line 196 "MB04ND.f"
 	    }
 
 
@@ -252,22 +287,31 @@
 /*           [ B(:,I)  C(:,IP:P) ] = [ B(:,I)  C(:,IP:P) ] - */
 /*                                   tau * w * [ 1 v' ]. */
 
+#line 209 "MB04ND.f"
 	    if (*m > 0) {
+#line 209 "MB04ND.f"
 		mb04ny_(m, &im, &a[i__ + ip * a_dim1], lda, &tau[i__], &b[i__ 
 			* b_dim1 + 1], ldb, &c__[ip * c_dim1 + 1], ldc, &
 			dwork[1]);
+#line 209 "MB04ND.f"
 	    }
+#line 212 "MB04ND.f"
 /* L10: */
+#line 212 "MB04ND.f"
 	}
 
+#line 214 "MB04ND.f"
     } else {
 
+#line 216 "MB04ND.f"
 	for (i__ = *n; i__ >= 2; --i__) {
 
 /*           Annihilate the I-th row of A and apply the transformations */
 /*           to the first block row, exploiting its structure. */
 
+#line 221 "MB04ND.f"
 	    i__1 = *p + 1;
+#line 221 "MB04ND.f"
 	    dlarfg_(&i__1, &r__[i__ + i__ * r_dim1], &a[i__ + a_dim1], lda, &
 		    tau[i__]);
 
@@ -279,18 +323,26 @@
 /*           [ R(1:I-1,I)  A(1:I-1,:) ] = [ R(1:I-1,I)  A(1:I-1,:) ] - */
 /*                                        tau * w * [ 1 v' ]. */
 
+#line 231 "MB04ND.f"
 	    i__1 = i__ - 1;
+#line 231 "MB04ND.f"
 	    mb04ny_(&i__1, p, &a[i__ + a_dim1], lda, &tau[i__], &r__[i__ * 
 		    r_dim1 + 1], ldr, &a[a_offset], lda, &dwork[1]);
+#line 233 "MB04ND.f"
 /* L20: */
+#line 233 "MB04ND.f"
 	}
 
+#line 235 "MB04ND.f"
 	i__1 = *p + 1;
+#line 235 "MB04ND.f"
 	dlarfg_(&i__1, &r__[r_dim1 + 1], &a[a_dim1 + 1], lda, &tau[1]);
+#line 236 "MB04ND.f"
 	if (*m > 0) {
 
 /*           Apply the transformations to the second block row. */
 
+#line 240 "MB04ND.f"
 	    for (i__ = *n; i__ >= 1; --i__) {
 
 /*              Compute */
@@ -300,13 +352,19 @@
 
 /*              [ B(:,I)  C ] = [ B(:,I)  C ] - tau * w * [ 1 v' ]. */
 
+#line 249 "MB04ND.f"
 		mb04ny_(m, p, &a[i__ + a_dim1], lda, &tau[i__], &b[i__ * 
 			b_dim1 + 1], ldb, &c__[c_offset], ldc, &dwork[1]);
+#line 251 "MB04ND.f"
 /* L30: */
+#line 251 "MB04ND.f"
 	    }
 
+#line 253 "MB04ND.f"
 	}
+#line 254 "MB04ND.f"
     }
+#line 255 "MB04ND.f"
     return 0;
 /* *** Last line of MB04ND *** */
 } /* mb04nd_ */

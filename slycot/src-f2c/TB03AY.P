@@ -1,0 +1,6 @@
+extern int tb03ay_(integer *nr, doublereal *a, integer *lda, integer *indblk, integer *nblk, doublereal *vcoeff, integer *ldvco1, integer *ldvco2, doublereal *pcoeff, integer *ldpco1, integer *ldpco2, integer *info);
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dtrsm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */

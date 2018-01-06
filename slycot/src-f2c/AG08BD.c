@@ -1,3 +1,4 @@
+#line 1 "AG08BD.f"
 /* AG08BD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AG08BD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -350,168 +352,289 @@ static integer c__0 = 0;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 293 "AG08BD.f"
     /* Parameter adjustments */
+#line 293 "AG08BD.f"
     a_dim1 = *lda;
+#line 293 "AG08BD.f"
     a_offset = 1 + a_dim1;
+#line 293 "AG08BD.f"
     a -= a_offset;
+#line 293 "AG08BD.f"
     e_dim1 = *lde;
+#line 293 "AG08BD.f"
     e_offset = 1 + e_dim1;
+#line 293 "AG08BD.f"
     e -= e_offset;
+#line 293 "AG08BD.f"
     b_dim1 = *ldb;
+#line 293 "AG08BD.f"
     b_offset = 1 + b_dim1;
+#line 293 "AG08BD.f"
     b -= b_offset;
+#line 293 "AG08BD.f"
     c_dim1 = *ldc;
+#line 293 "AG08BD.f"
     c_offset = 1 + c_dim1;
+#line 293 "AG08BD.f"
     c__ -= c_offset;
+#line 293 "AG08BD.f"
     d_dim1 = *ldd;
+#line 293 "AG08BD.f"
     d_offset = 1 + d_dim1;
+#line 293 "AG08BD.f"
     d__ -= d_offset;
+#line 293 "AG08BD.f"
     --infz;
+#line 293 "AG08BD.f"
     --kronr;
+#line 293 "AG08BD.f"
     --infe;
+#line 293 "AG08BD.f"
     --kronl;
+#line 293 "AG08BD.f"
     --iwork;
+#line 293 "AG08BD.f"
     --dwork;
+#line 293 "AG08BD.f"
 
+#line 293 "AG08BD.f"
     /* Function Body */
+#line 293 "AG08BD.f"
     *info = 0;
 /* Computing MAX */
+#line 294 "AG08BD.f"
     i__1 = *l + *p, i__2 = *n + *m;
+#line 294 "AG08BD.f"
     ldabcd = max(i__1,i__2);
+#line 295 "AG08BD.f"
     labcd2 = ldabcd * (*n + *m);
+#line 296 "AG08BD.f"
     lequil = lsame_(equil, "S", (ftnlen)1, (ftnlen)1);
+#line 297 "AG08BD.f"
     lquery = *ldwork == -1;
 
 /*     Test the input scalar arguments. */
 
+#line 301 "AG08BD.f"
     if (! lequil && ! lsame_(equil, "N", (ftnlen)1, (ftnlen)1)) {
+#line 302 "AG08BD.f"
 	*info = -1;
+#line 303 "AG08BD.f"
     } else if (*l < 0) {
+#line 304 "AG08BD.f"
 	*info = -2;
+#line 305 "AG08BD.f"
     } else if (*n < 0) {
+#line 306 "AG08BD.f"
 	*info = -3;
+#line 307 "AG08BD.f"
     } else if (*m < 0) {
+#line 308 "AG08BD.f"
 	*info = -4;
+#line 309 "AG08BD.f"
     } else if (*p < 0) {
+#line 310 "AG08BD.f"
 	*info = -5;
+#line 311 "AG08BD.f"
     } else if (*lda < max(1,*l)) {
+#line 312 "AG08BD.f"
 	*info = -7;
+#line 313 "AG08BD.f"
     } else if (*lde < max(1,*l)) {
+#line 314 "AG08BD.f"
 	*info = -9;
+#line 315 "AG08BD.f"
     } else if (*ldb < 1 || *m > 0 && *ldb < *l) {
+#line 316 "AG08BD.f"
 	*info = -11;
+#line 317 "AG08BD.f"
     } else if (*ldc < max(1,*p)) {
+#line 318 "AG08BD.f"
 	*info = -13;
+#line 319 "AG08BD.f"
     } else if (*ldd < max(1,*p)) {
+#line 320 "AG08BD.f"
 	*info = -15;
+#line 321 "AG08BD.f"
     } else if (*tol >= 1.) {
+#line 322 "AG08BD.f"
 	*info = -27;
+#line 323 "AG08BD.f"
     } else {
 /* Computing MIN */
+#line 324 "AG08BD.f"
 	i__1 = *l + *p, i__2 = *m + *n;
+#line 324 "AG08BD.f"
 	i0 = min(i__1,i__2);
+#line 325 "AG08BD.f"
 	i1 = min(*l,*n);
+#line 326 "AG08BD.f"
 	ii = min(*m,*p);
 /* Computing MAX */
+#line 327 "AG08BD.f"
 	i__1 = 1, i__2 = ldabcd * 5;
+#line 327 "AG08BD.f"
 	ldw = labcd2 + max(i__1,i__2);
+#line 328 "AG08BD.f"
 	if (lequil) {
 /* Computing MAX */
+#line 328 "AG08BD.f"
 	    i__1 = *l + *n << 2;
+#line 328 "AG08BD.f"
 	    ldw = max(i__1,ldw);
+#line 328 "AG08BD.f"
 	}
+#line 330 "AG08BD.f"
 	if (lquery) {
+#line 331 "AG08BD.f"
 	    tg01fd_("N", "N", "N", l, n, m, p, &a[a_offset], lda, &e[e_offset]
 		    , lde, &b[b_offset], ldb, &c__[c_offset], ldc, dum, &c__1,
 		     dum, &c__1, &nn, &n2, tol, &iwork[1], &dwork[1], &c_n1, 
 		    info, (ftnlen)1, (ftnlen)1, (ftnlen)1);
 /* Computing MAX */
+#line 334 "AG08BD.f"
 	    i__1 = ldw, i__2 = (integer) dwork[1];
+#line 334 "AG08BD.f"
 	    wrkopt = max(i__1,i__2);
+#line 335 "AG08BD.f"
 	    svlmax = 0.;
+#line 336 "AG08BD.f"
 	    i__1 = *m + *n;
+#line 336 "AG08BD.f"
 	    i__2 = *p + *l;
+#line 336 "AG08BD.f"
 	    i__3 = ldabcd + i1;
+#line 336 "AG08BD.f"
 	    ag08by_(&c_true, &i1, &i__1, &i__2, &svlmax, &dwork[1], &i__3, &e[
 		    e_offset], lde, &nu, &mu, niz, dinfz, nkrol, &infz[1], &
 		    kronl[1], tol, &iwork[1], &dwork[1], &c_n1, info);
 /* Computing MAX */
+#line 339 "AG08BD.f"
 	    i__1 = wrkopt, i__2 = labcd2 + (integer) dwork[1];
+#line 339 "AG08BD.f"
 	    wrkopt = max(i__1,i__2);
+#line 340 "AG08BD.f"
 	    i__1 = *m + *n;
+#line 340 "AG08BD.f"
 	    i__2 = ldabcd + i1;
+#line 340 "AG08BD.f"
 	    ag08by_(&c_false, &i1, &ii, &i__1, &svlmax, &dwork[1], &i__2, &e[
 		    e_offset], lde, &nu, &mu, niz, dinfz, nkrol, &infz[1], &
 		    kronl[1], tol, &iwork[1], &dwork[1], &c_n1, info);
 /* Computing MAX */
+#line 343 "AG08BD.f"
 	    i__1 = wrkopt, i__2 = labcd2 + (integer) dwork[1];
+#line 343 "AG08BD.f"
 	    wrkopt = max(i__1,i__2);
+#line 344 "AG08BD.f"
 	    i__1 = i1 + ii;
+#line 344 "AG08BD.f"
 	    nb = ilaenv_(&c__1, "ZGERQF", " ", &ii, &i__1, &c_n1, &c_n1, (
 		    ftnlen)6, (ftnlen)1);
 /* Computing MAX */
+#line 345 "AG08BD.f"
 	    i__1 = wrkopt, i__2 = labcd2 + ii + ii * nb;
+#line 345 "AG08BD.f"
 	    wrkopt = max(i__1,i__2);
 /* Computing MIN */
+#line 346 "AG08BD.f"
 	    i__3 = i1 + ii;
+#line 346 "AG08BD.f"
 	    i__1 = 64, i__2 = ilaenv_(&c__1, "DORMRQ", "RT", &i1, &i__3, &ii, 
 		    &c_n1, (ftnlen)6, (ftnlen)2);
+#line 346 "AG08BD.f"
 	    nb = min(i__1,i__2);
 /* Computing MAX */
+#line 348 "AG08BD.f"
 	    i__1 = wrkopt, i__2 = labcd2 + ii + i1 * nb;
+#line 348 "AG08BD.f"
 	    wrkopt = max(i__1,i__2);
+#line 349 "AG08BD.f"
 	} else if (*ldwork < ldw) {
+#line 350 "AG08BD.f"
 	    *info = -30;
+#line 351 "AG08BD.f"
 	}
+#line 352 "AG08BD.f"
     }
 
+#line 354 "AG08BD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 358 "AG08BD.f"
 	i__1 = -(*info);
+#line 358 "AG08BD.f"
 	xerbla_("AG08BD", &i__1, (ftnlen)6);
+#line 359 "AG08BD.f"
 	return 0;
+#line 360 "AG08BD.f"
     } else if (lquery) {
+#line 361 "AG08BD.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 362 "AG08BD.f"
 	return 0;
+#line 363 "AG08BD.f"
     }
 
+#line 365 "AG08BD.f"
     *niz = 0;
+#line 366 "AG08BD.f"
     *nkrol = 0;
+#line 367 "AG08BD.f"
     *nkror = 0;
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 371 "AG08BD.f"
     i__1 = max(*l,*n), i__1 = max(i__1,*m);
+#line 371 "AG08BD.f"
     if (max(i__1,*p) == 0) {
+#line 372 "AG08BD.f"
 	*nfz = 0;
+#line 373 "AG08BD.f"
 	*dinfz = 0;
+#line 374 "AG08BD.f"
 	*ninfe = 0;
+#line 375 "AG08BD.f"
 	*nrank = 0;
+#line 376 "AG08BD.f"
 	iwork[1] = 0;
+#line 377 "AG08BD.f"
 	dwork[1] = 1.;
+#line 378 "AG08BD.f"
 	return 0;
+#line 379 "AG08BD.f"
     }
 
 /*     (Note: Comments in the code beginning "Workspace:" describe the */
 /*     minimal amount of real workspace needed at that point in the */
 /*     code, as well as the preferred amount for good performance.) */
 
+#line 385 "AG08BD.f"
     wrkopt = 1;
+#line 386 "AG08BD.f"
     kabcd = 1;
+#line 387 "AG08BD.f"
     jwork = kabcd + labcd2;
 
 /*     If required, balance the system pencil. */
 /*     Workspace: need   4*(L+N). */
 
+#line 392 "AG08BD.f"
     if (lequil) {
+#line 393 "AG08BD.f"
 	tg01ad_("A", l, n, m, p, &c_b25, &a[a_offset], lda, &e[e_offset], lde,
 		 &b[b_offset], ldb, &c__[c_offset], ldc, &dwork[1], &dwork[*l 
 		+ 1], &dwork[*l + *n + 1], info, (ftnlen)1);
+#line 395 "AG08BD.f"
 	wrkopt = *l + *n << 2;
+#line 396 "AG08BD.f"
     }
+#line 397 "AG08BD.f"
     svlmax = dlange_("Frobenius", l, n, &e[e_offset], lde, &dwork[1], (ftnlen)
 	    9);
 
@@ -526,12 +649,15 @@ static integer c__0 = 0;
 /*                     prefer larger. */
 /*     Integer workspace: N. */
 
+#line 410 "AG08BD.f"
     tg01fd_("N", "N", "N", l, n, m, p, &a[a_offset], lda, &e[e_offset], lde, &
 	    b[b_offset], ldb, &c__[c_offset], ldc, dum, &c__1, dum, &c__1, &
 	    nn, &n2, tol, &iwork[1], &dwork[1], ldwork, info, (ftnlen)1, (
 	    ftnlen)1, (ftnlen)1);
 /* Computing MAX */
+#line 413 "AG08BD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 413 "AG08BD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Construct the system pencil */
@@ -544,34 +670,51 @@ static integer c__0 = 0;
 /*     of dimension (L+P)-by-(M+N). */
 /*     Workspace: need  LABCD2 = max( L+P, N+M )*( N+M ). */
 
+#line 425 "AG08BD.f"
     n2 = *n - nn;
+#line 426 "AG08BD.f"
     mm = *m + n2;
+#line 427 "AG08BD.f"
     pp = *p + (*l - nn);
+#line 428 "AG08BD.f"
     dlacpy_("Full", l, m, &b[b_offset], ldb, &dwork[kabcd], &ldabcd, (ftnlen)
 	    4);
+#line 429 "AG08BD.f"
     dlacpy_("Full", p, m, &d__[d_offset], ldd, &dwork[kabcd + *l], &ldabcd, (
 	    ftnlen)4);
+#line 430 "AG08BD.f"
     dlacpy_("Full", l, &n2, &a[(nn + 1) * a_dim1 + 1], lda, &dwork[kabcd + 
 	    ldabcd * *m], &ldabcd, (ftnlen)4);
+#line 432 "AG08BD.f"
     dlacpy_("Full", p, &n2, &c__[(nn + 1) * c_dim1 + 1], ldc, &dwork[kabcd + 
 	    ldabcd * *m + *l], &ldabcd, (ftnlen)4);
+#line 434 "AG08BD.f"
     dlacpy_("Full", l, &nn, &a[a_offset], lda, &dwork[kabcd + ldabcd * mm], &
 	    ldabcd, (ftnlen)4);
+#line 436 "AG08BD.f"
     dlacpy_("Full", p, &nn, &c__[c_offset], ldc, &dwork[kabcd + ldabcd * mm + 
 	    *l], &ldabcd, (ftnlen)4);
 
 /*     If required, set tolerance. */
 
+#line 441 "AG08BD.f"
     toler = *tol;
+#line 442 "AG08BD.f"
     if (toler <= 0.) {
+#line 443 "AG08BD.f"
 	toler = (doublereal) ((*l + *p) * (*m + *n)) * dlamch_("Precision", (
 		ftnlen)9);
+#line 444 "AG08BD.f"
     }
 /* Computing MAX */
+#line 445 "AG08BD.f"
     i__1 = nn + pp;
+#line 445 "AG08BD.f"
     i__2 = nn + mm;
+#line 445 "AG08BD.f"
     d__1 = svlmax, d__2 = dlange_("Frobenius", &i__1, &i__2, &dwork[kabcd], &
 	    ldabcd, &dwork[jwork], (ftnlen)9);
+#line 445 "AG08BD.f"
     svlmax = max(d__1,d__2);
 
 /*     Extract the reduced pencil S2(lambda) */
@@ -589,45 +732,68 @@ static integer c__0 = 0;
 /*                     prefer larger. */
 /*     Integer workspace: MM, MM <= M+N; PP <= P+L. */
 
+#line 464 "AG08BD.f"
     i__1 = *ldwork - jwork + 1;
+#line 464 "AG08BD.f"
     ag08by_(&c_true, &nn, &mm, &pp, &svlmax, &dwork[kabcd], &ldabcd, &e[
 	    e_offset], lde, &nu, &mu, niz, dinfz, nkrol, &infz[1], &kronl[1], 
 	    &toler, &iwork[1], &dwork[jwork], &i__1, info);
 
 /* Computing MAX */
+#line 468 "AG08BD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 468 "AG08BD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Set the number of simple (nondynamic) infinite eigenvalues */
 /*     and the normal rank of the system pencil. */
 
+#line 473 "AG08BD.f"
     nsinfe = mu;
+#line 474 "AG08BD.f"
     *nrank = nn + mu;
 
 /*     Pertranspose the system. */
 
 /* Computing MAX */
+#line 478 "AG08BD.f"
     i__2 = 0, i__3 = nu - 1;
+#line 478 "AG08BD.f"
     i__1 = max(i__2,i__3);
 /* Computing MAX */
+#line 478 "AG08BD.f"
     i__5 = 0, i__6 = nu - 1;
+#line 478 "AG08BD.f"
     i__4 = max(i__5,i__6);
+#line 478 "AG08BD.f"
     tb01xd_("D", &nu, &mm, &mm, &i__1, &i__4, &dwork[kabcd + ldabcd * mm], &
 	    ldabcd, &dwork[kabcd], &ldabcd, &dwork[kabcd + ldabcd * mm + nu], 
 	    &ldabcd, &dwork[kabcd + nu], &ldabcd, info, (ftnlen)1);
+#line 483 "AG08BD.f"
     i__1 = nu + mm;
+#line 483 "AG08BD.f"
     ma02bd_("Right", &i__1, &mm, &dwork[kabcd], &ldabcd, (ftnlen)5);
+#line 484 "AG08BD.f"
     i__1 = nu + mm;
+#line 484 "AG08BD.f"
     ma02bd_("Left", &mm, &i__1, &dwork[kabcd + nu], &ldabcd, (ftnlen)4);
 /* Computing MAX */
+#line 485 "AG08BD.f"
     i__2 = 0, i__3 = nu - 1;
+#line 485 "AG08BD.f"
     i__1 = max(i__2,i__3);
+#line 485 "AG08BD.f"
     ma02cd_(&nu, &c__0, &i__1, &e[e_offset], lde);
 
+#line 487 "AG08BD.f"
     if (mu != mm) {
+#line 488 "AG08BD.f"
 	nn = nu;
+#line 489 "AG08BD.f"
 	pp = mm;
+#line 490 "AG08BD.f"
 	mm = mu;
+#line 491 "AG08BD.f"
 	kabcd += (pp - mm) * ldabcd;
 
 /*        Extract the reduced pencil S3(lambda), */
@@ -643,16 +809,22 @@ static integer c__0 = 0;
 /*                   prefer larger. */
 /*        No integer workspace necessary. */
 
+#line 506 "AG08BD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 506 "AG08BD.f"
 	ag08by_(&c_false, &nn, &mm, &pp, &svlmax, &dwork[kabcd], &ldabcd, &e[
 		e_offset], lde, &nu, &mu, &i0, &i1, nkror, &iwork[1], &kronr[
 		1], &toler, &iwork[1], &dwork[jwork], &i__1, info);
 
 /* Computing MAX */
+#line 510 "AG08BD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 510 "AG08BD.f"
 	wrkopt = max(i__1,i__2);
+#line 511 "AG08BD.f"
     }
 
+#line 513 "AG08BD.f"
     if (nu != 0) {
 
 /*        Perform a unitary transformation on the columns of */
@@ -666,134 +838,213 @@ static integer c__0 = 0;
 /*        Compute Af by reducing  ( Br Ar ) to  ( *  Af ) . */
 /*                                ( Dr Cr )     ( Y   0 ) */
 
+#line 526 "AG08BD.f"
 	numu = nu + mu;
+#line 527 "AG08BD.f"
 	ipd = kabcd + nu;
+#line 528 "AG08BD.f"
 	itau = jwork;
+#line 529 "AG08BD.f"
 	jwork = itau + mu;
 
 /*        Workspace: need   LABCD2 + 2*min(M,P); */
 /*                   prefer LABCD2 + min(M,P) + min(M,P)*NB. */
 
+#line 534 "AG08BD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 534 "AG08BD.f"
 	dtzrzf_(&mu, &numu, &dwork[ipd], &ldabcd, &dwork[itau], &dwork[jwork],
 		 &i__1, info);
 /* Computing MAX */
+#line 536 "AG08BD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 536 "AG08BD.f"
 	wrkopt = max(i__1,i__2);
 
 /*        Workspace: need   LABCD2 + min(M,P) + min(L,N); */
 /*                   prefer LABCD2 + min(M,P) + min(L,N)*NB. */
 
+#line 541 "AG08BD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 541 "AG08BD.f"
 	dormrz_("Right", "Transpose", &nu, &numu, &mu, &nu, &dwork[ipd], &
 		ldabcd, &dwork[itau], &dwork[kabcd], &ldabcd, &dwork[jwork], &
 		i__1, info, (ftnlen)5, (ftnlen)9);
 /* Computing MAX */
+#line 544 "AG08BD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 544 "AG08BD.f"
 	wrkopt = max(i__1,i__2);
 
 /*        Save Af. */
 
+#line 548 "AG08BD.f"
 	dlacpy_("Full", &nu, &nu, &dwork[kabcd + ldabcd * mu], &ldabcd, &a[
 		a_offset], lda, (ftnlen)4);
 
 /*        Compute Ef by applying the saved transformations from previous */
 /*        reduction to ( 0  Er ) . */
 
+#line 554 "AG08BD.f"
 	dlaset_("Full", &nu, &mu, &c_b25, &c_b25, &dwork[kabcd], &ldabcd, (
 		ftnlen)4);
+#line 555 "AG08BD.f"
 	dlacpy_("Full", &nu, &nu, &e[e_offset], lde, &dwork[kabcd + ldabcd * 
 		mu], &ldabcd, (ftnlen)4);
 
+#line 558 "AG08BD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 558 "AG08BD.f"
 	dormrz_("Right", "Transpose", &nu, &numu, &mu, &nu, &dwork[ipd], &
 		ldabcd, &dwork[itau], &dwork[kabcd], &ldabcd, &dwork[jwork], &
 		i__1, info, (ftnlen)5, (ftnlen)9);
 
 /*        Save Ef. */
 
+#line 564 "AG08BD.f"
 	dlacpy_("Full", &nu, &nu, &dwork[kabcd + ldabcd * mu], &ldabcd, &e[
 		e_offset], lde, (ftnlen)4);
+#line 566 "AG08BD.f"
     }
 
+#line 568 "AG08BD.f"
     *nfz = nu;
 
 /*     Set right Kronecker indices (column indices). */
 
+#line 572 "AG08BD.f"
     i__1 = *nkror;
+#line 572 "AG08BD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 573 "AG08BD.f"
 	iwork[i__] = kronr[i__];
+#line 574 "AG08BD.f"
 /* L10: */
+#line 574 "AG08BD.f"
     }
 
+#line 576 "AG08BD.f"
     j = 0;
+#line 577 "AG08BD.f"
     i__1 = *nkror;
+#line 577 "AG08BD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 578 "AG08BD.f"
 	i__2 = j + iwork[i__];
+#line 578 "AG08BD.f"
 	for (ii = j + 1; ii <= i__2; ++ii) {
+#line 579 "AG08BD.f"
 	    kronr[ii] = i__ - 1;
+#line 580 "AG08BD.f"
 /* L20: */
+#line 580 "AG08BD.f"
 	}
+#line 581 "AG08BD.f"
 	j += iwork[i__];
+#line 582 "AG08BD.f"
 /* L30: */
+#line 582 "AG08BD.f"
     }
 
+#line 584 "AG08BD.f"
     *nkror = j;
 
 /*     Set left Kronecker indices (row indices). */
 
+#line 588 "AG08BD.f"
     i__1 = *nkrol;
+#line 588 "AG08BD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 589 "AG08BD.f"
 	iwork[i__] = kronl[i__];
+#line 590 "AG08BD.f"
 /* L40: */
+#line 590 "AG08BD.f"
     }
 
+#line 592 "AG08BD.f"
     j = 0;
+#line 593 "AG08BD.f"
     i__1 = *nkrol;
+#line 593 "AG08BD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 594 "AG08BD.f"
 	i__2 = j + iwork[i__];
+#line 594 "AG08BD.f"
 	for (ii = j + 1; ii <= i__2; ++ii) {
+#line 595 "AG08BD.f"
 	    kronl[ii] = i__ - 1;
+#line 596 "AG08BD.f"
 /* L50: */
+#line 596 "AG08BD.f"
 	}
+#line 597 "AG08BD.f"
 	j += iwork[i__];
+#line 598 "AG08BD.f"
 /* L60: */
+#line 598 "AG08BD.f"
     }
 
+#line 600 "AG08BD.f"
     *nkrol = j;
 
 /*     Determine the number of simple infinite blocks */
 /*     as the difference between the number of infinite blocks */
 /*     of order greater than one and the order of Dr. */
 
+#line 606 "AG08BD.f"
     *ninfe = 0;
+#line 607 "AG08BD.f"
     i__1 = *dinfz;
+#line 607 "AG08BD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 608 "AG08BD.f"
 	*ninfe += infz[i__];
+#line 609 "AG08BD.f"
 /* L70: */
+#line 609 "AG08BD.f"
     }
+#line 610 "AG08BD.f"
     *ninfe = nsinfe - *ninfe;
+#line 611 "AG08BD.f"
     i__1 = *ninfe;
+#line 611 "AG08BD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 612 "AG08BD.f"
 	infe[i__] = 1;
+#line 613 "AG08BD.f"
 /* L80: */
+#line 613 "AG08BD.f"
     }
 
 /*     Set the structure of infinite eigenvalues. */
 
+#line 617 "AG08BD.f"
     i__1 = *dinfz;
+#line 617 "AG08BD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 618 "AG08BD.f"
 	i__2 = *ninfe + infz[i__];
+#line 618 "AG08BD.f"
 	for (ii = *ninfe + 1; ii <= i__2; ++ii) {
+#line 619 "AG08BD.f"
 	    infe[ii] = i__ + 1;
+#line 620 "AG08BD.f"
 /* L90: */
+#line 620 "AG08BD.f"
 	}
+#line 621 "AG08BD.f"
 	*ninfe += infz[i__];
+#line 622 "AG08BD.f"
 /* L100: */
+#line 622 "AG08BD.f"
     }
 
+#line 624 "AG08BD.f"
     iwork[1] = nsinfe;
+#line 625 "AG08BD.f"
     dwork[1] = (doublereal) wrkopt;
+#line 626 "AG08BD.f"
     return 0;
 /* *** Last line of AG08BD *** */
 } /* ag08bd_ */

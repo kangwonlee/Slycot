@@ -1,3 +1,4 @@
+#line 1 "MB02MD.f"
 /* MB02MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02MD.f"
 /* Table of constant values */
 
 static doublereal c_b8 = 0.;
@@ -386,86 +388,150 @@ static doublereal c_b52 = -1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 334 "MB02MD.f"
     /* Parameter adjustments */
+#line 334 "MB02MD.f"
     c_dim1 = *ldc;
+#line 334 "MB02MD.f"
     c_offset = 1 + c_dim1;
+#line 334 "MB02MD.f"
     c__ -= c_offset;
+#line 334 "MB02MD.f"
     --s;
+#line 334 "MB02MD.f"
     x_dim1 = *ldx;
+#line 334 "MB02MD.f"
     x_offset = 1 + x_dim1;
+#line 334 "MB02MD.f"
     x -= x_offset;
+#line 334 "MB02MD.f"
     --iwork;
+#line 334 "MB02MD.f"
     --dwork;
+#line 334 "MB02MD.f"
 
+#line 334 "MB02MD.f"
     /* Function Body */
+#line 334 "MB02MD.f"
     *iwarn = 0;
+#line 335 "MB02MD.f"
     *info = 0;
+#line 336 "MB02MD.f"
     nl = *n + *l;
+#line 337 "MB02MD.f"
     k = max(*m,nl);
+#line 338 "MB02MD.f"
     p = min(*m,*n);
+#line 339 "MB02MD.f"
     minmnl = min(*m,nl);
 /* Computing MAX */
+#line 340 "MB02MD.f"
     i__1 = minmnl * 3 + k, i__2 = minmnl * 5;
+#line 340 "MB02MD.f"
     ldw = max(i__1,i__2);
+#line 341 "MB02MD.f"
     ljobr = lsame_(job, "R", (ftnlen)1, (ftnlen)1);
+#line 342 "MB02MD.f"
     ljobt = lsame_(job, "T", (ftnlen)1, (ftnlen)1);
+#line 343 "MB02MD.f"
     ljobn = lsame_(job, "N", (ftnlen)1, (ftnlen)1);
 
 /*     Determine whether RANK or/and TOL is/are to be computed. */
 
+#line 347 "MB02MD.f"
     crank = ! ljobt && ! ljobn;
+#line 348 "MB02MD.f"
     ctol = ! ljobr && ! ljobn;
 
 /*     Test the input scalar arguments. */
 
+#line 352 "MB02MD.f"
     if (ctol && crank && ! lsame_(job, "B", (ftnlen)1, (ftnlen)1)) {
+#line 353 "MB02MD.f"
 	*info = -1;
+#line 354 "MB02MD.f"
     } else if (*m < 0) {
+#line 355 "MB02MD.f"
 	*info = -2;
+#line 356 "MB02MD.f"
     } else if (*n < 0) {
+#line 357 "MB02MD.f"
 	*info = -3;
+#line 358 "MB02MD.f"
     } else if (*l < 0) {
+#line 359 "MB02MD.f"
 	*info = -4;
+#line 360 "MB02MD.f"
     } else if (! crank && *rank > p) {
+#line 361 "MB02MD.f"
 	*info = -5;
+#line 362 "MB02MD.f"
     } else if (*ldc < max(1,k)) {
+#line 363 "MB02MD.f"
 	*info = -7;
+#line 364 "MB02MD.f"
     } else if (*ldx < max(1,*n)) {
+#line 365 "MB02MD.f"
 	*info = -10;
+#line 366 "MB02MD.f"
     } else if (ctol && *tol < 0.) {
+#line 367 "MB02MD.f"
 	*info = -11;
+#line 368 "MB02MD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 368 "MB02MD.f"
 	i__1 = 2, i__2 = *m * nl + ldw, i__1 = max(i__1,i__2), i__2 = *l * 3;
+#line 368 "MB02MD.f"
 	if (*m >= nl && *ldwork < max(2,ldw) || *m < nl && *ldwork < max(i__1,
 		i__2)) {
+#line 371 "MB02MD.f"
 	    *info = -14;
+#line 372 "MB02MD.f"
 	}
+#line 372 "MB02MD.f"
     }
 
+#line 374 "MB02MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 378 "MB02MD.f"
 	i__1 = -(*info);
+#line 378 "MB02MD.f"
 	xerbla_("MB02MD", &i__1, (ftnlen)6);
+#line 379 "MB02MD.f"
 	return 0;
+#line 380 "MB02MD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 384 "MB02MD.f"
     if (crank) {
+#line 384 "MB02MD.f"
 	*rank = p;
+#line 384 "MB02MD.f"
     }
+#line 386 "MB02MD.f"
     if (min(*m,nl) == 0) {
+#line 387 "MB02MD.f"
 	if (*m == 0) {
+#line 388 "MB02MD.f"
 	    dlaset_("Full", &nl, &nl, &c_b8, &c_b9, &c__[c_offset], ldc, (
 		    ftnlen)4);
+#line 389 "MB02MD.f"
 	    dlaset_("Full", n, l, &c_b8, &c_b8, &x[x_offset], ldx, (ftnlen)4);
+#line 390 "MB02MD.f"
 	}
+#line 391 "MB02MD.f"
 	dwork[1] = 2.;
+#line 392 "MB02MD.f"
 	dwork[2] = 1.;
+#line 393 "MB02MD.f"
 	return 0;
+#line 394 "MB02MD.f"
     }
 
 /*     Subroutine MB02MD solves a set of linear equations by a Total */
@@ -481,16 +547,21 @@ static doublereal c_b52 = -1.;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 409 "MB02MD.f"
     if (*m >= nl) {
 
 /*        M >= N + L:  Overwrite V' on C. */
 /*        Workspace: need max(3*min(M,N+L) + max(M,N+L), 5*min(M,N+L)). */
 
+#line 414 "MB02MD.f"
 	jwork = 1;
+#line 415 "MB02MD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 415 "MB02MD.f"
 	dgesvd_("No left vectors", "Overwritten on C", m, &nl, &c__[c_offset],
 		 ldc, &s[1], &dwork[1], &c__1, &dwork[1], &c__1, &dwork[jwork]
 		, &i__1, info, (ftnlen)15, (ftnlen)16);
+#line 418 "MB02MD.f"
     } else {
 
 /*        M < N + L:  Save C in the workspace and compute V' in C. */
@@ -498,75 +569,124 @@ static doublereal c_b52 = -1.;
 /*        Workspace: need M*(N+L) + max(3*min(M,N+L) + max(M,N+L), */
 /*                                      5*min(M,N+L)). */
 
+#line 425 "MB02MD.f"
 	dlacpy_("Full", m, &nl, &c__[c_offset], ldc, &dwork[1], m, (ftnlen)4);
+#line 426 "MB02MD.f"
 	jwork = *m * nl + 1;
+#line 427 "MB02MD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 427 "MB02MD.f"
 	dgesvd_("No left vectors", "All right vectors", m, &nl, &dwork[1], m, 
 		&s[1], &dwork[1], &c__1, &c__[c_offset], ldc, &dwork[jwork], &
 		i__1, info, (ftnlen)15, (ftnlen)17);
+#line 430 "MB02MD.f"
     }
 
+#line 432 "MB02MD.f"
     if (*info > 0) {
 
 /*        Save the unconverged non-diagonal elements of the bidiagonal */
 /*        matrix and exit. */
 
+#line 437 "MB02MD.f"
 	i__1 = minmnl - 1;
+#line 437 "MB02MD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 438 "MB02MD.f"
 	    dwork[j] = dwork[jwork + j];
+#line 439 "MB02MD.f"
 /* L10: */
+#line 439 "MB02MD.f"
 	}
 
+#line 441 "MB02MD.f"
 	return 0;
+#line 442 "MB02MD.f"
     }
 /* Computing MAX */
+#line 443 "MB02MD.f"
     i__1 = 2, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 443 "MB02MD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Transpose V' in-situ (in C). */
 
+#line 447 "MB02MD.f"
     i__1 = nl;
+#line 447 "MB02MD.f"
     for (j = 2; j <= i__1; ++j) {
+#line 448 "MB02MD.f"
 	i__2 = j - 1;
+#line 448 "MB02MD.f"
 	dswap_(&i__2, &c__[j + c_dim1], ldc, &c__[j * c_dim1 + 1], &c__1);
+#line 449 "MB02MD.f"
 /* L20: */
+#line 449 "MB02MD.f"
     }
 
 /*     Step 2: Compute the rank of the approximation [A+DA|B+DB]. */
 
+#line 453 "MB02MD.f"
     if (ctol) {
+#line 454 "MB02MD.f"
 	toltmp = sqrt((doublereal) k * 2.) * *tol;
+#line 455 "MB02MD.f"
 	smax = toltmp;
+#line 456 "MB02MD.f"
     } else {
+#line 457 "MB02MD.f"
 	toltmp = *tol;
+#line 458 "MB02MD.f"
 	if (toltmp <= 0.) {
+#line 458 "MB02MD.f"
 	    toltmp = dlamch_("Precision", (ftnlen)9);
+#line 458 "MB02MD.f"
 	}
 /* Computing MAX */
+#line 459 "MB02MD.f"
 	d__1 = toltmp * s[1], d__2 = dlamch_("Safe minimum", (ftnlen)12);
+#line 459 "MB02MD.f"
 	smax = max(d__1,d__2);
+#line 460 "MB02MD.f"
     }
 
+#line 462 "MB02MD.f"
     if (crank) {
 /*        WHILE ( RANK .GT. 0 ) .AND. ( S(RANK) .LE. SMAX ) DO */
+#line 464 "MB02MD.f"
 L40:
+#line 464 "MB02MD.f"
 	if (*rank > 0) {
+#line 465 "MB02MD.f"
 	    if (s[*rank] <= smax) {
+#line 466 "MB02MD.f"
 		--(*rank);
+#line 467 "MB02MD.f"
 		goto L40;
+#line 468 "MB02MD.f"
 	    }
+#line 469 "MB02MD.f"
 	}
 /*        END WHILE 40 */
+#line 471 "MB02MD.f"
     }
 
+#line 473 "MB02MD.f"
     if (*l == 0) {
+#line 474 "MB02MD.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 475 "MB02MD.f"
 	dwork[2] = 1.;
+#line 476 "MB02MD.f"
 	return 0;
+#line 477 "MB02MD.f"
     }
 
+#line 479 "MB02MD.f"
     n1 = *n + 1;
+#line 480 "MB02MD.f"
     itau = 1;
+#line 481 "MB02MD.f"
     jwork = itau + *l;
 
 /*     Step 3: Compute the orthogonal matrix Q and matrices F and Y */
@@ -576,33 +696,53 @@ L40:
 
 /*        Adjust the rank if S(RANK) has multiplicity greater than 1. */
 
+#line 490 "MB02MD.f"
 L60:
+#line 491 "MB02MD.f"
     r1 = *rank + 1;
+#line 492 "MB02MD.f"
     if (*rank < minmnl) {
 /*           WHILE RANK.GT.0 .AND. S(RANK)**2 - S(R1)**2.LE.TOL**2 DO */
+#line 494 "MB02MD.f"
 L80:
+#line 494 "MB02MD.f"
 	if (*rank > 0) {
 /* Computing 2nd power */
+#line 495 "MB02MD.f"
 	    d__1 = s[r1] / s[*rank];
 /* Computing 2nd power */
+#line 495 "MB02MD.f"
 	    d__2 = toltmp / s[*rank];
+#line 495 "MB02MD.f"
 	    if (1. - d__1 * d__1 <= d__2 * d__2) {
+#line 497 "MB02MD.f"
 		--(*rank);
+#line 498 "MB02MD.f"
 		*iwarn = 1;
+#line 499 "MB02MD.f"
 		goto L80;
+#line 500 "MB02MD.f"
 	    }
+#line 501 "MB02MD.f"
 	}
 /*           END WHILE 80 */
+#line 503 "MB02MD.f"
     }
 
+#line 505 "MB02MD.f"
     if (*rank == 0) {
 
 /*           Return zero solution. */
 
+#line 509 "MB02MD.f"
 	dlaset_("Full", n, l, &c_b8, &c_b8, &x[x_offset], ldx, (ftnlen)4);
+#line 510 "MB02MD.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 511 "MB02MD.f"
 	dwork[2] = 1.;
+#line 512 "MB02MD.f"
 	return 0;
+#line 513 "MB02MD.f"
     }
 
 /*        Compute the orthogonal matrix Q (in factorized form) and the */
@@ -613,58 +753,89 @@ L80:
 /*        L rows of V2 matrix is not exploited. */
 /*        Workspace: need 2*L;  prefer L + L*NB. */
 
+#line 523 "MB02MD.f"
     r1 = *rank + 1;
+#line 524 "MB02MD.f"
     i__1 = nl - *rank;
+#line 524 "MB02MD.f"
     i__2 = *ldwork - jwork + 1;
+#line 524 "MB02MD.f"
     dgerqf_(l, &i__1, &c__[n1 + r1 * c_dim1], ldc, &dwork[itau], &dwork[jwork]
 	    , &i__2, info);
 /* Computing MAX */
+#line 526 "MB02MD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 526 "MB02MD.f"
     wrkopt = max(i__1,i__2);
 
 /*        Workspace: need N+L;  prefer L + N*NB. */
 
+#line 530 "MB02MD.f"
     i__1 = nl - *rank;
+#line 530 "MB02MD.f"
     i__2 = *ldwork - jwork + 1;
+#line 530 "MB02MD.f"
     dormrq_("Right", "Transpose", n, &i__1, l, &c__[n1 + r1 * c_dim1], ldc, &
 	    dwork[itau], &c__[r1 * c_dim1 + 1], ldc, &dwork[jwork], &i__2, 
 	    info, (ftnlen)5, (ftnlen)9);
 /* Computing MAX */
+#line 533 "MB02MD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 533 "MB02MD.f"
     wrkopt = max(i__1,i__2);
 
+#line 535 "MB02MD.f"
     i__1 = *n - *rank;
+#line 535 "MB02MD.f"
     dlaset_("Full", l, &i__1, &c_b8, &c_b8, &c__[n1 + r1 * c_dim1], ldc, (
 	    ftnlen)4);
+#line 536 "MB02MD.f"
     if (*l > 1) {
+#line 536 "MB02MD.f"
 	i__1 = *l - 1;
+#line 536 "MB02MD.f"
 	i__2 = *l - 1;
+#line 536 "MB02MD.f"
 	dlaset_("Lower", &i__1, &i__2, &c_b8, &c_b8, &c__[n1 + 1 + n1 * 
 		c_dim1], ldc, (ftnlen)5);
+#line 536 "MB02MD.f"
     }
 
 /*        Estimate the reciprocal condition number of the matrix F, */
 /*        and lower the rank if F can be considered as singular. */
 /*        Workspace: need 3*L. */
 
+#line 544 "MB02MD.f"
     dtrcon_("1-norm", "Upper", "Non-unit", l, &c__[n1 + n1 * c_dim1], ldc, &
 	    rcond, &dwork[1], &iwork[1], info, (ftnlen)6, (ftnlen)5, (ftnlen)
 	    8);
 /* Computing MAX */
+#line 546 "MB02MD.f"
     i__1 = wrkopt, i__2 = *l * 3;
+#line 546 "MB02MD.f"
     wrkopt = max(i__1,i__2);
 
+#line 548 "MB02MD.f"
     fnorm = dlantr_("1-norm", "Upper", "Non-unit", l, l, &c__[n1 + n1 * 
 	    c_dim1], ldc, &dwork[1], (ftnlen)6, (ftnlen)5, (ftnlen)8);
+#line 550 "MB02MD.f"
     if (rcond <= toltmp * fnorm) {
+#line 551 "MB02MD.f"
 	--(*rank);
+#line 552 "MB02MD.f"
 	*iwarn = 2;
+#line 553 "MB02MD.f"
 	goto L60;
+#line 554 "MB02MD.f"
     } else if (fnorm <= toltmp * dlange_("1-norm", n, l, &c__[n1 * c_dim1 + 1]
 	    , ldc, &dwork[1], (ftnlen)6)) {
+#line 556 "MB02MD.f"
 	*rank -= *l;
+#line 557 "MB02MD.f"
 	*iwarn = 2;
+#line 558 "MB02MD.f"
 	goto L60;
+#line 559 "MB02MD.f"
     }
 /*     UNTIL ( F nonsingular, i.e., RCOND.GT.TOL*FNORM or */
 /*                                  FNORM.GT.TOL*norm(Y) ) */
@@ -672,17 +843,22 @@ L80:
 /*     Step 4: Solve X F = -Y by forward elimination, */
 /*             (F is upper triangular). */
 
+#line 566 "MB02MD.f"
     dlacpy_("Full", n, l, &c__[n1 * c_dim1 + 1], ldc, &x[x_offset], ldx, (
 	    ftnlen)4);
+#line 567 "MB02MD.f"
     dtrsm_("Right", "Upper", "No transpose", "Non-unit", n, l, &c_b52, &c__[
 	    n1 + n1 * c_dim1], ldc, &x[x_offset], ldx, (ftnlen)5, (ftnlen)5, (
 	    ftnlen)12, (ftnlen)8);
 
 /*     Set the optimal workspace and reciprocal condition number of F. */
 
+#line 572 "MB02MD.f"
     dwork[1] = (doublereal) wrkopt;
+#line 573 "MB02MD.f"
     dwork[2] = rcond;
 
+#line 575 "MB02MD.f"
     return 0;
 /* *** Last line of MB02MD *** */
 } /* mb02md_ */

@@ -1,3 +1,4 @@
+#line 1 "DG01MD.f"
 /* DG01MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "DG01MD.f"
 /* Subroutine */ int dg01md_(char *indi, integer *n, doublereal *xr, 
 	doublereal *xi, integer *info, ftnlen indi_len)
 {
@@ -153,121 +155,209 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 139 "DG01MD.f"
     /* Parameter adjustments */
+#line 139 "DG01MD.f"
     --xi;
+#line 139 "DG01MD.f"
     --xr;
+#line 139 "DG01MD.f"
 
+#line 139 "DG01MD.f"
     /* Function Body */
+#line 139 "DG01MD.f"
     *info = 0;
+#line 140 "DG01MD.f"
     lindi = lsame_(indi, "D", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 144 "DG01MD.f"
     if (! lindi && ! lsame_(indi, "I", (ftnlen)1, (ftnlen)1)) {
+#line 145 "DG01MD.f"
 	*info = -1;
+#line 146 "DG01MD.f"
     } else {
+#line 147 "DG01MD.f"
 	j = 0;
+#line 148 "DG01MD.f"
 	if (*n >= 2) {
+#line 149 "DG01MD.f"
 	    j = *n;
 /*           WHILE ( MOD( J, 2 ).EQ.0 ) DO */
+#line 151 "DG01MD.f"
 L10:
+#line 152 "DG01MD.f"
 	    if (j % 2 == 0) {
+#line 153 "DG01MD.f"
 		j /= 2;
+#line 154 "DG01MD.f"
 		goto L10;
+#line 155 "DG01MD.f"
 	    }
 /*           END WHILE 10 */
+#line 157 "DG01MD.f"
 	}
+#line 158 "DG01MD.f"
 	if (j != 1) {
+#line 158 "DG01MD.f"
 	    *info = -2;
+#line 158 "DG01MD.f"
 	}
+#line 159 "DG01MD.f"
     }
 
+#line 161 "DG01MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 165 "DG01MD.f"
 	i__1 = -(*info);
+#line 165 "DG01MD.f"
 	xerbla_("DG01MD", &i__1, (ftnlen)6);
+#line 166 "DG01MD.f"
 	return 0;
+#line 167 "DG01MD.f"
     }
 
 /*     Inplace shuffling of data. */
 
+#line 171 "DG01MD.f"
     j = 1;
 
+#line 173 "DG01MD.f"
     i__1 = *n;
+#line 173 "DG01MD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 174 "DG01MD.f"
 	if (j > i__) {
+#line 175 "DG01MD.f"
 	    tr = xr[i__];
+#line 176 "DG01MD.f"
 	    ti = xi[i__];
+#line 177 "DG01MD.f"
 	    xr[i__] = xr[j];
+#line 178 "DG01MD.f"
 	    xi[i__] = xi[j];
+#line 179 "DG01MD.f"
 	    xr[j] = tr;
+#line 180 "DG01MD.f"
 	    xi[j] = ti;
+#line 181 "DG01MD.f"
 	}
+#line 182 "DG01MD.f"
 	k = *n / 2;
 /*        REPEAT */
+#line 184 "DG01MD.f"
 L20:
+#line 184 "DG01MD.f"
 	if (j > k) {
+#line 185 "DG01MD.f"
 	    j -= k;
+#line 186 "DG01MD.f"
 	    k /= 2;
+#line 187 "DG01MD.f"
 	    if (k >= 2) {
+#line 187 "DG01MD.f"
 		goto L20;
+#line 187 "DG01MD.f"
 	    }
+#line 188 "DG01MD.f"
 	}
 /*        UNTIL ( K.LT.2 ) */
+#line 190 "DG01MD.f"
 	j += k;
+#line 191 "DG01MD.f"
 /* L30: */
+#line 191 "DG01MD.f"
     }
 
 /*     Transform by decimation in time. */
 
+#line 195 "DG01MD.f"
     pi2 = atan(1.) * 8.;
+#line 196 "DG01MD.f"
     if (lindi) {
+#line 196 "DG01MD.f"
 	pi2 = -pi2;
+#line 196 "DG01MD.f"
     }
 
+#line 198 "DG01MD.f"
     i__ = 1;
 
 /*     WHILE ( I.LT.N ) DO */
 
+#line 202 "DG01MD.f"
 L40:
+#line 202 "DG01MD.f"
     if (i__ < *n) {
+#line 203 "DG01MD.f"
 	l = i__ << 1;
+#line 204 "DG01MD.f"
 	whelp = pi2 / (doublereal) l;
+#line 205 "DG01MD.f"
 	wstpi = sin(whelp);
+#line 206 "DG01MD.f"
 	whelp = sin(whelp * .5);
+#line 207 "DG01MD.f"
 	wstpr = whelp * -2. * whelp;
+#line 208 "DG01MD.f"
 	wr = 1.;
+#line 209 "DG01MD.f"
 	wi = 0.;
 
+#line 211 "DG01MD.f"
 	i__1 = i__;
+#line 211 "DG01MD.f"
 	for (j = 1; j <= i__1; ++j) {
 
+#line 213 "DG01MD.f"
 	    i__2 = *n;
+#line 213 "DG01MD.f"
 	    i__3 = l;
+#line 213 "DG01MD.f"
 	    for (k = j; i__3 < 0 ? k >= i__2 : k <= i__2; k += i__3) {
+#line 214 "DG01MD.f"
 		m = k + i__;
+#line 215 "DG01MD.f"
 		tr = wr * xr[m] - wi * xi[m];
+#line 216 "DG01MD.f"
 		ti = wr * xi[m] + wi * xr[m];
+#line 217 "DG01MD.f"
 		xr[m] = xr[k] - tr;
+#line 218 "DG01MD.f"
 		xi[m] = xi[k] - ti;
+#line 219 "DG01MD.f"
 		xr[k] += tr;
+#line 220 "DG01MD.f"
 		xi[k] += ti;
+#line 221 "DG01MD.f"
 /* L50: */
+#line 221 "DG01MD.f"
 	    }
 
+#line 223 "DG01MD.f"
 	    whelp = wr;
+#line 224 "DG01MD.f"
 	    wr = wr + wr * wstpr - wi * wstpi;
+#line 225 "DG01MD.f"
 	    wi = wi + whelp * wstpi + wi * wstpr;
+#line 226 "DG01MD.f"
 /* L60: */
+#line 226 "DG01MD.f"
 	}
 
+#line 228 "DG01MD.f"
 	i__ = l;
+#line 229 "DG01MD.f"
 	goto L40;
 /*        END WHILE 40 */
+#line 231 "DG01MD.f"
     }
 
+#line 233 "DG01MD.f"
     return 0;
 /* *** Last line of DG01MD *** */
 } /* dg01md_ */

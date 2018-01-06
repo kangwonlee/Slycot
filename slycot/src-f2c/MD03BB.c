@@ -1,3 +1,4 @@
+#line 1 "MD03BB.f"
 /* MD03BB.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MD03BB.f"
 /* Subroutine */ int md03bb_(char *cond, integer *n, integer *ipar, integer *
 	lipar, doublereal *r__, integer *ldr, integer *ipvt, doublereal *diag,
 	 doublereal *qtb, doublereal *delta, doublereal *par, integer *ranks, 
@@ -215,23 +217,39 @@
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 198 "MD03BB.f"
     /* Parameter adjustments */
+#line 198 "MD03BB.f"
     --ipar;
+#line 198 "MD03BB.f"
     r_dim1 = *ldr;
+#line 198 "MD03BB.f"
     r_offset = 1 + r_dim1;
+#line 198 "MD03BB.f"
     r__ -= r_offset;
+#line 198 "MD03BB.f"
     --ipvt;
+#line 198 "MD03BB.f"
     --diag;
+#line 198 "MD03BB.f"
     --qtb;
+#line 198 "MD03BB.f"
     --ranks;
+#line 198 "MD03BB.f"
     --x;
+#line 198 "MD03BB.f"
     --rx;
+#line 198 "MD03BB.f"
     --dwork;
+#line 198 "MD03BB.f"
 
+#line 198 "MD03BB.f"
     /* Function Body */
+#line 198 "MD03BB.f"
     md03by_(cond, n, &r__[r_offset], ldr, &ipvt[1], &diag[1], &qtb[1], delta, 
 	    par, &ranks[1], &x[1], &rx[1], tol, &dwork[1], ldwork, info, (
 	    ftnlen)1);
+#line 200 "MD03BB.f"
     return 0;
 
 /* *** Last line of MD03BB *** */

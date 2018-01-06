@@ -1,3 +1,4 @@
+#line 1 "AB08MZ.f"
 /* AB08MZ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB08MZ.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -228,97 +230,171 @@ static integer c_n1 = -1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 190 "AB08MZ.f"
     /* Parameter adjustments */
+#line 190 "AB08MZ.f"
     a_dim1 = *lda;
+#line 190 "AB08MZ.f"
     a_offset = 1 + a_dim1;
+#line 190 "AB08MZ.f"
     a -= a_offset;
+#line 190 "AB08MZ.f"
     b_dim1 = *ldb;
+#line 190 "AB08MZ.f"
     b_offset = 1 + b_dim1;
+#line 190 "AB08MZ.f"
     b -= b_offset;
+#line 190 "AB08MZ.f"
     c_dim1 = *ldc;
+#line 190 "AB08MZ.f"
     c_offset = 1 + c_dim1;
+#line 190 "AB08MZ.f"
     c__ -= c_offset;
+#line 190 "AB08MZ.f"
     d_dim1 = *ldd;
+#line 190 "AB08MZ.f"
     d_offset = 1 + d_dim1;
+#line 190 "AB08MZ.f"
     d__ -= d_offset;
+#line 190 "AB08MZ.f"
     --iwork;
+#line 190 "AB08MZ.f"
     --dwork;
+#line 190 "AB08MZ.f"
     --zwork;
+#line 190 "AB08MZ.f"
 
+#line 190 "AB08MZ.f"
     /* Function Body */
+#line 190 "AB08MZ.f"
     np = *n + *p;
+#line 191 "AB08MZ.f"
     nm = *n + *m;
+#line 192 "AB08MZ.f"
     *info = 0;
+#line 193 "AB08MZ.f"
     lequil = lsame_(equil, "S", (ftnlen)1, (ftnlen)1);
+#line 194 "AB08MZ.f"
     lquery = *lzwork == -1;
+#line 195 "AB08MZ.f"
     wrkopt = np * nm;
 
 /*     Test the input scalar arguments. */
 
+#line 199 "AB08MZ.f"
     if (! lequil && ! lsame_(equil, "N", (ftnlen)1, (ftnlen)1)) {
+#line 200 "AB08MZ.f"
 	*info = -1;
+#line 201 "AB08MZ.f"
     } else if (*n < 0) {
+#line 202 "AB08MZ.f"
 	*info = -2;
+#line 203 "AB08MZ.f"
     } else if (*m < 0) {
+#line 204 "AB08MZ.f"
 	*info = -3;
+#line 205 "AB08MZ.f"
     } else if (*p < 0) {
+#line 206 "AB08MZ.f"
 	*info = -4;
+#line 207 "AB08MZ.f"
     } else if (*lda < max(1,*n)) {
+#line 208 "AB08MZ.f"
 	*info = -6;
+#line 209 "AB08MZ.f"
     } else if (*ldb < max(1,*n)) {
+#line 210 "AB08MZ.f"
 	*info = -8;
+#line 211 "AB08MZ.f"
     } else if (*ldc < max(1,*p)) {
+#line 212 "AB08MZ.f"
 	*info = -10;
+#line 213 "AB08MZ.f"
     } else if (*ldd < max(1,*p)) {
+#line 214 "AB08MZ.f"
 	*info = -12;
+#line 215 "AB08MZ.f"
     } else {
 /* Computing MAX */
 /* Computing MAX */
+#line 216 "AB08MZ.f"
 	i__3 = *m * 3 - 1;
 /* Computing MAX */
+#line 216 "AB08MZ.f"
 	i__4 = *p * 3 - 1, i__4 = max(i__4,np);
+#line 216 "AB08MZ.f"
 	i__1 = min(*p,*m) + max(i__3,*n), i__1 = max(i__1,1), i__2 = min(*p,*
 		n) + max(i__4,nm);
+#line 216 "AB08MZ.f"
 	kw = wrkopt + max(i__1,i__2);
+#line 218 "AB08MZ.f"
 	if (lquery) {
+#line 219 "AB08MZ.f"
 	    svlmax = 0.;
+#line 220 "AB08MZ.f"
 	    ninfz = 0;
+#line 221 "AB08MZ.f"
 	    i__1 = max(1,np);
+#line 221 "AB08MZ.f"
 	    ab8nxz_(n, m, p, p, &c__0, &svlmax, &zwork[1], &i__1, &ninfz, &
 		    iwork[1], &iwork[1], &mu, &nu, &nkrol, tol, &iwork[1], &
 		    dwork[1], &zwork[1], &c_n1, info);
 /* Computing MAX */
+#line 224 "AB08MZ.f"
 	    i__1 = kw, i__2 = wrkopt + (integer) zwork[1].r;
+#line 224 "AB08MZ.f"
 	    wrkopt = max(i__1,i__2);
+#line 225 "AB08MZ.f"
 	} else if (*lzwork < kw) {
+#line 226 "AB08MZ.f"
 	    *info = -17;
+#line 227 "AB08MZ.f"
 	}
+#line 228 "AB08MZ.f"
     }
 
+#line 230 "AB08MZ.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 234 "AB08MZ.f"
 	i__1 = -(*info);
+#line 234 "AB08MZ.f"
 	xerbla_("AB08MZ", &i__1, (ftnlen)6);
+#line 235 "AB08MZ.f"
 	return 0;
+#line 236 "AB08MZ.f"
     } else if (lquery) {
+#line 237 "AB08MZ.f"
 	zwork[1].r = (doublereal) wrkopt, zwork[1].i = 0.;
+#line 238 "AB08MZ.f"
 	return 0;
+#line 239 "AB08MZ.f"
     }
 
 /*     Quick return if possible. */
 
+#line 243 "AB08MZ.f"
     if (min(*m,*p) == 0) {
+#line 244 "AB08MZ.f"
 	*rank = 0;
+#line 245 "AB08MZ.f"
 	zwork[1].r = 1., zwork[1].i = 0.;
+#line 246 "AB08MZ.f"
 	return 0;
+#line 247 "AB08MZ.f"
     }
 
+#line 249 "AB08MZ.f"
     i__1 = (*n << 1) + 1;
+#line 249 "AB08MZ.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 250 "AB08MZ.f"
 	iwork[i__] = 0;
+#line 251 "AB08MZ.f"
 /* L10: */
+#line 251 "AB08MZ.f"
     }
 
 /*     (Note: Comments in the code beginning "Workspace:" describe the */
@@ -329,32 +405,47 @@ static integer c_n1 = -1;
 /*                                    ( D  C ) */
 /*     Complex workspace: need   (N+P)*(N+M). */
 
+#line 261 "AB08MZ.f"
     zlacpy_("Full", n, m, &b[b_offset], ldb, &zwork[1], &np, (ftnlen)4);
+#line 262 "AB08MZ.f"
     zlacpy_("Full", p, m, &d__[d_offset], ldd, &zwork[*n + 1], &np, (ftnlen)4)
 	    ;
+#line 263 "AB08MZ.f"
     zlacpy_("Full", n, n, &a[a_offset], lda, &zwork[np * *m + 1], &np, (
 	    ftnlen)4);
+#line 264 "AB08MZ.f"
     zlacpy_("Full", p, n, &c__[c_offset], ldc, &zwork[np * *m + *n + 1], &np, 
 	    (ftnlen)4);
 
 /*     If required, balance the compound matrix (default MAXRED). */
 /*     Real Workspace: need   N. */
 
+#line 269 "AB08MZ.f"
     kw = wrkopt + 1;
+#line 270 "AB08MZ.f"
     if (lequil) {
+#line 271 "AB08MZ.f"
 	maxred = 0.;
+#line 272 "AB08MZ.f"
 	tb01iz_("A", n, m, p, &maxred, &zwork[np * *m + 1], &np, &zwork[1], &
 		np, &zwork[np * *m + *n + 1], &np, &dwork[1], info, (ftnlen)1)
 		;
+#line 274 "AB08MZ.f"
     }
 
 /*     If required, set tolerance. */
 
+#line 278 "AB08MZ.f"
     thresh = sqrt((doublereal) (np * nm)) * dlamch_("Precision", (ftnlen)9);
+#line 279 "AB08MZ.f"
     toler = *tol;
+#line 280 "AB08MZ.f"
     if (toler < thresh) {
+#line 280 "AB08MZ.f"
 	toler = thresh;
+#line 280 "AB08MZ.f"
     }
+#line 281 "AB08MZ.f"
     svlmax = zlange_("Frobenius", &np, &nm, &zwork[1], &np, &dwork[1], (
 	    ftnlen)9);
 
@@ -367,20 +458,31 @@ static integer c_n1 = -1;
 /*                        prefer larger. */
 /*     Integer workspace: 2*N+MAX(M,P)+1. */
 
+#line 292 "AB08MZ.f"
     ro = *p;
+#line 293 "AB08MZ.f"
     sigma = 0;
+#line 294 "AB08MZ.f"
     ninfz = 0;
+#line 295 "AB08MZ.f"
     i__1 = *lzwork - kw + 1;
+#line 295 "AB08MZ.f"
     ab8nxz_(n, m, p, &ro, &sigma, &svlmax, &zwork[1], &np, &ninfz, &iwork[1], 
 	    &iwork[*n + 1], &mu, &nu, &nkrol, &toler, &iwork[(*n << 1) + 2], &
 	    dwork[1], &zwork[kw], &i__1, info);
+#line 298 "AB08MZ.f"
     *rank = mu;
 
 /* Computing MAX */
+#line 300 "AB08MZ.f"
     i__4 = kw;
+#line 300 "AB08MZ.f"
     i__2 = wrkopt, i__3 = (integer) zwork[i__4].r + kw - 1;
+#line 300 "AB08MZ.f"
     i__1 = max(i__2,i__3);
+#line 300 "AB08MZ.f"
     zwork[1].r = (doublereal) i__1, zwork[1].i = 0.;
+#line 301 "AB08MZ.f"
     return 0;
 /* *** Last line of AB08MZ *** */
 } /* ab08mz_ */

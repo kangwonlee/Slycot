@@ -1,0 +1,4 @@
+extern int df01md_(char *sico, integer *n, doublereal *dt, doublereal *a, doublereal *dwork, integer *info, ftnlen sico_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dg01nd_ 14 6 13 4 7 7 4 124 */

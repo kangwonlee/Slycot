@@ -1,3 +1,4 @@
+#line 1 "TD05AD.f"
 /* TD05AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TD05AD.f"
 /* Table of constant values */
 
 static doublereal c_b13 = 90.;
@@ -177,45 +179,76 @@ static doublereal c_b13 = 90.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 152 "TD05AD.f"
     /* Parameter adjustments */
+#line 152 "TD05AD.f"
     --b;
+#line 152 "TD05AD.f"
     --a;
+#line 152 "TD05AD.f"
 
+#line 152 "TD05AD.f"
     /* Function Body */
+#line 152 "TD05AD.f"
     *info = 0;
+#line 153 "TD05AD.f"
     lunitf = lsame_(unitf, "H", (ftnlen)1, (ftnlen)1);
+#line 154 "TD05AD.f"
     loutpu = lsame_(output, "P", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 158 "TD05AD.f"
     if (! lunitf && ! lsame_(unitf, "R", (ftnlen)1, (ftnlen)1)) {
+#line 159 "TD05AD.f"
 	*info = -1;
+#line 160 "TD05AD.f"
     } else if (! loutpu && ! lsame_(output, "C", (ftnlen)1, (ftnlen)1)) {
+#line 161 "TD05AD.f"
 	*info = -2;
+#line 162 "TD05AD.f"
     } else if (*np1 < 1) {
+#line 163 "TD05AD.f"
 	*info = -3;
+#line 164 "TD05AD.f"
     } else if (*mp1 < 1) {
+#line 165 "TD05AD.f"
 	*info = -4;
+#line 166 "TD05AD.f"
     }
 
+#line 168 "TD05AD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 172 "TD05AD.f"
 	i__1 = -(*info);
+#line 172 "TD05AD.f"
 	xerbla_("TD05AD", &i__1, (ftnlen)6);
+#line 173 "TD05AD.f"
 	return 0;
+#line 174 "TD05AD.f"
     }
 
+#line 176 "TD05AD.f"
     m = *mp1 - 1;
+#line 177 "TD05AD.f"
     n = *np1 - 1;
+#line 178 "TD05AD.f"
     wc = *w;
+#line 179 "TD05AD.f"
     twopi = atan(1.) * 8.;
+#line 180 "TD05AD.f"
     if (lunitf) {
+#line 180 "TD05AD.f"
 	wc *= twopi;
+#line 180 "TD05AD.f"
     }
 /* Computing 2nd power */
+#line 181 "TD05AD.f"
     d__1 = wc;
+#line 181 "TD05AD.f"
     w2 = d__1 * d__1;
 
 /*     Determine the orders z (NZZERO) and p (NPZERO) of the factors */
@@ -223,147 +256,240 @@ static doublereal c_b13 = 90.;
 /*     the zero trailing coefficients.  The value of G(jW) will then be */
 /*     computed as (jW)**(z-p)*m(jW)/n(jW), for appropriate m and n. */
 
+#line 188 "TD05AD.f"
     i__ = 0;
 
+#line 190 "TD05AD.f"
 L10:
+#line 191 "TD05AD.f"
     ++i__;
+#line 192 "TD05AD.f"
     if (i__ <= m) {
+#line 193 "TD05AD.f"
 	if (b[i__] == 0.) {
+#line 193 "TD05AD.f"
 	    goto L10;
+#line 193 "TD05AD.f"
 	}
+#line 194 "TD05AD.f"
     }
 
+#line 196 "TD05AD.f"
     nzzero = i__ - 1;
+#line 197 "TD05AD.f"
     i__ = 0;
 
+#line 199 "TD05AD.f"
 L20:
+#line 200 "TD05AD.f"
     ++i__;
+#line 201 "TD05AD.f"
     if (i__ <= n) {
+#line 202 "TD05AD.f"
 	if (a[i__] == 0.) {
+#line 202 "TD05AD.f"
 	    goto L20;
+#line 202 "TD05AD.f"
 	}
+#line 203 "TD05AD.f"
     }
 
+#line 205 "TD05AD.f"
     npzero = i__ - 1;
+#line 206 "TD05AD.f"
     iphase = nzzero - npzero;
 
+#line 208 "TD05AD.f"
     m2 = (m - nzzero) % 2;
 
 /*     Add real parts of the numerator m(jW). */
 
+#line 212 "TD05AD.f"
     treal = b[*mp1 - m2];
 
+#line 214 "TD05AD.f"
     i__1 = nzzero + 1;
+#line 214 "TD05AD.f"
     for (i__ = m - 1 - m2; i__ >= i__1; i__ += -2) {
+#line 215 "TD05AD.f"
 	treal = b[i__] - w2 * treal;
+#line 216 "TD05AD.f"
 /* L30: */
+#line 216 "TD05AD.f"
     }
 
 /*     Add imaginary parts of the numerator m(jW). */
 
+#line 220 "TD05AD.f"
     if (m == 0) {
+#line 221 "TD05AD.f"
 	timag = 0.;
+#line 222 "TD05AD.f"
     } else {
+#line 223 "TD05AD.f"
 	timag = b[m + m2];
 
+#line 225 "TD05AD.f"
 	i__1 = nzzero + 2;
+#line 225 "TD05AD.f"
 	for (i__ = m + m2 - 2; i__ >= i__1; i__ += -2) {
+#line 226 "TD05AD.f"
 	    timag = b[i__] - w2 * timag;
+#line 227 "TD05AD.f"
 /* L40: */
+#line 227 "TD05AD.f"
 	}
 
+#line 229 "TD05AD.f"
 	timag *= wc;
+#line 230 "TD05AD.f"
     }
 
+#line 232 "TD05AD.f"
     n2 = (n - npzero) % 2;
 
 /*     Add real parts of the denominator n(jW). */
 
+#line 236 "TD05AD.f"
     breal = a[*np1 - n2];
 
+#line 238 "TD05AD.f"
     i__1 = npzero + 1;
+#line 238 "TD05AD.f"
     for (i__ = n - 1 - n2; i__ >= i__1; i__ += -2) {
+#line 239 "TD05AD.f"
 	breal = a[i__] - w2 * breal;
+#line 240 "TD05AD.f"
 /* L50: */
+#line 240 "TD05AD.f"
     }
 
 /*     Add imaginary parts of the denominator n(jW). */
 
+#line 244 "TD05AD.f"
     if (n == 0) {
+#line 245 "TD05AD.f"
 	bimag = 0.;
+#line 246 "TD05AD.f"
     } else {
+#line 247 "TD05AD.f"
 	bimag = a[n + n2];
 
+#line 249 "TD05AD.f"
 	i__1 = npzero + 2;
+#line 249 "TD05AD.f"
 	for (i__ = n + n2 - 2; i__ >= i__1; i__ += -2) {
+#line 250 "TD05AD.f"
 	    bimag = a[i__] - w2 * bimag;
+#line 251 "TD05AD.f"
 /* L60: */
+#line 251 "TD05AD.f"
 	}
 
+#line 253 "TD05AD.f"
 	bimag *= wc;
+#line 254 "TD05AD.f"
     }
 
 /* Computing MAX */
+#line 256 "TD05AD.f"
     d__1 = abs(breal), d__2 = abs(bimag);
+#line 256 "TD05AD.f"
     if (max(d__1,d__2) == 0. || *w == 0. && iphase < 0) {
 
 /*        Error return:  The specified frequency W is a pole of G(jW), */
 /*              or all the coefficients of the A polynomial are zero. */
 
+#line 262 "TD05AD.f"
 	*info = 1;
+#line 263 "TD05AD.f"
     } else {
 
 /*        Evaluate the complex number W**(z-p)*m(jW)/n(jW). */
 
+#line 267 "TD05AD.f"
 	z__2.r = treal, z__2.i = timag;
+#line 267 "TD05AD.f"
 	z__3.r = breal, z__3.i = bimag;
+#line 267 "TD05AD.f"
 	zladiv_(&z__1, &z__2, &z__3);
+#line 267 "TD05AD.f"
 	ztemp.r = z__1.r, ztemp.i = z__1.i;
+#line 269 "TD05AD.f"
 	*valr = ztemp.r * pow_di(&wc, &iphase);
+#line 270 "TD05AD.f"
 	*vali = d_imag(&ztemp) * pow_di(&wc, &iphase);
 
+#line 272 "TD05AD.f"
 	if (! loutpu) {
 
 /*           Cartesian co-ordinates: Update the result for j**(z-p). */
 
+#line 276 "TD05AD.f"
 	    i__ = abs(iphase) % 4;
+#line 277 "TD05AD.f"
 	    if (iphase > 0 && i__ > 1 || iphase < 0 && (i__ == 1 || i__ == 2))
 		     {
+#line 279 "TD05AD.f"
 		*valr = -(*valr);
+#line 280 "TD05AD.f"
 		*vali = -(*vali);
+#line 281 "TD05AD.f"
 	    }
 
+#line 283 "TD05AD.f"
 	    if (i__ % 2 != 0) {
+#line 284 "TD05AD.f"
 		g = *valr;
+#line 285 "TD05AD.f"
 		*valr = -(*vali);
+#line 286 "TD05AD.f"
 		*vali = g;
+#line 287 "TD05AD.f"
 	    }
 
+#line 289 "TD05AD.f"
 	} else {
 
 /*           Polar co-ordinates: Compute the magnitude and phase. */
 
+#line 293 "TD05AD.f"
 	    g = dlapy2_(valr, vali);
 
+#line 295 "TD05AD.f"
 	    if (*valr == 0.) {
+#line 296 "TD05AD.f"
 		*vali = d_sign(&c_b13, vali);
+#line 297 "TD05AD.f"
 	    } else {
+#line 298 "TD05AD.f"
 		*vali = atan(*vali / *valr) / twopi * 360.;
+#line 299 "TD05AD.f"
 		if (*vali == 0. && nzzero == m && npzero == n && b[nzzero + 1]
 			 * a[npzero + 1] < 0.) {
+#line 299 "TD05AD.f"
 		    *vali = 180.;
+#line 299 "TD05AD.f"
 		}
+#line 302 "TD05AD.f"
 	    }
 
+#line 304 "TD05AD.f"
 	    *valr = d_lg10(&g) * 20.;
 
+#line 306 "TD05AD.f"
 	    if (iphase != 0) {
+#line 306 "TD05AD.f"
 		*vali += (doublereal) (nzzero - npzero) * 90.;
+#line 306 "TD05AD.f"
 	    }
+#line 308 "TD05AD.f"
 	}
 
+#line 310 "TD05AD.f"
     }
 
+#line 312 "TD05AD.f"
     return 0;
 /* *** Last line of TD05AD *** */
 } /* td05ad_ */

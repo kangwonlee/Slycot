@@ -1,3 +1,4 @@
+#line 1 "SB02ND.f"
 /* SB02ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB02ND.f"
 /* Table of constant values */
 
 static doublereal c_b16 = 1.;
@@ -404,110 +406,195 @@ static integer c__0 = 0;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 333 "SB02ND.f"
     /* Parameter adjustments */
+#line 333 "SB02ND.f"
     a_dim1 = *lda;
+#line 333 "SB02ND.f"
     a_offset = 1 + a_dim1;
+#line 333 "SB02ND.f"
     a -= a_offset;
+#line 333 "SB02ND.f"
     b_dim1 = *ldb;
+#line 333 "SB02ND.f"
     b_offset = 1 + b_dim1;
+#line 333 "SB02ND.f"
     b -= b_offset;
+#line 333 "SB02ND.f"
     r_dim1 = *ldr;
+#line 333 "SB02ND.f"
     r_offset = 1 + r_dim1;
+#line 333 "SB02ND.f"
     r__ -= r_offset;
+#line 333 "SB02ND.f"
     --ipiv;
+#line 333 "SB02ND.f"
     l_dim1 = *ldl;
+#line 333 "SB02ND.f"
     l_offset = 1 + l_dim1;
+#line 333 "SB02ND.f"
     l -= l_offset;
+#line 333 "SB02ND.f"
     x_dim1 = *ldx;
+#line 333 "SB02ND.f"
     x_offset = 1 + x_dim1;
+#line 333 "SB02ND.f"
     x -= x_offset;
+#line 333 "SB02ND.f"
     f_dim1 = *ldf;
+#line 333 "SB02ND.f"
     f_offset = 1 + f_dim1;
+#line 333 "SB02ND.f"
     f -= f_offset;
+#line 333 "SB02ND.f"
     --oufact;
+#line 333 "SB02ND.f"
     --iwork;
+#line 333 "SB02ND.f"
     --dwork;
+#line 333 "SB02ND.f"
 
+#line 333 "SB02ND.f"
     /* Function Body */
+#line 333 "SB02ND.f"
     *info = 0;
+#line 334 "SB02ND.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 335 "SB02ND.f"
     lfactc = lsame_(fact, "C", (ftnlen)1, (ftnlen)1);
+#line 336 "SB02ND.f"
     lfactd = lsame_(fact, "D", (ftnlen)1, (ftnlen)1);
+#line 337 "SB02ND.f"
     lfactu = lsame_(fact, "U", (ftnlen)1, (ftnlen)1);
+#line 338 "SB02ND.f"
     luplou = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 339 "SB02ND.f"
     withl = lsame_(jobl, "N", (ftnlen)1, (ftnlen)1);
+#line 340 "SB02ND.f"
     lfacta = lfactc || lfactd || lfactu;
 
 /*     Test the input scalar arguments. */
 
+#line 344 "SB02ND.f"
     if (! discr && ! lsame_(dico, "C", (ftnlen)1, (ftnlen)1)) {
+#line 345 "SB02ND.f"
 	*info = -1;
+#line 346 "SB02ND.f"
     } else if (! lfacta && ! lsame_(fact, "N", (ftnlen)1, (ftnlen)1) || discr 
 	    && lfactu) {
+#line 348 "SB02ND.f"
 	*info = -2;
+#line 349 "SB02ND.f"
     } else if (! luplou && ! lsame_(uplo, "L", (ftnlen)1, (ftnlen)1)) {
+#line 350 "SB02ND.f"
 	*info = -3;
+#line 351 "SB02ND.f"
     } else if (! withl && ! lsame_(jobl, "Z", (ftnlen)1, (ftnlen)1)) {
+#line 352 "SB02ND.f"
 	*info = -4;
+#line 353 "SB02ND.f"
     } else if (*n < 0) {
+#line 354 "SB02ND.f"
 	*info = -5;
+#line 355 "SB02ND.f"
     } else if (*m < 0) {
+#line 356 "SB02ND.f"
 	*info = -6;
+#line 357 "SB02ND.f"
     } else if (*p < 0) {
+#line 358 "SB02ND.f"
 	*info = -7;
+#line 359 "SB02ND.f"
     } else if (! discr && *lda < 1 || discr && *lda < max(1,*n)) {
+#line 361 "SB02ND.f"
 	*info = -9;
+#line 362 "SB02ND.f"
     } else if (*ldb < max(1,*n)) {
+#line 363 "SB02ND.f"
 	*info = -11;
+#line 364 "SB02ND.f"
     } else if (*ldr < max(1,*m) || lfactd && *ldr < max(1,*p)) {
+#line 366 "SB02ND.f"
 	*info = -13;
+#line 367 "SB02ND.f"
     } else if (! withl && *ldl < 1 || withl && *ldl < max(1,*n)) {
+#line 369 "SB02ND.f"
 	*info = -16;
+#line 370 "SB02ND.f"
     } else if (*ldx < max(1,*n)) {
+#line 371 "SB02ND.f"
 	*info = -18;
+#line 372 "SB02ND.f"
     } else if (lfactu) {
+#line 373 "SB02ND.f"
 	if (*rnorm < 0.) {
+#line 373 "SB02ND.f"
 	    *info = -19;
+#line 373 "SB02ND.f"
 	}
+#line 375 "SB02ND.f"
     }
+#line 376 "SB02ND.f"
     if (*ldf < max(1,*m)) {
+#line 377 "SB02ND.f"
 	*info = -21;
+#line 378 "SB02ND.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 378 "SB02ND.f"
 	i__1 = 2, i__2 = *m * 3;
 /* Computing MAX */
+#line 378 "SB02ND.f"
 	i__3 = 2, i__4 = *m << 1;
 /* Computing MAX */
+#line 378 "SB02ND.f"
 	i__5 = 2, i__6 = min(*p,*m) + *m;
 /* Computing MAX */
+#line 378 "SB02ND.f"
 	i__7 = *n + *m * 3 + 2, i__8 = (*n << 2) + 1;
+#line 378 "SB02ND.f"
 	if ((! lfacta || lfactc && ! discr) && *ldwork < max(i__1,i__2) || 
 		lfactu && *ldwork < max(i__3,i__4) || discr && lfactc && *
 		ldwork < *n + *m * 3 + 2 || ! discr && lfactd && *ldwork < 
 		max(i__5,i__6) || discr && lfactd && *ldwork < max(i__7,i__8))
 		 {
+#line 386 "SB02ND.f"
 	    *info = -25;
+#line 387 "SB02ND.f"
 	}
+#line 387 "SB02ND.f"
     }
 
+#line 389 "SB02ND.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 393 "SB02ND.f"
 	i__1 = -(*info);
+#line 393 "SB02ND.f"
 	xerbla_("SB02ND", &i__1, (ftnlen)6);
+#line 394 "SB02ND.f"
 	return 0;
+#line 395 "SB02ND.f"
     }
 
 /*     Quick return if possible. */
 
+#line 399 "SB02ND.f"
     if (*n == 0 || *m == 0 || lfactd && *p == 0) {
+#line 400 "SB02ND.f"
 	dwork[1] = 1.;
+#line 401 "SB02ND.f"
 	dwork[2] = 1.;
+#line 402 "SB02ND.f"
 	return 0;
+#line 403 "SB02ND.f"
     }
 
+#line 405 "SB02ND.f"
     wrkopt = 1;
+#line 406 "SB02ND.f"
     eps = dlamch_("Epsilon", (ftnlen)7);
 
 /*     Determine the right-hand side of the matrix equation. */
@@ -519,136 +606,211 @@ static integer c__0 = 0;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 417 "SB02ND.f"
     dgemm_("Transpose", "No transpose", m, n, n, &c_b16, &b[b_offset], ldb, &
 	    x[x_offset], ldx, &c_b17, &f[f_offset], ldf, (ftnlen)9, (ftnlen)
 	    12);
 
+#line 420 "SB02ND.f"
     if (! lfacta) {
+#line 421 "SB02ND.f"
 	if (discr) {
 
 /*           Discrete-time case with R not factored. Compute R + B'XB. */
 
+#line 425 "SB02ND.f"
 	    if (luplou) {
 
+#line 427 "SB02ND.f"
 		i__1 = *m;
+#line 427 "SB02ND.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 428 "SB02ND.f"
 		    dgemv_("No transpose", &j, n, &c_b16, &f[f_offset], ldf, &
 			    b[j * b_dim1 + 1], &c__1, &c_b16, &r__[j * r_dim1 
 			    + 1], &c__1, (ftnlen)12);
+#line 430 "SB02ND.f"
 /* L10: */
+#line 430 "SB02ND.f"
 		}
 
+#line 432 "SB02ND.f"
 	    } else {
 
+#line 434 "SB02ND.f"
 		i__1 = *m;
+#line 434 "SB02ND.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 435 "SB02ND.f"
 		    dgemv_("Transpose", n, &j, &c_b16, &b[b_offset], ldb, &f[
 			    j + f_dim1], ldf, &c_b16, &r__[j + r_dim1], ldr, (
 			    ftnlen)9);
+#line 437 "SB02ND.f"
 /* L20: */
+#line 437 "SB02ND.f"
 		}
 
+#line 439 "SB02ND.f"
 	    }
+#line 440 "SB02ND.f"
 	}
 
 /*        Compute the 1-norm of the matrix  R  or  R + B'XB. */
 /*        Workspace: need M. */
 
+#line 445 "SB02ND.f"
 	rnormp = dlansy_("1-norm", uplo, m, &r__[r_offset], ldr, &dwork[1], (
 		ftnlen)6, (ftnlen)1);
+#line 446 "SB02ND.f"
 	wrkopt = max(wrkopt,*m);
+#line 447 "SB02ND.f"
     }
 
+#line 449 "SB02ND.f"
     if (discr) {
 
 /*        For discrete-time case, postmultiply B'X by A. */
 /*        Workspace: need N. */
 
+#line 454 "SB02ND.f"
 	i__1 = *m;
+#line 454 "SB02ND.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 455 "SB02ND.f"
 	    dcopy_(n, &f[i__ + f_dim1], ldf, &dwork[1], &c__1);
+#line 456 "SB02ND.f"
 	    dgemv_("Transpose", n, n, &c_b16, &a[a_offset], lda, &dwork[1], &
 		    c__1, &c_b17, &f[i__ + f_dim1], ldf, (ftnlen)9);
+#line 458 "SB02ND.f"
 /* L30: */
+#line 458 "SB02ND.f"
 	}
 
+#line 460 "SB02ND.f"
 	wrkopt = max(wrkopt,*n);
+#line 461 "SB02ND.f"
     }
 
+#line 463 "SB02ND.f"
     if (withl) {
 
 /*        Add L'. */
 
+#line 467 "SB02ND.f"
 	i__1 = *m;
+#line 467 "SB02ND.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
 
+#line 469 "SB02ND.f"
 	    i__2 = *n;
+#line 469 "SB02ND.f"
 	    for (j = 1; j <= i__2; ++j) {
+#line 470 "SB02ND.f"
 		f[i__ + j * f_dim1] += l[j + i__ * l_dim1];
+#line 471 "SB02ND.f"
 /* L40: */
+#line 471 "SB02ND.f"
 	    }
 
+#line 473 "SB02ND.f"
 /* L50: */
+#line 473 "SB02ND.f"
 	}
 
+#line 475 "SB02ND.f"
     }
 
 /*     Solve the matrix equation. */
 
+#line 479 "SB02ND.f"
     if (lfacta) {
 
 /*        Case 1: Matrix R is given in a factored form. */
 
+#line 483 "SB02ND.f"
 	if (lfactd) {
 
 /*           Use QR factorization of D. */
 /*           Workspace: need   min(P,M) + M, */
 /*                      prefer min(P,M) + M*NB. */
 
+#line 489 "SB02ND.f"
 	    itau = 1;
+#line 490 "SB02ND.f"
 	    jwork = itau + min(*p,*m);
+#line 491 "SB02ND.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 491 "SB02ND.f"
 	    dgeqrf_(p, m, &r__[r_offset], ldr, &dwork[itau], &dwork[jwork], &
 		    i__1, &ifail);
 /* Computing MAX */
+#line 493 "SB02ND.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 493 "SB02ND.f"
 	    wrkopt = max(i__1,i__2);
 
 /*           Make positive the diagonal elements of the triangular */
 /*           factor. Construct the strictly lower triangle, if requested. */
 
+#line 498 "SB02ND.f"
 	    i__1 = *m;
+#line 498 "SB02ND.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 499 "SB02ND.f"
 		if (r__[i__ + i__ * r_dim1] < 0.) {
 
+#line 501 "SB02ND.f"
 		    i__2 = *m;
+#line 501 "SB02ND.f"
 		    for (j = i__; j <= i__2; ++j) {
+#line 502 "SB02ND.f"
 			r__[i__ + j * r_dim1] = -r__[i__ + j * r_dim1];
+#line 503 "SB02ND.f"
 /* L60: */
+#line 503 "SB02ND.f"
 		    }
 
+#line 505 "SB02ND.f"
 		}
+#line 506 "SB02ND.f"
 		if (! luplou) {
+#line 506 "SB02ND.f"
 		    i__2 = i__ - 1;
+#line 506 "SB02ND.f"
 		    dcopy_(&i__2, &r__[i__ * r_dim1 + 1], &c__1, &r__[i__ + 
 			    r_dim1], ldr);
+#line 506 "SB02ND.f"
 		}
+#line 508 "SB02ND.f"
 /* L70: */
+#line 508 "SB02ND.f"
 	    }
 
+#line 510 "SB02ND.f"
 	    if (*p < *m) {
+#line 511 "SB02ND.f"
 		i__1 = *m - *p;
+#line 511 "SB02ND.f"
 		dlaset_("Full", &i__1, m, &c_b17, &c_b17, &r__[*p + 1 + 
 			r_dim1], ldr, (ftnlen)4);
+#line 512 "SB02ND.f"
 		if (! discr) {
+#line 513 "SB02ND.f"
 		    dwork[2] = 0.;
+#line 514 "SB02ND.f"
 		    *info = *m + 1;
+#line 515 "SB02ND.f"
 		    return 0;
+#line 516 "SB02ND.f"
 		}
+#line 517 "SB02ND.f"
 	    }
+#line 518 "SB02ND.f"
 	}
 
+#line 520 "SB02ND.f"
 	jw = 1;
+#line 521 "SB02ND.f"
 	if (discr) {
 
 /*           Discrete-time case. Update the factorization for B'XB. */
@@ -659,161 +821,253 @@ static integer c__0 = 0;
 /*           Define     JW = 1   for Cholesky factorization of X, */
 /*                      JW = N+3 for spectral factorization of X. */
 
+#line 531 "SB02ND.f"
 	    i__1 = *ldx + 1;
+#line 531 "SB02ND.f"
 	    dcopy_(n, &x[x_offset], &i__1, &dwork[1], &c__1);
+#line 532 "SB02ND.f"
 	    dpotrf_("Upper", n, &x[x_offset], ldx, &ifail, (ftnlen)5);
+#line 533 "SB02ND.f"
 	    if (ifail == 0) {
 
 /*              Use Cholesky factorization of X to compute chol(X)*B. */
 
+#line 537 "SB02ND.f"
 		oufact[2] = 1;
+#line 538 "SB02ND.f"
 		dtrmm_("Left", "Upper", "No transpose", "Non unit", n, m, &
 			c_b16, &x[x_offset], ldx, &b[b_offset], ldb, (ftnlen)
 			4, (ftnlen)5, (ftnlen)12, (ftnlen)8);
+#line 540 "SB02ND.f"
 	    } else {
 
 /*              Use spectral factorization of X, X = UVU'. */
 /*              Workspace: need   4*N+1, */
 /*                         prefer N*(NB+2)+N+2. */
 
+#line 546 "SB02ND.f"
 		jw = *n + 3;
+#line 547 "SB02ND.f"
 		oufact[2] = 2;
+#line 548 "SB02ND.f"
 		i__1 = *ldx + 1;
+#line 548 "SB02ND.f"
 		dcopy_(n, &dwork[1], &c__1, &x[x_offset], &i__1);
+#line 549 "SB02ND.f"
 		i__1 = *ldwork - jw + 1;
+#line 549 "SB02ND.f"
 		dsyev_("Vectors", "Lower", n, &x[x_offset], ldx, &dwork[3], &
 			dwork[jw], &i__1, &ifail, (ftnlen)7, (ftnlen)5);
+#line 551 "SB02ND.f"
 		if (ifail > 0) {
+#line 552 "SB02ND.f"
 		    *info = *m + 2;
+#line 553 "SB02ND.f"
 		    return 0;
+#line 554 "SB02ND.f"
 		}
 /* Computing MAX */
+#line 555 "SB02ND.f"
 		i__1 = wrkopt, i__2 = (integer) dwork[jw] + jw - 1;
+#line 555 "SB02ND.f"
 		wrkopt = max(i__1,i__2);
+#line 556 "SB02ND.f"
 		temp = (d__1 = dwork[*n + 2], abs(d__1)) * eps;
 
 /*              Count the negligible eigenvalues and compute sqrt(V)U'B. */
 /*              Workspace: need 2*N+2. */
 
+#line 561 "SB02ND.f"
 		jz = 0;
 
+#line 563 "SB02ND.f"
 L80:
+#line 564 "SB02ND.f"
 		if ((d__1 = dwork[jz + 3], abs(d__1)) <= temp) {
+#line 565 "SB02ND.f"
 		    ++jz;
+#line 566 "SB02ND.f"
 		    if (jz < *n) {
+#line 566 "SB02ND.f"
 			goto L80;
+#line 566 "SB02ND.f"
 		    }
+#line 567 "SB02ND.f"
 		}
 
+#line 569 "SB02ND.f"
 		i__1 = *m;
+#line 569 "SB02ND.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 570 "SB02ND.f"
 		    dcopy_(n, &b[j * b_dim1 + 1], &c__1, &dwork[jw], &c__1);
+#line 571 "SB02ND.f"
 		    dgemv_("Transpose", n, n, &c_b16, &x[x_offset], ldx, &
 			    dwork[jw], &c__1, &c_b17, &b[j * b_dim1 + 1], &
 			    c__1, (ftnlen)9);
+#line 573 "SB02ND.f"
 /* L90: */
+#line 573 "SB02ND.f"
 		}
 
+#line 575 "SB02ND.f"
 		i__1 = *n;
+#line 575 "SB02ND.f"
 		for (i__ = jz + 1; i__ <= i__1; ++i__) {
+#line 576 "SB02ND.f"
 		    d__2 = sqrt((d__1 = dwork[i__ + 2], abs(d__1)));
+#line 576 "SB02ND.f"
 		    dscal_(m, &d__2, &b[i__ + b_dim1], ldb);
+#line 578 "SB02ND.f"
 /* L100: */
+#line 578 "SB02ND.f"
 		}
 
+#line 580 "SB02ND.f"
 		if (jz > 0) {
+#line 580 "SB02ND.f"
 		    dlaset_("Full", &jz, m, &c_b17, &c_b17, &b[b_offset], ldb,
 			     (ftnlen)4);
+#line 580 "SB02ND.f"
 		}
+#line 582 "SB02ND.f"
 	    }
 
 /*           Update the triangular factorization. */
 
+#line 586 "SB02ND.f"
 	    if (! luplou) {
 
 /*              For efficiency, use the transposed of the lower triangle. */
 
+#line 590 "SB02ND.f"
 		i__1 = *m;
+#line 590 "SB02ND.f"
 		for (i__ = 2; i__ <= i__1; ++i__) {
+#line 591 "SB02ND.f"
 		    i__2 = i__ - 1;
+#line 591 "SB02ND.f"
 		    dcopy_(&i__2, &r__[i__ + r_dim1], ldr, &r__[i__ * r_dim1 
 			    + 1], &c__1);
+#line 592 "SB02ND.f"
 /* L110: */
+#line 592 "SB02ND.f"
 		}
 
+#line 594 "SB02ND.f"
 	    }
 
 /*           Workspace: need JW+2*M-1. */
 
+#line 598 "SB02ND.f"
 	    mb04kd_("Full", m, &c__0, n, &r__[r_offset], ldr, &b[b_offset], 
 		    ldb, dummy, n, dummy, m, &dwork[jw], &dwork[jw + *n], (
 		    ftnlen)4);
 /* Computing MAX */
+#line 600 "SB02ND.f"
 	    i__1 = wrkopt, i__2 = jw + (*m << 1) - 1;
+#line 600 "SB02ND.f"
 	    wrkopt = max(i__1,i__2);
 
 /*           Make positive the diagonal elements of the triangular */
 /*           factor. */
 
+#line 605 "SB02ND.f"
 	    i__1 = *m;
+#line 605 "SB02ND.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 606 "SB02ND.f"
 		if (r__[i__ + i__ * r_dim1] < 0.) {
 
+#line 608 "SB02ND.f"
 		    i__2 = *m;
+#line 608 "SB02ND.f"
 		    for (j = i__; j <= i__2; ++j) {
+#line 609 "SB02ND.f"
 			r__[i__ + j * r_dim1] = -r__[i__ + j * r_dim1];
+#line 610 "SB02ND.f"
 /* L120: */
+#line 610 "SB02ND.f"
 		    }
 
+#line 612 "SB02ND.f"
 		}
+#line 613 "SB02ND.f"
 /* L130: */
+#line 613 "SB02ND.f"
 	    }
 
+#line 615 "SB02ND.f"
 	    if (! luplou) {
 
 /*              Construct the lower triangle. */
 
+#line 619 "SB02ND.f"
 		i__1 = *m;
+#line 619 "SB02ND.f"
 		for (i__ = 2; i__ <= i__1; ++i__) {
+#line 620 "SB02ND.f"
 		    i__2 = i__ - 1;
+#line 620 "SB02ND.f"
 		    dcopy_(&i__2, &r__[i__ * r_dim1 + 1], &c__1, &r__[i__ + 
 			    r_dim1], ldr);
+#line 621 "SB02ND.f"
 /* L140: */
+#line 621 "SB02ND.f"
 		}
 
+#line 623 "SB02ND.f"
 	    }
+#line 624 "SB02ND.f"
 	}
 
 /*        Compute the condition number of the coefficient matrix. */
 
+#line 628 "SB02ND.f"
 	if (! lfactu) {
 
 /*           Workspace: need JW+3*M-1. */
 
+#line 632 "SB02ND.f"
 	    dtrcon_("1-norm", uplo, "Non unit", m, &r__[r_offset], ldr, &
 		    rcond, &dwork[jw], &iwork[1], &ifail, (ftnlen)6, (ftnlen)
 		    1, (ftnlen)8);
+#line 634 "SB02ND.f"
 	    oufact[1] = 1;
 /* Computing MAX */
+#line 635 "SB02ND.f"
 	    i__1 = wrkopt, i__2 = jw + *m * 3 - 1;
+#line 635 "SB02ND.f"
 	    wrkopt = max(i__1,i__2);
+#line 636 "SB02ND.f"
 	} else {
 
 /*           Workspace: need 2*M. */
 
+#line 640 "SB02ND.f"
 	    dsycon_(uplo, m, &r__[r_offset], ldr, &ipiv[1], rnorm, &rcond, &
 		    dwork[1], &iwork[1], info, (ftnlen)1);
+#line 642 "SB02ND.f"
 	    oufact[1] = 2;
 /* Computing MAX */
+#line 643 "SB02ND.f"
 	    i__1 = wrkopt, i__2 = *m << 1;
+#line 643 "SB02ND.f"
 	    wrkopt = max(i__1,i__2);
+#line 644 "SB02ND.f"
 	}
+#line 645 "SB02ND.f"
 	dwork[2] = rcond;
+#line 646 "SB02ND.f"
 	if (rcond < eps) {
+#line 647 "SB02ND.f"
 	    *info = *m + 1;
+#line 648 "SB02ND.f"
 	    return 0;
+#line 649 "SB02ND.f"
 	}
 
+#line 651 "SB02ND.f"
     } else {
 
 /*        Case 2: Matrix R is given in an unfactored form. */
@@ -823,125 +1077,193 @@ L80:
 /*        Cholesky factorization. */
 /*        Workspace: need M. */
 
+#line 660 "SB02ND.f"
 	i__1 = *ldr + 1;
+#line 660 "SB02ND.f"
 	dcopy_(m, &r__[r_offset], &i__1, &dwork[1], &c__1);
+#line 661 "SB02ND.f"
 	if (luplou) {
 
+#line 663 "SB02ND.f"
 	    i__1 = *m;
+#line 663 "SB02ND.f"
 	    for (j = 2; j <= i__1; ++j) {
+#line 664 "SB02ND.f"
 		i__2 = j - 1;
+#line 664 "SB02ND.f"
 		dcopy_(&i__2, &r__[j * r_dim1 + 1], &c__1, &r__[j + r_dim1], 
 			ldr);
+#line 665 "SB02ND.f"
 /* L150: */
+#line 665 "SB02ND.f"
 	    }
 
+#line 667 "SB02ND.f"
 	} else {
 
+#line 669 "SB02ND.f"
 	    i__1 = *m;
+#line 669 "SB02ND.f"
 	    for (j = 2; j <= i__1; ++j) {
+#line 670 "SB02ND.f"
 		i__2 = j - 1;
+#line 670 "SB02ND.f"
 		dcopy_(&i__2, &r__[j + r_dim1], ldr, &r__[j * r_dim1 + 1], &
 			c__1);
+#line 671 "SB02ND.f"
 /* L160: */
+#line 671 "SB02ND.f"
 	    }
 
+#line 673 "SB02ND.f"
 	}
+#line 674 "SB02ND.f"
 	dpotrf_(uplo, m, &r__[r_offset], ldr, info, (ftnlen)1);
+#line 675 "SB02ND.f"
 	oufact[1] = 1;
+#line 676 "SB02ND.f"
 	if (*info == 0) {
 
 /*           Compute the reciprocal of the condition number of R. */
 /*           Workspace: need 3*M. */
 
+#line 681 "SB02ND.f"
 	    dpocon_(uplo, m, &r__[r_offset], ldr, &rnormp, &rcond, &dwork[1], 
 		    &iwork[1], info, (ftnlen)1);
 
 /*           Return if the matrix is singular to working precision. */
 
+#line 686 "SB02ND.f"
 	    dwork[2] = rcond;
+#line 687 "SB02ND.f"
 	    if (rcond < eps) {
+#line 688 "SB02ND.f"
 		*info = *m + 1;
+#line 689 "SB02ND.f"
 		return 0;
+#line 690 "SB02ND.f"
 	    }
 /* Computing MAX */
+#line 691 "SB02ND.f"
 	    i__1 = wrkopt, i__2 = *m * 3;
+#line 691 "SB02ND.f"
 	    wrkopt = max(i__1,i__2);
+#line 692 "SB02ND.f"
 	} else {
 
 /*           Use UdU' or LdL' factorization, first restoring the saved */
 /*           triangle. */
 
+#line 697 "SB02ND.f"
 	    i__1 = *ldr + 1;
+#line 697 "SB02ND.f"
 	    dcopy_(m, &dwork[1], &c__1, &r__[r_offset], &i__1);
+#line 698 "SB02ND.f"
 	    if (luplou) {
 
+#line 700 "SB02ND.f"
 		i__1 = *m;
+#line 700 "SB02ND.f"
 		for (j = 2; j <= i__1; ++j) {
+#line 701 "SB02ND.f"
 		    i__2 = j - 1;
+#line 701 "SB02ND.f"
 		    dcopy_(&i__2, &r__[j + r_dim1], ldr, &r__[j * r_dim1 + 1],
 			     &c__1);
+#line 702 "SB02ND.f"
 /* L170: */
+#line 702 "SB02ND.f"
 		}
 
+#line 704 "SB02ND.f"
 	    } else {
 
+#line 706 "SB02ND.f"
 		i__1 = *m;
+#line 706 "SB02ND.f"
 		for (j = 2; j <= i__1; ++j) {
+#line 707 "SB02ND.f"
 		    i__2 = j - 1;
+#line 707 "SB02ND.f"
 		    dcopy_(&i__2, &r__[j * r_dim1 + 1], &c__1, &r__[j + 
 			    r_dim1], ldr);
+#line 708 "SB02ND.f"
 /* L180: */
+#line 708 "SB02ND.f"
 		}
 
+#line 710 "SB02ND.f"
 	    }
 
 /*           Workspace: need   1, */
 /*                      prefer M*NB. */
 
+#line 715 "SB02ND.f"
 	    dsytrf_(uplo, m, &r__[r_offset], ldr, &ipiv[1], &dwork[1], ldwork,
 		     info, (ftnlen)1);
+#line 716 "SB02ND.f"
 	    oufact[1] = 2;
+#line 717 "SB02ND.f"
 	    if (*info > 0) {
+#line 717 "SB02ND.f"
 		return 0;
+#line 717 "SB02ND.f"
 	    }
 /* Computing MAX */
+#line 719 "SB02ND.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 719 "SB02ND.f"
 	    wrkopt = max(i__1,i__2);
 
 /*           Compute the reciprocal of the condition number of R. */
 /*           Workspace: need   2*M. */
 
+#line 724 "SB02ND.f"
 	    dsycon_(uplo, m, &r__[r_offset], ldr, &ipiv[1], &rnormp, &rcond, &
 		    dwork[1], &iwork[1], info, (ftnlen)1);
 
 /*           Return if the matrix is singular to working precision. */
 
+#line 729 "SB02ND.f"
 	    dwork[2] = rcond;
+#line 730 "SB02ND.f"
 	    if (rcond < eps) {
+#line 731 "SB02ND.f"
 		*info = *m + 1;
+#line 732 "SB02ND.f"
 		return 0;
+#line 733 "SB02ND.f"
 	    }
+#line 734 "SB02ND.f"
 	}
+#line 735 "SB02ND.f"
     }
 
+#line 737 "SB02ND.f"
     if (oufact[1] == 1) {
 
 /*        Solve the positive definite linear system. */
 
+#line 741 "SB02ND.f"
 	dpotrs_(uplo, m, n, &r__[r_offset], ldr, &f[f_offset], ldf, info, (
 		ftnlen)1);
+#line 742 "SB02ND.f"
     } else {
 
 /*        Solve the indefinite linear system. */
 
+#line 746 "SB02ND.f"
 	dsytrs_(uplo, m, n, &r__[r_offset], ldr, &ipiv[1], &f[f_offset], ldf, 
 		info, (ftnlen)1);
+#line 747 "SB02ND.f"
     }
 
 /*     Set the optimal workspace. */
 
+#line 751 "SB02ND.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 753 "SB02ND.f"
     return 0;
 /* *** Last line of SB02ND *** */
 } /* sb02nd_ */

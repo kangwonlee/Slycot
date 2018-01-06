@@ -1,3 +1,4 @@
+#line 1 "MB01WD.f"
 /* MB01WD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01WD.f"
 /* Table of constant values */
 
 static doublereal c_b12 = 0.;
@@ -228,75 +230,127 @@ static integer c__1 = 1;
 
 /*     Test the input scalar arguments. */
 
+#line 190 "MB01WD.f"
     /* Parameter adjustments */
+#line 190 "MB01WD.f"
     r_dim1 = *ldr;
+#line 190 "MB01WD.f"
     r_offset = 1 + r_dim1;
+#line 190 "MB01WD.f"
     r__ -= r_offset;
+#line 190 "MB01WD.f"
     a_dim1 = *lda;
+#line 190 "MB01WD.f"
     a_offset = 1 + a_dim1;
+#line 190 "MB01WD.f"
     a -= a_offset;
+#line 190 "MB01WD.f"
     t_dim1 = *ldt;
+#line 190 "MB01WD.f"
     t_offset = 1 + t_dim1;
+#line 190 "MB01WD.f"
     t -= t_offset;
+#line 190 "MB01WD.f"
 
+#line 190 "MB01WD.f"
     /* Function Body */
+#line 190 "MB01WD.f"
     *info = 0;
+#line 191 "MB01WD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 192 "MB01WD.f"
     upper = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 193 "MB01WD.f"
     transp = lsame_(trans, "T", (ftnlen)1, (ftnlen)1) || lsame_(trans, "C", (
 	    ftnlen)1, (ftnlen)1);
+#line 194 "MB01WD.f"
     reduc = lsame_(hess, "H", (ftnlen)1, (ftnlen)1);
 
+#line 196 "MB01WD.f"
     if (! (discr || lsame_(dico, "C", (ftnlen)1, (ftnlen)1))) {
+#line 197 "MB01WD.f"
 	*info = -1;
+#line 198 "MB01WD.f"
     } else if (! (upper || lsame_(uplo, "L", (ftnlen)1, (ftnlen)1))) {
+#line 199 "MB01WD.f"
 	*info = -2;
+#line 200 "MB01WD.f"
     } else if (! (transp || lsame_(trans, "N", (ftnlen)1, (ftnlen)1))) {
+#line 201 "MB01WD.f"
 	*info = -3;
+#line 202 "MB01WD.f"
     } else if (! (reduc || lsame_(hess, "F", (ftnlen)1, (ftnlen)1))) {
+#line 203 "MB01WD.f"
 	*info = -4;
+#line 204 "MB01WD.f"
     } else if (*n < 0) {
+#line 205 "MB01WD.f"
 	*info = -5;
+#line 206 "MB01WD.f"
     } else if (*ldr < max(1,*n)) {
+#line 207 "MB01WD.f"
 	*info = -9;
+#line 208 "MB01WD.f"
     } else if (*lda < max(1,*n)) {
+#line 209 "MB01WD.f"
 	*info = -11;
+#line 210 "MB01WD.f"
     } else if (*ldt < max(1,*n)) {
+#line 211 "MB01WD.f"
 	*info = -13;
+#line 212 "MB01WD.f"
     }
 
+#line 214 "MB01WD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 218 "MB01WD.f"
 	i__1 = -(*info);
+#line 218 "MB01WD.f"
 	xerbla_("MB01WD", &i__1, (ftnlen)6);
+#line 219 "MB01WD.f"
 	return 0;
+#line 220 "MB01WD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 224 "MB01WD.f"
     if (*n == 0) {
+#line 224 "MB01WD.f"
 	return 0;
+#line 224 "MB01WD.f"
     }
 
+#line 227 "MB01WD.f"
     if (*alpha == 0.) {
+#line 228 "MB01WD.f"
 	if (*beta == 0.) {
 
 /*           Special case when both alpha = 0 and beta = 0. */
 
+#line 232 "MB01WD.f"
 	    dlaset_(uplo, n, n, &c_b12, &c_b12, &r__[r_offset], ldr, (ftnlen)
 		    1);
+#line 233 "MB01WD.f"
 	} else {
 
 /*           Special case alpha = 0. */
 
+#line 237 "MB01WD.f"
 	    if (*beta != 1.) {
+#line 237 "MB01WD.f"
 		dlascl_(uplo, &c__0, &c__0, &c_b16, beta, n, n, &r__[r_offset]
 			, ldr, &info2, (ftnlen)1);
+#line 237 "MB01WD.f"
 	    }
+#line 239 "MB01WD.f"
 	}
+#line 240 "MB01WD.f"
 	return 0;
+#line 241 "MB01WD.f"
     }
 
 /*     General case: alpha <> 0. */
@@ -304,124 +358,197 @@ static integer c__1 = 1;
 /*     Compute (in A) T*A, if TRANS = 'N', or */
 /*                    A*T, otherwise. */
 
+#line 248 "MB01WD.f"
     if (transp) {
+#line 249 "MB01WD.f"
 	*(unsigned char *)side = 'R';
+#line 250 "MB01WD.f"
 	*(unsigned char *)negtra = 'N';
+#line 251 "MB01WD.f"
     } else {
+#line 252 "MB01WD.f"
 	*(unsigned char *)side = 'L';
+#line 253 "MB01WD.f"
 	*(unsigned char *)negtra = 'T';
+#line 254 "MB01WD.f"
     }
 
+#line 256 "MB01WD.f"
     if (reduc && *n > 2) {
+#line 257 "MB01WD.f"
 	mb01zd_(side, uplo, "NoTranspose", "Non-unit", n, n, &c__1, &c_b16, &
 		t[t_offset], ldt, &a[a_offset], lda, &info2, (ftnlen)1, (
 		ftnlen)1, (ftnlen)11, (ftnlen)8);
+#line 259 "MB01WD.f"
     } else {
+#line 260 "MB01WD.f"
 	dtrmm_(side, uplo, "NoTranspose", "Non-unit", n, n, &c_b16, &t[
 		t_offset], ldt, &a[a_offset], lda, (ftnlen)1, (ftnlen)1, (
 		ftnlen)11, (ftnlen)8);
+#line 262 "MB01WD.f"
     }
 
+#line 264 "MB01WD.f"
     if (! discr) {
 
 /*        Compute (in A) alpha*T'*T*A, if TRANS = 'N', or */
 /*                       alpha*A*T*T', otherwise. */
 
+#line 269 "MB01WD.f"
 	if (reduc && *n > 2) {
+#line 270 "MB01WD.f"
 	    mb01zd_(side, uplo, "Transpose", "Non-unit", n, n, &c__1, alpha, &
 		    t[t_offset], ldt, &a[a_offset], lda, &info2, (ftnlen)1, (
 		    ftnlen)1, (ftnlen)9, (ftnlen)8);
+#line 272 "MB01WD.f"
 	} else {
+#line 273 "MB01WD.f"
 	    dtrmm_(side, uplo, "Transpose", "Non-unit", n, n, alpha, &t[
 		    t_offset], ldt, &a[a_offset], lda, (ftnlen)1, (ftnlen)1, (
 		    ftnlen)9, (ftnlen)8);
+#line 275 "MB01WD.f"
 	}
 
 /*        Compute the required triangle of the result, using symmetry. */
 
+#line 279 "MB01WD.f"
 	if (upper) {
+#line 280 "MB01WD.f"
 	    if (*beta == 0.) {
 
+#line 282 "MB01WD.f"
 		i__1 = *n;
+#line 282 "MB01WD.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 283 "MB01WD.f"
 		    i__2 = j;
+#line 283 "MB01WD.f"
 		    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 284 "MB01WD.f"
 			r__[i__ + j * r_dim1] = a[i__ + j * a_dim1] + a[j + 
 				i__ * a_dim1];
+#line 285 "MB01WD.f"
 /* L10: */
+#line 285 "MB01WD.f"
 		    }
+#line 286 "MB01WD.f"
 /* L20: */
+#line 286 "MB01WD.f"
 		}
 
+#line 288 "MB01WD.f"
 	    } else {
 
+#line 290 "MB01WD.f"
 		i__1 = *n;
+#line 290 "MB01WD.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 291 "MB01WD.f"
 		    i__2 = j;
+#line 291 "MB01WD.f"
 		    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 292 "MB01WD.f"
 			r__[i__ + j * r_dim1] = a[i__ + j * a_dim1] + a[j + 
 				i__ * a_dim1] + *beta * r__[i__ + j * r_dim1];
+#line 293 "MB01WD.f"
 /* L30: */
+#line 293 "MB01WD.f"
 		    }
+#line 294 "MB01WD.f"
 /* L40: */
+#line 294 "MB01WD.f"
 		}
 
+#line 296 "MB01WD.f"
 	    }
 
+#line 298 "MB01WD.f"
 	} else {
 
+#line 300 "MB01WD.f"
 	    if (*beta == 0.) {
 
+#line 302 "MB01WD.f"
 		i__1 = *n;
+#line 302 "MB01WD.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 303 "MB01WD.f"
 		    i__2 = *n;
+#line 303 "MB01WD.f"
 		    for (i__ = j; i__ <= i__2; ++i__) {
+#line 304 "MB01WD.f"
 			r__[i__ + j * r_dim1] = a[i__ + j * a_dim1] + a[j + 
 				i__ * a_dim1];
+#line 305 "MB01WD.f"
 /* L50: */
+#line 305 "MB01WD.f"
 		    }
+#line 306 "MB01WD.f"
 /* L60: */
+#line 306 "MB01WD.f"
 		}
 
+#line 308 "MB01WD.f"
 	    } else {
 
+#line 310 "MB01WD.f"
 		i__1 = *n;
+#line 310 "MB01WD.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 311 "MB01WD.f"
 		    i__2 = *n;
+#line 311 "MB01WD.f"
 		    for (i__ = j; i__ <= i__2; ++i__) {
+#line 312 "MB01WD.f"
 			r__[i__ + j * r_dim1] = a[i__ + j * a_dim1] + a[j + 
 				i__ * a_dim1] + *beta * r__[i__ + j * r_dim1];
+#line 313 "MB01WD.f"
 /* L70: */
+#line 313 "MB01WD.f"
 		    }
+#line 314 "MB01WD.f"
 /* L80: */
+#line 314 "MB01WD.f"
 		}
 
+#line 316 "MB01WD.f"
 	    }
 
+#line 318 "MB01WD.f"
 	}
 
+#line 320 "MB01WD.f"
     } else {
 
 /*        Compute (in R) alpha*A'*T'*T*A + beta*R, if TRANS = 'N', or */
 /*                       alpha*A*T*T'*A' + beta*R, otherwise. */
 
+#line 325 "MB01WD.f"
 	if (reduc && *n > 2) {
+#line 326 "MB01WD.f"
 	    mb01yd_(uplo, negtra, n, n, &c__1, alpha, beta, &a[a_offset], lda,
 		     &r__[r_offset], ldr, &info2, (ftnlen)1, (ftnlen)1);
+#line 328 "MB01WD.f"
 	} else {
+#line 329 "MB01WD.f"
 	    dsyrk_(uplo, negtra, n, n, alpha, &a[a_offset], lda, beta, &r__[
 		    r_offset], ldr, (ftnlen)1, (ftnlen)1);
+#line 331 "MB01WD.f"
 	}
 
 /*        Compute (in R) -alpha*T'*T + R, if TRANS = 'N', or */
 /*                       -alpha*T*T' + R, otherwise. */
 
+#line 336 "MB01WD.f"
 	d__1 = -(*alpha);
+#line 336 "MB01WD.f"
 	mb01yd_(uplo, negtra, n, n, &c__0, &d__1, &c_b16, &t[t_offset], ldt, &
 		r__[r_offset], ldr, &info2, (ftnlen)1, (ftnlen)1);
 
+#line 339 "MB01WD.f"
     }
 
+#line 341 "MB01WD.f"
     return 0;
 /* *** Last line of MB01WD *** */
 } /* mb01wd_ */

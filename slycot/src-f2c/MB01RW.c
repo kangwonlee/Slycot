@@ -1,3 +1,4 @@
+#line 1 "MB01RW.f"
 /* MB01RW.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01RW.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -152,173 +154,284 @@ static doublereal c_b13 = 0.;
 
 /*     .. Executable Statements */
 
+#line 130 "MB01RW.f"
     /* Parameter adjustments */
+#line 130 "MB01RW.f"
     a_dim1 = *lda;
+#line 130 "MB01RW.f"
     a_offset = 1 + a_dim1;
+#line 130 "MB01RW.f"
     a -= a_offset;
+#line 130 "MB01RW.f"
     z_dim1 = *ldz;
+#line 130 "MB01RW.f"
     z_offset = 1 + z_dim1;
+#line 130 "MB01RW.f"
     z__ -= z_offset;
+#line 130 "MB01RW.f"
     --dwork;
+#line 130 "MB01RW.f"
 
+#line 130 "MB01RW.f"
     /* Function Body */
+#line 130 "MB01RW.f"
     nottra = lsame_(trans, "N", (ftnlen)1, (ftnlen)1);
+#line 131 "MB01RW.f"
     upper = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
 
+#line 133 "MB01RW.f"
     *info = 0;
+#line 134 "MB01RW.f"
     if (! (upper || lsame_(uplo, "L", (ftnlen)1, (ftnlen)1))) {
+#line 135 "MB01RW.f"
 	*info = -1;
+#line 136 "MB01RW.f"
     } else if (! (nottra || lsame_(trans, "T", (ftnlen)1, (ftnlen)1))) {
+#line 137 "MB01RW.f"
 	*info = -2;
+#line 138 "MB01RW.f"
     } else if (*m < 0) {
+#line 139 "MB01RW.f"
 	*info = -3;
+#line 140 "MB01RW.f"
     } else if (*n < 0) {
+#line 141 "MB01RW.f"
 	*info = -4;
+#line 142 "MB01RW.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 142 "MB01RW.f"
 	i__1 = max(1,*m);
+#line 142 "MB01RW.f"
 	if (*lda < max(i__1,*n)) {
+#line 143 "MB01RW.f"
 	    *info = -6;
+#line 144 "MB01RW.f"
 	} else if (nottra && *ldz < max(1,*m) || ! nottra && *ldz < max(1,*n))
 		 {
+#line 146 "MB01RW.f"
 	    *info = -8;
+#line 147 "MB01RW.f"
 	}
+#line 147 "MB01RW.f"
     }
 
+#line 149 "MB01RW.f"
     if (*info != 0) {
+#line 150 "MB01RW.f"
 	i__1 = -(*info);
+#line 150 "MB01RW.f"
 	xerbla_("MB01RW", &i__1, (ftnlen)6);
+#line 151 "MB01RW.f"
 	return 0;
+#line 152 "MB01RW.f"
     }
 
 /*     Quick return if possible. */
 
+#line 156 "MB01RW.f"
     if (*n == 0 || *m == 0) {
+#line 156 "MB01RW.f"
 	return 0;
+#line 156 "MB01RW.f"
     }
 
+#line 159 "MB01RW.f"
     if (nottra) {
 
 /*        Compute Z*A*Z'. */
 
+#line 163 "MB01RW.f"
 	if (upper) {
 
 /*           Compute Z*A in A (M-by-N). */
 
+#line 167 "MB01RW.f"
 	    i__1 = *n;
+#line 167 "MB01RW.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 168 "MB01RW.f"
 		i__2 = j - 1;
+#line 168 "MB01RW.f"
 		dcopy_(&i__2, &a[j * a_dim1 + 1], &c__1, &dwork[1], &c__1);
+#line 169 "MB01RW.f"
 		i__2 = *n - j + 1;
+#line 169 "MB01RW.f"
 		dcopy_(&i__2, &a[j + j * a_dim1], lda, &dwork[j], &c__1);
+#line 170 "MB01RW.f"
 		dgemv_(trans, m, n, &c_b11, &z__[z_offset], ldz, &dwork[1], &
 			c__1, &c_b13, &a[j * a_dim1 + 1], &c__1, (ftnlen)1);
+#line 172 "MB01RW.f"
 /* L10: */
+#line 172 "MB01RW.f"
 	    }
 
 /*           Compute A*Z' in the upper triangular part of A. */
 
+#line 176 "MB01RW.f"
 	    i__1 = *m;
+#line 176 "MB01RW.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 177 "MB01RW.f"
 		dcopy_(n, &a[i__ + a_dim1], lda, &dwork[1], &c__1);
+#line 178 "MB01RW.f"
 		i__2 = *m - i__ + 1;
+#line 178 "MB01RW.f"
 		dgemv_(trans, &i__2, n, &c_b11, &z__[i__ + z_dim1], ldz, &
 			dwork[1], &c__1, &c_b13, &a[i__ + i__ * a_dim1], lda, 
 			(ftnlen)1);
+#line 180 "MB01RW.f"
 /* L20: */
+#line 180 "MB01RW.f"
 	    }
 
+#line 182 "MB01RW.f"
 	} else {
 
 /*           Compute A*Z' in A (N-by-M). */
 
+#line 186 "MB01RW.f"
 	    i__1 = *n;
+#line 186 "MB01RW.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 187 "MB01RW.f"
 		i__2 = i__ - 1;
+#line 187 "MB01RW.f"
 		dcopy_(&i__2, &a[i__ + a_dim1], lda, &dwork[1], &c__1);
+#line 188 "MB01RW.f"
 		i__2 = *n - i__ + 1;
+#line 188 "MB01RW.f"
 		dcopy_(&i__2, &a[i__ + i__ * a_dim1], &c__1, &dwork[i__], &
 			c__1);
+#line 189 "MB01RW.f"
 		dgemv_(trans, m, n, &c_b11, &z__[z_offset], ldz, &dwork[1], &
 			c__1, &c_b13, &a[i__ + a_dim1], lda, (ftnlen)1);
+#line 191 "MB01RW.f"
 /* L30: */
+#line 191 "MB01RW.f"
 	    }
 
 /*           Compute Z*A in the lower triangular part of A. */
 
+#line 195 "MB01RW.f"
 	    i__1 = *m;
+#line 195 "MB01RW.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 196 "MB01RW.f"
 		dcopy_(n, &a[j * a_dim1 + 1], &c__1, &dwork[1], &c__1);
+#line 197 "MB01RW.f"
 		i__2 = *m - j + 1;
+#line 197 "MB01RW.f"
 		dgemv_(trans, &i__2, n, &c_b11, &z__[j + z_dim1], ldz, &dwork[
 			1], &c__1, &c_b13, &a[j + j * a_dim1], &c__1, (ftnlen)
 			1);
+#line 199 "MB01RW.f"
 /* L40: */
+#line 199 "MB01RW.f"
 	    }
 
+#line 201 "MB01RW.f"
 	}
+#line 202 "MB01RW.f"
     } else {
 
 /*        Compute Z'*A*Z. */
 
+#line 206 "MB01RW.f"
 	if (upper) {
 
 /*           Compute Z'*A in A (M-by-N). */
 
+#line 210 "MB01RW.f"
 	    i__1 = *n;
+#line 210 "MB01RW.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 211 "MB01RW.f"
 		i__2 = j - 1;
+#line 211 "MB01RW.f"
 		dcopy_(&i__2, &a[j * a_dim1 + 1], &c__1, &dwork[1], &c__1);
+#line 212 "MB01RW.f"
 		i__2 = *n - j + 1;
+#line 212 "MB01RW.f"
 		dcopy_(&i__2, &a[j + j * a_dim1], lda, &dwork[j], &c__1);
+#line 213 "MB01RW.f"
 		dgemv_(trans, n, m, &c_b11, &z__[z_offset], ldz, &dwork[1], &
 			c__1, &c_b13, &a[j * a_dim1 + 1], &c__1, (ftnlen)1);
+#line 215 "MB01RW.f"
 /* L50: */
+#line 215 "MB01RW.f"
 	    }
 
 /*           Compute A*Z in the upper triangular part of A. */
 
+#line 219 "MB01RW.f"
 	    i__1 = *m;
+#line 219 "MB01RW.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 220 "MB01RW.f"
 		dcopy_(n, &a[i__ + a_dim1], lda, &dwork[1], &c__1);
+#line 221 "MB01RW.f"
 		i__2 = *m - i__ + 1;
+#line 221 "MB01RW.f"
 		dgemv_(trans, n, &i__2, &c_b11, &z__[i__ * z_dim1 + 1], ldz, &
 			dwork[1], &c__1, &c_b13, &a[i__ + i__ * a_dim1], lda, 
 			(ftnlen)1);
+#line 223 "MB01RW.f"
 /* L60: */
+#line 223 "MB01RW.f"
 	    }
 
+#line 225 "MB01RW.f"
 	} else {
 
 /*           Compute A*Z in A (N-by-M). */
 
+#line 229 "MB01RW.f"
 	    i__1 = *n;
+#line 229 "MB01RW.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 230 "MB01RW.f"
 		i__2 = i__ - 1;
+#line 230 "MB01RW.f"
 		dcopy_(&i__2, &a[i__ + a_dim1], lda, &dwork[1], &c__1);
+#line 231 "MB01RW.f"
 		i__2 = *n - i__ + 1;
+#line 231 "MB01RW.f"
 		dcopy_(&i__2, &a[i__ + i__ * a_dim1], &c__1, &dwork[i__], &
 			c__1);
+#line 232 "MB01RW.f"
 		dgemv_(trans, n, m, &c_b11, &z__[z_offset], ldz, &dwork[1], &
 			c__1, &c_b13, &a[i__ + a_dim1], lda, (ftnlen)1);
+#line 234 "MB01RW.f"
 /* L70: */
+#line 234 "MB01RW.f"
 	    }
 
 /*           Compute Z'*A in the lower triangular part of A. */
 
+#line 238 "MB01RW.f"
 	    i__1 = *m;
+#line 238 "MB01RW.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 239 "MB01RW.f"
 		dcopy_(n, &a[j * a_dim1 + 1], &c__1, &dwork[1], &c__1);
+#line 240 "MB01RW.f"
 		i__2 = *m - j + 1;
+#line 240 "MB01RW.f"
 		dgemv_(trans, n, &i__2, &c_b11, &z__[j * z_dim1 + 1], ldz, &
 			dwork[1], &c__1, &c_b13, &a[j + j * a_dim1], &c__1, (
 			ftnlen)1);
+#line 242 "MB01RW.f"
 /* L80: */
+#line 242 "MB01RW.f"
 	    }
 
+#line 244 "MB01RW.f"
 	}
+#line 245 "MB01RW.f"
     }
 
+#line 247 "MB01RW.f"
     return 0;
 /* *** Last line of MB01RW *** */
 } /* mb01rw_ */

@@ -1,0 +1,5 @@
+extern int mb03vd_(integer *n, integer *p, integer *ilo, integer *ihi, doublereal *a, integer *lda1, integer *lda2, doublereal *tau, integer *ldtau, doublereal *dwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: mb04py_ 14 9 13 4 4 7 7 7 4 7 124 */

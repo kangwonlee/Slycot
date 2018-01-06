@@ -1,0 +1,6 @@
+extern int mb04di_(char *job, char *sgn, integer *n, integer *ilo, doublereal *scale, integer *m, doublereal *v1, integer *ldv1, doublereal *v2, integer *ldv2, integer *info, ftnlen job_len, ftnlen sgn_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: drscl_ 14 4 4 7 7 4 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: dscal_ 14 4 4 7 7 4 */

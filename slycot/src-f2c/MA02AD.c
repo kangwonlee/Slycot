@@ -1,3 +1,4 @@
+#line 1 "MA02AD.f"
 /* MA02AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MA02AD.f"
 /* Subroutine */ int ma02ad_(char *job, integer *m, integer *n, doublereal *a,
 	 integer *lda, doublereal *b, integer *ldb, ftnlen job_len)
 {
@@ -99,47 +101,88 @@
 
 /*     .. Executable Statements .. */
 
+#line 86 "MA02AD.f"
     /* Parameter adjustments */
+#line 86 "MA02AD.f"
     a_dim1 = *lda;
+#line 86 "MA02AD.f"
     a_offset = 1 + a_dim1;
+#line 86 "MA02AD.f"
     a -= a_offset;
+#line 86 "MA02AD.f"
     b_dim1 = *ldb;
+#line 86 "MA02AD.f"
     b_offset = 1 + b_dim1;
+#line 86 "MA02AD.f"
     b -= b_offset;
+#line 86 "MA02AD.f"
 
+#line 86 "MA02AD.f"
     /* Function Body */
+#line 86 "MA02AD.f"
     if (lsame_(job, "U", (ftnlen)1, (ftnlen)1)) {
+#line 87 "MA02AD.f"
 	i__1 = *n;
+#line 87 "MA02AD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 88 "MA02AD.f"
 	    i__2 = min(j,*m);
+#line 88 "MA02AD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 89 "MA02AD.f"
 		b[j + i__ * b_dim1] = a[i__ + j * a_dim1];
+#line 90 "MA02AD.f"
 /* L10: */
+#line 90 "MA02AD.f"
 	    }
+#line 91 "MA02AD.f"
 /* L20: */
+#line 91 "MA02AD.f"
 	}
+#line 92 "MA02AD.f"
     } else if (lsame_(job, "L", (ftnlen)1, (ftnlen)1)) {
+#line 93 "MA02AD.f"
 	i__1 = *n;
+#line 93 "MA02AD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 94 "MA02AD.f"
 	    i__2 = *m;
+#line 94 "MA02AD.f"
 	    for (i__ = j; i__ <= i__2; ++i__) {
+#line 95 "MA02AD.f"
 		b[j + i__ * b_dim1] = a[i__ + j * a_dim1];
+#line 96 "MA02AD.f"
 /* L30: */
+#line 96 "MA02AD.f"
 	    }
+#line 97 "MA02AD.f"
 /* L40: */
+#line 97 "MA02AD.f"
 	}
+#line 98 "MA02AD.f"
     } else {
+#line 99 "MA02AD.f"
 	i__1 = *n;
+#line 99 "MA02AD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 100 "MA02AD.f"
 	    i__2 = *m;
+#line 100 "MA02AD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 101 "MA02AD.f"
 		b[j + i__ * b_dim1] = a[i__ + j * a_dim1];
+#line 102 "MA02AD.f"
 /* L50: */
+#line 102 "MA02AD.f"
 	    }
+#line 103 "MA02AD.f"
 /* L60: */
+#line 103 "MA02AD.f"
 	}
+#line 104 "MA02AD.f"
     }
 
+#line 106 "MA02AD.f"
     return 0;
 /* *** Last line of MA02AD *** */
 } /* ma02ad_ */

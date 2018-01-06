@@ -1,3 +1,4 @@
+#line 1 "MC03MD.f"
 /* MC03MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC03MD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -249,109 +251,185 @@ static doublereal c_b8 = 0.;
 
 /*     Test the input scalar arguments. */
 
+#line 226 "MC03MD.f"
     /* Parameter adjustments */
+#line 226 "MC03MD.f"
     p1_dim1 = *ldp11;
+#line 226 "MC03MD.f"
     p1_dim2 = *ldp12;
+#line 226 "MC03MD.f"
     p1_offset = 1 + p1_dim1 * (1 + p1_dim2);
+#line 226 "MC03MD.f"
     p1 -= p1_offset;
+#line 226 "MC03MD.f"
     p2_dim1 = *ldp21;
+#line 226 "MC03MD.f"
     p2_dim2 = *ldp22;
+#line 226 "MC03MD.f"
     p2_offset = 1 + p2_dim1 * (1 + p2_dim2);
+#line 226 "MC03MD.f"
     p2 -= p2_offset;
+#line 226 "MC03MD.f"
     p3_dim1 = *ldp31;
+#line 226 "MC03MD.f"
     p3_dim2 = *ldp32;
+#line 226 "MC03MD.f"
     p3_offset = 1 + p3_dim1 * (1 + p3_dim2);
+#line 226 "MC03MD.f"
     p3 -= p3_offset;
+#line 226 "MC03MD.f"
     --dwork;
+#line 226 "MC03MD.f"
 
+#line 226 "MC03MD.f"
     /* Function Body */
+#line 226 "MC03MD.f"
     *info = 0;
+#line 227 "MC03MD.f"
     if (*rp1 < 0) {
+#line 228 "MC03MD.f"
 	*info = -1;
+#line 229 "MC03MD.f"
     } else if (*cp1 < 0) {
+#line 230 "MC03MD.f"
 	*info = -2;
+#line 231 "MC03MD.f"
     } else if (*cp2 < 0) {
+#line 232 "MC03MD.f"
 	*info = -3;
+#line 233 "MC03MD.f"
     } else if (*dp1 < -1) {
+#line 234 "MC03MD.f"
 	*info = -4;
+#line 235 "MC03MD.f"
     } else if (*dp2 < -1) {
+#line 236 "MC03MD.f"
 	*info = -5;
+#line 237 "MC03MD.f"
     } else if (*dp3 < -1) {
+#line 238 "MC03MD.f"
 	*info = -6;
+#line 239 "MC03MD.f"
     } else if (*dp1 == -1 && *ldp11 < 1 || *dp1 >= 0 && *ldp11 < max(1,*rp1)) 
 	    {
+#line 241 "MC03MD.f"
 	*info = -9;
+#line 242 "MC03MD.f"
     } else if (*dp1 == -1 && *ldp12 < 1 || *dp1 >= 0 && *ldp12 < max(1,*cp1)) 
 	    {
+#line 244 "MC03MD.f"
 	*info = -10;
+#line 245 "MC03MD.f"
     } else if (*dp2 == -1 && *ldp21 < 1 || *dp2 >= 0 && *ldp21 < max(1,*cp1)) 
 	    {
+#line 247 "MC03MD.f"
 	*info = -12;
+#line 248 "MC03MD.f"
     } else if (*dp2 == -1 && *ldp22 < 1 || *dp2 >= 0 && *ldp22 < max(1,*cp2)) 
 	    {
+#line 250 "MC03MD.f"
 	*info = -13;
+#line 251 "MC03MD.f"
     } else if (*ldp31 < max(1,*rp1)) {
+#line 252 "MC03MD.f"
 	*info = -15;
+#line 253 "MC03MD.f"
     } else if (*ldp32 < max(1,*cp2)) {
+#line 254 "MC03MD.f"
 	*info = -16;
+#line 255 "MC03MD.f"
     }
 
+#line 257 "MC03MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 261 "MC03MD.f"
 	i__1 = -(*info);
+#line 261 "MC03MD.f"
 	xerbla_("MC03MD", &i__1, (ftnlen)6);
+#line 262 "MC03MD.f"
 	return 0;
+#line 263 "MC03MD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 267 "MC03MD.f"
     if (*rp1 == 0 || *cp2 == 0) {
+#line 267 "MC03MD.f"
 	return 0;
+#line 267 "MC03MD.f"
     }
 
+#line 270 "MC03MD.f"
     if (*alpha == 0.) {
+#line 270 "MC03MD.f"
 	*dp3 = -1;
+#line 270 "MC03MD.f"
     }
 
+#line 273 "MC03MD.f"
     if (*dp3 >= 0) {
 
 /*        P3(x) := ALPHA * P3(x). */
 
+#line 277 "MC03MD.f"
 	i__1 = *dp3 + 1;
+#line 277 "MC03MD.f"
 	for (k = 1; k <= i__1; ++k) {
 
+#line 279 "MC03MD.f"
 	    i__2 = *cp2;
+#line 279 "MC03MD.f"
 	    for (j = 1; j <= i__2; ++j) {
+#line 280 "MC03MD.f"
 		dscal_(rp1, alpha, &p3[(j + k * p3_dim2) * p3_dim1 + 1], &
 			c__1);
+#line 281 "MC03MD.f"
 /* L20: */
+#line 281 "MC03MD.f"
 	    }
 
+#line 283 "MC03MD.f"
 /* L40: */
+#line 283 "MC03MD.f"
 	}
+#line 284 "MC03MD.f"
     }
 
+#line 286 "MC03MD.f"
     if (*dp1 == -1 || *dp2 == -1 || *cp1 == 0) {
+#line 286 "MC03MD.f"
 	return 0;
+#line 286 "MC03MD.f"
     }
 
 /*     Neither of P1(x) and P2(x) is the zero polynomial. */
 
+#line 291 "MC03MD.f"
     dpol3 = *dp1 + *dp2;
+#line 292 "MC03MD.f"
     if (dpol3 > *dp3) {
 
 /*        Initialize the additional part of P3(x) to zero. */
 
+#line 296 "MC03MD.f"
 	i__1 = dpol3 + 1;
+#line 296 "MC03MD.f"
 	for (k = *dp3 + 2; k <= i__1; ++k) {
+#line 297 "MC03MD.f"
 	    dlaset_("Full", rp1, cp2, &c_b8, &c_b8, &p3[(k * p3_dim2 + 1) * 
 		    p3_dim1 + 1], ldp31, (ftnlen)4);
+#line 299 "MC03MD.f"
 /* L80: */
+#line 299 "MC03MD.f"
 	}
 
+#line 301 "MC03MD.f"
 	*dp3 = dpol3;
+#line 302 "MC03MD.f"
     }
 /*                                                              k-1 */
 /*     The inner product of the j-th row of the coefficient of x    of P1 */
@@ -360,65 +438,105 @@ static doublereal c_b8 = 0.;
 /*                                                 k+i-2 */
 /*     the (j,h)-th element of the coefficient of x      of P3(x). */
 
+#line 310 "MC03MD.f"
     i__1 = *dp1 + 1;
+#line 310 "MC03MD.f"
     for (k = 1; k <= i__1; ++k) {
 
+#line 312 "MC03MD.f"
 	i__2 = *rp1;
+#line 312 "MC03MD.f"
 	for (j = 1; j <= i__2; ++j) {
+#line 313 "MC03MD.f"
 	    dcopy_(cp1, &p1[j + (k * p1_dim2 + 1) * p1_dim1], ldp11, &dwork[1]
 		    , &c__1);
 
+#line 315 "MC03MD.f"
 	    i__3 = *dp2 + 1;
+#line 315 "MC03MD.f"
 	    for (i__ = 1; i__ <= i__3; ++i__) {
+#line 316 "MC03MD.f"
 		e = k + i__ - 1;
 
+#line 318 "MC03MD.f"
 		i__4 = *cp2;
+#line 318 "MC03MD.f"
 		for (h__ = 1; h__ <= i__4; ++h__) {
+#line 319 "MC03MD.f"
 		    p3[j + (h__ + e * p3_dim2) * p3_dim1] = ddot_(cp1, &dwork[
 			    1], &c__1, &p2[(h__ + i__ * p2_dim2) * p2_dim1 + 
 			    1], &c__1) + p3[j + (h__ + e * p3_dim2) * p3_dim1]
 			    ;
+#line 321 "MC03MD.f"
 /* L100: */
+#line 321 "MC03MD.f"
 		}
 
+#line 323 "MC03MD.f"
 /* L120: */
+#line 323 "MC03MD.f"
 	    }
 
+#line 325 "MC03MD.f"
 /* L140: */
+#line 325 "MC03MD.f"
 	}
 
+#line 327 "MC03MD.f"
 /* L160: */
+#line 327 "MC03MD.f"
     }
 
 /*     Computation of the exact degree of P3(x). */
 
+#line 331 "MC03MD.f"
     cfzero = TRUE_;
 /*     WHILE ( DP3 >= 0 and CFZERO ) DO */
+#line 333 "MC03MD.f"
 L180:
+#line 333 "MC03MD.f"
     if (*dp3 >= 0 && cfzero) {
+#line 334 "MC03MD.f"
 	dpol3 = *dp3 + 1;
 
+#line 336 "MC03MD.f"
 	i__1 = *cp2;
+#line 336 "MC03MD.f"
 	for (j = 1; j <= i__1; ++j) {
 
+#line 338 "MC03MD.f"
 	    i__2 = *rp1;
+#line 338 "MC03MD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 339 "MC03MD.f"
 		if (p3[i__ + (j + dpol3 * p3_dim2) * p3_dim1] != 0.) {
+#line 339 "MC03MD.f"
 		    cfzero = FALSE_;
+#line 339 "MC03MD.f"
 		}
+#line 340 "MC03MD.f"
 /* L200: */
+#line 340 "MC03MD.f"
 	    }
 
+#line 342 "MC03MD.f"
 /* L220: */
+#line 342 "MC03MD.f"
 	}
 
+#line 344 "MC03MD.f"
 	if (cfzero) {
+#line 344 "MC03MD.f"
 	    --(*dp3);
+#line 344 "MC03MD.f"
 	}
+#line 345 "MC03MD.f"
 	goto L180;
+#line 346 "MC03MD.f"
     }
 /*     END WHILE 180 */
 
+#line 349 "MC03MD.f"
     return 0;
 /* *** Last line of MC03MD *** */
 } /* mc03md_ */

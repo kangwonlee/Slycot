@@ -1,3 +1,4 @@
+#line 1 "SB03RD.f"
 /* SB03RD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB03RD.f"
 /* Table of constant values */
 
 static doublereal c_b15 = 0.;
@@ -299,188 +301,311 @@ static integer c__1 = 1;
 
 /*     Decode and Test input parameters. */
 
+#line 259 "SB03RD.f"
     /* Parameter adjustments */
+#line 259 "SB03RD.f"
     a_dim1 = *lda;
+#line 259 "SB03RD.f"
     a_offset = 1 + a_dim1;
+#line 259 "SB03RD.f"
     a -= a_offset;
+#line 259 "SB03RD.f"
     u_dim1 = *ldu;
+#line 259 "SB03RD.f"
     u_offset = 1 + u_dim1;
+#line 259 "SB03RD.f"
     u -= u_offset;
+#line 259 "SB03RD.f"
     c_dim1 = *ldc;
+#line 259 "SB03RD.f"
     c_offset = 1 + c_dim1;
+#line 259 "SB03RD.f"
     c__ -= c_offset;
+#line 259 "SB03RD.f"
     --wr;
+#line 259 "SB03RD.f"
     --wi;
+#line 259 "SB03RD.f"
     --iwork;
+#line 259 "SB03RD.f"
     --dwork;
+#line 259 "SB03RD.f"
 
+#line 259 "SB03RD.f"
     /* Function Body */
+#line 259 "SB03RD.f"
     wantx = lsame_(job, "X", (ftnlen)1, (ftnlen)1);
+#line 260 "SB03RD.f"
     wantsp = lsame_(job, "S", (ftnlen)1, (ftnlen)1);
+#line 261 "SB03RD.f"
     wantbh = lsame_(job, "B", (ftnlen)1, (ftnlen)1);
+#line 262 "SB03RD.f"
     nofact = lsame_(fact, "N", (ftnlen)1, (ftnlen)1);
+#line 263 "SB03RD.f"
     nota = lsame_(trana, "N", (ftnlen)1, (ftnlen)1);
 
+#line 265 "SB03RD.f"
     *info = 0;
+#line 266 "SB03RD.f"
     if (! wantsp && ! wantbh && ! wantx) {
+#line 267 "SB03RD.f"
 	*info = -1;
+#line 268 "SB03RD.f"
     } else if (! nofact && ! lsame_(fact, "F", (ftnlen)1, (ftnlen)1)) {
+#line 269 "SB03RD.f"
 	*info = -2;
+#line 270 "SB03RD.f"
     } else if (! nota && ! lsame_(trana, "T", (ftnlen)1, (ftnlen)1) && ! 
 	    lsame_(trana, "C", (ftnlen)1, (ftnlen)1)) {
+#line 272 "SB03RD.f"
 	*info = -3;
+#line 273 "SB03RD.f"
     } else if (*n < 0) {
+#line 274 "SB03RD.f"
 	*info = -4;
+#line 275 "SB03RD.f"
     } else if (*lda < max(1,*n)) {
+#line 276 "SB03RD.f"
 	*info = -6;
+#line 277 "SB03RD.f"
     } else if (*ldu < max(1,*n)) {
+#line 278 "SB03RD.f"
 	*info = -8;
+#line 279 "SB03RD.f"
     } else if (wantsp && *ldc < 1 || ! wantsp && *ldc < max(1,*n)) {
+#line 281 "SB03RD.f"
 	*info = -10;
+#line 282 "SB03RD.f"
     }
 
 /*     Compute workspace. */
 
+#line 286 "SB03RD.f"
     if (wantx) {
+#line 287 "SB03RD.f"
 	if (nofact) {
 /* Computing MAX */
+#line 288 "SB03RD.f"
 	    i__1 = *n * *n, i__2 = *n * 3;
+#line 288 "SB03RD.f"
 	    minwrk = max(i__1,i__2);
+#line 289 "SB03RD.f"
 	} else {
+#line 290 "SB03RD.f"
 	    minwrk = *n * *n;
+#line 291 "SB03RD.f"
 	}
+#line 292 "SB03RD.f"
     } else {
+#line 293 "SB03RD.f"
 	if (nofact) {
 /* Computing MAX */
+#line 294 "SB03RD.f"
 	    i__1 = (*n << 1) * *n, i__2 = *n * 3;
+#line 294 "SB03RD.f"
 	    minwrk = max(i__1,i__2);
+#line 295 "SB03RD.f"
 	} else {
+#line 296 "SB03RD.f"
 	    minwrk = (*n << 1) * *n;
+#line 297 "SB03RD.f"
 	}
+#line 298 "SB03RD.f"
     }
+#line 299 "SB03RD.f"
     if (*ldwork < max(1,minwrk)) {
+#line 300 "SB03RD.f"
 	*info = -18;
+#line 301 "SB03RD.f"
     }
 
+#line 303 "SB03RD.f"
     if (*info != 0) {
+#line 304 "SB03RD.f"
 	i__1 = -(*info);
+#line 304 "SB03RD.f"
 	xerbla_("SB03RD", &i__1, (ftnlen)6);
+#line 305 "SB03RD.f"
 	return 0;
+#line 306 "SB03RD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 310 "SB03RD.f"
     if (*n == 0) {
+#line 311 "SB03RD.f"
 	*scale = 1.;
+#line 312 "SB03RD.f"
 	if (wantbh) {
+#line 312 "SB03RD.f"
 	    *ferr = 0.;
+#line 312 "SB03RD.f"
 	}
+#line 314 "SB03RD.f"
 	dwork[1] = 1.;
+#line 315 "SB03RD.f"
 	return 0;
+#line 316 "SB03RD.f"
     }
 
+#line 318 "SB03RD.f"
     lwa = 0;
 
+#line 320 "SB03RD.f"
     if (nofact) {
 
 /*        Compute the Schur factorization of A. */
 /*        Workspace:  need   3*N; */
 /*                    prefer larger. */
 
+#line 326 "SB03RD.f"
 	dgees_("Vectors", "Not ordered", (L_fp)select_, n, &a[a_offset], lda, 
 		&sdim, &wr[1], &wi[1], &u[u_offset], ldu, &dwork[1], ldwork, 
 		bwork, info, (ftnlen)7, (ftnlen)11);
+#line 328 "SB03RD.f"
 	if (*info > 0) {
+#line 328 "SB03RD.f"
 	    return 0;
+#line 328 "SB03RD.f"
 	}
+#line 330 "SB03RD.f"
 	lwa = (integer) dwork[1];
+#line 331 "SB03RD.f"
     }
 
+#line 333 "SB03RD.f"
     if (! wantsp) {
 
 /*        Transform the right-hand side. */
 /*        Workspace:  need   N*N. */
 
+#line 338 "SB03RD.f"
 	*(unsigned char *)uplo = 'U';
+#line 339 "SB03RD.f"
 	mb01rd_(uplo, "Transpose", n, n, &c_b15, &c_b16, &c__[c_offset], ldc, 
 		&u[u_offset], ldu, &c__[c_offset], ldc, &dwork[1], ldwork, 
 		info, (ftnlen)1, (ftnlen)9);
 
+#line 342 "SB03RD.f"
 	i__1 = *n;
+#line 342 "SB03RD.f"
 	for (i__ = 2; i__ <= i__1; ++i__) {
+#line 343 "SB03RD.f"
 	    i__2 = i__ - 1;
+#line 343 "SB03RD.f"
 	    dcopy_(&i__2, &c__[i__ * c_dim1 + 1], &c__1, &c__[i__ + c_dim1], 
 		    ldc);
+#line 344 "SB03RD.f"
 /* L10: */
+#line 344 "SB03RD.f"
 	}
 
 /*        Solve the transformed equation. */
 
+#line 348 "SB03RD.f"
 	sb03my_(trana, n, &a[a_offset], lda, &c__[c_offset], ldc, scale, info,
 		 (ftnlen)1);
+#line 349 "SB03RD.f"
 	if (*info > 0) {
+#line 349 "SB03RD.f"
 	    *info = *n + 1;
+#line 349 "SB03RD.f"
 	}
 
 /*        Transform back the solution. */
 
+#line 354 "SB03RD.f"
 	mb01rd_(uplo, "No transpose", n, n, &c_b15, &c_b16, &c__[c_offset], 
 		ldc, &u[u_offset], ldu, &c__[c_offset], ldc, &dwork[1], 
 		ldwork, info, (ftnlen)1, (ftnlen)12);
 
+#line 357 "SB03RD.f"
 	i__1 = *n;
+#line 357 "SB03RD.f"
 	for (i__ = 2; i__ <= i__1; ++i__) {
+#line 358 "SB03RD.f"
 	    i__2 = i__ - 1;
+#line 358 "SB03RD.f"
 	    dcopy_(&i__2, &c__[i__ * c_dim1 + 1], &c__1, &c__[i__ + c_dim1], 
 		    ldc);
+#line 359 "SB03RD.f"
 /* L20: */
+#line 359 "SB03RD.f"
 	}
 
+#line 361 "SB03RD.f"
     }
 
+#line 363 "SB03RD.f"
     if (! wantx) {
 
 /*        Estimate sep(op(A),-op(A)'). */
 /*        Workspace:  2*N*N. */
 
+#line 368 "SB03RD.f"
 	if (nota) {
+#line 369 "SB03RD.f"
 	    *(unsigned char *)notra = 'T';
+#line 370 "SB03RD.f"
 	} else {
+#line 371 "SB03RD.f"
 	    *(unsigned char *)notra = 'N';
+#line 372 "SB03RD.f"
 	}
 
+#line 374 "SB03RD.f"
 	est = 0.;
+#line 375 "SB03RD.f"
 	kase = 0;
 /*        REPEAT */
+#line 377 "SB03RD.f"
 L30:
+#line 378 "SB03RD.f"
 	i__1 = *n * *n;
+#line 378 "SB03RD.f"
 	dlacon_(&i__1, &dwork[*n * *n + 1], &dwork[1], &iwork[1], &est, &kase)
 		;
+#line 379 "SB03RD.f"
 	if (kase != 0) {
+#line 380 "SB03RD.f"
 	    if (kase == 1) {
+#line 381 "SB03RD.f"
 		sb03my_(trana, n, &a[a_offset], lda, &dwork[1], n, &scalef, &
 			ierr, (ftnlen)1);
+#line 382 "SB03RD.f"
 	    } else {
+#line 383 "SB03RD.f"
 		sb03my_(notra, n, &a[a_offset], lda, &dwork[1], n, &scalef, &
 			ierr, (ftnlen)1);
+#line 384 "SB03RD.f"
 	    }
+#line 385 "SB03RD.f"
 	    goto L30;
+#line 386 "SB03RD.f"
 	}
 /*        UNTIL KASE = 0 */
 
+#line 389 "SB03RD.f"
 	*sep = scalef / est;
 
+#line 391 "SB03RD.f"
 	if (wantbh) {
 
 /*           Compute the estimate of the relative error. */
 
+#line 395 "SB03RD.f"
 	    *ferr = dlamch_("Precision", (ftnlen)9) * dlanhs_("Frobenius", n, 
 		    &a[a_offset], lda, &dwork[1], (ftnlen)9) / *sep;
+#line 397 "SB03RD.f"
 	}
+#line 398 "SB03RD.f"
     }
 
+#line 400 "SB03RD.f"
     dwork[1] = (doublereal) max(lwa,minwrk);
 
+#line 402 "SB03RD.f"
     return 0;
 /* *** Last line of SB03RD *** */
 } /* sb03rd_ */

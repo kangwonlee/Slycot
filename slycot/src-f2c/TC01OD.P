@@ -1,0 +1,5 @@
+extern int tc01od_(char *leri, integer *m, integer *p, integer *indlim, doublereal *pcoeff, integer *ldpco1, integer *ldpco2, doublereal *qcoeff, integer *ldqco1, integer *ldqco2, integer *info, ftnlen leri_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */

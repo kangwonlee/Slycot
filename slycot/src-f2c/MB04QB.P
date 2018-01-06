@@ -1,0 +1,7 @@
+extern int mb04qb_(char *tranc, char *trand, char *tranq, char *storev, char *storew, integer *m, integer *n, integer *k, doublereal *v, integer *ldv, doublereal *w, integer *ldw, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *cs, doublereal *tau, doublereal *dwork, integer *ldwork, integer *info, ftnlen tranc_len, ftnlen trand_len, ftnlen tranq_len, ftnlen storev_len, ftnlen storew_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: ue01md_ 4 8 4 13 13 4 4 4 124 124 */
+/*:ref: mb04qf_ 14 19 13 13 13 4 4 7 4 7 4 7 7 7 4 7 4 7 124 124 124 */
+/*:ref: mb04qc_ 14 30 13 13 13 13 13 13 13 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 7 124 124 124 124 124 124 124 */
+/*:ref: mb04qu_ 14 26 13 13 13 13 13 4 4 4 7 4 7 4 7 4 7 4 7 7 7 4 4 124 124 124 124 124 */

@@ -1,3 +1,4 @@
+#line 1 "MB01SD.f"
 /* MB01SD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01SD.f"
 /* Subroutine */ int mb01sd_(char *jobs, integer *m, integer *n, doublereal *
 	a, integer *lda, doublereal *r__, doublereal *c__, ftnlen jobs_len)
 {
@@ -101,61 +103,106 @@
 
 /*     Quick return if possible. */
 
+#line 87 "MB01SD.f"
     /* Parameter adjustments */
+#line 87 "MB01SD.f"
     a_dim1 = *lda;
+#line 87 "MB01SD.f"
     a_offset = 1 + a_dim1;
+#line 87 "MB01SD.f"
     a -= a_offset;
+#line 87 "MB01SD.f"
     --r__;
+#line 87 "MB01SD.f"
     --c__;
+#line 87 "MB01SD.f"
 
+#line 87 "MB01SD.f"
     /* Function Body */
+#line 87 "MB01SD.f"
     if (*m == 0 || *n == 0) {
+#line 87 "MB01SD.f"
 	return 0;
+#line 87 "MB01SD.f"
     }
 
+#line 90 "MB01SD.f"
     if (lsame_(jobs, "C", (ftnlen)1, (ftnlen)1)) {
 
 /*        Column scaling, no row scaling. */
 
+#line 94 "MB01SD.f"
 	i__1 = *n;
+#line 94 "MB01SD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 95 "MB01SD.f"
 	    cj = c__[j];
+#line 96 "MB01SD.f"
 	    i__2 = *m;
+#line 96 "MB01SD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 97 "MB01SD.f"
 		a[i__ + j * a_dim1] = cj * a[i__ + j * a_dim1];
+#line 98 "MB01SD.f"
 /* L10: */
+#line 98 "MB01SD.f"
 	    }
+#line 99 "MB01SD.f"
 /* L20: */
+#line 99 "MB01SD.f"
 	}
+#line 100 "MB01SD.f"
     } else if (lsame_(jobs, "R", (ftnlen)1, (ftnlen)1)) {
 
 /*        Row scaling, no column scaling. */
 
+#line 104 "MB01SD.f"
 	i__1 = *n;
+#line 104 "MB01SD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 105 "MB01SD.f"
 	    i__2 = *m;
+#line 105 "MB01SD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 106 "MB01SD.f"
 		a[i__ + j * a_dim1] = r__[i__] * a[i__ + j * a_dim1];
+#line 107 "MB01SD.f"
 /* L30: */
+#line 107 "MB01SD.f"
 	    }
+#line 108 "MB01SD.f"
 /* L40: */
+#line 108 "MB01SD.f"
 	}
+#line 109 "MB01SD.f"
     } else if (lsame_(jobs, "B", (ftnlen)1, (ftnlen)1)) {
 
 /*        Row and column scaling. */
 
+#line 113 "MB01SD.f"
 	i__1 = *n;
+#line 113 "MB01SD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 114 "MB01SD.f"
 	    cj = c__[j];
+#line 115 "MB01SD.f"
 	    i__2 = *m;
+#line 115 "MB01SD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 116 "MB01SD.f"
 		a[i__ + j * a_dim1] = cj * r__[i__] * a[i__ + j * a_dim1];
+#line 117 "MB01SD.f"
 /* L50: */
+#line 117 "MB01SD.f"
 	    }
+#line 118 "MB01SD.f"
 /* L60: */
+#line 118 "MB01SD.f"
 	}
+#line 119 "MB01SD.f"
     }
 
+#line 121 "MB01SD.f"
     return 0;
 /* *** Last line of MB01SD *** */
 } /* mb01sd_ */

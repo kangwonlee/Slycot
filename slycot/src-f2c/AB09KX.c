@@ -1,3 +1,4 @@
+#line 1 "AB09KX.f"
 /* AB09KX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB09KX.f"
 /* Table of constant values */
 
 static doublereal c_b24 = -1.;
@@ -439,144 +441,263 @@ static integer c__1 = 1;
 /*     .. External Subroutines .. */
 /*     .. Executable Statements .. */
 
+#line 398 "AB09KX.f"
     /* Parameter adjustments */
+#line 398 "AB09KX.f"
     a_dim1 = *lda;
+#line 398 "AB09KX.f"
     a_offset = 1 + a_dim1;
+#line 398 "AB09KX.f"
     a -= a_offset;
+#line 398 "AB09KX.f"
     b_dim1 = *ldb;
+#line 398 "AB09KX.f"
     b_offset = 1 + b_dim1;
+#line 398 "AB09KX.f"
     b -= b_offset;
+#line 398 "AB09KX.f"
     c_dim1 = *ldc;
+#line 398 "AB09KX.f"
     c_offset = 1 + c_dim1;
+#line 398 "AB09KX.f"
     c__ -= c_offset;
+#line 398 "AB09KX.f"
     d_dim1 = *ldd;
+#line 398 "AB09KX.f"
     d_offset = 1 + d_dim1;
+#line 398 "AB09KX.f"
     d__ -= d_offset;
+#line 398 "AB09KX.f"
     av_dim1 = *ldav;
+#line 398 "AB09KX.f"
     av_offset = 1 + av_dim1;
+#line 398 "AB09KX.f"
     av -= av_offset;
+#line 398 "AB09KX.f"
     bv_dim1 = *ldbv;
+#line 398 "AB09KX.f"
     bv_offset = 1 + bv_dim1;
+#line 398 "AB09KX.f"
     bv -= bv_offset;
+#line 398 "AB09KX.f"
     cv_dim1 = *ldcv;
+#line 398 "AB09KX.f"
     cv_offset = 1 + cv_dim1;
+#line 398 "AB09KX.f"
     cv -= cv_offset;
+#line 398 "AB09KX.f"
     dv_dim1 = *lddv;
+#line 398 "AB09KX.f"
     dv_offset = 1 + dv_dim1;
+#line 398 "AB09KX.f"
     dv -= dv_offset;
+#line 398 "AB09KX.f"
     aw_dim1 = *ldaw;
+#line 398 "AB09KX.f"
     aw_offset = 1 + aw_dim1;
+#line 398 "AB09KX.f"
     aw -= aw_offset;
+#line 398 "AB09KX.f"
     bw_dim1 = *ldbw;
+#line 398 "AB09KX.f"
     bw_offset = 1 + bw_dim1;
+#line 398 "AB09KX.f"
     bw -= bw_offset;
+#line 398 "AB09KX.f"
     cw_dim1 = *ldcw;
+#line 398 "AB09KX.f"
     cw_offset = 1 + cw_dim1;
+#line 398 "AB09KX.f"
     cw -= cw_offset;
+#line 398 "AB09KX.f"
     dw_dim1 = *lddw;
+#line 398 "AB09KX.f"
     dw_offset = 1 + dw_dim1;
+#line 398 "AB09KX.f"
     dw -= dw_offset;
+#line 398 "AB09KX.f"
     --dwork;
+#line 398 "AB09KX.f"
 
+#line 398 "AB09KX.f"
     /* Function Body */
+#line 398 "AB09KX.f"
     conjs = lsame_(job, "C", (ftnlen)1, (ftnlen)1);
+#line 399 "AB09KX.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 400 "AB09KX.f"
     leftw = lsame_(weight, "L", (ftnlen)1, (ftnlen)1) || lsame_(weight, "B", (
 	    ftnlen)1, (ftnlen)1);
+#line 401 "AB09KX.f"
     rightw = lsame_(weight, "R", (ftnlen)1, (ftnlen)1) || lsame_(weight, 
 	    "B", (ftnlen)1, (ftnlen)1);
+#line 402 "AB09KX.f"
     frwght = leftw || rightw;
 
+#line 404 "AB09KX.f"
     *iwarn = 0;
+#line 405 "AB09KX.f"
     *info = 0;
+#line 406 "AB09KX.f"
     if (discr && conjs) {
+#line 407 "AB09KX.f"
 	ia = *nv << 1;
+#line 408 "AB09KX.f"
 	ib = *nw << 1;
+#line 409 "AB09KX.f"
     } else {
+#line 410 "AB09KX.f"
 	ia = 0;
+#line 411 "AB09KX.f"
 	ib = 0;
+#line 412 "AB09KX.f"
     }
+#line 413 "AB09KX.f"
     lw = 1;
+#line 414 "AB09KX.f"
     if (leftw) {
 /* Computing MAX */
 /* Computing MAX */
+#line 414 "AB09KX.f"
 	i__3 = ia, i__4 = *p * *n, i__3 = max(i__3,i__4), i__4 = *p * *m;
+#line 414 "AB09KX.f"
 	i__1 = lw, i__2 = *nv * (*nv + 5), i__1 = max(i__1,i__2), i__2 = *nv *
 		 *n + max(i__3,i__4);
+#line 414 "AB09KX.f"
 	lw = max(i__1,i__2);
+#line 414 "AB09KX.f"
     }
+#line 416 "AB09KX.f"
     if (rightw) {
 /* Computing MAX */
 /* Computing MAX */
+#line 416 "AB09KX.f"
 	i__3 = ib, i__4 = *m * *n, i__3 = max(i__3,i__4), i__4 = *p * *m;
+#line 416 "AB09KX.f"
 	i__1 = lw, i__2 = *nw * (*nw + 5), i__1 = max(i__1,i__2), i__2 = *nw *
 		 *n + max(i__3,i__4);
+#line 416 "AB09KX.f"
 	lw = max(i__1,i__2);
+#line 416 "AB09KX.f"
     }
 
 /*     Test the input scalar arguments. */
 
+#line 421 "AB09KX.f"
     if (! (lsame_(job, "N", (ftnlen)1, (ftnlen)1) || conjs)) {
+#line 422 "AB09KX.f"
 	*info = -1;
+#line 423 "AB09KX.f"
     } else if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 424 "AB09KX.f"
 	*info = -2;
+#line 425 "AB09KX.f"
     } else if (! (frwght || lsame_(weight, "N", (ftnlen)1, (ftnlen)1))) {
+#line 426 "AB09KX.f"
 	*info = -3;
+#line 427 "AB09KX.f"
     } else if (*n < 0) {
+#line 428 "AB09KX.f"
 	*info = -4;
+#line 429 "AB09KX.f"
     } else if (*nv < 0) {
+#line 430 "AB09KX.f"
 	*info = -5;
+#line 431 "AB09KX.f"
     } else if (*nw < 0) {
+#line 432 "AB09KX.f"
 	*info = -6;
+#line 433 "AB09KX.f"
     } else if (*m < 0) {
+#line 434 "AB09KX.f"
 	*info = -7;
+#line 435 "AB09KX.f"
     } else if (*p < 0) {
+#line 436 "AB09KX.f"
 	*info = -8;
+#line 437 "AB09KX.f"
     } else if (*lda < max(1,*n)) {
+#line 438 "AB09KX.f"
 	*info = -10;
+#line 439 "AB09KX.f"
     } else if (*ldb < max(1,*n)) {
+#line 440 "AB09KX.f"
 	*info = -12;
+#line 441 "AB09KX.f"
     } else if (*ldc < max(1,*p)) {
+#line 442 "AB09KX.f"
 	*info = -14;
+#line 443 "AB09KX.f"
     } else if (*ldd < max(1,*p)) {
+#line 444 "AB09KX.f"
 	*info = -16;
+#line 445 "AB09KX.f"
     } else if (*ldav < 1 || leftw && *ldav < *nv) {
+#line 446 "AB09KX.f"
 	*info = -18;
+#line 447 "AB09KX.f"
     } else if (*ldbv < 1 || leftw && *ldbv < *nv) {
+#line 448 "AB09KX.f"
 	*info = -20;
+#line 449 "AB09KX.f"
     } else if (*ldcv < 1 || leftw && *ldcv < *p) {
+#line 450 "AB09KX.f"
 	*info = -22;
+#line 451 "AB09KX.f"
     } else if (*lddv < 1 || leftw && *lddv < *p) {
+#line 452 "AB09KX.f"
 	*info = -24;
+#line 453 "AB09KX.f"
     } else if (*ldaw < 1 || rightw && *ldaw < *nw) {
+#line 454 "AB09KX.f"
 	*info = -26;
+#line 455 "AB09KX.f"
     } else if (*ldbw < 1 || rightw && *ldbw < *nw) {
+#line 456 "AB09KX.f"
 	*info = -28;
+#line 457 "AB09KX.f"
     } else if (*ldcw < 1 || rightw && *ldcw < *m) {
+#line 458 "AB09KX.f"
 	*info = -30;
+#line 459 "AB09KX.f"
     } else if (*lddw < 1 || rightw && *lddw < *m) {
+#line 460 "AB09KX.f"
 	*info = -32;
+#line 461 "AB09KX.f"
     } else if (*ldwork < lw) {
+#line 462 "AB09KX.f"
 	*info = -34;
+#line 463 "AB09KX.f"
     }
 
+#line 465 "AB09KX.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 469 "AB09KX.f"
 	i__1 = -(*info);
+#line 469 "AB09KX.f"
 	xerbla_("AB09KX", &i__1, (ftnlen)6);
+#line 470 "AB09KX.f"
 	return 0;
+#line 471 "AB09KX.f"
     }
 
 /*     Quick return if possible. */
 
+#line 475 "AB09KX.f"
     if (! frwght || min(*m,*p) == 0) {
+#line 476 "AB09KX.f"
 	dwork[1] = 1.;
+#line 477 "AB09KX.f"
 	return 0;
+#line 478 "AB09KX.f"
     }
 
+#line 480 "AB09KX.f"
     work = 1.;
+#line 481 "AB09KX.f"
     if (leftw && *nv > 0) {
 
 /*        Reduce AV to a real Schur form using an orthogonal similarity */
@@ -586,71 +707,125 @@ static integer c__1 = 1;
 /*        Workspace needed:  NV*(NV+5); */
 /*                           prefer larger. */
 
+#line 490 "AB09KX.f"
 	kw = *nv * (*nv + 2) + 1;
+#line 491 "AB09KX.f"
 	i__1 = *ldwork - kw + 1;
+#line 491 "AB09KX.f"
 	tb01wd_(nv, p, p, &av[av_offset], ldav, &bv[bv_offset], ldbv, &cv[
 		cv_offset], ldcv, &dwork[(*nv << 1) + 1], nv, &dwork[1], &
 		dwork[*nv + 1], &dwork[kw], &i__1, &ierr);
+#line 494 "AB09KX.f"
 	if (ierr != 0) {
+#line 495 "AB09KX.f"
 	    *info = 1;
+#line 496 "AB09KX.f"
 	    return 0;
+#line 497 "AB09KX.f"
 	}
 /* Computing MAX */
+#line 498 "AB09KX.f"
 	d__1 = work, d__2 = dwork[kw] + (doublereal) (kw - 1);
+#line 498 "AB09KX.f"
 	work = max(d__1,d__2);
 
+#line 500 "AB09KX.f"
 	if (conjs) {
 
 /*           Check the stability of the eigenvalues of AV. */
 
+#line 504 "AB09KX.f"
 	    if (discr) {
+#line 505 "AB09KX.f"
 		i__1 = *nv;
+#line 505 "AB09KX.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 506 "AB09KX.f"
 		    if (dlapy2_(&dwork[i__], &dwork[*nv + i__]) >= 1.) {
+#line 507 "AB09KX.f"
 			*iwarn = 1;
+#line 508 "AB09KX.f"
 			goto L50;
+#line 509 "AB09KX.f"
 		    }
+#line 510 "AB09KX.f"
 /* L10: */
+#line 510 "AB09KX.f"
 		}
+#line 511 "AB09KX.f"
 	    } else {
+#line 512 "AB09KX.f"
 		i__1 = *nv;
+#line 512 "AB09KX.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 513 "AB09KX.f"
 		    if (dwork[i__] >= 0.) {
+#line 514 "AB09KX.f"
 			*iwarn = 1;
+#line 515 "AB09KX.f"
 			goto L50;
+#line 516 "AB09KX.f"
 		    }
+#line 517 "AB09KX.f"
 /* L20: */
+#line 517 "AB09KX.f"
 		}
+#line 518 "AB09KX.f"
 	    }
+#line 519 "AB09KX.f"
 	} else {
 
 /*           Check the anti-stability of the eigenvalues of AV. */
 
+#line 523 "AB09KX.f"
 	    if (discr) {
+#line 524 "AB09KX.f"
 		i__1 = *nv;
+#line 524 "AB09KX.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 525 "AB09KX.f"
 		    if (dlapy2_(&dwork[i__], &dwork[*nv + i__]) <= 1.) {
+#line 526 "AB09KX.f"
 			*iwarn = 1;
+#line 527 "AB09KX.f"
 			goto L50;
+#line 528 "AB09KX.f"
 		    }
+#line 529 "AB09KX.f"
 /* L30: */
+#line 529 "AB09KX.f"
 		}
+#line 530 "AB09KX.f"
 	    } else {
+#line 531 "AB09KX.f"
 		i__1 = *nv;
+#line 531 "AB09KX.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 532 "AB09KX.f"
 		    if (dwork[i__] <= 0.) {
+#line 533 "AB09KX.f"
 			*iwarn = 1;
+#line 534 "AB09KX.f"
 			goto L50;
+#line 535 "AB09KX.f"
 		    }
+#line 536 "AB09KX.f"
 /* L40: */
+#line 536 "AB09KX.f"
 		}
+#line 537 "AB09KX.f"
 	    }
+#line 538 "AB09KX.f"
 	}
+#line 539 "AB09KX.f"
 L50:
 
+#line 541 "AB09KX.f"
 	;
+#line 541 "AB09KX.f"
     }
 
+#line 543 "AB09KX.f"
     if (rightw && *nw > 0) {
 
 /*        Reduce AW to a real Schur form using an orthogonal similarity */
@@ -660,73 +835,130 @@ L50:
 /*        Workspace needed:  NW*(NW+5); */
 /*                           prefer larger. */
 
+#line 552 "AB09KX.f"
 	kw = *nw * (*nw + 2) + 1;
+#line 553 "AB09KX.f"
 	i__1 = *ldwork - kw + 1;
+#line 553 "AB09KX.f"
 	tb01wd_(nw, m, m, &aw[aw_offset], ldaw, &bw[bw_offset], ldbw, &cw[
 		cw_offset], ldcw, &dwork[(*nw << 1) + 1], nw, &dwork[1], &
 		dwork[*nw + 1], &dwork[kw], &i__1, &ierr);
+#line 556 "AB09KX.f"
 	if (ierr != 0) {
+#line 557 "AB09KX.f"
 	    *info = 2;
+#line 558 "AB09KX.f"
 	    return 0;
+#line 559 "AB09KX.f"
 	}
 /* Computing MAX */
+#line 560 "AB09KX.f"
 	d__1 = work, d__2 = dwork[kw] + (doublereal) (kw - 1);
+#line 560 "AB09KX.f"
 	work = max(d__1,d__2);
 
+#line 562 "AB09KX.f"
 	if (conjs) {
 
 /*           Check the stability of the eigenvalues of AW. */
 
+#line 566 "AB09KX.f"
 	    if (discr) {
+#line 567 "AB09KX.f"
 		i__1 = *nw;
+#line 567 "AB09KX.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 568 "AB09KX.f"
 		    if (dlapy2_(&dwork[i__], &dwork[*nw + i__]) >= 1.) {
+#line 569 "AB09KX.f"
 			*iwarn += 2;
+#line 570 "AB09KX.f"
 			goto L100;
+#line 571 "AB09KX.f"
 		    }
+#line 572 "AB09KX.f"
 /* L60: */
+#line 572 "AB09KX.f"
 		}
+#line 573 "AB09KX.f"
 	    } else {
+#line 574 "AB09KX.f"
 		i__1 = *nw;
+#line 574 "AB09KX.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 575 "AB09KX.f"
 		    if (dwork[i__] >= 0.) {
+#line 576 "AB09KX.f"
 			*iwarn += 2;
+#line 577 "AB09KX.f"
 			goto L100;
+#line 578 "AB09KX.f"
 		    }
+#line 579 "AB09KX.f"
 /* L70: */
+#line 579 "AB09KX.f"
 		}
+#line 580 "AB09KX.f"
 	    }
+#line 581 "AB09KX.f"
 	} else {
 
 /*           Check the anti-stability of the eigenvalues of AW. */
 
+#line 585 "AB09KX.f"
 	    if (discr) {
+#line 586 "AB09KX.f"
 		i__1 = *nw;
+#line 586 "AB09KX.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 587 "AB09KX.f"
 		    if (dlapy2_(&dwork[i__], &dwork[*nw + i__]) <= 1.) {
+#line 588 "AB09KX.f"
 			*iwarn += 2;
+#line 589 "AB09KX.f"
 			goto L100;
+#line 590 "AB09KX.f"
 		    }
+#line 591 "AB09KX.f"
 /* L80: */
+#line 591 "AB09KX.f"
 		}
+#line 592 "AB09KX.f"
 	    } else {
+#line 593 "AB09KX.f"
 		i__1 = *nw;
+#line 593 "AB09KX.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 594 "AB09KX.f"
 		    if (dwork[i__] <= 0.) {
+#line 595 "AB09KX.f"
 			*iwarn += 2;
+#line 596 "AB09KX.f"
 			goto L100;
+#line 597 "AB09KX.f"
 		    }
+#line 598 "AB09KX.f"
 /* L90: */
+#line 598 "AB09KX.f"
 		}
+#line 599 "AB09KX.f"
 	    }
+#line 600 "AB09KX.f"
 	}
+#line 601 "AB09KX.f"
 L100:
+#line 602 "AB09KX.f"
 	;
+#line 602 "AB09KX.f"
     }
 
+#line 604 "AB09KX.f"
     if (leftw) {
+#line 605 "AB09KX.f"
 	ldw = max(*nv,1);
+#line 606 "AB09KX.f"
 	kw = *nv * *n + 1;
+#line 607 "AB09KX.f"
 	if (conjs) {
 
 /*           Compute the projection of conj(V)*G. */
@@ -738,10 +970,12 @@ L100:
 /*           Compute -CV'*C. */
 /*           Workspace needed: NV*N. */
 
+#line 618 "AB09KX.f"
 	    dgemm_("T", "N", nv, n, p, &c_b24, &cv[cv_offset], ldcv, &c__[
 		    c_offset], ldc, &c_b25, &dwork[1], &ldw, (ftnlen)1, (
 		    ftnlen)1);
 
+#line 621 "AB09KX.f"
 	    if (discr) {
 
 /*              Compute X and SCALE satisfying */
@@ -750,12 +984,17 @@ L100:
 
 /*              Additional workspace needed: 2*NV. */
 
+#line 629 "AB09KX.f"
 		sb04py_("T", "N", &c_n1, nv, n, &av[av_offset], ldav, &a[
 			a_offset], lda, &dwork[1], &ldw, &scale, &dwork[kw], &
 			ierr, (ftnlen)1, (ftnlen)1);
+#line 631 "AB09KX.f"
 		if (ierr != 0) {
+#line 632 "AB09KX.f"
 		    *info = 3;
+#line 633 "AB09KX.f"
 		    return 0;
+#line 634 "AB09KX.f"
 		}
 
 /*              Construct C <- DV'*C + BV'*X*A/SCALE, */
@@ -765,47 +1004,61 @@ L100:
 
 /*              C <- DV'*C. */
 
+#line 643 "AB09KX.f"
 		dgemm_("T", "N", p, n, p, &c_b31, &dv[dv_offset], lddv, &c__[
 			c_offset], ldc, &c_b25, &dwork[kw], p, (ftnlen)1, (
 			ftnlen)1);
+#line 645 "AB09KX.f"
 		dlacpy_("F", p, n, &dwork[kw], p, &c__[c_offset], ldc, (
 			ftnlen)1);
 
 /*              D <- DV'*D. */
 
+#line 649 "AB09KX.f"
 		dgemm_("T", "N", p, m, p, &c_b31, &dv[dv_offset], lddv, &d__[
 			d_offset], ldd, &c_b25, &dwork[kw], p, (ftnlen)1, (
 			ftnlen)1);
+#line 651 "AB09KX.f"
 		dlacpy_("F", p, m, &dwork[kw], p, &d__[d_offset], ldd, (
 			ftnlen)1);
 
 /*              C <- C + BV'*X*A/SCALE. */
 
+#line 655 "AB09KX.f"
 		d__1 = 1. / scale;
+#line 655 "AB09KX.f"
 		dgemm_("T", "N", p, n, nv, &d__1, &bv[bv_offset], ldbv, &
 			dwork[1], &ldw, &c_b25, &dwork[kw], p, (ftnlen)1, (
 			ftnlen)1);
+#line 657 "AB09KX.f"
 		dgemm_("N", "N", p, n, n, &c_b31, &dwork[kw], p, &a[a_offset],
 			 lda, &c_b31, &c__[c_offset], ldc, (ftnlen)1, (ftnlen)
 			1);
 
 /*              D <- D + BV'*X*B/SCALE. */
 
+#line 662 "AB09KX.f"
 		dgemm_("N", "N", p, m, n, &c_b31, &dwork[kw], p, &b[b_offset],
 			 ldb, &c_b31, &d__[d_offset], ldd, (ftnlen)1, (ftnlen)
 			1);
+#line 664 "AB09KX.f"
 	    } else {
 
 /*              Compute X and SCALE satisfying */
 
 /*              AV'*X + X*A + SCALE*CV'*C = 0. */
 
+#line 670 "AB09KX.f"
 		dtrsyl_("T", "N", &c__1, nv, n, &av[av_offset], ldav, &a[
 			a_offset], lda, &dwork[1], &ldw, &scale, &ierr, (
 			ftnlen)1, (ftnlen)1);
+#line 672 "AB09KX.f"
 		if (ierr != 0) {
+#line 673 "AB09KX.f"
 		    *info = 3;
+#line 674 "AB09KX.f"
 		    return 0;
+#line 675 "AB09KX.f"
 		}
 
 /*              Construct C and D. */
@@ -813,24 +1066,32 @@ L100:
 
 /*              Construct C <- BV'*X/SCALE + DV'*C. */
 
+#line 682 "AB09KX.f"
 		dgemm_("T", "N", p, n, p, &c_b31, &dv[dv_offset], lddv, &c__[
 			c_offset], ldc, &c_b25, &dwork[kw], p, (ftnlen)1, (
 			ftnlen)1);
+#line 684 "AB09KX.f"
 		dlacpy_("F", p, n, &dwork[kw], p, &c__[c_offset], ldc, (
 			ftnlen)1);
+#line 685 "AB09KX.f"
 		d__1 = 1. / scale;
+#line 685 "AB09KX.f"
 		dgemm_("T", "N", p, n, nv, &d__1, &bv[bv_offset], ldbv, &
 			dwork[1], &ldw, &c_b31, &c__[c_offset], ldc, (ftnlen)
 			1, (ftnlen)1);
 
 /*              Construct D <- DV'*D. */
 
+#line 690 "AB09KX.f"
 		dgemm_("T", "N", p, m, p, &c_b31, &dv[dv_offset], lddv, &d__[
 			d_offset], ldd, &c_b25, &dwork[kw], p, (ftnlen)1, (
 			ftnlen)1);
+#line 692 "AB09KX.f"
 		dlacpy_("F", p, m, &dwork[kw], p, &d__[d_offset], ldd, (
 			ftnlen)1);
+#line 693 "AB09KX.f"
 	    }
+#line 694 "AB09KX.f"
 	} else {
 
 /*           Compute the projection of V*G. */
@@ -840,6 +1101,7 @@ L100:
 /*           Compute -BV*C. */
 /*           Workspace needed: NV*N. */
 
+#line 703 "AB09KX.f"
 	    dgemm_("N", "N", nv, n, p, &c_b24, &bv[bv_offset], ldbv, &c__[
 		    c_offset], ldc, &c_b25, &dwork[1], &ldw, (ftnlen)1, (
 		    ftnlen)1);
@@ -848,36 +1110,53 @@ L100:
 
 /*           AV*X - X*A + SCALE*BV*C = 0. */
 
+#line 710 "AB09KX.f"
 	    dtrsyl_("N", "N", &c_n1, nv, n, &av[av_offset], ldav, &a[a_offset]
 		    , lda, &dwork[1], &ldw, &scale, &ierr, (ftnlen)1, (ftnlen)
 		    1);
+#line 712 "AB09KX.f"
 	    if (ierr != 0) {
+#line 713 "AB09KX.f"
 		*info = 3;
+#line 714 "AB09KX.f"
 		return 0;
+#line 715 "AB09KX.f"
 	    }
 
 /*           Construct C <- CV*X/SCALE + DV*C. */
 
+#line 719 "AB09KX.f"
 	    dgemm_("N", "N", p, n, p, &c_b31, &dv[dv_offset], lddv, &c__[
 		    c_offset], ldc, &c_b25, &dwork[kw], p, (ftnlen)1, (ftnlen)
 		    1);
+#line 721 "AB09KX.f"
 	    dlacpy_("F", p, n, &dwork[kw], p, &c__[c_offset], ldc, (ftnlen)1);
+#line 722 "AB09KX.f"
 	    d__1 = 1. / scale;
+#line 722 "AB09KX.f"
 	    dgemm_("N", "N", p, n, nv, &d__1, &cv[cv_offset], ldcv, &dwork[1],
 		     &ldw, &c_b31, &c__[c_offset], ldc, (ftnlen)1, (ftnlen)1);
 
 /*           Construct D <- DV*D. */
 
+#line 727 "AB09KX.f"
 	    dgemm_("N", "N", p, m, p, &c_b31, &dv[dv_offset], lddv, &d__[
 		    d_offset], ldd, &c_b25, &dwork[kw], p, (ftnlen)1, (ftnlen)
 		    1);
+#line 729 "AB09KX.f"
 	    dlacpy_("F", p, m, &dwork[kw], p, &d__[d_offset], ldd, (ftnlen)1);
+#line 730 "AB09KX.f"
 	}
+#line 731 "AB09KX.f"
     }
 
+#line 733 "AB09KX.f"
     if (rightw) {
+#line 734 "AB09KX.f"
 	ldwn = max(*n,1);
+#line 735 "AB09KX.f"
 	kw = *n * *nw + 1;
+#line 736 "AB09KX.f"
 	if (conjs) {
 
 /*           Compute the projection of G*conj(W) or of conj(V)*G*conj(W). */
@@ -889,11 +1168,14 @@ L100:
 /*           Compute -BW*B'. */
 /*           Workspace needed: N*NW. */
 
+#line 747 "AB09KX.f"
 	    ldw = max(*nw,1);
+#line 748 "AB09KX.f"
 	    dgemm_("N", "T", nw, n, m, &c_b24, &bw[bw_offset], ldbw, &b[
 		    b_offset], ldb, &c_b25, &dwork[1], &ldw, (ftnlen)1, (
 		    ftnlen)1);
 
+#line 751 "AB09KX.f"
 	    if (discr) {
 
 /*              Compute Y' and SCALE satisfying */
@@ -902,12 +1184,17 @@ L100:
 
 /*              Additional workspace needed: 2*NW. */
 
+#line 759 "AB09KX.f"
 		sb04py_("N", "T", &c_n1, nw, n, &aw[aw_offset], ldaw, &a[
 			a_offset], lda, &dwork[1], &ldw, &scale, &dwork[kw], &
 			ierr, (ftnlen)1, (ftnlen)1);
+#line 761 "AB09KX.f"
 		if (ierr != 0) {
+#line 762 "AB09KX.f"
 		    *info = 4;
+#line 763 "AB09KX.f"
 		    return 0;
+#line 764 "AB09KX.f"
 		}
 
 /*              Construct B <- B*DW' + A*Y*CW'/SCALE, */
@@ -917,47 +1204,61 @@ L100:
 
 /*              B <- B*DW'. */
 
+#line 773 "AB09KX.f"
 		dgemm_("N", "T", n, m, m, &c_b31, &b[b_offset], ldb, &dw[
 			dw_offset], lddw, &c_b25, &dwork[kw], &ldwn, (ftnlen)
 			1, (ftnlen)1);
+#line 775 "AB09KX.f"
 		dlacpy_("F", n, m, &dwork[kw], &ldwn, &b[b_offset], ldb, (
 			ftnlen)1);
 
 /*              D <- D*DW'. */
 
+#line 779 "AB09KX.f"
 		dgemm_("N", "T", p, m, m, &c_b31, &d__[d_offset], ldd, &dw[
 			dw_offset], lddw, &c_b25, &dwork[kw], p, (ftnlen)1, (
 			ftnlen)1);
+#line 781 "AB09KX.f"
 		dlacpy_("F", p, m, &dwork[kw], p, &d__[d_offset], ldd, (
 			ftnlen)1);
 
 /*              B <- B + A*Y*CW'/SCALE. */
 
+#line 785 "AB09KX.f"
 		d__1 = 1. / scale;
+#line 785 "AB09KX.f"
 		dgemm_("T", "T", n, m, nw, &d__1, &dwork[1], &ldw, &cw[
 			cw_offset], ldcw, &c_b25, &dwork[kw], &ldwn, (ftnlen)
 			1, (ftnlen)1);
+#line 787 "AB09KX.f"
 		dgemm_("N", "N", n, m, n, &c_b31, &a[a_offset], lda, &dwork[
 			kw], &ldwn, &c_b31, &b[b_offset], ldb, (ftnlen)1, (
 			ftnlen)1);
 
 /*              D <- D + C*Y*CW'/SCALE. */
 
+#line 792 "AB09KX.f"
 		dgemm_("N", "N", p, m, n, &c_b31, &c__[c_offset], ldc, &dwork[
 			kw], &ldwn, &c_b31, &d__[d_offset], ldd, (ftnlen)1, (
 			ftnlen)1);
+#line 794 "AB09KX.f"
 	    } else {
 
 /*              Compute Y' and SCALE satisfying */
 
 /*              AW*Y' + Y'*A' + SCALE*BW*B' = 0. */
 
+#line 800 "AB09KX.f"
 		dtrsyl_("N", "T", &c__1, nw, n, &aw[aw_offset], ldaw, &a[
 			a_offset], lda, &dwork[1], &ldw, &scale, &ierr, (
 			ftnlen)1, (ftnlen)1);
+#line 802 "AB09KX.f"
 		if (ierr != 0) {
+#line 803 "AB09KX.f"
 		    *info = 4;
+#line 804 "AB09KX.f"
 		    return 0;
+#line 805 "AB09KX.f"
 		}
 
 /*              Construct B and D. */
@@ -965,24 +1266,32 @@ L100:
 
 /*              Construct B <- B*DW' + Y*CW'/SCALE. */
 
+#line 812 "AB09KX.f"
 		dgemm_("N", "T", n, m, m, &c_b31, &b[b_offset], ldb, &dw[
 			dw_offset], lddw, &c_b25, &dwork[kw], &ldwn, (ftnlen)
 			1, (ftnlen)1);
+#line 814 "AB09KX.f"
 		dlacpy_("F", n, m, &dwork[kw], &ldwn, &b[b_offset], ldb, (
 			ftnlen)1);
+#line 815 "AB09KX.f"
 		d__1 = 1. / scale;
+#line 815 "AB09KX.f"
 		dgemm_("T", "T", n, m, nw, &d__1, &dwork[1], &ldw, &cw[
 			cw_offset], ldcw, &c_b31, &b[b_offset], ldb, (ftnlen)
 			1, (ftnlen)1);
 
 /*              D <- D*DW'. */
 
+#line 820 "AB09KX.f"
 		dgemm_("N", "T", p, m, m, &c_b31, &d__[d_offset], ldd, &dw[
 			dw_offset], lddw, &c_b25, &dwork[kw], p, (ftnlen)1, (
 			ftnlen)1);
+#line 822 "AB09KX.f"
 		dlacpy_("F", p, m, &dwork[kw], p, &d__[d_offset], ldd, (
 			ftnlen)1);
+#line 823 "AB09KX.f"
 	    }
+#line 824 "AB09KX.f"
 	} else {
 
 /*           Compute the projection of G*W or of V*G*W. */
@@ -992,6 +1301,7 @@ L100:
 /*           Compute B*CW. */
 /*           Workspace needed: N*NW. */
 
+#line 833 "AB09KX.f"
 	    dgemm_("N", "N", n, nw, m, &c_b31, &b[b_offset], ldb, &cw[
 		    cw_offset], ldcw, &c_b25, &dwork[1], &ldwn, (ftnlen)1, (
 		    ftnlen)1);
@@ -1000,40 +1310,56 @@ L100:
 
 /*           A*Y - Y*AW - SCALE*B*CW = 0. */
 
+#line 840 "AB09KX.f"
 	    dtrsyl_("N", "N", &c_n1, n, nw, &a[a_offset], lda, &aw[aw_offset],
 		     ldaw, &dwork[1], &ldwn, &scale, &ierr, (ftnlen)1, (
 		    ftnlen)1);
+#line 842 "AB09KX.f"
 	    if (ierr != 0) {
+#line 843 "AB09KX.f"
 		*info = 4;
+#line 844 "AB09KX.f"
 		return 0;
+#line 845 "AB09KX.f"
 	    }
 
 /*           Construct B and D. */
 /*           Additional workspace needed: MAX( N*M, P*M ). */
 /*           Construct B <- B*DW + Y*BW/SCALE. */
 
+#line 851 "AB09KX.f"
 	    dgemm_("N", "N", n, m, m, &c_b31, &b[b_offset], ldb, &dw[
 		    dw_offset], lddw, &c_b25, &dwork[kw], &ldwn, (ftnlen)1, (
 		    ftnlen)1);
+#line 853 "AB09KX.f"
 	    dlacpy_("F", n, m, &dwork[kw], &ldwn, &b[b_offset], ldb, (ftnlen)
 		    1);
+#line 854 "AB09KX.f"
 	    d__1 = 1. / scale;
+#line 854 "AB09KX.f"
 	    dgemm_("N", "N", n, m, nw, &d__1, &dwork[1], &ldwn, &bw[bw_offset]
 		    , ldbw, &c_b31, &b[b_offset], ldb, (ftnlen)1, (ftnlen)1);
 
 /*           D <- D*DW. */
 
+#line 859 "AB09KX.f"
 	    dgemm_("N", "N", p, m, m, &c_b31, &d__[d_offset], ldd, &dw[
 		    dw_offset], lddw, &c_b25, &dwork[kw], p, (ftnlen)1, (
 		    ftnlen)1);
+#line 861 "AB09KX.f"
 	    dlacpy_("F", p, m, &dwork[kw], p, &d__[d_offset], ldd, (ftnlen)1);
+#line 862 "AB09KX.f"
 	}
+#line 863 "AB09KX.f"
     }
 
 /* Computing MAX */
+#line 865 "AB09KX.f"
     d__1 = work, d__2 = (doublereal) lw;
+#line 865 "AB09KX.f"
     dwork[1] = max(d__1,d__2);
 
+#line 867 "AB09KX.f"
     return 0;
 /* *** Last line of AB09KX *** */
 } /* ab09kx_ */

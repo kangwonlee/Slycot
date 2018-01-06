@@ -1,3 +1,4 @@
+#line 1 "select.f"
 /* select.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "select.f"
 logical select_(doublereal *par1, doublereal *par2)
 {
     /* System generated locals */
@@ -39,7 +41,9 @@ logical select_(doublereal *par1, doublereal *par2)
 /*     Void logical function for DGEES. */
 
 
+#line 25 "select.f"
     ret_val = TRUE_;
+#line 26 "select.f"
     return ret_val;
 } /* select_ */
 

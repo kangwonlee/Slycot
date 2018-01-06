@@ -1,0 +1,4 @@
+extern int mc01qd_(integer *da, integer *db, doublereal *a, doublereal *b, doublereal *rq, integer *iwarn, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */

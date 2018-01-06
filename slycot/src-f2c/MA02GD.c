@@ -1,3 +1,4 @@
+#line 1 "MA02GD.f"
 /* MA02GD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MA02GD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -135,66 +137,112 @@ static integer c__1 = 1;
 
 /*     Quick return if possible. */
 
+#line 115 "MA02GD.f"
     /* Parameter adjustments */
+#line 115 "MA02GD.f"
     a_dim1 = *lda;
+#line 115 "MA02GD.f"
     a_offset = 1 + a_dim1;
+#line 115 "MA02GD.f"
     a -= a_offset;
+#line 115 "MA02GD.f"
     --ipiv;
+#line 115 "MA02GD.f"
 
+#line 115 "MA02GD.f"
     /* Function Body */
+#line 115 "MA02GD.f"
     if (*incx == 0 || *n == 0) {
+#line 115 "MA02GD.f"
 	return 0;
+#line 115 "MA02GD.f"
     }
 
 /*     Interchange column J with column IPIV(J) for each of columns K1 */
 /*     through K2. */
 
+#line 121 "MA02GD.f"
     if (*incx > 0) {
+#line 122 "MA02GD.f"
 	jx = *k1;
+#line 123 "MA02GD.f"
     } else {
+#line 124 "MA02GD.f"
 	jx = (1 - *k2) * *incx + 1;
+#line 125 "MA02GD.f"
     }
 
+#line 127 "MA02GD.f"
     if (*incx == 1) {
 
+#line 129 "MA02GD.f"
 	i__1 = *k2;
+#line 129 "MA02GD.f"
 	for (j = *k1; j <= i__1; ++j) {
+#line 130 "MA02GD.f"
 	    jp = ipiv[j];
+#line 131 "MA02GD.f"
 	    if (jp != j) {
+#line 131 "MA02GD.f"
 		dswap_(n, &a[j * a_dim1 + 1], &c__1, &a[jp * a_dim1 + 1], &
 			c__1);
+#line 131 "MA02GD.f"
 	    }
+#line 133 "MA02GD.f"
 /* L10: */
+#line 133 "MA02GD.f"
 	}
 
+#line 135 "MA02GD.f"
     } else if (*incx > 1) {
 
+#line 137 "MA02GD.f"
 	i__1 = *k2;
+#line 137 "MA02GD.f"
 	for (j = *k1; j <= i__1; ++j) {
+#line 138 "MA02GD.f"
 	    jp = ipiv[jx];
+#line 139 "MA02GD.f"
 	    if (jp != j) {
+#line 139 "MA02GD.f"
 		dswap_(n, &a[j * a_dim1 + 1], &c__1, &a[jp * a_dim1 + 1], &
 			c__1);
+#line 139 "MA02GD.f"
 	    }
+#line 141 "MA02GD.f"
 	    jx += *incx;
+#line 142 "MA02GD.f"
 /* L20: */
+#line 142 "MA02GD.f"
 	}
 
+#line 144 "MA02GD.f"
     } else if (*incx < 0) {
 
+#line 146 "MA02GD.f"
 	i__1 = *k1;
+#line 146 "MA02GD.f"
 	for (j = *k2; j >= i__1; --j) {
+#line 147 "MA02GD.f"
 	    jp = ipiv[jx];
+#line 148 "MA02GD.f"
 	    if (jp != j) {
+#line 148 "MA02GD.f"
 		dswap_(n, &a[j * a_dim1 + 1], &c__1, &a[jp * a_dim1 + 1], &
 			c__1);
+#line 148 "MA02GD.f"
 	    }
+#line 150 "MA02GD.f"
 	    jx += *incx;
+#line 151 "MA02GD.f"
 /* L30: */
+#line 151 "MA02GD.f"
 	}
 
+#line 153 "MA02GD.f"
     }
 
+#line 155 "MA02GD.f"
     return 0;
 
 /* *** Last line of MA02GD *** */

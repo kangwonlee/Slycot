@@ -1,3 +1,4 @@
+#line 1 "MB04YD.f"
 /* MB04YD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04YD.f"
 /* Table of constant values */
 
 static doublereal c_b13 = -.125;
@@ -372,190 +374,329 @@ static doublereal c_b19 = 1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 321 "MB04YD.f"
     /* Parameter adjustments */
+#line 321 "MB04YD.f"
     --q;
+#line 321 "MB04YD.f"
     --e;
+#line 321 "MB04YD.f"
     u_dim1 = *ldu;
+#line 321 "MB04YD.f"
     u_offset = 1 + u_dim1;
+#line 321 "MB04YD.f"
     u -= u_offset;
+#line 321 "MB04YD.f"
     v_dim1 = *ldv;
+#line 321 "MB04YD.f"
     v_offset = 1 + v_dim1;
+#line 321 "MB04YD.f"
     v -= v_offset;
+#line 321 "MB04YD.f"
     --inul;
+#line 321 "MB04YD.f"
     --dwork;
+#line 321 "MB04YD.f"
 
+#line 321 "MB04YD.f"
     /* Function Body */
+#line 321 "MB04YD.f"
     p = min(*m,*n);
+#line 322 "MB04YD.f"
     *info = 0;
+#line 323 "MB04YD.f"
     *iwarn = 0;
+#line 324 "MB04YD.f"
     ljobui = lsame_(jobu, "I", (ftnlen)1, (ftnlen)1);
+#line 325 "MB04YD.f"
     ljobvi = lsame_(jobv, "I", (ftnlen)1, (ftnlen)1);
+#line 326 "MB04YD.f"
     ljobua = ljobui || lsame_(jobu, "U", (ftnlen)1, (ftnlen)1);
+#line 327 "MB04YD.f"
     ljobva = ljobvi || lsame_(jobv, "U", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 331 "MB04YD.f"
     if (! ljobua && ! lsame_(jobu, "N", (ftnlen)1, (ftnlen)1)) {
+#line 332 "MB04YD.f"
 	*info = -1;
+#line 333 "MB04YD.f"
     } else if (! ljobva && ! lsame_(jobv, "N", (ftnlen)1, (ftnlen)1)) {
+#line 334 "MB04YD.f"
 	*info = -2;
+#line 335 "MB04YD.f"
     } else if (*m < 0) {
+#line 336 "MB04YD.f"
 	*info = -3;
+#line 337 "MB04YD.f"
     } else if (*n < 0) {
+#line 338 "MB04YD.f"
 	*info = -4;
+#line 339 "MB04YD.f"
     } else if (*rank > p) {
+#line 340 "MB04YD.f"
 	*info = -5;
+#line 341 "MB04YD.f"
     } else if (*rank < 0 && *theta < 0.) {
+#line 342 "MB04YD.f"
 	*info = -6;
+#line 343 "MB04YD.f"
     } else if (! ljobua && *ldu < 1 || ljobua && *ldu < max(1,*m)) {
+#line 345 "MB04YD.f"
 	*info = -10;
+#line 346 "MB04YD.f"
     } else if (! ljobva && *ldv < 1 || ljobva && *ldv < max(1,*n)) {
+#line 348 "MB04YD.f"
 	*info = -12;
+#line 349 "MB04YD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 349 "MB04YD.f"
 	i__1 = 1, i__2 = p * 6 - 5;
 /* Computing MAX */
+#line 349 "MB04YD.f"
 	i__3 = 1, i__4 = (p << 2) - 3;
+#line 349 "MB04YD.f"
 	if ((ljobua || ljobva) && *ldwork < max(i__1,i__2) || ! (ljobua || 
 		ljobva) && *ldwork < max(i__3,i__4)) {
+#line 352 "MB04YD.f"
 	    *info = -17;
+#line 353 "MB04YD.f"
 	}
+#line 353 "MB04YD.f"
     }
 
+#line 355 "MB04YD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 359 "MB04YD.f"
 	i__1 = -(*info);
+#line 359 "MB04YD.f"
 	xerbla_("MB04YD", &i__1, (ftnlen)6);
+#line 360 "MB04YD.f"
 	return 0;
+#line 361 "MB04YD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 365 "MB04YD.f"
     if (p == 0) {
+#line 366 "MB04YD.f"
 	if (*rank >= 0) {
+#line 366 "MB04YD.f"
 	    *theta = 0.;
+#line 366 "MB04YD.f"
 	}
+#line 368 "MB04YD.f"
 	*rank = 0;
+#line 369 "MB04YD.f"
 	return 0;
+#line 370 "MB04YD.f"
     }
 
 /*     Set tolerances and machine parameters. */
 
+#line 374 "MB04YD.f"
     tolabs = *tol;
+#line 375 "MB04YD.f"
     tolrel = *reltol;
+#line 376 "MB04YD.f"
     smax = (d__1 = q[p], abs(d__1));
 
+#line 378 "MB04YD.f"
     i__1 = p - 1;
+#line 378 "MB04YD.f"
     for (j = 1; j <= i__1; ++j) {
 /* Computing MAX */
+#line 379 "MB04YD.f"
 	d__3 = smax, d__4 = (d__1 = q[j], abs(d__1)), d__3 = max(d__3,d__4), 
 		d__4 = (d__2 = e[j], abs(d__2));
+#line 379 "MB04YD.f"
 	smax = max(d__3,d__4);
+#line 380 "MB04YD.f"
 /* L20: */
+#line 380 "MB04YD.f"
     }
 
+#line 382 "MB04YD.f"
     safemn = dlamch_("Safe minimum", (ftnlen)12);
+#line 383 "MB04YD.f"
     eps = dlamch_("Epsilon", (ftnlen)7);
+#line 384 "MB04YD.f"
     if (tolabs <= 0.) {
+#line 384 "MB04YD.f"
 	tolabs = eps * smax;
+#line 384 "MB04YD.f"
     }
+#line 385 "MB04YD.f"
     x = dlamch_("Base", (ftnlen)4) * eps;
+#line 386 "MB04YD.f"
     if (tolrel <= x) {
+#line 386 "MB04YD.f"
 	tolrel = x;
+#line 386 "MB04YD.f"
     }
 /* Computing MAX */
 /* Computing MIN */
+#line 387 "MB04YD.f"
     d__3 = 100., d__4 = pow_dd(&eps, &c_b13);
+#line 387 "MB04YD.f"
     d__1 = 10., d__2 = min(d__3,d__4);
+#line 387 "MB04YD.f"
     thresh = max(d__1,d__2) * eps;
+#line 388 "MB04YD.f"
     smlnum = safemn / eps;
+#line 389 "MB04YD.f"
     rmin = sqrt(smlnum);
 /* Computing MIN */
+#line 390 "MB04YD.f"
     d__1 = 1. / rmin, d__2 = 1. / sqrt(sqrt(safemn));
+#line 390 "MB04YD.f"
     rmax = min(d__1,d__2);
+#line 391 "MB04YD.f"
     thetac = *theta;
 
 /*     Scale the matrix to allowable range, if necessary, and set PIVMIN, */
 /*     using the squares of Q and E (saved in DWORK). */
 
+#line 396 "MB04YD.f"
     iascl = 0;
+#line 397 "MB04YD.f"
     if (smax > 0. && smax < rmin) {
+#line 398 "MB04YD.f"
 	iascl = 1;
+#line 399 "MB04YD.f"
 	sigma = rmin / smax;
+#line 400 "MB04YD.f"
     } else if (smax > rmax) {
+#line 401 "MB04YD.f"
 	iascl = 1;
+#line 402 "MB04YD.f"
 	sigma = rmax / smax;
+#line 403 "MB04YD.f"
     }
+#line 404 "MB04YD.f"
     if (iascl == 1) {
+#line 405 "MB04YD.f"
 	dscal_(&p, &sigma, &q[1], &c__1);
+#line 406 "MB04YD.f"
 	i__1 = p - 1;
+#line 406 "MB04YD.f"
 	dscal_(&i__1, &sigma, &e[1], &c__1);
+#line 407 "MB04YD.f"
 	thetac = sigma * *theta;
+#line 408 "MB04YD.f"
 	tolabs = sigma * tolabs;
+#line 409 "MB04YD.f"
     }
 
 /* Computing 2nd power */
+#line 411 "MB04YD.f"
     d__1 = q[p];
+#line 411 "MB04YD.f"
     pivmin = d__1 * d__1;
+#line 412 "MB04YD.f"
     dwork[p] = pivmin;
 
+#line 414 "MB04YD.f"
     i__1 = p - 1;
+#line 414 "MB04YD.f"
     for (j = 1; j <= i__1; ++j) {
 /* Computing 2nd power */
+#line 415 "MB04YD.f"
 	d__1 = q[j];
+#line 415 "MB04YD.f"
 	dwork[j] = d__1 * d__1;
 /* Computing 2nd power */
+#line 416 "MB04YD.f"
 	d__1 = e[j];
+#line 416 "MB04YD.f"
 	dwork[p + j] = d__1 * d__1;
 /* Computing MAX */
+#line 417 "MB04YD.f"
 	d__1 = pivmin, d__2 = dwork[j], d__1 = max(d__1,d__2), d__2 = dwork[p 
 		+ j];
+#line 417 "MB04YD.f"
 	pivmin = max(d__1,d__2);
+#line 418 "MB04YD.f"
 /* L40: */
+#line 418 "MB04YD.f"
     }
 
 /* Computing MAX */
+#line 420 "MB04YD.f"
     d__1 = pivmin * safemn;
+#line 420 "MB04YD.f"
     pivmin = max(d__1,safemn);
 
 /*     Initialize U and/or V to the identity matrix, if needed. */
 
+#line 424 "MB04YD.f"
     if (ljobui) {
+#line 424 "MB04YD.f"
 	dlaset_("Full", m, &p, &c_b18, &c_b19, &u[u_offset], ldu, (ftnlen)4);
+#line 424 "MB04YD.f"
     }
+#line 426 "MB04YD.f"
     if (ljobvi) {
+#line 426 "MB04YD.f"
 	dlaset_("Full", n, &p, &c_b18, &c_b19, &v[v_offset], ldv, (ftnlen)4);
+#line 426 "MB04YD.f"
     }
 
 /*     Estimate THETA (if not fixed by the user), and set R. */
 
+#line 431 "MB04YD.f"
     if (*rank >= 0) {
+#line 432 "MB04YD.f"
 	j = p - *rank;
+#line 433 "MB04YD.f"
 	mb03md_(&p, &j, &thetac, &q[1], &e[1], &dwork[1], &dwork[p + 1], &
 		pivmin, &tolabs, &tolrel, iwarn, &info1);
+#line 435 "MB04YD.f"
 	*theta = thetac;
+#line 436 "MB04YD.f"
 	if (iascl == 1) {
+#line 436 "MB04YD.f"
 	    *theta /= sigma;
+#line 436 "MB04YD.f"
 	}
+#line 437 "MB04YD.f"
 	if (j <= 0) {
+#line 437 "MB04YD.f"
 	    return 0;
+#line 437 "MB04YD.f"
 	}
+#line 439 "MB04YD.f"
 	r__ = p - j;
+#line 440 "MB04YD.f"
     } else {
+#line 441 "MB04YD.f"
 	r__ = p - mb03nd_(&p, &thetac, &dwork[1], &dwork[p + 1], &pivmin, &
 		info1);
+#line 442 "MB04YD.f"
     }
 
+#line 444 "MB04YD.f"
     *rank = p;
 
+#line 446 "MB04YD.f"
     i__1 = p;
+#line 446 "MB04YD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 447 "MB04YD.f"
 	if (inul[i__]) {
+#line 447 "MB04YD.f"
 	    --(*rank);
+#line 447 "MB04YD.f"
 	}
+#line 448 "MB04YD.f"
 /* L60: */
+#line 448 "MB04YD.f"
     }
 
 /*     From now on K is the smallest known index such that the elements */
@@ -563,208 +704,346 @@ static doublereal c_b19 = 1.;
 /*     or C2. */
 /*     RANK = P - SUM(dimensions of known bidiagonal matrices of C2). */
 
+#line 455 "MB04YD.f"
     k = p;
+#line 456 "MB04YD.f"
     oldi = -1;
+#line 457 "MB04YD.f"
     oldk = -1;
+#line 458 "MB04YD.f"
     iter = 0;
+#line 459 "MB04YD.f"
     maxit = p * 30;
 /*     WHILE ( C3 NOT EMPTY ) DO */
+#line 461 "MB04YD.f"
 L80:
+#line 461 "MB04YD.f"
     if (*rank > r__ && k > 0) {
 /*        WHILE ( K.GT.0 .AND. INUL(K) ) DO */
 
 /*        Search for the rightmost index of a bidiagonal submatrix, */
 /*        not yet classified. */
 
+#line 467 "MB04YD.f"
 L100:
+#line 467 "MB04YD.f"
 	if (k > 0) {
+#line 468 "MB04YD.f"
 	    if (inul[k]) {
+#line 469 "MB04YD.f"
 		--k;
+#line 470 "MB04YD.f"
 		goto L100;
+#line 471 "MB04YD.f"
 	    }
+#line 472 "MB04YD.f"
 	}
 /*        END WHILE 100 */
 
+#line 475 "MB04YD.f"
 	if (k == 0) {
+#line 475 "MB04YD.f"
 	    return 0;
+#line 475 "MB04YD.f"
 	}
 
+#line 478 "MB04YD.f"
 	noc12 = TRUE_;
 /*        WHILE ((ITER < MAXIT).AND.(No bidiagonal matrix of C1 or */
 /*                C2 found)) DO */
+#line 481 "MB04YD.f"
 L120:
+#line 481 "MB04YD.f"
 	if (iter < maxit && noc12) {
 
 /*           Search for negligible Q(I) or E(I-1) (for I > 1) and find */
 /*           the shift. */
 
+#line 486 "MB04YD.f"
 	    i__ = k;
+#line 487 "MB04YD.f"
 	    x = (d__1 = q[i__], abs(d__1));
+#line 488 "MB04YD.f"
 	    shift = x;
 /*           WHILE ABS( Q(I) ) > TOLABS .AND. ABS( E(I-1) ) > TOLABS ) DO */
+#line 490 "MB04YD.f"
 L140:
+#line 490 "MB04YD.f"
 	    if (i__ > 1) {
+#line 491 "MB04YD.f"
 		if (x > tolabs && (d__1 = e[i__ - 1], abs(d__1)) > tolabs) {
+#line 493 "MB04YD.f"
 		    --i__;
+#line 494 "MB04YD.f"
 		    x = (d__1 = q[i__], abs(d__1));
+#line 495 "MB04YD.f"
 		    if (x < shift) {
+#line 495 "MB04YD.f"
 			shift = x;
+#line 495 "MB04YD.f"
 		    }
+#line 496 "MB04YD.f"
 		    goto L140;
+#line 497 "MB04YD.f"
 		}
+#line 498 "MB04YD.f"
 	    }
 /*           END WHILE 140 */
 
 /*           Classify the bidiagonal submatrix (of order J) found. */
 
+#line 503 "MB04YD.f"
 	    j = k - i__ + 1;
+#line 504 "MB04YD.f"
 	    if (x <= tolabs || k == i__) {
+#line 505 "MB04YD.f"
 		noc12 = FALSE_;
+#line 506 "MB04YD.f"
 	    } else {
+#line 507 "MB04YD.f"
 		numeig = mb03nd_(&j, &thetac, &dwork[i__], &dwork[p + i__], &
 			pivmin, &info1);
+#line 509 "MB04YD.f"
 		if (numeig >= j || numeig <= 0) {
+#line 509 "MB04YD.f"
 		    noc12 = FALSE_;
+#line 509 "MB04YD.f"
 		}
+#line 510 "MB04YD.f"
 	    }
+#line 511 "MB04YD.f"
 	    if (noc12) {
+#line 512 "MB04YD.f"
 		if (j == 2) {
 
 /*                 Handle separately the 2-by-2 submatrix. */
 
+#line 516 "MB04YD.f"
 		    dlasv2_(&q[i__], &e[i__], &q[k], &sigmn, &sigmx, &sinr, &
 			    cosr, &sinl, &cosl);
+#line 518 "MB04YD.f"
 		    q[i__] = sigmx;
+#line 519 "MB04YD.f"
 		    q[k] = sigmn;
+#line 520 "MB04YD.f"
 		    e[i__] = 0.;
+#line 521 "MB04YD.f"
 		    --(*rank);
+#line 522 "MB04YD.f"
 		    inul[k] = TRUE_;
+#line 523 "MB04YD.f"
 		    noc12 = FALSE_;
 
 /*                 Update U and/or V, if needed. */
 
+#line 527 "MB04YD.f"
 		    if (ljobua) {
+#line 527 "MB04YD.f"
 			drot_(m, &u[i__ * u_dim1 + 1], &c__1, &u[k * u_dim1 + 
 				1], &c__1, &cosl, &sinl);
+#line 527 "MB04YD.f"
 		    }
+#line 529 "MB04YD.f"
 		    if (ljobva) {
+#line 529 "MB04YD.f"
 			drot_(n, &v[i__ * v_dim1 + 1], &c__1, &v[k * v_dim1 + 
 				1], &c__1, &cosr, &sinr);
+#line 529 "MB04YD.f"
 		    }
+#line 531 "MB04YD.f"
 		} else {
 
 /*                 If working on new submatrix, choose QR or */
 /*                 QL iteration. */
 
+#line 536 "MB04YD.f"
 		    if (i__ != oldi || k != oldk) {
+#line 536 "MB04YD.f"
 			qrit = (d__1 = q[i__], abs(d__1)) >= (d__2 = q[k], 
 				abs(d__2));
+#line 536 "MB04YD.f"
 		    }
+#line 538 "MB04YD.f"
 		    oldi = i__;
+#line 539 "MB04YD.f"
 		    if (qrit) {
+#line 540 "MB04YD.f"
 			if ((d__2 = e[k - 1], abs(d__2)) <= thresh * (d__1 = 
 				q[k], abs(d__1))) {
+#line 540 "MB04YD.f"
 			    e[k - 1] = 0.;
+#line 540 "MB04YD.f"
 			}
+#line 542 "MB04YD.f"
 		    } else {
+#line 543 "MB04YD.f"
 			if ((d__2 = e[i__], abs(d__2)) <= thresh * (d__1 = q[
 				i__], abs(d__1))) {
+#line 543 "MB04YD.f"
 			    e[i__] = 0.;
+#line 543 "MB04YD.f"
 			}
+#line 545 "MB04YD.f"
 		    }
 
+#line 547 "MB04YD.f"
 		    mb04yw_(&qrit, &ljobua, &ljobva, m, n, &i__, &k, &shift, &
 			    q[1], &e[1], &u[u_offset], ldu, &v[v_offset], ldv,
 			     &dwork[p * 2]);
 
+#line 550 "MB04YD.f"
 		    if (qrit) {
+#line 551 "MB04YD.f"
 			if ((d__1 = e[k - 1], abs(d__1)) <= tolabs) {
+#line 551 "MB04YD.f"
 			    e[k - 1] = 0.;
+#line 551 "MB04YD.f"
 			}
+#line 552 "MB04YD.f"
 		    } else {
+#line 553 "MB04YD.f"
 			if ((d__1 = e[i__], abs(d__1)) <= tolabs) {
+#line 553 "MB04YD.f"
 			    e[i__] = 0.;
+#line 553 "MB04YD.f"
 			}
+#line 554 "MB04YD.f"
 		    }
 /* Computing 2nd power */
+#line 555 "MB04YD.f"
 		    d__1 = q[k];
+#line 555 "MB04YD.f"
 		    dwork[k] = d__1 * d__1;
 
+#line 557 "MB04YD.f"
 		    i__1 = k - 1;
+#line 557 "MB04YD.f"
 		    for (i1 = i__; i1 <= i__1; ++i1) {
 /* Computing 2nd power */
+#line 558 "MB04YD.f"
 			d__1 = q[i1];
+#line 558 "MB04YD.f"
 			dwork[i1] = d__1 * d__1;
 /* Computing 2nd power */
+#line 559 "MB04YD.f"
 			d__1 = e[i1];
+#line 559 "MB04YD.f"
 			dwork[p + i1] = d__1 * d__1;
+#line 560 "MB04YD.f"
 /* L160: */
+#line 560 "MB04YD.f"
 		    }
 
+#line 562 "MB04YD.f"
 		    ++iter;
+#line 563 "MB04YD.f"
 		}
+#line 564 "MB04YD.f"
 	    }
+#line 565 "MB04YD.f"
 	    goto L120;
+#line 566 "MB04YD.f"
 	}
 /*        END WHILE 120 */
 
+#line 569 "MB04YD.f"
 	if (iter >= maxit) {
+#line 570 "MB04YD.f"
 	    *info = 1;
+#line 571 "MB04YD.f"
 	    goto L200;
+#line 572 "MB04YD.f"
 	}
 
+#line 574 "MB04YD.f"
 	if (x <= tolabs) {
 
 /*           Split at negligible diagonal element ABS( Q(I) ) <= TOLABS. */
 
+#line 578 "MB04YD.f"
 	    mb02ny_(&ljobua, &ljobva, m, n, &i__, &k, &q[1], &e[1], &u[
 		    u_offset], ldu, &v[v_offset], ldv, &dwork[p * 2]);
+#line 580 "MB04YD.f"
 	    inul[i__] = TRUE_;
+#line 581 "MB04YD.f"
 	    --(*rank);
+#line 582 "MB04YD.f"
 	} else {
 
 /*           A negligible superdiagonal element ABS( E(I-1) ) <= TOL */
 /*           has been found, the corresponding bidiagonal submatrix */
 /*           belongs to C1 or C2. Treat this bidiagonal submatrix. */
 
+#line 588 "MB04YD.f"
 	    if (j >= 2) {
+#line 589 "MB04YD.f"
 		if (numeig == j) {
 
+#line 591 "MB04YD.f"
 		    i__1 = k;
+#line 591 "MB04YD.f"
 		    for (i1 = i__; i1 <= i__1; ++i1) {
+#line 592 "MB04YD.f"
 			inul[i1] = TRUE_;
+#line 593 "MB04YD.f"
 /* L180: */
+#line 593 "MB04YD.f"
 		    }
 
+#line 595 "MB04YD.f"
 		    *rank -= j;
+#line 596 "MB04YD.f"
 		    k -= j;
+#line 597 "MB04YD.f"
 		} else {
+#line 598 "MB04YD.f"
 		    k = i__ - 1;
+#line 599 "MB04YD.f"
 		}
+#line 600 "MB04YD.f"
 	    } else {
+#line 601 "MB04YD.f"
 		if (x <= thetac + tolabs) {
+#line 602 "MB04YD.f"
 		    inul[i__] = TRUE_;
+#line 603 "MB04YD.f"
 		    --(*rank);
+#line 604 "MB04YD.f"
 		}
+#line 605 "MB04YD.f"
 		--k;
+#line 606 "MB04YD.f"
 	    }
+#line 607 "MB04YD.f"
 	    oldk = k;
+#line 608 "MB04YD.f"
 	}
+#line 609 "MB04YD.f"
 	goto L80;
+#line 610 "MB04YD.f"
     }
 /*     END WHILE 80 */
 
 /*     If matrix was scaled, then rescale Q and E appropriately. */
 
+#line 615 "MB04YD.f"
 L200:
+#line 616 "MB04YD.f"
     if (iascl == 1) {
+#line 617 "MB04YD.f"
 	d__1 = 1. / sigma;
+#line 617 "MB04YD.f"
 	dscal_(&p, &d__1, &q[1], &c__1);
+#line 618 "MB04YD.f"
 	i__1 = p - 1;
+#line 618 "MB04YD.f"
 	d__1 = 1. / sigma;
+#line 618 "MB04YD.f"
 	dscal_(&i__1, &d__1, &e[1], &c__1);
+#line 619 "MB04YD.f"
     }
 
+#line 621 "MB04YD.f"
     return 0;
 /* *** Last line of MB04YD *** */
 } /* mb04yd_ */

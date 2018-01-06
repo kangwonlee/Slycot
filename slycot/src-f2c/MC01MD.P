@@ -1,0 +1,3 @@
+extern int mc01md_(integer *dp, doublereal *alpha, integer *k, doublereal *p, doublereal *q, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */

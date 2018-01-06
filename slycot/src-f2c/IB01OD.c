@@ -1,3 +1,4 @@
+#line 1 "IB01OD.f"
 /* IB01OD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "IB01OD.f"
 /* Subroutine */ int ib01od_(char *ctrl, integer *nobr, integer *l, 
 	doublereal *sv, integer *n, doublereal *tol, integer *iwarn, integer *
 	info, ftnlen ctrl_len)
@@ -154,94 +156,161 @@
 
 /*     Check the scalar input parameters. */
 
+#line 135 "IB01OD.f"
     /* Parameter adjustments */
+#line 135 "IB01OD.f"
     --sv;
+#line 135 "IB01OD.f"
 
+#line 135 "IB01OD.f"
     /* Function Body */
+#line 135 "IB01OD.f"
     contrl = lsame_(ctrl, "C", (ftnlen)1, (ftnlen)1);
+#line 136 "IB01OD.f"
     lnobr = *l * *nobr;
+#line 137 "IB01OD.f"
     *iwarn = 0;
+#line 138 "IB01OD.f"
     *info = 0;
+#line 139 "IB01OD.f"
     if (! (contrl || lsame_(ctrl, "N", (ftnlen)1, (ftnlen)1))) {
+#line 140 "IB01OD.f"
 	*info = -1;
+#line 141 "IB01OD.f"
     } else if (*nobr <= 0) {
+#line 142 "IB01OD.f"
 	*info = -2;
+#line 143 "IB01OD.f"
     } else if (*l <= 0) {
+#line 144 "IB01OD.f"
 	*info = -3;
+#line 145 "IB01OD.f"
     }
 
+#line 147 "IB01OD.f"
     if (*info != 0) {
+#line 148 "IB01OD.f"
 	i__1 = -(*info);
+#line 148 "IB01OD.f"
 	xerbla_("IB01OD", &i__1, (ftnlen)6);
+#line 149 "IB01OD.f"
 	return 0;
+#line 150 "IB01OD.f"
     }
 
 /*     Set  TOL  if necessay. */
 
+#line 154 "IB01OD.f"
     toll = *tol;
+#line 155 "IB01OD.f"
     if (toll == 0.) {
+#line 155 "IB01OD.f"
 	toll = dlamch_("Precision", (ftnlen)9) * sv[1] * (doublereal) (*nobr);
+#line 155 "IB01OD.f"
     }
 
 /*     Obtain the system order. */
 
+#line 160 "IB01OD.f"
     *n = 0;
+#line 161 "IB01OD.f"
     if (sv[1] != 0.) {
+#line 162 "IB01OD.f"
 	*n = *nobr;
+#line 163 "IB01OD.f"
 	if (toll >= 0.) {
 
 /*           Estimate  n  based on the tolerance  TOLL. */
 
+#line 167 "IB01OD.f"
 	    i__1 = *nobr - 1;
+#line 167 "IB01OD.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 168 "IB01OD.f"
 		if (sv[i__ + 1] < toll) {
+#line 169 "IB01OD.f"
 		    *n = i__;
+#line 170 "IB01OD.f"
 		    goto L30;
+#line 171 "IB01OD.f"
 		}
+#line 172 "IB01OD.f"
 /* L10: */
+#line 172 "IB01OD.f"
 	    }
+#line 173 "IB01OD.f"
 	} else {
 
 /*           Estimate  n  based on the largest logarithmic gap between */
 /*           two consecutive singular values. */
 
+#line 178 "IB01OD.f"
 	    gap = 0.;
+#line 179 "IB01OD.f"
 	    i__1 = *nobr - 1;
+#line 179 "IB01OD.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 180 "IB01OD.f"
 		rnrm = sv[i__ + 1];
+#line 181 "IB01OD.f"
 		if (rnrm != 0.) {
+#line 182 "IB01OD.f"
 		    rnrm = d_lg10(&sv[i__]) - d_lg10(&rnrm);
+#line 183 "IB01OD.f"
 		    if (rnrm > gap) {
+#line 184 "IB01OD.f"
 			gap = rnrm;
+#line 185 "IB01OD.f"
 			*n = i__;
+#line 186 "IB01OD.f"
 		    }
+#line 187 "IB01OD.f"
 		} else {
+#line 188 "IB01OD.f"
 		    if (gap == 0.) {
+#line 188 "IB01OD.f"
 			*n = i__;
+#line 188 "IB01OD.f"
 		    }
+#line 190 "IB01OD.f"
 		    goto L30;
+#line 191 "IB01OD.f"
 		}
+#line 192 "IB01OD.f"
 /* L20: */
+#line 192 "IB01OD.f"
 	    }
+#line 193 "IB01OD.f"
 	}
+#line 194 "IB01OD.f"
     }
 
+#line 196 "IB01OD.f"
 L30:
+#line 197 "IB01OD.f"
     if (*n == 0) {
 
 /*        Return with  N = 0  if all singular values are zero. */
 
+#line 201 "IB01OD.f"
 	*iwarn = 3;
+#line 202 "IB01OD.f"
 	return 0;
+#line 203 "IB01OD.f"
     }
 
+#line 205 "IB01OD.f"
     if (contrl) {
 
 /*        Ask confirmation of the system order. */
 
+#line 209 "IB01OD.f"
 	i__1 = *nobr - 1;
+#line 209 "IB01OD.f"
 	ib01oy_(&lnobr, &i__1, n, &sv[1], &ierr);
+#line 210 "IB01OD.f"
     }
+#line 211 "IB01OD.f"
     return 0;
 
 /* *** Last line of IB01OD *** */

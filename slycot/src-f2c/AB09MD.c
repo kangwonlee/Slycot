@@ -1,3 +1,4 @@
+#line 1 "AB09MD.f"
 /* AB09MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB09MD.f"
 /* Subroutine */ int ab09md_(char *dico, char *job, char *equil, char *ordsel,
 	 integer *n, integer *m, integer *p, integer *nr, doublereal *alpha, 
 	doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *
@@ -350,85 +352,147 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 319 "AB09MD.f"
     /* Parameter adjustments */
+#line 319 "AB09MD.f"
     a_dim1 = *lda;
+#line 319 "AB09MD.f"
     a_offset = 1 + a_dim1;
+#line 319 "AB09MD.f"
     a -= a_offset;
+#line 319 "AB09MD.f"
     b_dim1 = *ldb;
+#line 319 "AB09MD.f"
     b_offset = 1 + b_dim1;
+#line 319 "AB09MD.f"
     b -= b_offset;
+#line 319 "AB09MD.f"
     c_dim1 = *ldc;
+#line 319 "AB09MD.f"
     c_offset = 1 + c_dim1;
+#line 319 "AB09MD.f"
     c__ -= c_offset;
+#line 319 "AB09MD.f"
     --hsv;
+#line 319 "AB09MD.f"
     --iwork;
+#line 319 "AB09MD.f"
     --dwork;
+#line 319 "AB09MD.f"
 
+#line 319 "AB09MD.f"
     /* Function Body */
+#line 319 "AB09MD.f"
     *info = 0;
+#line 320 "AB09MD.f"
     *iwarn = 0;
+#line 321 "AB09MD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 322 "AB09MD.f"
     fixord = lsame_(ordsel, "F", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 326 "AB09MD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 327 "AB09MD.f"
 	*info = -1;
+#line 328 "AB09MD.f"
     } else if (! (lsame_(job, "B", (ftnlen)1, (ftnlen)1) || lsame_(job, "N", (
 	    ftnlen)1, (ftnlen)1))) {
+#line 329 "AB09MD.f"
 	*info = -2;
+#line 330 "AB09MD.f"
     } else if (! (lsame_(equil, "S", (ftnlen)1, (ftnlen)1) || lsame_(equil, 
 	    "N", (ftnlen)1, (ftnlen)1))) {
+#line 332 "AB09MD.f"
 	*info = -3;
+#line 333 "AB09MD.f"
     } else if (! (fixord || lsame_(ordsel, "A", (ftnlen)1, (ftnlen)1))) {
+#line 334 "AB09MD.f"
 	*info = -4;
+#line 335 "AB09MD.f"
     } else if (*n < 0) {
+#line 336 "AB09MD.f"
 	*info = -5;
+#line 337 "AB09MD.f"
     } else if (*m < 0) {
+#line 338 "AB09MD.f"
 	*info = -6;
+#line 339 "AB09MD.f"
     } else if (*p < 0) {
+#line 340 "AB09MD.f"
 	*info = -7;
+#line 341 "AB09MD.f"
     } else if (fixord && (*nr < 0 || *nr > *n)) {
+#line 342 "AB09MD.f"
 	*info = -8;
+#line 343 "AB09MD.f"
     } else if (discr && (*alpha < 0. || *alpha > 1.) || ! discr && *alpha > 
 	    0.) {
+#line 345 "AB09MD.f"
 	*info = -9;
+#line 346 "AB09MD.f"
     } else if (*lda < max(1,*n)) {
+#line 347 "AB09MD.f"
 	*info = -11;
+#line 348 "AB09MD.f"
     } else if (*ldb < max(1,*n)) {
+#line 349 "AB09MD.f"
 	*info = -13;
+#line 350 "AB09MD.f"
     } else if (*ldc < max(1,*p)) {
+#line 351 "AB09MD.f"
 	*info = -15;
+#line 352 "AB09MD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 352 "AB09MD.f"
 	i__3 = max(*n,*m);
+#line 352 "AB09MD.f"
 	i__1 = 1, i__2 = *n * ((*n << 1) + max(i__3,*p) + 5) + *n * (*n + 1) /
 		 2;
+#line 352 "AB09MD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 354 "AB09MD.f"
 	    *info = -21;
+#line 355 "AB09MD.f"
 	}
+#line 355 "AB09MD.f"
     }
 
+#line 357 "AB09MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 361 "AB09MD.f"
 	i__1 = -(*info);
+#line 361 "AB09MD.f"
 	xerbla_("AB09MD", &i__1, (ftnlen)6);
+#line 362 "AB09MD.f"
 	return 0;
+#line 363 "AB09MD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 367 "AB09MD.f"
     i__1 = min(*n,*m);
+#line 367 "AB09MD.f"
     if (min(i__1,*p) == 0) {
+#line 368 "AB09MD.f"
 	*nr = 0;
+#line 369 "AB09MD.f"
 	dwork[1] = 1.;
+#line 370 "AB09MD.f"
 	return 0;
+#line 371 "AB09MD.f"
     }
 
+#line 373 "AB09MD.f"
     if (lsame_(equil, "S", (ftnlen)1, (ftnlen)1)) {
 
 /*        Scale simultaneously the matrices A, B and C: */
@@ -436,31 +500,50 @@
 /*        diagonal matrix. */
 /*        Workspace: N. */
 
+#line 380 "AB09MD.f"
 	maxred = 100.;
+#line 381 "AB09MD.f"
 	tb01id_("All", n, m, p, &maxred, &a[a_offset], lda, &b[b_offset], ldb,
 		 &c__[c_offset], ldc, &dwork[1], info, (ftnlen)3);
+#line 383 "AB09MD.f"
     }
 
 /*     Correct the value of ALPHA to ensure stability. */
 
+#line 387 "AB09MD.f"
     alpwrk = *alpha;
+#line 388 "AB09MD.f"
     if (discr) {
+#line 389 "AB09MD.f"
 	if (*alpha == 1.) {
+#line 389 "AB09MD.f"
 	    alpwrk = 1. - sqrt(dlamch_("E", (ftnlen)1));
+#line 389 "AB09MD.f"
 	}
+#line 390 "AB09MD.f"
     } else {
+#line 391 "AB09MD.f"
 	if (*alpha == 0.) {
+#line 391 "AB09MD.f"
 	    alpwrk = -sqrt(dlamch_("E", (ftnlen)1));
+#line 391 "AB09MD.f"
 	}
+#line 392 "AB09MD.f"
     }
 
 /*     Allocate working storage. */
 
+#line 396 "AB09MD.f"
     nn = *n * *n;
+#line 397 "AB09MD.f"
     ku = 1;
+#line 398 "AB09MD.f"
     kwr = ku + nn;
+#line 399 "AB09MD.f"
     kwi = kwr + *n;
+#line 400 "AB09MD.f"
     kw = kwi + *n;
+#line 401 "AB09MD.f"
     lwr = *ldwork - kw + 1;
 
 /*     Reduce A to a block-diagonal real Schur form, with the */
@@ -472,73 +555,114 @@
 /*     Additional workspace:  need   3*N; */
 /*                            prefer larger. */
 
+#line 412 "AB09MD.f"
     tb01kd_(dico, "Unstable", "General", n, m, p, &alpwrk, &a[a_offset], lda, 
 	    &b[b_offset], ldb, &c__[c_offset], ldc, &nu, &dwork[ku], n, &
 	    dwork[kwr], &dwork[kwi], &dwork[kw], &lwr, &ierr, (ftnlen)1, (
 	    ftnlen)8, (ftnlen)7);
 
+#line 416 "AB09MD.f"
     if (ierr != 0) {
+#line 417 "AB09MD.f"
 	if (ierr != 3) {
+#line 418 "AB09MD.f"
 	    *info = 1;
+#line 419 "AB09MD.f"
 	} else {
+#line 420 "AB09MD.f"
 	    *info = 2;
+#line 421 "AB09MD.f"
 	}
+#line 422 "AB09MD.f"
 	return 0;
+#line 423 "AB09MD.f"
     }
 
+#line 425 "AB09MD.f"
     wrkopt = (integer) (dwork[kw] + (doublereal) (kw - 1));
 
+#line 427 "AB09MD.f"
     iwarnl = 0;
+#line 428 "AB09MD.f"
     *ns = *n - nu;
+#line 429 "AB09MD.f"
     if (fixord) {
 /* Computing MAX */
+#line 430 "AB09MD.f"
 	i__1 = 0, i__2 = *nr - nu;
+#line 430 "AB09MD.f"
 	nra = max(i__1,i__2);
+#line 431 "AB09MD.f"
 	if (*nr < nu) {
+#line 431 "AB09MD.f"
 	    iwarnl = 2;
+#line 431 "AB09MD.f"
 	}
+#line 433 "AB09MD.f"
     } else {
+#line 434 "AB09MD.f"
 	nra = 0;
+#line 435 "AB09MD.f"
     }
 
 /*     Finish if only unstable part is present. */
 
+#line 439 "AB09MD.f"
     if (*ns == 0) {
+#line 440 "AB09MD.f"
 	*nr = nu;
+#line 441 "AB09MD.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 442 "AB09MD.f"
 	return 0;
+#line 443 "AB09MD.f"
     }
 
+#line 445 "AB09MD.f"
     nu1 = nu + 1;
 
 /*     Allocate working storage. */
 
+#line 449 "AB09MD.f"
     kt = 1;
+#line 450 "AB09MD.f"
     kti = kt + nn;
+#line 451 "AB09MD.f"
     kw = kti + nn;
 
 /*     Compute a B & T approximation of the stable part. */
 /*     Workspace: need   N*(2*N+MAX(N,M,P)+5) + N*(N+1)/2; */
 /*                prefer larger. */
 
+#line 457 "AB09MD.f"
     i__1 = *ldwork - kw + 1;
+#line 457 "AB09MD.f"
     ab09ax_(dico, job, ordsel, ns, m, p, &nra, &a[nu1 + nu1 * a_dim1], lda, &
 	    b[nu1 + b_dim1], ldb, &c__[nu1 * c_dim1 + 1], ldc, &hsv[1], &
 	    dwork[kt], n, &dwork[kti], n, tol, &iwork[1], &dwork[kw], &i__1, 
 	    iwarn, &ierr, (ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 461 "AB09MD.f"
     *iwarn = max(*iwarn,iwarnl);
 
+#line 463 "AB09MD.f"
     if (ierr != 0) {
+#line 464 "AB09MD.f"
 	*info = ierr + 1;
+#line 465 "AB09MD.f"
 	return 0;
+#line 466 "AB09MD.f"
     }
 
+#line 468 "AB09MD.f"
     *nr = nra + nu;
 
 /* Computing MAX */
+#line 470 "AB09MD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 470 "AB09MD.f"
     dwork[1] = (doublereal) max(i__1,i__2);
 
+#line 472 "AB09MD.f"
     return 0;
 /* *** Last line of AB09MD *** */
 } /* ab09md_ */

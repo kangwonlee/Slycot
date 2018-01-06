@@ -1,3 +1,4 @@
+#line 1 "SB08CD.f"
 /* SB08CD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB08CD.f"
 /* Table of constant values */
 
 static doublereal c_b6 = 0.;
@@ -301,89 +303,156 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 267 "SB08CD.f"
     /* Parameter adjustments */
+#line 267 "SB08CD.f"
     a_dim1 = *lda;
+#line 267 "SB08CD.f"
     a_offset = 1 + a_dim1;
+#line 267 "SB08CD.f"
     a -= a_offset;
+#line 267 "SB08CD.f"
     b_dim1 = *ldb;
+#line 267 "SB08CD.f"
     b_offset = 1 + b_dim1;
+#line 267 "SB08CD.f"
     b -= b_offset;
+#line 267 "SB08CD.f"
     c_dim1 = *ldc;
+#line 267 "SB08CD.f"
     c_offset = 1 + c_dim1;
+#line 267 "SB08CD.f"
     c__ -= c_offset;
+#line 267 "SB08CD.f"
     d_dim1 = *ldd;
+#line 267 "SB08CD.f"
     d_offset = 1 + d_dim1;
+#line 267 "SB08CD.f"
     d__ -= d_offset;
+#line 267 "SB08CD.f"
     br_dim1 = *ldbr;
+#line 267 "SB08CD.f"
     br_offset = 1 + br_dim1;
+#line 267 "SB08CD.f"
     br -= br_offset;
+#line 267 "SB08CD.f"
     dr_dim1 = *lddr;
+#line 267 "SB08CD.f"
     dr_offset = 1 + dr_dim1;
+#line 267 "SB08CD.f"
     dr -= dr_offset;
+#line 267 "SB08CD.f"
     --dwork;
+#line 267 "SB08CD.f"
 
+#line 267 "SB08CD.f"
     /* Function Body */
+#line 267 "SB08CD.f"
     *iwarn = 0;
+#line 268 "SB08CD.f"
     *info = 0;
 
 /*     Check the scalar input parameters. */
 
+#line 272 "SB08CD.f"
     if (! lsame_(dico, "C", (ftnlen)1, (ftnlen)1) && ! lsame_(dico, "D", (
 	    ftnlen)1, (ftnlen)1)) {
+#line 274 "SB08CD.f"
 	*info = -1;
+#line 275 "SB08CD.f"
     } else if (*n < 0) {
+#line 276 "SB08CD.f"
 	*info = -2;
+#line 277 "SB08CD.f"
     } else if (*m < 0) {
+#line 278 "SB08CD.f"
 	*info = -3;
+#line 279 "SB08CD.f"
     } else if (*p < 0) {
+#line 280 "SB08CD.f"
 	*info = -4;
+#line 281 "SB08CD.f"
     } else if (*lda < max(1,*n)) {
+#line 282 "SB08CD.f"
 	*info = -6;
+#line 283 "SB08CD.f"
     } else if (*ldb < max(1,*n)) {
+#line 284 "SB08CD.f"
 	*info = -8;
+#line 285 "SB08CD.f"
     } else if (*ldc < 1 || *n > 0 && *ldc < max(*m,*p)) {
+#line 287 "SB08CD.f"
 	*info = -10;
+#line 288 "SB08CD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 288 "SB08CD.f"
 	i__1 = max(1,*m);
+#line 288 "SB08CD.f"
 	if (*ldd < max(i__1,*p)) {
+#line 289 "SB08CD.f"
 	    *info = -12;
+#line 290 "SB08CD.f"
 	} else if (*ldbr < max(1,*n)) {
+#line 291 "SB08CD.f"
 	    *info = -16;
+#line 292 "SB08CD.f"
 	} else if (*lddr < max(1,*p)) {
+#line 293 "SB08CD.f"
 	    *info = -18;
+#line 294 "SB08CD.f"
 	} else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 294 "SB08CD.f"
 	    i__3 = *n * (*n + 5), i__4 = *p * (*p + 2), i__3 = max(i__3,i__4),
 		     i__4 = *p << 2, i__3 = max(i__3,i__4), i__4 = *m << 2;
+#line 294 "SB08CD.f"
 	    i__1 = 1, i__2 = *p * *n + max(i__3,i__4);
+#line 294 "SB08CD.f"
 	    if (*ldwork < max(i__1,i__2)) {
+#line 296 "SB08CD.f"
 		*info = -21;
+#line 297 "SB08CD.f"
 	    }
+#line 297 "SB08CD.f"
 	}
+#line 297 "SB08CD.f"
     }
+#line 298 "SB08CD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 302 "SB08CD.f"
 	i__1 = -(*info);
+#line 302 "SB08CD.f"
 	xerbla_("SB08CD", &i__1, (ftnlen)6);
+#line 303 "SB08CD.f"
 	return 0;
+#line 304 "SB08CD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 308 "SB08CD.f"
     if (min(*n,*p) == 0) {
+#line 309 "SB08CD.f"
 	*nq = 0;
+#line 310 "SB08CD.f"
 	*nr = 0;
+#line 311 "SB08CD.f"
 	dwork[1] = 1.;
+#line 312 "SB08CD.f"
 	dlaset_("Full", p, p, &c_b6, &c_b7, &dr[dr_offset], lddr, (ftnlen)4);
+#line 313 "SB08CD.f"
 	return 0;
+#line 314 "SB08CD.f"
     }
 
 /*     Compute the dual system G' = (A',C',B',D'). */
 
+#line 318 "SB08CD.f"
     ab07md_("D", n, m, p, &a[a_offset], lda, &b[b_offset], ldb, &c__[c_offset]
 	    , ldc, &d__[d_offset], ldd, info, (ftnlen)1);
 
@@ -394,12 +463,17 @@ static integer c__1 = 1;
 /*     Additional workspace:  need  MAX( N*(N+5), P*(P+2), 4*P, 4*M ); */
 /*                            prefer larger. */
 
+#line 328 "SB08CD.f"
     kbr = 1;
+#line 329 "SB08CD.f"
     kw = kbr + *p * *n;
+#line 330 "SB08CD.f"
     i__1 = *ldwork - kw + 1;
+#line 330 "SB08CD.f"
     sb08dd_(dico, n, p, m, &a[a_offset], lda, &b[b_offset], ldb, &c__[
 	    c_offset], ldc, &d__[d_offset], ldd, nq, nr, &dwork[kbr], p, &dr[
 	    dr_offset], lddr, tol, &dwork[kw], &i__1, iwarn, info, (ftnlen)1);
+#line 333 "SB08CD.f"
     if (*info == 0) {
 
 /*        Determine the elements of the left coprime factorization from */
@@ -407,31 +481,47 @@ static integer c__1 = 1;
 /*        state-matrix upper real Schur. */
 
 /* Computing MAX */
+#line 339 "SB08CD.f"
 	i__2 = 0, i__3 = *nq - 1;
+#line 339 "SB08CD.f"
 	i__1 = max(i__2,i__3);
 /* Computing MAX */
+#line 339 "SB08CD.f"
 	i__5 = 0, i__6 = *nq - 1;
+#line 339 "SB08CD.f"
 	i__4 = max(i__5,i__6);
+#line 339 "SB08CD.f"
 	tb01xd_("D", nq, p, m, &i__1, &i__4, &a[a_offset], lda, &b[b_offset], 
 		ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, info, (ftnlen)
 		1);
 
+#line 342 "SB08CD.f"
 	ma02ad_("Full", p, nq, &dwork[kbr], p, &br[br_offset], ldbr, (ftnlen)
 		4);
+#line 343 "SB08CD.f"
 	ma02bd_("Left", nq, p, &br[br_offset], ldbr, (ftnlen)4);
 
+#line 345 "SB08CD.f"
 	i__1 = *p;
+#line 345 "SB08CD.f"
 	for (i__ = 2; i__ <= i__1; ++i__) {
+#line 346 "SB08CD.f"
 	    i__2 = i__ - 1;
+#line 346 "SB08CD.f"
 	    dswap_(&i__2, &dr[i__ + dr_dim1], lddr, &dr[i__ * dr_dim1 + 1], &
 		    c__1);
+#line 347 "SB08CD.f"
 /* L10: */
+#line 347 "SB08CD.f"
 	}
 
+#line 349 "SB08CD.f"
     }
 
+#line 351 "SB08CD.f"
     dwork[1] = dwork[kw] + (doublereal) (kw - 1);
 
+#line 353 "SB08CD.f"
     return 0;
 /* *** Last line of SB08CD *** */
 } /* sb08cd_ */

@@ -1,3 +1,4 @@
+#line 1 "SB04RW.f"
 /* SB04RW.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB04RW.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -154,73 +156,122 @@ static doublereal c_b12 = -1.;
 /*     For speed, no tests on the input scalar arguments are made. */
 /*     Quick return if possible. */
 
+#line 131 "SB04RW.f"
     /* Parameter adjustments */
+#line 131 "SB04RW.f"
     c_dim1 = *ldc;
+#line 131 "SB04RW.f"
     c_offset = 1 + c_dim1;
+#line 131 "SB04RW.f"
     c__ -= c_offset;
+#line 131 "SB04RW.f"
     ab_dim1 = *ldab;
+#line 131 "SB04RW.f"
     ab_offset = 1 + ab_dim1;
+#line 131 "SB04RW.f"
     ab -= ab_offset;
+#line 131 "SB04RW.f"
     ba_dim1 = *ldba;
+#line 131 "SB04RW.f"
     ba_offset = 1 + ba_dim1;
+#line 131 "SB04RW.f"
     ba -= ba_offset;
+#line 131 "SB04RW.f"
     --d__;
+#line 131 "SB04RW.f"
     --dwork;
+#line 131 "SB04RW.f"
 
+#line 131 "SB04RW.f"
     /* Function Body */
+#line 131 "SB04RW.f"
     if (*n == 0 || *m == 0) {
+#line 131 "SB04RW.f"
 	return 0;
+#line 131 "SB04RW.f"
     }
 
+#line 134 "SB04RW.f"
     if (lsame_(abschr, "B", (ftnlen)1, (ftnlen)1)) {
 
 /*        Construct the column of the right-hand side. */
 
+#line 138 "SB04RW.f"
 	dcopy_(n, &c__[*indx * c_dim1 + 1], &c__1, &d__[1], &c__1);
+#line 139 "SB04RW.f"
 	if (lsame_(ul, "U", (ftnlen)1, (ftnlen)1)) {
+#line 140 "SB04RW.f"
 	    if (*indx > 1) {
+#line 141 "SB04RW.f"
 		i__1 = *indx - 1;
+#line 141 "SB04RW.f"
 		dgemv_("N", n, &i__1, &c_b7, &c__[c_offset], ldc, &ab[*indx * 
 			ab_dim1 + 1], &c__1, &c_b9, &dwork[1], &c__1, (ftnlen)
 			1);
+#line 143 "SB04RW.f"
 		dgemv_("N", n, n, &c_b12, &ba[ba_offset], ldba, &dwork[1], &
 			c__1, &c_b7, &d__[1], &c__1, (ftnlen)1);
+#line 145 "SB04RW.f"
 	    }
+#line 146 "SB04RW.f"
 	} else {
+#line 147 "SB04RW.f"
 	    if (*indx < *m) {
+#line 148 "SB04RW.f"
 		i__1 = *m - *indx;
+#line 148 "SB04RW.f"
 		dgemv_("N", n, &i__1, &c_b7, &c__[(*indx + 1) * c_dim1 + 1], 
 			ldc, &ab[*indx + 1 + *indx * ab_dim1], &c__1, &c_b9, &
 			dwork[1], &c__1, (ftnlen)1);
+#line 150 "SB04RW.f"
 		dgemv_("N", n, n, &c_b12, &ba[ba_offset], ldba, &dwork[1], &
 			c__1, &c_b7, &d__[1], &c__1, (ftnlen)1);
+#line 152 "SB04RW.f"
 	    }
+#line 153 "SB04RW.f"
 	}
+#line 154 "SB04RW.f"
     } else {
 
 /*        Construct the row of the right-hand side. */
 
+#line 158 "SB04RW.f"
 	dcopy_(m, &c__[*indx + c_dim1], ldc, &d__[1], &c__1);
+#line 159 "SB04RW.f"
 	if (lsame_(ul, "U", (ftnlen)1, (ftnlen)1)) {
+#line 160 "SB04RW.f"
 	    if (*indx < *n) {
+#line 161 "SB04RW.f"
 		i__1 = *n - *indx;
+#line 161 "SB04RW.f"
 		dgemv_("T", &i__1, m, &c_b7, &c__[*indx + 1 + c_dim1], ldc, &
 			ab[*indx + (*indx + 1) * ab_dim1], ldab, &c_b9, &
 			dwork[1], &c__1, (ftnlen)1);
+#line 163 "SB04RW.f"
 		dgemv_("T", m, m, &c_b12, &ba[ba_offset], ldba, &dwork[1], &
 			c__1, &c_b7, &d__[1], &c__1, (ftnlen)1);
+#line 165 "SB04RW.f"
 	    }
+#line 166 "SB04RW.f"
 	} else {
+#line 167 "SB04RW.f"
 	    if (*indx > 1) {
+#line 168 "SB04RW.f"
 		i__1 = *indx - 1;
+#line 168 "SB04RW.f"
 		dgemv_("T", &i__1, m, &c_b7, &c__[c_offset], ldc, &ab[*indx + 
 			ab_dim1], ldab, &c_b9, &dwork[1], &c__1, (ftnlen)1);
+#line 170 "SB04RW.f"
 		dgemv_("T", m, m, &c_b12, &ba[ba_offset], ldba, &dwork[1], &
 			c__1, &c_b7, &d__[1], &c__1, (ftnlen)1);
+#line 172 "SB04RW.f"
 	    }
+#line 173 "SB04RW.f"
 	}
+#line 174 "SB04RW.f"
     }
 
+#line 176 "SB04RW.f"
     return 0;
 /* *** Last line of SB04RW *** */
 } /* sb04rw_ */

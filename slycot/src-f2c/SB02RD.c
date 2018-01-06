@@ -1,3 +1,4 @@
+#line 1 "SB02RD.f"
 /* SB02RD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB02RD.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -688,189 +690,356 @@ static doublereal c_b85 = -1.;
 
 /*     Decode the input parameters. */
 
+#line 600 "SB02RD.f"
     /* Parameter adjustments */
+#line 600 "SB02RD.f"
     a_dim1 = *lda;
+#line 600 "SB02RD.f"
     a_offset = 1 + a_dim1;
+#line 600 "SB02RD.f"
     a -= a_offset;
+#line 600 "SB02RD.f"
     t_dim1 = *ldt;
+#line 600 "SB02RD.f"
     t_offset = 1 + t_dim1;
+#line 600 "SB02RD.f"
     t -= t_offset;
+#line 600 "SB02RD.f"
     v_dim1 = *ldv;
+#line 600 "SB02RD.f"
     v_offset = 1 + v_dim1;
+#line 600 "SB02RD.f"
     v -= v_offset;
+#line 600 "SB02RD.f"
     g_dim1 = *ldg;
+#line 600 "SB02RD.f"
     g_offset = 1 + g_dim1;
+#line 600 "SB02RD.f"
     g -= g_offset;
+#line 600 "SB02RD.f"
     q_dim1 = *ldq;
+#line 600 "SB02RD.f"
     q_offset = 1 + q_dim1;
+#line 600 "SB02RD.f"
     q -= q_offset;
+#line 600 "SB02RD.f"
     x_dim1 = *ldx;
+#line 600 "SB02RD.f"
     x_offset = 1 + x_dim1;
+#line 600 "SB02RD.f"
     x -= x_offset;
+#line 600 "SB02RD.f"
     --wr;
+#line 600 "SB02RD.f"
     --wi;
+#line 600 "SB02RD.f"
     s_dim1 = *lds;
+#line 600 "SB02RD.f"
     s_offset = 1 + s_dim1;
+#line 600 "SB02RD.f"
     s -= s_offset;
+#line 600 "SB02RD.f"
     --iwork;
+#line 600 "SB02RD.f"
     --dwork;
+#line 600 "SB02RD.f"
     --bwork;
+#line 600 "SB02RD.f"
 
+#line 600 "SB02RD.f"
     /* Function Body */
+#line 600 "SB02RD.f"
     n2 = *n + *n;
+#line 601 "SB02RD.f"
     nn = *n * *n;
+#line 602 "SB02RD.f"
     np1 = *n + 1;
+#line 603 "SB02RD.f"
     *info = 0;
+#line 604 "SB02RD.f"
     joba = lsame_(job, "A", (ftnlen)1, (ftnlen)1);
+#line 605 "SB02RD.f"
     jobc = lsame_(job, "C", (ftnlen)1, (ftnlen)1);
+#line 606 "SB02RD.f"
     jobe = lsame_(job, "E", (ftnlen)1, (ftnlen)1);
+#line 607 "SB02RD.f"
     jobx = lsame_(job, "X", (ftnlen)1, (ftnlen)1);
+#line 608 "SB02RD.f"
     nofact = lsame_(fact, "N", (ftnlen)1, (ftnlen)1);
+#line 609 "SB02RD.f"
     notrna = lsame_(trana, "N", (ftnlen)1, (ftnlen)1);
+#line 610 "SB02RD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 611 "SB02RD.f"
     luplo = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 612 "SB02RD.f"
     lscal = lsame_(scal, "G", (ftnlen)1, (ftnlen)1);
+#line 613 "SB02RD.f"
     lsort = lsame_(sort, "S", (ftnlen)1, (ftnlen)1);
+#line 614 "SB02RD.f"
     update = lsame_(lyapun, "O", (ftnlen)1, (ftnlen)1);
+#line 615 "SB02RD.f"
     jbxa = jobx || joba;
+#line 616 "SB02RD.f"
     lhinv = FALSE_;
+#line 617 "SB02RD.f"
     if (discr && jbxa) {
+#line 617 "SB02RD.f"
 	lhinv = lsame_(hinv, "D", (ftnlen)1, (ftnlen)1);
+#line 617 "SB02RD.f"
     }
 
 /*     Test the input scalar arguments. */
 
+#line 622 "SB02RD.f"
     if (! (jbxa || jobc || jobe)) {
+#line 623 "SB02RD.f"
 	*info = -1;
+#line 624 "SB02RD.f"
     } else if (! (discr || lsame_(dico, "C", (ftnlen)1, (ftnlen)1))) {
+#line 625 "SB02RD.f"
 	*info = -2;
+#line 626 "SB02RD.f"
     } else if (discr && jbxa) {
+#line 627 "SB02RD.f"
 	if (! (lhinv || lsame_(hinv, "I", (ftnlen)1, (ftnlen)1))) {
+#line 627 "SB02RD.f"
 	    *info = -3;
+#line 627 "SB02RD.f"
 	}
+#line 629 "SB02RD.f"
     }
+#line 630 "SB02RD.f"
     if (*info == 0) {
+#line 631 "SB02RD.f"
 	if (! (notrna || lsame_(trana, "T", (ftnlen)1, (ftnlen)1) || lsame_(
 		trana, "C", (ftnlen)1, (ftnlen)1))) {
+#line 633 "SB02RD.f"
 	    *info = -4;
+#line 634 "SB02RD.f"
 	} else if (! (luplo || lsame_(uplo, "L", (ftnlen)1, (ftnlen)1))) {
+#line 636 "SB02RD.f"
 	    *info = -5;
+#line 637 "SB02RD.f"
 	} else if (jbxa) {
+#line 638 "SB02RD.f"
 	    if (! (lscal || lsame_(scal, "N", (ftnlen)1, (ftnlen)1))) {
+#line 639 "SB02RD.f"
 		*info = -6;
+#line 640 "SB02RD.f"
 	    } else if (! (lsort || lsame_(sort, "U", (ftnlen)1, (ftnlen)1))) {
+#line 641 "SB02RD.f"
 		*info = -7;
+#line 642 "SB02RD.f"
 	    }
+#line 643 "SB02RD.f"
 	}
+#line 644 "SB02RD.f"
 	if (*info == 0 && ! jobx) {
+#line 645 "SB02RD.f"
 	    if (! (nofact || lsame_(fact, "F", (ftnlen)1, (ftnlen)1))) {
+#line 646 "SB02RD.f"
 		*info = -8;
+#line 647 "SB02RD.f"
 	    } else if (! (update || lsame_(lyapun, "R", (ftnlen)1, (ftnlen)1))
 		    ) {
+#line 648 "SB02RD.f"
 		*info = -9;
+#line 649 "SB02RD.f"
 	    }
+#line 650 "SB02RD.f"
 	}
+#line 651 "SB02RD.f"
 	if (*info == 0) {
+#line 652 "SB02RD.f"
 	    if (*n < 0) {
+#line 653 "SB02RD.f"
 		*info = -10;
+#line 654 "SB02RD.f"
 	    } else if (*lda < 1 || (jbxa || nofact || update) && *lda < *n) {
+#line 656 "SB02RD.f"
 		*info = -12;
+#line 657 "SB02RD.f"
 	    } else if (*ldt < 1 || ! jobx && *ldt < *n) {
+#line 658 "SB02RD.f"
 		*info = -14;
+#line 659 "SB02RD.f"
 	    } else if (*ldv < 1 || ! jobx && *ldv < *n) {
+#line 660 "SB02RD.f"
 		*info = -16;
+#line 661 "SB02RD.f"
 	    } else if (*ldg < max(1,*n)) {
+#line 662 "SB02RD.f"
 		*info = -18;
+#line 663 "SB02RD.f"
 	    } else if (*ldq < max(1,*n)) {
+#line 664 "SB02RD.f"
 		*info = -20;
+#line 665 "SB02RD.f"
 	    } else if (*ldx < max(1,*n)) {
+#line 666 "SB02RD.f"
 		*info = -22;
+#line 667 "SB02RD.f"
 	    } else if (*lds < 1 || jbxa && *lds < n2) {
+#line 668 "SB02RD.f"
 		*info = -29;
+#line 669 "SB02RD.f"
 	    } else {
+#line 670 "SB02RD.f"
 		if (jbxa) {
 /* Computing MAX */
+#line 671 "SB02RD.f"
 		    i__1 = 1, i__2 = (nn << 2) + (*n << 3);
+#line 671 "SB02RD.f"
 		    if (*ldwork < max(i__1,i__2) + 5) {
+#line 671 "SB02RD.f"
 			*info = -32;
+#line 671 "SB02RD.f"
 		    }
+#line 673 "SB02RD.f"
 		} else {
+#line 674 "SB02RD.f"
 		    if (nofact && update) {
+#line 675 "SB02RD.f"
 			if (! discr && jobc) {
+#line 676 "SB02RD.f"
 			    lws = *n * 5;
+#line 677 "SB02RD.f"
 			} else {
+#line 678 "SB02RD.f"
 			    lws = *n * 5 + nn;
+#line 679 "SB02RD.f"
 			}
+#line 680 "SB02RD.f"
 		    } else {
+#line 681 "SB02RD.f"
 			lws = 0;
+#line 682 "SB02RD.f"
 		    }
+#line 683 "SB02RD.f"
 		    if (discr) {
+#line 684 "SB02RD.f"
 			if (jobc) {
 /* Computing MAX */
+#line 685 "SB02RD.f"
 			    i__1 = 3, i__2 = nn << 1;
+#line 685 "SB02RD.f"
 			    lwe = max(i__1,i__2) + nn;
+#line 686 "SB02RD.f"
 			} else {
 /* Computing MAX */
+#line 687 "SB02RD.f"
 			    i__1 = 3, i__2 = nn << 1;
+#line 687 "SB02RD.f"
 			    lwe = max(i__1,i__2) + (nn << 1);
+#line 688 "SB02RD.f"
 			}
+#line 689 "SB02RD.f"
 		    } else {
+#line 690 "SB02RD.f"
 			if (jobc) {
+#line 691 "SB02RD.f"
 			    lwe = nn << 1;
+#line 692 "SB02RD.f"
 			} else {
+#line 693 "SB02RD.f"
 			    lwe = nn << 2;
+#line 694 "SB02RD.f"
 			}
+#line 695 "SB02RD.f"
 		    }
+#line 696 "SB02RD.f"
 		    if (update || jobc) {
+#line 697 "SB02RD.f"
 			lwn = 0;
+#line 698 "SB02RD.f"
 		    } else {
+#line 699 "SB02RD.f"
 			if (discr) {
+#line 700 "SB02RD.f"
 			    lwn = *n * 3;
+#line 701 "SB02RD.f"
 			} else {
+#line 702 "SB02RD.f"
 			    lwn = *n << 1;
+#line 703 "SB02RD.f"
 			}
+#line 704 "SB02RD.f"
 		    }
 /* Computing MAX */
+#line 705 "SB02RD.f"
 		    i__1 = max(1,lws);
+#line 705 "SB02RD.f"
 		    if (*ldwork < max(i__1,lwe) + 5 + lwn) {
+#line 705 "SB02RD.f"
 			*info = -32;
+#line 705 "SB02RD.f"
 		    }
+#line 707 "SB02RD.f"
 		}
+#line 708 "SB02RD.f"
 	    }
+#line 709 "SB02RD.f"
 	}
+#line 710 "SB02RD.f"
     }
 
+#line 712 "SB02RD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 716 "SB02RD.f"
 	i__1 = -(*info);
+#line 716 "SB02RD.f"
 	xerbla_("SB02RD", &i__1, (ftnlen)6);
+#line 717 "SB02RD.f"
 	return 0;
+#line 718 "SB02RD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 722 "SB02RD.f"
     if (*n == 0) {
+#line 723 "SB02RD.f"
 	if (jobx) {
+#line 723 "SB02RD.f"
 	    *sep = 1.;
+#line 723 "SB02RD.f"
 	}
+#line 725 "SB02RD.f"
 	if (jobc || joba) {
+#line 725 "SB02RD.f"
 	    *rcond = 1.;
+#line 725 "SB02RD.f"
 	}
+#line 727 "SB02RD.f"
 	if (jobe || joba) {
+#line 727 "SB02RD.f"
 	    *ferr = 0.;
+#line 727 "SB02RD.f"
 	}
+#line 729 "SB02RD.f"
 	dwork[1] = 1.;
+#line 730 "SB02RD.f"
 	dwork[2] = 1.;
+#line 731 "SB02RD.f"
 	dwork[3] = 1.;
+#line 732 "SB02RD.f"
 	if (discr) {
+#line 733 "SB02RD.f"
 	    dwork[4] = 1.;
+#line 734 "SB02RD.f"
 	    dwork[5] = 1.;
+#line 735 "SB02RD.f"
 	}
+#line 736 "SB02RD.f"
 	return 0;
+#line 737 "SB02RD.f"
     }
 
+#line 739 "SB02RD.f"
     if (jbxa) {
 
 /*        Compute the solution matrix X. */
@@ -880,98 +1049,161 @@ static doublereal c_b85 = -1.;
 /*        Workspace:  need   0    if DICO = 'C'; */
 /*                           6*N, if DICO = 'D'. */
 
+#line 748 "SB02RD.f"
 	sb02ru_(dico, hinv, trana, uplo, n, &a[a_offset], lda, &g[g_offset], 
 		ldg, &q[q_offset], ldq, &s[s_offset], lds, &iwork[1], &dwork[
 		1], ldwork, &ierr, (ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)1)
 		;
 
+#line 751 "SB02RD.f"
 	if (ierr != 0) {
+#line 752 "SB02RD.f"
 	    *info = 1;
+#line 753 "SB02RD.f"
 	    if (discr) {
+#line 754 "SB02RD.f"
 		dwork[4] = dwork[1];
+#line 755 "SB02RD.f"
 		dwork[5] = dwork[2];
+#line 756 "SB02RD.f"
 	    }
+#line 757 "SB02RD.f"
 	    return 0;
+#line 758 "SB02RD.f"
 	}
 
+#line 760 "SB02RD.f"
 	if (discr) {
+#line 761 "SB02RD.f"
 	    wrkopt = (doublereal) (*n * 6);
+#line 762 "SB02RD.f"
 	    rconda = dwork[1];
+#line 763 "SB02RD.f"
 	    pivota = dwork[2];
+#line 764 "SB02RD.f"
 	} else {
+#line 765 "SB02RD.f"
 	    wrkopt = 0.;
+#line 766 "SB02RD.f"
 	}
 
+#line 768 "SB02RD.f"
 	if (lscal) {
 
 /*           Scale the Hamiltonian or symplectic matrix S, using the */
 /*           square roots of the norms of the matrices Q and G. */
 
+#line 773 "SB02RD.f"
 	    qnorm = sqrt(dlansy_("1-norm", uplo, n, &q[q_offset], ldq, &dwork[
 		    1], (ftnlen)6, (ftnlen)1));
+#line 774 "SB02RD.f"
 	    gnorm = sqrt(dlansy_("1-norm", uplo, n, &g[g_offset], ldg, &dwork[
 		    1], (ftnlen)6, (ftnlen)1));
 
+#line 776 "SB02RD.f"
 	    lscl = qnorm > gnorm && gnorm > 0.;
+#line 777 "SB02RD.f"
 	    if (lscl) {
+#line 778 "SB02RD.f"
 		dlascl_("G", &c__0, &c__0, &qnorm, &gnorm, n, n, &s[np1 + 
 			s_dim1], lds, &ierr, (ftnlen)1);
+#line 780 "SB02RD.f"
 		dlascl_("G", &c__0, &c__0, &gnorm, &qnorm, n, n, &s[np1 * 
 			s_dim1 + 1], lds, &ierr, (ftnlen)1);
+#line 782 "SB02RD.f"
 	    }
+#line 783 "SB02RD.f"
 	} else {
+#line 784 "SB02RD.f"
 	    lscl = FALSE_;
+#line 785 "SB02RD.f"
 	}
 
 /*        Find the ordered Schur factorization of S,  S = U*H*U'. */
 /*        Workspace:  need   5 + 4*N*N + 6*N; */
 /*                    prefer larger. */
 
+#line 791 "SB02RD.f"
 	iu = 6;
+#line 792 "SB02RD.f"
 	iw = iu + (nn << 2);
+#line 793 "SB02RD.f"
 	ldw = *ldwork - iw + 1;
+#line 794 "SB02RD.f"
 	if (! discr) {
+#line 795 "SB02RD.f"
 	    if (lsort) {
+#line 796 "SB02RD.f"
 		dgees_("Vectors", "Sorted", (L_fp)sb02mv_, &n2, &s[s_offset], 
 			lds, &nrot, &wr[1], &wi[1], &dwork[iu], &n2, &dwork[
 			iw], &ldw, &bwork[1], &ierr, (ftnlen)7, (ftnlen)6);
+#line 799 "SB02RD.f"
 	    } else {
+#line 800 "SB02RD.f"
 		dgees_("Vectors", "Sorted", (L_fp)sb02mr_, &n2, &s[s_offset], 
 			lds, &nrot, &wr[1], &wi[1], &dwork[iu], &n2, &dwork[
 			iw], &ldw, &bwork[1], &ierr, (ftnlen)7, (ftnlen)6);
+#line 803 "SB02RD.f"
 	    }
+#line 804 "SB02RD.f"
 	} else {
+#line 805 "SB02RD.f"
 	    if (lsort) {
+#line 806 "SB02RD.f"
 		dgees_("Vectors", "Sorted", (L_fp)sb02mw_, &n2, &s[s_offset], 
 			lds, &nrot, &wr[1], &wi[1], &dwork[iu], &n2, &dwork[
 			iw], &ldw, &bwork[1], &ierr, (ftnlen)7, (ftnlen)6);
+#line 809 "SB02RD.f"
 	    } else {
+#line 810 "SB02RD.f"
 		dgees_("Vectors", "Sorted", (L_fp)sb02ms_, &n2, &s[s_offset], 
 			lds, &nrot, &wr[1], &wi[1], &dwork[iu], &n2, &dwork[
 			iw], &ldw, &bwork[1], &ierr, (ftnlen)7, (ftnlen)6);
+#line 813 "SB02RD.f"
 	    }
+#line 814 "SB02RD.f"
 	    if (lhinv) {
+#line 815 "SB02RD.f"
 		dswap_(n, &wr[1], &c__1, &wr[np1], &c__1);
+#line 816 "SB02RD.f"
 		dswap_(n, &wi[1], &c__1, &wi[np1], &c__1);
+#line 817 "SB02RD.f"
 	    }
+#line 818 "SB02RD.f"
 	}
+#line 819 "SB02RD.f"
 	if (ierr > n2) {
+#line 820 "SB02RD.f"
 	    *info = 3;
+#line 821 "SB02RD.f"
 	} else if (ierr > 0) {
+#line 822 "SB02RD.f"
 	    *info = 2;
+#line 823 "SB02RD.f"
 	} else if (nrot != *n) {
+#line 824 "SB02RD.f"
 	    *info = 4;
+#line 825 "SB02RD.f"
 	}
+#line 826 "SB02RD.f"
 	if (*info != 0) {
+#line 827 "SB02RD.f"
 	    if (discr) {
+#line 828 "SB02RD.f"
 		dwork[4] = rconda;
+#line 829 "SB02RD.f"
 		dwork[5] = pivota;
+#line 830 "SB02RD.f"
 	    }
+#line 831 "SB02RD.f"
 	    return 0;
+#line 832 "SB02RD.f"
 	}
 
 /* Computing MAX */
+#line 834 "SB02RD.f"
 	d__1 = wrkopt, d__2 = dwork[iw] + (doublereal) (iw - 1);
+#line 834 "SB02RD.f"
 	wrkopt = max(d__1,d__2);
 
 /*        Compute the solution of X*U(1,1) = U(2,1) using */
@@ -981,244 +1213,377 @@ static doublereal c_b85 = -1.;
 
 /*        First transpose U(2,1) in-situ. */
 
+#line 843 "SB02RD.f"
 	i__1 = *n - 1;
+#line 843 "SB02RD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 844 "SB02RD.f"
 	    i__2 = *n - i__;
+#line 844 "SB02RD.f"
 	    dswap_(&i__2, &dwork[iu + *n + i__ * (n2 + 1) - 1], &n2, &dwork[
 		    iu + *n + (i__ - 1) * (n2 + 1) + 1], &c__1);
+#line 846 "SB02RD.f"
 /* L20: */
+#line 846 "SB02RD.f"
 	}
 
+#line 848 "SB02RD.f"
 	iwr = iw;
+#line 849 "SB02RD.f"
 	iwc = iwr + *n;
+#line 850 "SB02RD.f"
 	iwf = iwc + *n;
+#line 851 "SB02RD.f"
 	iwb = iwf + *n;
+#line 852 "SB02RD.f"
 	iw = iwb + *n;
 
+#line 854 "SB02RD.f"
 	mb02pd_("Equilibrate", "Transpose", n, n, &dwork[iu], &n2, &s[np1 + 
 		s_dim1], lds, &iwork[1], equed, &dwork[iwr], &dwork[iwc], &
 		dwork[iu + *n], &n2, &x[x_offset], ldx, &rcondu, &dwork[iwf], 
 		&dwork[iwb], &iwork[np1], &dwork[iw], &ierr, (ftnlen)11, (
 		ftnlen)9, (ftnlen)1);
+#line 859 "SB02RD.f"
 	if (jobx) {
 
 /*           Restore U(2,1) back in-situ. */
 
+#line 863 "SB02RD.f"
 	    i__1 = *n - 1;
+#line 863 "SB02RD.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 864 "SB02RD.f"
 		i__2 = *n - i__;
+#line 864 "SB02RD.f"
 		dswap_(&i__2, &dwork[iu + *n + i__ * (n2 + 1) - 1], &n2, &
 			dwork[iu + *n + (i__ - 1) * (n2 + 1) + 1], &c__1);
+#line 866 "SB02RD.f"
 /* L40: */
+#line 866 "SB02RD.f"
 	    }
 
+#line 868 "SB02RD.f"
 	    if (! lsame_(equed, "N", (ftnlen)1, (ftnlen)1)) {
 
 /*              Undo the equilibration of U(1,1) and U(2,1). */
 
+#line 872 "SB02RD.f"
 		rowequ = lsame_(equed, "R", (ftnlen)1, (ftnlen)1) || lsame_(
 			equed, "B", (ftnlen)1, (ftnlen)1);
+#line 873 "SB02RD.f"
 		colequ = lsame_(equed, "C", (ftnlen)1, (ftnlen)1) || lsame_(
 			equed, "B", (ftnlen)1, (ftnlen)1);
 
+#line 875 "SB02RD.f"
 		if (rowequ) {
 
+#line 877 "SB02RD.f"
 		    i__1 = *n;
+#line 877 "SB02RD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 878 "SB02RD.f"
 			dwork[iwr + i__ - 1] = 1. / dwork[iwr + i__ - 1];
+#line 879 "SB02RD.f"
 /* L60: */
+#line 879 "SB02RD.f"
 		    }
 
+#line 881 "SB02RD.f"
 		    mb01sd_("Row scaling", n, n, &dwork[iu], &n2, &dwork[iwr],
 			     &dwork[iwc], (ftnlen)11);
+#line 883 "SB02RD.f"
 		}
 
+#line 885 "SB02RD.f"
 		if (colequ) {
 
+#line 887 "SB02RD.f"
 		    i__1 = *n;
+#line 887 "SB02RD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 888 "SB02RD.f"
 			dwork[iwc + i__ - 1] = 1. / dwork[iwc + i__ - 1];
+#line 889 "SB02RD.f"
 /* L80: */
+#line 889 "SB02RD.f"
 		    }
 
+#line 891 "SB02RD.f"
 		    mb01sd_("Column scaling", n, n, &dwork[iu], &n2, &dwork[
 			    iwr], &dwork[iwc], (ftnlen)14);
+#line 893 "SB02RD.f"
 		    mb01sd_("Column scaling", n, n, &dwork[iu + *n], &n2, &
 			    dwork[iwr], &dwork[iwc], (ftnlen)14);
+#line 895 "SB02RD.f"
 		}
+#line 896 "SB02RD.f"
 	    }
 
 /*           Set S(2,1) to zero. */
 
+#line 900 "SB02RD.f"
 	    dlaset_("Full", n, n, &c_b61, &c_b61, &s[np1 + s_dim1], lds, (
 		    ftnlen)4);
+#line 901 "SB02RD.f"
 	}
 
+#line 903 "SB02RD.f"
 	pivotu = dwork[iw];
 
+#line 905 "SB02RD.f"
 	if (ierr > 0) {
 
 /*           Singular matrix. Set INFO and DWORK for error return. */
 
+#line 909 "SB02RD.f"
 	    *info = 5;
+#line 910 "SB02RD.f"
 	    goto L160;
+#line 911 "SB02RD.f"
 	}
 
 /*        Make sure the solution matrix X is symmetric. */
 
+#line 915 "SB02RD.f"
 	i__1 = *n - 1;
+#line 915 "SB02RD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 916 "SB02RD.f"
 	    i__2 = *n - i__;
+#line 916 "SB02RD.f"
 	    daxpy_(&i__2, &c_b65, &x[i__ + (i__ + 1) * x_dim1], ldx, &x[i__ + 
 		    1 + i__ * x_dim1], &c__1);
+#line 917 "SB02RD.f"
 	    i__2 = *n - i__;
+#line 917 "SB02RD.f"
 	    dscal_(&i__2, &c_b67, &x[i__ + 1 + i__ * x_dim1], &c__1);
+#line 918 "SB02RD.f"
 	    i__2 = *n - i__;
+#line 918 "SB02RD.f"
 	    dcopy_(&i__2, &x[i__ + 1 + i__ * x_dim1], &c__1, &x[i__ + (i__ + 
 		    1) * x_dim1], ldx);
+#line 919 "SB02RD.f"
 /* L100: */
+#line 919 "SB02RD.f"
 	}
 
+#line 921 "SB02RD.f"
 	if (lscal) {
 
 /*           Undo scaling for the solution matrix. */
 
+#line 925 "SB02RD.f"
 	    if (lscl) {
+#line 925 "SB02RD.f"
 		dlascl_("G", &c__0, &c__0, &gnorm, &qnorm, n, n, &x[x_offset],
 			 ldx, &ierr, (ftnlen)1);
+#line 925 "SB02RD.f"
 	    }
+#line 928 "SB02RD.f"
 	}
+#line 929 "SB02RD.f"
     }
 
+#line 931 "SB02RD.f"
     if (! jobx) {
+#line 932 "SB02RD.f"
 	if (! joba) {
+#line 932 "SB02RD.f"
 	    wrkopt = 0.;
+#line 932 "SB02RD.f"
 	}
 
 /*        Estimate the conditioning and compute an error bound on the */
 /*        solution of the algebraic Riccati equation. */
 
+#line 938 "SB02RD.f"
 	iw = 6;
+#line 939 "SB02RD.f"
 	*(unsigned char *)lofact = *(unsigned char *)fact;
+#line 940 "SB02RD.f"
 	if (nofact && ! update) {
 
 /*           Compute Ac and its Schur factorization. */
 
+#line 944 "SB02RD.f"
 	    if (discr) {
+#line 945 "SB02RD.f"
 		dlaset_("Full", n, n, &c_b61, &c_b65, &dwork[iw], n, (ftnlen)
 			4);
+#line 946 "SB02RD.f"
 		dsymm_("Left", uplo, n, n, &c_b65, &g[g_offset], ldg, &x[
 			x_offset], ldx, &c_b65, &dwork[iw], n, (ftnlen)4, (
 			ftnlen)1);
+#line 948 "SB02RD.f"
 		if (notrna) {
 
 /*                 Compute Ac = inv(I_n + G*X)*A. */
 
+#line 952 "SB02RD.f"
 		    dlacpy_("Full", n, n, &a[a_offset], lda, &t[t_offset], 
 			    ldt, (ftnlen)4);
+#line 953 "SB02RD.f"
 		    dgesv_(n, n, &dwork[iw], n, &iwork[1], &t[t_offset], ldt, 
 			    &ierr);
+#line 954 "SB02RD.f"
 		} else {
 
 /*                 Compute Ac = A*inv(I_n + X*G). */
 
+#line 958 "SB02RD.f"
 		    ma02ad_("Full", n, n, &a[a_offset], lda, &t[t_offset], 
 			    ldt, (ftnlen)4);
+#line 959 "SB02RD.f"
 		    dgesv_(n, n, &dwork[iw], n, &iwork[1], &t[t_offset], ldt, 
 			    &ierr);
+#line 960 "SB02RD.f"
 		    i__1 = *n;
+#line 960 "SB02RD.f"
 		    for (i__ = 2; i__ <= i__1; ++i__) {
+#line 961 "SB02RD.f"
 			i__2 = i__ - 1;
+#line 961 "SB02RD.f"
 			dswap_(&i__2, &t[i__ * t_dim1 + 1], &c__1, &t[i__ + 
 				t_dim1], ldt);
+#line 962 "SB02RD.f"
 /* L120: */
+#line 962 "SB02RD.f"
 		    }
+#line 963 "SB02RD.f"
 		}
 
+#line 965 "SB02RD.f"
 	    } else {
 
+#line 967 "SB02RD.f"
 		dlacpy_("Full", n, n, &a[a_offset], lda, &t[t_offset], ldt, (
 			ftnlen)4);
+#line 968 "SB02RD.f"
 		if (notrna) {
 
 /*                 Compute Ac = A - G*X. */
 
+#line 972 "SB02RD.f"
 		    dsymm_("Left", uplo, n, n, &c_b85, &g[g_offset], ldg, &x[
 			    x_offset], ldx, &c_b65, &t[t_offset], ldt, (
 			    ftnlen)4, (ftnlen)1);
+#line 974 "SB02RD.f"
 		} else {
 
 /*                 Compute Ac = A - X*G. */
 
+#line 978 "SB02RD.f"
 		    dsymm_("Right", uplo, n, n, &c_b85, &g[g_offset], ldg, &x[
 			    x_offset], ldx, &c_b65, &t[t_offset], ldt, (
 			    ftnlen)5, (ftnlen)1);
+#line 980 "SB02RD.f"
 		}
+#line 981 "SB02RD.f"
 	    }
 
 /*           Compute the Schur factorization of Ac, Ac = V*T*V'. */
 /*           Workspace:  need   5 + 5*N. */
 /*                       prefer larger. */
 
+#line 987 "SB02RD.f"
 	    iwr = iw;
+#line 988 "SB02RD.f"
 	    iwi = iwr + *n;
+#line 989 "SB02RD.f"
 	    iw = iwi + *n;
+#line 990 "SB02RD.f"
 	    ldw = *ldwork - iw + 1;
 
+#line 992 "SB02RD.f"
 	    dgees_("Vectors", "Not ordered", (L_fp)sb02ms_, n, &t[t_offset], 
 		    ldt, &nrot, &dwork[iwr], &dwork[iwi], &v[v_offset], ldv, &
 		    dwork[iw], &ldw, &bwork[1], &ierr, (ftnlen)7, (ftnlen)11);
 
+#line 996 "SB02RD.f"
 	    if (ierr != 0) {
+#line 997 "SB02RD.f"
 		*info = 6;
+#line 998 "SB02RD.f"
 		goto L160;
+#line 999 "SB02RD.f"
 	    }
 
 /* Computing MAX */
+#line 1001 "SB02RD.f"
 	    d__1 = wrkopt, d__2 = dwork[iw] + (doublereal) (iw - 1);
+#line 1001 "SB02RD.f"
 	    wrkopt = max(d__1,d__2);
+#line 1002 "SB02RD.f"
 	    *(unsigned char *)lofact = 'F';
+#line 1003 "SB02RD.f"
 	    iw = 6;
+#line 1004 "SB02RD.f"
 	}
 
+#line 1006 "SB02RD.f"
 	if (! update) {
 
 /*           Update G, Q, and X using the orthogonal matrix V. */
 
+#line 1010 "SB02RD.f"
 	    *(unsigned char *)tranat = 'T';
 
 /*           Save the diagonal elements of G and Q. */
 
+#line 1014 "SB02RD.f"
 	    i__1 = *ldg + 1;
+#line 1014 "SB02RD.f"
 	    dcopy_(n, &g[g_offset], &i__1, &dwork[iw], &c__1);
+#line 1015 "SB02RD.f"
 	    i__1 = *ldq + 1;
+#line 1015 "SB02RD.f"
 	    dcopy_(n, &q[q_offset], &i__1, &dwork[iw + *n], &c__1);
+#line 1016 "SB02RD.f"
 	    iw += n2;
 
+#line 1018 "SB02RD.f"
 	    if (joba) {
+#line 1018 "SB02RD.f"
 		dlacpy_("Full", n, n, &x[x_offset], ldx, &s[np1 + s_dim1], 
 			lds, (ftnlen)4);
+#line 1018 "SB02RD.f"
 	    }
+#line 1020 "SB02RD.f"
 	    mb01ru_(uplo, tranat, n, n, &c_b61, &c_b65, &x[x_offset], ldx, &v[
 		    v_offset], ldv, &x[x_offset], ldx, &dwork[iw], &nn, &ierr,
 		     (ftnlen)1, (ftnlen)1);
+#line 1022 "SB02RD.f"
 	    i__1 = *ldx + 1;
+#line 1022 "SB02RD.f"
 	    dscal_(n, &c_b67, &x[x_offset], &i__1);
+#line 1023 "SB02RD.f"
 	    ma02ed_(uplo, n, &x[x_offset], ldx, (ftnlen)1);
+#line 1024 "SB02RD.f"
 	    if (! discr) {
+#line 1025 "SB02RD.f"
 		ma02ed_(uplo, n, &g[g_offset], ldg, (ftnlen)1);
+#line 1026 "SB02RD.f"
 		ma02ed_(uplo, n, &q[q_offset], ldq, (ftnlen)1);
+#line 1027 "SB02RD.f"
 	    }
+#line 1028 "SB02RD.f"
 	    mb01ru_(uplo, tranat, n, n, &c_b61, &c_b65, &g[g_offset], ldg, &v[
 		    v_offset], ldv, &g[g_offset], ldg, &dwork[iw], &nn, &ierr,
 		     (ftnlen)1, (ftnlen)1);
+#line 1030 "SB02RD.f"
 	    i__1 = *ldg + 1;
+#line 1030 "SB02RD.f"
 	    dscal_(n, &c_b67, &g[g_offset], &i__1);
+#line 1031 "SB02RD.f"
 	    mb01ru_(uplo, tranat, n, n, &c_b61, &c_b65, &q[q_offset], ldq, &v[
 		    v_offset], ldv, &q[q_offset], ldq, &dwork[iw], &nn, &ierr,
 		     (ftnlen)1, (ftnlen)1);
+#line 1033 "SB02RD.f"
 	    i__1 = *ldq + 1;
+#line 1033 "SB02RD.f"
 	    dscal_(n, &c_b67, &q[q_offset], &i__1);
+#line 1034 "SB02RD.f"
 	}
 
 /*        Estimate the conditioning and/or the error bound. */
@@ -1243,91 +1608,152 @@ static doublereal c_b85 = -1.;
 /*               = 3*N, if LYAPUN = 'R' and DICO = 'D' and (JOB = 'E' or */
 /*                                                          JOB = 'A'). */
 
+#line 1058 "SB02RD.f"
 	ldw = *ldwork - iw + 1;
+#line 1059 "SB02RD.f"
 	if (joba) {
+#line 1060 "SB02RD.f"
 	    *(unsigned char *)jobs = 'B';
+#line 1061 "SB02RD.f"
 	} else {
+#line 1062 "SB02RD.f"
 	    *(unsigned char *)jobs = *(unsigned char *)job;
+#line 1063 "SB02RD.f"
 	}
 
+#line 1065 "SB02RD.f"
 	if (discr) {
+#line 1066 "SB02RD.f"
 	    sb02sd_(jobs, lofact, trana, uplo, lyapun, n, &a[a_offset], lda, &
 		    t[t_offset], ldt, &v[v_offset], ldv, &g[g_offset], ldg, &
 		    q[q_offset], ldq, &x[x_offset], ldx, sep, rcond, ferr, &
 		    iwork[1], &dwork[iw], &ldw, &ierr, (ftnlen)1, (ftnlen)1, (
 		    ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 1069 "SB02RD.f"
 	} else {
+#line 1070 "SB02RD.f"
 	    sb02qd_(jobs, lofact, trana, uplo, lyapun, n, &a[a_offset], lda, &
 		    t[t_offset], ldt, &v[v_offset], ldv, &g[g_offset], ldg, &
 		    q[q_offset], ldq, &x[x_offset], ldx, sep, rcond, ferr, &
 		    iwork[1], &dwork[iw], &ldw, &ierr, (ftnlen)1, (ftnlen)1, (
 		    ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 1073 "SB02RD.f"
 	}
 
 /* Computing MAX */
+#line 1075 "SB02RD.f"
 	d__1 = wrkopt, d__2 = dwork[iw] + (doublereal) (iw - 1);
+#line 1075 "SB02RD.f"
 	wrkopt = max(d__1,d__2);
+#line 1076 "SB02RD.f"
 	if (ierr == np1) {
+#line 1077 "SB02RD.f"
 	    *info = 7;
+#line 1078 "SB02RD.f"
 	} else if (ierr > 0) {
+#line 1079 "SB02RD.f"
 	    *info = 6;
+#line 1080 "SB02RD.f"
 	    goto L160;
+#line 1081 "SB02RD.f"
 	}
 
+#line 1083 "SB02RD.f"
 	if (! update) {
 
 /*           Restore X, G, and Q and set S(2,1) to zero, if needed. */
 
+#line 1087 "SB02RD.f"
 	    if (joba) {
+#line 1088 "SB02RD.f"
 		dlacpy_("Full", n, n, &s[np1 + s_dim1], lds, &x[x_offset], 
 			ldx, (ftnlen)4);
+#line 1089 "SB02RD.f"
 		dlaset_("Full", n, n, &c_b61, &c_b61, &s[np1 + s_dim1], lds, (
 			ftnlen)4);
+#line 1090 "SB02RD.f"
 	    } else {
+#line 1091 "SB02RD.f"
 		mb01ru_(uplo, trana, n, n, &c_b61, &c_b65, &x[x_offset], ldx, 
 			&v[v_offset], ldv, &x[x_offset], ldx, &dwork[iw], &nn,
 			 &ierr, (ftnlen)1, (ftnlen)1);
+#line 1093 "SB02RD.f"
 		i__1 = *ldx + 1;
+#line 1093 "SB02RD.f"
 		dscal_(n, &c_b67, &x[x_offset], &i__1);
+#line 1094 "SB02RD.f"
 		ma02ed_(uplo, n, &x[x_offset], ldx, (ftnlen)1);
+#line 1095 "SB02RD.f"
 	    }
+#line 1096 "SB02RD.f"
 	    if (luplo) {
+#line 1097 "SB02RD.f"
 		*(unsigned char *)loup = 'L';
+#line 1098 "SB02RD.f"
 	    } else {
+#line 1099 "SB02RD.f"
 		*(unsigned char *)loup = 'U';
+#line 1100 "SB02RD.f"
 	    }
 
+#line 1102 "SB02RD.f"
 	    iw = 6;
+#line 1103 "SB02RD.f"
 	    i__1 = *ldg + 1;
+#line 1103 "SB02RD.f"
 	    dcopy_(n, &dwork[iw], &c__1, &g[g_offset], &i__1);
+#line 1104 "SB02RD.f"
 	    ma02ed_(loup, n, &g[g_offset], ldg, (ftnlen)1);
+#line 1105 "SB02RD.f"
 	    i__1 = *ldq + 1;
+#line 1105 "SB02RD.f"
 	    dcopy_(n, &dwork[iw + *n], &c__1, &q[q_offset], &i__1);
+#line 1106 "SB02RD.f"
 	    ma02ed_(loup, n, &q[q_offset], ldq, (ftnlen)1);
+#line 1107 "SB02RD.f"
 	}
 
+#line 1109 "SB02RD.f"
     }
 
 /*     Set the optimal workspace and other details. */
 
+#line 1113 "SB02RD.f"
     dwork[1] = wrkopt;
+#line 1114 "SB02RD.f"
 L160:
+#line 1115 "SB02RD.f"
     if (jbxa) {
+#line 1116 "SB02RD.f"
 	dwork[2] = rcondu;
+#line 1117 "SB02RD.f"
 	dwork[3] = pivotu;
+#line 1118 "SB02RD.f"
 	if (discr) {
+#line 1119 "SB02RD.f"
 	    dwork[4] = rconda;
+#line 1120 "SB02RD.f"
 	    dwork[5] = pivota;
+#line 1121 "SB02RD.f"
 	}
+#line 1122 "SB02RD.f"
 	if (jobx) {
+#line 1123 "SB02RD.f"
 	    if (lscl) {
+#line 1124 "SB02RD.f"
 		*sep = qnorm / gnorm;
+#line 1125 "SB02RD.f"
 	    } else {
+#line 1126 "SB02RD.f"
 		*sep = 1.;
+#line 1127 "SB02RD.f"
 	    }
+#line 1128 "SB02RD.f"
 	}
+#line 1129 "SB02RD.f"
     }
 
+#line 1131 "SB02RD.f"
     return 0;
 /* *** Last line of SB02RD *** */
 } /* sb02rd_ */

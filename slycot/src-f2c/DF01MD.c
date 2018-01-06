@@ -1,3 +1,4 @@
+#line 1 "DF01MD.f"
 /* DF01MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "DF01MD.f"
 /* Subroutine */ int df01md_(char *sico, integer *n, doublereal *dt, 
 	doublereal *a, doublereal *dwork, integer *info, ftnlen sico_len)
 {
@@ -204,139 +206,239 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 185 "DF01MD.f"
     /* Parameter adjustments */
+#line 185 "DF01MD.f"
     --dwork;
+#line 185 "DF01MD.f"
     --a;
+#line 185 "DF01MD.f"
 
+#line 185 "DF01MD.f"
     /* Function Body */
+#line 185 "DF01MD.f"
     *info = 0;
+#line 186 "DF01MD.f"
     lsico = lsame_(sico, "S", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 190 "DF01MD.f"
     if (! lsico && ! lsame_(sico, "C", (ftnlen)1, (ftnlen)1)) {
+#line 191 "DF01MD.f"
 	*info = -1;
+#line 192 "DF01MD.f"
     } else {
+#line 193 "DF01MD.f"
 	m = 0;
+#line 194 "DF01MD.f"
 	if (*n > 4) {
+#line 195 "DF01MD.f"
 	    m = *n - 1;
 /*           WHILE ( MOD( M, 2 ).EQ.0 ) DO */
+#line 197 "DF01MD.f"
 L10:
+#line 198 "DF01MD.f"
 	    if (m % 2 == 0) {
+#line 199 "DF01MD.f"
 		m /= 2;
+#line 200 "DF01MD.f"
 		goto L10;
+#line 201 "DF01MD.f"
 	    }
 /*           END WHILE 10 */
+#line 203 "DF01MD.f"
 	}
+#line 204 "DF01MD.f"
 	if (m != 1) {
+#line 204 "DF01MD.f"
 	    *info = -2;
+#line 204 "DF01MD.f"
 	}
+#line 205 "DF01MD.f"
     }
 
+#line 207 "DF01MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 211 "DF01MD.f"
 	i__1 = -(*info);
+#line 211 "DF01MD.f"
 	xerbla_("DF01MD", &i__1, (ftnlen)6);
+#line 212 "DF01MD.f"
 	return 0;
+#line 213 "DF01MD.f"
     }
 
 /*     Initialisation. */
 
+#line 217 "DF01MD.f"
     m = *n - 1;
+#line 218 "DF01MD.f"
     md2 = (*n + 1) / 2;
+#line 219 "DF01MD.f"
     pibym = atan(1.) * 4. / (doublereal) m;
+#line 220 "DF01MD.f"
     i2 = 1;
+#line 221 "DF01MD.f"
     dwork[md2 + 1] = 0.;
+#line 222 "DF01MD.f"
     dwork[md2 * 2] = 0.;
 
+#line 224 "DF01MD.f"
     if (lsico) {
 
 /*        Sine transform. */
 
+#line 228 "DF01MD.f"
 	lsig = TRUE_;
+#line 229 "DF01MD.f"
 	dwork[1] = a[2] * -2.;
+#line 230 "DF01MD.f"
 	dwork[md2] = a[m] * 2.;
 
+#line 232 "DF01MD.f"
 	i__1 = m;
+#line 232 "DF01MD.f"
 	for (i__ = 4; i__ <= i__1; i__ += 2) {
+#line 233 "DF01MD.f"
 	    ++i2;
+#line 234 "DF01MD.f"
 	    dwork[i2] = a[i__ - 2] - a[i__];
+#line 235 "DF01MD.f"
 	    dwork[md2 + i2] = -a[i__ - 1];
+#line 236 "DF01MD.f"
 /* L20: */
+#line 236 "DF01MD.f"
 	}
 
+#line 238 "DF01MD.f"
     } else {
 
 /*        Cosine transform. */
 
+#line 242 "DF01MD.f"
 	lsig = FALSE_;
+#line 243 "DF01MD.f"
 	dwork[1] = a[1] * 2.;
+#line 244 "DF01MD.f"
 	dwork[md2] = a[*n] * 2.;
+#line 245 "DF01MD.f"
 	a0 = a[2];
 
+#line 247 "DF01MD.f"
 	i__1 = m;
+#line 247 "DF01MD.f"
 	for (i__ = 4; i__ <= i__1; i__ += 2) {
+#line 248 "DF01MD.f"
 	    ++i2;
+#line 249 "DF01MD.f"
 	    dwork[i2] = a[i__ - 1] * 2.;
+#line 250 "DF01MD.f"
 	    dwork[md2 + i2] = (a[i__ - 2] - a[i__]) * 2.;
+#line 251 "DF01MD.f"
 	    a0 += a[i__];
+#line 252 "DF01MD.f"
 /* L30: */
+#line 252 "DF01MD.f"
 	}
 
+#line 254 "DF01MD.f"
 	a0 *= 2.;
+#line 255 "DF01MD.f"
     }
 
 /*     Inverse Fourier transform. */
 
+#line 259 "DF01MD.f"
     i__1 = md2 - 1;
+#line 259 "DF01MD.f"
     dg01nd_("Inverse", &i__1, &dwork[1], &dwork[md2 + 1], info, (ftnlen)7);
 
 /*     Sine or cosine coefficients. */
 
+#line 263 "DF01MD.f"
     if (lsico) {
+#line 264 "DF01MD.f"
 	a[1] = 0.;
+#line 265 "DF01MD.f"
 	a[*n] = 0.;
+#line 266 "DF01MD.f"
     } else {
+#line 267 "DF01MD.f"
 	a[1] = *dt * 2. * (dwork[1] + a0);
+#line 268 "DF01MD.f"
 	a[*n] = *dt * 2. * (dwork[1] - a0);
+#line 269 "DF01MD.f"
     }
 
+#line 271 "DF01MD.f"
     ind1 = md2 + 1;
+#line 272 "DF01MD.f"
     ind2 = *n;
 
+#line 274 "DF01MD.f"
     i__1 = m - 1;
+#line 274 "DF01MD.f"
     for (i__ = 1; i__ <= i__1; i__ += 2) {
+#line 275 "DF01MD.f"
 	w1 = dwork[ind1];
+#line 276 "DF01MD.f"
 	w2 = dwork[ind2];
+#line 277 "DF01MD.f"
 	if (lsig) {
+#line 277 "DF01MD.f"
 	    w2 = -w2;
+#line 277 "DF01MD.f"
 	}
+#line 278 "DF01MD.f"
 	w3 = sin(pibym * (doublereal) i__) * 2.;
+#line 279 "DF01MD.f"
 	a[i__ + 1] = *dt * (w1 + w2 - (w1 - w2) / w3);
+#line 280 "DF01MD.f"
 	++ind1;
+#line 281 "DF01MD.f"
 	--ind2;
+#line 282 "DF01MD.f"
 /* L40: */
+#line 282 "DF01MD.f"
     }
 
+#line 284 "DF01MD.f"
     ind1 = 2;
+#line 285 "DF01MD.f"
     ind2 = md2 - 1;
 
+#line 287 "DF01MD.f"
     i__1 = m - 2;
+#line 287 "DF01MD.f"
     for (i__ = 2; i__ <= i__1; i__ += 2) {
+#line 288 "DF01MD.f"
 	w1 = dwork[ind1];
+#line 289 "DF01MD.f"
 	w2 = dwork[ind2];
+#line 290 "DF01MD.f"
 	if (lsig) {
+#line 290 "DF01MD.f"
 	    w2 = -w2;
+#line 290 "DF01MD.f"
 	}
+#line 291 "DF01MD.f"
 	w3 = sin(pibym * (doublereal) i__) * 2.;
+#line 292 "DF01MD.f"
 	a[i__ + 1] = *dt * (w1 + w2 - (w1 - w2) / w3);
+#line 293 "DF01MD.f"
 	++ind1;
+#line 294 "DF01MD.f"
 	--ind2;
+#line 295 "DF01MD.f"
 /* L50: */
+#line 295 "DF01MD.f"
     }
 
+#line 297 "DF01MD.f"
     return 0;
 /* *** Last line of DF01MD *** */
 } /* df01md_ */

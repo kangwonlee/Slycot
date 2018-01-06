@@ -1,3 +1,4 @@
+#line 1 "SB01FY.f"
 /* SB01FY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB01FY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -179,21 +181,37 @@ static doublereal c_b16 = 1.;
 
 /*     For efficiency reasons, the parameters are not checked. */
 
+#line 139 "SB01FY.f"
     /* Parameter adjustments */
+#line 139 "SB01FY.f"
     a_dim1 = *lda;
+#line 139 "SB01FY.f"
     a_offset = 1 + a_dim1;
+#line 139 "SB01FY.f"
     a -= a_offset;
+#line 139 "SB01FY.f"
     b_dim1 = *ldb;
+#line 139 "SB01FY.f"
     b_offset = 1 + b_dim1;
+#line 139 "SB01FY.f"
     b -= b_offset;
+#line 139 "SB01FY.f"
     f_dim1 = *ldf;
+#line 139 "SB01FY.f"
     f_offset = 1 + f_dim1;
+#line 139 "SB01FY.f"
     f -= f_offset;
+#line 139 "SB01FY.f"
     v_dim1 = *ldv;
+#line 139 "SB01FY.f"
     v_offset = 1 + v_dim1;
+#line 139 "SB01FY.f"
     v -= v_offset;
+#line 139 "SB01FY.f"
 
+#line 139 "SB01FY.f"
     /* Function Body */
+#line 139 "SB01FY.f"
     *info = 0;
 
 /*     Compute an N-by-N upper triangular R such that R'*R = B*B' and */
@@ -202,77 +220,135 @@ static doublereal c_b16 = 1.;
 /*     A'*U'*U + U'*U*A = R'*R if DISCR = .FALSE. or */
 /*     A'*U'*U*A - U'*U = R'*R if DISCR = .TRUE. . */
 
+#line 147 "SB01FY.f"
     ma02ad_("Full", n, m, &b[b_offset], ldb, &f[f_offset], ldf, (ftnlen)4);
 
+#line 149 "SB01FY.f"
     if (*n == 1) {
 
 /*        The N = 1 case. */
 
+#line 153 "SB01FY.f"
 	if (*m > 1) {
+#line 153 "SB01FY.f"
 	    dlarfg_(m, &f[f_dim1 + 1], &f[f_dim1 + 2], &c__1, &temp);
+#line 153 "SB01FY.f"
 	}
+#line 155 "SB01FY.f"
 	r11 = (d__1 = f[f_dim1 + 1], abs(d__1));
 
 /*        Make sure A is unstable or divergent and find U. */
 
+#line 159 "SB01FY.f"
 	if (*discr) {
+#line 160 "SB01FY.f"
 	    temp = (d__1 = a[a_dim1 + 1], abs(d__1));
+#line 161 "SB01FY.f"
 	    if (temp <= 1.) {
+#line 162 "SB01FY.f"
 		*info = 2;
+#line 163 "SB01FY.f"
 		return 0;
+#line 164 "SB01FY.f"
 	    } else {
+#line 165 "SB01FY.f"
 		temp = r11 / sqrt((temp - 1.) * (temp + 1.));
+#line 166 "SB01FY.f"
 	    }
+#line 167 "SB01FY.f"
 	} else {
+#line 168 "SB01FY.f"
 	    if (a[a_dim1 + 1] <= 0.) {
+#line 169 "SB01FY.f"
 		*info = 2;
+#line 170 "SB01FY.f"
 		return 0;
+#line 171 "SB01FY.f"
 	    } else {
+#line 172 "SB01FY.f"
 		temp = r11 / sqrt((d__1 = a[a_dim1 + 1] * 2., abs(d__1)));
+#line 173 "SB01FY.f"
 	    }
+#line 174 "SB01FY.f"
 	}
+#line 175 "SB01FY.f"
 	u[0] = temp;
+#line 176 "SB01FY.f"
 	scale = 1.;
+#line 177 "SB01FY.f"
     } else {
 
 /*        The N = 2 case. */
 
+#line 181 "SB01FY.f"
 	if (*m > 1) {
+#line 182 "SB01FY.f"
 	    dlarfg_(m, &f[f_dim1 + 1], &f[f_dim1 + 2], &c__1, &temp);
+#line 183 "SB01FY.f"
 	    i__1 = *n - 1;
+#line 183 "SB01FY.f"
 	    dlatzm_("Left", m, &i__1, &f[f_dim1 + 2], &c__1, &temp, &f[(
 		    f_dim1 << 1) + 1], &f[(f_dim1 << 1) + 2], ldf, &v[
 		    v_offset], (ftnlen)4);
+#line 185 "SB01FY.f"
 	}
+#line 186 "SB01FY.f"
 	r11 = f[f_dim1 + 1];
+#line 187 "SB01FY.f"
 	r12 = f[(f_dim1 << 1) + 1];
+#line 188 "SB01FY.f"
 	if (*m > 2) {
+#line 188 "SB01FY.f"
 	    i__1 = *m - 1;
+#line 188 "SB01FY.f"
 	    dlarfg_(&i__1, &f[(f_dim1 << 1) + 2], &f[(f_dim1 << 1) + 3], &
 		    c__1, &temp);
+#line 188 "SB01FY.f"
 	}
+#line 190 "SB01FY.f"
 	if (*m == 1) {
+#line 191 "SB01FY.f"
 	    r22 = 0.;
+#line 192 "SB01FY.f"
 	} else {
+#line 193 "SB01FY.f"
 	    r22 = f[(f_dim1 << 1) + 2];
+#line 194 "SB01FY.f"
 	}
+#line 195 "SB01FY.f"
 	at[0] = a[a_dim1 + 1];
+#line 196 "SB01FY.f"
 	at[2] = a[a_dim1 + 2];
+#line 197 "SB01FY.f"
 	at[1] = a[(a_dim1 << 1) + 1];
+#line 198 "SB01FY.f"
 	at[3] = a[(a_dim1 << 1) + 2];
+#line 199 "SB01FY.f"
 	u[0] = r11;
+#line 200 "SB01FY.f"
 	u[2] = r12;
+#line 201 "SB01FY.f"
 	u[3] = r22;
+#line 202 "SB01FY.f"
 	sb03oy_(discr, &c_false, &c_n1, at, &c__2, u, &c__2, dummy, &c__2, &
 		scale, info);
+#line 204 "SB01FY.f"
 	if (*info != 0) {
+#line 205 "SB01FY.f"
 	    if (*info != 4) {
+#line 206 "SB01FY.f"
 		*info = 2;
+#line 207 "SB01FY.f"
 	    } else {
+#line 208 "SB01FY.f"
 		*info = 3;
+#line 209 "SB01FY.f"
 	    }
+#line 210 "SB01FY.f"
 	    return 0;
+#line 211 "SB01FY.f"
 	}
+#line 212 "SB01FY.f"
     }
 
 /*     Check the controllability of the pair (A,B). */
@@ -281,19 +357,29 @@ static doublereal c_b16 = 1.;
 /*              If the pair (A,B) is nearly uncontrollable, then */
 /*              the computed results may be inaccurate. */
 
+#line 220 "SB01FY.f"
     i__1 = *n;
+#line 220 "SB01FY.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 221 "SB01FY.f"
 	if (u[i__ + (i__ << 1) - 3] == 0.) {
+#line 222 "SB01FY.f"
 	    *info = 1;
+#line 223 "SB01FY.f"
 	    return 0;
+#line 224 "SB01FY.f"
 	}
+#line 225 "SB01FY.f"
 /* L10: */
+#line 225 "SB01FY.f"
     }
 
 /*     Set V = I. */
 
+#line 229 "SB01FY.f"
     dlaset_("Upper", m, m, &c_b15, &c_b16, &v[v_offset], ldv, (ftnlen)5);
 
+#line 231 "SB01FY.f"
     if (*discr) {
 
 /*        Compute an upper triangular matrix V such that */
@@ -303,23 +389,39 @@ static doublereal c_b16 = 1.;
 /*        First compute F = B'*inv(U) and the Cholesky factorization */
 /*        of I + F*F'. */
 
+#line 240 "SB01FY.f"
 	i__1 = *m;
+#line 240 "SB01FY.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 241 "SB01FY.f"
 	    f[i__ + f_dim1] = b[i__ * b_dim1 + 1] / u[0] * scale;
+#line 242 "SB01FY.f"
 /* L20: */
+#line 242 "SB01FY.f"
 	}
+#line 243 "SB01FY.f"
 	if (*n == 2) {
+#line 244 "SB01FY.f"
 	    i__1 = *m;
+#line 244 "SB01FY.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 245 "SB01FY.f"
 		f[i__ + (f_dim1 << 1)] = (b[i__ * b_dim1 + 2] - f[i__ + 
 			f_dim1] * u[2]) / u[3] * scale;
+#line 246 "SB01FY.f"
 /* L30: */
+#line 246 "SB01FY.f"
 	    }
+#line 247 "SB01FY.f"
 	    mb04ox_(m, &v[v_offset], ldv, &f[(f_dim1 << 1) + 1], &c__1);
+#line 248 "SB01FY.f"
 	}
+#line 249 "SB01FY.f"
 	mb04ox_(m, &v[v_offset], ldv, &f[f_dim1 + 1], &c__1);
+#line 250 "SB01FY.f"
 	dtrtri_("Upper", "NonUnit", m, &v[v_offset], ldv, info, (ftnlen)5, (
 		ftnlen)7);
+#line 251 "SB01FY.f"
     }
 
 /*     Compute the feedback matrix F as: */
@@ -332,68 +434,116 @@ static doublereal c_b16 = 1.;
 /*                                -1 */
 /*             F = -B'*(U'*U+B*B')  *A. */
 
+#line 263 "SB01FY.f"
     if (*n == 1) {
+#line 264 "SB01FY.f"
 	if (*discr) {
+#line 265 "SB01FY.f"
 	    temp = -a[a_dim1 + 1];
+#line 266 "SB01FY.f"
 	    r11 = dlapy2_(u, &r11);
+#line 267 "SB01FY.f"
 	    i__1 = *m;
+#line 267 "SB01FY.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 268 "SB01FY.f"
 		f[i__ + f_dim1] = b[i__ * b_dim1 + 1] / r11 / r11 * temp;
+#line 269 "SB01FY.f"
 /* L40: */
+#line 269 "SB01FY.f"
 	    }
+#line 270 "SB01FY.f"
 	} else {
+#line 271 "SB01FY.f"
 	    r11 = u[0];
+#line 272 "SB01FY.f"
 	    i__1 = *m;
+#line 272 "SB01FY.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 273 "SB01FY.f"
 		f[i__ + f_dim1] = -(b[i__ * b_dim1 + 1] / r11 / r11);
+#line 274 "SB01FY.f"
 /* L50: */
+#line 274 "SB01FY.f"
 	    }
+#line 275 "SB01FY.f"
 	}
+#line 276 "SB01FY.f"
     } else {
 
 /*        Set R = U  if DISCR = .FALSE. or compute the Cholesky */
 /*        factorization of R'*R = U'*U+B*B' if DISCR = .TRUE.. */
 
+#line 281 "SB01FY.f"
 	if (*discr) {
+#line 282 "SB01FY.f"
 	    temp = u[0];
+#line 283 "SB01FY.f"
 	    drotg_(&r11, &temp, &cs, &sn);
+#line 284 "SB01FY.f"
 	    temp = -sn * r12 + cs * u[2];
+#line 285 "SB01FY.f"
 	    r12 = cs * r12 + sn * u[2];
+#line 286 "SB01FY.f"
 	    r22 = dlapy3_(&r22, &temp, &u[3]);
+#line 287 "SB01FY.f"
 	} else {
+#line 288 "SB01FY.f"
 	    r11 = u[0];
+#line 289 "SB01FY.f"
 	    r12 = u[2];
+#line 290 "SB01FY.f"
 	    r22 = u[3];
+#line 291 "SB01FY.f"
 	}
 
 /*        Compute F = -B'*inv(R'*R). */
 
+#line 295 "SB01FY.f"
 	i__1 = *m;
+#line 295 "SB01FY.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 296 "SB01FY.f"
 	    f[i__ + f_dim1] = -b[i__ * b_dim1 + 1] / r11;
+#line 297 "SB01FY.f"
 	    f[i__ + (f_dim1 << 1)] = -(b[i__ * b_dim1 + 2] + f[i__ + f_dim1] *
 		     r12) / r22;
+#line 298 "SB01FY.f"
 	    f[i__ + (f_dim1 << 1)] /= r22;
+#line 299 "SB01FY.f"
 	    f[i__ + f_dim1] = (f[i__ + f_dim1] - f[i__ + (f_dim1 << 1)] * r12)
 		     / r11;
+#line 300 "SB01FY.f"
 /* L60: */
+#line 300 "SB01FY.f"
 	}
+#line 301 "SB01FY.f"
 	if (*discr) {
 
 /*           Compute F <-- F*A. */
 
+#line 305 "SB01FY.f"
 	    i__1 = *m;
+#line 305 "SB01FY.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 306 "SB01FY.f"
 		temp = f[i__ + f_dim1] * a[a_dim1 + 1] + f[i__ + (f_dim1 << 1)
 			] * a[a_dim1 + 2];
+#line 307 "SB01FY.f"
 		f[i__ + (f_dim1 << 1)] = f[i__ + f_dim1] * a[(a_dim1 << 1) + 
 			1] + f[i__ + (f_dim1 << 1)] * a[(a_dim1 << 1) + 2];
+#line 308 "SB01FY.f"
 		f[i__ + f_dim1] = temp;
+#line 309 "SB01FY.f"
 /* L70: */
+#line 309 "SB01FY.f"
 	    }
+#line 310 "SB01FY.f"
 	}
+#line 311 "SB01FY.f"
     }
 
+#line 313 "SB01FY.f"
     return 0;
 /* *** Last line of SB01FY *** */
 } /* sb01fy_ */

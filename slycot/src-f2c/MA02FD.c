@@ -1,3 +1,4 @@
+#line 1 "MA02FD.f"
 /* MA02FD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MA02FD.f"
 /* Subroutine */ int ma02fd_(doublereal *x1, doublereal *x2, doublereal *c__, 
 	doublereal *s, integer *info)
 {
@@ -95,14 +97,23 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 81 "MA02FD.f"
     if ((*x1 != 0. || *x2 != 0.) && abs(*x2) >= abs(*x1)) {
+#line 83 "MA02FD.f"
 	*info = 1;
+#line 84 "MA02FD.f"
     } else {
+#line 85 "MA02FD.f"
 	*info = 0;
+#line 86 "MA02FD.f"
 	if (*x1 == 0.) {
+#line 87 "MA02FD.f"
 	    *s = 0.;
+#line 88 "MA02FD.f"
 	    *c__ = 1.;
+#line 89 "MA02FD.f"
 	} else {
+#line 90 "MA02FD.f"
 	    *s = *x2 / *x1;
 
 /*           No overflows could appear in the next statement; underflows */
@@ -110,12 +121,18 @@
 /*              abs(C) = ONE - delta, */
 /*           where delta is much less than machine precision. */
 
+#line 97 "MA02FD.f"
 	    d__1 = sqrt(1. - *s) * sqrt(*s + 1.);
+#line 97 "MA02FD.f"
 	    *c__ = d_sign(&d__1, x1);
+#line 98 "MA02FD.f"
 	    *x1 = *c__ * *x1;
+#line 99 "MA02FD.f"
 	}
+#line 100 "MA02FD.f"
     }
 
+#line 102 "MA02FD.f"
     return 0;
 /* *** Last line of MA02FD *** */
 } /* ma02fd_ */

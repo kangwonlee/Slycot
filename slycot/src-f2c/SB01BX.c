@@ -1,3 +1,4 @@
+#line 1 "SB01BX.f"
 /* SB01BX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB01BX.f"
 /* Subroutine */ int sb01bx_(logical *reig, integer *n, doublereal *xr, 
 	doublereal *xi, doublereal *wr, doublereal *wi, doublereal *s, 
 	doublereal *p)
@@ -118,65 +120,123 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 103 "SB01BX.f"
     /* Parameter adjustments */
+#line 103 "SB01BX.f"
     --wi;
+#line 103 "SB01BX.f"
     --wr;
+#line 103 "SB01BX.f"
 
+#line 103 "SB01BX.f"
     /* Function Body */
+#line 103 "SB01BX.f"
     j = 1;
+#line 104 "SB01BX.f"
     if (*reig) {
+#line 105 "SB01BX.f"
 	y = (d__1 = wr[1] - *xr, abs(d__1));
+#line 106 "SB01BX.f"
 	i__1 = *n;
+#line 106 "SB01BX.f"
 	for (i__ = 2; i__ <= i__1; ++i__) {
+#line 107 "SB01BX.f"
 	    x = (d__1 = wr[i__] - *xr, abs(d__1));
+#line 108 "SB01BX.f"
 	    if (x < y) {
+#line 109 "SB01BX.f"
 		y = x;
+#line 110 "SB01BX.f"
 		j = i__;
+#line 111 "SB01BX.f"
 	    }
+#line 112 "SB01BX.f"
 /* L10: */
+#line 112 "SB01BX.f"
 	}
+#line 113 "SB01BX.f"
 	*s = wr[j];
+#line 114 "SB01BX.f"
 	k = *n - j;
+#line 115 "SB01BX.f"
 	if (k > 0) {
+#line 116 "SB01BX.f"
 	    i__1 = j + k - 1;
+#line 116 "SB01BX.f"
 	    for (i__ = j; i__ <= i__1; ++i__) {
+#line 117 "SB01BX.f"
 		wr[i__] = wr[i__ + 1];
+#line 118 "SB01BX.f"
 /* L20: */
+#line 118 "SB01BX.f"
 	    }
+#line 119 "SB01BX.f"
 	    wr[*n] = *s;
+#line 120 "SB01BX.f"
 	}
+#line 121 "SB01BX.f"
 	*p = *s;
+#line 122 "SB01BX.f"
     } else {
+#line 123 "SB01BX.f"
 	y = (d__1 = wr[1] - *xr, abs(d__1)) + (d__2 = wi[1] - *xi, abs(d__2));
+#line 124 "SB01BX.f"
 	i__1 = *n;
+#line 124 "SB01BX.f"
 	for (i__ = 3; i__ <= i__1; i__ += 2) {
+#line 125 "SB01BX.f"
 	    x = (d__1 = wr[i__] - *xr, abs(d__1)) + (d__2 = wi[i__] - *xi, 
 		    abs(d__2));
+#line 126 "SB01BX.f"
 	    if (x < y) {
+#line 127 "SB01BX.f"
 		y = x;
+#line 128 "SB01BX.f"
 		j = i__;
+#line 129 "SB01BX.f"
 	    }
+#line 130 "SB01BX.f"
 /* L30: */
+#line 130 "SB01BX.f"
 	}
+#line 131 "SB01BX.f"
 	x = wr[j];
+#line 132 "SB01BX.f"
 	y = wi[j];
+#line 133 "SB01BX.f"
 	k = *n - j - 1;
+#line 134 "SB01BX.f"
 	if (k > 0) {
+#line 135 "SB01BX.f"
 	    i__1 = j + k - 1;
+#line 135 "SB01BX.f"
 	    for (i__ = j; i__ <= i__1; ++i__) {
+#line 136 "SB01BX.f"
 		wr[i__] = wr[i__ + 2];
+#line 137 "SB01BX.f"
 		wi[i__] = wi[i__ + 2];
+#line 138 "SB01BX.f"
 /* L40: */
+#line 138 "SB01BX.f"
 	    }
+#line 139 "SB01BX.f"
 	    wr[*n - 1] = x;
+#line 140 "SB01BX.f"
 	    wi[*n - 1] = y;
+#line 141 "SB01BX.f"
 	    wr[*n] = x;
+#line 142 "SB01BX.f"
 	    wi[*n] = -y;
+#line 143 "SB01BX.f"
 	}
+#line 144 "SB01BX.f"
 	*s = x + x;
+#line 145 "SB01BX.f"
 	*p = x * x + y * y;
+#line 146 "SB01BX.f"
     }
 
+#line 148 "SB01BX.f"
     return 0;
 /* *** End of SB01BX *** */
 } /* sb01bx_ */

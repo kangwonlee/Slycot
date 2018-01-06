@@ -1,0 +1,17 @@
+extern int mb02id_(char *job, integer *k, integer *l, integer *m, integer *n, integer *rb, integer *rc, doublereal *tc, integer *ldtc, doublereal *tr, integer *ldtr, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *dwork, integer *ldwork, integer *info, ftnlen job_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dgels_ 14 12 13 4 4 4 7 4 7 4 7 4 4 124 */
+/*:ref: mb02kd_ 14 22 13 13 4 4 4 4 4 7 7 7 4 7 4 7 4 7 4 7 4 4 124 124 */
+/*:ref: dgeqrf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: ma02ad_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dorgqr_ 14 9 4 4 4 7 4 7 7 4 4 */
+/*:ref: dtrsm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dtrtri_ 14 8 13 13 4 7 4 4 124 124 */
+/*:ref: ilaenv_ 4 9 4 13 13 4 4 4 4 124 124 */
+/*:ref: mb02cu_ 14 19 13 4 4 4 4 7 4 7 4 7 4 4 4 7 7 7 4 4 124 */
+/*:ref: mb02cv_ 14 26 13 13 4 4 4 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 7 7 4 4 124 124 */
+/*:ref: dtrmm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */

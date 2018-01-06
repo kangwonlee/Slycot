@@ -1,3 +1,4 @@
+#line 1 "MB01XD.f"
 /* MB01XD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01XD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -154,112 +156,176 @@ static doublereal c_b15 = 1.;
 
 /*     Test the input scalar arguments. */
 
+#line 127 "MB01XD.f"
     /* Parameter adjustments */
+#line 127 "MB01XD.f"
     a_dim1 = *lda;
+#line 127 "MB01XD.f"
     a_offset = 1 + a_dim1;
+#line 127 "MB01XD.f"
     a -= a_offset;
+#line 127 "MB01XD.f"
 
+#line 127 "MB01XD.f"
     /* Function Body */
+#line 127 "MB01XD.f"
     *info = 0;
+#line 128 "MB01XD.f"
     upper = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 129 "MB01XD.f"
     if (! upper && ! lsame_(uplo, "L", (ftnlen)1, (ftnlen)1)) {
+#line 130 "MB01XD.f"
 	*info = -1;
+#line 131 "MB01XD.f"
     } else if (*n < 0) {
+#line 132 "MB01XD.f"
 	*info = -2;
+#line 133 "MB01XD.f"
     } else if (*lda < max(1,*n)) {
+#line 134 "MB01XD.f"
 	*info = -4;
+#line 135 "MB01XD.f"
     }
 
+#line 137 "MB01XD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 141 "MB01XD.f"
 	i__1 = -(*info);
+#line 141 "MB01XD.f"
 	xerbla_("MB01XD", &i__1, (ftnlen)6);
+#line 142 "MB01XD.f"
 	return 0;
+#line 143 "MB01XD.f"
     }
 
 /*     Quick return, if possible. */
 
+#line 147 "MB01XD.f"
     if (*n == 0) {
+#line 147 "MB01XD.f"
 	return 0;
+#line 147 "MB01XD.f"
     }
 
 /*     Determine the block size for this environment (as for DLAUUM). */
 
+#line 152 "MB01XD.f"
     nb = ilaenv_(&c__1, "DLAUUM", uplo, n, &c_n1, &c_n1, &c_n1, (ftnlen)6, (
 	    ftnlen)1);
 
+#line 154 "MB01XD.f"
     if (nb <= 1 || nb >= *n) {
 
 /*        Use unblocked code. */
 
+#line 158 "MB01XD.f"
 	mb01xy_(uplo, n, &a[a_offset], lda, info, (ftnlen)1);
+#line 159 "MB01XD.f"
     } else {
 
 /*        Use blocked code. */
 
+#line 163 "MB01XD.f"
 	if (upper) {
 
 /*           Compute the product U' * U. */
 
+#line 167 "MB01XD.f"
 	    i__1 = -nb;
+#line 167 "MB01XD.f"
 	    for (i__ = *n; i__1 < 0 ? i__ >= 1 : i__ <= 1; i__ += i__1) {
+#line 168 "MB01XD.f"
 		ib = min(nb,i__);
+#line 169 "MB01XD.f"
 		ii = i__ - ib + 1;
+#line 170 "MB01XD.f"
 		if (i__ < *n) {
+#line 171 "MB01XD.f"
 		    i__2 = *n - i__;
+#line 171 "MB01XD.f"
 		    dtrmm_("Left", "Upper", "Transpose", "Non-unit", &ib, &
 			    i__2, &c_b15, &a[ii + ii * a_dim1], lda, &a[ii + (
 			    ii + ib) * a_dim1], lda, (ftnlen)4, (ftnlen)5, (
 			    ftnlen)9, (ftnlen)8);
+#line 174 "MB01XD.f"
 		    i__2 = *n - i__;
+#line 174 "MB01XD.f"
 		    i__3 = i__ - ib;
+#line 174 "MB01XD.f"
 		    dgemm_("Transpose", "No transpose", &ib, &i__2, &i__3, &
 			    c_b15, &a[ii * a_dim1 + 1], lda, &a[(ii + ib) * 
 			    a_dim1 + 1], lda, &c_b15, &a[ii + (ii + ib) * 
 			    a_dim1], lda, (ftnlen)9, (ftnlen)12);
+#line 177 "MB01XD.f"
 		}
+#line 178 "MB01XD.f"
 		mb01xy_("Upper", &ib, &a[ii + ii * a_dim1], lda, info, (
 			ftnlen)5);
+#line 179 "MB01XD.f"
 		i__2 = ii - 1;
+#line 179 "MB01XD.f"
 		dsyrk_("Upper", "Transpose", &ib, &i__2, &c_b15, &a[ii * 
 			a_dim1 + 1], lda, &c_b15, &a[ii + ii * a_dim1], lda, (
 			ftnlen)5, (ftnlen)9);
+#line 181 "MB01XD.f"
 /* L10: */
+#line 181 "MB01XD.f"
 	    }
+#line 182 "MB01XD.f"
 	} else {
 
 /*           Compute the product L * L'. */
 
+#line 186 "MB01XD.f"
 	    i__1 = -nb;
+#line 186 "MB01XD.f"
 	    for (i__ = *n; i__1 < 0 ? i__ >= 1 : i__ <= 1; i__ += i__1) {
+#line 187 "MB01XD.f"
 		ib = min(nb,i__);
+#line 188 "MB01XD.f"
 		ii = i__ - ib + 1;
+#line 189 "MB01XD.f"
 		if (i__ < *n) {
+#line 190 "MB01XD.f"
 		    i__2 = *n - i__;
+#line 190 "MB01XD.f"
 		    dtrmm_("Right", "Lower", "Transpose", "Non-unit", &i__2, &
 			    ib, &c_b15, &a[ii + ii * a_dim1], lda, &a[ii + ib 
 			    + ii * a_dim1], lda, (ftnlen)5, (ftnlen)5, (
 			    ftnlen)9, (ftnlen)8);
+#line 193 "MB01XD.f"
 		    i__2 = *n - i__;
+#line 193 "MB01XD.f"
 		    i__3 = i__ - ib;
+#line 193 "MB01XD.f"
 		    dgemm_("No transpose", "Transpose", &i__2, &ib, &i__3, &
 			    c_b15, &a[ii + ib + a_dim1], lda, &a[ii + a_dim1],
 			     lda, &c_b15, &a[ii + ib + ii * a_dim1], lda, (
 			    ftnlen)12, (ftnlen)9);
+#line 196 "MB01XD.f"
 		}
+#line 197 "MB01XD.f"
 		mb01xy_("Lower", &ib, &a[ii + ii * a_dim1], lda, info, (
 			ftnlen)5);
+#line 198 "MB01XD.f"
 		i__2 = ii - 1;
+#line 198 "MB01XD.f"
 		dsyrk_("Lower", "No Transpose", &ib, &i__2, &c_b15, &a[ii + 
 			a_dim1], lda, &c_b15, &a[ii + ii * a_dim1], lda, (
 			ftnlen)5, (ftnlen)12);
+#line 200 "MB01XD.f"
 /* L20: */
+#line 200 "MB01XD.f"
 	    }
+#line 201 "MB01XD.f"
 	}
+#line 202 "MB01XD.f"
     }
 
+#line 204 "MB01XD.f"
     return 0;
 
 /* *** Last line of MB01XD *** */

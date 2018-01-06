@@ -1,0 +1,2 @@
+extern int mb03rx_(char *jobv, integer *n, integer *kl, integer *ku, doublereal *a, integer *lda, doublereal *x, integer *ldx, doublereal *wr, doublereal *wi, doublereal *dwork, ftnlen jobv_len);
+/*:ref: dtrexc_ 14 11 13 4 7 4 7 4 4 4 7 4 124 */

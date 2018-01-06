@@ -1,3 +1,4 @@
+#line 1 "MA02ED.f"
 /* MA02ED.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MA02ED.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -99,35 +101,57 @@ static integer c__1 = 1;
 
 /*     For efficiency reasons, the parameters are not checked for errors. */
 
+#line 80 "MA02ED.f"
     /* Parameter adjustments */
+#line 80 "MA02ED.f"
     a_dim1 = *lda;
+#line 80 "MA02ED.f"
     a_offset = 1 + a_dim1;
+#line 80 "MA02ED.f"
     a -= a_offset;
+#line 80 "MA02ED.f"
 
+#line 80 "MA02ED.f"
     /* Function Body */
+#line 80 "MA02ED.f"
     if (lsame_(uplo, "L", (ftnlen)1, (ftnlen)1)) {
 
 /*        Construct the upper triangle of A. */
 
+#line 84 "MA02ED.f"
 	i__1 = *n;
+#line 84 "MA02ED.f"
 	for (j = 2; j <= i__1; ++j) {
+#line 85 "MA02ED.f"
 	    i__2 = j - 1;
+#line 85 "MA02ED.f"
 	    dcopy_(&i__2, &a[j + a_dim1], lda, &a[j * a_dim1 + 1], &c__1);
+#line 86 "MA02ED.f"
 /* L20: */
+#line 86 "MA02ED.f"
 	}
 
+#line 88 "MA02ED.f"
     } else if (lsame_(uplo, "U", (ftnlen)1, (ftnlen)1)) {
 
 /*        Construct the lower triangle of A. */
 
+#line 92 "MA02ED.f"
 	i__1 = *n;
+#line 92 "MA02ED.f"
 	for (j = 2; j <= i__1; ++j) {
+#line 93 "MA02ED.f"
 	    i__2 = j - 1;
+#line 93 "MA02ED.f"
 	    dcopy_(&i__2, &a[j * a_dim1 + 1], &c__1, &a[j + a_dim1], lda);
+#line 94 "MA02ED.f"
 /* L40: */
+#line 94 "MA02ED.f"
 	}
 
+#line 96 "MA02ED.f"
     }
+#line 97 "MA02ED.f"
     return 0;
 /* *** Last line of MA02ED *** */
 } /* ma02ed_ */

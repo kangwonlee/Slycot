@@ -1,3 +1,4 @@
+#line 1 "MB02WD.f"
 /* MB02WD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02WD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -338,190 +340,300 @@ static doublereal c_b22 = 0.;
 
 /*     Decode the scalar input parameters. */
 
+#line 308 "MB02WD.f"
     /* Parameter adjustments */
+#line 308 "MB02WD.f"
     --ipar;
+#line 308 "MB02WD.f"
     --dpar;
+#line 308 "MB02WD.f"
     a_dim1 = *lda;
+#line 308 "MB02WD.f"
     a_offset = 1 + a_dim1;
+#line 308 "MB02WD.f"
     a -= a_offset;
+#line 308 "MB02WD.f"
     --b;
+#line 308 "MB02WD.f"
     --x;
+#line 308 "MB02WD.f"
     --dwork;
+#line 308 "MB02WD.f"
 
+#line 308 "MB02WD.f"
     /* Function Body */
+#line 308 "MB02WD.f"
     mat = lsame_(form, "U", (ftnlen)1, (ftnlen)1) || lsame_(form, "L", (
 	    ftnlen)1, (ftnlen)1);
 
 /*     Check the scalar input parameters. */
 
+#line 312 "MB02WD.f"
     *iwarn = 0;
+#line 313 "MB02WD.f"
     *info = 0;
+#line 314 "MB02WD.f"
     if (! (mat || lsame_(form, "F", (ftnlen)1, (ftnlen)1))) {
+#line 315 "MB02WD.f"
 	*info = -1;
+#line 316 "MB02WD.f"
     } else if (*n < 0) {
+#line 317 "MB02WD.f"
 	*info = -3;
+#line 318 "MB02WD.f"
     } else if (! mat && *lipar < 0) {
+#line 319 "MB02WD.f"
 	*info = -5;
+#line 320 "MB02WD.f"
     } else if (! mat && *ldpar < 0) {
+#line 321 "MB02WD.f"
 	*info = -7;
+#line 322 "MB02WD.f"
     } else if (*itmax < 0) {
+#line 323 "MB02WD.f"
 	*info = -8;
+#line 324 "MB02WD.f"
     } else if (*lda < 1 || mat && *lda < *n) {
+#line 325 "MB02WD.f"
 	*info = -10;
+#line 326 "MB02WD.f"
     } else if (*incb <= 0) {
+#line 327 "MB02WD.f"
 	*info = -12;
+#line 328 "MB02WD.f"
     } else if (*incx <= 0) {
+#line 329 "MB02WD.f"
 	*info = -14;
+#line 330 "MB02WD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 330 "MB02WD.f"
 	i__1 = 2, i__2 = *n * 3;
+#line 330 "MB02WD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 331 "MB02WD.f"
 	    *info = -17;
+#line 332 "MB02WD.f"
 	}
+#line 332 "MB02WD.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 336 "MB02WD.f"
     if (*info != 0) {
+#line 337 "MB02WD.f"
 	i__1 = -(*info);
+#line 337 "MB02WD.f"
 	xerbla_("MB02WD", &i__1, (ftnlen)6);
+#line 338 "MB02WD.f"
 	return 0;
+#line 339 "MB02WD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 343 "MB02WD.f"
     if (*n == 0) {
+#line 344 "MB02WD.f"
 	dwork[1] = 0.;
+#line 345 "MB02WD.f"
 	dwork[2] = 0.;
+#line 346 "MB02WD.f"
 	return 0;
+#line 347 "MB02WD.f"
     }
 
+#line 349 "MB02WD.f"
     if (*itmax == 0) {
+#line 350 "MB02WD.f"
 	dwork[1] = 0.;
+#line 351 "MB02WD.f"
 	*iwarn = 2;
+#line 352 "MB02WD.f"
 	return 0;
+#line 353 "MB02WD.f"
     }
 
 /*     Set default tolerance, if needed. */
 
+#line 357 "MB02WD.f"
     toldef = *tol;
+#line 358 "MB02WD.f"
     if (toldef <= 0.) {
+#line 358 "MB02WD.f"
 	toldef = (doublereal) (*n) * dlamch_("Epsilon", (ftnlen)7) * dnrm2_(n,
 		 &b[1], incb);
+#line 358 "MB02WD.f"
     }
 
 /*     Initialize local variables. */
 
+#line 363 "MB02WD.f"
     k = 0;
 
 /*     Vector q is stored in DWORK(1), A*q or f(A, q) in DWORK(AQ), */
 /*     and r in DWORK(R). The workspace for F starts in DWORK(DWLEFT). */
 
+#line 368 "MB02WD.f"
     aq = *n + 1;
+#line 369 "MB02WD.f"
     r__ = *n + aq;
+#line 370 "MB02WD.f"
     dwleft = *n + r__;
 
 /*     Prepare the first iteration, initialize r and q. */
 
+#line 374 "MB02WD.f"
     if (mat) {
+#line 375 "MB02WD.f"
 	dcopy_(n, &b[1], incb, &dwork[r__], &c__1);
+#line 376 "MB02WD.f"
 	dsymv_(form, n, &c_b8, &a[a_offset], lda, &x[1], incx, &c_b9, &dwork[
 		r__], &c__1, (ftnlen)1);
+#line 377 "MB02WD.f"
     } else {
+#line 378 "MB02WD.f"
 	dcopy_(n, &x[1], incx, &dwork[r__], &c__1);
+#line 379 "MB02WD.f"
 	i__1 = *ldwork - dwleft + 1;
+#line 379 "MB02WD.f"
 	(*f)(n, &ipar[1], lipar, &dpar[1], ldpar, &a[a_offset], lda, &dwork[
 		r__], &c__1, &dwork[dwleft], &i__1, info);
+#line 381 "MB02WD.f"
 	if (*info != 0) {
+#line 381 "MB02WD.f"
 	    return 0;
+#line 381 "MB02WD.f"
 	}
+#line 383 "MB02WD.f"
 	daxpy_(n, &c_b9, &b[1], incb, &dwork[r__], &c__1);
+#line 384 "MB02WD.f"
     }
+#line 385 "MB02WD.f"
     dcopy_(n, &dwork[r__], &c__1, &dwork[1], &c__1);
 
+#line 387 "MB02WD.f"
     res = dnrm2_(n, &dwork[r__], &c__1);
 
 /*     Do nothing if x is already the solution. */
 
+#line 391 "MB02WD.f"
     if (res <= toldef) {
+#line 391 "MB02WD.f"
 	goto L20;
+#line 391 "MB02WD.f"
     }
 
 /*     Begin of the iteration loop. */
 
 /*     WHILE ( RES.GT.TOLDEF .AND. K.LE.ITMAX ) DO */
+#line 396 "MB02WD.f"
 L10:
 
 /*        Calculate A*q or f(A, q). */
 
+#line 400 "MB02WD.f"
     if (mat) {
+#line 401 "MB02WD.f"
 	dsymv_(form, n, &c_b8, &a[a_offset], lda, &dwork[1], &c__1, &c_b22, &
 		dwork[aq], &c__1, (ftnlen)1);
+#line 403 "MB02WD.f"
     } else {
+#line 404 "MB02WD.f"
 	dcopy_(n, &dwork[1], &c__1, &dwork[aq], &c__1);
+#line 405 "MB02WD.f"
 	i__1 = *ldwork - dwleft + 1;
+#line 405 "MB02WD.f"
 	(*f)(n, &ipar[1], lipar, &dpar[1], ldpar, &a[a_offset], lda, &dwork[
 		aq], &c__1, &dwork[dwleft], &i__1, info);
+#line 407 "MB02WD.f"
 	if (*info != 0) {
+#line 407 "MB02WD.f"
 	    return 0;
+#line 407 "MB02WD.f"
 	}
+#line 409 "MB02WD.f"
     }
 
 /*        Calculate ALPHA(k). */
 
+#line 413 "MB02WD.f"
     alpha = ddot_(n, &dwork[1], &c__1, &dwork[r__], &c__1) / ddot_(n, &dwork[
 	    1], &c__1, &dwork[aq], &c__1);
 
 /*        x(k+1) = x(k) - ALPHA(k)*q(k). */
 
+#line 418 "MB02WD.f"
     d__1 = -alpha;
+#line 418 "MB02WD.f"
     daxpy_(n, &d__1, &dwork[1], &c__1, &x[1], incx);
 
 /*        r(k+1) = r(k) - ALPHA(k)*(A*q(k)). */
 
+#line 422 "MB02WD.f"
     d__1 = -alpha;
+#line 422 "MB02WD.f"
     daxpy_(n, &d__1, &dwork[aq], &c__1, &dwork[r__], &c__1);
 
 /*        Save RES and calculate a new RES. */
 
+#line 426 "MB02WD.f"
     resold = res;
+#line 427 "MB02WD.f"
     res = dnrm2_(n, &dwork[r__], &c__1);
 
 /*        Exit if tolerance is reached. */
 
+#line 431 "MB02WD.f"
     if (res <= toldef) {
+#line 431 "MB02WD.f"
 	goto L20;
+#line 431 "MB02WD.f"
     }
 
 /*        Calculate BETA(k). */
 
 /* Computing 2nd power */
+#line 435 "MB02WD.f"
     d__1 = res / resold;
+#line 435 "MB02WD.f"
     beta = d__1 * d__1;
 
 /*        q(k+1) = r(k+1) + BETA(k)*q(k). */
 
+#line 439 "MB02WD.f"
     dscal_(n, &beta, &dwork[1], &c__1);
+#line 440 "MB02WD.f"
     daxpy_(n, &c_b8, &dwork[r__], &c__1, &dwork[1], &c__1);
 
 /*        End of the iteration loop. */
 
+#line 444 "MB02WD.f"
     ++k;
+#line 445 "MB02WD.f"
     if (k < *itmax) {
+#line 445 "MB02WD.f"
 	goto L10;
+#line 445 "MB02WD.f"
     }
 /*     END WHILE 10 */
 
 /*     Tolerance was not reached! */
 
+#line 450 "MB02WD.f"
     *iwarn = 1;
 
+#line 452 "MB02WD.f"
 L20:
 
+#line 454 "MB02WD.f"
     dwork[1] = (doublereal) k;
+#line 455 "MB02WD.f"
     dwork[2] = res;
 
 /* *** Last line of MB02WD *** */
+#line 458 "MB02WD.f"
     return 0;
 } /* mb02wd_ */
 

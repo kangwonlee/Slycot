@@ -1,3 +1,4 @@
+#line 1 "SB03TD.f"
 /* SB03TD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB03TD.f"
 /* Table of constant values */
 
 static doublereal c_b23 = 0.;
@@ -420,191 +422,320 @@ static doublereal c_b25 = .5;
 
 /*     Decode option parameters. */
 
+#line 375 "SB03TD.f"
     /* Parameter adjustments */
+#line 375 "SB03TD.f"
     a_dim1 = *lda;
+#line 375 "SB03TD.f"
     a_offset = 1 + a_dim1;
+#line 375 "SB03TD.f"
     a -= a_offset;
+#line 375 "SB03TD.f"
     t_dim1 = *ldt;
+#line 375 "SB03TD.f"
     t_offset = 1 + t_dim1;
+#line 375 "SB03TD.f"
     t -= t_offset;
+#line 375 "SB03TD.f"
     u_dim1 = *ldu;
+#line 375 "SB03TD.f"
     u_offset = 1 + u_dim1;
+#line 375 "SB03TD.f"
     u -= u_offset;
+#line 375 "SB03TD.f"
     c_dim1 = *ldc;
+#line 375 "SB03TD.f"
     c_offset = 1 + c_dim1;
+#line 375 "SB03TD.f"
     c__ -= c_offset;
+#line 375 "SB03TD.f"
     x_dim1 = *ldx;
+#line 375 "SB03TD.f"
     x_offset = 1 + x_dim1;
+#line 375 "SB03TD.f"
     x -= x_offset;
+#line 375 "SB03TD.f"
     --wr;
+#line 375 "SB03TD.f"
     --wi;
+#line 375 "SB03TD.f"
     --iwork;
+#line 375 "SB03TD.f"
     --dwork;
+#line 375 "SB03TD.f"
 
+#line 375 "SB03TD.f"
     /* Function Body */
+#line 375 "SB03TD.f"
     jobx = lsame_(job, "X", (ftnlen)1, (ftnlen)1);
+#line 376 "SB03TD.f"
     jobs = lsame_(job, "S", (ftnlen)1, (ftnlen)1);
+#line 377 "SB03TD.f"
     jobc = lsame_(job, "C", (ftnlen)1, (ftnlen)1);
+#line 378 "SB03TD.f"
     jobe = lsame_(job, "E", (ftnlen)1, (ftnlen)1);
+#line 379 "SB03TD.f"
     joba = lsame_(job, "A", (ftnlen)1, (ftnlen)1);
+#line 380 "SB03TD.f"
     nofact = lsame_(fact, "N", (ftnlen)1, (ftnlen)1);
+#line 381 "SB03TD.f"
     notrna = lsame_(trana, "N", (ftnlen)1, (ftnlen)1);
+#line 382 "SB03TD.f"
     lower = lsame_(uplo, "L", (ftnlen)1, (ftnlen)1);
+#line 383 "SB03TD.f"
     update = lsame_(lyapun, "O", (ftnlen)1, (ftnlen)1);
 
 /*     Compute workspace. */
 
+#line 387 "SB03TD.f"
     nn = *n * *n;
+#line 388 "SB03TD.f"
     if (jobx) {
+#line 389 "SB03TD.f"
 	ldw = nn;
+#line 390 "SB03TD.f"
     } else if (jobs || jobc) {
+#line 391 "SB03TD.f"
 	ldw = nn << 1;
+#line 392 "SB03TD.f"
     } else {
+#line 393 "SB03TD.f"
 	ldw = nn * 3;
+#line 394 "SB03TD.f"
     }
+#line 395 "SB03TD.f"
     if ((jobe || joba) && ! update) {
+#line 395 "SB03TD.f"
 	ldw = ldw + *n - 1;
+#line 395 "SB03TD.f"
     }
+#line 397 "SB03TD.f"
     if (nofact) {
 /* Computing MAX */
+#line 397 "SB03TD.f"
 	i__1 = ldw, i__2 = *n * 3;
+#line 397 "SB03TD.f"
 	ldw = max(i__1,i__2);
+#line 397 "SB03TD.f"
     }
 
 /*     Test the scalar input parameters. */
 
+#line 402 "SB03TD.f"
     *info = 0;
+#line 403 "SB03TD.f"
     if (! (jobx || jobs || jobc || jobe || joba)) {
+#line 404 "SB03TD.f"
 	*info = -1;
+#line 405 "SB03TD.f"
     } else if (! (nofact || lsame_(fact, "F", (ftnlen)1, (ftnlen)1))) {
+#line 406 "SB03TD.f"
 	*info = -2;
+#line 407 "SB03TD.f"
     } else if (! (notrna || lsame_(trana, "T", (ftnlen)1, (ftnlen)1) || 
 	    lsame_(trana, "C", (ftnlen)1, (ftnlen)1))) {
+#line 409 "SB03TD.f"
 	*info = -3;
+#line 410 "SB03TD.f"
     } else if (! (lower || lsame_(uplo, "U", (ftnlen)1, (ftnlen)1))) {
+#line 411 "SB03TD.f"
 	*info = -4;
+#line 412 "SB03TD.f"
     } else if (! (update || lsame_(lyapun, "R", (ftnlen)1, (ftnlen)1))) {
+#line 413 "SB03TD.f"
 	*info = -5;
+#line 414 "SB03TD.f"
     } else if (*n < 0) {
+#line 415 "SB03TD.f"
 	*info = -6;
+#line 416 "SB03TD.f"
     } else if ((jobc || jobe) && (*scale < 0. || *scale > 1.)) {
+#line 418 "SB03TD.f"
 	*info = -7;
+#line 419 "SB03TD.f"
     } else if (*lda < 1 || *lda < *n && (update && ! jobx || nofact)) {
+#line 422 "SB03TD.f"
 	*info = -9;
+#line 423 "SB03TD.f"
     } else if (*ldt < max(1,*n)) {
+#line 424 "SB03TD.f"
 	*info = -11;
+#line 425 "SB03TD.f"
     } else if (*ldu < 1 || *ldu < *n && update) {
+#line 426 "SB03TD.f"
 	*info = -13;
+#line 427 "SB03TD.f"
     } else if (*ldc < 1 || ! jobs && *ldc < *n) {
+#line 428 "SB03TD.f"
 	*info = -15;
+#line 429 "SB03TD.f"
     } else if (*ldx < 1 || ! jobs && *ldx < *n) {
+#line 430 "SB03TD.f"
 	*info = -17;
+#line 431 "SB03TD.f"
     } else if (*ldwork < 1 || *ldwork < ldw) {
+#line 432 "SB03TD.f"
 	*info = -25;
+#line 433 "SB03TD.f"
     }
 
+#line 435 "SB03TD.f"
     if (*info != 0) {
+#line 436 "SB03TD.f"
 	i__1 = -(*info);
+#line 436 "SB03TD.f"
 	xerbla_("SB03TD", &i__1, (ftnlen)6);
+#line 437 "SB03TD.f"
 	return 0;
+#line 438 "SB03TD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 442 "SB03TD.f"
     if (*n == 0) {
+#line 443 "SB03TD.f"
 	if (jobx || joba) {
+#line 443 "SB03TD.f"
 	    *scale = 1.;
+#line 443 "SB03TD.f"
 	}
+#line 445 "SB03TD.f"
 	if (jobc || joba) {
+#line 445 "SB03TD.f"
 	    *rcond = 1.;
+#line 445 "SB03TD.f"
 	}
+#line 447 "SB03TD.f"
 	if (jobe || joba) {
+#line 447 "SB03TD.f"
 	    *ferr = 0.;
+#line 447 "SB03TD.f"
 	}
+#line 449 "SB03TD.f"
 	dwork[1] = 1.;
+#line 450 "SB03TD.f"
 	return 0;
+#line 451 "SB03TD.f"
     }
 
+#line 453 "SB03TD.f"
     if (nofact) {
 
 /*        Compute the Schur factorization of A. */
 /*        Workspace:  need   3*N; */
 /*                    prefer larger. */
 
+#line 459 "SB03TD.f"
 	dlacpy_("Full", n, n, &a[a_offset], lda, &t[t_offset], ldt, (ftnlen)4)
 		;
+#line 460 "SB03TD.f"
 	if (update) {
+#line 461 "SB03TD.f"
 	    *(unsigned char *)sjob = 'V';
+#line 462 "SB03TD.f"
 	} else {
+#line 463 "SB03TD.f"
 	    *(unsigned char *)sjob = 'N';
+#line 464 "SB03TD.f"
 	}
+#line 465 "SB03TD.f"
 	dgees_(sjob, "Not ordered", (L_fp)select_, n, &t[t_offset], ldt, &
 		sdim, &wr[1], &wi[1], &u[u_offset], ldu, &dwork[1], ldwork, 
 		bwork, info, (ftnlen)1, (ftnlen)11);
+#line 467 "SB03TD.f"
 	if (*info > 0) {
+#line 467 "SB03TD.f"
 	    return 0;
+#line 467 "SB03TD.f"
 	}
+#line 469 "SB03TD.f"
 	*(unsigned char *)cfact = 'F';
+#line 470 "SB03TD.f"
     } else {
+#line 471 "SB03TD.f"
 	*(unsigned char *)cfact = *(unsigned char *)fact;
+#line 472 "SB03TD.f"
     }
 
+#line 474 "SB03TD.f"
     if (jobx || joba) {
 
 /*        Copy the right-hand side in X. */
 
+#line 478 "SB03TD.f"
 	dlacpy_(uplo, n, n, &c__[c_offset], ldc, &x[x_offset], ldx, (ftnlen)1)
 		;
 
+#line 480 "SB03TD.f"
 	if (update) {
 
 /*           Transform the right-hand side. */
 /*           Workspace:  need   N*N. */
 
+#line 485 "SB03TD.f"
 	    mb01ru_(uplo, "Transpose", n, n, &c_b23, &c_b24, &x[x_offset], 
 		    ldx, &u[u_offset], ldu, &x[x_offset], ldx, &dwork[1], 
 		    ldwork, info, (ftnlen)1, (ftnlen)9);
+#line 487 "SB03TD.f"
 	    i__1 = *ldx + 1;
+#line 487 "SB03TD.f"
 	    dscal_(n, &c_b25, &x[x_offset], &i__1);
+#line 488 "SB03TD.f"
 	}
 
 /*        Fill in the remaining triangle of X. */
 
+#line 492 "SB03TD.f"
 	ma02ed_(uplo, n, &x[x_offset], ldx, (ftnlen)1);
 
 /*        Solve the transformed equation. */
 
+#line 496 "SB03TD.f"
 	sb03my_(trana, n, &t[t_offset], ldt, &x[x_offset], ldx, scale, info, (
 		ftnlen)1);
+#line 497 "SB03TD.f"
 	if (*info > 0) {
+#line 497 "SB03TD.f"
 	    *info = *n + 1;
+#line 497 "SB03TD.f"
 	}
 
+#line 500 "SB03TD.f"
 	if (update) {
 
 /*           Transform back the solution. */
 
+#line 504 "SB03TD.f"
 	    mb01ru_(uplo, "No transpose", n, n, &c_b23, &c_b24, &x[x_offset], 
 		    ldx, &u[u_offset], ldu, &x[x_offset], ldx, &dwork[1], 
 		    ldwork, info, (ftnlen)1, (ftnlen)12);
+#line 506 "SB03TD.f"
 	    i__1 = *ldx + 1;
+#line 506 "SB03TD.f"
 	    dscal_(n, &c_b25, &x[x_offset], &i__1);
 
 /*           Fill in the remaining triangle of X. */
 
+#line 510 "SB03TD.f"
 	    ma02ed_(uplo, n, &x[x_offset], ldx, (ftnlen)1);
+#line 511 "SB03TD.f"
 	}
+#line 512 "SB03TD.f"
     }
 
+#line 514 "SB03TD.f"
     if (jobs) {
 
 /*        Estimate sep(op(A),-op(A)'). */
 /*        Workspace:  2*N*N. */
 
+#line 519 "SB03TD.f"
 	sb03qy_("Separation", trana, lyapun, n, &t[t_offset], ldt, &u[
 		u_offset], ldu, &x[x_offset], ldx, sep, &thnorm, &iwork[1], &
 		dwork[1], ldwork, info, (ftnlen)10, (ftnlen)1, (ftnlen)1);
 
+#line 522 "SB03TD.f"
     } else if (! jobx) {
 
 /*        Estimate the reciprocal condition and/or the error bound. */
@@ -613,23 +744,34 @@ static doublereal c_b25 = .5;
 /*                    a = 1, if JOB = 'E' or JOB = 'A', and LYAPUN = 'R'; */
 /*                    a = 0, otherwise. */
 
+#line 530 "SB03TD.f"
 	if (joba) {
+#line 531 "SB03TD.f"
 	    *(unsigned char *)jobl = 'B';
+#line 532 "SB03TD.f"
 	} else {
+#line 533 "SB03TD.f"
 	    *(unsigned char *)jobl = *(unsigned char *)job;
+#line 534 "SB03TD.f"
 	}
+#line 535 "SB03TD.f"
 	sb03qd_(jobl, cfact, trana, uplo, lyapun, n, scale, &a[a_offset], lda,
 		 &t[t_offset], ldt, &u[u_offset], ldu, &c__[c_offset], ldc, &
 		x[x_offset], ldx, sep, rcond, ferr, &iwork[1], &dwork[1], 
 		ldwork, info, (ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)1, (
 		ftnlen)1);
 /* Computing MAX */
+#line 538 "SB03TD.f"
 	i__1 = ldw, i__2 = (integer) dwork[1];
+#line 538 "SB03TD.f"
 	ldw = max(i__1,i__2);
+#line 539 "SB03TD.f"
     }
 
+#line 541 "SB03TD.f"
     dwork[1] = (doublereal) ldw;
 
+#line 543 "SB03TD.f"
     return 0;
 /* *** Last line of SB03TD *** */
 } /* sb03td_ */

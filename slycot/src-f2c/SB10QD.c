@@ -1,3 +1,4 @@
+#line 1 "SB10QD.f"
 /* SB10QD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB10QD.f"
 /* Table of constant values */
 
 static doublereal c_b5 = 0.;
@@ -335,72 +337,138 @@ static doublereal c_b17 = -1.;
 
 /*     Decode and Test input parameters. */
 
+#line 277 "SB10QD.f"
     /* Parameter adjustments */
+#line 277 "SB10QD.f"
     a_dim1 = *lda;
+#line 277 "SB10QD.f"
     a_offset = 1 + a_dim1;
+#line 277 "SB10QD.f"
     a -= a_offset;
+#line 277 "SB10QD.f"
     b_dim1 = *ldb;
+#line 277 "SB10QD.f"
     b_offset = 1 + b_dim1;
+#line 277 "SB10QD.f"
     b -= b_offset;
+#line 277 "SB10QD.f"
     c_dim1 = *ldc;
+#line 277 "SB10QD.f"
     c_offset = 1 + c_dim1;
+#line 277 "SB10QD.f"
     c__ -= c_offset;
+#line 277 "SB10QD.f"
     d_dim1 = *ldd;
+#line 277 "SB10QD.f"
     d_offset = 1 + d_dim1;
+#line 277 "SB10QD.f"
     d__ -= d_offset;
+#line 277 "SB10QD.f"
     f_dim1 = *ldf;
+#line 277 "SB10QD.f"
     f_offset = 1 + f_dim1;
+#line 277 "SB10QD.f"
     f -= f_offset;
+#line 277 "SB10QD.f"
     h_dim1 = *ldh;
+#line 277 "SB10QD.f"
     h_offset = 1 + h_dim1;
+#line 277 "SB10QD.f"
     h__ -= h_offset;
+#line 277 "SB10QD.f"
     x_dim1 = *ldx;
+#line 277 "SB10QD.f"
     x_offset = 1 + x_dim1;
+#line 277 "SB10QD.f"
     x -= x_offset;
+#line 277 "SB10QD.f"
     y_dim1 = *ldy;
+#line 277 "SB10QD.f"
     y_offset = 1 + y_dim1;
+#line 277 "SB10QD.f"
     y -= y_offset;
+#line 277 "SB10QD.f"
     --xycond;
+#line 277 "SB10QD.f"
     --iwork;
+#line 277 "SB10QD.f"
     --dwork;
+#line 277 "SB10QD.f"
     --bwork;
+#line 277 "SB10QD.f"
 
+#line 277 "SB10QD.f"
     /* Function Body */
+#line 277 "SB10QD.f"
     m1 = *m - *ncon;
+#line 278 "SB10QD.f"
     m2 = *ncon;
+#line 279 "SB10QD.f"
     np1 = *np - *nmeas;
+#line 280 "SB10QD.f"
     np2 = *nmeas;
+#line 281 "SB10QD.f"
     nn = *n * *n;
 
+#line 283 "SB10QD.f"
     *info = 0;
+#line 284 "SB10QD.f"
     if (*n < 0) {
+#line 285 "SB10QD.f"
 	*info = -1;
+#line 286 "SB10QD.f"
     } else if (*m < 0) {
+#line 287 "SB10QD.f"
 	*info = -2;
+#line 288 "SB10QD.f"
     } else if (*np < 0) {
+#line 289 "SB10QD.f"
 	*info = -3;
+#line 290 "SB10QD.f"
     } else if (*ncon < 0 || m1 < 0 || m2 > np1) {
+#line 291 "SB10QD.f"
 	*info = -4;
+#line 292 "SB10QD.f"
     } else if (*nmeas < 0 || np1 < 0 || np2 > m1) {
+#line 293 "SB10QD.f"
 	*info = -5;
+#line 294 "SB10QD.f"
     } else if (*gamma < 0.) {
+#line 295 "SB10QD.f"
 	*info = -6;
+#line 296 "SB10QD.f"
     } else if (*lda < max(1,*n)) {
+#line 297 "SB10QD.f"
 	*info = -8;
+#line 298 "SB10QD.f"
     } else if (*ldb < max(1,*n)) {
+#line 299 "SB10QD.f"
 	*info = -10;
+#line 300 "SB10QD.f"
     } else if (*ldc < max(1,*np)) {
+#line 301 "SB10QD.f"
 	*info = -12;
+#line 302 "SB10QD.f"
     } else if (*ldd < max(1,*np)) {
+#line 303 "SB10QD.f"
 	*info = -14;
+#line 304 "SB10QD.f"
     } else if (*ldf < max(1,*m)) {
+#line 305 "SB10QD.f"
 	*info = -16;
+#line 306 "SB10QD.f"
     } else if (*ldh < max(1,*n)) {
+#line 307 "SB10QD.f"
 	*info = -18;
+#line 308 "SB10QD.f"
     } else if (*ldx < max(1,*n)) {
+#line 309 "SB10QD.f"
 	*info = -20;
+#line 310 "SB10QD.f"
     } else if (*ldy < max(1,*n)) {
+#line 311 "SB10QD.f"
 	*info = -22;
+#line 312 "SB10QD.f"
     } else {
 
 /*        Compute workspace. */
@@ -408,89 +476,139 @@ static doublereal c_b17 = -1.;
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
+#line 316 "SB10QD.f"
 	i__5 = *n * *m, i__6 = nn * 10 + *n * 12 + 5;
+#line 316 "SB10QD.f"
 	i__3 = m1 << 1, i__4 = nn * 3 + max(i__5,i__6);
 /* Computing MAX */
 /* Computing MAX */
+#line 316 "SB10QD.f"
 	i__9 = *n * *np, i__10 = nn * 10 + *n * 12 + 5;
+#line 316 "SB10QD.f"
 	i__7 = np1 << 1, i__8 = nn * 3 + max(i__9,i__10);
+#line 316 "SB10QD.f"
 	i__1 = 1, i__2 = *m * *m + max(i__3,i__4), i__1 = max(i__1,i__2), 
 		i__2 = *np * *np + max(i__7,i__8);
+#line 316 "SB10QD.f"
 	minwrk = max(i__1,i__2);
+#line 320 "SB10QD.f"
 	if (*ldwork < minwrk) {
+#line 320 "SB10QD.f"
 	    *info = -26;
+#line 320 "SB10QD.f"
 	}
+#line 322 "SB10QD.f"
     }
+#line 323 "SB10QD.f"
     if (*info != 0) {
+#line 324 "SB10QD.f"
 	i__1 = -(*info);
+#line 324 "SB10QD.f"
 	xerbla_("SB10QD", &i__1, (ftnlen)6);
+#line 325 "SB10QD.f"
 	return 0;
+#line 326 "SB10QD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 330 "SB10QD.f"
     if (*n == 0 || *m == 0 || *np == 0 || m1 == 0 || m2 == 0 || np1 == 0 || 
 	    np2 == 0) {
+#line 332 "SB10QD.f"
 	xycond[1] = 1.;
+#line 333 "SB10QD.f"
 	xycond[2] = 1.;
+#line 334 "SB10QD.f"
 	dwork[1] = 1.;
+#line 335 "SB10QD.f"
 	return 0;
+#line 336 "SB10QD.f"
     }
+#line 337 "SB10QD.f"
     nd1 = np1 - m2;
+#line 338 "SB10QD.f"
     nd2 = m1 - np2;
+#line 339 "SB10QD.f"
     n2 = *n << 1;
 
 /*     Get the machine precision. */
 
+#line 343 "SB10QD.f"
     eps = dlamch_("Epsilon", (ftnlen)7);
 
 /*     Workspace usage. */
 
+#line 347 "SB10QD.f"
     iwa = *m * *m + 1;
+#line 348 "SB10QD.f"
     iwq = iwa + nn;
+#line 349 "SB10QD.f"
     iwg = iwq + nn;
+#line 350 "SB10QD.f"
     iw2 = iwg + nn;
 
 /*     Compute |D1111'||D1111 D1112| - gamma^2*Im1 . */
 /*             |D1112'| */
 
+#line 355 "SB10QD.f"
     d__1 = -(*gamma) * *gamma;
+#line 355 "SB10QD.f"
     dlaset_("L", &m1, &m1, &c_b5, &d__1, &dwork[1], m, (ftnlen)1);
+#line 356 "SB10QD.f"
     if (nd1 > 0) {
+#line 356 "SB10QD.f"
 	dsyrk_("L", "T", &m1, &nd1, &c_b8, &d__[d_offset], ldd, &c_b8, &dwork[
 		1], m, (ftnlen)1, (ftnlen)1);
+#line 356 "SB10QD.f"
     }
 
 /*     Compute inv(|D1111'|*|D1111 D1112| - gamma^2*Im1) . */
 /*                 |D1112'| */
 
+#line 362 "SB10QD.f"
     iwrk = iwa;
+#line 363 "SB10QD.f"
     anorm = dlansy_("I", "L", &m1, &dwork[1], m, &dwork[iwrk], (ftnlen)1, (
 	    ftnlen)1);
+#line 364 "SB10QD.f"
     i__1 = *ldwork - iwrk + 1;
+#line 364 "SB10QD.f"
     dsytrf_("L", &m1, &dwork[1], m, &iwork[1], &dwork[iwrk], &i__1, &info2, (
 	    ftnlen)1);
+#line 366 "SB10QD.f"
     if (info2 > 0) {
+#line 367 "SB10QD.f"
 	*info = 1;
+#line 368 "SB10QD.f"
 	return 0;
+#line 369 "SB10QD.f"
     }
 
+#line 371 "SB10QD.f"
     lwamax = (integer) dwork[iwrk] + iwrk - 1;
+#line 372 "SB10QD.f"
     dsycon_("L", &m1, &dwork[1], m, &iwork[1], &anorm, &rcond, &dwork[iwrk], &
 	    iwork[m1 + 1], &info2, (ftnlen)1);
+#line 374 "SB10QD.f"
     if (rcond < eps) {
+#line 375 "SB10QD.f"
 	*info = 1;
+#line 376 "SB10QD.f"
 	return 0;
+#line 377 "SB10QD.f"
     }
 
 /*     Compute inv(R) block by block. */
 
+#line 381 "SB10QD.f"
     dsytri_("L", &m1, &dwork[1], m, &iwork[1], &dwork[iwrk], &info2, (ftnlen)
 	    1);
 
 /*     Compute -|D1121 D1122|*inv(|D1111'|*|D1111 D1112| - gamma^2*Im1) . */
 /*                                |D1112'| */
 
+#line 386 "SB10QD.f"
     dsymm_("R", "L", &m2, &m1, &c_b17, &dwork[1], m, &d__[nd1 + 1 + d_dim1], 
 	    ldd, &c_b5, &dwork[m1 + 1], m, (ftnlen)1, (ftnlen)1);
 
@@ -500,49 +618,65 @@ static doublereal c_b17 = -1.;
 /*                  gamma^2*Im1)*|D1121'| + Im2 . */
 /*                               |D1122'| */
 
+#line 395 "SB10QD.f"
     dlaset_("Lower", &m2, &m2, &c_b5, &c_b8, &dwork[m1 * (*m + 1) + 1], m, (
 	    ftnlen)5);
+#line 396 "SB10QD.f"
     mb01rx_("Right", "Lower", "Transpose", &m2, &m1, &c_b8, &c_b17, &dwork[m1 
 	    * (*m + 1) + 1], m, &d__[nd1 + 1 + d_dim1], ldd, &dwork[m1 + 1], 
 	    m, &info2, (ftnlen)5, (ftnlen)5, (ftnlen)9);
 
 /*     Compute D11'*C1 . */
 
+#line 402 "SB10QD.f"
     dgemm_("T", "N", &m1, n, &np1, &c_b8, &d__[d_offset], ldd, &c__[c_offset],
 	     ldc, &c_b5, &dwork[iw2], m, (ftnlen)1, (ftnlen)1);
 
 /*     Compute D1D'*C1 . */
 
+#line 407 "SB10QD.f"
     dlacpy_("Full", &m2, n, &c__[nd1 + 1 + c_dim1], ldc, &dwork[iw2 + m1], m, 
 	    (ftnlen)4);
 
 /*     Compute inv(R)*D1D'*C1 in F . */
 
+#line 412 "SB10QD.f"
     dsymm_("L", "L", m, n, &c_b8, &dwork[1], m, &dwork[iw2], m, &c_b5, &f[
 	    f_offset], ldf, (ftnlen)1, (ftnlen)1);
 
 /*     Compute Ax = A - B*inv(R)*D1D'*C1 . */
 
+#line 417 "SB10QD.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &dwork[iwa], n, (ftnlen)4);
+#line 418 "SB10QD.f"
     dgemm_("N", "N", n, n, m, &c_b17, &b[b_offset], ldb, &f[f_offset], ldf, &
 	    c_b8, &dwork[iwa], n, (ftnlen)1, (ftnlen)1);
 
 /*     Compute Cx = C1'*C1 - C1'*D1D*inv(R)*D1D'*C1 . */
 
+#line 423 "SB10QD.f"
     if (nd1 == 0) {
+#line 424 "SB10QD.f"
 	dlaset_("L", n, n, &c_b5, &c_b5, &dwork[iwq], n, (ftnlen)1);
+#line 425 "SB10QD.f"
     } else {
+#line 426 "SB10QD.f"
 	dsyrk_("L", "T", n, &np1, &c_b8, &c__[c_offset], ldc, &c_b5, &dwork[
 		iwq], n, (ftnlen)1, (ftnlen)1);
+#line 428 "SB10QD.f"
 	mb01rx_("Left", "Lower", "Transpose", n, m, &c_b8, &c_b17, &dwork[iwq]
 		, n, &dwork[iw2], m, &f[f_offset], ldf, &info2, (ftnlen)4, (
 		ftnlen)5, (ftnlen)9);
+#line 430 "SB10QD.f"
     }
 
 /*     Compute Dx = B*inv(R)*B' . */
 
+#line 434 "SB10QD.f"
     iwrk = iw2;
+#line 435 "SB10QD.f"
     i__1 = *m * *n;
+#line 435 "SB10QD.f"
     mb01ru_("Lower", "NoTranspose", n, m, &c_b5, &c_b8, &dwork[iwg], n, &b[
 	    b_offset], ldb, &dwork[1], m, &dwork[iwrk], &i__1, &info2, (
 	    ftnlen)5, (ftnlen)11);
@@ -551,87 +685,130 @@ static doublereal c_b17 = -1.;
 /*     Workspace:  need   M*M + 13*N*N + 12*N + 5; */
 /*                 prefer larger. */
 
+#line 443 "SB10QD.f"
     iwt = iw2;
+#line 444 "SB10QD.f"
     iwv = iwt + nn;
+#line 445 "SB10QD.f"
     iwr = iwv + nn;
+#line 446 "SB10QD.f"
     iwi = iwr + n2;
+#line 447 "SB10QD.f"
     iws = iwi + n2;
+#line 448 "SB10QD.f"
     iwrk = iws + (nn << 2);
 
+#line 450 "SB10QD.f"
     i__1 = *ldwork - iwrk + 1;
-    sb02rd_("All", "Continuous", "NotUsed", "NoTranspose", "Lower", "General"
+#line 450 "SB10QD.f"
+    sb02rd_("All", "Continuous", "NotUsed", "NoTranspose", "Lower", "General"\
 	    "Scaling", "Stable", "NotFactored", "Original", n, &dwork[iwa], n, 
 	    &dwork[iwt], n, &dwork[iwv], n, &dwork[iwg], n, &dwork[iwq], n, &
 	    x[x_offset], ldx, &sep, &xycond[1], &ferr, &dwork[iwr], &dwork[
 	    iwi], &dwork[iws], &n2, &iwork[1], &dwork[iwrk], &i__1, &bwork[1],
 	     &info2, (ftnlen)3, (ftnlen)10, (ftnlen)7, (ftnlen)11, (ftnlen)5, 
 	    (ftnlen)14, (ftnlen)6, (ftnlen)11, (ftnlen)8);
+#line 457 "SB10QD.f"
     if (info2 > 0) {
+#line 458 "SB10QD.f"
 	*info = 2;
+#line 459 "SB10QD.f"
 	return 0;
+#line 460 "SB10QD.f"
     }
 
 /* Computing MAX */
+#line 462 "SB10QD.f"
     i__1 = (integer) dwork[iwrk] + iwrk - 1;
+#line 462 "SB10QD.f"
     lwamax = max(i__1,lwamax);
 
 /*     Compute F = -inv(R)*|D1D'*C1 + B'*X| . */
 
+#line 466 "SB10QD.f"
     iwrk = iw2;
+#line 467 "SB10QD.f"
     dgemm_("T", "N", m, n, n, &c_b8, &b[b_offset], ldb, &x[x_offset], ldx, &
 	    c_b5, &dwork[iwrk], m, (ftnlen)1, (ftnlen)1);
+#line 469 "SB10QD.f"
     dsymm_("L", "L", m, n, &c_b17, &dwork[1], m, &dwork[iwrk], m, &c_b17, &f[
 	    f_offset], ldf, (ftnlen)1, (ftnlen)1);
 
 /*     Workspace usage. */
 
+#line 474 "SB10QD.f"
     iwa = *np * *np + 1;
+#line 475 "SB10QD.f"
     iwq = iwa + nn;
+#line 476 "SB10QD.f"
     iwg = iwq + nn;
+#line 477 "SB10QD.f"
     iw2 = iwg + nn;
 
 /*     Compute |D1111|*|D1111' D1121'| - gamma^2*Inp1 . */
 /*             |D1121| */
 
+#line 482 "SB10QD.f"
     d__1 = -(*gamma) * *gamma;
+#line 482 "SB10QD.f"
     dlaset_("U", &np1, &np1, &c_b5, &d__1, &dwork[1], np, (ftnlen)1);
+#line 483 "SB10QD.f"
     if (nd2 > 0) {
+#line 483 "SB10QD.f"
 	dsyrk_("U", "N", &np1, &nd2, &c_b8, &d__[d_offset], ldd, &c_b8, &
 		dwork[1], np, (ftnlen)1, (ftnlen)1);
+#line 483 "SB10QD.f"
     }
 
 /*     Compute inv(|D1111|*|D1111' D1121'| - gamma^2*Inp1) . */
 /*                 |D1121| */
 
+#line 489 "SB10QD.f"
     iwrk = iwa;
+#line 490 "SB10QD.f"
     anorm = dlansy_("I", "U", &np1, &dwork[1], np, &dwork[iwrk], (ftnlen)1, (
 	    ftnlen)1);
+#line 491 "SB10QD.f"
     i__1 = *ldwork - iwrk + 1;
+#line 491 "SB10QD.f"
     dsytrf_("U", &np1, &dwork[1], np, &iwork[1], &dwork[iwrk], &i__1, &info2, 
 	    (ftnlen)1);
+#line 493 "SB10QD.f"
     if (info2 > 0) {
+#line 494 "SB10QD.f"
 	*info = 1;
+#line 495 "SB10QD.f"
 	return 0;
+#line 496 "SB10QD.f"
     }
 
 /* Computing MAX */
+#line 498 "SB10QD.f"
     i__1 = (integer) dwork[iwrk] + iwrk - 1;
+#line 498 "SB10QD.f"
     lwamax = max(i__1,lwamax);
+#line 499 "SB10QD.f"
     dsycon_("U", &np1, &dwork[1], np, &iwork[1], &anorm, &rcond, &dwork[iwrk],
 	     &iwork[np1 + 1], &info2, (ftnlen)1);
+#line 501 "SB10QD.f"
     if (rcond < eps) {
+#line 502 "SB10QD.f"
 	*info = 1;
+#line 503 "SB10QD.f"
 	return 0;
+#line 504 "SB10QD.f"
     }
 
 /*     Compute inv(RT) . */
 
+#line 508 "SB10QD.f"
     dsytri_("U", &np1, &dwork[1], np, &iwork[1], &dwork[iwrk], &info2, (
 	    ftnlen)1);
 
 /*     Compute -inv(|D1111||D1111' D1121'| - gamma^2*Inp1)*|D1112| . */
 /*                  |D1121|                                |D1122| */
 
+#line 513 "SB10QD.f"
     dsymm_("L", "U", &np1, &np2, &c_b17, &dwork[1], np, &d__[(nd2 + 1) * 
 	    d_dim1 + 1], ldd, &c_b5, &dwork[np1 * *np + 1], np, (ftnlen)1, (
 	    ftnlen)1);
@@ -642,8 +819,10 @@ static doublereal c_b17 = -1.;
 /*                gamma^2*Inp1)*|D1112| + Inp2 . */
 /*                              |D1122| */
 
+#line 522 "SB10QD.f"
     dlaset_("Full", &np2, &np2, &c_b5, &c_b8, &dwork[np1 * (*np + 1) + 1], np,
 	     (ftnlen)4);
+#line 524 "SB10QD.f"
     mb01rx_("Left", "Upper", "Transpose", &np2, &np1, &c_b8, &c_b17, &dwork[
 	    np1 * (*np + 1) + 1], np, &d__[(nd2 + 1) * d_dim1 + 1], ldd, &
 	    dwork[np1 * *np + 1], np, &info2, (ftnlen)4, (ftnlen)5, (ftnlen)9)
@@ -651,41 +830,55 @@ static doublereal c_b17 = -1.;
 
 /*     Compute B1*D11' . */
 
+#line 530 "SB10QD.f"
     dgemm_("N", "T", n, &np1, &m1, &c_b8, &b[b_offset], ldb, &d__[d_offset], 
 	    ldd, &c_b5, &dwork[iw2], n, (ftnlen)1, (ftnlen)1);
 
 /*     Compute B1*DD1' . */
 
+#line 535 "SB10QD.f"
     dlacpy_("Full", n, &np2, &b[(nd2 + 1) * b_dim1 + 1], ldb, &dwork[iw2 + 
 	    np1 * *n], n, (ftnlen)4);
 
 /*     Compute B1*DD1'*inv(RT) in H . */
 
+#line 540 "SB10QD.f"
     dsymm_("R", "U", n, np, &c_b8, &dwork[1], np, &dwork[iw2], n, &c_b5, &h__[
 	    h_offset], ldh, (ftnlen)1, (ftnlen)1);
 
 /*     Compute Ay = A - B1*DD1'*inv(RT)*C . */
 
+#line 545 "SB10QD.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &dwork[iwa], n, (ftnlen)4);
+#line 546 "SB10QD.f"
     dgemm_("N", "N", n, n, np, &c_b17, &h__[h_offset], ldh, &c__[c_offset], 
 	    ldc, &c_b8, &dwork[iwa], n, (ftnlen)1, (ftnlen)1);
 
 /*     Compute Cy = B1*B1' - B1*DD1'*inv(RT)*DD1*B1' . */
 
+#line 551 "SB10QD.f"
     if (nd2 == 0) {
+#line 552 "SB10QD.f"
 	dlaset_("U", n, n, &c_b5, &c_b5, &dwork[iwq], n, (ftnlen)1);
+#line 553 "SB10QD.f"
     } else {
+#line 554 "SB10QD.f"
 	dsyrk_("U", "N", n, &m1, &c_b8, &b[b_offset], ldb, &c_b5, &dwork[iwq],
 		 n, (ftnlen)1, (ftnlen)1);
+#line 556 "SB10QD.f"
 	mb01rx_("Right", "Upper", "Transpose", n, np, &c_b8, &c_b17, &dwork[
 		iwq], n, &h__[h_offset], ldh, &dwork[iw2], n, &info2, (ftnlen)
 		5, (ftnlen)5, (ftnlen)9);
+#line 558 "SB10QD.f"
     }
 
 /*     Compute Dy = C'*inv(RT)*C . */
 
+#line 562 "SB10QD.f"
     iwrk = iw2;
+#line 563 "SB10QD.f"
     i__1 = *n * *np;
+#line 563 "SB10QD.f"
     mb01ru_("Upper", "Transpose", n, np, &c_b5, &c_b8, &dwork[iwg], n, &c__[
 	    c_offset], ldc, &dwork[1], np, &dwork[iwrk], &i__1, &info2, (
 	    ftnlen)5, (ftnlen)9);
@@ -694,39 +887,58 @@ static doublereal c_b17 = -1.;
 /*     Workspace:  need   NP*NP + 13*N*N + 12*N + 5; */
 /*                 prefer larger. */
 
+#line 570 "SB10QD.f"
     iwt = iw2;
+#line 571 "SB10QD.f"
     iwv = iwt + nn;
+#line 572 "SB10QD.f"
     iwr = iwv + nn;
+#line 573 "SB10QD.f"
     iwi = iwr + n2;
+#line 574 "SB10QD.f"
     iws = iwi + n2;
+#line 575 "SB10QD.f"
     iwrk = iws + (nn << 2);
 
+#line 577 "SB10QD.f"
     i__1 = *ldwork - iwrk + 1;
-    sb02rd_("All", "Continuous", "NotUsed", "Transpose", "Upper", "GeneralSc"
+#line 577 "SB10QD.f"
+    sb02rd_("All", "Continuous", "NotUsed", "Transpose", "Upper", "GeneralSc"\
 	    "aling", "Stable", "NotFactored", "Original", n, &dwork[iwa], n, &
 	    dwork[iwt], n, &dwork[iwv], n, &dwork[iwg], n, &dwork[iwq], n, &y[
 	    y_offset], ldy, &sep, &xycond[2], &ferr, &dwork[iwr], &dwork[iwi],
 	     &dwork[iws], &n2, &iwork[1], &dwork[iwrk], &i__1, &bwork[1], &
 	    info2, (ftnlen)3, (ftnlen)10, (ftnlen)7, (ftnlen)9, (ftnlen)5, (
 	    ftnlen)14, (ftnlen)6, (ftnlen)11, (ftnlen)8);
+#line 584 "SB10QD.f"
     if (info2 > 0) {
+#line 585 "SB10QD.f"
 	*info = 3;
+#line 586 "SB10QD.f"
 	return 0;
+#line 587 "SB10QD.f"
     }
 
 /* Computing MAX */
+#line 589 "SB10QD.f"
     i__1 = (integer) dwork[iwrk] + iwrk - 1;
+#line 589 "SB10QD.f"
     lwamax = max(i__1,lwamax);
 
 /*     Compute H = -|B1*DD1' + Y*C'|*inv(RT) . */
 
+#line 593 "SB10QD.f"
     iwrk = iw2;
+#line 594 "SB10QD.f"
     dgemm_("N", "T", n, np, n, &c_b8, &y[y_offset], ldy, &c__[c_offset], ldc, 
 	    &c_b5, &dwork[iwrk], n, (ftnlen)1, (ftnlen)1);
+#line 596 "SB10QD.f"
     dsymm_("R", "U", n, np, &c_b17, &dwork[1], np, &dwork[iwrk], n, &c_b17, &
 	    h__[h_offset], ldh, (ftnlen)1, (ftnlen)1);
 
+#line 599 "SB10QD.f"
     dwork[1] = (doublereal) lwamax;
+#line 600 "SB10QD.f"
     return 0;
 /* *** Last line of SB10QD *** */
 } /* sb10qd_ */

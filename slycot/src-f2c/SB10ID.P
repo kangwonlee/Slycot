@@ -1,0 +1,14 @@
+extern int sb10id_(integer *n, integer *m, integer *np, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *factor, integer *nk, doublereal *ak, integer *ldak, doublereal *bk, integer *ldbk, doublereal *ck, integer *ldck, doublereal *dk, integer *lddk, doublereal *rcond, integer *iwork, doublereal *dwork, integer *ldwork, logical *bwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dsyrk_ 14 12 13 13 4 4 7 7 4 7 7 4 124 124 */
+/*:ref: dpotrf_ 14 6 13 4 7 4 4 124 */
+/*:ref: dpotrs_ 14 9 13 4 4 7 4 7 4 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dtrsm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: sb02rd_ 14 43 13 13 13 13 13 13 13 13 13 4 7 4 7 4 7 4 7 4 7 4 7 4 7 7 7 7 7 7 4 4 7 4 12 4 124 124 124 124 124 124 124 124 124 */
+/*:ref: select_ 12 :*/
+/*:ref: dgees_ 14 17 13 13 212 4 7 4 4 7 7 7 4 7 4 12 4 124 124 */
+/*:ref: sb10jd_ 14 17 4 4 4 7 4 7 4 7 4 7 4 7 4 4 7 4 4 */
+/*:ref: mb02vd_ 14 10 13 4 4 7 4 4 7 4 4 124 */

@@ -1,3 +1,4 @@
+#line 1 "TB01LD.f"
 /* TB01LD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TB01LD.f"
 /* Table of constant values */
 
 static doublereal c_b13 = 0.;
@@ -260,77 +262,136 @@ static integer c__1 = 1;
 
 /*     .. Executable Statements .. */
 
+#line 220 "TB01LD.f"
     /* Parameter adjustments */
+#line 220 "TB01LD.f"
     a_dim1 = *lda;
+#line 220 "TB01LD.f"
     a_offset = 1 + a_dim1;
+#line 220 "TB01LD.f"
     a -= a_offset;
+#line 220 "TB01LD.f"
     b_dim1 = *ldb;
+#line 220 "TB01LD.f"
     b_offset = 1 + b_dim1;
+#line 220 "TB01LD.f"
     b -= b_offset;
+#line 220 "TB01LD.f"
     c_dim1 = *ldc;
+#line 220 "TB01LD.f"
     c_offset = 1 + c_dim1;
+#line 220 "TB01LD.f"
     c__ -= c_offset;
+#line 220 "TB01LD.f"
     u_dim1 = *ldu;
+#line 220 "TB01LD.f"
     u_offset = 1 + u_dim1;
+#line 220 "TB01LD.f"
     u -= u_offset;
+#line 220 "TB01LD.f"
     --wr;
+#line 220 "TB01LD.f"
     --wi;
+#line 220 "TB01LD.f"
     --dwork;
+#line 220 "TB01LD.f"
 
+#line 220 "TB01LD.f"
     /* Function Body */
+#line 220 "TB01LD.f"
     *info = 0;
+#line 221 "TB01LD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 222 "TB01LD.f"
     ljobg = lsame_(joba, "G", (ftnlen)1, (ftnlen)1);
 
 /*     Check input scalar arguments. */
 
+#line 226 "TB01LD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 227 "TB01LD.f"
 	*info = -1;
+#line 228 "TB01LD.f"
     } else if (! (lsame_(stdom, "S", (ftnlen)1, (ftnlen)1) || lsame_(stdom, 
 	    "U", (ftnlen)1, (ftnlen)1))) {
+#line 230 "TB01LD.f"
 	*info = -2;
+#line 231 "TB01LD.f"
     } else if (! (lsame_(joba, "S", (ftnlen)1, (ftnlen)1) || ljobg)) {
+#line 232 "TB01LD.f"
 	*info = -3;
+#line 233 "TB01LD.f"
     } else if (*n < 0) {
+#line 234 "TB01LD.f"
 	*info = -4;
+#line 235 "TB01LD.f"
     } else if (*m < 0) {
+#line 236 "TB01LD.f"
 	*info = -5;
+#line 237 "TB01LD.f"
     } else if (*p < 0) {
+#line 238 "TB01LD.f"
 	*info = -6;
+#line 239 "TB01LD.f"
     } else if (discr && *alpha < 0.) {
+#line 240 "TB01LD.f"
 	*info = -7;
+#line 241 "TB01LD.f"
     } else if (*lda < max(1,*n)) {
+#line 242 "TB01LD.f"
 	*info = -9;
+#line 243 "TB01LD.f"
     } else if (*ldb < max(1,*n)) {
+#line 244 "TB01LD.f"
 	*info = -11;
+#line 245 "TB01LD.f"
     } else if (*ldc < max(1,*p)) {
+#line 246 "TB01LD.f"
 	*info = -13;
+#line 247 "TB01LD.f"
     } else if (*ldu < max(1,*n)) {
+#line 248 "TB01LD.f"
 	*info = -16;
+#line 249 "TB01LD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 249 "TB01LD.f"
 	i__1 = 1, i__2 = *n * 3;
+#line 249 "TB01LD.f"
 	if (*ldwork < max(1,*n) || *ldwork < max(i__1,i__2) && ljobg) {
+#line 251 "TB01LD.f"
 	    *info = -20;
+#line 252 "TB01LD.f"
 	}
+#line 252 "TB01LD.f"
     }
 
+#line 254 "TB01LD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 258 "TB01LD.f"
 	i__1 = -(*info);
+#line 258 "TB01LD.f"
 	xerbla_("TB01LD", &i__1, (ftnlen)6);
+#line 259 "TB01LD.f"
 	return 0;
+#line 260 "TB01LD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 264 "TB01LD.f"
     *ndim = 0;
+#line 265 "TB01LD.f"
     if (*n == 0) {
+#line 265 "TB01LD.f"
 	return 0;
+#line 265 "TB01LD.f"
     }
 
+#line 268 "TB01LD.f"
     if (lsame_(joba, "G", (ftnlen)1, (ftnlen)1)) {
 
 /*        Reduce A to real Schur form using an orthogonal similarity */
@@ -340,89 +401,133 @@ static integer c__1 = 1;
 /*        Workspace:  need   3*N; */
 /*                    prefer larger. */
 
+#line 277 "TB01LD.f"
 	dgees_("Vectors", "Not ordered", (L_fp)select_, n, &a[a_offset], lda, 
 		&sdim, &wr[1], &wi[1], &u[u_offset], ldu, &dwork[1], ldwork, 
 		bwork, info, (ftnlen)7, (ftnlen)11);
+#line 279 "TB01LD.f"
 	wrkopt = dwork[1];
+#line 280 "TB01LD.f"
 	if (*info != 0) {
+#line 281 "TB01LD.f"
 	    *info = 1;
+#line 282 "TB01LD.f"
 	    return 0;
+#line 283 "TB01LD.f"
 	}
+#line 284 "TB01LD.f"
     } else {
 
 /*        Initialize U with an identity matrix. */
 
+#line 288 "TB01LD.f"
 	dlaset_("Full", n, n, &c_b13, &c_b14, &u[u_offset], ldu, (ftnlen)4);
+#line 289 "TB01LD.f"
 	wrkopt = 0.;
+#line 290 "TB01LD.f"
     }
 
 /*     Separate the spectrum of A. The leading NDIM-by-NDIM submatrix of */
 /*     A corresponds to the eigenvalues of interest. */
 /*     Workspace:  need   N. */
 
+#line 296 "TB01LD.f"
     mb03qd_(dico, stdom, "Update", n, &c__1, n, alpha, &a[a_offset], lda, &u[
 	    u_offset], ldu, ndim, &dwork[1], info, (ftnlen)1, (ftnlen)1, (
 	    ftnlen)6);
+#line 298 "TB01LD.f"
     if (*info != 0) {
+#line 298 "TB01LD.f"
 	return 0;
+#line 298 "TB01LD.f"
     }
 
 /*     Compute the eigenvalues. */
 
+#line 303 "TB01LD.f"
     mb03qx_(n, &a[a_offset], lda, &wr[1], &wi[1], &ierr);
 
 /*     Apply the transformation: B <-- U'*B. */
 
+#line 307 "TB01LD.f"
     if (*ldwork < *n * *m) {
 
 /*        Not enough working space for using DGEMM. */
 
+#line 311 "TB01LD.f"
 	i__1 = *m;
+#line 311 "TB01LD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 312 "TB01LD.f"
 	    dcopy_(n, &b[i__ * b_dim1 + 1], &c__1, &dwork[1], &c__1);
+#line 313 "TB01LD.f"
 	    dgemv_("Transpose", n, n, &c_b14, &u[u_offset], ldu, &dwork[1], &
 		    c__1, &c_b13, &b[i__ * b_dim1 + 1], &c__1, (ftnlen)9);
+#line 315 "TB01LD.f"
 /* L10: */
+#line 315 "TB01LD.f"
 	}
 
+#line 317 "TB01LD.f"
     } else {
+#line 318 "TB01LD.f"
 	dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[1], n, (ftnlen)4);
+#line 319 "TB01LD.f"
 	dgemm_("Transpose", "No transpose", n, m, n, &c_b14, &u[u_offset], 
 		ldu, &dwork[1], n, &c_b13, &b[b_offset], ldb, (ftnlen)9, (
 		ftnlen)12);
 /* Computing MAX */
+#line 321 "TB01LD.f"
 	d__1 = wrkopt, d__2 = (doublereal) (*n * *m);
+#line 321 "TB01LD.f"
 	wrkopt = max(d__1,d__2);
+#line 322 "TB01LD.f"
     }
 
 /*     Apply the transformation: C <-- C*U. */
 
+#line 326 "TB01LD.f"
     if (*ldwork < *n * *p) {
 
 /*        Not enough working space for using DGEMM. */
 
+#line 330 "TB01LD.f"
 	i__1 = *p;
+#line 330 "TB01LD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 331 "TB01LD.f"
 	    dcopy_(n, &c__[i__ + c_dim1], ldc, &dwork[1], &c__1);
+#line 332 "TB01LD.f"
 	    dgemv_("Transpose", n, n, &c_b14, &u[u_offset], ldu, &dwork[1], &
 		    c__1, &c_b13, &c__[i__ + c_dim1], ldc, (ftnlen)9);
+#line 334 "TB01LD.f"
 /* L20: */
+#line 334 "TB01LD.f"
 	}
 
+#line 336 "TB01LD.f"
     } else {
+#line 337 "TB01LD.f"
 	ldwp = max(1,*p);
+#line 338 "TB01LD.f"
 	dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[1], &ldwp, (ftnlen)
 		4);
+#line 339 "TB01LD.f"
 	dgemm_("No transpose", "No transpose", p, n, n, &c_b14, &dwork[1], &
 		ldwp, &u[u_offset], ldu, &c_b13, &c__[c_offset], ldc, (ftnlen)
 		12, (ftnlen)12);
 /* Computing MAX */
+#line 341 "TB01LD.f"
 	d__1 = wrkopt, d__2 = (doublereal) (*n * *p);
+#line 341 "TB01LD.f"
 	wrkopt = max(d__1,d__2);
+#line 342 "TB01LD.f"
     }
 
+#line 344 "TB01LD.f"
     dwork[1] = wrkopt;
 
+#line 346 "TB01LD.f"
     return 0;
 /* *** Last line of TB01LD *** */
 } /* tb01ld_ */

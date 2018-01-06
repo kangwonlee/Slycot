@@ -1,3 +1,4 @@
+#line 1 "TD04AD.f"
 /* TD04AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TD04AD.f"
 /* Table of constant values */
 
 static doublereal c_b8 = 0.;
@@ -290,233 +292,374 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 258 "TD04AD.f"
     /* Parameter adjustments */
+#line 258 "TD04AD.f"
     --index;
+#line 258 "TD04AD.f"
     dcoeff_dim1 = *lddcoe;
+#line 258 "TD04AD.f"
     dcoeff_offset = 1 + dcoeff_dim1;
+#line 258 "TD04AD.f"
     dcoeff -= dcoeff_offset;
+#line 258 "TD04AD.f"
     ucoeff_dim1 = *lduco1;
+#line 258 "TD04AD.f"
     ucoeff_dim2 = *lduco2;
+#line 258 "TD04AD.f"
     ucoeff_offset = 1 + ucoeff_dim1 * (1 + ucoeff_dim2);
+#line 258 "TD04AD.f"
     ucoeff -= ucoeff_offset;
+#line 258 "TD04AD.f"
     a_dim1 = *lda;
+#line 258 "TD04AD.f"
     a_offset = 1 + a_dim1;
+#line 258 "TD04AD.f"
     a -= a_offset;
+#line 258 "TD04AD.f"
     b_dim1 = *ldb;
+#line 258 "TD04AD.f"
     b_offset = 1 + b_dim1;
+#line 258 "TD04AD.f"
     b -= b_offset;
+#line 258 "TD04AD.f"
     c_dim1 = *ldc;
+#line 258 "TD04AD.f"
     c_offset = 1 + c_dim1;
+#line 258 "TD04AD.f"
     c__ -= c_offset;
+#line 258 "TD04AD.f"
     d_dim1 = *ldd;
+#line 258 "TD04AD.f"
     d_offset = 1 + d_dim1;
+#line 258 "TD04AD.f"
     d__ -= d_offset;
+#line 258 "TD04AD.f"
     --iwork;
+#line 258 "TD04AD.f"
     --dwork;
+#line 258 "TD04AD.f"
 
+#line 258 "TD04AD.f"
     /* Function Body */
+#line 258 "TD04AD.f"
     *info = 0;
+#line 259 "TD04AD.f"
     lrocor = lsame_(rowcol, "R", (ftnlen)1, (ftnlen)1);
+#line 260 "TD04AD.f"
     lrococ = lsame_(rowcol, "C", (ftnlen)1, (ftnlen)1);
 /* Computing MAX */
+#line 261 "TD04AD.f"
     i__1 = max(1,*m);
+#line 261 "TD04AD.f"
     mplim = max(i__1,*p);
 
 /*     Test the input scalar arguments. */
 
+#line 265 "TD04AD.f"
     if (! lrocor && ! lrococ) {
+#line 266 "TD04AD.f"
 	*info = -1;
+#line 267 "TD04AD.f"
     } else if (*m < 0) {
+#line 268 "TD04AD.f"
 	*info = -2;
+#line 269 "TD04AD.f"
     } else if (*p < 0) {
+#line 270 "TD04AD.f"
 	*info = -3;
+#line 271 "TD04AD.f"
     } else if (lrocor && *lddcoe < max(1,*p) || lrococ && *lddcoe < max(1,*m))
 	     {
+#line 273 "TD04AD.f"
 	*info = -6;
+#line 274 "TD04AD.f"
     } else if (lrocor && *lduco1 < max(1,*p) || lrococ && *lduco1 < mplim) {
+#line 276 "TD04AD.f"
 	*info = -8;
+#line 277 "TD04AD.f"
     } else if (lrocor && *lduco2 < max(1,*m) || lrococ && *lduco2 < mplim) {
+#line 279 "TD04AD.f"
 	*info = -9;
+#line 280 "TD04AD.f"
     }
 
+#line 282 "TD04AD.f"
     n = 0;
+#line 283 "TD04AD.f"
     if (*info == 0) {
+#line 284 "TD04AD.f"
 	if (lrocor) {
 
 /*           Initialization for T(s) given as rows over common */
 /*           denominators. */
 
+#line 289 "TD04AD.f"
 	    pwork = *p;
+#line 290 "TD04AD.f"
 	    mwork = *m;
+#line 291 "TD04AD.f"
 	} else {
 
 /*           Initialization for T(s) given as columns over common */
 /*           denominators. */
 
+#line 296 "TD04AD.f"
 	    pwork = *m;
+#line 297 "TD04AD.f"
 	    mwork = *p;
+#line 298 "TD04AD.f"
 	}
 
 /*        Calculate N, the order of the resulting state-space */
 /*        representation. */
 
+#line 303 "TD04AD.f"
 	kdcoef = 0;
 
+#line 305 "TD04AD.f"
 	i__1 = pwork;
+#line 305 "TD04AD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
 /* Computing MAX */
+#line 306 "TD04AD.f"
 	    i__2 = kdcoef, i__3 = index[i__];
+#line 306 "TD04AD.f"
 	    kdcoef = max(i__2,i__3);
+#line 307 "TD04AD.f"
 	    n += index[i__];
+#line 308 "TD04AD.f"
 /* L10: */
+#line 308 "TD04AD.f"
 	}
 
+#line 310 "TD04AD.f"
 	++kdcoef;
 
+#line 312 "TD04AD.f"
 	if (*lda < max(1,n)) {
+#line 313 "TD04AD.f"
 	    *info = -12;
+#line 314 "TD04AD.f"
 	} else if (*ldb < max(1,n)) {
+#line 315 "TD04AD.f"
 	    *info = -14;
+#line 316 "TD04AD.f"
 	} else if (*ldc < mplim) {
+#line 317 "TD04AD.f"
 	    *info = -16;
+#line 318 "TD04AD.f"
 	} else if (lrocor && *ldd < max(1,*p) || lrococ && *ldd < mplim) {
+#line 320 "TD04AD.f"
 	    *info = -18;
+#line 321 "TD04AD.f"
 	} else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 321 "TD04AD.f"
 	    i__3 = n, i__4 = *m * 3, i__3 = max(i__3,i__4), i__4 = *p * 3;
+#line 321 "TD04AD.f"
 	    i__1 = 1, i__2 = n + max(i__3,i__4);
+#line 321 "TD04AD.f"
 	    if (*ldwork < max(i__1,i__2)) {
+#line 322 "TD04AD.f"
 		*info = -22;
+#line 323 "TD04AD.f"
 	    }
+#line 323 "TD04AD.f"
 	}
+#line 324 "TD04AD.f"
     }
 
+#line 326 "TD04AD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 330 "TD04AD.f"
 	i__1 = -(*info);
+#line 330 "TD04AD.f"
 	xerbla_("TD04AD", &i__1, (ftnlen)6);
+#line 331 "TD04AD.f"
 	return 0;
+#line 332 "TD04AD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 336 "TD04AD.f"
     i__1 = max(n,*m);
+#line 336 "TD04AD.f"
     if (max(i__1,*p) == 0) {
+#line 337 "TD04AD.f"
 	*nr = 0;
+#line 338 "TD04AD.f"
 	dwork[1] = 1.;
+#line 339 "TD04AD.f"
 	return 0;
+#line 340 "TD04AD.f"
     }
 
+#line 342 "TD04AD.f"
     if (lrococ) {
 
 /*        Initialize the remainder of the leading */
 /*        MPLIM-by-MPLIM-by-KDCOEF part of U(s) to zero. */
 
+#line 347 "TD04AD.f"
 	if (*p < *m) {
 
+#line 349 "TD04AD.f"
 	    i__1 = kdcoef;
+#line 349 "TD04AD.f"
 	    for (k = 1; k <= i__1; ++k) {
+#line 350 "TD04AD.f"
 		i__2 = *m - *p;
+#line 350 "TD04AD.f"
 		dlaset_("Full", &i__2, &mplim, &c_b8, &c_b8, &ucoeff[*p + 1 + 
 			(k * ucoeff_dim2 + 1) * ucoeff_dim1], lduco1, (ftnlen)
 			4);
+#line 352 "TD04AD.f"
 /* L20: */
+#line 352 "TD04AD.f"
 	    }
 
+#line 354 "TD04AD.f"
 	} else if (*p > *m) {
 
+#line 356 "TD04AD.f"
 	    i__1 = kdcoef;
+#line 356 "TD04AD.f"
 	    for (k = 1; k <= i__1; ++k) {
+#line 357 "TD04AD.f"
 		i__2 = *p - *m;
+#line 357 "TD04AD.f"
 		dlaset_("Full", &mplim, &i__2, &c_b8, &c_b8, &ucoeff[(*m + 1 
 			+ k * ucoeff_dim2) * ucoeff_dim1 + 1], lduco1, (
 			ftnlen)4);
+#line 359 "TD04AD.f"
 /* L30: */
+#line 359 "TD04AD.f"
 	    }
 
+#line 361 "TD04AD.f"
 	}
 
+#line 363 "TD04AD.f"
 	if (mplim != 1) {
 
 /*           Non-scalar T(s) factorized by columns: transpose it (i.e. */
 /*           U(s)). */
 
+#line 368 "TD04AD.f"
 	    jstop = mplim - 1;
 
+#line 370 "TD04AD.f"
 	    i__1 = kdcoef;
+#line 370 "TD04AD.f"
 	    for (k = 1; k <= i__1; ++k) {
 
+#line 372 "TD04AD.f"
 		i__2 = jstop;
+#line 372 "TD04AD.f"
 		for (j = 1; j <= i__2; ++j) {
+#line 373 "TD04AD.f"
 		    i__3 = mplim - j;
+#line 373 "TD04AD.f"
 		    dswap_(&i__3, &ucoeff[j + 1 + (j + k * ucoeff_dim2) * 
 			    ucoeff_dim1], &c__1, &ucoeff[j + (j + 1 + k * 
 			    ucoeff_dim2) * ucoeff_dim1], lduco1);
+#line 375 "TD04AD.f"
 /* L40: */
+#line 375 "TD04AD.f"
 		}
 
+#line 377 "TD04AD.f"
 /* L50: */
+#line 377 "TD04AD.f"
 	    }
 
+#line 379 "TD04AD.f"
 	}
+#line 380 "TD04AD.f"
     }
 
 /*     Construct non-minimal state-space representation (by Wolovich's */
 /*     Structure Theorem) which has transfer matrix T(s) or T'(s) as */
 /*     appropriate ... */
 
+#line 386 "TD04AD.f"
     td03ay_(&mwork, &pwork, &index[1], &dcoeff[dcoeff_offset], lddcoe, &
 	    ucoeff[ucoeff_offset], lduco1, lduco2, &n, &a[a_offset], lda, &b[
 	    b_offset], ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, info);
+#line 388 "TD04AD.f"
     if (*info > 0) {
+#line 388 "TD04AD.f"
 	return 0;
+#line 388 "TD04AD.f"
     }
 
 /*     and then separate out a minimal realization from this. */
 
 /*     Workspace: need  N + MAX(N, 3*MWORK, 3*PWORK). */
 
+#line 395 "TD04AD.f"
     tb01pd_("Minimal", "Scale", &n, &mwork, &pwork, &a[a_offset], lda, &b[
 	    b_offset], ldb, &c__[c_offset], ldc, nr, tol, &iwork[1], &dwork[1]
 	    , ldwork, info, (ftnlen)7, (ftnlen)5);
 
+#line 398 "TD04AD.f"
     if (lrococ) {
 
 /*        If T(s) originally factorized by columns, find dual of minimal */
 /*        state-space representation, and reorder the rows and columns */
 /*        to get an upper block Hessenberg state dynamics matrix. */
 
+#line 404 "TD04AD.f"
 	k = iwork[1] + iwork[2] - 1;
+#line 405 "TD04AD.f"
 	i__1 = *nr - 1;
+#line 405 "TD04AD.f"
 	tb01xd_("D", nr, &mwork, &pwork, &k, &i__1, &a[a_offset], lda, &b[
 		b_offset], ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, 
 		info, (ftnlen)1);
+#line 407 "TD04AD.f"
 	if (mplim != 1) {
 
 /*           Also, retranspose U(s) if this is non-scalar. */
 
+#line 411 "TD04AD.f"
 	    i__1 = kdcoef;
+#line 411 "TD04AD.f"
 	    for (k = 1; k <= i__1; ++k) {
 
+#line 413 "TD04AD.f"
 		i__2 = jstop;
+#line 413 "TD04AD.f"
 		for (j = 1; j <= i__2; ++j) {
+#line 414 "TD04AD.f"
 		    i__3 = mplim - j;
+#line 414 "TD04AD.f"
 		    dswap_(&i__3, &ucoeff[j + 1 + (j + k * ucoeff_dim2) * 
 			    ucoeff_dim1], &c__1, &ucoeff[j + (j + 1 + k * 
 			    ucoeff_dim2) * ucoeff_dim1], lduco1);
+#line 416 "TD04AD.f"
 /* L60: */
+#line 416 "TD04AD.f"
 		}
 
+#line 418 "TD04AD.f"
 /* L70: */
+#line 418 "TD04AD.f"
 	    }
 
+#line 420 "TD04AD.f"
 	}
+#line 421 "TD04AD.f"
     }
 
+#line 423 "TD04AD.f"
     return 0;
 /* *** Last line of TD04AD *** */
 } /* td04ad_ */

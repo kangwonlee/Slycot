@@ -1,3 +1,4 @@
+#line 1 "MB02ND.f"
 /* MB02ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02ND.f"
 /* Table of constant values */
 
 static doublereal c_b4 = 0.;
@@ -486,113 +488,199 @@ static doublereal c_b85 = -1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 416 "MB02ND.f"
     /* Parameter adjustments */
+#line 416 "MB02ND.f"
     c_dim1 = *ldc;
+#line 416 "MB02ND.f"
     c_offset = 1 + c_dim1;
+#line 416 "MB02ND.f"
     c__ -= c_offset;
+#line 416 "MB02ND.f"
     x_dim1 = *ldx;
+#line 416 "MB02ND.f"
     x_offset = 1 + x_dim1;
+#line 416 "MB02ND.f"
     x -= x_offset;
+#line 416 "MB02ND.f"
     --q;
+#line 416 "MB02ND.f"
     --inul;
+#line 416 "MB02ND.f"
     --iwork;
+#line 416 "MB02ND.f"
     --dwork;
+#line 416 "MB02ND.f"
     --bwork;
+#line 416 "MB02ND.f"
 
+#line 416 "MB02ND.f"
     /* Function Body */
+#line 416 "MB02ND.f"
     *iwarn = 0;
+#line 417 "MB02ND.f"
     *info = 0;
+#line 418 "MB02ND.f"
     nl = *n + *l;
+#line 419 "MB02ND.f"
     k = max(*m,nl);
+#line 420 "MB02ND.f"
     p = min(*m,nl);
+#line 421 "MB02ND.f"
     if (*m >= nl) {
+#line 422 "MB02ND.f"
 	lw = nl * (nl - 1) / 2;
+#line 423 "MB02ND.f"
     } else {
+#line 424 "MB02ND.f"
 	lw = *m * nl - *m * (*m - 1) / 2;
+#line 425 "MB02ND.f"
     }
 /* Computing MAX */
 /* Computing MAX */
+#line 426 "MB02ND.f"
     i__3 = nl, i__4 = *l * 3;
+#line 426 "MB02ND.f"
     i__1 = nl * 6 - 5, i__2 = *l * *l + max(i__3,i__4);
+#line 426 "MB02ND.f"
     jv = p + lw + max(i__1,i__2);
 
 /*     Test the input scalar arguments. */
 
+#line 430 "MB02ND.f"
     if (*m < 0) {
+#line 431 "MB02ND.f"
 	*info = -1;
+#line 432 "MB02ND.f"
     } else if (*n < 0) {
+#line 433 "MB02ND.f"
 	*info = -2;
+#line 434 "MB02ND.f"
     } else if (*l < 0) {
+#line 435 "MB02ND.f"
 	*info = -3;
+#line 436 "MB02ND.f"
     } else if (*rank > min(*m,*n)) {
+#line 437 "MB02ND.f"
 	*info = -4;
+#line 438 "MB02ND.f"
     } else if (*rank < 0 && *theta < 0.) {
+#line 439 "MB02ND.f"
 	*info = -5;
+#line 440 "MB02ND.f"
     } else if (*ldc < max(1,k)) {
+#line 441 "MB02ND.f"
 	*info = -7;
+#line 442 "MB02ND.f"
     } else if (*ldx < max(1,*n)) {
+#line 443 "MB02ND.f"
 	*info = -9;
+#line 444 "MB02ND.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 444 "MB02ND.f"
 	i__1 = 2, i__2 = k + (p << 1), i__1 = max(i__1,i__2);
+#line 444 "MB02ND.f"
 	if (*ldwork < max(i__1,jv)) {
+#line 445 "MB02ND.f"
 	    *info = -16;
+#line 446 "MB02ND.f"
 	}
+#line 446 "MB02ND.f"
     }
 
+#line 448 "MB02ND.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 452 "MB02ND.f"
 	i__1 = -(*info);
+#line 452 "MB02ND.f"
 	xerbla_("MB02ND", &i__1, (ftnlen)6);
+#line 453 "MB02ND.f"
 	return 0;
+#line 454 "MB02ND.f"
     }
 
 /*     Quick return if possible. */
 
+#line 458 "MB02ND.f"
     if (min(*m,nl) == 0) {
+#line 459 "MB02ND.f"
 	if (*m == 0) {
+#line 460 "MB02ND.f"
 	    dlaset_("Full", &nl, &nl, &c_b4, &c_b5, &c__[c_offset], ldc, (
 		    ftnlen)4);
+#line 461 "MB02ND.f"
 	    dlaset_("Full", n, l, &c_b4, &c_b4, &x[x_offset], ldx, (ftnlen)4);
 
+#line 463 "MB02ND.f"
 	    i__1 = nl;
+#line 463 "MB02ND.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 464 "MB02ND.f"
 		inul[i__] = TRUE_;
+#line 465 "MB02ND.f"
 /* L10: */
+#line 465 "MB02ND.f"
 	    }
 
+#line 467 "MB02ND.f"
 	}
+#line 468 "MB02ND.f"
 	if (*rank >= 0) {
+#line 468 "MB02ND.f"
 	    *theta = 0.;
+#line 468 "MB02ND.f"
 	}
+#line 470 "MB02ND.f"
 	*rank = 0;
+#line 471 "MB02ND.f"
 	dwork[1] = 2.;
+#line 472 "MB02ND.f"
 	dwork[2] = 1.;
+#line 473 "MB02ND.f"
 	return 0;
+#line 474 "MB02ND.f"
     }
 
+#line 476 "MB02ND.f"
     wrkopt = 2;
+#line 477 "MB02ND.f"
     n1 = *n + 1;
 
+#line 479 "MB02ND.f"
     eps = dlamch_("Precision", (ftnlen)9);
+#line 480 "MB02ND.f"
     lfirst = TRUE_;
 
 /*     Initializations. */
 
+#line 484 "MB02ND.f"
     i__1 = p;
+#line 484 "MB02ND.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 485 "MB02ND.f"
 	inul[i__] = FALSE_;
+#line 486 "MB02ND.f"
 	bwork[i__] = FALSE_;
+#line 487 "MB02ND.f"
 /* L20: */
+#line 487 "MB02ND.f"
     }
 
+#line 489 "MB02ND.f"
     i__1 = nl;
+#line 489 "MB02ND.f"
     for (i__ = p + 1; i__ <= i__1; ++i__) {
+#line 490 "MB02ND.f"
 	inul[i__] = TRUE_;
+#line 491 "MB02ND.f"
 	bwork[i__] = FALSE_;
+#line 492 "MB02ND.f"
 /* L40: */
+#line 492 "MB02ND.f"
     }
 
 /*     Subroutine MB02ND solves a set of linear equations by a Total */
@@ -610,30 +698,47 @@ static doublereal c_b85 = -1.;
 /*     following subroutine, as returned by ILAENV.) */
 
 /* Computing MAX */
+#line 508 "MB02ND.f"
     i__1 = nl, i__2 = ilaenv_(&c__6, "DGESVD", "NN", m, &nl, &c__0, &c__0, (
 	    ftnlen)6, (ftnlen)2);
+#line 508 "MB02ND.f"
     if (*m >= max(i__1,i__2)) {
 
 /*        Workspace: need   2*(N+L), */
 /*                   prefer N+L + (N+L)*NB. */
 
+#line 515 "MB02ND.f"
 	itauq = 1;
+#line 516 "MB02ND.f"
 	jwork = itauq + nl;
+#line 517 "MB02ND.f"
 	i__1 = *ldwork - jwork + 1;
+#line 517 "MB02ND.f"
 	dgeqrf_(m, &nl, &c__[c_offset], ldc, &dwork[itauq], &dwork[jwork], &
 		i__1, &ifail);
 /* Computing MAX */
+#line 519 "MB02ND.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 519 "MB02ND.f"
 	wrkopt = max(i__1,i__2);
+#line 520 "MB02ND.f"
 	if (nl > 1) {
+#line 520 "MB02ND.f"
 	    i__1 = nl - 1;
+#line 520 "MB02ND.f"
 	    i__2 = nl - 1;
+#line 520 "MB02ND.f"
 	    dlaset_("Lower", &i__1, &i__2, &c_b4, &c_b4, &c__[c_dim1 + 2], 
 		    ldc, (ftnlen)5);
+#line 520 "MB02ND.f"
 	}
+#line 522 "MB02ND.f"
 	mnl = nl;
+#line 523 "MB02ND.f"
     } else {
+#line 524 "MB02ND.f"
 	mnl = *m;
+#line 525 "MB02ND.f"
     }
 
 /*     1.b): Transform C (or R) into bidiagonal form Q using Householder */
@@ -641,33 +746,53 @@ static doublereal c_b85 = -1.;
 /*     Workspace: need   2*min(M,N+L) + max(M,N+L), */
 /*                prefer 2*min(M,N+L) + (M+N+L)*NB. */
 
+#line 532 "MB02ND.f"
     itaup = 1;
+#line 533 "MB02ND.f"
     itauq = itaup + p;
+#line 534 "MB02ND.f"
     jwork = itauq + p;
+#line 535 "MB02ND.f"
     i__1 = *ldwork - jwork + 1;
+#line 535 "MB02ND.f"
     dgebrd_(&mnl, &nl, &c__[c_offset], ldc, &q[1], &q[p + 1], &dwork[itauq], &
 	    dwork[itaup], &dwork[jwork], &i__1, &ifail);
 /* Computing MAX */
+#line 537 "MB02ND.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 537 "MB02ND.f"
     wrkopt = max(i__1,i__2);
 
 /*     If the matrix is lower bidiagonal, rotate to be upper bidiagonal */
 /*     by applying Givens rotations on the left. */
 
+#line 542 "MB02ND.f"
     if (*m < nl) {
+#line 543 "MB02ND.f"
 	ioff = 0;
 
+#line 545 "MB02ND.f"
 	i__1 = p - 1;
+#line 545 "MB02ND.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 546 "MB02ND.f"
 	    dlartg_(&q[i__], &q[p + i__], &cs, &sn, &temp);
+#line 547 "MB02ND.f"
 	    q[i__] = temp;
+#line 548 "MB02ND.f"
 	    q[p + i__] = sn * q[i__ + 1];
+#line 549 "MB02ND.f"
 	    q[i__ + 1] = cs * q[i__ + 1];
+#line 550 "MB02ND.f"
 /* L60: */
+#line 550 "MB02ND.f"
 	}
 
+#line 552 "MB02ND.f"
     } else {
+#line 553 "MB02ND.f"
 	ioff = 1;
+#line 554 "MB02ND.f"
     }
 
 /*     Store the Householder transformations performed onto the rows of C */
@@ -677,48 +802,73 @@ static doublereal c_b85 = -1.;
 /*                prefer LDW = min(M,N+L) + (N+L)**2,        if M >= N+L, */
 /*                       LDW = min(M,N+L) + M*(N+L),         if M <  N+L. */
 
+#line 563 "MB02ND.f"
     ihoush = itauq;
+#line 564 "MB02ND.f"
     mc = nl - ioff;
+#line 565 "MB02ND.f"
     kf = ihoush + p * nl;
 /* Computing MAX */
 /* Computing 2nd power */
+#line 566 "MB02ND.f"
     i__3 = nl;
 /* Computing MAX */
+#line 566 "MB02ND.f"
     i__4 = nl, i__5 = *l * 3;
+#line 566 "MB02ND.f"
     i__1 = (*n + *l) * 6 - 5, i__2 = i__3 * i__3 + max(i__4,i__5) - 1;
+#line 566 "MB02ND.f"
     sufwrk = *ldwork >= kf + max(i__1,i__2);
+#line 568 "MB02ND.f"
     if (sufwrk) {
 
 /*        Enough workspace for a fast algorithm. */
 
+#line 572 "MB02ND.f"
 	dlacpy_("Upper", &p, &nl, &c__[c_offset], ldc, &dwork[ihoush], &p, (
 		ftnlen)5);
+#line 573 "MB02ND.f"
 	kj = kf;
 /* Computing MAX */
+#line 574 "MB02ND.f"
 	i__1 = wrkopt, i__2 = kf - 1;
+#line 574 "MB02ND.f"
 	wrkopt = max(i__1,i__2);
+#line 575 "MB02ND.f"
     } else {
 
 /*        Not enough workspace for a fast algorithm. */
 
+#line 579 "MB02ND.f"
 	kj = ihoush;
 
+#line 581 "MB02ND.f"
 	i__1 = min(p,mc);
+#line 581 "MB02ND.f"
 	for (nj = 1; nj <= i__1; ++nj) {
+#line 582 "MB02ND.f"
 	    j = mc - nj + 1;
+#line 583 "MB02ND.f"
 	    dcopy_(&j, &c__[nj + (nj + ioff) * c_dim1], ldc, &dwork[kj], &
 		    c__1);
+#line 584 "MB02ND.f"
 	    kj += j;
+#line 585 "MB02ND.f"
 /* L80: */
+#line 585 "MB02ND.f"
 	}
 
+#line 587 "MB02ND.f"
     }
 
 /*     1.c): Initialize the right singular base matrix V with the */
 /*           identity matrix (V overwrites C). */
 
+#line 592 "MB02ND.f"
     dlaset_("Full", &nl, &nl, &c_b4, &c_b5, &c__[c_offset], ldc, (ftnlen)4);
+#line 593 "MB02ND.f"
     jv = kj;
+#line 594 "MB02ND.f"
     iwarm = 0;
 
 /*     REPEAT */
@@ -732,41 +882,64 @@ static doublereal c_b85 = -1.;
 /*     the desired right singular subspace. */
 /*     Workspace: LDW + 6*(N+L)-5. */
 
+#line 607 "MB02ND.f"
 L100:
+#line 608 "MB02ND.f"
     jwork = jv;
+#line 609 "MB02ND.f"
     i__1 = *ldwork - jwork + 1;
+#line 609 "MB02ND.f"
     mb04yd_("No U", "Update V", &p, &nl, rank, theta, &q[1], &q[p + 1], dummy,
 	     &c__1, &c__[c_offset], ldc, &inul[1], tol, reltol, &dwork[jwork],
 	     &i__1, iwarn, info, (ftnlen)4, (ftnlen)8);
 /* Computing MAX */
+#line 612 "MB02ND.f"
     i__1 = wrkopt, i__2 = jwork + nl * 6 - 6;
+#line 612 "MB02ND.f"
     wrkopt = max(i__1,i__2);
 
+#line 614 "MB02ND.f"
     *iwarn = max(*iwarn,iwarm);
+#line 615 "MB02ND.f"
     if (*info > 0) {
+#line 615 "MB02ND.f"
 	return 0;
+#line 615 "MB02ND.f"
     }
 
 /*     Set pointers to the selected base vectors in the right singular */
 /*     matrix of C. */
 
+#line 621 "MB02ND.f"
     k = 0;
 
+#line 623 "MB02ND.f"
     i__1 = nl;
+#line 623 "MB02ND.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 624 "MB02ND.f"
 	if (inul[i__]) {
+#line 625 "MB02ND.f"
 	    ++k;
+#line 626 "MB02ND.f"
 	    iwork[k] = i__;
+#line 627 "MB02ND.f"
 	}
+#line 628 "MB02ND.f"
 /* L120: */
+#line 628 "MB02ND.f"
     }
 
+#line 630 "MB02ND.f"
     if (k < *l) {
 
 /*        Rank of the TLS approximation is larger than min(M,N). */
 
+#line 634 "MB02ND.f"
 	*info = 2;
+#line 635 "MB02ND.f"
 	return 0;
+#line 636 "MB02ND.f"
     }
 
 /*     Step 3: Back transformation phase. */
@@ -777,80 +950,132 @@ L100:
 /*     by INUL(I) = .TRUE.). Already transformed vectors are those for */
 /*     which BWORK(I) = .TRUE.. */
 
+#line 646 "MB02ND.f"
     kf = k;
+#line 647 "MB02ND.f"
     if (sufwrk && lfirst) {
 
 /*        Enough workspace for a fast algorithm and first pass. */
 
+#line 651 "MB02ND.f"
 	ij = jv;
 
+#line 653 "MB02ND.f"
 	i__1 = k;
+#line 653 "MB02ND.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 654 "MB02ND.f"
 	    dcopy_(&nl, &c__[iwork[j] * c_dim1 + 1], &c__1, &dwork[ij], &c__1)
 		    ;
+#line 655 "MB02ND.f"
 	    ij += nl;
+#line 656 "MB02ND.f"
 /* L140: */
+#line 656 "MB02ND.f"
 	}
 
 /*        Workspace: need   LDW + (N+L)*K + K, */
 /*                   prefer LDW + (N+L)*K + K*NB. */
 
+#line 661 "MB02ND.f"
 	ij = jv;
+#line 662 "MB02ND.f"
 	jwork = ij + nl * k;
+#line 663 "MB02ND.f"
 	i__1 = *ldwork - jwork + 1;
+#line 663 "MB02ND.f"
 	dormbr_("P vectors", "Left", "No transpose", &nl, &k, &mnl, &dwork[
 		ihoush], &p, &dwork[itaup], &dwork[ij], &nl, &dwork[jwork], &
 		i__1, &ifail, (ftnlen)9, (ftnlen)4, (ftnlen)12);
 /* Computing MAX */
+#line 666 "MB02ND.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 666 "MB02ND.f"
 	wrkopt = max(i__1,i__2);
 
+#line 668 "MB02ND.f"
 	i__1 = nl;
+#line 668 "MB02ND.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 669 "MB02ND.f"
 	    if (inul[i__] && ! bwork[i__]) {
+#line 669 "MB02ND.f"
 		bwork[i__] = TRUE_;
+#line 669 "MB02ND.f"
 	    }
+#line 671 "MB02ND.f"
 /* L160: */
+#line 671 "MB02ND.f"
 	}
 
+#line 673 "MB02ND.f"
     } else {
 
 /*        Not enough workspace for a fast algorithm or subsequent passes. */
 
+#line 677 "MB02ND.f"
 	i__1 = nl;
+#line 677 "MB02ND.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 678 "MB02ND.f"
 	    if (inul[i__] && ! bwork[i__]) {
+#line 679 "MB02ND.f"
 		kj = jv;
 
+#line 681 "MB02ND.f"
 		for (nj = min(p,mc); nj >= 1; --nj) {
+#line 682 "MB02ND.f"
 		    j = mc - nj + 1;
+#line 683 "MB02ND.f"
 		    kj -= j;
+#line 684 "MB02ND.f"
 		    first = dwork[kj];
+#line 685 "MB02ND.f"
 		    dwork[kj] = 1.;
+#line 686 "MB02ND.f"
 		    dlarf_("Left", &j, &c__1, &dwork[kj], &c__1, &dwork[itaup 
 			    + nj - 1], &c__[nj + ioff + i__ * c_dim1], ldc, &
 			    dwork[jwork], (ftnlen)4);
+#line 689 "MB02ND.f"
 		    dwork[kj] = first;
+#line 690 "MB02ND.f"
 /* L170: */
+#line 690 "MB02ND.f"
 		}
 
+#line 692 "MB02ND.f"
 		bwork[i__] = TRUE_;
+#line 693 "MB02ND.f"
 	    }
+#line 694 "MB02ND.f"
 /* L180: */
+#line 694 "MB02ND.f"
 	}
+#line 695 "MB02ND.f"
     }
 
+#line 697 "MB02ND.f"
     if (*rank <= 0) {
+#line 697 "MB02ND.f"
 	*rank = 0;
+#line 697 "MB02ND.f"
     }
+#line 699 "MB02ND.f"
     if (min(*rank,*l) == 0) {
+#line 700 "MB02ND.f"
 	if (sufwrk && lfirst) {
+#line 700 "MB02ND.f"
 	    dlacpy_("Full", &nl, &k, &dwork[jv], &nl, &c__[c_offset], ldc, (
 		    ftnlen)4);
+#line 700 "MB02ND.f"
 	}
+#line 702 "MB02ND.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 703 "MB02ND.f"
 	dwork[2] = 1.;
+#line 704 "MB02ND.f"
 	return 0;
+#line 705 "MB02ND.f"
     }
 
 /*     Step 4: Compute matrices F and Y */
@@ -864,6 +1089,7 @@ L100:
 /*     lowered, because the already created zero pattern of the last */
 /*     L rows of V2 matrix is not exploited. */
 
+#line 718 "MB02ND.f"
     if (sufwrk && lfirst) {
 
 /*        Enough workspace for a fast algorithm and first pass. */
@@ -871,114 +1097,185 @@ L100:
 /*                   prefer LDW1 + L + L*NB, where */
 /*                          LDW1 = LDW + (N+L)*K; */
 
+#line 725 "MB02ND.f"
 	itauq = jwork;
+#line 726 "MB02ND.f"
 	jwork = itauq + *l;
+#line 727 "MB02ND.f"
 	i__1 = *ldwork - jwork + 1;
+#line 727 "MB02ND.f"
 	dgerqf_(l, &k, &dwork[jv + *n], &nl, &dwork[itauq], &dwork[jwork], &
 		i__1, info);
 /* Computing MAX */
+#line 729 "MB02ND.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 729 "MB02ND.f"
 	wrkopt = max(i__1,i__2);
 
 /*        Workspace: need   LDW1 + N+L, */
 /*                   prefer LDW1 + L + N*NB. */
 
+#line 734 "MB02ND.f"
 	i__1 = *ldwork - jwork + 1;
+#line 734 "MB02ND.f"
 	dormrq_("Right", "Transpose", n, &k, l, &dwork[jv + *n], &nl, &dwork[
 		itauq], &dwork[jv], &nl, &dwork[jwork], &i__1, info, (ftnlen)
 		5, (ftnlen)9);
 /* Computing MAX */
+#line 737 "MB02ND.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 737 "MB02ND.f"
 	wrkopt = max(i__1,i__2);
 
+#line 739 "MB02ND.f"
 	jf = jv + nl * (k - *l) + *n;
+#line 740 "MB02ND.f"
 	ldf = nl;
+#line 741 "MB02ND.f"
 	jwork = jf + ldf * *l - *n;
+#line 742 "MB02ND.f"
 	i__1 = k - *l;
+#line 742 "MB02ND.f"
 	dlaset_("Full", l, &i__1, &c_b4, &c_b4, &dwork[jv + *n], &ldf, (
 		ftnlen)4);
+#line 743 "MB02ND.f"
 	if (*l > 1) {
+#line 743 "MB02ND.f"
 	    i__1 = *l - 1;
+#line 743 "MB02ND.f"
 	    i__2 = *l - 1;
+#line 743 "MB02ND.f"
 	    dlaset_("Lower", &i__1, &i__2, &c_b4, &c_b4, &dwork[jf + 1], &ldf,
 		     (ftnlen)5);
+#line 743 "MB02ND.f"
 	}
+#line 746 "MB02ND.f"
 	ij = jv;
 
+#line 748 "MB02ND.f"
 	i__1 = k;
+#line 748 "MB02ND.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 749 "MB02ND.f"
 	    dcopy_(&nl, &dwork[ij], &c__1, &c__[iwork[j] * c_dim1 + 1], &c__1)
 		    ;
+#line 750 "MB02ND.f"
 	    ij += nl;
+#line 751 "MB02ND.f"
 /* L200: */
+#line 751 "MB02ND.f"
 	}
 
+#line 753 "MB02ND.f"
     } else {
 
 /*        Not enough workspace for a fast algorithm or subsequent passes. */
 /*        Workspace: LDW2 + N+L, where LDW2 = LDW + L*L. */
 
+#line 758 "MB02ND.f"
 	i__ = nl;
+#line 759 "MB02ND.f"
 	jf = jv;
+#line 760 "MB02ND.f"
 	ldf = *l;
+#line 761 "MB02ND.f"
 	jwork = jf + ldf * *l;
 /* Computing MAX */
+#line 762 "MB02ND.f"
 	i__1 = wrkopt, i__2 = jwork + nl - 1;
+#line 762 "MB02ND.f"
 	wrkopt = max(i__1,i__2);
 
 /*        WHILE ( ( K >= 1 ) .AND. ( I > N ) ) DO */
+#line 765 "MB02ND.f"
 L220:
+#line 766 "MB02ND.f"
 	if (k >= 1 && i__ > *n) {
 
+#line 768 "MB02ND.f"
 	    i__1 = k;
+#line 768 "MB02ND.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 769 "MB02ND.f"
 		dwork[jwork + j - 1] = c__[i__ + iwork[j] * c_dim1];
+#line 770 "MB02ND.f"
 /* L240: */
+#line 770 "MB02ND.f"
 	    }
 
 /*           Compute Householder transformation. */
 
+#line 774 "MB02ND.f"
 	    dlarfg_(&k, &dwork[jwork + k - 1], &dwork[jwork], &c__1, &temp);
+#line 775 "MB02ND.f"
 	    c__[i__ + iwork[k] * c_dim1] = dwork[jwork + k - 1];
+#line 776 "MB02ND.f"
 	    if (temp != 0.) {
 
 /*              Apply Householder transformation onto the selected base */
 /*              vectors. */
 
+#line 781 "MB02ND.f"
 		i__1 = i__ - 1;
+#line 781 "MB02ND.f"
 		for (i1 = 1; i1 <= i__1; ++i1) {
+#line 782 "MB02ND.f"
 		    inprod = c__[i1 + iwork[k] * c_dim1];
 
+#line 784 "MB02ND.f"
 		    i__2 = k - 1;
+#line 784 "MB02ND.f"
 		    for (j = 1; j <= i__2; ++j) {
+#line 785 "MB02ND.f"
 			inprod += dwork[jwork + j - 1] * c__[i1 + iwork[j] * 
 				c_dim1];
+#line 786 "MB02ND.f"
 /* L260: */
+#line 786 "MB02ND.f"
 		    }
 
+#line 788 "MB02ND.f"
 		    hh = inprod * temp;
+#line 789 "MB02ND.f"
 		    c__[i1 + iwork[k] * c_dim1] -= hh;
 
+#line 791 "MB02ND.f"
 		    i__2 = k - 1;
+#line 791 "MB02ND.f"
 		    for (j = 1; j <= i__2; ++j) {
+#line 792 "MB02ND.f"
 			j1 = iwork[j];
+#line 793 "MB02ND.f"
 			c__[i1 + j1 * c_dim1] -= dwork[jwork + j - 1] * hh;
+#line 794 "MB02ND.f"
 			c__[i__ + j1 * c_dim1] = 0.;
+#line 795 "MB02ND.f"
 /* L280: */
+#line 795 "MB02ND.f"
 		    }
 
+#line 797 "MB02ND.f"
 /* L300: */
+#line 797 "MB02ND.f"
 		}
 
+#line 799 "MB02ND.f"
 	    }
+#line 800 "MB02ND.f"
 	    i__1 = i__ - *n;
+#line 800 "MB02ND.f"
 	    dcopy_(&i__1, &c__[n1 + iwork[k] * c_dim1], &c__1, &dwork[jf + (
 		    i__ - *n - 1) * *l], &c__1);
+#line 801 "MB02ND.f"
 	    --k;
+#line 802 "MB02ND.f"
 	    --i__;
+#line 803 "MB02ND.f"
 	    goto L220;
+#line 804 "MB02ND.f"
 	}
 /*        END WHILE 220 */
+#line 806 "MB02ND.f"
     }
 
 /*     Estimate the reciprocal condition number of the matrix F. */
@@ -986,94 +1283,153 @@ L220:
 /*     Workspace: LDW1 + 3*L or */
 /*                LDW2 + 3*L. */
 
+#line 813 "MB02ND.f"
     dtrcon_("1-norm", "Upper", "Non-unit", l, &dwork[jf], &ldf, &rcond, &
 	    dwork[jwork], &iwork[kf + 1], info, (ftnlen)6, (ftnlen)5, (ftnlen)
 	    8);
 /* Computing MAX */
+#line 815 "MB02ND.f"
     i__1 = wrkopt, i__2 = jwork + *l * 3 - 1;
+#line 815 "MB02ND.f"
     wrkopt = max(i__1,i__2);
 
+#line 817 "MB02ND.f"
     i__1 = *l;
+#line 817 "MB02ND.f"
     for (j = 1; j <= i__1; ++j) {
+#line 818 "MB02ND.f"
 	dcopy_(n, &c__[iwork[kf - *l + j] * c_dim1 + 1], &c__1, &x[j * x_dim1 
 		+ 1], &c__1);
+#line 819 "MB02ND.f"
 /* L320: */
+#line 819 "MB02ND.f"
     }
 
+#line 821 "MB02ND.f"
     fnorm = dlantr_("1-norm", "Upper", "Non-unit", l, l, &dwork[jf], &ldf, &
 	    dwork[jwork], (ftnlen)6, (ftnlen)5, (ftnlen)8);
+#line 823 "MB02ND.f"
     if (rcond <= eps * fnorm) {
+#line 824 "MB02ND.f"
 	--(*rank);
+#line 825 "MB02ND.f"
 	goto L340;
+#line 826 "MB02ND.f"
     }
+#line 827 "MB02ND.f"
     if (fnorm <= eps * dlange_("1-norm", n, l, &x[x_offset], ldx, &dwork[
 	    jwork], (ftnlen)6)) {
+#line 829 "MB02ND.f"
 	*rank -= *l;
+#line 830 "MB02ND.f"
 	goto L340;
+#line 831 "MB02ND.f"
     } else {
+#line 832 "MB02ND.f"
 	goto L400;
+#line 833 "MB02ND.f"
     }
 
+#line 835 "MB02ND.f"
 L340:
+#line 836 "MB02ND.f"
     iwarm = 2;
+#line 837 "MB02ND.f"
     *theta = -1.;
+#line 838 "MB02ND.f"
     if (sufwrk && lfirst) {
 
 /*           Rearrange the stored Householder transformations for */
 /*           subsequent passes, taking care to avoid overwriting. */
 
+#line 843 "MB02ND.f"
 	if (p < nl) {
+#line 844 "MB02ND.f"
 	    kj = ihoush + nl * (nl - 1);
+#line 845 "MB02ND.f"
 	    mj = ihoush + p * (nl - 1);
 
+#line 847 "MB02ND.f"
 	    i__1 = nl;
+#line 847 "MB02ND.f"
 	    for (nj = 1; nj <= i__1; ++nj) {
+#line 848 "MB02ND.f"
 		for (j = p - 1; j >= 0; --j) {
+#line 849 "MB02ND.f"
 		    dwork[kj + j] = dwork[mj + j];
+#line 850 "MB02ND.f"
 /* L350: */
+#line 850 "MB02ND.f"
 		}
+#line 851 "MB02ND.f"
 		kj -= nl;
+#line 852 "MB02ND.f"
 		mj -= p;
+#line 853 "MB02ND.f"
 /* L360: */
+#line 853 "MB02ND.f"
 	    }
 
+#line 855 "MB02ND.f"
 	}
+#line 856 "MB02ND.f"
 	kj = ihoush;
+#line 857 "MB02ND.f"
 	mj = ihoush + nl * ioff;
 
+#line 859 "MB02ND.f"
 	i__1 = min(p,mc);
+#line 859 "MB02ND.f"
 	for (nj = 1; nj <= i__1; ++nj) {
+#line 860 "MB02ND.f"
 	    i__2 = mc - nj;
+#line 860 "MB02ND.f"
 	    for (j = 0; j <= i__2; ++j) {
+#line 861 "MB02ND.f"
 		dwork[kj] = dwork[mj + j * p];
+#line 862 "MB02ND.f"
 		++kj;
+#line 863 "MB02ND.f"
 /* L370: */
+#line 863 "MB02ND.f"
 	    }
+#line 864 "MB02ND.f"
 	    mj = mj + nl + 1;
+#line 865 "MB02ND.f"
 /* L380: */
+#line 865 "MB02ND.f"
 	}
 
+#line 867 "MB02ND.f"
 	jv = kj;
+#line 868 "MB02ND.f"
 	lfirst = FALSE_;
+#line 869 "MB02ND.f"
     }
+#line 870 "MB02ND.f"
     goto L100;
 /*     UNTIL ( F nonsingular, i.e., RCOND.GT.EPS*FNORM or */
 /*                                  FNORM.GT.EPS*norm(Y) ) */
+#line 873 "MB02ND.f"
 L400:
 
 /*     Step 5: Compute TLS solution. */
 /*             -------------------- */
 /*     Solve X F = -Y  by forward elimination  (F is upper triangular). */
 
+#line 879 "MB02ND.f"
     dtrsm_("Right", "Upper", "No transpose", "Non-unit", n, l, &c_b85, &dwork[
 	    jf], &ldf, &x[x_offset], ldx, (ftnlen)5, (ftnlen)5, (ftnlen)12, (
 	    ftnlen)8);
 
 /*     Set the optimal workspace and reciprocal condition number of F. */
 
+#line 884 "MB02ND.f"
     dwork[1] = (doublereal) wrkopt;
+#line 885 "MB02ND.f"
     dwork[2] = rcond;
 
+#line 887 "MB02ND.f"
     return 0;
 /* *** Last line of MB02ND *** */
 } /* mb02nd_ */

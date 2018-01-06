@@ -1,0 +1,15 @@
+extern int fb01vd_(integer *n, integer *m, integer *l, doublereal *p, integer *ldp, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *q, integer *ldq, doublereal *r__, integer *ldr, doublereal *k, integer *ldk, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: mb01rd_ 14 17 13 13 4 4 7 7 7 4 7 4 7 4 7 4 4 124 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dtrmm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: dlansy_ 7 8 13 13 4 7 4 7 124 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dpotrf_ 14 6 13 4 7 4 4 124 */
+/*:ref: dpocon_ 14 10 13 4 7 4 7 7 7 4 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dtrsm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */

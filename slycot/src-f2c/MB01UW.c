@@ -1,3 +1,4 @@
+#line 1 "MB01UW.f"
 /* MB01UW.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01UW.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -188,73 +190,126 @@ static integer c__0 = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 155 "MB01UW.f"
     /* Parameter adjustments */
+#line 155 "MB01UW.f"
     h_dim1 = *ldh;
+#line 155 "MB01UW.f"
     h_offset = 1 + h_dim1;
+#line 155 "MB01UW.f"
     h__ -= h_offset;
+#line 155 "MB01UW.f"
     a_dim1 = *lda;
+#line 155 "MB01UW.f"
     a_offset = 1 + a_dim1;
+#line 155 "MB01UW.f"
     a -= a_offset;
+#line 155 "MB01UW.f"
     --dwork;
+#line 155 "MB01UW.f"
 
+#line 155 "MB01UW.f"
     /* Function Body */
+#line 155 "MB01UW.f"
     *info = 0;
+#line 156 "MB01UW.f"
     lside = lsame_(side, "L", (ftnlen)1, (ftnlen)1);
+#line 157 "MB01UW.f"
     ltrans = lsame_(trans, "T", (ftnlen)1, (ftnlen)1) || lsame_(trans, "C", (
 	    ftnlen)1, (ftnlen)1);
 
+#line 159 "MB01UW.f"
     if (! lside && ! lsame_(side, "R", (ftnlen)1, (ftnlen)1)) {
+#line 160 "MB01UW.f"
 	*info = -1;
+#line 161 "MB01UW.f"
     } else if (! ltrans && ! lsame_(trans, "N", (ftnlen)1, (ftnlen)1)) {
+#line 162 "MB01UW.f"
 	*info = -2;
+#line 163 "MB01UW.f"
     } else if (*m < 0) {
+#line 164 "MB01UW.f"
 	*info = -3;
+#line 165 "MB01UW.f"
     } else if (*n < 0) {
+#line 166 "MB01UW.f"
 	*info = -4;
+#line 167 "MB01UW.f"
     } else if (*ldh < 1 || lside && *ldh < *m || ! lside && *ldh < *n) {
+#line 169 "MB01UW.f"
 	*info = -7;
+#line 170 "MB01UW.f"
     } else if (*lda < max(1,*m)) {
+#line 171 "MB01UW.f"
 	*info = -9;
+#line 172 "MB01UW.f"
     } else if (*ldwork < 0 || *alpha != 0. && min(*m,*n) > 0 && (lside && *
 	    ldwork < *m - 1 || ! lside && *ldwork < *n - 1)) {
+#line 176 "MB01UW.f"
 	*info = -11;
+#line 177 "MB01UW.f"
     }
 
+#line 179 "MB01UW.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 183 "MB01UW.f"
 	i__1 = -(*info);
+#line 183 "MB01UW.f"
 	xerbla_("MB01UW", &i__1, (ftnlen)6);
+#line 184 "MB01UW.f"
 	return 0;
+#line 185 "MB01UW.f"
     }
 
 /*     Quick return, if possible. */
 
+#line 189 "MB01UW.f"
     if (min(*m,*n) == 0) {
+#line 190 "MB01UW.f"
 	return 0;
+#line 191 "MB01UW.f"
     } else if (lside) {
+#line 192 "MB01UW.f"
 	if (*m == 1) {
+#line 193 "MB01UW.f"
 	    d__1 = *alpha * h__[h_dim1 + 1];
+#line 193 "MB01UW.f"
 	    dscal_(n, &d__1, &a[a_offset], lda);
+#line 194 "MB01UW.f"
 	    return 0;
+#line 195 "MB01UW.f"
 	}
+#line 196 "MB01UW.f"
     } else {
+#line 197 "MB01UW.f"
 	if (*n == 1) {
+#line 198 "MB01UW.f"
 	    d__1 = *alpha * h__[h_dim1 + 1];
+#line 198 "MB01UW.f"
 	    dscal_(m, &d__1, &a[a_offset], &c__1);
+#line 199 "MB01UW.f"
 	    return 0;
+#line 200 "MB01UW.f"
 	}
+#line 201 "MB01UW.f"
     }
 
+#line 203 "MB01UW.f"
     if (*alpha == 0.) {
 
 /*        Set A to zero and return. */
 
+#line 207 "MB01UW.f"
 	dlaset_("Full", m, n, &c_b10, &c_b10, &a[a_offset], lda, (ftnlen)4);
+#line 208 "MB01UW.f"
 	return 0;
+#line 209 "MB01UW.f"
     }
 
+#line 211 "MB01UW.f"
     if (*ldwork >= *m * *n) {
 
 /*        Enough workspace for a fast BLAS 3 calculation. */
@@ -263,7 +318,9 @@ static integer c__0 = 0;
 /*          A : = alpha*A * op( triu( H ) ), */
 /*        involving the upper triangle of H. */
 
+#line 219 "MB01UW.f"
 	dlacpy_("Full", m, n, &a[a_offset], lda, &dwork[1], m, (ftnlen)4);
+#line 220 "MB01UW.f"
 	dtrmm_(side, "Upper", trans, "Non-unit", m, n, alpha, &h__[h_offset], 
 		ldh, &a[a_offset], lda, (ftnlen)1, (ftnlen)5, (ftnlen)1, (
 		ftnlen)8);
@@ -273,225 +330,371 @@ static integer c__0 = 0;
 /*        corresponding elements in the first column of H, and the */
 /*        calculations are organized for column operations. */
 
+#line 228 "MB01UW.f"
 	if (lside) {
+#line 229 "MB01UW.f"
 	    if (*m > 2) {
+#line 229 "MB01UW.f"
 		i__1 = *m - 2;
+#line 229 "MB01UW.f"
 		i__2 = *ldh + 1;
+#line 229 "MB01UW.f"
 		dswap_(&i__1, &h__[(h_dim1 << 1) + 3], &i__2, &h__[h_dim1 + 3]
 			, &c__1);
+#line 229 "MB01UW.f"
 	    }
+#line 231 "MB01UW.f"
 	    if (ltrans) {
+#line 232 "MB01UW.f"
 		jw = 1;
+#line 233 "MB01UW.f"
 		i__1 = *n;
+#line 233 "MB01UW.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 234 "MB01UW.f"
 		    ++jw;
+#line 235 "MB01UW.f"
 		    i__2 = *m - 1;
+#line 235 "MB01UW.f"
 		    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 236 "MB01UW.f"
 			a[i__ + j * a_dim1] += *alpha * h__[i__ + 1 + h_dim1] 
 				* dwork[jw];
+#line 238 "MB01UW.f"
 			++jw;
+#line 239 "MB01UW.f"
 /* L10: */
+#line 239 "MB01UW.f"
 		    }
+#line 240 "MB01UW.f"
 /* L20: */
+#line 240 "MB01UW.f"
 		}
+#line 241 "MB01UW.f"
 	    } else {
+#line 242 "MB01UW.f"
 		jw = 0;
+#line 243 "MB01UW.f"
 		i__1 = *n;
+#line 243 "MB01UW.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 244 "MB01UW.f"
 		    ++jw;
+#line 245 "MB01UW.f"
 		    i__2 = *m;
+#line 245 "MB01UW.f"
 		    for (i__ = 2; i__ <= i__2; ++i__) {
+#line 246 "MB01UW.f"
 			a[i__ + j * a_dim1] += *alpha * h__[i__ + h_dim1] * 
 				dwork[jw];
+#line 248 "MB01UW.f"
 			++jw;
+#line 249 "MB01UW.f"
 /* L30: */
+#line 249 "MB01UW.f"
 		    }
+#line 250 "MB01UW.f"
 /* L40: */
+#line 250 "MB01UW.f"
 		}
+#line 251 "MB01UW.f"
 	    }
+#line 252 "MB01UW.f"
 	    if (*m > 2) {
+#line 252 "MB01UW.f"
 		i__1 = *m - 2;
+#line 252 "MB01UW.f"
 		i__2 = *ldh + 1;
+#line 252 "MB01UW.f"
 		dswap_(&i__1, &h__[(h_dim1 << 1) + 3], &i__2, &h__[h_dim1 + 3]
 			, &c__1);
+#line 252 "MB01UW.f"
 	    }
 
+#line 255 "MB01UW.f"
 	} else {
 
+#line 257 "MB01UW.f"
 	    if (ltrans) {
+#line 258 "MB01UW.f"
 		jw = 1;
+#line 259 "MB01UW.f"
 		i__1 = *n - 1;
+#line 259 "MB01UW.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 260 "MB01UW.f"
 		    if (h__[j + 1 + j * h_dim1] != 0.) {
+#line 260 "MB01UW.f"
 			d__1 = *alpha * h__[j + 1 + j * h_dim1];
+#line 260 "MB01UW.f"
 			daxpy_(m, &d__1, &dwork[jw], &c__1, &a[(j + 1) * 
 				a_dim1 + 1], &c__1);
+#line 260 "MB01UW.f"
 		    }
+#line 263 "MB01UW.f"
 		    jw += *m;
+#line 264 "MB01UW.f"
 /* L50: */
+#line 264 "MB01UW.f"
 		}
+#line 265 "MB01UW.f"
 	    } else {
+#line 266 "MB01UW.f"
 		jw = *m + 1;
+#line 267 "MB01UW.f"
 		i__1 = *n - 1;
+#line 267 "MB01UW.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 268 "MB01UW.f"
 		    if (h__[j + 1 + j * h_dim1] != 0.) {
+#line 268 "MB01UW.f"
 			d__1 = *alpha * h__[j + 1 + j * h_dim1];
+#line 268 "MB01UW.f"
 			daxpy_(m, &d__1, &dwork[jw], &c__1, &a[j * a_dim1 + 1]
 				, &c__1);
+#line 268 "MB01UW.f"
 		    }
+#line 271 "MB01UW.f"
 		    jw += *m;
+#line 272 "MB01UW.f"
 /* L60: */
+#line 272 "MB01UW.f"
 		}
+#line 273 "MB01UW.f"
 	    }
+#line 274 "MB01UW.f"
 	}
 
+#line 276 "MB01UW.f"
     } else {
 
 /*        Use a BLAS 2 calculation. */
 
+#line 280 "MB01UW.f"
 	if (lside) {
+#line 281 "MB01UW.f"
 	    if (*m > 2) {
+#line 281 "MB01UW.f"
 		i__1 = *m - 2;
+#line 281 "MB01UW.f"
 		i__2 = *ldh + 1;
+#line 281 "MB01UW.f"
 		dswap_(&i__1, &h__[(h_dim1 << 1) + 3], &i__2, &h__[h_dim1 + 3]
 			, &c__1);
+#line 281 "MB01UW.f"
 	    }
+#line 283 "MB01UW.f"
 	    if (ltrans) {
+#line 284 "MB01UW.f"
 		i__1 = *n;
+#line 284 "MB01UW.f"
 		for (j = 1; j <= i__1; ++j) {
 
 /*                 Compute the contribution of the subdiagonal of H to */
 /*                 the j-th column of the product. */
 
+#line 289 "MB01UW.f"
 		    i__2 = *m - 1;
+#line 289 "MB01UW.f"
 		    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 290 "MB01UW.f"
 			dwork[i__] = h__[i__ + 1 + h_dim1] * a[i__ + 1 + j * 
 				a_dim1];
+#line 291 "MB01UW.f"
 /* L70: */
+#line 291 "MB01UW.f"
 		    }
 
 /*                 Multiply the upper triangle of H by the j-th column */
 /*                 of A, and add to the above result. */
 
+#line 296 "MB01UW.f"
 		    dtrmv_("Upper", trans, "Non-unit", m, &h__[h_offset], ldh,
 			     &a[j * a_dim1 + 1], &c__1, (ftnlen)5, (ftnlen)1, 
 			    (ftnlen)8);
+#line 298 "MB01UW.f"
 		    i__2 = *m - 1;
+#line 298 "MB01UW.f"
 		    daxpy_(&i__2, &c_b33, &dwork[1], &c__1, &a[j * a_dim1 + 1]
 			    , &c__1);
+#line 299 "MB01UW.f"
 /* L80: */
+#line 299 "MB01UW.f"
 		}
 
+#line 301 "MB01UW.f"
 	    } else {
+#line 302 "MB01UW.f"
 		i__1 = *n;
+#line 302 "MB01UW.f"
 		for (j = 1; j <= i__1; ++j) {
 
 /*                 Compute the contribution of the subdiagonal of H to */
 /*                 the j-th column of the product. */
 
+#line 307 "MB01UW.f"
 		    i__2 = *m - 1;
+#line 307 "MB01UW.f"
 		    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 308 "MB01UW.f"
 			dwork[i__] = h__[i__ + 1 + h_dim1] * a[i__ + j * 
 				a_dim1];
+#line 309 "MB01UW.f"
 /* L90: */
+#line 309 "MB01UW.f"
 		    }
 
 /*                 Multiply the upper triangle of H by the j-th column */
 /*                 of A, and add to the above result. */
 
+#line 314 "MB01UW.f"
 		    dtrmv_("Upper", trans, "Non-unit", m, &h__[h_offset], ldh,
 			     &a[j * a_dim1 + 1], &c__1, (ftnlen)5, (ftnlen)1, 
 			    (ftnlen)8);
+#line 316 "MB01UW.f"
 		    i__2 = *m - 1;
+#line 316 "MB01UW.f"
 		    daxpy_(&i__2, &c_b33, &dwork[1], &c__1, &a[j * a_dim1 + 2]
 			    , &c__1);
+#line 317 "MB01UW.f"
 /* L100: */
+#line 317 "MB01UW.f"
 		}
+#line 318 "MB01UW.f"
 	    }
+#line 319 "MB01UW.f"
 	    if (*m > 2) {
+#line 319 "MB01UW.f"
 		i__1 = *m - 2;
+#line 319 "MB01UW.f"
 		i__2 = *ldh + 1;
+#line 319 "MB01UW.f"
 		dswap_(&i__1, &h__[(h_dim1 << 1) + 3], &i__2, &h__[h_dim1 + 3]
 			, &c__1);
+#line 319 "MB01UW.f"
 	    }
 
+#line 322 "MB01UW.f"
 	} else {
 
 /*           Below, row-wise calculations are used for A. */
 
+#line 326 "MB01UW.f"
 	    if (*n > 2) {
+#line 326 "MB01UW.f"
 		i__1 = *n - 2;
+#line 326 "MB01UW.f"
 		i__2 = *ldh + 1;
+#line 326 "MB01UW.f"
 		dswap_(&i__1, &h__[(h_dim1 << 1) + 3], &i__2, &h__[h_dim1 + 3]
 			, &c__1);
+#line 326 "MB01UW.f"
 	    }
+#line 328 "MB01UW.f"
 	    if (ltrans) {
+#line 329 "MB01UW.f"
 		i__1 = *m;
+#line 329 "MB01UW.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
 
 /*                 Compute the contribution of the subdiagonal of H to */
 /*                 the i-th row of the product. */
 
+#line 334 "MB01UW.f"
 		    i__2 = *n - 1;
+#line 334 "MB01UW.f"
 		    for (j = 1; j <= i__2; ++j) {
+#line 335 "MB01UW.f"
 			dwork[j] = a[i__ + j * a_dim1] * h__[j + 1 + h_dim1];
+#line 336 "MB01UW.f"
 /* L110: */
+#line 336 "MB01UW.f"
 		    }
 
 /*                 Multiply the i-th row of A by the upper triangle of H, */
 /*                 and add to the above result. */
 
+#line 341 "MB01UW.f"
 		    dtrmv_("Upper", "NoTranspose", "Non-unit", n, &h__[
 			    h_offset], ldh, &a[i__ + a_dim1], lda, (ftnlen)5, 
 			    (ftnlen)11, (ftnlen)8);
+#line 343 "MB01UW.f"
 		    i__2 = *n - 1;
+#line 343 "MB01UW.f"
 		    daxpy_(&i__2, &c_b33, &dwork[1], &c__1, &a[i__ + (a_dim1 
 			    << 1)], lda);
+#line 344 "MB01UW.f"
 /* L120: */
+#line 344 "MB01UW.f"
 		}
 
+#line 346 "MB01UW.f"
 	    } else {
+#line 347 "MB01UW.f"
 		i__1 = *m;
+#line 347 "MB01UW.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
 
 /*                 Compute the contribution of the subdiagonal of H to */
 /*                 the i-th row of the product. */
 
+#line 352 "MB01UW.f"
 		    i__2 = *n - 1;
+#line 352 "MB01UW.f"
 		    for (j = 1; j <= i__2; ++j) {
+#line 353 "MB01UW.f"
 			dwork[j] = a[i__ + (j + 1) * a_dim1] * h__[j + 1 + 
 				h_dim1];
+#line 354 "MB01UW.f"
 /* L130: */
+#line 354 "MB01UW.f"
 		    }
 
 /*                 Multiply the i-th row of A by the upper triangle of H, */
 /*                 and add to the above result. */
 
+#line 359 "MB01UW.f"
 		    dtrmv_("Upper", "Transpose", "Non-unit", n, &h__[h_offset]
 			    , ldh, &a[i__ + a_dim1], lda, (ftnlen)5, (ftnlen)
 			    9, (ftnlen)8);
+#line 361 "MB01UW.f"
 		    i__2 = *n - 1;
+#line 361 "MB01UW.f"
 		    daxpy_(&i__2, &c_b33, &dwork[1], &c__1, &a[i__ + a_dim1], 
 			    lda);
+#line 362 "MB01UW.f"
 /* L140: */
+#line 362 "MB01UW.f"
 		}
+#line 363 "MB01UW.f"
 	    }
+#line 364 "MB01UW.f"
 	    if (*n > 2) {
+#line 364 "MB01UW.f"
 		i__1 = *n - 2;
+#line 364 "MB01UW.f"
 		i__2 = *ldh + 1;
+#line 364 "MB01UW.f"
 		dswap_(&i__1, &h__[(h_dim1 << 1) + 3], &i__2, &h__[h_dim1 + 3]
 			, &c__1);
+#line 364 "MB01UW.f"
 	    }
 
+#line 367 "MB01UW.f"
 	}
 
 /*        Scale the result by alpha. */
 
+#line 371 "MB01UW.f"
 	if (*alpha != 1.) {
+#line 371 "MB01UW.f"
 	    dlascl_("General", &c__0, &c__0, &c_b33, alpha, m, n, &a[a_offset]
 		    , lda, info, (ftnlen)7);
+#line 371 "MB01UW.f"
 	}
+#line 374 "MB01UW.f"
     }
+#line 375 "MB01UW.f"
     return 0;
 /* *** Last line of MB01UW *** */
 } /* mb01uw_ */

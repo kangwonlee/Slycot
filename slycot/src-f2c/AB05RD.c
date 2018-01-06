@@ -1,3 +1,4 @@
+#line 1 "AB05RD.f"
 /* AB05RD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB05RD.f"
 /* Table of constant values */
 
 static doublereal c_b9 = 1.;
@@ -308,161 +310,275 @@ static doublereal c_b16 = 0.;
 
 /*     Check the input scalar arguments. */
 
+#line 281 "AB05RD.f"
     /* Parameter adjustments */
+#line 281 "AB05RD.f"
     a_dim1 = *lda;
+#line 281 "AB05RD.f"
     a_offset = 1 + a_dim1;
+#line 281 "AB05RD.f"
     a -= a_offset;
+#line 281 "AB05RD.f"
     b_dim1 = *ldb;
+#line 281 "AB05RD.f"
     b_offset = 1 + b_dim1;
+#line 281 "AB05RD.f"
     b -= b_offset;
+#line 281 "AB05RD.f"
     c_dim1 = *ldc;
+#line 281 "AB05RD.f"
     c_offset = 1 + c_dim1;
+#line 281 "AB05RD.f"
     c__ -= c_offset;
+#line 281 "AB05RD.f"
     d_dim1 = *ldd;
+#line 281 "AB05RD.f"
     d_offset = 1 + d_dim1;
+#line 281 "AB05RD.f"
     d__ -= d_offset;
+#line 281 "AB05RD.f"
     f_dim1 = *ldf;
+#line 281 "AB05RD.f"
     f_offset = 1 + f_dim1;
+#line 281 "AB05RD.f"
     f -= f_offset;
+#line 281 "AB05RD.f"
     k_dim1 = *ldk;
+#line 281 "AB05RD.f"
     k_offset = 1 + k_dim1;
+#line 281 "AB05RD.f"
     k -= k_offset;
+#line 281 "AB05RD.f"
     g_dim1 = *ldg;
+#line 281 "AB05RD.f"
     g_offset = 1 + g_dim1;
+#line 281 "AB05RD.f"
     g -= g_offset;
+#line 281 "AB05RD.f"
     h_dim1 = *ldh;
+#line 281 "AB05RD.f"
     h_offset = 1 + h_dim1;
+#line 281 "AB05RD.f"
     h__ -= h_offset;
+#line 281 "AB05RD.f"
     bc_dim1 = *ldbc;
+#line 281 "AB05RD.f"
     bc_offset = 1 + bc_dim1;
+#line 281 "AB05RD.f"
     bc -= bc_offset;
+#line 281 "AB05RD.f"
     cc_dim1 = *ldcc;
+#line 281 "AB05RD.f"
     cc_offset = 1 + cc_dim1;
+#line 281 "AB05RD.f"
     cc -= cc_offset;
+#line 281 "AB05RD.f"
     dc_dim1 = *lddc;
+#line 281 "AB05RD.f"
     dc_offset = 1 + dc_dim1;
+#line 281 "AB05RD.f"
     dc -= dc_offset;
+#line 281 "AB05RD.f"
     --iwork;
+#line 281 "AB05RD.f"
     --dwork;
+#line 281 "AB05RD.f"
 
+#line 281 "AB05RD.f"
     /* Function Body */
+#line 281 "AB05RD.f"
     unitf = lsame_(fbtype, "I", (ftnlen)1, (ftnlen)1);
+#line 282 "AB05RD.f"
     outpf = lsame_(fbtype, "O", (ftnlen)1, (ftnlen)1);
+#line 283 "AB05RD.f"
     ljobd = lsame_(jobd, "D", (ftnlen)1, (ftnlen)1);
 
+#line 285 "AB05RD.f"
     *info = 0;
 
+#line 287 "AB05RD.f"
     if (! unitf && ! outpf) {
+#line 288 "AB05RD.f"
 	*info = -1;
+#line 289 "AB05RD.f"
     } else if (! ljobd && ! lsame_(jobd, "Z", (ftnlen)1, (ftnlen)1)) {
+#line 290 "AB05RD.f"
 	*info = -2;
+#line 291 "AB05RD.f"
     } else if (*n < 0) {
+#line 292 "AB05RD.f"
 	*info = -3;
+#line 293 "AB05RD.f"
     } else if (*m < 0) {
+#line 294 "AB05RD.f"
 	*info = -4;
+#line 295 "AB05RD.f"
     } else if (*p < 0 || unitf && *p != *m) {
+#line 296 "AB05RD.f"
 	*info = -5;
+#line 297 "AB05RD.f"
     } else if (*mv < 0) {
+#line 298 "AB05RD.f"
 	*info = -6;
+#line 299 "AB05RD.f"
     } else if (*pz < 0) {
+#line 300 "AB05RD.f"
 	*info = -7;
+#line 301 "AB05RD.f"
     } else if (*lda < max(1,*n)) {
+#line 302 "AB05RD.f"
 	*info = -11;
+#line 303 "AB05RD.f"
     } else if (*ldb < max(1,*n)) {
+#line 304 "AB05RD.f"
 	*info = -13;
+#line 305 "AB05RD.f"
     } else if (*n > 0 && *ldc < max(1,*p) || *n == 0 && *ldc < 1) {
+#line 307 "AB05RD.f"
 	*info = -15;
+#line 308 "AB05RD.f"
     } else if (ljobd && *ldd < max(1,*p) || ! ljobd && *ldd < 1) {
+#line 310 "AB05RD.f"
 	*info = -17;
+#line 311 "AB05RD.f"
     } else if (outpf && *alpha != 0. && *ldf < max(1,*m) || (unitf || *alpha 
 	    == 0.) && *ldf < 1) {
+#line 313 "AB05RD.f"
 	*info = -19;
+#line 314 "AB05RD.f"
     } else if (*beta != 0. && *ldk < max(1,*m) || *beta == 0. && *ldk < 1) {
+#line 316 "AB05RD.f"
 	*info = -21;
+#line 317 "AB05RD.f"
     } else if (*ldg < max(1,*m)) {
+#line 318 "AB05RD.f"
 	*info = -23;
+#line 319 "AB05RD.f"
     } else if (*ldh < max(1,*pz)) {
+#line 320 "AB05RD.f"
 	*info = -25;
+#line 321 "AB05RD.f"
     } else if (*ldbc < max(1,*n)) {
+#line 322 "AB05RD.f"
 	*info = -28;
+#line 323 "AB05RD.f"
     } else if (*n > 0 && *ldcc < max(1,*pz) || *n == 0 && *ldcc < 1) {
+#line 325 "AB05RD.f"
 	*info = -30;
+#line 326 "AB05RD.f"
     } else if (ljobd && *lddc < max(1,*pz) || ! ljobd && *lddc < 1) {
+#line 328 "AB05RD.f"
 	*info = -32;
+#line 329 "AB05RD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 329 "AB05RD.f"
 	i__1 = max(1,*m), i__2 = *p * *mv, i__1 = max(i__1,i__2), i__2 = *p * 
 		*p + (*p << 2);
+#line 329 "AB05RD.f"
 	if (ljobd && *ldwork < max(i__1,i__2) || ! ljobd && *ldwork < max(1,*
 		m)) {
+#line 331 "AB05RD.f"
 	    *info = -35;
+#line 332 "AB05RD.f"
 	}
+#line 332 "AB05RD.f"
     }
 
+#line 334 "AB05RD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 338 "AB05RD.f"
 	i__1 = -(*info);
+#line 338 "AB05RD.f"
 	xerbla_("AB05RD", &i__1, (ftnlen)6);
+#line 339 "AB05RD.f"
 	return 0;
+#line 340 "AB05RD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 344 "AB05RD.f"
     i__1 = *n, i__2 = min(*m,*p), i__1 = max(i__1,i__2), i__2 = min(*mv,*pz);
+#line 344 "AB05RD.f"
     if (max(i__1,i__2) == 0) {
+#line 345 "AB05RD.f"
 	*rcond = 1.;
+#line 346 "AB05RD.f"
 	return 0;
+#line 347 "AB05RD.f"
     }
 
 /*     Apply the partial output feedback u = alpha*F*y + v1 */
 
+#line 351 "AB05RD.f"
     ab05sd_(fbtype, jobd, n, m, p, alpha, &a[a_offset], lda, &b[b_offset], 
 	    ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, &f[f_offset], ldf, 
 	    rcond, &iwork[1], &dwork[1], ldwork, info, (ftnlen)1, (ftnlen)1);
+#line 354 "AB05RD.f"
     if (*info != 0) {
+#line 354 "AB05RD.f"
 	return 0;
+#line 354 "AB05RD.f"
     }
 
 /*     Apply the partial state feedback v1 = beta*K*x + v2. */
 
 /*     Compute Ac = A1 + beta*B1*K and C1 <- C1 + beta*D1*K. */
 
+#line 360 "AB05RD.f"
     if (*beta != 0. && *n > 0) {
+#line 361 "AB05RD.f"
 	dgemm_("N", "N", n, n, m, beta, &b[b_offset], ldb, &k[k_offset], ldk, 
 		&c_b9, &a[a_offset], lda, (ftnlen)1, (ftnlen)1);
+#line 363 "AB05RD.f"
 	if (ljobd) {
+#line 363 "AB05RD.f"
 	    dgemm_("N", "N", p, n, m, beta, &d__[d_offset], ldd, &k[k_offset],
 		     ldk, &c_b9, &c__[c_offset], ldc, (ftnlen)1, (ftnlen)1);
+#line 363 "AB05RD.f"
 	}
+#line 366 "AB05RD.f"
     }
 
 /*     Apply the input and output conversions v2 = G*v, z = H*y. */
 
 /*     Compute Bc = B1*G. */
 
+#line 372 "AB05RD.f"
     dgemm_("N", "N", n, mv, m, &c_b9, &b[b_offset], ldb, &g[g_offset], ldg, &
 	    c_b16, &bc[bc_offset], ldbc, (ftnlen)1, (ftnlen)1);
 
 /*     Compute Cc = H*C1. */
 
+#line 377 "AB05RD.f"
     if (*n > 0) {
+#line 377 "AB05RD.f"
 	dgemm_("N", "N", pz, n, p, &c_b9, &h__[h_offset], ldh, &c__[c_offset],
 		 ldc, &c_b16, &cc[cc_offset], ldcc, (ftnlen)1, (ftnlen)1);
+#line 377 "AB05RD.f"
     }
 
 /*     Compute Dc = H*D1*G. */
 
+#line 383 "AB05RD.f"
     if (ljobd) {
+#line 384 "AB05RD.f"
 	ldwp = max(1,*p);
+#line 385 "AB05RD.f"
 	dgemm_("N", "N", p, mv, m, &c_b9, &d__[d_offset], ldd, &g[g_offset], 
 		ldg, &c_b16, &dwork[1], &ldwp, (ftnlen)1, (ftnlen)1);
+#line 387 "AB05RD.f"
 	dgemm_("N", "N", pz, mv, p, &c_b9, &h__[h_offset], ldh, &dwork[1], &
 		ldwp, &c_b16, &dc[dc_offset], lddc, (ftnlen)1, (ftnlen)1);
+#line 389 "AB05RD.f"
     }
 
+#line 391 "AB05RD.f"
     return 0;
 /* *** Last line of AB05RD *** */
 } /* ab05rd_ */

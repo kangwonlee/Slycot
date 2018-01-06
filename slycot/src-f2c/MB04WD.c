@@ -1,3 +1,4 @@
+#line 1 "MB04WD.f"
 /* MB04WD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04WD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -223,155 +225,252 @@ static integer c__3 = 3;
 
 /*     Decode the scalar input parameters. */
 
+#line 185 "MB04WD.f"
     /* Parameter adjustments */
+#line 185 "MB04WD.f"
     q1_dim1 = *ldq1;
+#line 185 "MB04WD.f"
     q1_offset = 1 + q1_dim1;
+#line 185 "MB04WD.f"
     q1 -= q1_offset;
+#line 185 "MB04WD.f"
     q2_dim1 = *ldq2;
+#line 185 "MB04WD.f"
     q2_offset = 1 + q2_dim1;
+#line 185 "MB04WD.f"
     q2 -= q2_offset;
+#line 185 "MB04WD.f"
     --cs;
+#line 185 "MB04WD.f"
     --tau;
+#line 185 "MB04WD.f"
     --dwork;
+#line 185 "MB04WD.f"
 
+#line 185 "MB04WD.f"
     /* Function Body */
+#line 185 "MB04WD.f"
     *info = 0;
+#line 186 "MB04WD.f"
     ltrq1 = lsame_(tranq1, "T", (ftnlen)1, (ftnlen)1) || lsame_(tranq1, "C", (
 	    ftnlen)1, (ftnlen)1);
+#line 187 "MB04WD.f"
     ltrq2 = lsame_(tranq2, "T", (ftnlen)1, (ftnlen)1) || lsame_(tranq2, "C", (
 	    ftnlen)1, (ftnlen)1);
 /* Writing concatenation */
+#line 188 "MB04WD.f"
     i__1[0] = 1, a__1[0] = tranq1;
+#line 188 "MB04WD.f"
     i__1[1] = 1, a__1[1] = tranq2;
+#line 188 "MB04WD.f"
     s_cat(ch__1, a__1, i__1, &c__2, (ftnlen)2);
+#line 188 "MB04WD.f"
     nb = ue01md_(&c__1, "MB04WD", ch__1, m, n, k, (ftnlen)6, (ftnlen)2);
 
 /*     Check the scalar input parameters. */
 
+#line 192 "MB04WD.f"
     if (! (ltrq1 || lsame_(tranq1, "N", (ftnlen)1, (ftnlen)1))) {
+#line 193 "MB04WD.f"
 	*info = -1;
+#line 194 "MB04WD.f"
     } else if (! (ltrq2 || lsame_(tranq2, "N", (ftnlen)1, (ftnlen)1))) {
+#line 195 "MB04WD.f"
 	*info = -2;
+#line 196 "MB04WD.f"
     } else if (*m < 0) {
+#line 197 "MB04WD.f"
 	*info = -3;
+#line 198 "MB04WD.f"
     } else if (*n < 0 || *n > *m) {
+#line 199 "MB04WD.f"
 	*info = -4;
+#line 200 "MB04WD.f"
     } else if (*k < 0 || *k > *n) {
+#line 201 "MB04WD.f"
 	*info = -5;
+#line 202 "MB04WD.f"
     } else if (ltrq1 && *ldq1 < max(1,*n) || ! ltrq1 && *ldq1 < max(1,*m)) {
+#line 204 "MB04WD.f"
 	*info = -7;
+#line 205 "MB04WD.f"
     } else if (ltrq2 && *ldq2 < max(1,*n) || ! ltrq2 && *ldq2 < max(1,*m)) {
+#line 207 "MB04WD.f"
 	*info = -9;
+#line 208 "MB04WD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 208 "MB04WD.f"
 	i__2 = 1, i__3 = *m + *n;
+#line 208 "MB04WD.f"
 	if (*ldwork < max(i__2,i__3)) {
 /* Computing MAX */
+#line 209 "MB04WD.f"
 	    i__2 = 1, i__3 = *m + *n;
+#line 209 "MB04WD.f"
 	    dwork[1] = (doublereal) max(i__2,i__3);
+#line 210 "MB04WD.f"
 	    *info = -13;
+#line 211 "MB04WD.f"
 	}
+#line 211 "MB04WD.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 215 "MB04WD.f"
     if (*info != 0) {
+#line 216 "MB04WD.f"
 	i__2 = -(*info);
+#line 216 "MB04WD.f"
 	xerbla_("MB04WD", &i__2, (ftnlen)6);
+#line 217 "MB04WD.f"
 	return 0;
+#line 218 "MB04WD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 222 "MB04WD.f"
     if (*n == 0) {
+#line 223 "MB04WD.f"
 	dwork[1] = 1.;
+#line 224 "MB04WD.f"
 	return 0;
+#line 225 "MB04WD.f"
     }
 
+#line 227 "MB04WD.f"
     nbmin = 2;
+#line 228 "MB04WD.f"
     nx = 0;
+#line 229 "MB04WD.f"
     wrkopt = *m + *n;
+#line 230 "MB04WD.f"
     if (nb > 1 && nb < *k) {
 
 /*        Determine when to cross over from blocked to unblocked code. */
 
 /* Computing MAX */
 /* Writing concatenation */
+#line 234 "MB04WD.f"
 	i__1[0] = 1, a__1[0] = tranq1;
+#line 234 "MB04WD.f"
 	i__1[1] = 1, a__1[1] = tranq2;
+#line 234 "MB04WD.f"
 	s_cat(ch__1, a__1, i__1, &c__2, (ftnlen)2);
+#line 234 "MB04WD.f"
 	i__2 = 0, i__3 = ue01md_(&c__3, "MB04WD", ch__1, m, n, k, (ftnlen)6, (
 		ftnlen)2);
+#line 234 "MB04WD.f"
 	nx = max(i__2,i__3);
+#line 235 "MB04WD.f"
 	if (nx < *k) {
 
 /*           Determine if workspace is large enough for blocked code. */
 
 /* Computing MAX */
+#line 239 "MB04WD.f"
 	    i__2 = wrkopt, i__3 = (*n << 3) * nb + nb * 15 * nb;
+#line 239 "MB04WD.f"
 	    wrkopt = max(i__2,i__3);
+#line 240 "MB04WD.f"
 	    if (*ldwork < wrkopt) {
 
 /*              Not enough workspace to use optimal NB:  reduce NB and */
 /*              determine the minimum value of NB. */
 
+#line 245 "MB04WD.f"
 		nb = (integer) ((sqrt((doublereal) ((*n << 4) * *n + *ldwork *
 			 15)) - (doublereal) (*n << 2)) / 15.);
 /* Computing MAX */
 /* Writing concatenation */
+#line 247 "MB04WD.f"
 		i__1[0] = 1, a__1[0] = tranq1;
+#line 247 "MB04WD.f"
 		i__1[1] = 1, a__1[1] = tranq2;
+#line 247 "MB04WD.f"
 		s_cat(ch__1, a__1, i__1, &c__2, (ftnlen)2);
+#line 247 "MB04WD.f"
 		i__2 = 2, i__3 = ue01md_(&c__2, "MB04WD", ch__1, m, n, k, (
 			ftnlen)6, (ftnlen)2);
+#line 247 "MB04WD.f"
 		nbmin = max(i__2,i__3);
+#line 249 "MB04WD.f"
 	    }
+#line 250 "MB04WD.f"
 	}
+#line 251 "MB04WD.f"
     }
 
+#line 253 "MB04WD.f"
     if (nb >= nbmin && nb < *k && nx < *k) {
 
 /*        Use blocked code after the last block. */
 /*        The first kk columns are handled by the block method. */
 
+#line 258 "MB04WD.f"
 	ki = (*k - nx - 1) / nb * nb;
 /* Computing MIN */
+#line 259 "MB04WD.f"
 	i__2 = *k, i__3 = ki + nb;
+#line 259 "MB04WD.f"
 	kk = min(i__2,i__3);
+#line 260 "MB04WD.f"
     } else {
+#line 261 "MB04WD.f"
 	kk = 0;
+#line 262 "MB04WD.f"
     }
 
 /*     Use unblocked code for the last or only block. */
 
+#line 266 "MB04WD.f"
     if (kk < *n) {
+#line 266 "MB04WD.f"
 	i__2 = *m - kk;
+#line 266 "MB04WD.f"
 	i__3 = *n - kk;
+#line 266 "MB04WD.f"
 	i__4 = *k - kk;
+#line 266 "MB04WD.f"
 	mb04wu_(tranq1, tranq2, &i__2, &i__3, &i__4, &q1[kk + 1 + (kk + 1) * 
 		q1_dim1], ldq1, &q2[kk + 1 + (kk + 1) * q2_dim1], ldq2, &cs[(
 		kk << 1) + 1], &tau[kk + 1], &dwork[1], ldwork, &ierr, (
 		ftnlen)1, (ftnlen)1);
+#line 266 "MB04WD.f"
     }
 
 /*     Blocked code. */
 
+#line 273 "MB04WD.f"
     if (kk > 0) {
+#line 274 "MB04WD.f"
 	pdrs = 1;
+#line 275 "MB04WD.f"
 	pdt = pdrs + nb * 6 * nb;
+#line 276 "MB04WD.f"
 	pdw = pdt + nb * 9 * nb;
+#line 277 "MB04WD.f"
 	if (ltrq1 && ltrq2) {
+#line 278 "MB04WD.f"
 	    i__2 = -nb;
+#line 278 "MB04WD.f"
 	    for (i__ = ki + 1; i__2 < 0 ? i__ >= 1 : i__ <= 1; i__ += i__2) {
 /* Computing MIN */
+#line 279 "MB04WD.f"
 		i__3 = nb, i__4 = *k - i__ + 1;
+#line 279 "MB04WD.f"
 		ib = min(i__3,i__4);
+#line 280 "MB04WD.f"
 		if (i__ + ib <= *n) {
 
 /*                 Form the triangular factors of the symplectic block */
 /*                 reflector SH. */
 
+#line 285 "MB04WD.f"
 		    i__3 = *m - i__ + 1;
+#line 285 "MB04WD.f"
 		    mb04qf_("Forward", "Rowwise", "Rowwise", &i__3, &ib, &q1[
 			    i__ + i__ * q1_dim1], ldq1, &q2[i__ + i__ * 
 			    q2_dim1], ldq2, &cs[(i__ << 1) - 1], &tau[i__], &
@@ -381,9 +480,12 @@ static integer c__3 = 3;
 /*                 Apply SH to Q1(i+ib:n,i:m) and Q2(i+ib:n,i:m) from */
 /*                 the right. */
 
+#line 293 "MB04WD.f"
 		    i__3 = *m - i__ + 1;
+#line 293 "MB04WD.f"
 		    i__4 = *n - i__ - ib + 1;
-		    mb04qc_("Zero Structure", "Transpose", "Transpose", "No "
+#line 293 "MB04WD.f"
+		    mb04qc_("Zero Structure", "Transpose", "Transpose", "No "\
 			    "Transpose", "Forward", "Rowwise", "Rowwise", &
 			    i__3, &i__4, &ib, &q1[i__ + i__ * q1_dim1], ldq1, 
 			    &q2[i__ + i__ * q2_dim1], ldq2, &dwork[pdrs], &nb,
@@ -391,30 +493,43 @@ static integer c__3 = 3;
 			    ldq2, &q1[i__ + ib + i__ * q1_dim1], ldq1, &dwork[
 			    pdw], (ftnlen)14, (ftnlen)9, (ftnlen)9, (ftnlen)
 			    12, (ftnlen)7, (ftnlen)7, (ftnlen)7);
+#line 300 "MB04WD.f"
 		}
 
 /*              Apply SH to columns i:m of the current block. */
 
+#line 304 "MB04WD.f"
 		i__3 = *m - i__ + 1;
+#line 304 "MB04WD.f"
 		mb04wu_("Transpose", "Transpose", &i__3, &ib, &ib, &q1[i__ + 
 			i__ * q1_dim1], ldq1, &q2[i__ + i__ * q2_dim1], ldq2, 
 			&cs[(i__ << 1) - 1], &tau[i__], &dwork[1], ldwork, &
 			ierr, (ftnlen)9, (ftnlen)9);
+#line 307 "MB04WD.f"
 /* L10: */
+#line 307 "MB04WD.f"
 	    }
 
+#line 309 "MB04WD.f"
 	} else if (ltrq1) {
+#line 310 "MB04WD.f"
 	    i__2 = -nb;
+#line 310 "MB04WD.f"
 	    for (i__ = ki + 1; i__2 < 0 ? i__ >= 1 : i__ <= 1; i__ += i__2) {
 /* Computing MIN */
+#line 311 "MB04WD.f"
 		i__3 = nb, i__4 = *k - i__ + 1;
+#line 311 "MB04WD.f"
 		ib = min(i__3,i__4);
+#line 312 "MB04WD.f"
 		if (i__ + ib <= *n) {
 
 /*                 Form the triangular factors of the symplectic block */
 /*                 reflector SH. */
 
+#line 317 "MB04WD.f"
 		    i__3 = *m - i__ + 1;
+#line 317 "MB04WD.f"
 		    mb04qf_("Forward", "Rowwise", "Columnwise", &i__3, &ib, &
 			    q1[i__ + i__ * q1_dim1], ldq1, &q2[i__ + i__ * 
 			    q2_dim1], ldq2, &cs[(i__ << 1) - 1], &tau[i__], &
@@ -424,8 +539,11 @@ static integer c__3 = 3;
 /*                 Apply SH to Q1(i+ib:n,i:m) from the right and to */
 /*                 Q2(i:m,i+ib:n) from the left. */
 
+#line 325 "MB04WD.f"
 		    i__3 = *m - i__ + 1;
+#line 325 "MB04WD.f"
 		    i__4 = *n - i__ - ib + 1;
+#line 325 "MB04WD.f"
 		    mb04qc_("Zero Structure", "No Transpose", "Transpose", 
 			    "No Transpose", "Forward", "Rowwise", "Columnwise"
 			    , &i__3, &i__4, &ib, &q1[i__ + i__ * q1_dim1], 
@@ -435,30 +553,43 @@ static integer c__3 = 3;
 			    ldq1, &dwork[pdw], (ftnlen)14, (ftnlen)12, (
 			    ftnlen)9, (ftnlen)12, (ftnlen)7, (ftnlen)7, (
 			    ftnlen)10);
+#line 332 "MB04WD.f"
 		}
 
 /*              Apply SH to columns/rows i:m of the current block. */
 
+#line 336 "MB04WD.f"
 		i__3 = *m - i__ + 1;
+#line 336 "MB04WD.f"
 		mb04wu_("Transpose", "No Transpose", &i__3, &ib, &ib, &q1[i__ 
 			+ i__ * q1_dim1], ldq1, &q2[i__ + i__ * q2_dim1], 
 			ldq2, &cs[(i__ << 1) - 1], &tau[i__], &dwork[1], 
 			ldwork, &ierr, (ftnlen)9, (ftnlen)12);
+#line 339 "MB04WD.f"
 /* L20: */
+#line 339 "MB04WD.f"
 	    }
 
+#line 341 "MB04WD.f"
 	} else if (ltrq2) {
+#line 342 "MB04WD.f"
 	    i__2 = -nb;
+#line 342 "MB04WD.f"
 	    for (i__ = ki + 1; i__2 < 0 ? i__ >= 1 : i__ <= 1; i__ += i__2) {
 /* Computing MIN */
+#line 343 "MB04WD.f"
 		i__3 = nb, i__4 = *k - i__ + 1;
+#line 343 "MB04WD.f"
 		ib = min(i__3,i__4);
+#line 344 "MB04WD.f"
 		if (i__ + ib <= *n) {
 
 /*                 Form the triangular factors of the symplectic block */
 /*                 reflector SH. */
 
+#line 349 "MB04WD.f"
 		    i__3 = *m - i__ + 1;
+#line 349 "MB04WD.f"
 		    mb04qf_("Forward", "Columnwise", "Rowwise", &i__3, &ib, &
 			    q1[i__ + i__ * q1_dim1], ldq1, &q2[i__ + i__ * 
 			    q2_dim1], ldq2, &cs[(i__ << 1) - 1], &tau[i__], &
@@ -468,8 +599,11 @@ static integer c__3 = 3;
 /*                 Apply SH to Q1(i:m,i+ib:n) from the left and to */
 /*                 Q2(i+ib:n,i:m) from the right. */
 
+#line 357 "MB04WD.f"
 		    i__3 = *m - i__ + 1;
+#line 357 "MB04WD.f"
 		    i__4 = *n - i__ - ib + 1;
+#line 357 "MB04WD.f"
 		    mb04qc_("Zero Structure", "Transpose", "No Transpose", 
 			    "No Transpose", "Forward", "Columnwise", "Rowwise"
 			    , &i__3, &i__4, &ib, &q1[i__ + i__ * q1_dim1], 
@@ -478,30 +612,43 @@ static integer c__3 = 3;
 			    q2_dim1], ldq2, &q1[i__ + (i__ + ib) * q1_dim1], 
 			    ldq1, &dwork[pdw], (ftnlen)14, (ftnlen)9, (ftnlen)
 			    12, (ftnlen)12, (ftnlen)7, (ftnlen)10, (ftnlen)7);
+#line 364 "MB04WD.f"
 		}
 
 /*              Apply SH to columns/rows i:m of the current block. */
 
+#line 368 "MB04WD.f"
 		i__3 = *m - i__ + 1;
+#line 368 "MB04WD.f"
 		mb04wu_("No Transpose", "Transpose", &i__3, &ib, &ib, &q1[i__ 
 			+ i__ * q1_dim1], ldq1, &q2[i__ + i__ * q2_dim1], 
 			ldq2, &cs[(i__ << 1) - 1], &tau[i__], &dwork[1], 
 			ldwork, &ierr, (ftnlen)12, (ftnlen)9);
+#line 371 "MB04WD.f"
 /* L30: */
+#line 371 "MB04WD.f"
 	    }
 
+#line 373 "MB04WD.f"
 	} else {
+#line 374 "MB04WD.f"
 	    i__2 = -nb;
+#line 374 "MB04WD.f"
 	    for (i__ = ki + 1; i__2 < 0 ? i__ >= 1 : i__ <= 1; i__ += i__2) {
 /* Computing MIN */
+#line 375 "MB04WD.f"
 		i__3 = nb, i__4 = *k - i__ + 1;
+#line 375 "MB04WD.f"
 		ib = min(i__3,i__4);
+#line 376 "MB04WD.f"
 		if (i__ + ib <= *n) {
 
 /*                 Form the triangular factors of the symplectic block */
 /*                 reflector SH. */
 
+#line 381 "MB04WD.f"
 		    i__3 = *m - i__ + 1;
+#line 381 "MB04WD.f"
 		    mb04qf_("Forward", "Columnwise", "Columnwise", &i__3, &ib,
 			     &q1[i__ + i__ * q1_dim1], ldq1, &q2[i__ + i__ * 
 			    q2_dim1], ldq2, &cs[(i__ << 1) - 1], &tau[i__], &
@@ -511,10 +658,13 @@ static integer c__3 = 3;
 /*                 Apply SH to Q1(i:m,i+ib:n) and Q2(i:m,i+ib:n) from */
 /*                 the left. */
 
+#line 389 "MB04WD.f"
 		    i__3 = *m - i__ + 1;
+#line 389 "MB04WD.f"
 		    i__4 = *n - i__ - ib + 1;
+#line 389 "MB04WD.f"
 		    mb04qc_("Zero Structure", "No Transpose", "No Transpose", 
-			    "No Transpose", "Forward", "Columnwise", "Column"
+			    "No Transpose", "Forward", "Columnwise", "Column"\
 			    "wise", &i__3, &i__4, &ib, &q1[i__ + i__ * q1_dim1]
 			    , ldq1, &q2[i__ + i__ * q2_dim1], ldq2, &dwork[
 			    pdrs], &nb, &dwork[pdt], &nb, &q2[i__ + (i__ + ib)
@@ -522,22 +672,31 @@ static integer c__3 = 3;
 			    , ldq1, &dwork[pdw], (ftnlen)14, (ftnlen)12, (
 			    ftnlen)12, (ftnlen)12, (ftnlen)7, (ftnlen)10, (
 			    ftnlen)10);
+#line 396 "MB04WD.f"
 		}
 
 /*              Apply SH to rows i:m of the current block. */
 
+#line 400 "MB04WD.f"
 		i__3 = *m - i__ + 1;
+#line 400 "MB04WD.f"
 		mb04wu_("No Transpose", "No Transpose", &i__3, &ib, &ib, &q1[
 			i__ + i__ * q1_dim1], ldq1, &q2[i__ + i__ * q2_dim1], 
 			ldq2, &cs[(i__ << 1) - 1], &tau[i__], &dwork[1], 
 			ldwork, &ierr, (ftnlen)12, (ftnlen)12);
+#line 403 "MB04WD.f"
 /* L40: */
+#line 403 "MB04WD.f"
 	    }
+#line 404 "MB04WD.f"
 	}
+#line 405 "MB04WD.f"
     }
 
+#line 407 "MB04WD.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 409 "MB04WD.f"
     return 0;
 /* *** Last line of MB04WD *** */
 } /* mb04wd_ */

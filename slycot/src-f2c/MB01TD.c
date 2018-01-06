@@ -1,3 +1,4 @@
+#line 1 "MB01TD.f"
 /* MB01TD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01TD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -131,88 +133,148 @@ static doublereal c_b10 = 1.;
 
 /*     Test the input scalar arguments. */
 
+#line 110 "MB01TD.f"
     /* Parameter adjustments */
+#line 110 "MB01TD.f"
     a_dim1 = *lda;
+#line 110 "MB01TD.f"
     a_offset = 1 + a_dim1;
+#line 110 "MB01TD.f"
     a -= a_offset;
+#line 110 "MB01TD.f"
     b_dim1 = *ldb;
+#line 110 "MB01TD.f"
     b_offset = 1 + b_dim1;
+#line 110 "MB01TD.f"
     b -= b_offset;
+#line 110 "MB01TD.f"
     --dwork;
+#line 110 "MB01TD.f"
 
+#line 110 "MB01TD.f"
     /* Function Body */
+#line 110 "MB01TD.f"
     *info = 0;
+#line 111 "MB01TD.f"
     if (*n < 0) {
+#line 112 "MB01TD.f"
 	*info = -1;
+#line 113 "MB01TD.f"
     } else if (*lda < max(1,*n)) {
+#line 114 "MB01TD.f"
 	*info = -3;
+#line 115 "MB01TD.f"
     } else if (*ldb < max(1,*n)) {
+#line 116 "MB01TD.f"
 	*info = -5;
+#line 117 "MB01TD.f"
     }
 
+#line 119 "MB01TD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 123 "MB01TD.f"
 	i__1 = -(*info);
+#line 123 "MB01TD.f"
 	xerbla_("MB01TD", &i__1, (ftnlen)6);
+#line 124 "MB01TD.f"
 	return 0;
+#line 125 "MB01TD.f"
     }
 
 /*     Quick return, if possible. */
 
+#line 129 "MB01TD.f"
     if (*n == 0) {
+#line 130 "MB01TD.f"
 	return 0;
+#line 131 "MB01TD.f"
     } else if (*n == 1) {
+#line 132 "MB01TD.f"
 	b[b_dim1 + 1] = a[a_dim1 + 1] * b[b_dim1 + 1];
+#line 133 "MB01TD.f"
 	return 0;
+#line 134 "MB01TD.f"
     }
 
 /*     Test the upper quasi-triangular structure of A and B for identity. */
 
+#line 138 "MB01TD.f"
     i__1 = *n - 1;
+#line 138 "MB01TD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 139 "MB01TD.f"
 	if (a[i__ + 1 + i__ * a_dim1] == 0.) {
+#line 140 "MB01TD.f"
 	    if (b[i__ + 1 + i__ * b_dim1] != 0.) {
+#line 141 "MB01TD.f"
 		*info = 1;
+#line 142 "MB01TD.f"
 		return 0;
+#line 143 "MB01TD.f"
 	    }
+#line 144 "MB01TD.f"
 	} else if (i__ < *n - 1) {
+#line 145 "MB01TD.f"
 	    if (a[i__ + 2 + (i__ + 1) * a_dim1] != 0.) {
+#line 146 "MB01TD.f"
 		*info = 1;
+#line 147 "MB01TD.f"
 		return 0;
+#line 148 "MB01TD.f"
 	    }
+#line 149 "MB01TD.f"
 	}
+#line 150 "MB01TD.f"
 /* L10: */
+#line 150 "MB01TD.f"
     }
 
+#line 152 "MB01TD.f"
     i__1 = *n;
+#line 152 "MB01TD.f"
     for (j = 1; j <= i__1; ++j) {
 /* Computing MIN */
+#line 153 "MB01TD.f"
 	i__2 = j + 1;
+#line 153 "MB01TD.f"
 	jmin = min(i__2,*n);
 /* Computing MIN */
+#line 154 "MB01TD.f"
 	i__2 = jmin, i__3 = *n - 1;
+#line 154 "MB01TD.f"
 	jmnm = min(i__2,i__3);
 
 /*        Compute the contribution of the subdiagonal of A to the */
 /*        j-th column of the product. */
 
+#line 159 "MB01TD.f"
 	i__2 = jmnm;
+#line 159 "MB01TD.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 160 "MB01TD.f"
 	    dwork[i__] = a[i__ + 1 + i__ * a_dim1] * b[i__ + j * b_dim1];
+#line 161 "MB01TD.f"
 /* L20: */
+#line 161 "MB01TD.f"
 	}
 
 /*        Multiply the upper triangle of A by the j-th column of B, */
 /*        and add to the above result. */
 
+#line 166 "MB01TD.f"
 	dtrmv_("Upper", "No transpose", "Non-unit", &jmin, &a[a_offset], lda, 
 		&b[j * b_dim1 + 1], &c__1, (ftnlen)5, (ftnlen)12, (ftnlen)8);
+#line 168 "MB01TD.f"
 	daxpy_(&jmnm, &c_b10, &dwork[1], &c__1, &b[j * b_dim1 + 2], &c__1);
+#line 169 "MB01TD.f"
 /* L30: */
+#line 169 "MB01TD.f"
     }
 
+#line 171 "MB01TD.f"
     return 0;
 /* *** Last line of MB01TD *** */
 } /* mb01td_ */

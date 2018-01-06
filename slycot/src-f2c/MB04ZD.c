@@ -1,3 +1,4 @@
+#line 1 "MB04ZD.f"
 /* MB04ZD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04ZD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -297,144 +299,232 @@ static integer c__0 = 0;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 252 "MB04ZD.f"
     /* Parameter adjustments */
+#line 252 "MB04ZD.f"
     a_dim1 = *lda;
+#line 252 "MB04ZD.f"
     a_offset = 1 + a_dim1;
+#line 252 "MB04ZD.f"
     a -= a_offset;
+#line 252 "MB04ZD.f"
     qg_dim1 = *ldqg;
+#line 252 "MB04ZD.f"
     qg_offset = 1 + qg_dim1;
+#line 252 "MB04ZD.f"
     qg -= qg_offset;
+#line 252 "MB04ZD.f"
     u_dim1 = *ldu;
+#line 252 "MB04ZD.f"
     u_offset = 1 + u_dim1;
+#line 252 "MB04ZD.f"
     u -= u_offset;
+#line 252 "MB04ZD.f"
     --dwork;
+#line 252 "MB04ZD.f"
 
+#line 252 "MB04ZD.f"
     /* Function Body */
+#line 252 "MB04ZD.f"
     *info = 0;
+#line 253 "MB04ZD.f"
     accum = lsame_(compu, "A", (ftnlen)1, (ftnlen)1) || lsame_(compu, "V", (
 	    ftnlen)1, (ftnlen)1);
+#line 254 "MB04ZD.f"
     form = lsame_(compu, "F", (ftnlen)1, (ftnlen)1) || lsame_(compu, "I", (
 	    ftnlen)1, (ftnlen)1);
+#line 255 "MB04ZD.f"
     forget = lsame_(compu, "N", (ftnlen)1, (ftnlen)1);
 
+#line 257 "MB04ZD.f"
     if (! accum && ! form && ! forget) {
+#line 258 "MB04ZD.f"
 	*info = -1;
+#line 259 "MB04ZD.f"
     } else if (*n < 0) {
+#line 260 "MB04ZD.f"
 	*info = -2;
+#line 261 "MB04ZD.f"
     } else if (*lda < max(1,*n)) {
+#line 262 "MB04ZD.f"
 	*info = -4;
+#line 263 "MB04ZD.f"
     } else if (*ldqg < max(1,*n)) {
+#line 264 "MB04ZD.f"
 	*info = -6;
+#line 265 "MB04ZD.f"
     } else if (*ldu < 1 || ! forget && *ldu < max(1,*n)) {
+#line 267 "MB04ZD.f"
 	*info = -8;
+#line 268 "MB04ZD.f"
     }
 
+#line 270 "MB04ZD.f"
     if (*info != 0) {
+#line 271 "MB04ZD.f"
 	i__1 = -(*info);
+#line 271 "MB04ZD.f"
 	xerbla_("MB04ZD", &i__1, (ftnlen)6);
+#line 272 "MB04ZD.f"
 	return 0;
+#line 273 "MB04ZD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 277 "MB04ZD.f"
     if (*n == 0) {
+#line 277 "MB04ZD.f"
 	return 0;
+#line 277 "MB04ZD.f"
     }
 
 /*     Transform to square-reduced form. */
 
+#line 282 "MB04ZD.f"
     i__1 = *n - 1;
+#line 282 "MB04ZD.f"
     for (j = 1; j <= i__1; ++j) {
 /*                         T */
 /*        DWORK <- (Q*A - A *Q)(J+1:N,J). */
 
+#line 286 "MB04ZD.f"
 	i__2 = j - 1;
+#line 286 "MB04ZD.f"
 	dcopy_(&i__2, &qg[j + qg_dim1], ldqg, &dwork[*n + 1], &c__1);
+#line 287 "MB04ZD.f"
 	i__2 = *n - j + 1;
+#line 287 "MB04ZD.f"
 	dcopy_(&i__2, &qg[j + j * qg_dim1], &c__1, &dwork[*n + j], &c__1);
+#line 288 "MB04ZD.f"
 	i__2 = *n - j;
+#line 288 "MB04ZD.f"
 	dgemv_("Transpose", n, &i__2, &c_b13, &a[(j + 1) * a_dim1 + 1], lda, &
 		dwork[*n + 1], &c__1, &c_b15, &dwork[j + 1], &c__1, (ftnlen)9)
 		;
+#line 290 "MB04ZD.f"
 	i__2 = *n - j;
+#line 290 "MB04ZD.f"
 	dgemv_("NoTranspose", &i__2, &j, &c_b18, &qg[j + 1 + qg_dim1], ldqg, &
 		a[j * a_dim1 + 1], &c__1, &c_b18, &dwork[j + 1], &c__1, (
 		ftnlen)11);
+#line 292 "MB04ZD.f"
 	i__2 = *n - j;
+#line 292 "MB04ZD.f"
 	dsymv_("Lower", &i__2, &c_b18, &qg[j + 1 + (j + 1) * qg_dim1], ldqg, &
 		a[j + 1 + j * a_dim1], &c__1, &c_b18, &dwork[j + 1], &c__1, (
 		ftnlen)5);
 
 /*        Symplectic reflection to zero (H*H)((N+J+2):2N,J). */
 
+#line 297 "MB04ZD.f"
 	i__2 = *n - j;
+#line 297 "MB04ZD.f"
 	dlarfg_(&i__2, &dwork[j + 1], &dwork[j + 2], &c__1, &tau);
+#line 298 "MB04ZD.f"
 	y = dwork[j + 1];
+#line 299 "MB04ZD.f"
 	dwork[j + 1] = 1.;
 
+#line 301 "MB04ZD.f"
 	i__2 = *n - j;
+#line 301 "MB04ZD.f"
 	dlarfx_("Left", &i__2, n, &dwork[j + 1], &tau, &a[j + 1 + a_dim1], 
 		lda, &dwork[*n + 1], (ftnlen)4);
+#line 303 "MB04ZD.f"
 	i__2 = *n - j;
+#line 303 "MB04ZD.f"
 	dlarfx_("Right", n, &i__2, &dwork[j + 1], &tau, &a[(j + 1) * a_dim1 + 
 		1], lda, &dwork[*n + 1], (ftnlen)5);
 
+#line 306 "MB04ZD.f"
 	i__2 = *n - j;
+#line 306 "MB04ZD.f"
 	dlarfx_("Left", &i__2, &j, &dwork[j + 1], &tau, &qg[j + 1 + qg_dim1], 
 		ldqg, &dwork[*n + 1], (ftnlen)4);
+#line 308 "MB04ZD.f"
 	i__2 = *n - j;
+#line 308 "MB04ZD.f"
 	dsymv_("Lower", &i__2, &tau, &qg[j + 1 + (j + 1) * qg_dim1], ldqg, &
 		dwork[j + 1], &c__1, &c_b15, &dwork[*n + j + 1], &c__1, (
 		ftnlen)5);
+#line 310 "MB04ZD.f"
 	i__2 = *n - j;
+#line 310 "MB04ZD.f"
 	i__3 = *n - j;
+#line 310 "MB04ZD.f"
 	d__1 = -tau * ddot_(&i__3, &dwork[*n + j + 1], &c__1, &dwork[j + 1], &
 		c__1) / 2.;
+#line 310 "MB04ZD.f"
 	daxpy_(&i__2, &d__1, &dwork[j + 1], &c__1, &dwork[*n + j + 1], &c__1);
+#line 312 "MB04ZD.f"
 	i__2 = *n - j;
+#line 312 "MB04ZD.f"
 	dsyr2_("Lower", &i__2, &c_b13, &dwork[j + 1], &c__1, &dwork[*n + j + 
 		1], &c__1, &qg[j + 1 + (j + 1) * qg_dim1], ldqg, (ftnlen)5);
 
+#line 315 "MB04ZD.f"
 	i__2 = *n - j;
+#line 315 "MB04ZD.f"
 	dlarfx_("Right", &j, &i__2, &dwork[j + 1], &tau, &qg[(j + 2) * 
 		qg_dim1 + 1], ldqg, &dwork[*n + 1], (ftnlen)5);
+#line 317 "MB04ZD.f"
 	i__2 = *n - j;
+#line 317 "MB04ZD.f"
 	dsymv_("Upper", &i__2, &tau, &qg[j + 1 + (j + 2) * qg_dim1], ldqg, &
 		dwork[j + 1], &c__1, &c_b15, &dwork[*n + j + 1], &c__1, (
 		ftnlen)5);
+#line 319 "MB04ZD.f"
 	i__2 = *n - j;
+#line 319 "MB04ZD.f"
 	i__3 = *n - j;
+#line 319 "MB04ZD.f"
 	d__1 = -tau * ddot_(&i__3, &dwork[*n + j + 1], &c__1, &dwork[j + 1], &
 		c__1) / 2.;
+#line 319 "MB04ZD.f"
 	daxpy_(&i__2, &d__1, &dwork[j + 1], &c__1, &dwork[*n + j + 1], &c__1);
+#line 321 "MB04ZD.f"
 	i__2 = *n - j;
+#line 321 "MB04ZD.f"
 	dsyr2_("Upper", &i__2, &c_b13, &dwork[j + 1], &c__1, &dwork[*n + j + 
 		1], &c__1, &qg[j + 1 + (j + 2) * qg_dim1], ldqg, (ftnlen)5);
 
+#line 324 "MB04ZD.f"
 	if (form) {
 
 /*           Save reflection. */
 
+#line 328 "MB04ZD.f"
 	    i__2 = *n - j;
+#line 328 "MB04ZD.f"
 	    dcopy_(&i__2, &dwork[j + 1], &c__1, &u[j + 1 + j * u_dim1], &c__1)
 		    ;
+#line 329 "MB04ZD.f"
 	    u[j + 1 + j * u_dim1] = tau;
 
+#line 331 "MB04ZD.f"
 	} else if (accum) {
 
 /*           Accumulate reflection. */
 
+#line 335 "MB04ZD.f"
 	    i__2 = *n - j;
+#line 335 "MB04ZD.f"
 	    dlarfx_("Right", n, &i__2, &dwork[j + 1], &tau, &u[(j + 1) * 
 		    u_dim1 + 1], ldu, &dwork[*n + 1], (ftnlen)5);
+#line 337 "MB04ZD.f"
 	    i__2 = *n - j;
+#line 337 "MB04ZD.f"
 	    dlarfx_("Right", n, &i__2, &dwork[j + 1], &tau, &u[(*n + j + 1) * 
 		    u_dim1 + 1], ldu, &dwork[*n + 1], (ftnlen)5);
+#line 339 "MB04ZD.f"
 	}
 
 /*        (X,Y) := ((J+1,J),(N+J+1,J)) component of H*H. */
 
+#line 343 "MB04ZD.f"
 	i__2 = *n - j;
+#line 343 "MB04ZD.f"
 	x = ddot_(&j, &qg[(j + 2) * qg_dim1 + 1], &c__1, &qg[j + qg_dim1], 
 		ldqg) + ddot_(&i__2, &qg[j + 1 + (j + 2) * qg_dim1], ldqg, &
 		qg[j + 1 + j * qg_dim1], &c__1) + ddot_(n, &a[j + 1 + a_dim1],
@@ -442,188 +532,288 @@ static integer c__0 = 0;
 
 /*        Symplectic rotation to zero (H*H)(N+J+1,J). */
 
+#line 349 "MB04ZD.f"
 	dlartg_(&x, &y, &cosine, &sine, &temp);
 
+#line 351 "MB04ZD.f"
 	drot_(&j, &a[j + 1 + a_dim1], lda, &qg[j + 1 + qg_dim1], ldqg, &
 		cosine, &sine);
+#line 352 "MB04ZD.f"
 	drot_(&j, &a[(j + 1) * a_dim1 + 1], &c__1, &qg[(j + 2) * qg_dim1 + 1],
 		 &c__1, &cosine, &sine);
+#line 353 "MB04ZD.f"
 	if (j < *n - 1) {
+#line 354 "MB04ZD.f"
 	    i__2 = *n - j - 1;
+#line 354 "MB04ZD.f"
 	    drot_(&i__2, &a[j + 1 + (j + 2) * a_dim1], lda, &qg[j + 2 + (j + 
 		    1) * qg_dim1], &c__1, &cosine, &sine);
+#line 356 "MB04ZD.f"
 	    i__2 = *n - j - 1;
+#line 356 "MB04ZD.f"
 	    drot_(&i__2, &a[j + 2 + (j + 1) * a_dim1], &c__1, &qg[j + 1 + (j 
 		    + 3) * qg_dim1], ldqg, &cosine, &sine);
+#line 358 "MB04ZD.f"
 	}
 
+#line 360 "MB04ZD.f"
 	t[0] = a[j + 1 + (j + 1) * a_dim1];
+#line 361 "MB04ZD.f"
 	t[2] = qg[j + 1 + (j + 2) * qg_dim1];
+#line 362 "MB04ZD.f"
 	t[1] = qg[j + 1 + (j + 1) * qg_dim1];
+#line 363 "MB04ZD.f"
 	t[3] = -t[0];
+#line 364 "MB04ZD.f"
 	drot_(&c__2, t, &c__1, &t[2], &c__1, &cosine, &sine);
+#line 365 "MB04ZD.f"
 	drot_(&c__2, t, &c__2, &t[1], &c__2, &cosine, &sine);
+#line 366 "MB04ZD.f"
 	a[j + 1 + (j + 1) * a_dim1] = t[0];
+#line 367 "MB04ZD.f"
 	qg[j + 1 + (j + 2) * qg_dim1] = t[2];
+#line 368 "MB04ZD.f"
 	qg[j + 1 + (j + 1) * qg_dim1] = t[1];
 
+#line 370 "MB04ZD.f"
 	if (form) {
 
 /*           Save rotation. */
 
+#line 374 "MB04ZD.f"
 	    u[j + j * u_dim1] = cosine;
+#line 375 "MB04ZD.f"
 	    u[j + (*n + j) * u_dim1] = sine;
 
+#line 377 "MB04ZD.f"
 	} else if (accum) {
 
 /*           Accumulate rotation. */
 
+#line 381 "MB04ZD.f"
 	    drot_(n, &u[(j + 1) * u_dim1 + 1], &c__1, &u[(*n + j + 1) * 
 		    u_dim1 + 1], &c__1, &cosine, &sine);
+#line 382 "MB04ZD.f"
 	}
 
 /*        DWORK := (A*A  + G*Q)(J+1:N,J). */
 
+#line 386 "MB04ZD.f"
 	i__2 = *n - j;
+#line 386 "MB04ZD.f"
 	dgemv_("NoTranspose", &i__2, n, &c_b18, &a[j + 1 + a_dim1], lda, &a[j 
 		* a_dim1 + 1], &c__1, &c_b15, &dwork[j + 1], &c__1, (ftnlen)
 		11);
+#line 388 "MB04ZD.f"
 	i__2 = *n - j;
+#line 388 "MB04ZD.f"
 	dgemv_("Transpose", &j, &i__2, &c_b18, &qg[(j + 2) * qg_dim1 + 1], 
 		ldqg, &qg[j + qg_dim1], ldqg, &c_b18, &dwork[j + 1], &c__1, (
 		ftnlen)9);
+#line 390 "MB04ZD.f"
 	i__2 = *n - j;
+#line 390 "MB04ZD.f"
 	dsymv_("Upper", &i__2, &c_b18, &qg[j + 1 + (j + 2) * qg_dim1], ldqg, &
 		qg[j + 1 + j * qg_dim1], &c__1, &c_b18, &dwork[j + 1], &c__1, 
 		(ftnlen)5);
 
 /*        Symplectic reflection to zero (H*H)(J+2:N,J). */
 
+#line 395 "MB04ZD.f"
 	i__2 = *n - j;
+#line 395 "MB04ZD.f"
 	dlarfg_(&i__2, &dwork[j + 1], &dwork[j + 2], &c__1, &tau);
+#line 396 "MB04ZD.f"
 	dwork[j + 1] = 1.;
 
+#line 398 "MB04ZD.f"
 	i__2 = *n - j;
+#line 398 "MB04ZD.f"
 	dlarfx_("Left", &i__2, n, &dwork[j + 1], &tau, &a[j + 1 + a_dim1], 
 		lda, &dwork[*n + 1], (ftnlen)4);
+#line 400 "MB04ZD.f"
 	i__2 = *n - j;
+#line 400 "MB04ZD.f"
 	dlarfx_("Right", n, &i__2, &dwork[j + 1], &tau, &a[(j + 1) * a_dim1 + 
 		1], lda, &dwork[*n + 1], (ftnlen)5);
 
+#line 403 "MB04ZD.f"
 	i__2 = *n - j;
+#line 403 "MB04ZD.f"
 	dlarfx_("Left", &i__2, &j, &dwork[j + 1], &tau, &qg[j + 1 + qg_dim1], 
 		ldqg, &dwork[*n + 1], (ftnlen)4);
+#line 405 "MB04ZD.f"
 	i__2 = *n - j;
+#line 405 "MB04ZD.f"
 	dsymv_("Lower", &i__2, &tau, &qg[j + 1 + (j + 1) * qg_dim1], ldqg, &
 		dwork[j + 1], &c__1, &c_b15, &dwork[*n + j + 1], &c__1, (
 		ftnlen)5);
+#line 407 "MB04ZD.f"
 	i__2 = *n - j;
+#line 407 "MB04ZD.f"
 	i__3 = *n - j;
+#line 407 "MB04ZD.f"
 	d__1 = -tau * ddot_(&i__3, &dwork[*n + j + 1], &c__1, &dwork[j + 1], &
 		c__1) / 2.;
+#line 407 "MB04ZD.f"
 	daxpy_(&i__2, &d__1, &dwork[j + 1], &c__1, &dwork[*n + j + 1], &c__1);
+#line 409 "MB04ZD.f"
 	i__2 = *n - j;
+#line 409 "MB04ZD.f"
 	dsyr2_("Lower", &i__2, &c_b13, &dwork[j + 1], &c__1, &dwork[*n + j + 
 		1], &c__1, &qg[j + 1 + (j + 1) * qg_dim1], ldqg, (ftnlen)5);
 
+#line 412 "MB04ZD.f"
 	i__2 = *n - j;
+#line 412 "MB04ZD.f"
 	dlarfx_("Right", &j, &i__2, &dwork[j + 1], &tau, &qg[(j + 2) * 
 		qg_dim1 + 1], ldqg, &dwork[*n + 1], (ftnlen)5);
+#line 414 "MB04ZD.f"
 	i__2 = *n - j;
+#line 414 "MB04ZD.f"
 	dsymv_("Upper", &i__2, &tau, &qg[j + 1 + (j + 2) * qg_dim1], ldqg, &
 		dwork[j + 1], &c__1, &c_b15, &dwork[*n + j + 1], &c__1, (
 		ftnlen)5);
+#line 416 "MB04ZD.f"
 	i__2 = *n - j;
+#line 416 "MB04ZD.f"
 	i__3 = *n - j;
+#line 416 "MB04ZD.f"
 	d__1 = -tau * ddot_(&i__3, &dwork[*n + j + 1], &c__1, &dwork[j + 1], &
 		c__1) / 2.;
+#line 416 "MB04ZD.f"
 	daxpy_(&i__2, &d__1, &dwork[j + 1], &c__1, &dwork[*n + j + 1], &c__1);
+#line 418 "MB04ZD.f"
 	i__2 = *n - j;
+#line 418 "MB04ZD.f"
 	dsyr2_("Upper", &i__2, &c_b13, &dwork[j + 1], &c__1, &dwork[*n + j + 
 		1], &c__1, &qg[j + 1 + (j + 2) * qg_dim1], ldqg, (ftnlen)5);
 
+#line 421 "MB04ZD.f"
 	if (form) {
 
 /*           Save reflection. */
 
+#line 425 "MB04ZD.f"
 	    i__2 = *n - j;
+#line 425 "MB04ZD.f"
 	    dcopy_(&i__2, &dwork[j + 1], &c__1, &u[j + 1 + (*n + j) * u_dim1],
 		     &c__1);
+#line 426 "MB04ZD.f"
 	    u[j + 1 + (*n + j) * u_dim1] = tau;
 
+#line 428 "MB04ZD.f"
 	} else if (accum) {
 
 /*           Accumulate reflection. */
 
+#line 432 "MB04ZD.f"
 	    i__2 = *n - j;
+#line 432 "MB04ZD.f"
 	    dlarfx_("Right", n, &i__2, &dwork[j + 1], &tau, &u[(j + 1) * 
 		    u_dim1 + 1], ldu, &dwork[*n + 1], (ftnlen)5);
+#line 434 "MB04ZD.f"
 	    i__2 = *n - j;
+#line 434 "MB04ZD.f"
 	    dlarfx_("Right", n, &i__2, &dwork[j + 1], &tau, &u[(*n + j + 1) * 
 		    u_dim1 + 1], ldu, &dwork[*n + 1], (ftnlen)5);
+#line 436 "MB04ZD.f"
 	}
 
+#line 438 "MB04ZD.f"
 /* L10: */
+#line 438 "MB04ZD.f"
     }
 
+#line 440 "MB04ZD.f"
     if (form) {
+#line 441 "MB04ZD.f"
 	dummy[0] = 0.;
 
 /*        Form S by accumulating transformations. */
 
+#line 445 "MB04ZD.f"
 	for (j = *n - 1; j >= 1; --j) {
 
 /*           Initialize (J+1)st column of S. */
 
+#line 449 "MB04ZD.f"
 	    dcopy_(n, dummy, &c__0, &u[(j + 1) * u_dim1 + 1], &c__1);
+#line 450 "MB04ZD.f"
 	    u[j + 1 + (j + 1) * u_dim1] = 1.;
+#line 451 "MB04ZD.f"
 	    dcopy_(n, dummy, &c__0, &u[(*n + j + 1) * u_dim1 + 1], &c__1);
 
 /*           Second reflection. */
 
+#line 455 "MB04ZD.f"
 	    tau = u[j + 1 + (*n + j) * u_dim1];
+#line 456 "MB04ZD.f"
 	    u[j + 1 + (*n + j) * u_dim1] = 1.;
+#line 457 "MB04ZD.f"
 	    i__1 = *n - j;
+#line 457 "MB04ZD.f"
 	    i__2 = *n - j;
+#line 457 "MB04ZD.f"
 	    dlarfx_("Left", &i__1, &i__2, &u[j + 1 + (*n + j) * u_dim1], &tau,
 		     &u[j + 1 + (j + 1) * u_dim1], ldu, &dwork[*n + 1], (
 		    ftnlen)4);
+#line 459 "MB04ZD.f"
 	    i__1 = *n - j;
+#line 459 "MB04ZD.f"
 	    i__2 = *n - j;
+#line 459 "MB04ZD.f"
 	    dlarfx_("Left", &i__1, &i__2, &u[j + 1 + (*n + j) * u_dim1], &tau,
 		     &u[j + 1 + (*n + j + 1) * u_dim1], ldu, &dwork[*n + 1], (
 		    ftnlen)4);
 
 /*           Rotation. */
 
+#line 464 "MB04ZD.f"
 	    i__1 = *n - j;
+#line 464 "MB04ZD.f"
 	    drot_(&i__1, &u[j + 1 + (j + 1) * u_dim1], ldu, &u[j + 1 + (*n + 
 		    j + 1) * u_dim1], ldu, &u[j + j * u_dim1], &u[j + (*n + j)
 		     * u_dim1]);
 
 /*           First reflection. */
 
+#line 469 "MB04ZD.f"
 	    tau = u[j + 1 + j * u_dim1];
+#line 470 "MB04ZD.f"
 	    u[j + 1 + j * u_dim1] = 1.;
+#line 471 "MB04ZD.f"
 	    i__1 = *n - j;
+#line 471 "MB04ZD.f"
 	    i__2 = *n - j;
+#line 471 "MB04ZD.f"
 	    dlarfx_("Left", &i__1, &i__2, &u[j + 1 + j * u_dim1], &tau, &u[j 
 		    + 1 + (j + 1) * u_dim1], ldu, &dwork[*n + 1], (ftnlen)4);
+#line 473 "MB04ZD.f"
 	    i__1 = *n - j;
+#line 473 "MB04ZD.f"
 	    i__2 = *n - j;
+#line 473 "MB04ZD.f"
 	    dlarfx_("Left", &i__1, &i__2, &u[j + 1 + j * u_dim1], &tau, &u[j 
 		    + 1 + (*n + j + 1) * u_dim1], ldu, &dwork[*n + 1], (
 		    ftnlen)4);
+#line 475 "MB04ZD.f"
 /* L20: */
+#line 475 "MB04ZD.f"
 	}
 
 /*        The first column is the first column of identity. */
 
+#line 479 "MB04ZD.f"
 	dcopy_(n, dummy, &c__0, &u[u_offset], &c__1);
+#line 480 "MB04ZD.f"
 	u[u_dim1 + 1] = 1.;
+#line 481 "MB04ZD.f"
 	dcopy_(n, dummy, &c__0, &u[(*n + 1) * u_dim1 + 1], &c__1);
+#line 482 "MB04ZD.f"
     }
 
+#line 484 "MB04ZD.f"
     return 0;
 /*     *** Last line of MB04ZD *** */
 } /* mb04zd_ */

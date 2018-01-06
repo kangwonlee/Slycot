@@ -1,3 +1,4 @@
+#line 1 "SB02MT.f"
 /* SB02MT.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB02MT.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -349,98 +351,177 @@ static doublereal c_b37 = -1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 296 "SB02MT.f"
     /* Parameter adjustments */
+#line 296 "SB02MT.f"
     a_dim1 = *lda;
+#line 296 "SB02MT.f"
     a_offset = 1 + a_dim1;
+#line 296 "SB02MT.f"
     a -= a_offset;
+#line 296 "SB02MT.f"
     b_dim1 = *ldb;
+#line 296 "SB02MT.f"
     b_offset = 1 + b_dim1;
+#line 296 "SB02MT.f"
     b -= b_offset;
+#line 296 "SB02MT.f"
     q_dim1 = *ldq;
+#line 296 "SB02MT.f"
     q_offset = 1 + q_dim1;
+#line 296 "SB02MT.f"
     q -= q_offset;
+#line 296 "SB02MT.f"
     r_dim1 = *ldr;
+#line 296 "SB02MT.f"
     r_offset = 1 + r_dim1;
+#line 296 "SB02MT.f"
     r__ -= r_offset;
+#line 296 "SB02MT.f"
     l_dim1 = *ldl;
+#line 296 "SB02MT.f"
     l_offset = 1 + l_dim1;
+#line 296 "SB02MT.f"
     l -= l_offset;
+#line 296 "SB02MT.f"
     --ipiv;
+#line 296 "SB02MT.f"
     g_dim1 = *ldg;
+#line 296 "SB02MT.f"
     g_offset = 1 + g_dim1;
+#line 296 "SB02MT.f"
     g -= g_offset;
+#line 296 "SB02MT.f"
     --iwork;
+#line 296 "SB02MT.f"
     --dwork;
+#line 296 "SB02MT.f"
 
+#line 296 "SB02MT.f"
     /* Function Body */
+#line 296 "SB02MT.f"
     *info = 0;
+#line 297 "SB02MT.f"
     ljobg = lsame_(jobg, "G", (ftnlen)1, (ftnlen)1);
+#line 298 "SB02MT.f"
     ljobl = lsame_(jobl, "N", (ftnlen)1, (ftnlen)1);
+#line 299 "SB02MT.f"
     lfactc = lsame_(fact, "C", (ftnlen)1, (ftnlen)1);
+#line 300 "SB02MT.f"
     lfactu = lsame_(fact, "U", (ftnlen)1, (ftnlen)1);
+#line 301 "SB02MT.f"
     luplou = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 302 "SB02MT.f"
     lfacta = lfactc || lfactu;
 
 /*     Test the input scalar arguments. */
 
+#line 306 "SB02MT.f"
     if (! ljobg && ! lsame_(jobg, "N", (ftnlen)1, (ftnlen)1)) {
+#line 307 "SB02MT.f"
 	*info = -1;
+#line 308 "SB02MT.f"
     } else if (! ljobl && ! lsame_(jobl, "Z", (ftnlen)1, (ftnlen)1)) {
+#line 309 "SB02MT.f"
 	*info = -2;
+#line 310 "SB02MT.f"
     } else if (! lfacta && ! lsame_(fact, "N", (ftnlen)1, (ftnlen)1)) {
+#line 311 "SB02MT.f"
 	*info = -3;
+#line 312 "SB02MT.f"
     } else if (! luplou && ! lsame_(uplo, "L", (ftnlen)1, (ftnlen)1)) {
+#line 313 "SB02MT.f"
 	*info = -4;
+#line 314 "SB02MT.f"
     } else if (*n < 0) {
+#line 315 "SB02MT.f"
 	*info = -5;
+#line 316 "SB02MT.f"
     } else if (*m < 0) {
+#line 317 "SB02MT.f"
 	*info = -6;
+#line 318 "SB02MT.f"
     } else if (*lda < 1 || ljobl && *lda < *n) {
+#line 319 "SB02MT.f"
 	*info = -8;
+#line 320 "SB02MT.f"
     } else if (*ldb < max(1,*n)) {
+#line 321 "SB02MT.f"
 	*info = -10;
+#line 322 "SB02MT.f"
     } else if (*ldq < 1 || ljobl && *ldq < *n) {
+#line 323 "SB02MT.f"
 	*info = -12;
+#line 324 "SB02MT.f"
     } else if (*ldr < max(1,*m)) {
+#line 325 "SB02MT.f"
 	*info = -14;
+#line 326 "SB02MT.f"
     } else if (*ldl < 1 || ljobl && *ldl < *n) {
+#line 327 "SB02MT.f"
 	*info = -16;
+#line 328 "SB02MT.f"
     } else if (*ldg < 1 || ljobg && *ldg < *n) {
+#line 329 "SB02MT.f"
 	*info = -20;
+#line 330 "SB02MT.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 330 "SB02MT.f"
 	i__1 = 1, i__2 = *n * *m;
 /* Computing MAX */
+#line 330 "SB02MT.f"
 	i__3 = 2, i__4 = *n * *m, i__3 = max(i__3,i__4), i__4 = *m * 3;
+#line 330 "SB02MT.f"
 	if (lfactc && *ldwork < 1 || lfactu && *ldwork < max(i__1,i__2) || ! 
 		lfacta && *ldwork < max(i__3,i__4)) {
+#line 333 "SB02MT.f"
 	    *info = -23;
+#line 334 "SB02MT.f"
 	}
+#line 334 "SB02MT.f"
     }
 
+#line 336 "SB02MT.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 340 "SB02MT.f"
 	i__1 = -(*info);
+#line 340 "SB02MT.f"
 	xerbla_("SB02MT", &i__1, (ftnlen)6);
+#line 341 "SB02MT.f"
 	return 0;
+#line 342 "SB02MT.f"
     }
 
+#line 344 "SB02MT.f"
     if (lfactc) {
+#line 345 "SB02MT.f"
 	*oufact = 1;
+#line 346 "SB02MT.f"
     } else if (lfactu) {
+#line 347 "SB02MT.f"
 	*oufact = 2;
+#line 348 "SB02MT.f"
     }
 
 /*     Quick return if possible. */
 
+#line 352 "SB02MT.f"
     if (*n == 0 || *m == 0 || ! (ljobl || ljobg)) {
+#line 353 "SB02MT.f"
 	dwork[1] = 1.;
+#line 354 "SB02MT.f"
 	if (! lfacta) {
+#line 354 "SB02MT.f"
 	    dwork[2] = 1.;
+#line 354 "SB02MT.f"
 	}
+#line 355 "SB02MT.f"
 	return 0;
+#line 356 "SB02MT.f"
     }
 
 /*     (Note: Comments in the code beginning "Workspace:" describe the */
@@ -449,12 +530,15 @@ static doublereal c_b37 = -1.;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 364 "SB02MT.f"
     wrkopt = 1;
 
 /*     Set relative machine precision. */
 
+#line 368 "SB02MT.f"
     eps = dlamch_("Epsilon", (ftnlen)7);
 
+#line 370 "SB02MT.f"
     if (! lfacta) {
 
 /*        Compute the norm of the matrix R, which is not factored. */
@@ -463,156 +547,235 @@ static doublereal c_b37 = -1.;
 /*        factorization. */
 /*        Workspace: need M. */
 
+#line 378 "SB02MT.f"
 	rnorm = dlansy_("1-norm", uplo, m, &r__[r_offset], ldr, &dwork[1], (
 		ftnlen)6, (ftnlen)1);
+#line 379 "SB02MT.f"
 	i__1 = *ldr + 1;
+#line 379 "SB02MT.f"
 	dcopy_(m, &r__[r_offset], &i__1, &dwork[1], &c__1);
+#line 380 "SB02MT.f"
 	if (luplou) {
 
+#line 382 "SB02MT.f"
 	    i__1 = *m;
+#line 382 "SB02MT.f"
 	    for (j = 2; j <= i__1; ++j) {
+#line 383 "SB02MT.f"
 		i__2 = j - 1;
+#line 383 "SB02MT.f"
 		dcopy_(&i__2, &r__[j * r_dim1 + 1], &c__1, &r__[j + r_dim1], 
 			ldr);
+#line 384 "SB02MT.f"
 /* L20: */
+#line 384 "SB02MT.f"
 	    }
 
+#line 386 "SB02MT.f"
 	} else {
 
+#line 388 "SB02MT.f"
 	    i__1 = *m;
+#line 388 "SB02MT.f"
 	    for (j = 2; j <= i__1; ++j) {
+#line 389 "SB02MT.f"
 		i__2 = j - 1;
+#line 389 "SB02MT.f"
 		dcopy_(&i__2, &r__[j + r_dim1], ldr, &r__[j * r_dim1 + 1], &
 			c__1);
+#line 390 "SB02MT.f"
 /* L40: */
+#line 390 "SB02MT.f"
 	    }
 
+#line 392 "SB02MT.f"
 	}
+#line 393 "SB02MT.f"
 	dpotrf_(uplo, m, &r__[r_offset], ldr, info, (ftnlen)1);
+#line 394 "SB02MT.f"
 	if (*info == 0) {
 
 /*           Compute the reciprocal of the condition number of R. */
 /*           Workspace: need 3*M. */
 
+#line 399 "SB02MT.f"
 	    dpocon_(uplo, m, &r__[r_offset], ldr, &rnorm, &rcond, &dwork[1], &
 		    iwork[1], info, (ftnlen)1);
 
 /*           Return if the matrix is singular to working precision. */
 
+#line 404 "SB02MT.f"
 	    *oufact = 1;
+#line 405 "SB02MT.f"
 	    dwork[2] = rcond;
+#line 406 "SB02MT.f"
 	    if (rcond < eps) {
+#line 407 "SB02MT.f"
 		*info = *m + 1;
+#line 408 "SB02MT.f"
 		return 0;
+#line 409 "SB02MT.f"
 	    }
 /* Computing MAX */
+#line 410 "SB02MT.f"
 	    i__1 = wrkopt, i__2 = *m * 3;
+#line 410 "SB02MT.f"
 	    wrkopt = max(i__1,i__2);
+#line 411 "SB02MT.f"
 	} else {
 
 /*           Use UdU' or LdL' factorization, first restoring the saved */
 /*           triangle. */
 
+#line 416 "SB02MT.f"
 	    i__1 = *ldr + 1;
+#line 416 "SB02MT.f"
 	    dcopy_(m, &dwork[1], &c__1, &r__[r_offset], &i__1);
+#line 417 "SB02MT.f"
 	    if (luplou) {
 
+#line 419 "SB02MT.f"
 		i__1 = *m;
+#line 419 "SB02MT.f"
 		for (j = 2; j <= i__1; ++j) {
+#line 420 "SB02MT.f"
 		    i__2 = j - 1;
+#line 420 "SB02MT.f"
 		    dcopy_(&i__2, &r__[j + r_dim1], ldr, &r__[j * r_dim1 + 1],
 			     &c__1);
+#line 421 "SB02MT.f"
 /* L60: */
+#line 421 "SB02MT.f"
 		}
 
+#line 423 "SB02MT.f"
 	    } else {
 
+#line 425 "SB02MT.f"
 		i__1 = *m;
+#line 425 "SB02MT.f"
 		for (j = 2; j <= i__1; ++j) {
+#line 426 "SB02MT.f"
 		    i__2 = j - 1;
+#line 426 "SB02MT.f"
 		    dcopy_(&i__2, &r__[j * r_dim1 + 1], &c__1, &r__[j + 
 			    r_dim1], ldr);
+#line 427 "SB02MT.f"
 /* L80: */
+#line 427 "SB02MT.f"
 		}
 
+#line 429 "SB02MT.f"
 	    }
 
 /*           Compute the UdU' or LdL' factorization. */
 /*           Workspace: need   1, */
 /*                      prefer M*NB. */
 
+#line 435 "SB02MT.f"
 	    dsytrf_(uplo, m, &r__[r_offset], ldr, &ipiv[1], &dwork[1], ldwork,
 		     info, (ftnlen)1);
+#line 436 "SB02MT.f"
 	    *oufact = 2;
+#line 437 "SB02MT.f"
 	    if (*info > 0) {
+#line 438 "SB02MT.f"
 		dwork[2] = 1.;
+#line 439 "SB02MT.f"
 		return 0;
+#line 440 "SB02MT.f"
 	    }
 /* Computing MAX */
+#line 441 "SB02MT.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 441 "SB02MT.f"
 	    wrkopt = max(i__1,i__2);
 
 /*           Compute the reciprocal of the condition number of R. */
 /*           Workspace: need 2*M. */
 
+#line 446 "SB02MT.f"
 	    dsycon_(uplo, m, &r__[r_offset], ldr, &ipiv[1], &rnorm, &rcond, &
 		    dwork[1], &iwork[1], info, (ftnlen)1);
 
 /*           Return if the matrix is singular to working precision. */
 
+#line 451 "SB02MT.f"
 	    dwork[2] = rcond;
+#line 452 "SB02MT.f"
 	    if (rcond < eps) {
+#line 453 "SB02MT.f"
 		*info = *m + 1;
+#line 454 "SB02MT.f"
 		return 0;
+#line 455 "SB02MT.f"
 	    }
+#line 456 "SB02MT.f"
 	}
+#line 457 "SB02MT.f"
     }
 
+#line 459 "SB02MT.f"
     if (*oufact == 1) {
 
 /*        Solve positive definite linear system(s). */
 
+#line 463 "SB02MT.f"
 	if (luplou) {
+#line 464 "SB02MT.f"
 	    *(unsigned char *)trans = 'N';
+#line 465 "SB02MT.f"
 	} else {
+#line 466 "SB02MT.f"
 	    *(unsigned char *)trans = 'T';
+#line 467 "SB02MT.f"
 	}
 
 /*        Solve the system X*U = B, overwriting B with X. */
 
+#line 471 "SB02MT.f"
 	dtrsm_("Right", uplo, trans, "Non-unit", n, m, &c_b28, &r__[r_offset],
 		 ldr, &b[b_offset], ldb, (ftnlen)5, (ftnlen)1, (ftnlen)1, (
 		ftnlen)8);
 
+#line 474 "SB02MT.f"
 	if (ljobg) {
 /*                                      -1 */
 /*           Compute the matrix  G = B*R  *B', multiplying X*X' in G. */
 
+#line 478 "SB02MT.f"
 	    dsyrk_(uplo, "No transpose", n, m, &c_b28, &b[b_offset], ldb, &
 		    c_b31, &g[g_offset], ldg, (ftnlen)1, (ftnlen)12);
+#line 480 "SB02MT.f"
 	}
 
+#line 482 "SB02MT.f"
 	if (ljobl) {
 
 /*           Update matrices A and Q. */
 
 /*           Solve the system Y*U = L, overwriting L with Y. */
 
+#line 488 "SB02MT.f"
 	    dtrsm_("Right", uplo, trans, "Non-unit", n, m, &c_b28, &r__[
 		    r_offset], ldr, &l[l_offset], ldl, (ftnlen)5, (ftnlen)1, (
 		    ftnlen)1, (ftnlen)8);
 
 /*           Compute A <- A - X*Y'. */
 
+#line 493 "SB02MT.f"
 	    dgemm_("No transpose", "Transpose", n, n, m, &c_b37, &b[b_offset],
 		     ldb, &l[l_offset], ldl, &c_b28, &a[a_offset], lda, (
 		    ftnlen)12, (ftnlen)9);
 
 /*           Compute Q <- Q - Y*Y'. */
 
+#line 498 "SB02MT.f"
 	    dsyrk_(uplo, "No transpose", n, m, &c_b37, &l[l_offset], ldl, &
 		    c_b28, &q[q_offset], ldq, (ftnlen)1, (ftnlen)12);
+#line 500 "SB02MT.f"
 	}
+#line 501 "SB02MT.f"
     } else {
 
 /*        Solve indefinite linear system(s). */
@@ -620,99 +783,152 @@ static doublereal c_b37 = -1.;
 /*        Solve the system UdU'*X = B' (or LdL'*X = B'). */
 /*        Workspace: need N*M. */
 
+#line 508 "SB02MT.f"
 	i__1 = *m;
+#line 508 "SB02MT.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 509 "SB02MT.f"
 	    dcopy_(n, &b[j * b_dim1 + 1], &c__1, &dwork[j], m);
+#line 510 "SB02MT.f"
 /* L100: */
+#line 510 "SB02MT.f"
 	}
 
+#line 512 "SB02MT.f"
 	dsytrs_(uplo, m, n, &r__[r_offset], ldr, &ipiv[1], &dwork[1], m, info,
 		 (ftnlen)1);
 
+#line 514 "SB02MT.f"
 	if (ljobg) {
 /*                                                    -1 */
 /*           Compute a triangle of the matrix  G = B*R  *B' = B*X. */
 
+#line 518 "SB02MT.f"
 	    if (luplou) {
+#line 519 "SB02MT.f"
 		i__ = 1;
 
+#line 521 "SB02MT.f"
 		i__1 = *n;
+#line 521 "SB02MT.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 522 "SB02MT.f"
 		    dgemv_("No transpose", &j, m, &c_b28, &b[b_offset], ldb, &
 			    dwork[i__], &c__1, &c_b31, &g[j * g_dim1 + 1], &
 			    c__1, (ftnlen)12);
+#line 524 "SB02MT.f"
 		    i__ += *m;
+#line 525 "SB02MT.f"
 /* L120: */
+#line 525 "SB02MT.f"
 		}
 
+#line 527 "SB02MT.f"
 	    } else {
 
+#line 529 "SB02MT.f"
 		i__1 = *n;
+#line 529 "SB02MT.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 530 "SB02MT.f"
 		    dgemv_("Transpose", m, &j, &c_b28, &dwork[1], m, &b[j + 
 			    b_dim1], ldb, &c_b31, &g[j + g_dim1], ldg, (
 			    ftnlen)9);
+#line 532 "SB02MT.f"
 /* L140: */
+#line 532 "SB02MT.f"
 		}
 
+#line 534 "SB02MT.f"
 	    }
+#line 535 "SB02MT.f"
 	}
 
+#line 537 "SB02MT.f"
 	if (ljobl) {
 
 /*           Update matrices A and Q. */
 
 /*           Solve the system UdU'*Y = L' (or LdL'*Y = L'). */
 
+#line 543 "SB02MT.f"
 	    i__1 = *m;
+#line 543 "SB02MT.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 544 "SB02MT.f"
 		dcopy_(n, &l[j * l_dim1 + 1], &c__1, &dwork[j], m);
+#line 545 "SB02MT.f"
 /* L160: */
+#line 545 "SB02MT.f"
 	    }
 
+#line 547 "SB02MT.f"
 	    dsytrs_(uplo, m, n, &r__[r_offset], ldr, &ipiv[1], &dwork[1], m, 
 		    info, (ftnlen)1);
 
 /*           A <- A - B*Y. */
 
+#line 551 "SB02MT.f"
 	    dgemm_("No transpose", "No transpose", n, n, m, &c_b37, &b[
 		    b_offset], ldb, &dwork[1], m, &c_b28, &a[a_offset], lda, (
 		    ftnlen)12, (ftnlen)12);
 /*                                            -          -1 */
 /*           Compute a triangle of the matrix Q = Q - L*R  *L' = Q - L*Y. */
 
+#line 556 "SB02MT.f"
 	    if (luplou) {
+#line 557 "SB02MT.f"
 		i__ = 1;
 
+#line 559 "SB02MT.f"
 		i__1 = *n;
+#line 559 "SB02MT.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 560 "SB02MT.f"
 		    dgemv_("No transpose", &j, m, &c_b37, &l[l_offset], ldl, &
 			    dwork[i__], &c__1, &c_b28, &q[j * q_dim1 + 1], &
 			    c__1, (ftnlen)12);
+#line 562 "SB02MT.f"
 		    i__ += *m;
+#line 563 "SB02MT.f"
 /* L180: */
+#line 563 "SB02MT.f"
 		}
 
+#line 565 "SB02MT.f"
 	    } else {
 
+#line 567 "SB02MT.f"
 		i__1 = *n;
+#line 567 "SB02MT.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 568 "SB02MT.f"
 		    dgemv_("Transpose", m, &j, &c_b37, &dwork[1], m, &l[j + 
 			    l_dim1], ldl, &c_b28, &q[j + q_dim1], ldq, (
 			    ftnlen)9);
+#line 570 "SB02MT.f"
 /* L200: */
+#line 570 "SB02MT.f"
 		}
 
+#line 572 "SB02MT.f"
 	    }
+#line 573 "SB02MT.f"
 	}
+#line 574 "SB02MT.f"
     }
 
+#line 576 "SB02MT.f"
     dwork[1] = (doublereal) wrkopt;
+#line 577 "SB02MT.f"
     if (! lfacta) {
+#line 577 "SB02MT.f"
 	dwork[2] = rcond;
+#line 577 "SB02MT.f"
     }
 
 /* *** Last line of SB02MT *** */
+#line 580 "SB02MT.f"
     return 0;
 } /* sb02mt_ */
 

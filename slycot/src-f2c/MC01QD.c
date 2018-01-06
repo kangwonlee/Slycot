@@ -1,3 +1,4 @@
+#line 1 "MC01QD.f"
 /* MC01QD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC01QD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -179,65 +181,112 @@ static integer c__1 = 1;
 
 /*     Test the input scalar arguments. */
 
+#line 157 "MC01QD.f"
     /* Parameter adjustments */
+#line 157 "MC01QD.f"
     --rq;
+#line 157 "MC01QD.f"
     --b;
+#line 157 "MC01QD.f"
     --a;
+#line 157 "MC01QD.f"
 
+#line 157 "MC01QD.f"
     /* Function Body */
+#line 157 "MC01QD.f"
     *iwarn = 0;
+#line 158 "MC01QD.f"
     *info = 0;
+#line 159 "MC01QD.f"
     if (*da < -1) {
+#line 160 "MC01QD.f"
 	*info = -1;
+#line 161 "MC01QD.f"
     } else if (*db < 0) {
+#line 162 "MC01QD.f"
 	*info = -2;
+#line 163 "MC01QD.f"
     }
 
+#line 165 "MC01QD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 169 "MC01QD.f"
 	i__1 = -(*info);
+#line 169 "MC01QD.f"
 	xerbla_("MC01QD", &i__1, (ftnlen)6);
+#line 170 "MC01QD.f"
 	return 0;
+#line 171 "MC01QD.f"
     }
 
 /*     WHILE ( DB >= 0 and B(DB+1) = 0 ) DO */
+#line 174 "MC01QD.f"
 L20:
+#line 174 "MC01QD.f"
     if (*db >= 0) {
+#line 175 "MC01QD.f"
 	if (b[*db + 1] == 0.) {
+#line 176 "MC01QD.f"
 	    --(*db);
+#line 177 "MC01QD.f"
 	    ++(*iwarn);
+#line 178 "MC01QD.f"
 	    goto L20;
+#line 179 "MC01QD.f"
 	}
+#line 180 "MC01QD.f"
     }
 /*     END WHILE 20 */
+#line 182 "MC01QD.f"
     if (*db == -1) {
+#line 183 "MC01QD.f"
 	*info = 1;
+#line 184 "MC01QD.f"
 	return 0;
+#line 185 "MC01QD.f"
     }
 
 /*     B(x) is non-zero. */
 
+#line 189 "MC01QD.f"
     if (*da >= 0) {
+#line 190 "MC01QD.f"
 	n = *da;
+#line 191 "MC01QD.f"
 	i__1 = n + 1;
+#line 191 "MC01QD.f"
 	dcopy_(&i__1, &a[1], &c__1, &rq[1], &c__1);
 /*        WHILE ( N >= DB ) DO */
+#line 193 "MC01QD.f"
 L40:
+#line 193 "MC01QD.f"
 	if (n >= *db) {
+#line 194 "MC01QD.f"
 	    if (rq[n + 1] != 0.) {
+#line 195 "MC01QD.f"
 		q = rq[n + 1] / b[*db + 1];
+#line 196 "MC01QD.f"
 		d__1 = -q;
+#line 196 "MC01QD.f"
 		daxpy_(db, &d__1, &b[1], &c__1, &rq[n - *db + 1], &c__1);
+#line 197 "MC01QD.f"
 		rq[n + 1] = q;
+#line 198 "MC01QD.f"
 	    }
+#line 199 "MC01QD.f"
 	    --n;
+#line 200 "MC01QD.f"
 	    goto L40;
+#line 201 "MC01QD.f"
 	}
 /*        END WHILE 40 */
+#line 203 "MC01QD.f"
     }
 
+#line 205 "MC01QD.f"
     return 0;
 /* *** Last line of MC01QD *** */
 } /* mc01qd_ */

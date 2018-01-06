@@ -1,0 +1,10 @@
+extern int mb04ud_(char *jobq, char *jobz, integer *m, integer *n, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *q, integer *ldq, doublereal *z__, integer *ldz, integer *ranke, integer *istair, doublereal *tol, doublereal *dwork, integer *info, ftnlen jobq_len, ftnlen jobz_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: idamax_ 4 3 4 7 4 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dlarf_ 14 10 13 4 4 7 4 7 7 4 7 124 */

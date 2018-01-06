@@ -1,3 +1,4 @@
+#line 1 "IB01AD.f"
 /* IB01AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "IB01AD.f"
 /* Subroutine */ int ib01ad_(char *meth, char *alg, char *jobd, char *batch, 
 	char *conct, char *ctrl, integer *nobr, integer *m, integer *l, 
 	integer *nsmp, doublereal *u, integer *ldu, doublereal *y, integer *
@@ -523,85 +525,159 @@
 
 /*     Decode the scalar input parameters. */
 
+#line 493 "IB01AD.f"
     /* Parameter adjustments */
+#line 493 "IB01AD.f"
     u_dim1 = *ldu;
+#line 493 "IB01AD.f"
     u_offset = 1 + u_dim1;
+#line 493 "IB01AD.f"
     u -= u_offset;
+#line 493 "IB01AD.f"
     y_dim1 = *ldy;
+#line 493 "IB01AD.f"
     y_offset = 1 + y_dim1;
+#line 493 "IB01AD.f"
     y -= y_offset;
+#line 493 "IB01AD.f"
     r_dim1 = *ldr;
+#line 493 "IB01AD.f"
     r_offset = 1 + r_dim1;
+#line 493 "IB01AD.f"
     r__ -= r_offset;
+#line 493 "IB01AD.f"
     --sv;
+#line 493 "IB01AD.f"
     --iwork;
+#line 493 "IB01AD.f"
     --dwork;
+#line 493 "IB01AD.f"
 
+#line 493 "IB01AD.f"
     /* Function Body */
+#line 493 "IB01AD.f"
     moesp = lsame_(meth, "M", (ftnlen)1, (ftnlen)1);
+#line 494 "IB01AD.f"
     n4sid = lsame_(meth, "N", (ftnlen)1, (ftnlen)1);
+#line 495 "IB01AD.f"
     fqralg = lsame_(alg, "F", (ftnlen)1, (ftnlen)1);
+#line 496 "IB01AD.f"
     qralg = lsame_(alg, "Q", (ftnlen)1, (ftnlen)1);
+#line 497 "IB01AD.f"
     chalg = lsame_(alg, "C", (ftnlen)1, (ftnlen)1);
+#line 498 "IB01AD.f"
     jobdm = lsame_(jobd, "M", (ftnlen)1, (ftnlen)1);
+#line 499 "IB01AD.f"
     onebch = lsame_(batch, "O", (ftnlen)1, (ftnlen)1);
+#line 500 "IB01AD.f"
     first = lsame_(batch, "F", (ftnlen)1, (ftnlen)1) || onebch;
+#line 501 "IB01AD.f"
     interm = lsame_(batch, "I", (ftnlen)1, (ftnlen)1);
+#line 502 "IB01AD.f"
     last = lsame_(batch, "L", (ftnlen)1, (ftnlen)1) || onebch;
+#line 503 "IB01AD.f"
     contrl = lsame_(ctrl, "C", (ftnlen)1, (ftnlen)1);
 
+#line 505 "IB01AD.f"
     if (! onebch) {
+#line 506 "IB01AD.f"
 	connec = lsame_(conct, "C", (ftnlen)1, (ftnlen)1);
+#line 507 "IB01AD.f"
     } else {
+#line 508 "IB01AD.f"
 	connec = FALSE_;
+#line 509 "IB01AD.f"
     }
 
+#line 511 "IB01AD.f"
     mnobr = *m * *nobr;
+#line 512 "IB01AD.f"
     lnobr = *l * *nobr;
+#line 513 "IB01AD.f"
     lmnobr = lnobr + mnobr;
+#line 514 "IB01AD.f"
     nr = lmnobr + lmnobr;
+#line 515 "IB01AD.f"
     nobr21 = (*nobr << 1) - 1;
+#line 516 "IB01AD.f"
     *iwarn = 0;
+#line 517 "IB01AD.f"
     *info = 0;
+#line 518 "IB01AD.f"
     if (first) {
+#line 519 "IB01AD.f"
 	maxwrk = 1;
+#line 520 "IB01AD.f"
 	nsmpsm = 0;
+#line 521 "IB01AD.f"
     }
+#line 522 "IB01AD.f"
     nsmpsm += *nsmp;
 
 /*     Check the scalar input parameters. */
 
+#line 526 "IB01AD.f"
     if (! (moesp || n4sid)) {
+#line 527 "IB01AD.f"
 	*info = -1;
+#line 528 "IB01AD.f"
     } else if (! (fqralg || qralg || chalg)) {
+#line 529 "IB01AD.f"
 	*info = -2;
+#line 530 "IB01AD.f"
     } else if (moesp && ! (jobdm || lsame_(jobd, "N", (ftnlen)1, (ftnlen)1))) 
 	    {
+#line 531 "IB01AD.f"
 	*info = -3;
+#line 532 "IB01AD.f"
     } else if (! (first || interm || last)) {
+#line 533 "IB01AD.f"
 	*info = -4;
+#line 534 "IB01AD.f"
     } else if (! onebch) {
+#line 535 "IB01AD.f"
 	if (! (connec || lsame_(conct, "N", (ftnlen)1, (ftnlen)1))) {
+#line 535 "IB01AD.f"
 	    *info = -5;
+#line 535 "IB01AD.f"
 	}
+#line 537 "IB01AD.f"
     }
+#line 538 "IB01AD.f"
     if (*info == 0) {
+#line 539 "IB01AD.f"
 	if (! (contrl || lsame_(ctrl, "N", (ftnlen)1, (ftnlen)1))) {
+#line 540 "IB01AD.f"
 	    *info = -6;
+#line 541 "IB01AD.f"
 	} else if (*nobr <= 0) {
+#line 542 "IB01AD.f"
 	    *info = -7;
+#line 543 "IB01AD.f"
 	} else if (*m < 0) {
+#line 544 "IB01AD.f"
 	    *info = -8;
+#line 545 "IB01AD.f"
 	} else if (*l <= 0) {
+#line 546 "IB01AD.f"
 	    *info = -9;
+#line 547 "IB01AD.f"
 	} else if (*nsmp < *nobr << 1 || last && nsmpsm < nr + nobr21) {
+#line 549 "IB01AD.f"
 	    *info = -10;
+#line 550 "IB01AD.f"
 	} else if (*ldu < 1 || *m > 0 && *ldu < *nsmp) {
+#line 551 "IB01AD.f"
 	    *info = -12;
+#line 552 "IB01AD.f"
 	} else if (*ldy < *nsmp) {
+#line 553 "IB01AD.f"
 	    *info = -14;
+#line 554 "IB01AD.f"
 	} else if (*ldr < nr || moesp && jobdm && *ldr < mnobr * 3) {
+#line 556 "IB01AD.f"
 	    *info = -17;
+#line 557 "IB01AD.f"
 	} else {
 
 /*           Compute workspace. */
@@ -609,78 +685,142 @@
 /*           the minimal amount of workspace needed at that point in the */
 /*           code, as well as the preferred amount for good performance.) */
 
+#line 564 "IB01AD.f"
 	    ns = *nsmp - nobr21;
+#line 565 "IB01AD.f"
 	    if (chalg) {
+#line 566 "IB01AD.f"
 		if (! last) {
+#line 567 "IB01AD.f"
 		    if (connec) {
+#line 568 "IB01AD.f"
 			minwrk = nr - *m - *l << 1;
+#line 569 "IB01AD.f"
 		    } else {
+#line 570 "IB01AD.f"
 			minwrk = 1;
+#line 571 "IB01AD.f"
 		    }
+#line 572 "IB01AD.f"
 		} else if (moesp) {
+#line 573 "IB01AD.f"
 		    if (connec && ! onebch) {
 /* Computing MAX */
+#line 574 "IB01AD.f"
 			i__1 = nr - *m - *l << 1, i__2 = lnobr * 5;
+#line 574 "IB01AD.f"
 			minwrk = max(i__1,i__2);
+#line 575 "IB01AD.f"
 		    } else {
+#line 576 "IB01AD.f"
 			minwrk = lnobr * 5;
+#line 577 "IB01AD.f"
 			if (jobdm) {
 /* Computing MAX */
+#line 577 "IB01AD.f"
 			    i__1 = (mnobr << 1) - *nobr, i__1 = max(i__1,
 				    lmnobr);
+#line 577 "IB01AD.f"
 			    minwrk = max(i__1,minwrk);
+#line 577 "IB01AD.f"
 			}
+#line 579 "IB01AD.f"
 		    }
+#line 580 "IB01AD.f"
 		} else {
+#line 581 "IB01AD.f"
 		    minwrk = lmnobr * 5 + 1;
+#line 582 "IB01AD.f"
 		}
+#line 583 "IB01AD.f"
 	    } else if (fqralg) {
+#line 584 "IB01AD.f"
 		if (! onebch && connec) {
+#line 585 "IB01AD.f"
 		    minwrk = nr * (*m + *l + 3);
+#line 586 "IB01AD.f"
 		} else if (first || interm) {
+#line 587 "IB01AD.f"
 		    minwrk = nr * (*m + *l + 1);
+#line 588 "IB01AD.f"
 		} else {
+#line 589 "IB01AD.f"
 		    minwrk = (nr << 1) * (*m + *l + 1) + nr;
+#line 590 "IB01AD.f"
 		}
+#line 591 "IB01AD.f"
 	    } else {
+#line 592 "IB01AD.f"
 		minwrk = nr << 1;
+#line 593 "IB01AD.f"
 		if (onebch && *ldr >= ns) {
+#line 594 "IB01AD.f"
 		    if (moesp) {
 /* Computing MAX */
+#line 595 "IB01AD.f"
 			i__1 = minwrk, i__2 = lnobr * 5;
+#line 595 "IB01AD.f"
 			minwrk = max(i__1,i__2);
+#line 596 "IB01AD.f"
 		    } else {
+#line 597 "IB01AD.f"
 			minwrk = lmnobr * 5 + 1;
+#line 598 "IB01AD.f"
 		    }
+#line 599 "IB01AD.f"
 		}
+#line 600 "IB01AD.f"
 		if (first) {
+#line 601 "IB01AD.f"
 		    if (*ldr < ns) {
+#line 602 "IB01AD.f"
 			minwrk += nr;
+#line 603 "IB01AD.f"
 		    }
+#line 604 "IB01AD.f"
 		} else {
+#line 605 "IB01AD.f"
 		    if (connec) {
+#line 606 "IB01AD.f"
 			minwrk *= *nobr + 1;
+#line 607 "IB01AD.f"
 		    } else {
+#line 608 "IB01AD.f"
 			minwrk += nr;
+#line 609 "IB01AD.f"
 		    }
+#line 610 "IB01AD.f"
 		}
+#line 611 "IB01AD.f"
 	    }
 
+#line 613 "IB01AD.f"
 	    maxwrk = minwrk;
 
+#line 615 "IB01AD.f"
 	    if (*ldwork < minwrk) {
+#line 616 "IB01AD.f"
 		*info = -23;
+#line 617 "IB01AD.f"
 		dwork[1] = (doublereal) minwrk;
+#line 618 "IB01AD.f"
 	    }
+#line 619 "IB01AD.f"
 	}
+#line 620 "IB01AD.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 624 "IB01AD.f"
     if (*info != 0) {
+#line 625 "IB01AD.f"
 	i__1 = -(*info);
+#line 625 "IB01AD.f"
 	xerbla_("IB01AD", &i__1, (ftnlen)6);
+#line 626 "IB01AD.f"
 	return 0;
+#line 627 "IB01AD.f"
     }
 
 /*     Compress the input-output data. */
@@ -689,27 +829,36 @@
 /*                       (see SLICOT Library routine IB01MD); */
 /*                prefer larger. */
 
+#line 635 "IB01AD.f"
     ib01md_(meth, alg, batch, conct, nobr, m, l, nsmp, &u[u_offset], ldu, &y[
 	    y_offset], ldy, &r__[r_offset], ldr, &iwork[1], &dwork[1], ldwork,
 	     iwarn, info, (ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)1);
 
+#line 638 "IB01AD.f"
     if (*info == 1) {
 
 /*        Error return: A fast algorithm was requested (ALG = 'C', 'F') */
 /*        in sequential data processing, but it failed. */
 
+#line 643 "IB01AD.f"
 	return 0;
+#line 644 "IB01AD.f"
     }
 
 /* Computing MAX */
+#line 646 "IB01AD.f"
     i__1 = maxwrk, i__2 = (integer) dwork[1];
+#line 646 "IB01AD.f"
     maxwrk = max(i__1,i__2);
 
+#line 648 "IB01AD.f"
     if (! last) {
 
 /*        Return to get new data. */
 
+#line 652 "IB01AD.f"
 	return 0;
+#line 653 "IB01AD.f"
     }
 
 /*     Find the singular value decomposition (SVD) giving the system */
@@ -720,28 +869,38 @@
 /*                            5*(M+L)*NOBR+1, if METH = 'N'; */
 /*                prefer larger. */
 
+#line 663 "IB01AD.f"
     ib01nd_(meth, jobd, nobr, m, l, &r__[r_offset], ldr, &sv[1], rcond, &
 	    iwork[1], &dwork[1], ldwork, &iwarnl, info, (ftnlen)1, (ftnlen)1);
+#line 665 "IB01AD.f"
     *iwarn = max(*iwarn,iwarnl);
 
+#line 667 "IB01AD.f"
     if (*info == 2) {
 
 /*        Error return: the singular value decomposition (SVD) algorithm */
 /*        did not converge. */
 
+#line 672 "IB01AD.f"
 	return 0;
+#line 673 "IB01AD.f"
     }
 
 /*     Estimate the system order. */
 
+#line 677 "IB01AD.f"
     ib01od_(ctrl, nobr, l, &sv[1], n, tol, &iwarnl, info, (ftnlen)1);
+#line 678 "IB01AD.f"
     *iwarn = max(*iwarn,iwarnl);
 
 /*     Return optimal workspace in  DWORK(1). */
 
 /* Computing MAX */
+#line 682 "IB01AD.f"
     i__1 = maxwrk, i__2 = (integer) dwork[1];
+#line 682 "IB01AD.f"
     dwork[1] = (doublereal) max(i__1,i__2);
+#line 683 "IB01AD.f"
     return 0;
 
 /* *** Last line of IB01AD *** */

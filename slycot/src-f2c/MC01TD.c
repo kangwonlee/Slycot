@@ -1,3 +1,4 @@
+#line 1 "MC01TD.f"
 /* MC01TD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC01TD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -205,81 +207,134 @@ static doublereal c_b18 = 1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 180 "MC01TD.f"
     /* Parameter adjustments */
+#line 180 "MC01TD.f"
     --dwork;
+#line 180 "MC01TD.f"
     --p;
+#line 180 "MC01TD.f"
 
+#line 180 "MC01TD.f"
     /* Function Body */
+#line 180 "MC01TD.f"
     *iwarn = 0;
+#line 181 "MC01TD.f"
     *info = 0;
+#line 182 "MC01TD.f"
     dicoc = lsame_(dico, "C", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 186 "MC01TD.f"
     if (! dicoc && ! lsame_(dico, "D", (ftnlen)1, (ftnlen)1)) {
+#line 187 "MC01TD.f"
 	*info = -1;
+#line 188 "MC01TD.f"
     } else if (*dp < 0) {
+#line 189 "MC01TD.f"
 	*info = -2;
+#line 190 "MC01TD.f"
     }
 
+#line 192 "MC01TD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 196 "MC01TD.f"
 	i__1 = -(*info);
+#line 196 "MC01TD.f"
 	xerbla_("MC01TD", &i__1, (ftnlen)6);
+#line 197 "MC01TD.f"
 	return 0;
+#line 198 "MC01TD.f"
     }
 
 /*     WHILE (DP >= 0 and P(DP+1) = 0 ) DO */
+#line 201 "MC01TD.f"
 L20:
+#line 201 "MC01TD.f"
     if (*dp >= 0) {
+#line 202 "MC01TD.f"
 	if (p[*dp + 1] == 0.) {
+#line 203 "MC01TD.f"
 	    --(*dp);
+#line 204 "MC01TD.f"
 	    ++(*iwarn);
+#line 205 "MC01TD.f"
 	    goto L20;
+#line 206 "MC01TD.f"
 	}
+#line 207 "MC01TD.f"
     }
 /*     END WHILE 20 */
 
+#line 210 "MC01TD.f"
     if (*dp == -1) {
+#line 211 "MC01TD.f"
 	*info = 1;
+#line 212 "MC01TD.f"
 	return 0;
+#line 213 "MC01TD.f"
     }
 
 /*     P(x) is not the zero polynomial and its degree is exactly DP. */
 
+#line 217 "MC01TD.f"
     if (dicoc) {
 
 /*        Continuous-time case. */
 
 /*        Compute the Routh coefficients and the number of sign changes. */
 
+#line 223 "MC01TD.f"
 	i__1 = *dp + 1;
+#line 223 "MC01TD.f"
 	dcopy_(&i__1, &p[1], &c__1, &dwork[1], &c__1);
+#line 224 "MC01TD.f"
 	*nz = 0;
+#line 225 "MC01TD.f"
 	k = *dp;
 /*        WHILE ( K > 0 and DWORK(K) non-zero) DO */
+#line 227 "MC01TD.f"
 L40:
+#line 227 "MC01TD.f"
 	if (k > 0) {
+#line 228 "MC01TD.f"
 	    if (dwork[k] == 0.) {
+#line 229 "MC01TD.f"
 		*info = 2;
+#line 230 "MC01TD.f"
 	    } else {
+#line 231 "MC01TD.f"
 		alpha = dwork[k + 1] / dwork[k];
+#line 232 "MC01TD.f"
 		if (alpha < 0.) {
+#line 232 "MC01TD.f"
 		    ++(*nz);
+#line 232 "MC01TD.f"
 		}
+#line 233 "MC01TD.f"
 		--k;
 
+#line 235 "MC01TD.f"
 		for (i__ = k; i__ >= 2; i__ += -2) {
+#line 236 "MC01TD.f"
 		    dwork[i__] -= alpha * dwork[i__ - 1];
+#line 237 "MC01TD.f"
 /* L60: */
+#line 237 "MC01TD.f"
 		}
 
+#line 239 "MC01TD.f"
 		goto L40;
+#line 240 "MC01TD.f"
 	    }
+#line 241 "MC01TD.f"
 	}
 /*        END WHILE 40 */
+#line 243 "MC01TD.f"
     } else {
 
 /*        Discrete-time case. */
@@ -288,7 +343,9 @@ L40:
 /*        P(x) the elements of the array P are copied in DWORK in */
 /*        reverse order. */
 
+#line 251 "MC01TD.f"
 	i__1 = *dp + 1;
+#line 251 "MC01TD.f"
 	dcopy_(&i__1, &p[1], &c__1, &dwork[1], &c_n1);
 /*                                                           K-1 */
 /*        DWORK(K),...,DWORK(DP+1), are the coefficients of T   P(x) */
@@ -297,56 +354,95 @@ L40:
 /*                                                    i-1 */
 /*        DWORK(i), i = 1,...,K, contains alpha(i) * T   P(0). */
 
+#line 259 "MC01TD.f"
 	signum = 1;
+#line 260 "MC01TD.f"
 	*nz = 0;
+#line 261 "MC01TD.f"
 	k = 1;
 /*        WHILE ( K <= DP and DWORK(K) non-zero ) DO */
+#line 263 "MC01TD.f"
 L80:
+#line 263 "MC01TD.f"
 	if (k <= *dp && *info == 0) {
 /*                                        K */
 /*           Compute the coefficients of T P(x). */
 
+#line 267 "MC01TD.f"
 	    k1 = *dp - k + 2;
+#line 268 "MC01TD.f"
 	    k2 = *dp + 2;
+#line 269 "MC01TD.f"
 	    alpha = dwork[k - 1 + idamax_(&k1, &dwork[k], &c__1)];
+#line 270 "MC01TD.f"
 	    if (alpha == 0.) {
+#line 271 "MC01TD.f"
 		*info = 2;
+#line 272 "MC01TD.f"
 	    } else {
+#line 273 "MC01TD.f"
 		dcopy_(&k1, &dwork[k], &c__1, &dwork[k2], &c__1);
+#line 274 "MC01TD.f"
 		drscl_(&k1, &alpha, &dwork[k2], &c__1);
+#line 275 "MC01TD.f"
 		p1 = dwork[k2];
+#line 276 "MC01TD.f"
 		pk1 = dwork[k2 + k1 - 1];
 
+#line 278 "MC01TD.f"
 		i__1 = k1 - 1;
+#line 278 "MC01TD.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 279 "MC01TD.f"
 		    dwork[k + i__] = p1 * dwork[*dp + 1 + i__] - pk1 * dwork[
 			    k2 + k1 - i__];
+#line 280 "MC01TD.f"
 /* L100: */
+#line 280 "MC01TD.f"
 		}
 
 /*              Compute the number of unstable zeros. */
 
+#line 284 "MC01TD.f"
 		++k;
+#line 285 "MC01TD.f"
 		if (dwork[k] == 0.) {
+#line 286 "MC01TD.f"
 		    *info = 2;
+#line 287 "MC01TD.f"
 		} else {
+#line 288 "MC01TD.f"
 		    signum = (integer) (signum * d_sign(&c_b18, &dwork[k]));
+#line 289 "MC01TD.f"
 		    if ((doublereal) signum < 0.) {
+#line 289 "MC01TD.f"
 			++(*nz);
+#line 289 "MC01TD.f"
 		    }
+#line 290 "MC01TD.f"
 		}
+#line 291 "MC01TD.f"
 		goto L80;
+#line 292 "MC01TD.f"
 	    }
 /*           END WHILE 80 */
+#line 294 "MC01TD.f"
 	}
+#line 295 "MC01TD.f"
     }
 
+#line 297 "MC01TD.f"
     if (*info == 0 && *nz == 0) {
+#line 298 "MC01TD.f"
 	*stable = TRUE_;
+#line 299 "MC01TD.f"
     } else {
+#line 300 "MC01TD.f"
 	*stable = FALSE_;
+#line 301 "MC01TD.f"
     }
 
+#line 303 "MC01TD.f"
     return 0;
 /* *** Last line of MC01TD *** */
 } /* mc01td_ */

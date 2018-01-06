@@ -1,3 +1,4 @@
+#line 1 "SB08FD.f"
 /* SB08FD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB08FD.f"
 /* Table of constant values */
 
 static doublereal c_b6 = 0.;
@@ -320,113 +322,195 @@ static logical c_true = TRUE_;
 
 /*     .. Executable Statements .. */
 
+#line 266 "SB08FD.f"
     /* Parameter adjustments */
+#line 266 "SB08FD.f"
     --alpha;
+#line 266 "SB08FD.f"
     a_dim1 = *lda;
+#line 266 "SB08FD.f"
     a_offset = 1 + a_dim1;
+#line 266 "SB08FD.f"
     a -= a_offset;
+#line 266 "SB08FD.f"
     b_dim1 = *ldb;
+#line 266 "SB08FD.f"
     b_offset = 1 + b_dim1;
+#line 266 "SB08FD.f"
     b -= b_offset;
+#line 266 "SB08FD.f"
     c_dim1 = *ldc;
+#line 266 "SB08FD.f"
     c_offset = 1 + c_dim1;
+#line 266 "SB08FD.f"
     c__ -= c_offset;
+#line 266 "SB08FD.f"
     d_dim1 = *ldd;
+#line 266 "SB08FD.f"
     d_offset = 1 + d_dim1;
+#line 266 "SB08FD.f"
     d__ -= d_offset;
+#line 266 "SB08FD.f"
     cr_dim1 = *ldcr;
+#line 266 "SB08FD.f"
     cr_offset = 1 + cr_dim1;
+#line 266 "SB08FD.f"
     cr -= cr_offset;
+#line 266 "SB08FD.f"
     dr_dim1 = *lddr;
+#line 266 "SB08FD.f"
     dr_offset = 1 + dr_dim1;
+#line 266 "SB08FD.f"
     dr -= dr_offset;
+#line 266 "SB08FD.f"
     --dwork;
+#line 266 "SB08FD.f"
 
+#line 266 "SB08FD.f"
     /* Function Body */
+#line 266 "SB08FD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 267 "SB08FD.f"
     *iwarn = 0;
+#line 268 "SB08FD.f"
     *info = 0;
 
 /*     Check the scalar input parameters. */
 
+#line 272 "SB08FD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 273 "SB08FD.f"
 	*info = -1;
+#line 274 "SB08FD.f"
     } else if (*n < 0) {
+#line 275 "SB08FD.f"
 	*info = -2;
+#line 276 "SB08FD.f"
     } else if (*m < 0) {
+#line 277 "SB08FD.f"
 	*info = -3;
+#line 278 "SB08FD.f"
     } else if (*p < 0) {
+#line 279 "SB08FD.f"
 	*info = -4;
+#line 280 "SB08FD.f"
     } else if (discr && (alpha[1] < 0. || alpha[1] >= 1. || alpha[2] < 0. || 
 	    alpha[2] >= 1.) || ! discr && (alpha[1] >= 0. || alpha[2] >= 0.)) 
 	    {
+#line 285 "SB08FD.f"
 	*info = -5;
+#line 286 "SB08FD.f"
     } else if (*lda < max(1,*n)) {
+#line 287 "SB08FD.f"
 	*info = -7;
+#line 288 "SB08FD.f"
     } else if (*ldb < max(1,*n)) {
+#line 289 "SB08FD.f"
 	*info = -9;
+#line 290 "SB08FD.f"
     } else if (*ldc < max(1,*p)) {
+#line 291 "SB08FD.f"
 	*info = -11;
+#line 292 "SB08FD.f"
     } else if (*ldd < max(1,*p)) {
+#line 293 "SB08FD.f"
 	*info = -13;
+#line 294 "SB08FD.f"
     } else if (*ldcr < max(1,*m)) {
+#line 295 "SB08FD.f"
 	*info = -17;
+#line 296 "SB08FD.f"
     } else if (*lddr < max(1,*m)) {
+#line 297 "SB08FD.f"
 	*info = -19;
+#line 298 "SB08FD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 298 "SB08FD.f"
 	i__1 = 1, i__2 = *n * (*n + 5), i__1 = max(i__1,i__2), i__2 = *m * 5, 
 		i__1 = max(i__1,i__2), i__2 = *p << 2;
+#line 298 "SB08FD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 299 "SB08FD.f"
 	    *info = -22;
+#line 300 "SB08FD.f"
 	}
+#line 300 "SB08FD.f"
     }
+#line 301 "SB08FD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 305 "SB08FD.f"
 	i__1 = -(*info);
+#line 305 "SB08FD.f"
 	xerbla_("SB08FD", &i__1, (ftnlen)6);
+#line 306 "SB08FD.f"
 	return 0;
+#line 307 "SB08FD.f"
     }
 
 /*     Set DR = I and quick return if possible. */
 
+#line 311 "SB08FD.f"
     *nr = 0;
+#line 312 "SB08FD.f"
     dlaset_("Full", m, m, &c_b6, &c_b7, &dr[dr_offset], lddr, (ftnlen)4);
+#line 313 "SB08FD.f"
     if (min(*n,*m) == 0) {
+#line 314 "SB08FD.f"
 	*nq = 0;
+#line 315 "SB08FD.f"
 	dwork[1] = 1.;
+#line 316 "SB08FD.f"
 	return 0;
+#line 317 "SB08FD.f"
     }
 
 /*     Set F = 0 in the array CR. */
 
+#line 321 "SB08FD.f"
     dlaset_("Full", m, n, &c_b6, &c_b6, &cr[cr_offset], ldcr, (ftnlen)4);
 
 /*     Compute the norm of B and set the default tolerance if necessary. */
 
+#line 325 "SB08FD.f"
     bnorm = dlange_("1-norm", n, m, &b[b_offset], ldb, &dwork[1], (ftnlen)6);
+#line 326 "SB08FD.f"
     toler = *tol;
+#line 327 "SB08FD.f"
     if (toler <= 0.) {
+#line 327 "SB08FD.f"
 	toler = (doublereal) (*n) * bnorm * dlamch_("Epsilon", (ftnlen)7);
+#line 327 "SB08FD.f"
     }
+#line 329 "SB08FD.f"
     if (bnorm <= toler) {
+#line 330 "SB08FD.f"
 	*nq = 0;
+#line 331 "SB08FD.f"
 	dwork[1] = 1.;
+#line 332 "SB08FD.f"
 	return 0;
+#line 333 "SB08FD.f"
     }
 
 /*     Compute the bound for the numerical stability condition. */
 
+#line 337 "SB08FD.f"
     rmax = dlange_("1-norm", n, n, &a[a_offset], lda, &dwork[1], (ftnlen)6) * 
 	    10. / bnorm;
 
 /*     Allocate working storage. */
 
+#line 341 "SB08FD.f"
     kz = 1;
+#line 342 "SB08FD.f"
     kwr = kz + *n * *n;
+#line 343 "SB08FD.f"
     kwi = kwr + *n;
+#line 344 "SB08FD.f"
     kw = kwi + *n;
 
 /*     Reduce A to an ordered real Schur form using an orthogonal */
@@ -442,85 +526,132 @@ static logical c_true = TRUE_;
 /*     Additional workspace:  need   3*N; */
 /*                            prefer larger. */
 
+#line 359 "SB08FD.f"
     i__1 = *ldwork - kw + 1;
+#line 359 "SB08FD.f"
     tb01ld_(dico, "Stable", "General", n, m, p, &alpha[2], &a[a_offset], lda, 
 	    &b[b_offset], ldb, &c__[c_offset], ldc, &nfp, &dwork[kz], n, &
 	    dwork[kwr], &dwork[kwi], &dwork[kw], &i__1, info, (ftnlen)1, (
 	    ftnlen)6, (ftnlen)7);
+#line 362 "SB08FD.f"
     if (*info != 0) {
+#line 362 "SB08FD.f"
 	return 0;
+#line 362 "SB08FD.f"
     }
 
+#line 365 "SB08FD.f"
     wrkopt = dwork[kw] + (doublereal) (kw - 1);
 
 /*     Perform the pole assignment if there exist "unstable" eigenvalues. */
 
+#line 369 "SB08FD.f"
     *nq = *n;
+#line 370 "SB08FD.f"
     if (nfp < *n) {
+#line 371 "SB08FD.f"
 	kg = 1;
+#line 372 "SB08FD.f"
 	kfi = kg + (*m << 1);
+#line 373 "SB08FD.f"
 	kw = kfi + (*m << 1);
 
 /*        Set the limits for the bottom diagonal block. */
 
+#line 377 "SB08FD.f"
 	nlow = nfp + 1;
+#line 378 "SB08FD.f"
 	nsup = *n;
 
 /*        WHILE (NLOW <= NSUP) DO */
+#line 381 "SB08FD.f"
 L10:
+#line 381 "SB08FD.f"
 	if (nlow <= nsup) {
 
 /*           Main loop for assigning one or two poles. */
 
 /*           Determine the dimension of the last block. */
 
+#line 387 "SB08FD.f"
 	    ib = 1;
+#line 388 "SB08FD.f"
 	    if (nlow < nsup) {
+#line 389 "SB08FD.f"
 		if (a[nsup + (nsup - 1) * a_dim1] != 0.) {
+#line 389 "SB08FD.f"
 		    ib = 2;
+#line 389 "SB08FD.f"
 		}
+#line 390 "SB08FD.f"
 	    }
+#line 391 "SB08FD.f"
 	    l = nsup - ib + 1;
 
 /*           Save the last IB rows of B in G. */
 
+#line 395 "SB08FD.f"
 	    dlacpy_("Full", &ib, m, &b[l + b_dim1], ldb, &dwork[kg], &ib, (
 		    ftnlen)4);
 
 /*           Check the controllability of the last block. */
 
+#line 399 "SB08FD.f"
 	    if (dlange_("1-norm", &ib, m, &dwork[kg], &ib, &dwork[kw], (
 		    ftnlen)6) <= toler) {
 
 /*              Deflate the uncontrollable block and resume the */
 /*              main loop. */
 
+#line 405 "SB08FD.f"
 		nsup -= ib;
+#line 406 "SB08FD.f"
 	    } else {
 
 /*              Form the IBxIB matrix A2 from the last diagonal block and */
 /*              set the pole(s) to be assigned. */
 
+#line 411 "SB08FD.f"
 		a2[0] = a[l + l * a_dim1];
+#line 412 "SB08FD.f"
 		if (ib == 1) {
+#line 413 "SB08FD.f"
 		    sm = alpha[1];
+#line 414 "SB08FD.f"
 		    if (discr) {
+#line 414 "SB08FD.f"
 			sm = d_sign(&alpha[1], a2);
+#line 414 "SB08FD.f"
 		    }
+#line 415 "SB08FD.f"
 		    pr = alpha[1];
+#line 416 "SB08FD.f"
 		} else {
+#line 417 "SB08FD.f"
 		    a2[2] = a[l + nsup * a_dim1];
+#line 418 "SB08FD.f"
 		    a2[1] = a[nsup + l * a_dim1];
+#line 419 "SB08FD.f"
 		    a2[3] = a[nsup + nsup * a_dim1];
+#line 420 "SB08FD.f"
 		    sm = alpha[1] + alpha[1];
+#line 421 "SB08FD.f"
 		    pr = alpha[1] * alpha[1];
+#line 422 "SB08FD.f"
 		    if (discr) {
+#line 423 "SB08FD.f"
 			x = a2[0];
+#line 424 "SB08FD.f"
 			y = sqrt((d__1 = a2[2] * a2[1], abs(d__1)));
+#line 425 "SB08FD.f"
 			sm = sm * x / dlapy2_(&x, &y);
+#line 426 "SB08FD.f"
 		    } else {
+#line 427 "SB08FD.f"
 			pr -= a2[2] * a2[1];
+#line 428 "SB08FD.f"
 		    }
+#line 429 "SB08FD.f"
 		}
 
 /*              Determine the M-by-IB feedback matrix FI which assigns */
@@ -528,8 +659,10 @@ L10:
 
 /*              Workspace needed: 5*M. */
 
+#line 436 "SB08FD.f"
 		sb01by_(&ib, m, &sm, &pr, a2, &dwork[kg], &dwork[kfi], &toler,
 			 &dwork[kw], info);
+#line 438 "SB08FD.f"
 		if (*info != 0) {
 
 /*                 Uncontrollable 2x2 block with double real eigenvalues */
@@ -538,89 +671,136 @@ L10:
 /*                 One of them can be elliminated using the information */
 /*                 in DWORK(KFI) and DWORK(KFI+M). */
 
+#line 446 "SB08FD.f"
 		    cs = dwork[kfi];
+#line 447 "SB08FD.f"
 		    sn = -dwork[kfi + *m];
 
 /*                 Apply the Givens transformation to A, B, C and F. */
 
+#line 451 "SB08FD.f"
 		    l1 = l + 1;
+#line 452 "SB08FD.f"
 		    i__1 = nsup - l + 1;
+#line 452 "SB08FD.f"
 		    drot_(&i__1, &a[l1 + l * a_dim1], lda, &a[l + l * a_dim1],
 			     lda, &cs, &sn);
+#line 454 "SB08FD.f"
 		    drot_(&l1, &a[l1 * a_dim1 + 1], &c__1, &a[l * a_dim1 + 1],
 			     &c__1, &cs, &sn);
+#line 455 "SB08FD.f"
 		    drot_(m, &b[l1 + b_dim1], ldb, &b[l + b_dim1], ldb, &cs, &
 			    sn);
+#line 456 "SB08FD.f"
 		    if (*p > 0) {
+#line 456 "SB08FD.f"
 			drot_(p, &c__[l1 * c_dim1 + 1], &c__1, &c__[l * 
 				c_dim1 + 1], &c__1, &cs, &sn);
+#line 456 "SB08FD.f"
 		    }
+#line 458 "SB08FD.f"
 		    drot_(m, &cr[l1 * cr_dim1 + 1], &c__1, &cr[l * cr_dim1 + 
 			    1], &c__1, &cs, &sn);
 
 /*                 Deflate the uncontrollable block and resume the */
 /*                 main loop. */
 
+#line 463 "SB08FD.f"
 		    a[l1 + l * a_dim1] = 0.;
+#line 464 "SB08FD.f"
 		    --nsup;
+#line 465 "SB08FD.f"
 		    *info = 0;
+#line 466 "SB08FD.f"
 		    goto L10;
+#line 467 "SB08FD.f"
 		}
 
 /*              Check for possible numerical instability. */
 
+#line 471 "SB08FD.f"
 		if (dlange_("1-norm", m, &ib, &dwork[kfi], m, &dwork[kw], (
 			ftnlen)6) > rmax) {
+#line 471 "SB08FD.f"
 		    ++(*iwarn);
+#line 471 "SB08FD.f"
 		}
 
 /*              Update the feedback matrix F <-- F + [0 FI] in CR. */
 
+#line 476 "SB08FD.f"
 		k = kfi;
+#line 477 "SB08FD.f"
 		i__1 = l + ib - 1;
+#line 477 "SB08FD.f"
 		for (j = l; j <= i__1; ++j) {
+#line 478 "SB08FD.f"
 		    i__2 = *m;
+#line 478 "SB08FD.f"
 		    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 479 "SB08FD.f"
 			cr[i__ + j * cr_dim1] += dwork[k];
+#line 480 "SB08FD.f"
 			++k;
+#line 481 "SB08FD.f"
 /* L20: */
+#line 481 "SB08FD.f"
 		    }
+#line 482 "SB08FD.f"
 /* L30: */
+#line 482 "SB08FD.f"
 		}
 
 /*              Update the state matrix A <-- A + B*[0 FI]. */
 
+#line 486 "SB08FD.f"
 		dgemm_("NoTranspose", "NoTranspose", &nsup, &ib, m, &c_b7, &b[
 			b_offset], ldb, &dwork[kfi], m, &c_b7, &a[l * a_dim1 
 			+ 1], lda, (ftnlen)11, (ftnlen)11);
+#line 489 "SB08FD.f"
 		if (ib == 2) {
 
 /*                 Try to split the 2x2 block and standardize it. */
 
+#line 493 "SB08FD.f"
 		    l1 = l + 1;
+#line 494 "SB08FD.f"
 		    dlanv2_(&a[l + l * a_dim1], &a[l + l1 * a_dim1], &a[l1 + 
 			    l * a_dim1], &a[l1 + l1 * a_dim1], &x, &y, &pr, &
 			    sm, &cs, &sn);
 
 /*                 Apply the transformation to A, B, C and F. */
 
+#line 499 "SB08FD.f"
 		    if (l1 < nsup) {
+#line 499 "SB08FD.f"
 			i__1 = nsup - l1;
+#line 499 "SB08FD.f"
 			drot_(&i__1, &a[l + (l1 + 1) * a_dim1], lda, &a[l1 + (
 				l1 + 1) * a_dim1], lda, &cs, &sn);
+#line 499 "SB08FD.f"
 		    }
+#line 502 "SB08FD.f"
 		    i__1 = l - 1;
+#line 502 "SB08FD.f"
 		    drot_(&i__1, &a[l * a_dim1 + 1], &c__1, &a[l1 * a_dim1 + 
 			    1], &c__1, &cs, &sn);
+#line 503 "SB08FD.f"
 		    drot_(m, &b[l + b_dim1], ldb, &b[l1 + b_dim1], ldb, &cs, &
 			    sn);
+#line 504 "SB08FD.f"
 		    if (*p > 0) {
+#line 504 "SB08FD.f"
 			drot_(p, &c__[l * c_dim1 + 1], &c__1, &c__[l1 * 
 				c_dim1 + 1], &c__1, &cs, &sn);
+#line 504 "SB08FD.f"
 		    }
+#line 506 "SB08FD.f"
 		    drot_(m, &cr[l * cr_dim1 + 1], &c__1, &cr[l1 * cr_dim1 + 
 			    1], &c__1, &cs, &sn);
+#line 507 "SB08FD.f"
 		}
+#line 508 "SB08FD.f"
 		if (nlow + ib <= nsup) {
 
 /*                 Move the last block(s) to the leading position(s) of */
@@ -628,143 +808,214 @@ L10:
 
 /*                 Workspace:     need MAX(4*N, 4*M, 4*P). */
 
+#line 515 "SB08FD.f"
 		    ncur1 = nsup - ib;
+#line 516 "SB08FD.f"
 		    nmoves = 1;
+#line 517 "SB08FD.f"
 		    if (ib == 2 && a[nsup + (nsup - 1) * a_dim1] == 0.) {
+#line 518 "SB08FD.f"
 			ib = 1;
+#line 519 "SB08FD.f"
 			nmoves = 2;
+#line 520 "SB08FD.f"
 		    }
 
 /*                 WHILE (NMOVES > 0) DO */
+#line 523 "SB08FD.f"
 L40:
+#line 523 "SB08FD.f"
 		    if (nmoves > 0) {
+#line 524 "SB08FD.f"
 			ncur = ncur1;
 
 /*                    WHILE (NCUR >= NLOW) DO */
+#line 527 "SB08FD.f"
 L50:
+#line 527 "SB08FD.f"
 			if (ncur >= nlow) {
 
 /*                       Loop for positioning of the last block. */
 
 /*                       Determine the dimension of the current block. */
 
+#line 533 "SB08FD.f"
 			    ib1 = 1;
+#line 534 "SB08FD.f"
 			    if (ncur > nlow) {
+#line 535 "SB08FD.f"
 				if (a[ncur + (ncur - 1) * a_dim1] != 0.) {
+#line 535 "SB08FD.f"
 				    ib1 = 2;
+#line 535 "SB08FD.f"
 				}
+#line 536 "SB08FD.f"
 			    }
+#line 537 "SB08FD.f"
 			    nb = ib1 + ib;
 
 /*                       Initialize the local transformation matrix Z. */
 
+#line 541 "SB08FD.f"
 			    dlaset_("Full", &nb, &nb, &c_b6, &c_b7, z__, &
 				    c__4, (ftnlen)4);
+#line 542 "SB08FD.f"
 			    l = ncur - ib1 + 1;
 
 /*                       Exchange two adjacent blocks and accumulate the */
 /*                       transformations in Z. */
 
+#line 547 "SB08FD.f"
 			    dlaexc_(&c_true, &nb, &a[l + l * a_dim1], lda, 
 				    z__, &c__4, &c__1, &ib1, &ib, &dwork[1], 
 				    info);
+#line 549 "SB08FD.f"
 			    if (*info != 0) {
+#line 550 "SB08FD.f"
 				*info = 2;
+#line 551 "SB08FD.f"
 				return 0;
+#line 552 "SB08FD.f"
 			    }
 
 /*                       Apply the transformation to the rest of A. */
 
+#line 556 "SB08FD.f"
 			    l1 = l + nb;
+#line 557 "SB08FD.f"
 			    if (l1 <= nsup) {
+#line 558 "SB08FD.f"
 				i__1 = nsup - l1 + 1;
+#line 558 "SB08FD.f"
 				dgemm_("Transpose", "NoTranspose", &nb, &i__1,
 					 &nb, &c_b7, z__, &c__4, &a[l + l1 * 
 					a_dim1], lda, &c_b6, &dwork[1], &nb, (
 					ftnlen)9, (ftnlen)11);
+#line 561 "SB08FD.f"
 				i__1 = nsup - l1 + 1;
+#line 561 "SB08FD.f"
 				dlacpy_("Full", &nb, &i__1, &dwork[1], &nb, &
 					a[l + l1 * a_dim1], lda, (ftnlen)4);
+#line 563 "SB08FD.f"
 			    }
+#line 564 "SB08FD.f"
 			    i__1 = l - 1;
+#line 564 "SB08FD.f"
 			    dgemm_("NoTranspose", "NoTranspose", &i__1, &nb, &
 				    nb, &c_b7, &a[l * a_dim1 + 1], lda, z__, &
 				    c__4, &c_b6, &dwork[1], n, (ftnlen)11, (
 				    ftnlen)11);
+#line 567 "SB08FD.f"
 			    i__1 = l - 1;
+#line 567 "SB08FD.f"
 			    dlacpy_("Full", &i__1, &nb, &dwork[1], n, &a[l * 
 				    a_dim1 + 1], lda, (ftnlen)4);
 
 /*                       Apply the transformation to B, C and F. */
 
+#line 572 "SB08FD.f"
 			    dgemm_("Transpose", "NoTranspose", &nb, m, &nb, &
 				    c_b7, z__, &c__4, &b[l + b_dim1], ldb, &
 				    c_b6, &dwork[1], &nb, (ftnlen)9, (ftnlen)
 				    11);
+#line 575 "SB08FD.f"
 			    dlacpy_("Full", &nb, m, &dwork[1], &nb, &b[l + 
 				    b_dim1], ldb, (ftnlen)4);
 
+#line 578 "SB08FD.f"
 			    if (*p > 0) {
+#line 579 "SB08FD.f"
 				dgemm_("NoTranspose", "NoTranspose", p, &nb, &
 					nb, &c_b7, &c__[l * c_dim1 + 1], ldc, 
 					z__, &c__4, &c_b6, &dwork[1], p, (
 					ftnlen)11, (ftnlen)11);
+#line 582 "SB08FD.f"
 				dlacpy_("Full", p, &nb, &dwork[1], p, &c__[l *
 					 c_dim1 + 1], ldc, (ftnlen)4);
+#line 584 "SB08FD.f"
 			    }
 
+#line 586 "SB08FD.f"
 			    dgemm_("NoTranspose", "NoTranspose", m, &nb, &nb, 
 				    &c_b7, &cr[l * cr_dim1 + 1], ldcr, z__, &
 				    c__4, &c_b6, &dwork[1], m, (ftnlen)11, (
 				    ftnlen)11);
+#line 589 "SB08FD.f"
 			    dlacpy_("Full", m, &nb, &dwork[1], m, &cr[l * 
 				    cr_dim1 + 1], ldcr, (ftnlen)4);
 
+#line 592 "SB08FD.f"
 			    ncur -= ib1;
+#line 593 "SB08FD.f"
 			    goto L50;
+#line 594 "SB08FD.f"
 			}
 /*                    END WHILE 50 */
 
+#line 597 "SB08FD.f"
 			--nmoves;
+#line 598 "SB08FD.f"
 			++ncur1;
+#line 599 "SB08FD.f"
 			nlow += ib;
+#line 600 "SB08FD.f"
 			goto L40;
+#line 601 "SB08FD.f"
 		    }
 /*                 END WHILE 40 */
 
+#line 604 "SB08FD.f"
 		} else {
+#line 605 "SB08FD.f"
 		    nlow += ib;
+#line 606 "SB08FD.f"
 		}
+#line 607 "SB08FD.f"
 	    }
+#line 608 "SB08FD.f"
 	    goto L10;
+#line 609 "SB08FD.f"
 	}
 /*        END WHILE 10 */
 
+#line 612 "SB08FD.f"
 	*nq = nsup;
+#line 613 "SB08FD.f"
 	*nr = nsup - nfp;
 
 /*        Annihilate the elements below the first subdiagonal of A. */
 
+#line 617 "SB08FD.f"
 	if (*nq > 2) {
+#line 617 "SB08FD.f"
 	    i__1 = *nq - 2;
+#line 617 "SB08FD.f"
 	    i__2 = *nq - 2;
+#line 617 "SB08FD.f"
 	    dlaset_("Lower", &i__1, &i__2, &c_b6, &c_b6, &a[a_dim1 + 3], lda, 
 		    (ftnlen)5);
+#line 617 "SB08FD.f"
 	}
+#line 619 "SB08FD.f"
     }
 
 /*     Compute C <-- CQ = C + D*F. */
 
+#line 623 "SB08FD.f"
     dgemm_("NoTranspose", "NoTranspose", p, nq, m, &c_b7, &d__[d_offset], ldd,
 	     &cr[cr_offset], ldcr, &c_b7, &c__[c_offset], ldc, (ftnlen)11, (
 	    ftnlen)11);
 
 /* Computing MAX */
 /* Computing MAX */
+#line 626 "SB08FD.f"
     i__1 = *m * 5, i__2 = *p << 2;
+#line 626 "SB08FD.f"
     d__1 = wrkopt, d__2 = (doublereal) max(i__1,i__2);
+#line 626 "SB08FD.f"
     dwork[1] = max(d__1,d__2);
 
+#line 628 "SB08FD.f"
     return 0;
 /* *** Last line of SB08FD *** */
 } /* sb08fd_ */

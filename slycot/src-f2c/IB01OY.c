@@ -1,3 +1,4 @@
+#line 1 "IB01OY.f"
 /* IB01OY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "IB01OY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -148,97 +150,166 @@ static integer c__3 = 3;
 
 /*     Check the scalar input parameters. */
 
+#line 99 "IB01OY.f"
     /* Parameter adjustments */
+#line 99 "IB01OY.f"
     --sv;
+#line 99 "IB01OY.f"
 
+#line 99 "IB01OY.f"
     /* Function Body */
+#line 99 "IB01OY.f"
     *info = 0;
+#line 100 "IB01OY.f"
     if (*ns <= 0) {
+#line 101 "IB01OY.f"
 	*info = -1;
+#line 102 "IB01OY.f"
     } else if (*nmax < 0 || *nmax > *ns) {
+#line 103 "IB01OY.f"
 	*info = -2;
+#line 104 "IB01OY.f"
     } else if (*n < 0 || *n > *ns) {
+#line 105 "IB01OY.f"
 	*info = -3;
+#line 106 "IB01OY.f"
     }
 
+#line 108 "IB01OY.f"
     if (*info != 0) {
+#line 109 "IB01OY.f"
 	i__1 = -(*info);
+#line 109 "IB01OY.f"
 	xerbla_("IB01OY", &i__1, (ftnlen)6);
+#line 110 "IB01OY.f"
 	return 0;
+#line 111 "IB01OY.f"
     }
 
+#line 113 "IB01OY.f"
     s_wsfe(&io___1);
+#line 113 "IB01OY.f"
     i__1 = *ns;
+#line 113 "IB01OY.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 113 "IB01OY.f"
 	do_fio(&c__1, (char *)&sv[i__], (ftnlen)sizeof(doublereal));
+#line 113 "IB01OY.f"
     }
+#line 113 "IB01OY.f"
     e_wsfe();
+#line 116 "IB01OY.f"
     s_wsfe(&io___3);
+#line 116 "IB01OY.f"
     do_fio(&c__1, (char *)&(*n), (ftnlen)sizeof(integer));
+#line 116 "IB01OY.f"
     e_wsfe();
+#line 118 "IB01OY.f"
     s_wsfe(&io___4);
+#line 118 "IB01OY.f"
     e_wsfe();
 
+#line 121 "IB01OY.f"
 L10:
+#line 122 "IB01OY.f"
     s_wsfe(&io___5);
+#line 122 "IB01OY.f"
     e_wsfe();
+#line 123 "IB01OY.f"
     s_rsfe(&io___6);
+#line 123 "IB01OY.f"
     do_fio(&c__1, ans, (ftnlen)1);
+#line 123 "IB01OY.f"
     e_rsfe();
+#line 124 "IB01OY.f"
     yes = lsame_(ans, "Y", (ftnlen)1, (ftnlen)1);
+#line 125 "IB01OY.f"
     if (yes) {
+#line 126 "IB01OY.f"
 	if (*n <= *nmax) {
 
 /*              The value of n is adequate and has been confirmed. */
 
+#line 130 "IB01OY.f"
 	    return 0;
+#line 131 "IB01OY.f"
 	} else {
 
 /*              The estimated value of n is not acceptable. */
 
+#line 135 "IB01OY.f"
 	    s_wsfe(&io___9);
+#line 135 "IB01OY.f"
 	    do_fio(&c__1, (char *)&(*nmax), (ftnlen)sizeof(integer));
+#line 135 "IB01OY.f"
 	    e_wsfe();
+#line 137 "IB01OY.f"
 	    s_wsfe(&io___10);
+#line 137 "IB01OY.f"
 	    e_wsfe();
+#line 139 "IB01OY.f"
 	    goto L20;
+#line 140 "IB01OY.f"
 	}
 
+#line 142 "IB01OY.f"
     } else if (lsame_(ans, "N", (ftnlen)1, (ftnlen)1)) {
+#line 143 "IB01OY.f"
 	goto L20;
+#line 144 "IB01OY.f"
     } else {
 
 /*           Wrong answer should be re-entered. */
 
+#line 148 "IB01OY.f"
 	goto L10;
+#line 149 "IB01OY.f"
     }
 
 /*     Enter the desired value of n. */
 
+#line 153 "IB01OY.f"
 L20:
+#line 154 "IB01OY.f"
     s_wsfe(&io___11);
+#line 154 "IB01OY.f"
     do_fio(&c__1, (char *)&(*nmax), (ftnlen)sizeof(integer));
+#line 154 "IB01OY.f"
     e_wsfe();
+#line 156 "IB01OY.f"
     s_rsle(&io___12);
+#line 156 "IB01OY.f"
     do_lio(&c__3, &c__1, (char *)&(*n), (ftnlen)sizeof(integer));
+#line 156 "IB01OY.f"
     e_rsle();
+#line 157 "IB01OY.f"
     if (*n < 0) {
 
 /*           The specified value of n is not acceptable. */
 
+#line 161 "IB01OY.f"
 	s_wsfe(&io___13);
+#line 161 "IB01OY.f"
 	e_wsfe();
+#line 162 "IB01OY.f"
 	goto L20;
+#line 163 "IB01OY.f"
     } else if (*n > *nmax) {
 
 /*           The specified value of n is not acceptable. */
 
+#line 167 "IB01OY.f"
 	s_wsfe(&io___14);
+#line 167 "IB01OY.f"
 	do_fio(&c__1, (char *)&(*nmax), (ftnlen)sizeof(integer));
+#line 167 "IB01OY.f"
 	e_wsfe();
+#line 169 "IB01OY.f"
 	goto L20;
+#line 170 "IB01OY.f"
     }
 
+#line 172 "IB01OY.f"
     return 0;
 
 /* *** Last line of IB01OY *** */

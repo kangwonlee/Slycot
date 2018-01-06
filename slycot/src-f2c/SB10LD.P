@@ -1,0 +1,10 @@
+extern int sb10ld_(integer *n, integer *m, integer *np, integer *ncon, integer *nmeas, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *ak, integer *ldak, doublereal *bk, integer *ldbk, doublereal *ck, integer *ldck, doublereal *dk, integer *lddk, doublereal *ac, integer *ldac, doublereal *bc, integer *ldbc, doublereal *cc, integer *ldcc, doublereal *dc, integer *lddc, integer *iwork, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dgetrf_ 14 6 4 4 7 4 4 4 */
+/*:ref: dgecon_ 14 10 13 4 7 4 7 7 7 4 4 124 */
+/*:ref: dgetri_ 14 7 4 7 4 4 7 4 4 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */

@@ -1,3 +1,4 @@
+#line 1 "SB08HD.f"
 /* SB08HD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB08HD.f"
 /* Table of constant values */
 
 static doublereal c_b8 = 1.;
@@ -215,107 +217,174 @@ static doublereal c_b18 = -1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 181 "SB08HD.f"
     /* Parameter adjustments */
+#line 181 "SB08HD.f"
     a_dim1 = *lda;
+#line 181 "SB08HD.f"
     a_offset = 1 + a_dim1;
+#line 181 "SB08HD.f"
     a -= a_offset;
+#line 181 "SB08HD.f"
     b_dim1 = *ldb;
+#line 181 "SB08HD.f"
     b_offset = 1 + b_dim1;
+#line 181 "SB08HD.f"
     b -= b_offset;
+#line 181 "SB08HD.f"
     c_dim1 = *ldc;
+#line 181 "SB08HD.f"
     c_offset = 1 + c_dim1;
+#line 181 "SB08HD.f"
     c__ -= c_offset;
+#line 181 "SB08HD.f"
     d_dim1 = *ldd;
+#line 181 "SB08HD.f"
     d_offset = 1 + d_dim1;
+#line 181 "SB08HD.f"
     d__ -= d_offset;
+#line 181 "SB08HD.f"
     cr_dim1 = *ldcr;
+#line 181 "SB08HD.f"
     cr_offset = 1 + cr_dim1;
+#line 181 "SB08HD.f"
     cr -= cr_offset;
+#line 181 "SB08HD.f"
     dr_dim1 = *lddr;
+#line 181 "SB08HD.f"
     dr_offset = 1 + dr_dim1;
+#line 181 "SB08HD.f"
     dr -= dr_offset;
+#line 181 "SB08HD.f"
     --iwork;
+#line 181 "SB08HD.f"
     --dwork;
+#line 181 "SB08HD.f"
 
+#line 181 "SB08HD.f"
     /* Function Body */
+#line 181 "SB08HD.f"
     *info = 0;
 
 /*     Check the scalar input parameters. */
 
+#line 185 "SB08HD.f"
     if (*n < 0) {
+#line 186 "SB08HD.f"
 	*info = -1;
+#line 187 "SB08HD.f"
     } else if (*m < 0) {
+#line 188 "SB08HD.f"
 	*info = -2;
+#line 189 "SB08HD.f"
     } else if (*p < 0) {
+#line 190 "SB08HD.f"
 	*info = -3;
+#line 191 "SB08HD.f"
     } else if (*lda < max(1,*n)) {
+#line 192 "SB08HD.f"
 	*info = -5;
+#line 193 "SB08HD.f"
     } else if (*ldb < max(1,*n)) {
+#line 194 "SB08HD.f"
 	*info = -7;
+#line 195 "SB08HD.f"
     } else if (*ldc < max(1,*p)) {
+#line 196 "SB08HD.f"
 	*info = -9;
+#line 197 "SB08HD.f"
     } else if (*ldd < max(1,*p)) {
+#line 198 "SB08HD.f"
 	*info = -11;
+#line 199 "SB08HD.f"
     } else if (*ldcr < max(1,*m)) {
+#line 200 "SB08HD.f"
 	*info = -13;
+#line 201 "SB08HD.f"
     } else if (*lddr < max(1,*m)) {
+#line 202 "SB08HD.f"
 	*info = -15;
+#line 203 "SB08HD.f"
     }
+#line 204 "SB08HD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 208 "SB08HD.f"
 	i__1 = -(*info);
+#line 208 "SB08HD.f"
 	xerbla_("SB08HD", &i__1, (ftnlen)6);
+#line 209 "SB08HD.f"
 	return 0;
+#line 210 "SB08HD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 214 "SB08HD.f"
     if (*m == 0) {
+#line 215 "SB08HD.f"
 	dwork[1] = 1.;
+#line 216 "SB08HD.f"
 	return 0;
+#line 217 "SB08HD.f"
     }
 
 /*     Factor the matrix  DR.  First, compute the 1-norm. */
 
+#line 221 "SB08HD.f"
     drnorm = dlange_("1-norm", m, m, &dr[dr_offset], lddr, &dwork[1], (ftnlen)
 	    6);
+#line 222 "SB08HD.f"
     dgetrf_(m, m, &dr[dr_offset], lddr, &iwork[1], info);
+#line 223 "SB08HD.f"
     if (*info != 0) {
+#line 224 "SB08HD.f"
 	*info = 1;
+#line 225 "SB08HD.f"
 	dwork[1] = 0.;
+#line 226 "SB08HD.f"
 	return 0;
+#line 227 "SB08HD.f"
     }
 /*                         -1 */
 /*     Compute B = BQR * DR  , using the factorization P*DR = L*U. */
 
+#line 231 "SB08HD.f"
     dtrsm_("Right", "Upper", "NoTranspose", "NonUnit", n, m, &c_b8, &dr[
 	    dr_offset], lddr, &b[b_offset], ldb, (ftnlen)5, (ftnlen)5, (
 	    ftnlen)11, (ftnlen)7);
+#line 233 "SB08HD.f"
     dtrsm_("Right", "Lower", "NoTranspose", "Unit", n, m, &c_b8, &dr[
 	    dr_offset], lddr, &b[b_offset], ldb, (ftnlen)5, (ftnlen)5, (
 	    ftnlen)11, (ftnlen)4);
+#line 235 "SB08HD.f"
     ma02gd_(n, &b[b_offset], ldb, &c__1, m, &iwork[1], &c_n1);
 /*                               -1 */
 /*     Compute A = AQR - BQR * DR  * CR. */
 
+#line 239 "SB08HD.f"
     dgemm_("NoTranspose", "NoTranspose", n, n, m, &c_b18, &b[b_offset], ldb, &
 	    cr[cr_offset], ldcr, &c_b8, &a[a_offset], lda, (ftnlen)11, (
 	    ftnlen)11);
 /*                        -1 */
 /*     Compute D = DQ * DR  . */
 
+#line 244 "SB08HD.f"
     dtrsm_("Right", "Upper", "NoTranspose", "NonUnit", p, m, &c_b8, &dr[
 	    dr_offset], lddr, &d__[d_offset], ldd, (ftnlen)5, (ftnlen)5, (
 	    ftnlen)11, (ftnlen)7);
+#line 246 "SB08HD.f"
     dtrsm_("Right", "Lower", "NoTranspose", "Unit", p, m, &c_b8, &dr[
 	    dr_offset], lddr, &d__[d_offset], ldd, (ftnlen)5, (ftnlen)5, (
 	    ftnlen)11, (ftnlen)4);
+#line 248 "SB08HD.f"
     ma02gd_(p, &d__[d_offset], ldd, &c__1, m, &iwork[1], &c_n1);
 /*                             -1 */
 /*     Compute C = CQ - DQ * DR  * CR. */
 
+#line 252 "SB08HD.f"
     dgemm_("NoTranspose", "NoTranspose", p, n, m, &c_b18, &d__[d_offset], ldd,
 	     &cr[cr_offset], ldcr, &c_b8, &c__[c_offset], ldc, (ftnlen)11, (
 	    ftnlen)11);
@@ -323,14 +392,20 @@ static doublereal c_b18 = -1.;
 /*     Estimate the reciprocal condition number of DR. */
 /*     Workspace  4*M. */
 
+#line 258 "SB08HD.f"
     dgecon_("1-norm", m, &dr[dr_offset], lddr, &drnorm, &rcond, &dwork[1], &
 	    iwork[1], info, (ftnlen)6);
+#line 260 "SB08HD.f"
     if (rcond <= dlamch_("Epsilon", (ftnlen)7)) {
+#line 260 "SB08HD.f"
 	*info = 2;
+#line 260 "SB08HD.f"
     }
 
+#line 263 "SB08HD.f"
     dwork[1] = rcond;
 
+#line 265 "SB08HD.f"
     return 0;
 /* *** Last line of SB08HD *** */
 } /* sb08hd_ */

@@ -1,3 +1,4 @@
+#line 1 "SB10HD.f"
 /* SB10HD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB10HD.f"
 /* Subroutine */ int sb10hd_(integer *n, integer *m, integer *np, integer *
 	ncon, integer *nmeas, doublereal *a, integer *lda, doublereal *b, 
 	integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer 
@@ -299,69 +301,132 @@
 
 /*     Decode and Test input parameters. */
 
+#line 266 "SB10HD.f"
     /* Parameter adjustments */
+#line 266 "SB10HD.f"
     a_dim1 = *lda;
+#line 266 "SB10HD.f"
     a_offset = 1 + a_dim1;
+#line 266 "SB10HD.f"
     a -= a_offset;
+#line 266 "SB10HD.f"
     b_dim1 = *ldb;
+#line 266 "SB10HD.f"
     b_offset = 1 + b_dim1;
+#line 266 "SB10HD.f"
     b -= b_offset;
+#line 266 "SB10HD.f"
     c_dim1 = *ldc;
+#line 266 "SB10HD.f"
     c_offset = 1 + c_dim1;
+#line 266 "SB10HD.f"
     c__ -= c_offset;
+#line 266 "SB10HD.f"
     d_dim1 = *ldd;
+#line 266 "SB10HD.f"
     d_offset = 1 + d_dim1;
+#line 266 "SB10HD.f"
     d__ -= d_offset;
+#line 266 "SB10HD.f"
     ak_dim1 = *ldak;
+#line 266 "SB10HD.f"
     ak_offset = 1 + ak_dim1;
+#line 266 "SB10HD.f"
     ak -= ak_offset;
+#line 266 "SB10HD.f"
     bk_dim1 = *ldbk;
+#line 266 "SB10HD.f"
     bk_offset = 1 + bk_dim1;
+#line 266 "SB10HD.f"
     bk -= bk_offset;
+#line 266 "SB10HD.f"
     ck_dim1 = *ldck;
+#line 266 "SB10HD.f"
     ck_offset = 1 + ck_dim1;
+#line 266 "SB10HD.f"
     ck -= ck_offset;
+#line 266 "SB10HD.f"
     dk_dim1 = *lddk;
+#line 266 "SB10HD.f"
     dk_offset = 1 + dk_dim1;
+#line 266 "SB10HD.f"
     dk -= dk_offset;
+#line 266 "SB10HD.f"
     --rcond;
+#line 266 "SB10HD.f"
     --iwork;
+#line 266 "SB10HD.f"
     --dwork;
+#line 266 "SB10HD.f"
     --bwork;
+#line 266 "SB10HD.f"
 
+#line 266 "SB10HD.f"
     /* Function Body */
+#line 266 "SB10HD.f"
     m1 = *m - *ncon;
+#line 267 "SB10HD.f"
     m2 = *ncon;
+#line 268 "SB10HD.f"
     np1 = *np - *nmeas;
+#line 269 "SB10HD.f"
     np2 = *nmeas;
 
+#line 271 "SB10HD.f"
     *info = 0;
+#line 272 "SB10HD.f"
     if (*n < 0) {
+#line 273 "SB10HD.f"
 	*info = -1;
+#line 274 "SB10HD.f"
     } else if (*m < 0) {
+#line 275 "SB10HD.f"
 	*info = -2;
+#line 276 "SB10HD.f"
     } else if (*np < 0) {
+#line 277 "SB10HD.f"
 	*info = -3;
+#line 278 "SB10HD.f"
     } else if (*ncon < 0 || m1 < 0 || m2 > np1) {
+#line 279 "SB10HD.f"
 	*info = -4;
+#line 280 "SB10HD.f"
     } else if (*nmeas < 0 || np1 < 0 || np2 > m1) {
+#line 281 "SB10HD.f"
 	*info = -5;
+#line 282 "SB10HD.f"
     } else if (*lda < max(1,*n)) {
+#line 283 "SB10HD.f"
 	*info = -7;
+#line 284 "SB10HD.f"
     } else if (*ldb < max(1,*n)) {
+#line 285 "SB10HD.f"
 	*info = -9;
+#line 286 "SB10HD.f"
     } else if (*ldc < max(1,*np)) {
+#line 287 "SB10HD.f"
 	*info = -11;
+#line 288 "SB10HD.f"
     } else if (*ldd < max(1,*np)) {
+#line 289 "SB10HD.f"
 	*info = -13;
+#line 290 "SB10HD.f"
     } else if (*ldak < max(1,*n)) {
+#line 291 "SB10HD.f"
 	*info = -15;
+#line 292 "SB10HD.f"
     } else if (*ldbk < max(1,*n)) {
+#line 293 "SB10HD.f"
 	*info = -17;
+#line 294 "SB10HD.f"
     } else if (*ldck < max(1,m2)) {
+#line 295 "SB10HD.f"
 	*info = -19;
+#line 296 "SB10HD.f"
     } else if (*lddk < max(1,m2)) {
+#line 297 "SB10HD.f"
 	*info = -21;
+#line 298 "SB10HD.f"
     } else {
 
 /*        Compute workspace. */
@@ -369,103 +434,159 @@
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
+#line 302 "SB10HD.f"
 	i__5 = np1 * *n, i__6 = m2 * 3 + np1, i__5 = max(i__5,i__6), i__6 = 
 		m2 * 5;
 /* Computing MAX */
+#line 302 "SB10HD.f"
 	i__7 = m1 * *n, i__8 = np2 * 3 + m1, i__7 = max(i__7,i__8), i__8 = 
 		np2 * 5;
+#line 302 "SB10HD.f"
 	i__3 = m2 + np1 * np1 + max(i__5,i__6), i__4 = np2 + m1 * m1 + max(
 		i__7,i__8), i__3 = max(i__3,i__4), i__4 = *n * m2, i__3 = max(
 		i__3,i__4), i__4 = np2 * *n, i__3 = max(i__3,i__4), i__4 = 
 		np2 * m2, i__3 = max(i__3,i__4);
+#line 302 "SB10HD.f"
 	i__1 = max(i__3,1), i__2 = *n * (*n * 14 + 12 + m2 + np2) + 5;
+#line 302 "SB10HD.f"
 	minwrk = *n * *m + *np * (*n + *m) + m2 * m2 + np2 * np2 + max(i__1,
 		i__2);
+#line 309 "SB10HD.f"
 	if (*ldwork < minwrk) {
+#line 309 "SB10HD.f"
 	    *info = -26;
+#line 309 "SB10HD.f"
 	}
+#line 311 "SB10HD.f"
     }
+#line 312 "SB10HD.f"
     if (*info != 0) {
+#line 313 "SB10HD.f"
 	i__1 = -(*info);
+#line 313 "SB10HD.f"
 	xerbla_("SB10HD", &i__1, (ftnlen)6);
+#line 314 "SB10HD.f"
 	return 0;
+#line 315 "SB10HD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 319 "SB10HD.f"
     if (*n == 0 || *m == 0 || *np == 0 || m1 == 0 || m2 == 0 || np1 == 0 || 
 	    np2 == 0) {
+#line 321 "SB10HD.f"
 	rcond[1] = 1.;
+#line 322 "SB10HD.f"
 	rcond[2] = 1.;
+#line 323 "SB10HD.f"
 	rcond[3] = 1.;
+#line 324 "SB10HD.f"
 	rcond[4] = 1.;
+#line 325 "SB10HD.f"
 	dwork[1] = 1.;
+#line 326 "SB10HD.f"
 	return 0;
+#line 327 "SB10HD.f"
     }
 
+#line 329 "SB10HD.f"
     toll = *tol;
+#line 330 "SB10HD.f"
     if (toll <= 0.) {
 
 /*        Set the default value of the tolerance for rank tests. */
 
+#line 334 "SB10HD.f"
 	toll = sqrt(dlamch_("Epsilon", (ftnlen)7));
+#line 335 "SB10HD.f"
     }
 
 /*     Workspace usage. */
 
+#line 339 "SB10HD.f"
     iwc = *n * *m + 1;
+#line 340 "SB10HD.f"
     iwd = iwc + *np * *n;
+#line 341 "SB10HD.f"
     iwtu = iwd + *np * *m;
+#line 342 "SB10HD.f"
     iwty = iwtu + m2 * m2;
+#line 343 "SB10HD.f"
     iwrk = iwty + np2 * np2;
 
+#line 345 "SB10HD.f"
     dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[1], n, (ftnlen)4);
+#line 346 "SB10HD.f"
     dlacpy_("Full", np, n, &c__[c_offset], ldc, &dwork[iwc], np, (ftnlen)4);
+#line 347 "SB10HD.f"
     dlacpy_("Full", np, m, &d__[d_offset], ldd, &dwork[iwd], np, (ftnlen)4);
 
 /*     Transform the system so that D12 and D21 satisfy the formulas */
 /*     in the computation of the H2 optimal controller. */
 
+#line 352 "SB10HD.f"
     i__1 = *ldwork - iwrk + 1;
+#line 352 "SB10HD.f"
     sb10ud_(n, m, np, ncon, nmeas, &dwork[1], n, &dwork[iwc], np, &dwork[iwd],
 	     np, &dwork[iwtu], &m2, &dwork[iwty], &np2, &rcond[1], &toll, &
 	    dwork[iwrk], &i__1, &info2);
+#line 356 "SB10HD.f"
     if (info2 > 0) {
+#line 357 "SB10HD.f"
 	*info = info2;
+#line 358 "SB10HD.f"
 	return 0;
+#line 359 "SB10HD.f"
     }
+#line 360 "SB10HD.f"
     lwamax = (integer) dwork[iwrk] + iwrk - 1;
 
+#line 362 "SB10HD.f"
     iwy = iwrk;
+#line 363 "SB10HD.f"
     iwf = iwy + *n * *n;
+#line 364 "SB10HD.f"
     iwh = iwf + m2 * *n;
+#line 365 "SB10HD.f"
     iwrk = iwh + *n * np2;
 
 /*     Compute the optimal state feedback and output injection matrices. */
 /*     AK is used to store X. */
 
+#line 370 "SB10HD.f"
     i__1 = *ldwork - iwrk + 1;
+#line 370 "SB10HD.f"
     sb10vd_(n, m, np, ncon, nmeas, &a[a_offset], lda, &dwork[1], n, &dwork[
 	    iwc], np, &dwork[iwf], &m2, &dwork[iwh], n, &ak[ak_offset], ldak, 
 	    &dwork[iwy], n, &rcond[3], &iwork[1], &dwork[iwrk], &i__1, &bwork[
 	    1], &info2);
+#line 374 "SB10HD.f"
     if (info2 > 0) {
+#line 375 "SB10HD.f"
 	*info = info2 + 3;
+#line 376 "SB10HD.f"
 	return 0;
+#line 377 "SB10HD.f"
     }
 /* Computing MAX */
+#line 378 "SB10HD.f"
     i__1 = (integer) dwork[iwrk] + iwrk - 1;
+#line 378 "SB10HD.f"
     lwamax = max(i__1,lwamax);
 
 /*     Compute the H2 optimal controller. */
 
+#line 382 "SB10HD.f"
     sb10wd_(n, m, np, ncon, nmeas, &a[a_offset], lda, &dwork[1], n, &dwork[
 	    iwc], np, &dwork[iwd], np, &dwork[iwf], &m2, &dwork[iwh], n, &
 	    dwork[iwtu], &m2, &dwork[iwty], &np2, &ak[ak_offset], ldak, &bk[
 	    bk_offset], ldbk, &ck[ck_offset], ldck, &dk[dk_offset], lddk, &
 	    info2);
 
+#line 387 "SB10HD.f"
     dwork[1] = (doublereal) lwamax;
+#line 388 "SB10HD.f"
     return 0;
 /* *** Last line of SB10HD *** */
 } /* sb10hd_ */

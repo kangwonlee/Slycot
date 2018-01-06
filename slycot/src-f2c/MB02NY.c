@@ -1,3 +1,4 @@
+#line 1 "MB02NY.f"
 /* MB02NY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02NY.f"
 /* Subroutine */ int mb02ny_(logical *updatu, logical *updatv, integer *m, 
 	integer *n, integer *i__, integer *k, doublereal *q, doublereal *e, 
 	doublereal *u, integer *ldu, doublereal *v, integer *ldv, doublereal *
@@ -218,90 +220,159 @@
 
 /*     Quick return if possible. */
 
+#line 199 "MB02NY.f"
     /* Parameter adjustments */
+#line 199 "MB02NY.f"
     --q;
+#line 199 "MB02NY.f"
     --e;
+#line 199 "MB02NY.f"
     u_dim1 = *ldu;
+#line 199 "MB02NY.f"
     u_offset = 1 + u_dim1;
+#line 199 "MB02NY.f"
     u -= u_offset;
+#line 199 "MB02NY.f"
     v_dim1 = *ldv;
+#line 199 "MB02NY.f"
     v_offset = 1 + v_dim1;
+#line 199 "MB02NY.f"
     v -= v_offset;
+#line 199 "MB02NY.f"
     --dwork;
+#line 199 "MB02NY.f"
 
+#line 199 "MB02NY.f"
     /* Function Body */
+#line 199 "MB02NY.f"
     if (*m <= 0 || *n <= 0) {
+#line 199 "MB02NY.f"
 	return 0;
+#line 199 "MB02NY.f"
     }
 
+#line 202 "MB02NY.f"
     if (*i__ <= min(*m,*n)) {
+#line 202 "MB02NY.f"
 	q[*i__] = 0.;
+#line 202 "MB02NY.f"
     }
 
 /*     Annihilate E(I) (if I < K). */
 
+#line 206 "MB02NY.f"
     if (*i__ < *k) {
+#line 207 "MB02NY.f"
 	c__ = 0.;
+#line 208 "MB02NY.f"
 	s = 1.;
+#line 209 "MB02NY.f"
 	irot = 0;
+#line 210 "MB02NY.f"
 	nrot = *k - *i__;
 
+#line 212 "MB02NY.f"
 	i__1 = *k - 1;
+#line 212 "MB02NY.f"
 	for (l = *i__; l <= i__1; ++l) {
+#line 213 "MB02NY.f"
 	    g = e[l];
+#line 214 "MB02NY.f"
 	    e[l] = c__ * g;
+#line 215 "MB02NY.f"
 	    d__1 = s * g;
+#line 215 "MB02NY.f"
 	    dlartg_(&q[l + 1], &d__1, &c__, &s, &r__);
+#line 216 "MB02NY.f"
 	    q[l + 1] = r__;
+#line 217 "MB02NY.f"
 	    if (*updatu) {
+#line 218 "MB02NY.f"
 		++irot;
+#line 219 "MB02NY.f"
 		dwork[irot] = c__;
+#line 220 "MB02NY.f"
 		dwork[irot + nrot] = s;
+#line 221 "MB02NY.f"
 	    }
+#line 222 "MB02NY.f"
 /* L20: */
+#line 222 "MB02NY.f"
 	}
 
+#line 224 "MB02NY.f"
 	if (*updatu) {
+#line 224 "MB02NY.f"
 	    i__1 = nrot + 1;
+#line 224 "MB02NY.f"
 	    dlasr_("Right", "Top", "Forward", m, &i__1, &dwork[1], &dwork[
 		    nrot + 1], &u[*i__ * u_dim1 + 1], ldu, (ftnlen)5, (ftnlen)
 		    3, (ftnlen)7);
+#line 224 "MB02NY.f"
 	}
+#line 227 "MB02NY.f"
     }
 
 /*     Annihilate E(I-1) (if I > 1). */
 
+#line 231 "MB02NY.f"
     if (*i__ > 1) {
+#line 232 "MB02NY.f"
 	i1 = *i__ - 1;
+#line 233 "MB02NY.f"
 	f = e[i1];
+#line 234 "MB02NY.f"
 	e[i1] = 0.;
 
+#line 236 "MB02NY.f"
 	i__1 = i1 - 1;
+#line 236 "MB02NY.f"
 	for (l1 = 1; l1 <= i__1; ++l1) {
+#line 237 "MB02NY.f"
 	    l = *i__ - l1;
+#line 238 "MB02NY.f"
 	    dlartg_(&q[l], &f, &c__, &s, &r__);
+#line 239 "MB02NY.f"
 	    q[l] = r__;
+#line 240 "MB02NY.f"
 	    if (*updatv) {
+#line 241 "MB02NY.f"
 		dwork[l] = c__;
+#line 242 "MB02NY.f"
 		dwork[l + i1] = s;
+#line 243 "MB02NY.f"
 	    }
+#line 244 "MB02NY.f"
 	    g = e[l - 1];
+#line 245 "MB02NY.f"
 	    f = -s * g;
+#line 246 "MB02NY.f"
 	    e[l - 1] = c__ * g;
+#line 247 "MB02NY.f"
 /* L40: */
+#line 247 "MB02NY.f"
 	}
 
+#line 249 "MB02NY.f"
 	dlartg_(&q[1], &f, &c__, &s, &r__);
+#line 250 "MB02NY.f"
 	q[1] = r__;
+#line 251 "MB02NY.f"
 	if (*updatv) {
+#line 252 "MB02NY.f"
 	    dwork[1] = c__;
+#line 253 "MB02NY.f"
 	    dwork[*i__] = s;
+#line 254 "MB02NY.f"
 	    dlasr_("Right", "Bottom", "Backward", n, i__, &dwork[1], &dwork[*
 		    i__], &v[v_dim1 + 1], ldv, (ftnlen)5, (ftnlen)6, (ftnlen)
 		    8);
+#line 256 "MB02NY.f"
 	}
+#line 257 "MB02NY.f"
     }
 
+#line 259 "MB02NY.f"
     return 0;
 /* *** Last line of MB02NY *** */
 } /* mb02ny_ */

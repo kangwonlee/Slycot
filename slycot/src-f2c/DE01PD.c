@@ -1,3 +1,4 @@
+#line 1 "DE01PD.f"
 /* DE01PD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "DE01PD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -150,136 +152,233 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 127 "DE01PD.f"
     /* Parameter adjustments */
+#line 127 "DE01PD.f"
     --w;
+#line 127 "DE01PD.f"
     --b;
+#line 127 "DE01PD.f"
     --a;
+#line 127 "DE01PD.f"
 
+#line 127 "DE01PD.f"
     /* Function Body */
+#line 127 "DE01PD.f"
     *info = 0;
+#line 128 "DE01PD.f"
     lconv = lsame_(conv, "C", (ftnlen)1, (ftnlen)1);
+#line 129 "DE01PD.f"
     lwght = lsame_(wght, "A", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 133 "DE01PD.f"
     if (! lconv && ! lsame_(conv, "D", (ftnlen)1, (ftnlen)1)) {
+#line 134 "DE01PD.f"
 	*info = -1;
+#line 135 "DE01PD.f"
     } else if (! lwght && ! lsame_(wght, "N", (ftnlen)1, (ftnlen)1)) {
+#line 136 "DE01PD.f"
 	*info = -2;
+#line 137 "DE01PD.f"
     } else {
+#line 138 "DE01PD.f"
 	m = 0;
+#line 139 "DE01PD.f"
 	j = 0;
+#line 140 "DE01PD.f"
 	if (*n >= 1) {
+#line 141 "DE01PD.f"
 	    j = *n;
 /*           WHILE ( MOD( J, 2 ).EQ.0 ) DO */
+#line 143 "DE01PD.f"
 L10:
+#line 144 "DE01PD.f"
 	    if (j % 2 == 0) {
+#line 145 "DE01PD.f"
 		j /= 2;
+#line 146 "DE01PD.f"
 		++m;
+#line 147 "DE01PD.f"
 		goto L10;
+#line 148 "DE01PD.f"
 	    }
 /*           END WHILE 10 */
+#line 150 "DE01PD.f"
 	    if (j != 1) {
+#line 150 "DE01PD.f"
 		*info = -3;
+#line 150 "DE01PD.f"
 	    }
+#line 151 "DE01PD.f"
 	} else if (*n < 0) {
+#line 152 "DE01PD.f"
 	    *info = -3;
+#line 153 "DE01PD.f"
 	}
+#line 154 "DE01PD.f"
     }
 
+#line 156 "DE01PD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 160 "DE01PD.f"
 	i__1 = -(*info);
+#line 160 "DE01PD.f"
 	xerbla_("DE01PD", &i__1, (ftnlen)6);
+#line 161 "DE01PD.f"
 	return 0;
+#line 162 "DE01PD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 166 "DE01PD.f"
     if (*n <= 0) {
+#line 167 "DE01PD.f"
 	return 0;
+#line 168 "DE01PD.f"
     } else if (*n == 1) {
+#line 169 "DE01PD.f"
 	if (lconv) {
+#line 170 "DE01PD.f"
 	    a[1] *= b[1];
+#line 171 "DE01PD.f"
 	} else {
+#line 172 "DE01PD.f"
 	    a[1] /= b[1];
+#line 173 "DE01PD.f"
 	}
+#line 174 "DE01PD.f"
 	return 0;
+#line 175 "DE01PD.f"
     }
 
 /*     Scrambled Hartley transforms of A and B. */
 
+#line 179 "DE01PD.f"
     dg01od_("OutputScrambled", wght, n, &a[1], &w[1], info, (ftnlen)15, (
 	    ftnlen)1);
+#line 180 "DE01PD.f"
     dg01od_("OutputScrambled", wght, n, &b[1], &w[1], info, (ftnlen)15, (
 	    ftnlen)1);
 
 /*     Something similar to a Hadamard product/quotient. */
 
+#line 184 "DE01PD.f"
     len = 1;
+#line 185 "DE01PD.f"
     if (lconv) {
+#line 186 "DE01PD.f"
 	a[1] = a[1] * 2. * b[1];
+#line 187 "DE01PD.f"
 	a[2] = a[2] * 2. * b[2];
 
+#line 189 "DE01PD.f"
 	i__1 = m - 1;
+#line 189 "DE01PD.f"
 	for (l = 1; l <= i__1; ++l) {
+#line 190 "DE01PD.f"
 	    len <<= 1;
+#line 191 "DE01PD.f"
 	    r1 = len << 1;
 
+#line 193 "DE01PD.f"
 	    i__2 = len + len / 2;
+#line 193 "DE01PD.f"
 	    for (p1 = len + 1; p1 <= i__2; ++p1) {
+#line 194 "DE01PD.f"
 		t1 = b[p1] + b[r1];
+#line 195 "DE01PD.f"
 		t2 = b[p1] - b[r1];
+#line 196 "DE01PD.f"
 		t3 = t2 * a[p1];
+#line 197 "DE01PD.f"
 		a[p1] = t1 * a[p1] + t2 * a[r1];
+#line 198 "DE01PD.f"
 		a[r1] = t1 * a[r1] - t3;
+#line 199 "DE01PD.f"
 		--r1;
+#line 200 "DE01PD.f"
 /* L20: */
+#line 200 "DE01PD.f"
 	    }
 
+#line 202 "DE01PD.f"
 /* L30: */
+#line 202 "DE01PD.f"
 	}
 
+#line 204 "DE01PD.f"
     } else {
 
+#line 206 "DE01PD.f"
 	a[1] = a[1] * .5 / b[1];
+#line 207 "DE01PD.f"
 	a[2] = a[2] * .5 / b[2];
 
+#line 209 "DE01PD.f"
 	i__1 = m - 1;
+#line 209 "DE01PD.f"
 	for (l = 1; l <= i__1; ++l) {
+#line 210 "DE01PD.f"
 	    len <<= 1;
+#line 211 "DE01PD.f"
 	    r1 = len << 1;
 
+#line 213 "DE01PD.f"
 	    i__2 = len + len / 2;
+#line 213 "DE01PD.f"
 	    for (p1 = len + 1; p1 <= i__2; ++p1) {
+#line 214 "DE01PD.f"
 		d__1 = b[p1] + b[r1];
+#line 214 "DE01PD.f"
 		d__2 = b[r1] - b[p1];
+#line 214 "DE01PD.f"
 		dladiv_(&a[p1], &a[r1], &d__1, &d__2, &t1, &t2);
+#line 216 "DE01PD.f"
 		a[p1] = t1;
+#line 217 "DE01PD.f"
 		a[r1] = t2;
+#line 218 "DE01PD.f"
 		--r1;
+#line 219 "DE01PD.f"
 /* L40: */
+#line 219 "DE01PD.f"
 	    }
 
+#line 221 "DE01PD.f"
 /* L50: */
+#line 221 "DE01PD.f"
 	}
 
+#line 223 "DE01PD.f"
     }
 
 /*     Transposed Hartley transform of A. */
 
+#line 227 "DE01PD.f"
     dg01od_("InputScrambled", wght, n, &a[1], &w[1], info, (ftnlen)14, (
 	    ftnlen)1);
+#line 228 "DE01PD.f"
     if (lconv) {
+#line 229 "DE01PD.f"
 	d__1 = .5 / (doublereal) (*n);
+#line 229 "DE01PD.f"
 	dscal_(n, &d__1, &a[1], &c__1);
+#line 230 "DE01PD.f"
     } else {
+#line 231 "DE01PD.f"
 	d__1 = 2. / (doublereal) (*n);
+#line 231 "DE01PD.f"
 	dscal_(n, &d__1, &a[1], &c__1);
+#line 232 "DE01PD.f"
     }
 
+#line 234 "DE01PD.f"
     return 0;
 /* *** Last line of DE01PD *** */
 } /* de01pd_ */

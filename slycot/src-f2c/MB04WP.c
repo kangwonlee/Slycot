@@ -1,3 +1,4 @@
+#line 1 "MB04WP.f"
 /* MB04WP.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04WP.f"
 /* Table of constant values */
 
 static doublereal c_b7 = 0.;
@@ -176,94 +178,167 @@ static doublereal c_b8 = 1.;
 
 /*     Check the scalar input parameters. */
 
+#line 153 "MB04WP.f"
     /* Parameter adjustments */
+#line 153 "MB04WP.f"
     u1_dim1 = *ldu1;
+#line 153 "MB04WP.f"
     u1_offset = 1 + u1_dim1;
+#line 153 "MB04WP.f"
     u1 -= u1_offset;
+#line 153 "MB04WP.f"
     u2_dim1 = *ldu2;
+#line 153 "MB04WP.f"
     u2_offset = 1 + u2_dim1;
+#line 153 "MB04WP.f"
     u2 -= u2_offset;
+#line 153 "MB04WP.f"
     --cs;
+#line 153 "MB04WP.f"
     --tau;
+#line 153 "MB04WP.f"
     --dwork;
+#line 153 "MB04WP.f"
 
+#line 153 "MB04WP.f"
     /* Function Body */
+#line 153 "MB04WP.f"
     *info = 0;
+#line 154 "MB04WP.f"
     if (*n < 0) {
+#line 155 "MB04WP.f"
 	*info = -1;
+#line 156 "MB04WP.f"
     } else if (*ilo < 1 || *ilo > max(1,*n)) {
+#line 157 "MB04WP.f"
 	*info = -2;
+#line 158 "MB04WP.f"
     } else if (*ldu1 < max(1,*n)) {
+#line 159 "MB04WP.f"
 	*info = -4;
+#line 160 "MB04WP.f"
     } else if (*ldu2 < max(1,*n)) {
+#line 161 "MB04WP.f"
 	*info = -6;
+#line 162 "MB04WP.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 162 "MB04WP.f"
 	i__1 = 1, i__2 = *n - *ilo << 1;
+#line 162 "MB04WP.f"
 	if (*ldwork < max(i__1,i__2)) {
 /* Computing MAX */
+#line 163 "MB04WP.f"
 	    i__1 = 1, i__2 = *n - *ilo << 1;
+#line 163 "MB04WP.f"
 	    dwork[1] = (doublereal) max(i__1,i__2);
+#line 164 "MB04WP.f"
 	    *info = -10;
+#line 165 "MB04WP.f"
 	}
+#line 165 "MB04WP.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 169 "MB04WP.f"
     if (*info != 0) {
+#line 170 "MB04WP.f"
 	i__1 = -(*info);
+#line 170 "MB04WP.f"
 	xerbla_("MB04WP", &i__1, (ftnlen)6);
+#line 171 "MB04WP.f"
 	return 0;
+#line 172 "MB04WP.f"
     }
 
 /*     Quick return if possible. */
 
+#line 176 "MB04WP.f"
     if (*n == 0) {
+#line 177 "MB04WP.f"
 	dwork[1] = 1.;
+#line 178 "MB04WP.f"
 	return 0;
+#line 179 "MB04WP.f"
     }
 
 /*     Shift the vectors which define the elementary reflectors one */
 /*     column to the right, and set the first ilo rows and columns to */
 /*     those of the unit matrix. */
 
+#line 185 "MB04WP.f"
     i__1 = *ilo + 1;
+#line 185 "MB04WP.f"
     for (j = *n; j >= i__1; --j) {
+#line 186 "MB04WP.f"
 	i__2 = j - 1;
+#line 186 "MB04WP.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 187 "MB04WP.f"
 	    u1[i__ + j * u1_dim1] = 0.;
+#line 188 "MB04WP.f"
 /* L10: */
+#line 188 "MB04WP.f"
 	}
+#line 189 "MB04WP.f"
 	i__2 = *n;
+#line 189 "MB04WP.f"
 	for (i__ = j + 1; i__ <= i__2; ++i__) {
+#line 190 "MB04WP.f"
 	    u1[i__ + j * u1_dim1] = u1[i__ + (j - 1) * u1_dim1];
+#line 191 "MB04WP.f"
 /* L20: */
+#line 191 "MB04WP.f"
 	}
+#line 192 "MB04WP.f"
 /* L30: */
+#line 192 "MB04WP.f"
     }
+#line 193 "MB04WP.f"
     dlaset_("All", n, ilo, &c_b7, &c_b8, &u1[u1_offset], ldu1, (ftnlen)3);
+#line 194 "MB04WP.f"
     i__1 = *ilo + 1;
+#line 194 "MB04WP.f"
     for (j = *n; j >= i__1; --j) {
+#line 195 "MB04WP.f"
 	i__2 = j - 1;
+#line 195 "MB04WP.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 196 "MB04WP.f"
 	    u2[i__ + j * u2_dim1] = 0.;
+#line 197 "MB04WP.f"
 /* L40: */
+#line 197 "MB04WP.f"
 	}
+#line 198 "MB04WP.f"
 	i__2 = *n;
+#line 198 "MB04WP.f"
 	for (i__ = j; i__ <= i__2; ++i__) {
+#line 199 "MB04WP.f"
 	    u2[i__ + j * u2_dim1] = u2[i__ + (j - 1) * u2_dim1];
+#line 200 "MB04WP.f"
 /* L50: */
+#line 200 "MB04WP.f"
 	}
+#line 201 "MB04WP.f"
 /* L60: */
+#line 201 "MB04WP.f"
     }
+#line 202 "MB04WP.f"
     dlaset_("All", n, ilo, &c_b7, &c_b7, &u2[u2_offset], ldu2, (ftnlen)3);
+#line 203 "MB04WP.f"
     nh = *n - *ilo;
+#line 204 "MB04WP.f"
     if (nh > 0) {
+#line 205 "MB04WP.f"
 	mb04wd_("No Transpose", "No Transpose", &nh, &nh, &nh, &u1[*ilo + 1 + 
 		(*ilo + 1) * u1_dim1], ldu1, &u2[*ilo + 1 + (*ilo + 1) * 
 		u2_dim1], ldu2, &cs[*ilo], &tau[*ilo], &dwork[1], ldwork, &
 		ierr, (ftnlen)12, (ftnlen)12);
+#line 208 "MB04WP.f"
     }
+#line 209 "MB04WP.f"
     return 0;
 /* *** Last line of MB04WP *** */
 } /* mb04wp_ */

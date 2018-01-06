@@ -1,3 +1,4 @@
+#line 1 "MC01PD.f"
 /* MC01PD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC01PD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -130,72 +132,123 @@ static integer c__1 = 1;
 
 /*     Test the input scalar arguments. */
 
+#line 108 "MC01PD.f"
     /* Parameter adjustments */
+#line 108 "MC01PD.f"
     --dwork;
+#line 108 "MC01PD.f"
     --p;
+#line 108 "MC01PD.f"
     --imz;
+#line 108 "MC01PD.f"
     --rez;
+#line 108 "MC01PD.f"
 
+#line 108 "MC01PD.f"
     /* Function Body */
+#line 108 "MC01PD.f"
     if (*k < 0) {
+#line 109 "MC01PD.f"
 	*info = -1;
 
 /*        Error return. */
 
+#line 113 "MC01PD.f"
 	i__1 = -(*info);
+#line 113 "MC01PD.f"
 	xerbla_("MC01PD", &i__1, (ftnlen)6);
+#line 114 "MC01PD.f"
 	return 0;
+#line 115 "MC01PD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 119 "MC01PD.f"
     *info = 0;
+#line 120 "MC01PD.f"
     p[1] = 1.;
+#line 121 "MC01PD.f"
     if (*k == 0) {
+#line 121 "MC01PD.f"
 	return 0;
+#line 121 "MC01PD.f"
     }
 
+#line 124 "MC01PD.f"
     i__ = 1;
 /*     WHILE ( I <= K ) DO */
+#line 126 "MC01PD.f"
 L20:
+#line 126 "MC01PD.f"
     if (i__ <= *k) {
+#line 127 "MC01PD.f"
 	u = rez[i__];
+#line 128 "MC01PD.f"
 	v = imz[i__];
+#line 129 "MC01PD.f"
 	dwork[1] = 0.;
 
+#line 131 "MC01PD.f"
 	if (v == 0.) {
+#line 132 "MC01PD.f"
 	    dcopy_(&i__, &p[1], &c__1, &dwork[2], &c__1);
+#line 133 "MC01PD.f"
 	    d__1 = -u;
+#line 133 "MC01PD.f"
 	    daxpy_(&i__, &d__1, &p[1], &c__1, &dwork[1], &c__1);
+#line 134 "MC01PD.f"
 	    ++i__;
 
+#line 136 "MC01PD.f"
 	} else {
+#line 137 "MC01PD.f"
 	    if (i__ == *k) {
+#line 138 "MC01PD.f"
 		*info = *k;
+#line 139 "MC01PD.f"
 		return 0;
+#line 140 "MC01PD.f"
 	    } else if (u != rez[i__ + 1] || v != -imz[i__ + 1]) {
+#line 141 "MC01PD.f"
 		*info = i__ + 1;
+#line 142 "MC01PD.f"
 		return 0;
+#line 143 "MC01PD.f"
 	    }
 
+#line 145 "MC01PD.f"
 	    dwork[2] = 0.;
+#line 146 "MC01PD.f"
 	    dcopy_(&i__, &p[1], &c__1, &dwork[3], &c__1);
+#line 147 "MC01PD.f"
 	    d__1 = -(u + u);
+#line 147 "MC01PD.f"
 	    daxpy_(&i__, &d__1, &p[1], &c__1, &dwork[2], &c__1);
 /* Computing 2nd power */
+#line 148 "MC01PD.f"
 	    d__2 = u;
 /* Computing 2nd power */
+#line 148 "MC01PD.f"
 	    d__3 = v;
+#line 148 "MC01PD.f"
 	    d__1 = d__2 * d__2 + d__3 * d__3;
+#line 148 "MC01PD.f"
 	    daxpy_(&i__, &d__1, &p[1], &c__1, &dwork[1], &c__1);
+#line 149 "MC01PD.f"
 	    i__ += 2;
+#line 150 "MC01PD.f"
 	}
 
+#line 152 "MC01PD.f"
 	dcopy_(&i__, &dwork[1], &c__1, &p[1], &c__1);
+#line 153 "MC01PD.f"
 	goto L20;
+#line 154 "MC01PD.f"
     }
 /*     END WHILE 20 */
 
+#line 157 "MC01PD.f"
     return 0;
 /* *** Last line of MC01PD *** */
 } /* mc01pd_ */

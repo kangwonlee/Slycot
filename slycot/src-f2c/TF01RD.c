@@ -1,3 +1,4 @@
+#line 1 "TF01RD.f"
 /* TF01RD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TF01RD.f"
 /* Table of constant values */
 
 static doublereal c_b8 = 1.;
@@ -187,103 +189,166 @@ static doublereal c_b9 = 0.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 161 "TF01RD.f"
     /* Parameter adjustments */
+#line 161 "TF01RD.f"
     a_dim1 = *lda;
+#line 161 "TF01RD.f"
     a_offset = 1 + a_dim1;
+#line 161 "TF01RD.f"
     a -= a_offset;
+#line 161 "TF01RD.f"
     b_dim1 = *ldb;
+#line 161 "TF01RD.f"
     b_offset = 1 + b_dim1;
+#line 161 "TF01RD.f"
     b -= b_offset;
+#line 161 "TF01RD.f"
     c_dim1 = *ldc;
+#line 161 "TF01RD.f"
     c_offset = 1 + c_dim1;
+#line 161 "TF01RD.f"
     c__ -= c_offset;
+#line 161 "TF01RD.f"
     h_dim1 = *ldh;
+#line 161 "TF01RD.f"
     h_offset = 1 + h_dim1;
+#line 161 "TF01RD.f"
     h__ -= h_offset;
+#line 161 "TF01RD.f"
     --dwork;
+#line 161 "TF01RD.f"
 
+#line 161 "TF01RD.f"
     /* Function Body */
+#line 161 "TF01RD.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 165 "TF01RD.f"
     if (*na < 0) {
+#line 166 "TF01RD.f"
 	*info = -1;
+#line 167 "TF01RD.f"
     } else if (*nb < 0) {
+#line 168 "TF01RD.f"
 	*info = -2;
+#line 169 "TF01RD.f"
     } else if (*nc < 0) {
+#line 170 "TF01RD.f"
 	*info = -3;
+#line 171 "TF01RD.f"
     } else if (*n < 0) {
+#line 172 "TF01RD.f"
 	*info = -4;
+#line 173 "TF01RD.f"
     } else if (*lda < max(1,*na)) {
+#line 174 "TF01RD.f"
 	*info = -6;
+#line 175 "TF01RD.f"
     } else if (*ldb < max(1,*na)) {
+#line 176 "TF01RD.f"
 	*info = -8;
+#line 177 "TF01RD.f"
     } else if (*ldc < max(1,*nc)) {
+#line 178 "TF01RD.f"
 	*info = -10;
+#line 179 "TF01RD.f"
     } else if (*ldh < max(1,*nc)) {
+#line 180 "TF01RD.f"
 	*info = -12;
+#line 181 "TF01RD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 181 "TF01RD.f"
 	i__1 = 1, i__2 = (*na << 1) * *nc;
+#line 181 "TF01RD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 182 "TF01RD.f"
 	    *info = -14;
+#line 183 "TF01RD.f"
 	}
+#line 183 "TF01RD.f"
     }
 
+#line 185 "TF01RD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 189 "TF01RD.f"
 	i__1 = -(*info);
+#line 189 "TF01RD.f"
 	xerbla_("TF01RD", &i__1, (ftnlen)6);
+#line 190 "TF01RD.f"
 	return 0;
+#line 191 "TF01RD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 195 "TF01RD.f"
     i__1 = min(*na,*nb), i__1 = min(i__1,*nc);
+#line 195 "TF01RD.f"
     if (min(i__1,*n) == 0) {
+#line 195 "TF01RD.f"
 	return 0;
+#line 195 "TF01RD.f"
     }
 
+#line 198 "TF01RD.f"
     jwork = *nc * *na + 1;
+#line 199 "TF01RD.f"
     ldw = max(1,*nc);
+#line 200 "TF01RD.f"
     i__ = 1;
 
 /*     Copy C in the workspace beginning from the position JWORK. */
 /*     This workspace will contain the product C*A**(K-1), K = 1,2,...,N. */
 
+#line 205 "TF01RD.f"
     dlacpy_("Full", nc, na, &c__[c_offset], ldc, &dwork[jwork], &ldw, (ftnlen)
 	    4);
 
 /*     Form M(1), M(2), ..., M(N). */
 
+#line 209 "TF01RD.f"
     i__1 = *n;
+#line 209 "TF01RD.f"
     for (k = 1; k <= i__1; ++k) {
+#line 210 "TF01RD.f"
 	dlacpy_("Full", nc, na, &dwork[jwork], &ldw, &dwork[1], &ldw, (ftnlen)
 		4);
 
 /*        Form (C * A**(K-1)) * B = M(K). */
 
+#line 214 "TF01RD.f"
 	dgemm_("No transpose", "No transpose", nc, nb, na, &c_b8, &dwork[1], &
 		ldw, &b[b_offset], ldb, &c_b9, &h__[i__ * h_dim1 + 1], ldh, (
 		ftnlen)12, (ftnlen)12);
 
+#line 217 "TF01RD.f"
 	if (k != *n) {
 
 /*           Form C * A**K. */
 
+#line 221 "TF01RD.f"
 	    dgemm_("No transpose", "No transpose", nc, na, na, &c_b8, &dwork[
 		    1], &ldw, &a[a_offset], lda, &c_b9, &dwork[jwork], &ldw, (
 		    ftnlen)12, (ftnlen)12);
 
+#line 224 "TF01RD.f"
 	    i__ += *nb;
+#line 225 "TF01RD.f"
 	}
+#line 226 "TF01RD.f"
 /* L10: */
+#line 226 "TF01RD.f"
     }
 
+#line 228 "TF01RD.f"
     return 0;
 /* *** Last line of TF01RD *** */
 } /* tf01rd_ */

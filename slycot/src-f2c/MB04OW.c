@@ -1,3 +1,4 @@
+#line 1 "MB04OW.f"
 /* MB04OW.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04OW.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -193,137 +195,243 @@ static integer c__1 = 1;
 
 /*     For efficiency reasons, the parameters are not checked. */
 
+#line 165 "MB04OW.f"
     /* Parameter adjustments */
+#line 165 "MB04OW.f"
     a_dim1 = *lda;
+#line 165 "MB04OW.f"
     a_offset = 1 + a_dim1;
+#line 165 "MB04OW.f"
     a -= a_offset;
+#line 165 "MB04OW.f"
     t_dim1 = *ldt;
+#line 165 "MB04OW.f"
     t_offset = 1 + t_dim1;
+#line 165 "MB04OW.f"
     t -= t_offset;
+#line 165 "MB04OW.f"
     --x;
+#line 165 "MB04OW.f"
     b_dim1 = *ldb;
+#line 165 "MB04OW.f"
     b_offset = 1 + b_dim1;
+#line 165 "MB04OW.f"
     b -= b_offset;
+#line 165 "MB04OW.f"
     c_dim1 = *ldc;
+#line 165 "MB04OW.f"
     c_offset = 1 + c_dim1;
+#line 165 "MB04OW.f"
     c__ -= c_offset;
+#line 165 "MB04OW.f"
     --d__;
+#line 165 "MB04OW.f"
 
+#line 165 "MB04OW.f"
     /* Function Body */
+#line 165 "MB04OW.f"
     mn = *m + *n;
+#line 166 "MB04OW.f"
     if (*incx > 1) {
 
 /*        Code for increment INCX > 1. */
 
+#line 170 "MB04OW.f"
 	ix = 1;
+#line 171 "MB04OW.f"
 	if (*m > 0) {
 
+#line 173 "MB04OW.f"
 	    i__1 = *m - 1;
+#line 173 "MB04OW.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 174 "MB04OW.f"
 		dlartg_(&a[i__ + i__ * a_dim1], &x[ix], &ci, &si, &temp);
+#line 175 "MB04OW.f"
 		a[i__ + i__ * a_dim1] = temp;
+#line 176 "MB04OW.f"
 		ix += *incx;
+#line 177 "MB04OW.f"
 		i__2 = mn - i__;
+#line 177 "MB04OW.f"
 		drot_(&i__2, &a[i__ + (i__ + 1) * a_dim1], lda, &x[ix], incx, 
 			&ci, &si);
+#line 178 "MB04OW.f"
 		if (*p > 0) {
+#line 178 "MB04OW.f"
 		    drot_(p, &b[i__ + b_dim1], ldb, &d__[1], incd, &ci, &si);
+#line 178 "MB04OW.f"
 		}
+#line 180 "MB04OW.f"
 /* L10: */
+#line 180 "MB04OW.f"
 	    }
 
+#line 182 "MB04OW.f"
 	    dlartg_(&a[*m + *m * a_dim1], &x[ix], &ci, &si, &temp);
+#line 183 "MB04OW.f"
 	    a[*m + *m * a_dim1] = temp;
+#line 184 "MB04OW.f"
 	    ix += *incx;
+#line 185 "MB04OW.f"
 	    if (*n > 0) {
+#line 185 "MB04OW.f"
 		drot_(n, &a[*m + (*m + 1) * a_dim1], lda, &x[ix], incx, &ci, &
 			si);
+#line 185 "MB04OW.f"
 	    }
+#line 187 "MB04OW.f"
 	    if (*p > 0) {
+#line 187 "MB04OW.f"
 		drot_(p, &b[*m + b_dim1], ldb, &d__[1], incd, &ci, &si);
+#line 187 "MB04OW.f"
 	    }
+#line 189 "MB04OW.f"
 	}
 
+#line 191 "MB04OW.f"
 	if (*n > 0) {
 
+#line 193 "MB04OW.f"
 	    i__1 = *n - 1;
+#line 193 "MB04OW.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 194 "MB04OW.f"
 		dlartg_(&t[i__ + i__ * t_dim1], &x[ix], &ci, &si, &temp);
+#line 195 "MB04OW.f"
 		t[i__ + i__ * t_dim1] = temp;
+#line 196 "MB04OW.f"
 		ix += *incx;
+#line 197 "MB04OW.f"
 		i__2 = *n - i__;
+#line 197 "MB04OW.f"
 		drot_(&i__2, &t[i__ + (i__ + 1) * t_dim1], ldt, &x[ix], incx, 
 			&ci, &si);
+#line 198 "MB04OW.f"
 		if (*p > 0) {
+#line 198 "MB04OW.f"
 		    drot_(p, &c__[i__ + c_dim1], ldc, &d__[1], incd, &ci, &si)
 			    ;
+#line 198 "MB04OW.f"
 		}
+#line 200 "MB04OW.f"
 /* L20: */
+#line 200 "MB04OW.f"
 	    }
 
+#line 202 "MB04OW.f"
 	    dlartg_(&t[*n + *n * t_dim1], &x[ix], &ci, &si, &temp);
+#line 203 "MB04OW.f"
 	    t[*n + *n * t_dim1] = temp;
+#line 204 "MB04OW.f"
 	    if (*p > 0) {
+#line 204 "MB04OW.f"
 		drot_(p, &c__[*n + c_dim1], ldc, &d__[1], incd, &ci, &si);
+#line 204 "MB04OW.f"
 	    }
+#line 206 "MB04OW.f"
 	}
 
+#line 208 "MB04OW.f"
     } else if (*incx == 1) {
 
 /*        Code for increment INCX = 1. */
 
+#line 212 "MB04OW.f"
 	if (*m > 0) {
 
+#line 214 "MB04OW.f"
 	    i__1 = *m - 1;
+#line 214 "MB04OW.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 215 "MB04OW.f"
 		dlartg_(&a[i__ + i__ * a_dim1], &x[i__], &ci, &si, &temp);
+#line 216 "MB04OW.f"
 		a[i__ + i__ * a_dim1] = temp;
+#line 217 "MB04OW.f"
 		i__2 = mn - i__;
+#line 217 "MB04OW.f"
 		drot_(&i__2, &a[i__ + (i__ + 1) * a_dim1], lda, &x[i__ + 1], &
 			c__1, &ci, &si);
+#line 218 "MB04OW.f"
 		if (*p > 0) {
+#line 218 "MB04OW.f"
 		    drot_(p, &b[i__ + b_dim1], ldb, &d__[1], incd, &ci, &si);
+#line 218 "MB04OW.f"
 		}
+#line 220 "MB04OW.f"
 /* L30: */
+#line 220 "MB04OW.f"
 	    }
 
+#line 222 "MB04OW.f"
 	    dlartg_(&a[*m + *m * a_dim1], &x[*m], &ci, &si, &temp);
+#line 223 "MB04OW.f"
 	    a[*m + *m * a_dim1] = temp;
+#line 224 "MB04OW.f"
 	    if (*n > 0) {
+#line 224 "MB04OW.f"
 		drot_(n, &a[*m + (*m + 1) * a_dim1], lda, &x[*m + 1], &c__1, &
 			ci, &si);
+#line 224 "MB04OW.f"
 	    }
+#line 226 "MB04OW.f"
 	    if (*p > 0) {
+#line 226 "MB04OW.f"
 		drot_(p, &b[*m + b_dim1], ldb, &d__[1], incd, &ci, &si);
+#line 226 "MB04OW.f"
 	    }
+#line 228 "MB04OW.f"
 	}
 
+#line 230 "MB04OW.f"
 	if (*n > 0) {
+#line 231 "MB04OW.f"
 	    ix = *m + 1;
 
+#line 233 "MB04OW.f"
 	    i__1 = *n - 1;
+#line 233 "MB04OW.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 234 "MB04OW.f"
 		dlartg_(&t[i__ + i__ * t_dim1], &x[ix], &ci, &si, &temp);
+#line 235 "MB04OW.f"
 		t[i__ + i__ * t_dim1] = temp;
+#line 236 "MB04OW.f"
 		++ix;
+#line 237 "MB04OW.f"
 		i__2 = *n - i__;
+#line 237 "MB04OW.f"
 		drot_(&i__2, &t[i__ + (i__ + 1) * t_dim1], ldt, &x[ix], &c__1,
 			 &ci, &si);
+#line 238 "MB04OW.f"
 		if (*p > 0) {
+#line 238 "MB04OW.f"
 		    drot_(p, &c__[i__ + c_dim1], ldc, &d__[1], incd, &ci, &si)
 			    ;
+#line 238 "MB04OW.f"
 		}
+#line 240 "MB04OW.f"
 /* L40: */
+#line 240 "MB04OW.f"
 	    }
 
+#line 242 "MB04OW.f"
 	    dlartg_(&t[*n + *n * t_dim1], &x[ix], &ci, &si, &temp);
+#line 243 "MB04OW.f"
 	    t[*n + *n * t_dim1] = temp;
+#line 244 "MB04OW.f"
 	    if (*p > 0) {
+#line 244 "MB04OW.f"
 		drot_(p, &c__[*n + c_dim1], ldc, &d__[1], incd, &ci, &si);
+#line 244 "MB04OW.f"
 	    }
+#line 246 "MB04OW.f"
 	}
+#line 247 "MB04OW.f"
     }
 
+#line 249 "MB04OW.f"
     return 0;
 /* *** Last line of MB04OW *** */
 } /* mb04ow_ */

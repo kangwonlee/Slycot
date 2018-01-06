@@ -1,3 +1,4 @@
+#line 1 "TF01PD.f"
 /* TF01PD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TF01PD.f"
 /* Subroutine */ int tf01pd_(integer *nh1, integer *nh2, integer *nr, integer 
 	*nc, doublereal *h__, integer *ldh, doublereal *t, integer *ldt, 
 	integer *info)
@@ -142,81 +144,134 @@
 /*     .. External Subroutines .. */
 /*     .. Executable Statements .. */
 
+#line 123 "TF01PD.f"
     /* Parameter adjustments */
+#line 123 "TF01PD.f"
     h_dim1 = *ldh;
+#line 123 "TF01PD.f"
     h_offset = 1 + h_dim1;
+#line 123 "TF01PD.f"
     h__ -= h_offset;
+#line 123 "TF01PD.f"
     t_dim1 = *ldt;
+#line 123 "TF01PD.f"
     t_offset = 1 + t_dim1;
+#line 123 "TF01PD.f"
     t -= t_offset;
+#line 123 "TF01PD.f"
 
+#line 123 "TF01PD.f"
     /* Function Body */
+#line 123 "TF01PD.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 127 "TF01PD.f"
     if (*nh1 < 0) {
+#line 128 "TF01PD.f"
 	*info = -1;
+#line 129 "TF01PD.f"
     } else if (*nh2 < 0) {
+#line 130 "TF01PD.f"
 	*info = -2;
+#line 131 "TF01PD.f"
     } else if (*nr < 0) {
+#line 132 "TF01PD.f"
 	*info = -3;
+#line 133 "TF01PD.f"
     } else if (*nc < 0) {
+#line 134 "TF01PD.f"
 	*info = -4;
+#line 135 "TF01PD.f"
     } else if (*ldh < max(1,*nh1)) {
+#line 136 "TF01PD.f"
 	*info = -6;
+#line 137 "TF01PD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 137 "TF01PD.f"
 	i__1 = 1, i__2 = *nh1 * *nr;
+#line 137 "TF01PD.f"
 	if (*ldt < max(i__1,i__2)) {
+#line 138 "TF01PD.f"
 	    *info = -8;
+#line 139 "TF01PD.f"
 	}
+#line 139 "TF01PD.f"
     }
 
+#line 141 "TF01PD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 145 "TF01PD.f"
 	i__1 = -(*info);
+#line 145 "TF01PD.f"
 	xerbla_("TF01PD", &i__1, (ftnlen)6);
+#line 146 "TF01PD.f"
 	return 0;
+#line 147 "TF01PD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 151 "TF01PD.f"
     i__1 = max(*nh1,*nh2), i__1 = max(i__1,*nr);
+#line 151 "TF01PD.f"
     if (max(i__1,*nc) == 0) {
+#line 151 "TF01PD.f"
 	return 0;
+#line 151 "TF01PD.f"
     }
 
 /*     Construct the last block column of T. */
 
+#line 156 "TF01PD.f"
     ih = 1;
+#line 157 "TF01PD.f"
     nrow = (*nr - 1) * *nh1;
+#line 158 "TF01PD.f"
     ncol = (*nc - 1) * *nh2 + 1;
 
+#line 160 "TF01PD.f"
     i__1 = nrow + *nh1;
+#line 160 "TF01PD.f"
     i__2 = *nh1;
+#line 160 "TF01PD.f"
     for (it = 1; i__2 < 0 ? it >= i__1 : it <= i__1; it += i__2) {
+#line 161 "TF01PD.f"
 	dlacpy_("Full", nh1, nh2, &h__[ih * h_dim1 + 1], ldh, &t[it + ncol * 
 		t_dim1], ldt, (ftnlen)4);
+#line 163 "TF01PD.f"
 	ih += *nh2;
+#line 164 "TF01PD.f"
 /* L10: */
+#line 164 "TF01PD.f"
     }
 
 /*     Construct the remaining block columns of T in backward order. */
 
+#line 168 "TF01PD.f"
     i__2 = -(*nh2);
+#line 168 "TF01PD.f"
     for (jt = ncol - *nh2; i__2 < 0 ? jt >= 1 : jt <= 1; jt += i__2) {
+#line 169 "TF01PD.f"
 	dlacpy_("Full", &nrow, nh2, &t[*nh1 + 1 + (jt + *nh2) * t_dim1], ldt, 
 		&t[jt * t_dim1 + 1], ldt, (ftnlen)4);
+#line 171 "TF01PD.f"
 	dlacpy_("Full", nh1, nh2, &h__[ih * h_dim1 + 1], ldh, &t[nrow + 1 + 
 		jt * t_dim1], ldt, (ftnlen)4);
+#line 173 "TF01PD.f"
 	ih += *nh2;
+#line 174 "TF01PD.f"
 /* L20: */
+#line 174 "TF01PD.f"
     }
 
+#line 176 "TF01PD.f"
     return 0;
 /* *** Last line of TF01PD *** */
 } /* tf01pd_ */

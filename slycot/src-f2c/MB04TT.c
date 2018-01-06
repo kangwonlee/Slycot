@@ -1,3 +1,4 @@
+#line 1 "MB04TT.f"
 /* MB04TT.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04TT.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -244,26 +246,47 @@ static logical c_false = FALSE_;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 212 "MB04TT.f"
     /* Parameter adjustments */
+#line 212 "MB04TT.f"
     a_dim1 = *lda;
+#line 212 "MB04TT.f"
     a_offset = 1 + a_dim1;
+#line 212 "MB04TT.f"
     a -= a_offset;
+#line 212 "MB04TT.f"
     e_dim1 = *lde;
+#line 212 "MB04TT.f"
     e_offset = 1 + e_dim1;
+#line 212 "MB04TT.f"
     e -= e_offset;
+#line 212 "MB04TT.f"
     q_dim1 = *ldq;
+#line 212 "MB04TT.f"
     q_offset = 1 + q_dim1;
+#line 212 "MB04TT.f"
     q -= q_offset;
+#line 212 "MB04TT.f"
     z_dim1 = *ldz;
+#line 212 "MB04TT.f"
     z_offset = 1 + z_dim1;
+#line 212 "MB04TT.f"
     z__ -= z_offset;
+#line 212 "MB04TT.f"
     --istair;
+#line 212 "MB04TT.f"
     --iwork;
+#line 212 "MB04TT.f"
 
+#line 212 "MB04TT.f"
     /* Function Body */
+#line 212 "MB04TT.f"
     *rank = 0;
+#line 213 "MB04TT.f"
     if (*m <= 0 || *n <= 0) {
+#line 213 "MB04TT.f"
 	return 0;
+#line 213 "MB04TT.f"
     }
 
 /*     Initialisation. */
@@ -271,33 +294,53 @@ static logical c_false = FALSE_;
 /*     NJ = number of columns in submatrix Aj, */
 /*     MJ = number of rows in submatrices Aj and Ej. */
 
+#line 221 "MB04TT.f"
     nj = *nca;
+#line 222 "MB04TT.f"
     mj = *m + 1 - *ifira;
+#line 223 "MB04TT.f"
     ifira1 = *ifira - 1;
+#line 224 "MB04TT.f"
     ifica1 = *ifica - 1;
 
+#line 226 "MB04TT.f"
     i__1 = nj;
+#line 226 "MB04TT.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 227 "MB04TT.f"
 	iwork[i__] = i__;
+#line 228 "MB04TT.f"
 /* L20: */
+#line 228 "MB04TT.f"
     }
 
+#line 230 "MB04TT.f"
     k = 1;
+#line 231 "MB04TT.f"
     lzero = FALSE_;
+#line 232 "MB04TT.f"
     *rank = min(nj,mj);
+#line 233 "MB04TT.f"
     mxrank = *rank;
 
 /*     WHILE ( K <= MXRANK ) and ( LZERO = FALSE ) DO */
+#line 236 "MB04TT.f"
 L40:
+#line 236 "MB04TT.f"
     if (k <= mxrank && ! lzero) {
 
 /*        Determine column in Aj with largest max-norm. */
 
+#line 240 "MB04TT.f"
 	bmxnrm = 0.;
+#line 241 "MB04TT.f"
 	lsav = k;
+#line 242 "MB04TT.f"
 	kk = ifira1 + k;
 
+#line 244 "MB04TT.f"
 	i__1 = nj;
+#line 244 "MB04TT.f"
 	for (l = k; l <= i__1; ++l) {
 
 /*           IDAMAX call gives the relative index in column L of Aj where */
@@ -305,53 +348,81 @@ L40:
 /*           Note: the first element in column L is in row K of */
 /*                 matrix Aj. */
 
+#line 251 "MB04TT.f"
 	    ll = ifica1 + l;
+#line 252 "MB04TT.f"
 	    i__2 = mj - k + 1;
+#line 252 "MB04TT.f"
 	    bmx = (d__1 = a[idamax_(&i__2, &a[kk + ll * a_dim1], &c__1) + kk 
 		    - 1 + ll * a_dim1], abs(d__1));
+#line 253 "MB04TT.f"
 	    if (bmx > bmxnrm) {
+#line 254 "MB04TT.f"
 		bmxnrm = bmx;
+#line 255 "MB04TT.f"
 		lsav = l;
+#line 256 "MB04TT.f"
 	    }
+#line 257 "MB04TT.f"
 /* L60: */
+#line 257 "MB04TT.f"
 	}
 
+#line 259 "MB04TT.f"
 	ll = ifica1 + k;
+#line 260 "MB04TT.f"
 	if (bmxnrm < *tol) {
 
 /*           Set submatrix of Aj to zero. */
 
+#line 264 "MB04TT.f"
 	    i__1 = mj - k + 1;
+#line 264 "MB04TT.f"
 	    i__2 = nj - k + 1;
+#line 264 "MB04TT.f"
 	    dlaset_("Full", &i__1, &i__2, &c_b7, &c_b7, &a[kk + ll * a_dim1], 
 		    lda, (ftnlen)4);
+#line 266 "MB04TT.f"
 	    lzero = TRUE_;
+#line 267 "MB04TT.f"
 	    *rank = k - 1;
+#line 268 "MB04TT.f"
 	} else {
 
 /*           Check whether columns have to be interchanged. */
 
+#line 272 "MB04TT.f"
 	    if (lsav != k) {
 
 /*              Interchange the columns in A which correspond to the */
 /*              columns lsav and k in Aj. Store the permutation in IWORK. */
 
+#line 277 "MB04TT.f"
 		dswap_(m, &a[ll * a_dim1 + 1], &c__1, &a[(ifica1 + lsav) * 
 			a_dim1 + 1], &c__1);
+#line 278 "MB04TT.f"
 		ip = iwork[lsav];
+#line 279 "MB04TT.f"
 		iwork[lsav] = iwork[k];
+#line 280 "MB04TT.f"
 		iwork[k] = ip;
+#line 281 "MB04TT.f"
 	    }
 
+#line 283 "MB04TT.f"
 	    ++k;
+#line 284 "MB04TT.f"
 	    mk1 = *n - ll + 1;
 
+#line 286 "MB04TT.f"
 	    i__1 = k;
+#line 286 "MB04TT.f"
 	    for (i__ = mj; i__ >= i__1; --i__) {
 
 /*              II = absolute row number in A corresponding to row i in */
 /*                   Aj. */
 
+#line 291 "MB04TT.f"
 		ii = ifira1 + i__;
 
 /*              Construct Givens transformation to annihilate Aj(i,k). */
@@ -359,49 +430,71 @@ L40:
 /*              (NOT only to Aj). */
 /*              Update row transformation matrix Q, if needed. */
 
+#line 298 "MB04TT.f"
 		drotg_(&a[ii - 1 + ll * a_dim1], &a[ii + ll * a_dim1], &sc, &
 			ss);
+#line 299 "MB04TT.f"
 		i__2 = mk1 - 1;
+#line 299 "MB04TT.f"
 		drot_(&i__2, &a[ii - 1 + (ll + 1) * a_dim1], lda, &a[ii + (ll 
 			+ 1) * a_dim1], lda, &sc, &ss);
+#line 301 "MB04TT.f"
 		a[ii + ll * a_dim1] = 0.;
+#line 302 "MB04TT.f"
 		if (*updatq) {
+#line 302 "MB04TT.f"
 		    drot_(m, &q[(ii - 1) * q_dim1 + 1], &c__1, &q[ii * q_dim1 
 			    + 1], &c__1, &sc, &ss);
+#line 302 "MB04TT.f"
 		}
 
 /*              Determine boundary type of matrix E at rows II-1 and II. */
 
+#line 307 "MB04TT.f"
 		ist1 = istair[ii - 1];
+#line 308 "MB04TT.f"
 		ist2 = istair[ii];
+#line 309 "MB04TT.f"
 		if (ist1 * ist2 > 0) {
+#line 310 "MB04TT.f"
 		    if (ist1 > 0) {
 
 /*                    boundary form = (* x) */
 /*                                    (0 *) */
 
+#line 315 "MB04TT.f"
 			itype = 1;
+#line 316 "MB04TT.f"
 		    } else {
 
 /*                    boundary form = (x x) */
 /*                                    (x x) */
 
+#line 321 "MB04TT.f"
 			itype = 3;
+#line 322 "MB04TT.f"
 		    }
+#line 323 "MB04TT.f"
 		} else {
+#line 324 "MB04TT.f"
 		    if (ist1 < 0) {
 
 /*                    boundary form = (x x) */
 /*                                    (* x) */
 
+#line 329 "MB04TT.f"
 			itype = 2;
+#line 330 "MB04TT.f"
 		    } else {
 
 /*                    boundary form = (* x) */
 /*                                    (0 x) */
 
+#line 335 "MB04TT.f"
 			itype = 4;
+#line 336 "MB04TT.f"
 		    }
+#line 337 "MB04TT.f"
 		}
 
 /*              Apply row transformation also to matrix E. */
@@ -414,15 +507,22 @@ L40:
 /*              Note: JC1 < JC2   if ITYPE = 1. */
 /*                    JC1 = JC2   if ITYPE = 2, 3 or 4. */
 
+#line 349 "MB04TT.f"
 		jc1 = abs(ist1);
+#line 350 "MB04TT.f"
 		jc2 = abs(ist2);
+#line 351 "MB04TT.f"
 		jpvt = min(jc1,jc2);
 
+#line 353 "MB04TT.f"
 		i__2 = *n - jpvt + 1;
+#line 353 "MB04TT.f"
 		drot_(&i__2, &e[ii - 1 + jpvt * e_dim1], lde, &e[ii + jpvt * 
 			e_dim1], lde, &sc, &ss);
+#line 355 "MB04TT.f"
 		eijpvt = e[ii + jpvt * e_dim1];
 
+#line 357 "MB04TT.f"
 		if (itype == 1) {
 
 /*                 Construct column Givens transformation to annihilate */
@@ -430,60 +530,90 @@ L40:
 /*                 Apply column Givens transformation to matrix E */
 /*                 (NOT only to Ej). */
 
+#line 364 "MB04TT.f"
 		    drotg_(&e[ii + (jpvt + 1) * e_dim1], &e[ii + jpvt * 
 			    e_dim1], &sc, &ss);
+#line 365 "MB04TT.f"
 		    i__2 = ii - 1;
+#line 365 "MB04TT.f"
 		    drot_(&i__2, &e[(jpvt + 1) * e_dim1 + 1], &c__1, &e[jpvt *
 			     e_dim1 + 1], &c__1, &sc, &ss);
+#line 367 "MB04TT.f"
 		    e[ii + jpvt * e_dim1] = 0.;
 
 /*                 Apply this transformation also to matrix A */
 /*                 (NOT only to Aj). */
 /*                 Update column transformation matrix Z, if needed. */
 
+#line 373 "MB04TT.f"
 		    drot_(m, &a[(jpvt + 1) * a_dim1 + 1], &c__1, &a[jpvt * 
 			    a_dim1 + 1], &c__1, &sc, &ss);
+#line 374 "MB04TT.f"
 		    if (*updatz) {
+#line 374 "MB04TT.f"
 			drot_(n, &z__[(jpvt + 1) * z_dim1 + 1], &c__1, &z__[
 				jpvt * z_dim1 + 1], &c__1, &sc, &ss);
+#line 374 "MB04TT.f"
 		    }
 
+#line 377 "MB04TT.f"
 		} else if (itype == 2) {
+#line 378 "MB04TT.f"
 		    if (abs(eijpvt) < *tol) {
 
 /*                                                        (x x)    (* x) */
 /*                    Boundary form has been changed from (* x) to (0 x). */
 
+#line 383 "MB04TT.f"
 			istpvt = istair[ii];
+#line 384 "MB04TT.f"
 			istair[ii - 1] = istpvt;
+#line 385 "MB04TT.f"
 			istair[ii] = -(istpvt + 1);
+#line 386 "MB04TT.f"
 			e[ii + jpvt * e_dim1] = 0.;
+#line 387 "MB04TT.f"
 		    }
 
+#line 389 "MB04TT.f"
 		} else if (itype == 4) {
+#line 390 "MB04TT.f"
 		    if (abs(eijpvt) >= *tol) {
 
 /*                                                        (* x)    (x x) */
 /*                    Boundary form has been changed from (0 x) to (* x). */
 
+#line 395 "MB04TT.f"
 			istpvt = istair[ii - 1];
+#line 396 "MB04TT.f"
 			istair[ii - 1] = -istpvt;
+#line 397 "MB04TT.f"
 			istair[ii] = istpvt;
+#line 398 "MB04TT.f"
 		    }
+#line 399 "MB04TT.f"
 		}
+#line 400 "MB04TT.f"
 /* L80: */
+#line 400 "MB04TT.f"
 	    }
 
+#line 402 "MB04TT.f"
 	}
+#line 403 "MB04TT.f"
 	goto L40;
+#line 404 "MB04TT.f"
     }
 /*     END WHILE 40 */
 
 /*     Permute columns of Aj to original order. */
 
+#line 409 "MB04TT.f"
     i__1 = ifira1 + *rank;
+#line 409 "MB04TT.f"
     dlapmt_(&c_false, &i__1, &nj, &a[*ifica * a_dim1 + 1], lda, &iwork[1]);
 
+#line 411 "MB04TT.f"
     return 0;
 /* *** Last line of MB04TT *** */
 } /* mb04tt_ */

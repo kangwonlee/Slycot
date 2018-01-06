@@ -1,3 +1,4 @@
+#line 1 "MB03VD.f"
 /* MB03VD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03VD.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -251,119 +253,190 @@ static integer c__1 = 1;
 
 /*     Test the input scalar arguments. */
 
+#line 228 "MB03VD.f"
     /* Parameter adjustments */
+#line 228 "MB03VD.f"
     a_dim1 = *lda1;
+#line 228 "MB03VD.f"
     a_dim2 = *lda2;
+#line 228 "MB03VD.f"
     a_offset = 1 + a_dim1 * (1 + a_dim2);
+#line 228 "MB03VD.f"
     a -= a_offset;
+#line 228 "MB03VD.f"
     tau_dim1 = *ldtau;
+#line 228 "MB03VD.f"
     tau_offset = 1 + tau_dim1;
+#line 228 "MB03VD.f"
     tau -= tau_offset;
+#line 228 "MB03VD.f"
     --dwork;
+#line 228 "MB03VD.f"
 
+#line 228 "MB03VD.f"
     /* Function Body */
+#line 228 "MB03VD.f"
     *info = 0;
+#line 229 "MB03VD.f"
     if (*n < 0) {
+#line 230 "MB03VD.f"
 	*info = -1;
+#line 231 "MB03VD.f"
     } else if (*p < 1) {
+#line 232 "MB03VD.f"
 	*info = -2;
+#line 233 "MB03VD.f"
     } else if (*ilo < 1 || *ilo > max(1,*n)) {
+#line 234 "MB03VD.f"
 	*info = -3;
+#line 235 "MB03VD.f"
     } else if (*ihi < min(*ilo,*n) || *ihi > *n) {
+#line 236 "MB03VD.f"
 	*info = -4;
+#line 237 "MB03VD.f"
     } else if (*lda1 < max(1,*n)) {
+#line 238 "MB03VD.f"
 	*info = -6;
+#line 239 "MB03VD.f"
     } else if (*lda2 < max(1,*n)) {
+#line 240 "MB03VD.f"
 	*info = -7;
+#line 241 "MB03VD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 241 "MB03VD.f"
 	i__1 = 1, i__2 = *n - 1;
+#line 241 "MB03VD.f"
 	if (*ldtau < max(i__1,i__2)) {
+#line 242 "MB03VD.f"
 	    *info = -9;
+#line 243 "MB03VD.f"
 	}
+#line 243 "MB03VD.f"
     }
+#line 244 "MB03VD.f"
     if (*info != 0) {
+#line 245 "MB03VD.f"
 	i__1 = -(*info);
+#line 245 "MB03VD.f"
 	xerbla_("MB03VD", &i__1, (ftnlen)6);
+#line 246 "MB03VD.f"
 	return 0;
+#line 247 "MB03VD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 251 "MB03VD.f"
     nh = *ihi - *ilo + 1;
+#line 252 "MB03VD.f"
     if (nh <= 1) {
+#line 252 "MB03VD.f"
 	return 0;
+#line 252 "MB03VD.f"
     }
 
+#line 255 "MB03VD.f"
     dummy[0] = 0.;
 
+#line 257 "MB03VD.f"
     i__1 = *ihi - 1;
+#line 257 "MB03VD.f"
     for (i__ = *ilo; i__ <= i__1; ++i__) {
+#line 258 "MB03VD.f"
 	i1 = i__ + 1;
 /* Computing MIN */
+#line 259 "MB03VD.f"
 	i__2 = i__ + 2;
+#line 259 "MB03VD.f"
 	i2 = min(i__2,*n);
 
+#line 261 "MB03VD.f"
 	for (j = *p; j >= 2; --j) {
 
 /*           Set the elements 1:ILO-1 and IHI:N-1 of TAU(*,J) to zero. */
 
+#line 265 "MB03VD.f"
 	    i__2 = *ilo - 1;
+#line 265 "MB03VD.f"
 	    dcopy_(&i__2, dummy, &c__0, &tau[j * tau_dim1 + 1], &c__1);
+#line 266 "MB03VD.f"
 	    if (*ihi < *n) {
+#line 266 "MB03VD.f"
 		i__2 = *n - *ihi;
+#line 266 "MB03VD.f"
 		dcopy_(&i__2, dummy, &c__0, &tau[*ihi + j * tau_dim1], &c__1);
+#line 266 "MB03VD.f"
 	    }
 
 /*           Compute elementary reflector H_j(i) to annihilate */
 /*           A_j(i+1:ihi,i). */
 
+#line 272 "MB03VD.f"
 	    i__2 = *ihi - i__ + 1;
+#line 272 "MB03VD.f"
 	    dlarfg_(&i__2, &a[i__ + (i__ + j * a_dim2) * a_dim1], &a[i1 + (
 		    i__ + j * a_dim2) * a_dim1], &c__1, &tau[i__ + j * 
 		    tau_dim1]);
 
 /*           Apply H_j(i) to A_(j-1)(1:ihi,i:ihi) from the right. */
 
+#line 277 "MB03VD.f"
 	    i__2 = *ihi - i__ + 1;
+#line 277 "MB03VD.f"
 	    mb04py_("Right", ihi, &i__2, &a[i1 + (i__ + j * a_dim2) * a_dim1],
 		     &tau[i__ + j * tau_dim1], &a[(i__ + (j - 1) * a_dim2) * 
 		    a_dim1 + 1], lda1, &dwork[1], (ftnlen)5);
 
 /*           Apply H_j(i) to A_j(i:ihi,i+1:n) from the left. */
 
+#line 282 "MB03VD.f"
 	    i__2 = *ihi - i__ + 1;
+#line 282 "MB03VD.f"
 	    i__3 = *n - i__;
+#line 282 "MB03VD.f"
 	    mb04py_("Left", &i__2, &i__3, &a[i1 + (i__ + j * a_dim2) * a_dim1]
 		    , &tau[i__ + j * tau_dim1], &a[i__ + (i1 + j * a_dim2) * 
 		    a_dim1], lda1, &dwork[1], (ftnlen)4);
+#line 284 "MB03VD.f"
 /* L10: */
+#line 284 "MB03VD.f"
 	}
 
 /*        Compute elementary reflector H_1(i) to annihilate */
 /*        A_1(i+2:ihi,i). */
 
+#line 289 "MB03VD.f"
 	i__2 = *ihi - i__;
+#line 289 "MB03VD.f"
 	dlarfg_(&i__2, &a[i1 + (i__ + a_dim2) * a_dim1], &a[i2 + (i__ + 
 		a_dim2) * a_dim1], &c__1, &tau[i__ + tau_dim1]);
 
 /*        Apply H_1(i) to A_p(1:ihi,i+1:ihi) from the right. */
 
+#line 294 "MB03VD.f"
 	i__2 = *ihi - i__;
+#line 294 "MB03VD.f"
 	mb04py_("Right", ihi, &i__2, &a[i2 + (i__ + a_dim2) * a_dim1], &tau[
 		i__ + tau_dim1], &a[(i1 + *p * a_dim2) * a_dim1 + 1], lda1, &
 		dwork[1], (ftnlen)5);
 
 /*        Apply H_1(i) to A_1(i+1:ihi,i+1:n) from the left. */
 
+#line 299 "MB03VD.f"
 	i__2 = *ihi - i__;
+#line 299 "MB03VD.f"
 	i__3 = *n - i__;
+#line 299 "MB03VD.f"
 	mb04py_("Left", &i__2, &i__3, &a[i2 + (i__ + a_dim2) * a_dim1], &tau[
 		i__ + tau_dim1], &a[i1 + (i1 + a_dim2) * a_dim1], lda1, &
 		dwork[1], (ftnlen)4);
+#line 301 "MB03VD.f"
 /* L20: */
+#line 301 "MB03VD.f"
     }
 
+#line 303 "MB03VD.f"
     return 0;
 
 /* *** Last line of MB03VD *** */

@@ -1,3 +1,4 @@
+#line 1 "MB02RZ.f"
 /* MB02RZ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02RZ.f"
 /* Table of constant values */
 
 static doublecomplex c_b1 = {1.,0.};
@@ -151,42 +153,74 @@ static doublecomplex c_b1 = {1.,0.};
 
 /*     Test the input parameters. */
 
+#line 126 "MB02RZ.f"
     /* Parameter adjustments */
+#line 126 "MB02RZ.f"
     h_dim1 = *ldh;
+#line 126 "MB02RZ.f"
     h_offset = 1 + h_dim1;
+#line 126 "MB02RZ.f"
     h__ -= h_offset;
+#line 126 "MB02RZ.f"
     --ipiv;
+#line 126 "MB02RZ.f"
     b_dim1 = *ldb;
+#line 126 "MB02RZ.f"
     b_offset = 1 + b_dim1;
+#line 126 "MB02RZ.f"
     b -= b_offset;
+#line 126 "MB02RZ.f"
 
+#line 126 "MB02RZ.f"
     /* Function Body */
+#line 126 "MB02RZ.f"
     *info = 0;
+#line 127 "MB02RZ.f"
     notran = lsame_(trans, "N", (ftnlen)1, (ftnlen)1);
+#line 128 "MB02RZ.f"
     if (! notran && ! lsame_(trans, "T", (ftnlen)1, (ftnlen)1) && ! lsame_(
 	    trans, "C", (ftnlen)1, (ftnlen)1)) {
+#line 130 "MB02RZ.f"
 	*info = -1;
+#line 131 "MB02RZ.f"
     } else if (*n < 0) {
+#line 132 "MB02RZ.f"
 	*info = -2;
+#line 133 "MB02RZ.f"
     } else if (*nrhs < 0) {
+#line 134 "MB02RZ.f"
 	*info = -3;
+#line 135 "MB02RZ.f"
     } else if (*ldh < max(1,*n)) {
+#line 136 "MB02RZ.f"
 	*info = -5;
+#line 137 "MB02RZ.f"
     } else if (*ldb < max(1,*n)) {
+#line 138 "MB02RZ.f"
 	*info = -8;
+#line 139 "MB02RZ.f"
     }
+#line 140 "MB02RZ.f"
     if (*info != 0) {
+#line 141 "MB02RZ.f"
 	i__1 = -(*info);
+#line 141 "MB02RZ.f"
 	xerbla_("MB02RZ", &i__1, (ftnlen)6);
+#line 142 "MB02RZ.f"
 	return 0;
+#line 143 "MB02RZ.f"
     }
 
 /*     Quick return if possible. */
 
+#line 147 "MB02RZ.f"
     if (*n == 0 || *nrhs == 0) {
+#line 147 "MB02RZ.f"
 	return 0;
+#line 147 "MB02RZ.f"
     }
 
+#line 150 "MB02RZ.f"
     if (notran) {
 
 /*        Solve H * X = B. */
@@ -198,72 +232,110 @@ static doublecomplex c_b1 = {1.,0.};
 /*        where each transformation L(i) is a rank-one modification of */
 /*        the identity matrix. */
 
+#line 161 "MB02RZ.f"
 	i__1 = *n - 1;
+#line 161 "MB02RZ.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 162 "MB02RZ.f"
 	    jp = ipiv[j];
+#line 163 "MB02RZ.f"
 	    if (jp != j) {
+#line 163 "MB02RZ.f"
 		zswap_(nrhs, &b[jp + b_dim1], ldb, &b[j + b_dim1], ldb);
+#line 163 "MB02RZ.f"
 	    }
+#line 165 "MB02RZ.f"
 	    i__2 = j + 1 + j * h_dim1;
+#line 165 "MB02RZ.f"
 	    z__1.r = -h__[i__2].r, z__1.i = -h__[i__2].i;
+#line 165 "MB02RZ.f"
 	    zaxpy_(nrhs, &z__1, &b[j + b_dim1], ldb, &b[j + 1 + b_dim1], ldb);
+#line 167 "MB02RZ.f"
 /* L10: */
+#line 167 "MB02RZ.f"
 	}
 
 /*        Solve U * X = B, overwriting B with X. */
 
+#line 171 "MB02RZ.f"
 	ztrsm_("Left", "Upper", "No transpose", "Non-unit", n, nrhs, &c_b1, &
 		h__[h_offset], ldh, &b[b_offset], ldb, (ftnlen)4, (ftnlen)5, (
 		ftnlen)12, (ftnlen)8);
 
+#line 174 "MB02RZ.f"
     } else if (lsame_(trans, "T", (ftnlen)1, (ftnlen)1)) {
 
 /*        Solve H' * X = B. */
 
 /*        Solve U' * X = B, overwriting B with X. */
 
+#line 180 "MB02RZ.f"
 	ztrsm_("Left", "Upper", trans, "Non-unit", n, nrhs, &c_b1, &h__[
 		h_offset], ldh, &b[b_offset], ldb, (ftnlen)4, (ftnlen)5, (
 		ftnlen)1, (ftnlen)8);
 
 /*        Solve L' * X = B, overwriting B with X. */
 
+#line 185 "MB02RZ.f"
 	for (j = *n - 1; j >= 1; --j) {
+#line 186 "MB02RZ.f"
 	    i__1 = j + 1 + j * h_dim1;
+#line 186 "MB02RZ.f"
 	    z__1.r = -h__[i__1].r, z__1.i = -h__[i__1].i;
+#line 186 "MB02RZ.f"
 	    zaxpy_(nrhs, &z__1, &b[j + 1 + b_dim1], ldb, &b[j + b_dim1], ldb);
+#line 188 "MB02RZ.f"
 	    jp = ipiv[j];
+#line 189 "MB02RZ.f"
 	    if (jp != j) {
+#line 189 "MB02RZ.f"
 		zswap_(nrhs, &b[jp + b_dim1], ldb, &b[j + b_dim1], ldb);
+#line 189 "MB02RZ.f"
 	    }
+#line 191 "MB02RZ.f"
 /* L20: */
+#line 191 "MB02RZ.f"
 	}
 
+#line 193 "MB02RZ.f"
     } else {
 
 /*        Solve H**H * X = B. */
 
 /*        Solve U**H * X = B, overwriting B with X. */
 
+#line 199 "MB02RZ.f"
 	ztrsm_("Left", "Upper", trans, "Non-unit", n, nrhs, &c_b1, &h__[
 		h_offset], ldh, &b[b_offset], ldb, (ftnlen)4, (ftnlen)5, (
 		ftnlen)1, (ftnlen)8);
 
 /*        Solve L**H * X = B, overwriting B with X. */
 
+#line 204 "MB02RZ.f"
 	for (j = *n - 1; j >= 1; --j) {
+#line 205 "MB02RZ.f"
 	    d_cnjg(&z__2, &h__[j + 1 + j * h_dim1]);
+#line 205 "MB02RZ.f"
 	    z__1.r = -z__2.r, z__1.i = -z__2.i;
+#line 205 "MB02RZ.f"
 	    zaxpy_(nrhs, &z__1, &b[j + 1 + b_dim1], ldb, &b[j + b_dim1], ldb);
+#line 207 "MB02RZ.f"
 	    jp = ipiv[j];
+#line 208 "MB02RZ.f"
 	    if (jp != j) {
+#line 208 "MB02RZ.f"
 		zswap_(nrhs, &b[jp + b_dim1], ldb, &b[j + b_dim1], ldb);
+#line 208 "MB02RZ.f"
 	    }
+#line 210 "MB02RZ.f"
 /* L30: */
+#line 210 "MB02RZ.f"
 	}
 
+#line 212 "MB02RZ.f"
     }
 
+#line 214 "MB02RZ.f"
     return 0;
 /* *** Last line of MB02RZ *** */
 } /* mb02rz_ */

@@ -1,3 +1,4 @@
+#line 1 "TB04BX.f"
 /* TB04BX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TB04BX.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -181,121 +183,198 @@ static integer c__1 = 1;
 
 /*     Quick return if possible. */
 
+#line 162 "TB04BX.f"
     /* Parameter adjustments */
+#line 162 "TB04BX.f"
     a_dim1 = *lda;
+#line 162 "TB04BX.f"
     a_offset = 1 + a_dim1;
+#line 162 "TB04BX.f"
     a -= a_offset;
+#line 162 "TB04BX.f"
     --b;
+#line 162 "TB04BX.f"
     --c__;
+#line 162 "TB04BX.f"
     --pr;
+#line 162 "TB04BX.f"
     --pi;
+#line 162 "TB04BX.f"
     --zr;
+#line 162 "TB04BX.f"
     --zi;
+#line 162 "TB04BX.f"
     --iwork;
+#line 162 "TB04BX.f"
 
+#line 162 "TB04BX.f"
     /* Function Body */
+#line 162 "TB04BX.f"
     if (*ip == 0) {
+#line 163 "TB04BX.f"
 	*gain = 0.;
+#line 164 "TB04BX.f"
 	return 0;
+#line 165 "TB04BX.f"
     }
 
 /*     Compute a suitable value for S0 . */
 
+#line 169 "TB04BX.f"
     s0 = 0.;
 
+#line 171 "TB04BX.f"
     i__1 = *ip;
+#line 171 "TB04BX.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 172 "TB04BX.f"
 	s = (d__1 = pr[i__], abs(d__1));
+#line 173 "TB04BX.f"
 	if (pi[i__] != 0.) {
+#line 173 "TB04BX.f"
 	    s += (d__1 = pi[i__], abs(d__1));
+#line 173 "TB04BX.f"
 	}
+#line 175 "TB04BX.f"
 	s0 = max(s0,s);
+#line 176 "TB04BX.f"
 /* L10: */
+#line 176 "TB04BX.f"
     }
 
+#line 178 "TB04BX.f"
     i__1 = *iz;
+#line 178 "TB04BX.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 179 "TB04BX.f"
 	s = (d__1 = zr[i__], abs(d__1));
+#line 180 "TB04BX.f"
 	if (zi[i__] != 0.) {
+#line 180 "TB04BX.f"
 	    s += (d__1 = zi[i__], abs(d__1));
+#line 180 "TB04BX.f"
 	}
+#line 182 "TB04BX.f"
 	s0 = max(s0,s);
+#line 183 "TB04BX.f"
 /* L20: */
+#line 183 "TB04BX.f"
     }
 
+#line 185 "TB04BX.f"
     s0 = s0 * 2. + .1;
+#line 186 "TB04BX.f"
     if (s0 <= 1.) {
+#line 186 "TB04BX.f"
 	s0 = 1.1;
+#line 186 "TB04BX.f"
     }
 
 /*     Form A - S0*I . */
 
+#line 191 "TB04BX.f"
     i__1 = *ip;
+#line 191 "TB04BX.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 192 "TB04BX.f"
 	a[i__ + i__ * a_dim1] -= s0;
+#line 193 "TB04BX.f"
 /* L30: */
+#line 193 "TB04BX.f"
     }
 
 /*     Compute the LU factorization of the matrix A - S0*I */
 /*     (guaranteed to be nonsingular). */
 
+#line 198 "TB04BX.f"
     mb02sd_(ip, &a[a_offset], lda, &iwork[1], &info);
 
 /*     Solve the linear system (A - S0*I)*x = b . */
 
+#line 202 "TB04BX.f"
     mb02rd_("No Transpose", ip, &c__1, &a[a_offset], lda, &iwork[1], &b[1], 
 	    ip, &info, (ftnlen)12);
 /*                        -1 */
 /*     Compute c*(S0*I - A) *b + d . */
 
+#line 206 "TB04BX.f"
     *gain = *d__ - ddot_(ip, &c__[1], &c__1, &b[1], &c__1);
 
 /*     Multiply by the products in terms of poles and zeros in (1). */
 
+#line 210 "TB04BX.f"
     i__ = 1;
 
 /*     WHILE ( I <= IP ) DO */
 
+#line 214 "TB04BX.f"
 L40:
+#line 214 "TB04BX.f"
     if (i__ <= *ip) {
+#line 215 "TB04BX.f"
 	if (pi[i__] == 0.) {
+#line 216 "TB04BX.f"
 	    *gain *= s0 - pr[i__];
+#line 217 "TB04BX.f"
 	    ++i__;
+#line 218 "TB04BX.f"
 	} else {
 /* Computing 2nd power */
+#line 219 "TB04BX.f"
 	    d__1 = pr[i__];
 /* Computing 2nd power */
+#line 219 "TB04BX.f"
 	    d__2 = pi[i__];
+#line 219 "TB04BX.f"
 	    *gain *= s0 * (s0 - pr[i__] * 2.) + d__1 * d__1 + d__2 * d__2;
+#line 220 "TB04BX.f"
 	    i__ += 2;
+#line 221 "TB04BX.f"
 	}
+#line 222 "TB04BX.f"
 	goto L40;
+#line 223 "TB04BX.f"
     }
 
 /*     END WHILE 40 */
 
+#line 227 "TB04BX.f"
     i__ = 1;
 
 /*     WHILE ( I <= IZ ) DO */
 
+#line 231 "TB04BX.f"
 L50:
+#line 231 "TB04BX.f"
     if (i__ <= *iz) {
+#line 232 "TB04BX.f"
 	if (zi[i__] == 0.) {
+#line 233 "TB04BX.f"
 	    *gain /= s0 - zr[i__];
+#line 234 "TB04BX.f"
 	    ++i__;
+#line 235 "TB04BX.f"
 	} else {
 /* Computing 2nd power */
+#line 236 "TB04BX.f"
 	    d__1 = zr[i__];
 /* Computing 2nd power */
+#line 236 "TB04BX.f"
 	    d__2 = zi[i__];
+#line 236 "TB04BX.f"
 	    *gain /= s0 * (s0 - zr[i__] * 2.) + d__1 * d__1 + d__2 * d__2;
+#line 237 "TB04BX.f"
 	    i__ += 2;
+#line 238 "TB04BX.f"
 	}
+#line 239 "TB04BX.f"
 	goto L50;
+#line 240 "TB04BX.f"
     }
 
 /*     END WHILE 50 */
 
+#line 244 "TB04BX.f"
     return 0;
 /* *** Last line of TB04BX *** */
 } /* tb04bx_ */

@@ -1,3 +1,4 @@
+#line 1 "SB09MD.f"
 /* SB09MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB09MD.f"
 /* Subroutine */ int sb09md_(integer *n, integer *nc, integer *nb, doublereal 
 	*h1, integer *ldh1, doublereal *h2, integer *ldh2, doublereal *ss, 
 	integer *ldss, doublereal *se, integer *ldse, doublereal *pre, 
@@ -190,113 +192,201 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 174 "SB09MD.f"
     /* Parameter adjustments */
+#line 174 "SB09MD.f"
     h1_dim1 = *ldh1;
+#line 174 "SB09MD.f"
     h1_offset = 1 + h1_dim1;
+#line 174 "SB09MD.f"
     h1 -= h1_offset;
+#line 174 "SB09MD.f"
     h2_dim1 = *ldh2;
+#line 174 "SB09MD.f"
     h2_offset = 1 + h2_dim1;
+#line 174 "SB09MD.f"
     h2 -= h2_offset;
+#line 174 "SB09MD.f"
     ss_dim1 = *ldss;
+#line 174 "SB09MD.f"
     ss_offset = 1 + ss_dim1;
+#line 174 "SB09MD.f"
     ss -= ss_offset;
+#line 174 "SB09MD.f"
     se_dim1 = *ldse;
+#line 174 "SB09MD.f"
     se_offset = 1 + se_dim1;
+#line 174 "SB09MD.f"
     se -= se_offset;
+#line 174 "SB09MD.f"
     pre_dim1 = *ldpre;
+#line 174 "SB09MD.f"
     pre_offset = 1 + pre_dim1;
+#line 174 "SB09MD.f"
     pre -= pre_offset;
+#line 174 "SB09MD.f"
 
+#line 174 "SB09MD.f"
     /* Function Body */
+#line 174 "SB09MD.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 178 "SB09MD.f"
     if (*n < 0) {
+#line 179 "SB09MD.f"
 	*info = -1;
+#line 180 "SB09MD.f"
     } else if (*nc < 0) {
+#line 181 "SB09MD.f"
 	*info = -2;
+#line 182 "SB09MD.f"
     } else if (*nb < 0) {
+#line 183 "SB09MD.f"
 	*info = -3;
+#line 184 "SB09MD.f"
     } else if (*ldh1 < max(1,*nc)) {
+#line 185 "SB09MD.f"
 	*info = -5;
+#line 186 "SB09MD.f"
     } else if (*ldh2 < max(1,*nc)) {
+#line 187 "SB09MD.f"
 	*info = -7;
+#line 188 "SB09MD.f"
     } else if (*ldss < max(1,*nc)) {
+#line 189 "SB09MD.f"
 	*info = -9;
+#line 190 "SB09MD.f"
     } else if (*ldse < max(1,*nc)) {
+#line 191 "SB09MD.f"
 	*info = -11;
+#line 192 "SB09MD.f"
     } else if (*ldpre < max(1,*nc)) {
+#line 193 "SB09MD.f"
 	*info = -13;
+#line 194 "SB09MD.f"
     }
 
+#line 196 "SB09MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 200 "SB09MD.f"
 	i__1 = -(*info);
+#line 200 "SB09MD.f"
 	xerbla_("SB09MD", &i__1, (ftnlen)6);
+#line 201 "SB09MD.f"
 	return 0;
+#line 202 "SB09MD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 206 "SB09MD.f"
     if (*n == 0 || *nc == 0 || *nb == 0) {
+#line 206 "SB09MD.f"
 	return 0;
+#line 206 "SB09MD.f"
     }
 
 /* Computing MAX */
+#line 209 "SB09MD.f"
     d__1 = *tol, d__2 = dlamch_("Epsilon", (ftnlen)7);
+#line 209 "SB09MD.f"
     toler = max(d__1,d__2);
+#line 210 "SB09MD.f"
     epso = 1. / toler;
 
+#line 212 "SB09MD.f"
     i__1 = *nb;
+#line 212 "SB09MD.f"
     for (j = 1; j <= i__1; ++j) {
 
+#line 214 "SB09MD.f"
 	i__2 = *nc;
+#line 214 "SB09MD.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 215 "SB09MD.f"
 	    sse = 0.;
+#line 216 "SB09MD.f"
 	    sss = 0.;
+#line 217 "SB09MD.f"
 	    noflow = TRUE_;
+#line 218 "SB09MD.f"
 	    k = 0;
 
 /*           WHILE ( ( NOFLOW .AND. ( K .LT. N*NB ) ) DO */
+#line 221 "SB09MD.f"
 L20:
+#line 221 "SB09MD.f"
 	    if (noflow && k < *n * *nb) {
+#line 222 "SB09MD.f"
 		var = h1[i__ + (k + j) * h1_dim1];
+#line 223 "SB09MD.f"
 		vare = h2[i__ + (k + j) * h2_dim1] - var;
+#line 224 "SB09MD.f"
 		if (abs(var) > epso || abs(vare) > epso) {
+#line 226 "SB09MD.f"
 		    se[i__ + j * se_dim1] = epso;
+#line 227 "SB09MD.f"
 		    ss[i__ + j * ss_dim1] = epso;
+#line 228 "SB09MD.f"
 		    pre[i__ + j * pre_dim1] = 1.;
+#line 229 "SB09MD.f"
 		    noflow = FALSE_;
+#line 230 "SB09MD.f"
 		} else {
+#line 231 "SB09MD.f"
 		    if (abs(vare) > toler) {
+#line 231 "SB09MD.f"
 			sse += vare * vare;
+#line 231 "SB09MD.f"
 		    }
+#line 232 "SB09MD.f"
 		    if (abs(var) > toler) {
+#line 232 "SB09MD.f"
 			sss += var * var;
+#line 232 "SB09MD.f"
 		    }
+#line 233 "SB09MD.f"
 		    k += *nb;
+#line 234 "SB09MD.f"
 		}
+#line 235 "SB09MD.f"
 		goto L20;
+#line 236 "SB09MD.f"
 	    }
 /*           END WHILE 20 */
 
+#line 239 "SB09MD.f"
 	    if (noflow) {
+#line 240 "SB09MD.f"
 		se[i__ + j * se_dim1] = sse;
+#line 241 "SB09MD.f"
 		ss[i__ + j * ss_dim1] = sss;
+#line 242 "SB09MD.f"
 		pre[i__ + j * pre_dim1] = 100.;
+#line 243 "SB09MD.f"
 		if (sss > toler) {
+#line 243 "SB09MD.f"
 		    pre[i__ + j * pre_dim1] = sqrt(sse / sss) * 100.;
+#line 243 "SB09MD.f"
 		}
+#line 244 "SB09MD.f"
 	    }
+#line 245 "SB09MD.f"
 /* L40: */
+#line 245 "SB09MD.f"
 	}
 
+#line 247 "SB09MD.f"
 /* L60: */
+#line 247 "SB09MD.f"
     }
 
+#line 249 "SB09MD.f"
     return 0;
 /* *** Last line of SB09MD *** */
 } /* sb09md_ */

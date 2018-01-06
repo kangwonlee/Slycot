@@ -1,0 +1,2 @@
+extern int ma01ad_(doublereal *xr, doublereal *xi, doublereal *yr, doublereal *yi);
+/*:ref: dlapy2_ 7 2 7 7 */

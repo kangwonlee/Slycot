@@ -1,3 +1,4 @@
+#line 1 "MB04JD.f"
 /* MB04JD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04JD.f"
 /* Subroutine */ int mb04jd_(integer *n, integer *m, integer *p, integer *l, 
 	doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *
 	tau, doublereal *dwork, integer *ldwork, integer *info)
@@ -180,61 +182,108 @@
 
 /*     Test the input scalar arguments. */
 
+#line 156 "MB04JD.f"
     /* Parameter adjustments */
+#line 156 "MB04JD.f"
     a_dim1 = *lda;
+#line 156 "MB04JD.f"
     a_offset = 1 + a_dim1;
+#line 156 "MB04JD.f"
     a -= a_offset;
+#line 156 "MB04JD.f"
     b_dim1 = *ldb;
+#line 156 "MB04JD.f"
     b_offset = 1 + b_dim1;
+#line 156 "MB04JD.f"
     b -= b_offset;
+#line 156 "MB04JD.f"
     --tau;
+#line 156 "MB04JD.f"
     --dwork;
+#line 156 "MB04JD.f"
 
+#line 156 "MB04JD.f"
     /* Function Body */
+#line 156 "MB04JD.f"
     *info = 0;
+#line 157 "MB04JD.f"
     if (*n < 0) {
+#line 158 "MB04JD.f"
 	*info = -1;
+#line 159 "MB04JD.f"
     } else if (*m < 0) {
+#line 160 "MB04JD.f"
 	*info = -2;
+#line 161 "MB04JD.f"
     } else if (*p < 0) {
+#line 162 "MB04JD.f"
 	*info = -3;
+#line 163 "MB04JD.f"
     } else if (*l < 0) {
+#line 164 "MB04JD.f"
 	*info = -4;
+#line 165 "MB04JD.f"
     } else if (*lda < max(1,*n)) {
+#line 166 "MB04JD.f"
 	*info = -6;
+#line 167 "MB04JD.f"
     } else if (*ldb < max(1,*l)) {
+#line 168 "MB04JD.f"
 	*info = -8;
+#line 169 "MB04JD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 169 "MB04JD.f"
 	i__1 = 1, i__2 = *n - 1, i__1 = max(i__1,i__2), i__2 = *n - *p, i__1 =
 		 max(i__1,i__2);
+#line 169 "MB04JD.f"
 	if (*ldwork < max(i__1,*l)) {
+#line 170 "MB04JD.f"
 	    *info = -11;
+#line 171 "MB04JD.f"
 	}
+#line 171 "MB04JD.f"
     }
 
+#line 173 "MB04JD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 177 "MB04JD.f"
 	i__1 = -(*info);
+#line 177 "MB04JD.f"
 	xerbla_("MB04JD", &i__1, (ftnlen)6);
+#line 178 "MB04JD.f"
 	return 0;
+#line 179 "MB04JD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 183 "MB04JD.f"
     if (min(*m,*n) == 0) {
+#line 184 "MB04JD.f"
 	dwork[1] = 1.;
+#line 185 "MB04JD.f"
 	return 0;
+#line 186 "MB04JD.f"
     } else if (*m <= *p + 1) {
+#line 187 "MB04JD.f"
 	i__1 = min(*n,*m);
+#line 187 "MB04JD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 188 "MB04JD.f"
 	    tau[i__] = 0.;
+#line 189 "MB04JD.f"
 /* L5: */
+#line 189 "MB04JD.f"
 	}
+#line 190 "MB04JD.f"
 	dwork[1] = 1.;
+#line 191 "MB04JD.f"
 	return 0;
+#line 192 "MB04JD.f"
     }
 
 /*     Annihilate the superdiagonal elements of A and apply the */
@@ -247,68 +296,104 @@
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 204 "MB04JD.f"
     i__1 = min(*n,*p);
+#line 204 "MB04JD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
 
 /*        Exploit the structure of the I-th row of A. */
 
+#line 208 "MB04JD.f"
 	i__2 = *m - *p;
+#line 208 "MB04JD.f"
 	dlarfg_(&i__2, &a[i__ + i__ * a_dim1], &a[i__ + (i__ + 1) * a_dim1], 
 		lda, &tau[i__]);
+#line 209 "MB04JD.f"
 	if (tau[i__] != 0.) {
 
+#line 211 "MB04JD.f"
 	    first = a[i__ + i__ * a_dim1];
+#line 212 "MB04JD.f"
 	    a[i__ + i__ * a_dim1] = 1.;
 
+#line 214 "MB04JD.f"
 	    if (i__ < *n) {
+#line 214 "MB04JD.f"
 		i__2 = *n - i__;
+#line 214 "MB04JD.f"
 		i__3 = *m - *p;
+#line 214 "MB04JD.f"
 		dlarf_("Right", &i__2, &i__3, &a[i__ + i__ * a_dim1], lda, &
 			tau[i__], &a[i__ + 1 + i__ * a_dim1], lda, &dwork[1], 
 			(ftnlen)5);
+#line 214 "MB04JD.f"
 	    }
+#line 216 "MB04JD.f"
 	    if (*l > 0) {
+#line 216 "MB04JD.f"
 		i__2 = *m - *p;
+#line 216 "MB04JD.f"
 		dlarf_("Right", l, &i__2, &a[i__ + i__ * a_dim1], lda, &tau[
 			i__], &b[i__ * b_dim1 + 1], ldb, &dwork[1], (ftnlen)5)
 			;
+#line 216 "MB04JD.f"
 	    }
 
+#line 219 "MB04JD.f"
 	    a[i__ + i__ * a_dim1] = first;
+#line 220 "MB04JD.f"
 	}
+#line 221 "MB04JD.f"
 /* L10: */
+#line 221 "MB04JD.f"
     }
 
 /* Computing MAX */
+#line 223 "MB04JD.f"
     d__1 = 1., d__2 = (doublereal) (*n - 1), d__1 = max(d__1,d__2), d__2 = (
 	    doublereal) (*l);
+#line 223 "MB04JD.f"
     wrkopt = max(d__1,d__2);
 
 /*     Fast LQ factorization of the remaining trailing submatrix, if any. */
 /*     Workspace: need N-P;  prefer (N-P)*NB. */
 
+#line 228 "MB04JD.f"
     if (*n > *p) {
+#line 229 "MB04JD.f"
 	i__1 = *n - *p;
+#line 229 "MB04JD.f"
 	i__2 = *m - *p;
+#line 229 "MB04JD.f"
 	dgelqf_(&i__1, &i__2, &a[*p + 1 + (*p + 1) * a_dim1], lda, &tau[*p + 
 		1], &dwork[1], ldwork, info);
+#line 231 "MB04JD.f"
 	wrkopt = max(wrkopt,dwork[1]);
 
+#line 233 "MB04JD.f"
 	if (*l > 0) {
 
 /*           Apply the transformations to B. */
 /*           Workspace: need L;  prefer L*NB. */
 
+#line 238 "MB04JD.f"
 	    i__1 = *m - *p;
+#line 238 "MB04JD.f"
 	    i__2 = min(*n,*m) - *p;
+#line 238 "MB04JD.f"
 	    dormlq_("Right", "Transpose", l, &i__1, &i__2, &a[*p + 1 + (*p + 
 		    1) * a_dim1], lda, &tau[*p + 1], &b[(*p + 1) * b_dim1 + 1]
 		    , ldb, &dwork[1], ldwork, info, (ftnlen)5, (ftnlen)9);
+#line 241 "MB04JD.f"
 	    wrkopt = max(wrkopt,dwork[1]);
+#line 242 "MB04JD.f"
 	}
+#line 243 "MB04JD.f"
     }
 
+#line 245 "MB04JD.f"
     dwork[1] = wrkopt;
+#line 246 "MB04JD.f"
     return 0;
 /* *** Last line of MB04JD *** */
 } /* mb04jd_ */

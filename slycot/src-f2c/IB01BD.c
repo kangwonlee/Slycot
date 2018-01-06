@@ -1,3 +1,4 @@
+#line 1 "IB01BD.f"
 /* IB01BD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "IB01BD.f"
 /* Table of constant values */
 
 static doublereal c_b21 = 0.;
@@ -533,100 +535,192 @@ static integer c__0 = 0;
 
 /*     Decode the scalar input parameters. */
 
+#line 471 "IB01BD.f"
     /* Parameter adjustments */
+#line 471 "IB01BD.f"
     r_dim1 = *ldr;
+#line 471 "IB01BD.f"
     r_offset = 1 + r_dim1;
+#line 471 "IB01BD.f"
     r__ -= r_offset;
+#line 471 "IB01BD.f"
     a_dim1 = *lda;
+#line 471 "IB01BD.f"
     a_offset = 1 + a_dim1;
+#line 471 "IB01BD.f"
     a -= a_offset;
+#line 471 "IB01BD.f"
     c_dim1 = *ldc;
+#line 471 "IB01BD.f"
     c_offset = 1 + c_dim1;
+#line 471 "IB01BD.f"
     c__ -= c_offset;
+#line 471 "IB01BD.f"
     b_dim1 = *ldb;
+#line 471 "IB01BD.f"
     b_offset = 1 + b_dim1;
+#line 471 "IB01BD.f"
     b -= b_offset;
+#line 471 "IB01BD.f"
     d_dim1 = *ldd;
+#line 471 "IB01BD.f"
     d_offset = 1 + d_dim1;
+#line 471 "IB01BD.f"
     d__ -= d_offset;
+#line 471 "IB01BD.f"
     q_dim1 = *ldq;
+#line 471 "IB01BD.f"
     q_offset = 1 + q_dim1;
+#line 471 "IB01BD.f"
     q -= q_offset;
+#line 471 "IB01BD.f"
     ry_dim1 = *ldry;
+#line 471 "IB01BD.f"
     ry_offset = 1 + ry_dim1;
+#line 471 "IB01BD.f"
     ry -= ry_offset;
+#line 471 "IB01BD.f"
     s_dim1 = *lds;
+#line 471 "IB01BD.f"
     s_offset = 1 + s_dim1;
+#line 471 "IB01BD.f"
     s -= s_offset;
+#line 471 "IB01BD.f"
     k_dim1 = *ldk;
+#line 471 "IB01BD.f"
     k_offset = 1 + k_dim1;
+#line 471 "IB01BD.f"
     k -= k_offset;
+#line 471 "IB01BD.f"
     --iwork;
+#line 471 "IB01BD.f"
     --dwork;
+#line 471 "IB01BD.f"
     --bwork;
+#line 471 "IB01BD.f"
 
+#line 471 "IB01BD.f"
     /* Function Body */
+#line 471 "IB01BD.f"
     moesp = lsame_(meth, "M", (ftnlen)1, (ftnlen)1);
+#line 472 "IB01BD.f"
     n4sid = lsame_(meth, "N", (ftnlen)1, (ftnlen)1);
+#line 473 "IB01BD.f"
     combin = lsame_(meth, "C", (ftnlen)1, (ftnlen)1);
+#line 474 "IB01BD.f"
     withal = lsame_(job, "A", (ftnlen)1, (ftnlen)1);
+#line 475 "IB01BD.f"
     withc = lsame_(job, "C", (ftnlen)1, (ftnlen)1) || withal;
+#line 476 "IB01BD.f"
     withd = lsame_(job, "D", (ftnlen)1, (ftnlen)1) || withal;
+#line 477 "IB01BD.f"
     withb = lsame_(job, "B", (ftnlen)1, (ftnlen)1) || withd;
+#line 478 "IB01BD.f"
     withk = lsame_(jobck, "K", (ftnlen)1, (ftnlen)1);
+#line 479 "IB01BD.f"
     withco = lsame_(jobck, "C", (ftnlen)1, (ftnlen)1) || withk;
+#line 480 "IB01BD.f"
     mnobr = *m * *nobr;
+#line 481 "IB01BD.f"
     lnobr = *l * *nobr;
+#line 482 "IB01BD.f"
     lmnobr = lnobr + mnobr;
+#line 483 "IB01BD.f"
     mnobrn = mnobr + *n;
+#line 484 "IB01BD.f"
     ldunn = (lnobr - *l) * *n;
+#line 485 "IB01BD.f"
     lmmnol = lnobr + (mnobr << 1) + *l;
+#line 486 "IB01BD.f"
     nr = lmnobr + lmnobr;
+#line 487 "IB01BD.f"
     npl = *n + *l;
+#line 488 "IB01BD.f"
     n2 = *n + *n;
+#line 489 "IB01BD.f"
     nn = *n * *n;
+#line 490 "IB01BD.f"
     nl = *n * *l;
+#line 491 "IB01BD.f"
     ll = *l * *l;
+#line 492 "IB01BD.f"
     minwrk = 1;
+#line 493 "IB01BD.f"
     *iwarn = 0;
+#line 494 "IB01BD.f"
     *info = 0;
 
 /*     Check the scalar input parameters. */
 
+#line 498 "IB01BD.f"
     if (! (moesp || n4sid || combin)) {
+#line 499 "IB01BD.f"
 	*info = -1;
+#line 500 "IB01BD.f"
     } else if (! (withb || withc)) {
+#line 501 "IB01BD.f"
 	*info = -2;
+#line 502 "IB01BD.f"
     } else if (! (withco || lsame_(jobck, "N", (ftnlen)1, (ftnlen)1))) {
+#line 503 "IB01BD.f"
 	*info = -3;
+#line 504 "IB01BD.f"
     } else if (*nobr <= 1) {
+#line 505 "IB01BD.f"
 	*info = -4;
+#line 506 "IB01BD.f"
     } else if (*n <= 0 || *n >= *nobr) {
+#line 507 "IB01BD.f"
 	*info = -5;
+#line 508 "IB01BD.f"
     } else if (*m < 0) {
+#line 509 "IB01BD.f"
 	*info = -6;
+#line 510 "IB01BD.f"
     } else if (*l <= 0) {
+#line 511 "IB01BD.f"
 	*info = -7;
+#line 512 "IB01BD.f"
     } else if (withco && *nsmpl < nr) {
+#line 513 "IB01BD.f"
 	*info = -8;
+#line 514 "IB01BD.f"
     } else if (*ldr < nr) {
+#line 515 "IB01BD.f"
 	*info = -10;
+#line 516 "IB01BD.f"
     } else if (*lda < 1 || (withc || withb && ! moesp) && *lda < *n) {
+#line 518 "IB01BD.f"
 	*info = -12;
+#line 519 "IB01BD.f"
     } else if (*ldc < 1 || (withc || withb && ! moesp) && *ldc < *l) {
+#line 521 "IB01BD.f"
 	*info = -14;
+#line 522 "IB01BD.f"
     } else if (*ldb < 1 || withb && *ldb < *n && *m > 0) {
+#line 524 "IB01BD.f"
 	*info = -16;
+#line 525 "IB01BD.f"
     } else if (*ldd < 1 || withd && *ldd < *l && *m > 0) {
+#line 527 "IB01BD.f"
 	*info = -18;
+#line 528 "IB01BD.f"
     } else if (*ldq < 1 || withco && *ldq < *n) {
+#line 529 "IB01BD.f"
 	*info = -20;
+#line 530 "IB01BD.f"
     } else if (*ldry < 1 || withco && *ldry < *l) {
+#line 531 "IB01BD.f"
 	*info = -22;
+#line 532 "IB01BD.f"
     } else if (*lds < 1 || withco && *lds < *n) {
+#line 533 "IB01BD.f"
 	*info = -24;
+#line 534 "IB01BD.f"
     } else if (*ldk < 1 || withk && *ldk < *n) {
+#line 535 "IB01BD.f"
 	*info = -26;
+#line 536 "IB01BD.f"
     } else {
 
 /*        Compute workspace. */
@@ -634,176 +728,288 @@ static integer c__0 = 0;
 /*         minimal amount of workspace needed at that point in the code, */
 /*         as well as the preferred amount for good performance.) */
 
+#line 543 "IB01BD.f"
 	iaw = 0;
+#line 544 "IB01BD.f"
 	minwrk = ldunn + (*n << 2);
+#line 545 "IB01BD.f"
 	if (! n4sid) {
+#line 546 "IB01BD.f"
 	    id = 0;
+#line 547 "IB01BD.f"
 	    if (withc) {
 /* Computing MAX */
+#line 548 "IB01BD.f"
 		i__1 = minwrk, i__2 = (ldunn << 1) + n2, i__1 = max(i__1,i__2)
 			, i__2 = ldunn + nn + *n * 7;
+#line 548 "IB01BD.f"
 		minwrk = max(i__1,i__2);
+#line 549 "IB01BD.f"
 	    }
+#line 550 "IB01BD.f"
 	} else {
+#line 551 "IB01BD.f"
 	    id = *n;
+#line 552 "IB01BD.f"
 	}
 
+#line 554 "IB01BD.f"
 	if (*m > 0 && withb || ! moesp) {
 /* Computing MAX */
+#line 555 "IB01BD.f"
 	    i__1 = minwrk, i__2 = (ldunn << 1) + nn + id + *n * 7;
+#line 555 "IB01BD.f"
 	    minwrk = max(i__1,i__2);
+#line 556 "IB01BD.f"
 	    if (moesp) {
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
+#line 556 "IB01BD.f"
 		i__5 = lnobr * 3 + 1;
+#line 556 "IB01BD.f"
 		i__3 = *l + mnobr, i__4 = lnobr + max(i__5,*m);
+#line 556 "IB01BD.f"
 		i__1 = minwrk, i__2 = ldunn + *n + mnobr * 6, i__1 = max(i__1,
 			i__2), i__2 = ldunn + *n + max(i__3,i__4);
+#line 556 "IB01BD.f"
 		minwrk = max(i__1,i__2);
+#line 556 "IB01BD.f"
 	    }
+#line 560 "IB01BD.f"
 	} else {
+#line 561 "IB01BD.f"
 	    if (! n4sid) {
+#line 561 "IB01BD.f"
 		iaw = *n + nn;
+#line 561 "IB01BD.f"
 	    }
+#line 563 "IB01BD.f"
 	}
 
+#line 565 "IB01BD.f"
 	if (! moesp || withco) {
 /* Computing MAX */
 /* Computing MAX */
+#line 566 "IB01BD.f"
 	    i__3 = *n * 5;
+#line 566 "IB01BD.f"
 	    i__1 = minwrk, i__2 = ldunn + iaw + n2 + max(i__3,lmmnol), i__1 = 
 		    max(i__1,i__2), i__2 = id + (mnobrn << 2) + 1, i__1 = max(
 		    i__1,i__2), i__2 = id + mnobrn + npl;
+#line 566 "IB01BD.f"
 	    minwrk = max(i__1,i__2);
+#line 568 "IB01BD.f"
 	    if (! moesp && *m > 0 && withb) {
 /* Computing MAX */
 /* Computing MAX */
 /* Computing 2nd power */
+#line 568 "IB01BD.f"
 		i__5 = npl;
+#line 568 "IB01BD.f"
 		i__3 = i__5 * i__5, i__4 = (*m << 2) * npl + 1;
+#line 568 "IB01BD.f"
 		i__1 = minwrk, i__2 = mnobr * npl * (*m * npl + 1) + max(i__3,
 			i__4);
+#line 568 "IB01BD.f"
 		minwrk = max(i__1,i__2);
+#line 568 "IB01BD.f"
 	    }
+#line 571 "IB01BD.f"
 	    minwrk = lnobr * *n + minwrk;
+#line 572 "IB01BD.f"
 	}
 
+#line 574 "IB01BD.f"
 	if (withk) {
 /* Computing MAX */
 /* Computing MAX */
+#line 575 "IB01BD.f"
 	    i__3 = *l * 3;
+#line 575 "IB01BD.f"
 	    i__1 = minwrk, i__2 = (nn << 2) + (nl << 1) + ll + max(i__3,nl), 
 		    i__1 = max(i__1,i__2), i__2 = nn * 14 + *n * 12 + 5;
+#line 575 "IB01BD.f"
 	    minwrk = max(i__1,i__2);
+#line 577 "IB01BD.f"
 	}
 
+#line 579 "IB01BD.f"
 	if (*ldwork < minwrk) {
+#line 580 "IB01BD.f"
 	    *info = -30;
+#line 581 "IB01BD.f"
 	    dwork[1] = (doublereal) minwrk;
+#line 582 "IB01BD.f"
 	}
+#line 583 "IB01BD.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 587 "IB01BD.f"
     if (*info != 0) {
+#line 588 "IB01BD.f"
 	i__1 = -(*info);
+#line 588 "IB01BD.f"
 	xerbla_("IB01BD", &i__1, (ftnlen)6);
+#line 589 "IB01BD.f"
 	return 0;
+#line 590 "IB01BD.f"
     }
 
+#line 592 "IB01BD.f"
     if (! withk) {
+#line 593 "IB01BD.f"
 	*(unsigned char *)jobcv = *(unsigned char *)jobck;
+#line 594 "IB01BD.f"
     } else {
+#line 595 "IB01BD.f"
 	*(unsigned char *)jobcv = 'C';
+#line 596 "IB01BD.f"
     }
 
+#line 598 "IB01BD.f"
     io = 1;
+#line 599 "IB01BD.f"
     if (! moesp || withco) {
+#line 600 "IB01BD.f"
 	jwork = io + lnobr * *n;
+#line 601 "IB01BD.f"
     } else {
+#line 602 "IB01BD.f"
 	jwork = io;
+#line 603 "IB01BD.f"
     }
+#line 604 "IB01BD.f"
     maxwrk = minwrk;
 
 /*     Call the computational routine for estimating system matrices. */
 
+#line 608 "IB01BD.f"
     if (! combin) {
+#line 609 "IB01BD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 609 "IB01BD.f"
 	ib01pd_(meth, job, jobcv, nobr, n, m, l, nsmpl, &r__[r_offset], ldr, &
 		a[a_offset], lda, &c__[c_offset], ldc, &b[b_offset], ldb, &
 		d__[d_offset], ldd, &q[q_offset], ldq, &ry[ry_offset], ldry, &
 		s[s_offset], lds, &dwork[io], &lnobr, tol, &iwork[1], &dwork[
 		jwork], &i__1, iwarn, info, (ftnlen)1, (ftnlen)1, (ftnlen)1);
 
+#line 614 "IB01BD.f"
     } else {
 
+#line 616 "IB01BD.f"
 	if (withc) {
+#line 617 "IB01BD.f"
 	    if (withal) {
+#line 618 "IB01BD.f"
 		*(unsigned char *)jobcov = 'N';
+#line 619 "IB01BD.f"
 	    } else {
+#line 620 "IB01BD.f"
 		*(unsigned char *)jobcov = *(unsigned char *)jobcv;
+#line 621 "IB01BD.f"
 	    }
+#line 622 "IB01BD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 622 "IB01BD.f"
 	    ib01pd_("MOESP", "C and A", jobcov, nobr, n, m, l, nsmpl, &r__[
 		    r_offset], ldr, &a[a_offset], lda, &c__[c_offset], ldc, &
 		    b[b_offset], ldb, &d__[d_offset], ldd, &q[q_offset], ldq, 
 		    &ry[ry_offset], ldry, &s[s_offset], lds, &dwork[io], &
 		    lnobr, tol, &iwork[1], &dwork[jwork], &i__1, &iwarnl, 
 		    info, (ftnlen)5, (ftnlen)7, (ftnlen)1);
+#line 627 "IB01BD.f"
 	    if (*info != 0) {
+#line 627 "IB01BD.f"
 		return 0;
+#line 627 "IB01BD.f"
 	    }
+#line 629 "IB01BD.f"
 	    *iwarn = max(*iwarn,iwarnl);
 /* Computing MAX */
+#line 630 "IB01BD.f"
 	    i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 630 "IB01BD.f"
 	    maxwrk = max(i__1,i__2);
+#line 631 "IB01BD.f"
 	}
 
+#line 633 "IB01BD.f"
 	if (withb) {
+#line 634 "IB01BD.f"
 	    if (! withal) {
+#line 635 "IB01BD.f"
 		*(unsigned char *)jobbd = *(unsigned char *)job;
+#line 636 "IB01BD.f"
 	    } else {
+#line 637 "IB01BD.f"
 		*(unsigned char *)jobbd = 'D';
+#line 638 "IB01BD.f"
 	    }
+#line 639 "IB01BD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 639 "IB01BD.f"
 	    ib01pd_("N4SID", jobbd, jobcv, nobr, n, m, l, nsmpl, &r__[
 		    r_offset], ldr, &a[a_offset], lda, &c__[c_offset], ldc, &
 		    b[b_offset], ldb, &d__[d_offset], ldd, &q[q_offset], ldq, 
 		    &ry[ry_offset], ldry, &s[s_offset], lds, &dwork[io], &
 		    lnobr, tol, &iwork[1], &dwork[jwork], &i__1, &iwarnl, 
 		    info, (ftnlen)5, (ftnlen)1, (ftnlen)1);
+#line 643 "IB01BD.f"
 	    *iwarn = max(*iwarn,iwarnl);
+#line 644 "IB01BD.f"
 	}
+#line 645 "IB01BD.f"
     }
 
+#line 647 "IB01BD.f"
     if (*info != 0) {
+#line 647 "IB01BD.f"
 	return 0;
+#line 647 "IB01BD.f"
     }
 /* Computing MAX */
+#line 649 "IB01BD.f"
     i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 649 "IB01BD.f"
     maxwrk = max(i__1,i__2);
 
+#line 651 "IB01BD.f"
     for (i__ = 1; i__ <= 4; ++i__) {
+#line 652 "IB01BD.f"
 	rcnd[i__ - 1] = dwork[jwork + i__];
+#line 653 "IB01BD.f"
 /* L10: */
+#line 653 "IB01BD.f"
     }
 
+#line 655 "IB01BD.f"
     if (withk) {
+#line 656 "IB01BD.f"
 	if (*iwarn == 5) {
 
 /*           The problem seems to be a deterministic one. Set the Kalman */
 /*           gain to zero, set accuracy parameters and return. */
 
+#line 661 "IB01BD.f"
 	    dlaset_("Full", n, l, &c_b21, &c_b21, &k[k_offset], ldk, (ftnlen)
 		    4);
 
+#line 663 "IB01BD.f"
 	    for (i__ = 6; i__ <= 12; ++i__) {
+#line 664 "IB01BD.f"
 		dwork[i__] = 1.;
+#line 665 "IB01BD.f"
 /* L20: */
+#line 665 "IB01BD.f"
 	    }
 
+#line 667 "IB01BD.f"
 	    dwork[13] = 0.;
+#line 668 "IB01BD.f"
 	} else {
 
 /*           Compute the Kalman gain matrix. */
@@ -813,53 +1019,83 @@ static integer c__0 = 0;
 /*           Workspace:  need   4*N*N+2*N*L+L*L+max( 3*L,N*L ); */
 /*                       prefer larger. */
 
+#line 677 "IB01BD.f"
 	    ix = 1;
+#line 678 "IB01BD.f"
 	    iq = ix + nn;
+#line 679 "IB01BD.f"
 	    ia = iq + nn;
+#line 680 "IB01BD.f"
 	    ig = ia + nn;
+#line 681 "IB01BD.f"
 	    ic = ig + nn;
+#line 682 "IB01BD.f"
 	    ir = ic + nl;
+#line 683 "IB01BD.f"
 	    is = ir + ll;
+#line 684 "IB01BD.f"
 	    jwork = is + nl;
 
+#line 686 "IB01BD.f"
 	    ma02ad_("Full", n, n, &a[a_offset], lda, &dwork[ia], n, (ftnlen)4)
 		    ;
+#line 687 "IB01BD.f"
 	    ma02ad_("Full", l, n, &c__[c_offset], ldc, &dwork[ic], n, (ftnlen)
 		    4);
+#line 688 "IB01BD.f"
 	    dlacpy_("Upper", n, n, &q[q_offset], ldq, &dwork[iq], n, (ftnlen)
 		    5);
+#line 689 "IB01BD.f"
 	    dlacpy_("Upper", l, l, &ry[ry_offset], ldry, &dwork[ir], l, (
 		    ftnlen)5);
+#line 690 "IB01BD.f"
 	    dlacpy_("Full", n, l, &s[s_offset], lds, &dwork[is], n, (ftnlen)4)
 		    ;
 
+#line 692 "IB01BD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 692 "IB01BD.f"
 	    sb02mt_("G needed", "Nonzero S", "Not factored", "Upper", n, l, &
 		    dwork[ia], n, &dwork[ic], n, &dwork[iq], n, &dwork[ir], l,
 		     &dwork[is], n, &iwork[1], &ifact, &dwork[ig], n, &iwork[*
 		    l + 1], &dwork[jwork], &i__1, &ierr, (ftnlen)8, (ftnlen)9,
 		     (ftnlen)12, (ftnlen)5);
+#line 697 "IB01BD.f"
 	    if (ierr != 0) {
+#line 698 "IB01BD.f"
 		*info = 3;
+#line 699 "IB01BD.f"
 		return 0;
+#line 700 "IB01BD.f"
 	    }
 /* Computing MAX */
+#line 701 "IB01BD.f"
 	    i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 701 "IB01BD.f"
 	    maxwrk = max(i__1,i__2);
+#line 702 "IB01BD.f"
 	    rcondr = dwork[jwork + 1];
 
 /*           Solve the Riccati equation. */
 /*           Workspace:  need   14*N*N+12*N+5; */
 /*                       prefer larger. */
 
+#line 708 "IB01BD.f"
 	    it = ic;
+#line 709 "IB01BD.f"
 	    iv = it + nn;
+#line 710 "IB01BD.f"
 	    iwr = iv + nn;
+#line 711 "IB01BD.f"
 	    iwi = iwr + n2;
+#line 712 "IB01BD.f"
 	    is = iwi + n2;
+#line 713 "IB01BD.f"
 	    jwork = is + n2 * n2;
 
+#line 715 "IB01BD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 715 "IB01BD.f"
 	    sb02rd_("All", "Discrete", "Direct", "NoTranspose", "Upper", 
 		    "General scaling", "Unstable first", "Not factored", 
 		    "Reduced", n, &dwork[ia], n, &dwork[it], n, &dwork[iv], n,
@@ -869,83 +1105,130 @@ static integer c__0 = 0;
 		    3, (ftnlen)8, (ftnlen)6, (ftnlen)11, (ftnlen)5, (ftnlen)
 		    15, (ftnlen)14, (ftnlen)12, (ftnlen)7);
 
+#line 723 "IB01BD.f"
 	    if (ierr != 0 && ierr < 7) {
+#line 724 "IB01BD.f"
 		*info = ierr + 3;
+#line 725 "IB01BD.f"
 		return 0;
+#line 726 "IB01BD.f"
 	    }
 /* Computing MAX */
+#line 727 "IB01BD.f"
 	    i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 727 "IB01BD.f"
 	    maxwrk = max(i__1,i__2);
 
+#line 729 "IB01BD.f"
 	    for (i__ = 1; i__ <= 4; ++i__) {
+#line 730 "IB01BD.f"
 		rcnd[i__ + 3] = dwork[jwork + i__];
+#line 731 "IB01BD.f"
 /* L30: */
+#line 731 "IB01BD.f"
 	    }
 
 /*           Compute the gain matrix. */
 /*           Workspace:  need   2*N*N+2*N*L+L*L+3*L; */
 /*                       prefer larger. */
 
+#line 737 "IB01BD.f"
 	    ia = ix + nn;
+#line 738 "IB01BD.f"
 	    ic = ia + nn;
+#line 739 "IB01BD.f"
 	    ir = ic + nl;
+#line 740 "IB01BD.f"
 	    ik = ir + ll;
+#line 741 "IB01BD.f"
 	    jwork = ik + nl;
 
+#line 743 "IB01BD.f"
 	    ma02ad_("Full", n, n, &a[a_offset], lda, &dwork[ia], n, (ftnlen)4)
 		    ;
+#line 744 "IB01BD.f"
 	    ma02ad_("Full", l, n, &c__[c_offset], ldc, &dwork[ic], n, (ftnlen)
 		    4);
+#line 745 "IB01BD.f"
 	    dlacpy_("Upper", l, l, &ry[ry_offset], ldry, &dwork[ir], l, (
 		    ftnlen)5);
 
+#line 747 "IB01BD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 747 "IB01BD.f"
 	    sb02nd_("Discrete", "NotFactored", "Upper", "Nonzero S", n, l, &
 		    c__0, &dwork[ia], n, &dwork[ic], n, &dwork[ir], l, &iwork[
 		    1], &s[s_offset], lds, &dwork[ix], n, &rnorm, &dwork[ik], 
 		    l, oufact, &iwork[*l + 1], &dwork[jwork], &i__1, &ierr, (
 		    ftnlen)8, (ftnlen)11, (ftnlen)5, (ftnlen)9);
 
+#line 753 "IB01BD.f"
 	    if (ierr != 0) {
+#line 754 "IB01BD.f"
 		if (ierr <= *l + 1) {
+#line 755 "IB01BD.f"
 		    *info = 3;
+#line 756 "IB01BD.f"
 		} else if (ierr == *l + 2) {
+#line 757 "IB01BD.f"
 		    *info = 10;
+#line 758 "IB01BD.f"
 		}
+#line 759 "IB01BD.f"
 		return 0;
+#line 760 "IB01BD.f"
 	    }
 /* Computing MAX */
+#line 761 "IB01BD.f"
 	    i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 761 "IB01BD.f"
 	    maxwrk = max(i__1,i__2);
 
+#line 763 "IB01BD.f"
 	    ma02ad_("Full", l, n, &dwork[ik], l, &k[k_offset], ldk, (ftnlen)4)
 		    ;
 
 /*           Set the accuracy parameters. */
 
+#line 767 "IB01BD.f"
 	    dwork[11] = dwork[jwork + 1];
 
+#line 769 "IB01BD.f"
 	    for (i__ = 6; i__ <= 9; ++i__) {
+#line 770 "IB01BD.f"
 		dwork[i__] = rcnd[i__ - 2];
+#line 771 "IB01BD.f"
 /* L40: */
+#line 771 "IB01BD.f"
 	    }
 
+#line 773 "IB01BD.f"
 	    dwork[10] = rcondr;
+#line 774 "IB01BD.f"
 	    dwork[12] = rcond;
+#line 775 "IB01BD.f"
 	    dwork[13] = ferr;
+#line 776 "IB01BD.f"
 	}
+#line 777 "IB01BD.f"
     }
 
 /*     Return optimal workspace in  DWORK(1)  and the remaining */
 /*     reciprocal condition numbers in the next locations. */
 
+#line 782 "IB01BD.f"
     dwork[1] = (doublereal) maxwrk;
 
+#line 784 "IB01BD.f"
     for (i__ = 2; i__ <= 5; ++i__) {
+#line 785 "IB01BD.f"
 	dwork[i__] = rcnd[i__ - 2];
+#line 786 "IB01BD.f"
 /* L50: */
+#line 786 "IB01BD.f"
     }
 
+#line 788 "IB01BD.f"
     return 0;
 
 /* *** Last line of IB01BD *** */

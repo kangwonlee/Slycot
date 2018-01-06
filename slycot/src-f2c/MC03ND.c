@@ -1,3 +1,4 @@
+#line 1 "MC03ND.f"
 /* MC03ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC03ND.f"
 /* Table of constant values */
 
 static doublereal c_b13 = 0.;
@@ -342,92 +344,155 @@ static doublereal c_b19 = 1.;
 
 /*     Test the input scalar arguments. */
 
+#line 301 "MC03ND.f"
     /* Parameter adjustments */
+#line 301 "MC03ND.f"
     p_dim1 = *ldp1;
+#line 301 "MC03ND.f"
     p_dim2 = *ldp2;
+#line 301 "MC03ND.f"
     p_offset = 1 + p_dim1 * (1 + p_dim2);
+#line 301 "MC03ND.f"
     p -= p_offset;
+#line 301 "MC03ND.f"
     --gam;
+#line 301 "MC03ND.f"
     nullsp_dim1 = *ldnull;
+#line 301 "MC03ND.f"
     nullsp_offset = 1 + nullsp_dim1;
+#line 301 "MC03ND.f"
     nullsp -= nullsp_offset;
+#line 301 "MC03ND.f"
     ker_dim1 = *ldker1;
+#line 301 "MC03ND.f"
     ker_dim2 = *ldker2;
+#line 301 "MC03ND.f"
     ker_offset = 1 + ker_dim1 * (1 + ker_dim2);
+#line 301 "MC03ND.f"
     ker -= ker_offset;
+#line 301 "MC03ND.f"
     --iwork;
+#line 301 "MC03ND.f"
     --dwork;
+#line 301 "MC03ND.f"
 
+#line 301 "MC03ND.f"
     /* Function Body */
+#line 301 "MC03ND.f"
     m = *dp * *mp;
+#line 302 "MC03ND.f"
     h__ = m - *mp;
+#line 303 "MC03ND.f"
     n = h__ + *np;
+#line 304 "MC03ND.f"
     *info = 0;
+#line 305 "MC03ND.f"
     if (*mp < 0) {
+#line 306 "MC03ND.f"
 	*info = -1;
+#line 307 "MC03ND.f"
     } else if (*np < 0) {
+#line 308 "MC03ND.f"
 	*info = -2;
+#line 309 "MC03ND.f"
     } else if (*dp <= 0) {
+#line 310 "MC03ND.f"
 	*info = -3;
+#line 311 "MC03ND.f"
     } else if (*ldp1 < max(1,*mp)) {
+#line 312 "MC03ND.f"
 	*info = -5;
+#line 313 "MC03ND.f"
     } else if (*ldp2 < max(1,*np)) {
+#line 314 "MC03ND.f"
 	*info = -6;
+#line 315 "MC03ND.f"
     } else if (*ldnull < max(1,*np)) {
+#line 316 "MC03ND.f"
 	*info = -10;
+#line 317 "MC03ND.f"
     } else if (*ldker1 < max(1,*np)) {
+#line 318 "MC03ND.f"
 	*info = -12;
+#line 319 "MC03ND.f"
     } else if (*ldker2 < max(1,*np)) {
+#line 320 "MC03ND.f"
 	*info = -13;
+#line 321 "MC03ND.f"
     } else if (*ldwork < n * (m * n + (m + n << 1))) {
+#line 322 "MC03ND.f"
 	*info = -17;
+#line 323 "MC03ND.f"
     }
 
+#line 325 "MC03ND.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 329 "MC03ND.f"
 	i__1 = -(*info);
+#line 329 "MC03ND.f"
 	xerbla_("MC03ND", &i__1, (ftnlen)6);
+#line 330 "MC03ND.f"
 	return 0;
+#line 331 "MC03ND.f"
     }
 
 /*     Quick return if possible. */
 
+#line 335 "MC03ND.f"
     if (*mp == 0 || *np == 0) {
+#line 336 "MC03ND.f"
 	*dk = -1;
+#line 337 "MC03ND.f"
 	return 0;
+#line 338 "MC03ND.f"
     }
 
+#line 340 "MC03ND.f"
     jworka = 1;
+#line 341 "MC03ND.f"
     jworke = jworka + m * n;
+#line 342 "MC03ND.f"
     jworkz = jworke + m * n;
+#line 343 "MC03ND.f"
     jworkv = jworkz + n * n;
+#line 344 "MC03ND.f"
     jworkq = jworka;
 
 /*     Construct the matrices A and E in the pencil s*E-A in (1). */
 /*     Workspace:  2*M*N. */
 
+#line 349 "MC03ND.f"
     mc03nx_(mp, np, dp, &p[p_offset], ldp1, ldp2, &dwork[jworka], &m, &dwork[
 	    jworke], &m);
 
 /*     Computation of the tolerance. */
 
 /* Computing MAX */
+#line 354 "MC03ND.f"
     d__1 = dlange_("F", &m, np, &dwork[jworke + h__ * m], &m, &dwork[1], (
 	    ftnlen)1), d__2 = dlange_("F", mp, np, &p[p_offset], ldp1, &dwork[
 	    1], (ftnlen)1);
+#line 354 "MC03ND.f"
     toler = max(d__1,d__2);
+#line 356 "MC03ND.f"
     d__1 = sqrt((doublereal) h__);
+#line 356 "MC03ND.f"
     toler = dlamch_("Epsilon", (ftnlen)7) * 10. * dlapy2_(&toler, &d__1);
+#line 358 "MC03ND.f"
     if (toler <= *tol) {
+#line 358 "MC03ND.f"
 	toler = *tol;
+#line 358 "MC03ND.f"
     }
 
 /*     Reduction of E to column echelon form E0 = Q' x E x Z and */
 /*     transformation of A, A0 = Q' x A x Z. */
 /*     Workspace:  2*M*N + N*N + max(M,N). */
 
+#line 364 "MC03ND.f"
     mb04ud_("No Q", "Identity Z", &m, &n, &dwork[jworka], &m, &dwork[jworke], 
 	    &m, &dwork[jworkq], &m, &dwork[jworkz], &n, &ranke, &iwork[1], &
 	    toler, &dwork[jworkv], info, (ftnlen)4, (ftnlen)10);
@@ -440,71 +505,106 @@ static doublereal c_b19 = 1.;
 /*     IWORK(i), i = M+2*max(N,M+1)+1,...,M+2*max(N,M+1)+N, contains */
 /*               IMUK0 (not needed), and is also used as workspace. */
 
+#line 376 "MC03ND.f"
     muk = m + 1;
 /* Computing MAX */
+#line 377 "MC03ND.f"
     i__1 = n, i__2 = m + 1;
+#line 377 "MC03ND.f"
     nuk = muk + max(i__1,i__2);
 /* Computing MAX */
+#line 378 "MC03ND.f"
     i__1 = n, i__2 = m + 1;
+#line 378 "MC03ND.f"
     tail = nuk + max(i__1,i__2);
 
+#line 380 "MC03ND.f"
     mb04vd_("Separation", "No Q", "Update Z", &m, &n, &ranke, &dwork[jworka], 
 	    &m, &dwork[jworke], &m, &dwork[jworkq], &m, &dwork[jworkz], &n, &
 	    iwork[1], &nblcks, &nblcki, &iwork[muk], &iwork[nuk], &iwork[tail]
 	    , mnei, &toler, &iwork[tail], info, (ftnlen)10, (ftnlen)4, (
 	    ftnlen)8);
+#line 385 "MC03ND.f"
     if (*info > 0) {
 
 /*        Incorrect rank decisions. */
 
+#line 389 "MC03ND.f"
 	*info += nblcks;
+#line 390 "MC03ND.f"
 	return 0;
+#line 391 "MC03ND.f"
     }
 
 /*     If NBLCKS < 1, or the column dimension of s*E(eps) - A(eps) is */
 /*     zero, then there is no right nullspace. */
 
+#line 396 "MC03ND.f"
     if (nblcks < 1 || mnei[1] == 0) {
+#line 397 "MC03ND.f"
 	*dk = -1;
+#line 398 "MC03ND.f"
 	return 0;
+#line 399 "MC03ND.f"
     }
 
 /*     Start of the computation of the minimal basis. */
 
+#line 403 "MC03ND.f"
     *dk = nblcks - 1;
+#line 404 "MC03ND.f"
     nra = mnei[0];
+#line 405 "MC03ND.f"
     nca = mnei[1];
 
 /*     Determine a minimal basis VEPS(s) for the right nullspace of the */
 /*     pencil s*E(eps)-A(eps) associated with the polynomial matrix P(s). */
 /*     Workspace:  2*M*N + N*N + N*N*(M+1). */
 
+#line 411 "MC03ND.f"
     mc03ny_(&nblcks, &nra, &nca, &dwork[jworka], &m, &dwork[jworke], &m, &
 	    iwork[muk], &iwork[nuk], &dwork[jworkv], &n, info);
 
+#line 414 "MC03ND.f"
     if (*info > 0) {
+#line 414 "MC03ND.f"
 	return 0;
+#line 414 "MC03ND.f"
     }
 
+#line 417 "MC03ND.f"
     ncv = iwork[muk] - iwork[nuk];
+#line 418 "MC03ND.f"
     gam[1] = ncv;
+#line 419 "MC03ND.f"
     iwork[1] = 0;
+#line 420 "MC03ND.f"
     iwork[tail] = iwork[muk];
 
+#line 422 "MC03ND.f"
     i__1 = nblcks;
+#line 422 "MC03ND.f"
     for (i__ = 2; i__ <= i__1; ++i__) {
+#line 423 "MC03ND.f"
 	idiff = iwork[muk + i__ - 1] - iwork[nuk + i__ - 1];
+#line 424 "MC03ND.f"
 	gam[i__] = idiff;
+#line 425 "MC03ND.f"
 	iwork[i__] = ncv;
+#line 426 "MC03ND.f"
 	ncv += i__ * idiff;
+#line 427 "MC03ND.f"
 	iwork[tail + i__ - 1] = iwork[tail + i__ - 2] + iwork[muk + i__ - 1];
+#line 428 "MC03ND.f"
 /* L20: */
+#line 428 "MC03ND.f"
     }
 
 /*     Determine a basis for the right nullspace of the polynomial */
 /*     matrix P(s). This basis is stored in array NULLSP in condensed */
 /*     form. */
 
+#line 434 "MC03ND.f"
     dlaset_("Full", np, &ncv, &c_b13, &c_b13, &nullsp[nullsp_offset], ldnull, 
 	    (ftnlen)4);
 
@@ -516,41 +616,60 @@ static doublereal c_b19 = 1.;
 /*     nonzero submatrices Vij,k of VEPS, the result is stored in the */
 /*     array NULLSP. */
 
+#line 444 "MC03ND.f"
     vc1 = 1;
 
+#line 446 "MC03ND.f"
     i__1 = nblcks;
+#line 446 "MC03ND.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 447 "MC03ND.f"
 	vr2 = iwork[tail + i__ - 1];
 
+#line 449 "MC03ND.f"
 	i__2 = i__;
+#line 449 "MC03ND.f"
 	for (j = 1; j <= i__2; ++j) {
 
 /*           Multiplication of Z(H+1:N,1:VR2) with V.i,j-1 stored in */
 /*           VEPS(1:VR2,VC1:VC1+GAM(I)-1). */
 
+#line 454 "MC03ND.f"
 	    dgemm_("No transpose", "No transpose", np, &gam[i__], &vr2, &
 		    c_b19, &dwork[jworkz + h__], &n, &dwork[jworkv + (vc1 - 1)
 		     * n], &n, &c_b13, &nullsp[vc1 * nullsp_dim1 + 1], ldnull,
 		     (ftnlen)12, (ftnlen)12);
+#line 458 "MC03ND.f"
 	    vc1 += gam[i__];
+#line 459 "MC03ND.f"
 	    vr2 -= iwork[muk + i__ - j];
+#line 460 "MC03ND.f"
 /* L40: */
+#line 460 "MC03ND.f"
 	}
 
+#line 462 "MC03ND.f"
 /* L60: */
+#line 462 "MC03ND.f"
     }
 
 /*     Transfer of the columns of NULLSP to KER in order to obtain the */
 /*     polynomial matrix representation of K(s), the right nullspace */
 /*     of P(s). */
 
+#line 468 "MC03ND.f"
     sgamk = 1;
 
+#line 470 "MC03ND.f"
     i__1 = nblcks;
+#line 470 "MC03ND.f"
     for (k = 1; k <= i__1; ++k) {
+#line 471 "MC03ND.f"
 	i__2 = sgamk - 1;
+#line 471 "MC03ND.f"
 	dlaset_("Full", np, &i__2, &c_b13, &c_b13, &ker[(k * ker_dim2 + 1) * 
 		ker_dim1 + 1], ldker1, (ftnlen)4);
+#line 473 "MC03ND.f"
 	ifir = sgamk;
 
 /*        Copy the appropriate columns of NULLSP into KER(k). */
@@ -560,21 +679,33 @@ static doublereal c_b19 = 1.;
 /*        in the set of columns copied for a value of J. */
 /*        VC1 is the first column of NULLSP to be copied. */
 
+#line 482 "MC03ND.f"
 	i__2 = nblcks;
+#line 482 "MC03ND.f"
 	for (j = k; j <= i__2; ++j) {
+#line 483 "MC03ND.f"
 	    gamj = gam[j];
+#line 484 "MC03ND.f"
 	    vc1 = iwork[j] + (k - 1) * gamj + 1;
+#line 485 "MC03ND.f"
 	    dlacpy_("Full", np, &gamj, &nullsp[vc1 * nullsp_dim1 + 1], ldnull,
 		     &ker[(ifir + k * ker_dim2) * ker_dim1 + 1], ldker1, (
 		    ftnlen)4);
+#line 487 "MC03ND.f"
 	    ifir += gamj;
+#line 488 "MC03ND.f"
 /* L80: */
+#line 488 "MC03ND.f"
 	}
 
+#line 490 "MC03ND.f"
 	sgamk += gam[k];
+#line 491 "MC03ND.f"
 /* L100: */
+#line 491 "MC03ND.f"
     }
 
+#line 493 "MC03ND.f"
     return 0;
 /* *** Last line of MC03ND *** */
 } /* mc03nd_ */

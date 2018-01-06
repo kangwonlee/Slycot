@@ -1,3 +1,4 @@
+#line 1 "TB01XZ.f"
 /* TB01XZ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TB01XZ.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -193,157 +195,265 @@ static integer c__1 = 1;
 
 /*     Test the scalar input arguments. */
 
+#line 171 "TB01XZ.f"
     /* Parameter adjustments */
+#line 171 "TB01XZ.f"
     a_dim1 = *lda;
+#line 171 "TB01XZ.f"
     a_offset = 1 + a_dim1;
+#line 171 "TB01XZ.f"
     a -= a_offset;
+#line 171 "TB01XZ.f"
     b_dim1 = *ldb;
+#line 171 "TB01XZ.f"
     b_offset = 1 + b_dim1;
+#line 171 "TB01XZ.f"
     b -= b_offset;
+#line 171 "TB01XZ.f"
     c_dim1 = *ldc;
+#line 171 "TB01XZ.f"
     c_offset = 1 + c_dim1;
+#line 171 "TB01XZ.f"
     c__ -= c_offset;
+#line 171 "TB01XZ.f"
     d_dim1 = *ldd;
+#line 171 "TB01XZ.f"
     d_offset = 1 + d_dim1;
+#line 171 "TB01XZ.f"
     d__ -= d_offset;
+#line 171 "TB01XZ.f"
 
+#line 171 "TB01XZ.f"
     /* Function Body */
+#line 171 "TB01XZ.f"
     *info = 0;
+#line 172 "TB01XZ.f"
     ljobd = lsame_(jobd, "D", (ftnlen)1, (ftnlen)1);
+#line 173 "TB01XZ.f"
     maxmp = max(*m,*p);
+#line 174 "TB01XZ.f"
     minmp = min(*m,*p);
+#line 175 "TB01XZ.f"
     nm1 = *n - 1;
 
+#line 177 "TB01XZ.f"
     if (! ljobd && ! lsame_(jobd, "Z", (ftnlen)1, (ftnlen)1)) {
+#line 178 "TB01XZ.f"
 	*info = -1;
+#line 179 "TB01XZ.f"
     } else if (*n < 0) {
+#line 180 "TB01XZ.f"
 	*info = -2;
+#line 181 "TB01XZ.f"
     } else if (*m < 0) {
+#line 182 "TB01XZ.f"
 	*info = -3;
+#line 183 "TB01XZ.f"
     } else if (*p < 0) {
+#line 184 "TB01XZ.f"
 	*info = -4;
+#line 185 "TB01XZ.f"
     } else if (*kl < 0 || *kl > max(0,nm1)) {
+#line 186 "TB01XZ.f"
 	*info = -5;
+#line 187 "TB01XZ.f"
     } else if (*ku < 0 || *ku > max(0,nm1)) {
+#line 188 "TB01XZ.f"
 	*info = -6;
+#line 189 "TB01XZ.f"
     } else if (*lda < max(1,*n)) {
+#line 190 "TB01XZ.f"
 	*info = -8;
+#line 191 "TB01XZ.f"
     } else if (maxmp > 0 && *ldb < max(1,*n) || minmp == 0 && *ldb < 1) {
+#line 193 "TB01XZ.f"
 	*info = -10;
+#line 194 "TB01XZ.f"
     } else if (*ldc < 1 || *n > 0 && *ldc < maxmp) {
+#line 195 "TB01XZ.f"
 	*info = -12;
+#line 196 "TB01XZ.f"
     } else if (*ldd < 1 || ljobd && *ldd < maxmp) {
+#line 197 "TB01XZ.f"
 	*info = -14;
+#line 198 "TB01XZ.f"
     }
 
+#line 200 "TB01XZ.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 204 "TB01XZ.f"
 	i__1 = -(*info);
+#line 204 "TB01XZ.f"
 	xerbla_("TB01XZ", &i__1, (ftnlen)6);
+#line 205 "TB01XZ.f"
 	return 0;
+#line 206 "TB01XZ.f"
     }
 
 /*     Quick return if possible. */
 
+#line 210 "TB01XZ.f"
     if (ljobd) {
 
 /*        Replace D by D', if non-scalar. */
 
+#line 214 "TB01XZ.f"
 	i__1 = maxmp;
+#line 214 "TB01XZ.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 215 "TB01XZ.f"
 	    if (j < minmp) {
+#line 216 "TB01XZ.f"
 		i__2 = minmp - j;
+#line 216 "TB01XZ.f"
 		zswap_(&i__2, &d__[j + 1 + j * d_dim1], &c__1, &d__[j + (j + 
 			1) * d_dim1], ldd);
+#line 217 "TB01XZ.f"
 	    } else if (j > *p) {
+#line 218 "TB01XZ.f"
 		zcopy_(p, &d__[j * d_dim1 + 1], &c__1, &d__[j + d_dim1], ldd);
+#line 219 "TB01XZ.f"
 	    } else if (j > *m) {
+#line 220 "TB01XZ.f"
 		zcopy_(m, &d__[j + d_dim1], ldd, &d__[j * d_dim1 + 1], &c__1);
+#line 221 "TB01XZ.f"
 	    }
+#line 222 "TB01XZ.f"
 /* L5: */
+#line 222 "TB01XZ.f"
 	}
 
+#line 224 "TB01XZ.f"
     }
 
+#line 226 "TB01XZ.f"
     if (*n == 0) {
+#line 226 "TB01XZ.f"
 	return 0;
+#line 226 "TB01XZ.f"
     }
 
 /*     Replace matrix A by P*A'*P. */
 
+#line 231 "TB01XZ.f"
     if (*kl == nm1 && *ku == nm1) {
 
 /*        Full matrix A. */
 
+#line 235 "TB01XZ.f"
 	i__1 = nm1;
+#line 235 "TB01XZ.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 236 "TB01XZ.f"
 	    i__2 = *n - j;
+#line 236 "TB01XZ.f"
 	    i__3 = -(*lda);
+#line 236 "TB01XZ.f"
 	    zswap_(&i__2, &a[j * a_dim1 + 1], &c__1, &a[*n - j + 1 + (j + 1) *
 		     a_dim1], &i__3);
+#line 237 "TB01XZ.f"
 /* L10: */
+#line 237 "TB01XZ.f"
 	}
 
+#line 239 "TB01XZ.f"
     } else {
 
 /*        Band matrix A. */
 
+#line 243 "TB01XZ.f"
 	lda1 = *lda + 1;
 
 /*        Pertranspose the KL subdiagonals. */
 
 /* Computing MIN */
+#line 247 "TB01XZ.f"
 	i__2 = *kl, i__3 = *n - 2;
+#line 247 "TB01XZ.f"
 	i__1 = min(i__2,i__3);
+#line 247 "TB01XZ.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 248 "TB01XZ.f"
 	    j1 = (*n - j) / 2;
+#line 249 "TB01XZ.f"
 	    i__2 = -lda1;
+#line 249 "TB01XZ.f"
 	    zswap_(&j1, &a[j + 1 + a_dim1], &lda1, &a[*n - j1 + 1 + (*n - j1 
 		    + 1 - j) * a_dim1], &i__2);
+#line 250 "TB01XZ.f"
 /* L20: */
+#line 250 "TB01XZ.f"
 	}
 
 /*        Pertranspose the KU superdiagonals. */
 
 /* Computing MIN */
+#line 254 "TB01XZ.f"
 	i__2 = *ku, i__3 = *n - 2;
+#line 254 "TB01XZ.f"
 	i__1 = min(i__2,i__3);
+#line 254 "TB01XZ.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 255 "TB01XZ.f"
 	    j1 = (*n - j) / 2;
+#line 256 "TB01XZ.f"
 	    i__2 = -lda1;
+#line 256 "TB01XZ.f"
 	    zswap_(&j1, &a[(j + 1) * a_dim1 + 1], &lda1, &a[*n - j1 + 1 - j + 
 		    (*n - j1 + 1) * a_dim1], &i__2);
+#line 257 "TB01XZ.f"
 /* L30: */
+#line 257 "TB01XZ.f"
 	}
 
 /*        Pertranspose the diagonal. */
 
+#line 261 "TB01XZ.f"
 	j1 = *n / 2;
+#line 262 "TB01XZ.f"
 	i__1 = -lda1;
+#line 262 "TB01XZ.f"
 	zswap_(&j1, &a[a_dim1 + 1], &lda1, &a[*n - j1 + 1 + (*n - j1 + 1) * 
 		a_dim1], &i__1);
 
+#line 264 "TB01XZ.f"
     }
 
 /*     Replace matrix B by P*C' and matrix C by B'*P. */
 
+#line 268 "TB01XZ.f"
     i__1 = maxmp;
+#line 268 "TB01XZ.f"
     for (j = 1; j <= i__1; ++j) {
+#line 269 "TB01XZ.f"
 	if (j <= minmp) {
+#line 270 "TB01XZ.f"
 	    i__2 = -(*ldc);
+#line 270 "TB01XZ.f"
 	    zswap_(n, &b[j * b_dim1 + 1], &c__1, &c__[j + c_dim1], &i__2);
+#line 271 "TB01XZ.f"
 	} else if (j > *p) {
+#line 272 "TB01XZ.f"
 	    i__2 = -(*ldc);
+#line 272 "TB01XZ.f"
 	    zcopy_(n, &b[j * b_dim1 + 1], &c__1, &c__[j + c_dim1], &i__2);
+#line 273 "TB01XZ.f"
 	} else {
+#line 274 "TB01XZ.f"
 	    i__2 = -(*ldc);
+#line 274 "TB01XZ.f"
 	    zcopy_(n, &c__[j + c_dim1], &i__2, &b[j * b_dim1 + 1], &c__1);
+#line 275 "TB01XZ.f"
 	}
+#line 276 "TB01XZ.f"
 /* L40: */
+#line 276 "TB01XZ.f"
     }
 
+#line 278 "TB01XZ.f"
     return 0;
 /* *** Last line of TB01XZ *** */
 } /* tb01xz_ */

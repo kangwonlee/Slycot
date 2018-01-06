@@ -1,0 +1,4 @@
+extern int mb02sd_(integer *n, doublereal *h__, integer *ldh, integer *ipiv, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */

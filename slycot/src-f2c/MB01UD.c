@@ -1,3 +1,4 @@
+#line 1 "MB01UD.f"
 /* MB01UD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01UD.f"
 /* Table of constant values */
 
 static doublereal c_b9 = 0.;
@@ -170,60 +172,102 @@ static integer c__1 = 1;
 
 /*     Test the input scalar arguments. */
 
+#line 144 "MB01UD.f"
     /* Parameter adjustments */
+#line 144 "MB01UD.f"
     h_dim1 = *ldh;
+#line 144 "MB01UD.f"
     h_offset = 1 + h_dim1;
+#line 144 "MB01UD.f"
     h__ -= h_offset;
+#line 144 "MB01UD.f"
     a_dim1 = *lda;
+#line 144 "MB01UD.f"
     a_offset = 1 + a_dim1;
+#line 144 "MB01UD.f"
     a -= a_offset;
+#line 144 "MB01UD.f"
     b_dim1 = *ldb;
+#line 144 "MB01UD.f"
     b_offset = 1 + b_dim1;
+#line 144 "MB01UD.f"
     b -= b_offset;
+#line 144 "MB01UD.f"
 
+#line 144 "MB01UD.f"
     /* Function Body */
+#line 144 "MB01UD.f"
     *info = 0;
+#line 145 "MB01UD.f"
     lside = lsame_(side, "L", (ftnlen)1, (ftnlen)1);
+#line 146 "MB01UD.f"
     ltrans = lsame_(trans, "T", (ftnlen)1, (ftnlen)1) || lsame_(trans, "C", (
 	    ftnlen)1, (ftnlen)1);
 
+#line 148 "MB01UD.f"
     if (! lside && ! lsame_(side, "R", (ftnlen)1, (ftnlen)1)) {
+#line 149 "MB01UD.f"
 	*info = -1;
+#line 150 "MB01UD.f"
     } else if (! ltrans && ! lsame_(trans, "N", (ftnlen)1, (ftnlen)1)) {
+#line 151 "MB01UD.f"
 	*info = -2;
+#line 152 "MB01UD.f"
     } else if (*m < 0) {
+#line 153 "MB01UD.f"
 	*info = -3;
+#line 154 "MB01UD.f"
     } else if (*n < 0) {
+#line 155 "MB01UD.f"
 	*info = -4;
+#line 156 "MB01UD.f"
     } else if (*ldh < 1 || lside && *ldh < *m || ! lside && *ldh < *n) {
+#line 158 "MB01UD.f"
 	*info = -7;
+#line 159 "MB01UD.f"
     } else if (*lda < max(1,*m)) {
+#line 160 "MB01UD.f"
 	*info = -9;
+#line 161 "MB01UD.f"
     } else if (*ldb < max(1,*m)) {
+#line 162 "MB01UD.f"
 	*info = -11;
+#line 163 "MB01UD.f"
     }
 
+#line 165 "MB01UD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 169 "MB01UD.f"
 	i__1 = -(*info);
+#line 169 "MB01UD.f"
 	xerbla_("MB01UD", &i__1, (ftnlen)6);
+#line 170 "MB01UD.f"
 	return 0;
+#line 171 "MB01UD.f"
     }
 
 /*     Quick return, if possible. */
 
+#line 175 "MB01UD.f"
     if (min(*m,*n) == 0) {
+#line 175 "MB01UD.f"
 	return 0;
+#line 175 "MB01UD.f"
     }
 
+#line 178 "MB01UD.f"
     if (*alpha == 0.) {
 
 /*        Set B to zero and return. */
 
+#line 182 "MB01UD.f"
 	dlaset_("Full", m, n, &c_b9, &c_b9, &b[b_offset], ldb, (ftnlen)4);
+#line 183 "MB01UD.f"
 	return 0;
+#line 184 "MB01UD.f"
     }
 
 /*     Copy A in B and compute one of the matrix products */
@@ -231,7 +275,9 @@ static integer c__1 = 1;
 /*       B = alpha*A * op( triu( H ) ), */
 /*     involving the upper triangle of H. */
 
+#line 191 "MB01UD.f"
     dlacpy_("Full", m, n, &a[a_offset], lda, &b[b_offset], ldb, (ftnlen)4);
+#line 192 "MB01UD.f"
     dtrmm_(side, "Upper", trans, "Non-unit", m, n, alpha, &h__[h_offset], ldh,
 	     &b[b_offset], ldb, (ftnlen)1, (ftnlen)5, (ftnlen)1, (ftnlen)8);
 
@@ -240,68 +286,122 @@ static integer c__1 = 1;
 /*     corresponding elements in the first column of H, and the */
 /*     calculations are organized for column operations. */
 
+#line 200 "MB01UD.f"
     if (lside) {
+#line 201 "MB01UD.f"
 	if (*m > 2) {
+#line 201 "MB01UD.f"
 	    i__1 = *m - 2;
+#line 201 "MB01UD.f"
 	    i__2 = *ldh + 1;
+#line 201 "MB01UD.f"
 	    dswap_(&i__1, &h__[(h_dim1 << 1) + 3], &i__2, &h__[h_dim1 + 3], &
 		    c__1);
+#line 201 "MB01UD.f"
 	}
+#line 203 "MB01UD.f"
 	if (ltrans) {
+#line 204 "MB01UD.f"
 	    i__1 = *n;
+#line 204 "MB01UD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 205 "MB01UD.f"
 		i__2 = *m - 1;
+#line 205 "MB01UD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 206 "MB01UD.f"
 		    b[i__ + j * b_dim1] += *alpha * h__[i__ + 1 + h_dim1] * a[
 			    i__ + 1 + j * a_dim1];
+#line 207 "MB01UD.f"
 /* L10: */
+#line 207 "MB01UD.f"
 		}
+#line 208 "MB01UD.f"
 /* L20: */
+#line 208 "MB01UD.f"
 	    }
+#line 209 "MB01UD.f"
 	} else {
+#line 210 "MB01UD.f"
 	    i__1 = *n;
+#line 210 "MB01UD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 211 "MB01UD.f"
 		i__2 = *m;
+#line 211 "MB01UD.f"
 		for (i__ = 2; i__ <= i__2; ++i__) {
+#line 212 "MB01UD.f"
 		    b[i__ + j * b_dim1] += *alpha * h__[i__ + h_dim1] * a[i__ 
 			    - 1 + j * a_dim1];
+#line 213 "MB01UD.f"
 /* L30: */
+#line 213 "MB01UD.f"
 		}
+#line 214 "MB01UD.f"
 /* L40: */
+#line 214 "MB01UD.f"
 	    }
+#line 215 "MB01UD.f"
 	}
+#line 216 "MB01UD.f"
 	if (*m > 2) {
+#line 216 "MB01UD.f"
 	    i__1 = *m - 2;
+#line 216 "MB01UD.f"
 	    i__2 = *ldh + 1;
+#line 216 "MB01UD.f"
 	    dswap_(&i__1, &h__[(h_dim1 << 1) + 3], &i__2, &h__[h_dim1 + 3], &
 		    c__1);
+#line 216 "MB01UD.f"
 	}
 
+#line 219 "MB01UD.f"
     } else {
 
+#line 221 "MB01UD.f"
 	if (ltrans) {
+#line 222 "MB01UD.f"
 	    i__1 = *n - 1;
+#line 222 "MB01UD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 223 "MB01UD.f"
 		if (h__[j + 1 + j * h_dim1] != 0.) {
+#line 223 "MB01UD.f"
 		    d__1 = *alpha * h__[j + 1 + j * h_dim1];
+#line 223 "MB01UD.f"
 		    daxpy_(m, &d__1, &a[j * a_dim1 + 1], &c__1, &b[(j + 1) * 
 			    b_dim1 + 1], &c__1);
+#line 223 "MB01UD.f"
 		}
+#line 226 "MB01UD.f"
 /* L50: */
+#line 226 "MB01UD.f"
 	    }
+#line 227 "MB01UD.f"
 	} else {
+#line 228 "MB01UD.f"
 	    i__1 = *n - 1;
+#line 228 "MB01UD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 229 "MB01UD.f"
 		if (h__[j + 1 + j * h_dim1] != 0.) {
+#line 229 "MB01UD.f"
 		    d__1 = *alpha * h__[j + 1 + j * h_dim1];
+#line 229 "MB01UD.f"
 		    daxpy_(m, &d__1, &a[(j + 1) * a_dim1 + 1], &c__1, &b[j * 
 			    b_dim1 + 1], &c__1);
+#line 229 "MB01UD.f"
 		}
+#line 232 "MB01UD.f"
 /* L60: */
+#line 232 "MB01UD.f"
 	    }
+#line 233 "MB01UD.f"
 	}
+#line 234 "MB01UD.f"
     }
 
+#line 236 "MB01UD.f"
     return 0;
 /* *** Last line of MB01UD *** */
 } /* mb01ud_ */

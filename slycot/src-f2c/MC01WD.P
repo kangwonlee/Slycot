@@ -1,0 +1,2 @@
+extern int mc01wd_(integer *dp, doublereal *p, doublereal *u1, doublereal *u2, doublereal *q, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */

@@ -1,3 +1,4 @@
+#line 1 "MB05OY.f"
 /* MB05OY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB05OY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -145,78 +147,136 @@ static integer c__1 = 1;
 
 /*     Test the input scalar arguments. */
 
+#line 125 "MB05OY.f"
     /* Parameter adjustments */
+#line 125 "MB05OY.f"
     a_dim1 = *lda;
+#line 125 "MB05OY.f"
     a_offset = 1 + a_dim1;
+#line 125 "MB05OY.f"
     a -= a_offset;
+#line 125 "MB05OY.f"
     --scale;
+#line 125 "MB05OY.f"
 
+#line 125 "MB05OY.f"
     /* Function Body */
+#line 125 "MB05OY.f"
     *info = 0;
+#line 126 "MB05OY.f"
     if (! lsame_(job, "N", (ftnlen)1, (ftnlen)1) && ! lsame_(job, "P", (
 	    ftnlen)1, (ftnlen)1) && ! lsame_(job, "S", (ftnlen)1, (ftnlen)1) 
 	    && ! lsame_(job, "B", (ftnlen)1, (ftnlen)1)) {
+#line 128 "MB05OY.f"
 	*info = -1;
+#line 129 "MB05OY.f"
     } else if (*n < 0) {
+#line 130 "MB05OY.f"
 	*info = -2;
+#line 131 "MB05OY.f"
     } else if (*low < 1 || *low > max(1,*n)) {
+#line 132 "MB05OY.f"
 	*info = -3;
+#line 133 "MB05OY.f"
     } else if (*igh < min(*low,*n) || *igh > *n) {
+#line 134 "MB05OY.f"
 	*info = -4;
+#line 135 "MB05OY.f"
     } else if (*lda < max(1,*n)) {
+#line 136 "MB05OY.f"
 	*info = -6;
+#line 137 "MB05OY.f"
     }
 
+#line 139 "MB05OY.f"
     if (*info != 0) {
+#line 140 "MB05OY.f"
 	i__1 = -(*info);
+#line 140 "MB05OY.f"
 	xerbla_("MB05OY", &i__1, (ftnlen)6);
+#line 141 "MB05OY.f"
 	return 0;
+#line 142 "MB05OY.f"
     }
 
 /*     Quick return if possible. */
 
+#line 146 "MB05OY.f"
     if (*n == 0 || lsame_(job, "N", (ftnlen)1, (ftnlen)1)) {
+#line 146 "MB05OY.f"
 	return 0;
+#line 146 "MB05OY.f"
     }
 
+#line 149 "MB05OY.f"
     if (! lsame_(job, "P", (ftnlen)1, (ftnlen)1) && *igh != *low) {
 
+#line 151 "MB05OY.f"
 	i__1 = *igh;
+#line 151 "MB05OY.f"
 	for (i__ = *low; i__ <= i__1; ++i__) {
+#line 152 "MB05OY.f"
 	    dscal_(n, &scale[i__], &a[i__ + a_dim1], lda);
+#line 153 "MB05OY.f"
 /* L20: */
+#line 153 "MB05OY.f"
 	}
 
+#line 155 "MB05OY.f"
 	i__1 = *igh;
+#line 155 "MB05OY.f"
 	for (j = *low; j <= i__1; ++j) {
+#line 156 "MB05OY.f"
 	    d__1 = 1. / scale[j];
+#line 156 "MB05OY.f"
 	    dscal_(n, &d__1, &a[j * a_dim1 + 1], &c__1);
+#line 157 "MB05OY.f"
 /* L40: */
+#line 157 "MB05OY.f"
 	}
 
+#line 159 "MB05OY.f"
     }
 
+#line 161 "MB05OY.f"
     if (! lsame_(job, "S", (ftnlen)1, (ftnlen)1)) {
 
+#line 163 "MB05OY.f"
 	i__1 = *n;
+#line 163 "MB05OY.f"
 	for (ii = 1; ii <= i__1; ++ii) {
+#line 164 "MB05OY.f"
 	    i__ = ii;
+#line 165 "MB05OY.f"
 	    if (i__ < *low || i__ > *igh) {
+#line 166 "MB05OY.f"
 		if (i__ < *low) {
+#line 166 "MB05OY.f"
 		    i__ = *low - ii;
+#line 166 "MB05OY.f"
 		}
+#line 167 "MB05OY.f"
 		k = (integer) scale[i__];
+#line 168 "MB05OY.f"
 		if (k != i__) {
+#line 169 "MB05OY.f"
 		    dswap_(n, &a[i__ + a_dim1], lda, &a[k + a_dim1], lda);
+#line 170 "MB05OY.f"
 		    dswap_(n, &a[i__ * a_dim1 + 1], &c__1, &a[k * a_dim1 + 1],
 			     &c__1);
+#line 171 "MB05OY.f"
 		}
+#line 172 "MB05OY.f"
 	    }
+#line 173 "MB05OY.f"
 /* L60: */
+#line 173 "MB05OY.f"
 	}
 
+#line 175 "MB05OY.f"
     }
 
+#line 177 "MB05OY.f"
     return 0;
 /* *** Last line of MB05OY *** */
 } /* mb05oy_ */

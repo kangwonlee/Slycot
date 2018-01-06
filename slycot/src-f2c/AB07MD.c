@@ -1,3 +1,4 @@
+#line 1 "AB07MD.f"
 /* AB07MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB07MD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -168,109 +170,187 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 144 "AB07MD.f"
     /* Parameter adjustments */
+#line 144 "AB07MD.f"
     a_dim1 = *lda;
+#line 144 "AB07MD.f"
     a_offset = 1 + a_dim1;
+#line 144 "AB07MD.f"
     a -= a_offset;
+#line 144 "AB07MD.f"
     b_dim1 = *ldb;
+#line 144 "AB07MD.f"
     b_offset = 1 + b_dim1;
+#line 144 "AB07MD.f"
     b -= b_offset;
+#line 144 "AB07MD.f"
     c_dim1 = *ldc;
+#line 144 "AB07MD.f"
     c_offset = 1 + c_dim1;
+#line 144 "AB07MD.f"
     c__ -= c_offset;
+#line 144 "AB07MD.f"
     d_dim1 = *ldd;
+#line 144 "AB07MD.f"
     d_offset = 1 + d_dim1;
+#line 144 "AB07MD.f"
     d__ -= d_offset;
+#line 144 "AB07MD.f"
 
+#line 144 "AB07MD.f"
     /* Function Body */
+#line 144 "AB07MD.f"
     *info = 0;
+#line 145 "AB07MD.f"
     ljobd = lsame_(jobd, "D", (ftnlen)1, (ftnlen)1);
+#line 146 "AB07MD.f"
     mplim = max(*m,*p);
+#line 147 "AB07MD.f"
     minmp = min(*m,*p);
 
 /*     Test the input scalar arguments. */
 
+#line 151 "AB07MD.f"
     if (! ljobd && ! lsame_(jobd, "Z", (ftnlen)1, (ftnlen)1)) {
+#line 152 "AB07MD.f"
 	*info = -1;
+#line 153 "AB07MD.f"
     } else if (*n < 0) {
+#line 154 "AB07MD.f"
 	*info = -2;
+#line 155 "AB07MD.f"
     } else if (*m < 0) {
+#line 156 "AB07MD.f"
 	*info = -3;
+#line 157 "AB07MD.f"
     } else if (*p < 0) {
+#line 158 "AB07MD.f"
 	*info = -4;
+#line 159 "AB07MD.f"
     } else if (*lda < max(1,*n)) {
+#line 160 "AB07MD.f"
 	*info = -6;
+#line 161 "AB07MD.f"
     } else if (*ldb < max(1,*n)) {
+#line 162 "AB07MD.f"
 	*info = -8;
+#line 163 "AB07MD.f"
     } else if (*n > 0 && *ldc < max(1,mplim) || *n == 0 && *ldc < 1) {
+#line 165 "AB07MD.f"
 	*info = -10;
+#line 166 "AB07MD.f"
     } else if (ljobd && *ldd < max(1,mplim) || ! ljobd && *ldd < 1) {
+#line 168 "AB07MD.f"
 	*info = -12;
+#line 169 "AB07MD.f"
     }
 
+#line 171 "AB07MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 175 "AB07MD.f"
 	i__1 = -(*info);
+#line 175 "AB07MD.f"
 	xerbla_("AB07MD", &i__1, (ftnlen)6);
+#line 176 "AB07MD.f"
 	return 0;
+#line 177 "AB07MD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 181 "AB07MD.f"
     if (max(*n,minmp) == 0) {
+#line 181 "AB07MD.f"
 	return 0;
+#line 181 "AB07MD.f"
     }
 
+#line 184 "AB07MD.f"
     if (*n > 0) {
 
 /*        Transpose A, if non-scalar. */
 
+#line 188 "AB07MD.f"
 	i__1 = *n - 1;
+#line 188 "AB07MD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 189 "AB07MD.f"
 	    i__2 = *n - j;
+#line 189 "AB07MD.f"
 	    dswap_(&i__2, &a[j + 1 + j * a_dim1], &c__1, &a[j + (j + 1) * 
 		    a_dim1], lda);
+#line 190 "AB07MD.f"
 /* L10: */
+#line 190 "AB07MD.f"
 	}
 
 /*        Replace B by C' and C by B'. */
 
+#line 194 "AB07MD.f"
 	i__1 = mplim;
+#line 194 "AB07MD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 195 "AB07MD.f"
 	    if (j <= minmp) {
+#line 196 "AB07MD.f"
 		dswap_(n, &b[j * b_dim1 + 1], &c__1, &c__[j + c_dim1], ldc);
+#line 197 "AB07MD.f"
 	    } else if (j > *p) {
+#line 198 "AB07MD.f"
 		dcopy_(n, &b[j * b_dim1 + 1], &c__1, &c__[j + c_dim1], ldc);
+#line 199 "AB07MD.f"
 	    } else {
+#line 200 "AB07MD.f"
 		dcopy_(n, &c__[j + c_dim1], ldc, &b[j * b_dim1 + 1], &c__1);
+#line 201 "AB07MD.f"
 	    }
+#line 202 "AB07MD.f"
 /* L20: */
+#line 202 "AB07MD.f"
 	}
 
+#line 204 "AB07MD.f"
     }
 
+#line 206 "AB07MD.f"
     if (ljobd && minmp > 0) {
 
 /*        Transpose D, if non-scalar. */
 
+#line 210 "AB07MD.f"
 	i__1 = mplim;
+#line 210 "AB07MD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 211 "AB07MD.f"
 	    if (j < minmp) {
+#line 212 "AB07MD.f"
 		i__2 = minmp - j;
+#line 212 "AB07MD.f"
 		dswap_(&i__2, &d__[j + 1 + j * d_dim1], &c__1, &d__[j + (j + 
 			1) * d_dim1], ldd);
+#line 213 "AB07MD.f"
 	    } else if (j > *p) {
+#line 214 "AB07MD.f"
 		dcopy_(p, &d__[j * d_dim1 + 1], &c__1, &d__[j + d_dim1], ldd);
+#line 215 "AB07MD.f"
 	    } else if (j > *m) {
+#line 216 "AB07MD.f"
 		dcopy_(m, &d__[j + d_dim1], ldd, &d__[j * d_dim1 + 1], &c__1);
+#line 217 "AB07MD.f"
 	    }
+#line 218 "AB07MD.f"
 /* L30: */
+#line 218 "AB07MD.f"
 	}
 
+#line 220 "AB07MD.f"
     }
 
+#line 222 "AB07MD.f"
     return 0;
 /* *** Last line of AB07MD *** */
 } /* ab07md_ */

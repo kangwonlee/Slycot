@@ -1,3 +1,4 @@
+#line 1 "AB09BD.f"
 /* AB09BD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB09BD.f"
 /* Subroutine */ int ab09bd_(char *dico, char *job, char *equil, char *ordsel,
 	 integer *n, integer *m, integer *p, integer *nr, doublereal *a, 
 	integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *
@@ -308,141 +310,234 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 282 "AB09BD.f"
     /* Parameter adjustments */
+#line 282 "AB09BD.f"
     a_dim1 = *lda;
+#line 282 "AB09BD.f"
     a_offset = 1 + a_dim1;
+#line 282 "AB09BD.f"
     a -= a_offset;
+#line 282 "AB09BD.f"
     b_dim1 = *ldb;
+#line 282 "AB09BD.f"
     b_offset = 1 + b_dim1;
+#line 282 "AB09BD.f"
     b -= b_offset;
+#line 282 "AB09BD.f"
     c_dim1 = *ldc;
+#line 282 "AB09BD.f"
     c_offset = 1 + c_dim1;
+#line 282 "AB09BD.f"
     c__ -= c_offset;
+#line 282 "AB09BD.f"
     d_dim1 = *ldd;
+#line 282 "AB09BD.f"
     d_offset = 1 + d_dim1;
+#line 282 "AB09BD.f"
     d__ -= d_offset;
+#line 282 "AB09BD.f"
     --hsv;
+#line 282 "AB09BD.f"
     --iwork;
+#line 282 "AB09BD.f"
     --dwork;
+#line 282 "AB09BD.f"
 
+#line 282 "AB09BD.f"
     /* Function Body */
+#line 282 "AB09BD.f"
     *info = 0;
+#line 283 "AB09BD.f"
     *iwarn = 0;
+#line 284 "AB09BD.f"
     fixord = lsame_(ordsel, "F", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 288 "AB09BD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || lsame_(dico, "D", (
 	    ftnlen)1, (ftnlen)1))) {
+#line 289 "AB09BD.f"
 	*info = -1;
+#line 290 "AB09BD.f"
     } else if (! (lsame_(job, "B", (ftnlen)1, (ftnlen)1) || lsame_(job, "N", (
 	    ftnlen)1, (ftnlen)1))) {
+#line 291 "AB09BD.f"
 	*info = -2;
+#line 292 "AB09BD.f"
     } else if (! (lsame_(equil, "S", (ftnlen)1, (ftnlen)1) || lsame_(equil, 
 	    "N", (ftnlen)1, (ftnlen)1))) {
+#line 294 "AB09BD.f"
 	*info = -3;
+#line 295 "AB09BD.f"
     } else if (! (fixord || lsame_(ordsel, "A", (ftnlen)1, (ftnlen)1))) {
+#line 296 "AB09BD.f"
 	*info = -4;
+#line 297 "AB09BD.f"
     } else if (*n < 0) {
+#line 298 "AB09BD.f"
 	*info = -5;
+#line 299 "AB09BD.f"
     } else if (*m < 0) {
+#line 300 "AB09BD.f"
 	*info = -6;
+#line 301 "AB09BD.f"
     } else if (*p < 0) {
+#line 302 "AB09BD.f"
 	*info = -7;
+#line 303 "AB09BD.f"
     } else if (fixord && (*nr < 0 || *nr > *n)) {
+#line 304 "AB09BD.f"
 	*info = -8;
+#line 305 "AB09BD.f"
     } else if (*lda < max(1,*n)) {
+#line 306 "AB09BD.f"
 	*info = -10;
+#line 307 "AB09BD.f"
     } else if (*ldb < max(1,*n)) {
+#line 308 "AB09BD.f"
 	*info = -12;
+#line 309 "AB09BD.f"
     } else if (*ldc < max(1,*p)) {
+#line 310 "AB09BD.f"
 	*info = -14;
+#line 311 "AB09BD.f"
     } else if (*ldd < max(1,*p)) {
+#line 312 "AB09BD.f"
 	*info = -16;
+#line 313 "AB09BD.f"
     } else if (*tol2 > 0. && *tol2 > *tol1) {
+#line 314 "AB09BD.f"
 	*info = -19;
+#line 315 "AB09BD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 315 "AB09BD.f"
 	i__3 = max(*n,*m);
+#line 315 "AB09BD.f"
 	i__1 = 1, i__2 = *n * ((*n << 1) + max(i__3,*p) + 5) + *n * (*n + 1) /
 		 2;
+#line 315 "AB09BD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 317 "AB09BD.f"
 	    *info = -22;
+#line 318 "AB09BD.f"
 	}
+#line 318 "AB09BD.f"
     }
 
+#line 320 "AB09BD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 324 "AB09BD.f"
 	i__1 = -(*info);
+#line 324 "AB09BD.f"
 	xerbla_("AB09BD", &i__1, (ftnlen)6);
+#line 325 "AB09BD.f"
 	return 0;
+#line 326 "AB09BD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 330 "AB09BD.f"
     i__1 = min(*n,*m);
+#line 330 "AB09BD.f"
     if (min(i__1,*p) == 0) {
+#line 331 "AB09BD.f"
 	*nr = 0;
+#line 332 "AB09BD.f"
 	iwork[1] = 0;
+#line 333 "AB09BD.f"
 	dwork[1] = 1.;
+#line 334 "AB09BD.f"
 	return 0;
+#line 335 "AB09BD.f"
     }
 
 /*     Allocate working storage. */
 
+#line 339 "AB09BD.f"
     nn = *n * *n;
+#line 340 "AB09BD.f"
     kt = 1;
+#line 341 "AB09BD.f"
     kr = kt + nn;
+#line 342 "AB09BD.f"
     ki = kr + *n;
+#line 343 "AB09BD.f"
     kw = ki + *n;
 
+#line 345 "AB09BD.f"
     if (lsame_(equil, "S", (ftnlen)1, (ftnlen)1)) {
 
 /*        Scale simultaneously the matrices A, B and C: */
 /*        A <- inv(D)*A*D,  B <- inv(D)*B and C <- C*D, where D is a */
 /*        diagonal matrix. */
 
+#line 351 "AB09BD.f"
 	maxred = 100.;
+#line 352 "AB09BD.f"
 	tb01id_("All", n, m, p, &maxred, &a[a_offset], lda, &b[b_offset], ldb,
 		 &c__[c_offset], ldc, &dwork[1], info, (ftnlen)3);
+#line 354 "AB09BD.f"
     }
 
 /*     Reduce A to the real Schur form using an orthogonal similarity */
 /*     transformation A <- T'*A*T and apply the transformation to */
 /*     B and C: B <- T'*B and C <- C*T. */
 
+#line 360 "AB09BD.f"
     i__1 = *ldwork - kw + 1;
+#line 360 "AB09BD.f"
     tb01wd_(n, m, p, &a[a_offset], lda, &b[b_offset], ldb, &c__[c_offset], 
 	    ldc, &dwork[kt], n, &dwork[kr], &dwork[ki], &dwork[kw], &i__1, &
 	    ierr);
+#line 362 "AB09BD.f"
     if (ierr != 0) {
+#line 363 "AB09BD.f"
 	*info = 1;
+#line 364 "AB09BD.f"
 	return 0;
+#line 365 "AB09BD.f"
     }
 
+#line 367 "AB09BD.f"
     wrkopt = dwork[kw] + (doublereal) (kw - 1);
 
+#line 369 "AB09BD.f"
     kti = kt + nn;
+#line 370 "AB09BD.f"
     kw = kti + nn;
+#line 371 "AB09BD.f"
     i__1 = *ldwork - kw + 1;
+#line 371 "AB09BD.f"
     ab09bx_(dico, job, ordsel, n, m, p, nr, &a[a_offset], lda, &b[b_offset], 
 	    ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, &hsv[1], &dwork[kt]
 	    , n, &dwork[kti], n, tol1, tol2, &iwork[1], &dwork[kw], &i__1, 
 	    iwarn, &ierr, (ftnlen)1, (ftnlen)1, (ftnlen)1);
 
+#line 376 "AB09BD.f"
     if (ierr != 0) {
+#line 377 "AB09BD.f"
 	*info = ierr + 1;
+#line 378 "AB09BD.f"
 	return 0;
+#line 379 "AB09BD.f"
     }
 
 /* Computing MAX */
+#line 381 "AB09BD.f"
     d__1 = wrkopt, d__2 = dwork[kw] + (doublereal) (kw - 1);
+#line 381 "AB09BD.f"
     dwork[1] = max(d__1,d__2);
 
+#line 383 "AB09BD.f"
     return 0;
 /* *** Last line of AB09BD *** */
 } /* ab09bd_ */

@@ -1,0 +1,1 @@
+extern int mb04tu_(integer *n, doublereal *x, integer *incx, doublereal *y, integer *incy, doublereal *c__, doublereal *s);

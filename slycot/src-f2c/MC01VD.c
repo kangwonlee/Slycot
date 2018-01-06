@@ -1,3 +1,4 @@
+#line 1 "MC01VD.f"
 /* MC01VD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC01VD.f"
 /* Table of constant values */
 
 static doublereal c_b4 = 1.;
@@ -159,201 +161,378 @@ static doublereal c_b4 = 1.;
 
 /*     Detect special cases. */
 
+#line 130 "MC01VD.f"
     *info = 0;
+#line 131 "MC01VD.f"
     beta = (integer) dlamch_("Base", (ftnlen)4);
+#line 132 "MC01VD.f"
     sfmin = dlamch_("Safe minimum", (ftnlen)12);
+#line 133 "MC01VD.f"
     big = 1. / sfmin;
+#line 134 "MC01VD.f"
     if (*a == 0.) {
+#line 135 "MC01VD.f"
 	if (*b == 0.) {
+#line 136 "MC01VD.f"
 	    *info = 1;
+#line 137 "MC01VD.f"
 	} else {
+#line 138 "MC01VD.f"
 	    ovflow = FALSE_;
+#line 139 "MC01VD.f"
 	    *z2re = 0.;
+#line 140 "MC01VD.f"
 	    if (*c__ != 0.) {
+#line 141 "MC01VD.f"
 		absb = abs(*b);
+#line 142 "MC01VD.f"
 		if (absb >= 1.) {
+#line 143 "MC01VD.f"
 		    if (abs(*c__) >= absb * sfmin) {
+#line 143 "MC01VD.f"
 			*z2re = -(*c__) / *b;
+#line 143 "MC01VD.f"
 		    }
+#line 144 "MC01VD.f"
 		} else {
+#line 145 "MC01VD.f"
 		    if (abs(*c__) <= absb * big) {
+#line 146 "MC01VD.f"
 			*z2re = -(*c__) / *b;
+#line 147 "MC01VD.f"
 		    } else {
+#line 148 "MC01VD.f"
 			ovflow = TRUE_;
+#line 149 "MC01VD.f"
 			*z2re = big;
+#line 150 "MC01VD.f"
 			if (d_sign(&c_b4, b) * d_sign(&c_b4, c__) > 0.) {
+#line 150 "MC01VD.f"
 			    *z2re = -big;
+#line 150 "MC01VD.f"
 			}
+#line 152 "MC01VD.f"
 		    }
+#line 153 "MC01VD.f"
 		}
+#line 154 "MC01VD.f"
 	    }
+#line 155 "MC01VD.f"
 	    if (ovflow) {
+#line 156 "MC01VD.f"
 		*info = 1;
+#line 157 "MC01VD.f"
 	    } else {
+#line 158 "MC01VD.f"
 		*z1re = big;
+#line 159 "MC01VD.f"
 		*z1im = 0.;
+#line 160 "MC01VD.f"
 		*z2im = 0.;
+#line 161 "MC01VD.f"
 		*info = 2;
+#line 162 "MC01VD.f"
 	    }
+#line 163 "MC01VD.f"
 	}
+#line 164 "MC01VD.f"
 	return 0;
+#line 165 "MC01VD.f"
     }
 
+#line 167 "MC01VD.f"
     if (*c__ == 0.) {
+#line 168 "MC01VD.f"
 	ovflow = FALSE_;
+#line 169 "MC01VD.f"
 	*z1re = 0.;
+#line 170 "MC01VD.f"
 	if (*b != 0.) {
+#line 171 "MC01VD.f"
 	    absa = abs(*a);
+#line 172 "MC01VD.f"
 	    if (absa >= 1.) {
+#line 173 "MC01VD.f"
 		if (abs(*b) >= absa * sfmin) {
+#line 173 "MC01VD.f"
 		    *z1re = -(*b) / *a;
+#line 173 "MC01VD.f"
 		}
+#line 174 "MC01VD.f"
 	    } else {
+#line 175 "MC01VD.f"
 		if (abs(*b) <= absa * big) {
+#line 176 "MC01VD.f"
 		    *z1re = -(*b) / *a;
+#line 177 "MC01VD.f"
 		} else {
+#line 178 "MC01VD.f"
 		    ovflow = TRUE_;
+#line 179 "MC01VD.f"
 		    *z1re = big;
+#line 180 "MC01VD.f"
 		}
+#line 181 "MC01VD.f"
 	    }
+#line 182 "MC01VD.f"
 	}
+#line 183 "MC01VD.f"
 	if (ovflow) {
+#line 183 "MC01VD.f"
 	    *info = 3;
+#line 183 "MC01VD.f"
 	}
+#line 184 "MC01VD.f"
 	*z1im = 0.;
+#line 185 "MC01VD.f"
 	*z2re = 0.;
+#line 186 "MC01VD.f"
 	*z2im = 0.;
+#line 187 "MC01VD.f"
 	return 0;
+#line 188 "MC01VD.f"
     }
 
 /*     A and C are non-zero. */
 
+#line 192 "MC01VD.f"
     if (*b == 0.) {
+#line 193 "MC01VD.f"
 	ovflow = FALSE_;
+#line 194 "MC01VD.f"
 	absc = sqrt((abs(*c__)));
+#line 195 "MC01VD.f"
 	absa = sqrt((abs(*a)));
+#line 196 "MC01VD.f"
 	w = 0.;
+#line 197 "MC01VD.f"
 	if (absa >= 1.) {
+#line 198 "MC01VD.f"
 	    if (absc >= absa * sfmin) {
+#line 198 "MC01VD.f"
 		w = absc / absa;
+#line 198 "MC01VD.f"
 	    }
+#line 199 "MC01VD.f"
 	} else {
+#line 200 "MC01VD.f"
 	    if (absc <= absa * big) {
+#line 201 "MC01VD.f"
 		w = absc / absa;
+#line 202 "MC01VD.f"
 	    } else {
+#line 203 "MC01VD.f"
 		ovflow = TRUE_;
+#line 204 "MC01VD.f"
 		w = big;
+#line 205 "MC01VD.f"
 	    }
+#line 206 "MC01VD.f"
 	}
+#line 207 "MC01VD.f"
 	if (ovflow) {
+#line 208 "MC01VD.f"
 	    *info = 4;
+#line 209 "MC01VD.f"
 	} else {
+#line 210 "MC01VD.f"
 	    if (d_sign(&c_b4, a) * d_sign(&c_b4, c__) > 0.) {
+#line 211 "MC01VD.f"
 		*z1re = 0.;
+#line 212 "MC01VD.f"
 		*z2re = 0.;
+#line 213 "MC01VD.f"
 		*z1im = w;
+#line 214 "MC01VD.f"
 		*z2im = -w;
+#line 215 "MC01VD.f"
 	    } else {
+#line 216 "MC01VD.f"
 		*z1re = w;
+#line 217 "MC01VD.f"
 		*z2re = -w;
+#line 218 "MC01VD.f"
 		*z1im = 0.;
+#line 219 "MC01VD.f"
 		*z2im = 0.;
+#line 220 "MC01VD.f"
 	    }
+#line 221 "MC01VD.f"
 	}
+#line 222 "MC01VD.f"
 	return 0;
+#line 223 "MC01VD.f"
     }
 
 /*     A, B and C are non-zero. */
 
+#line 227 "MC01VD.f"
     mc01sw_(a, &beta, &ma, &ea);
+#line 228 "MC01VD.f"
     mc01sw_(b, &beta, &mb, &eb);
+#line 229 "MC01VD.f"
     mc01sw_(c__, &beta, &mc, &ec);
 
 /*     Compute a 'near' floating-point representation of the discriminant */
 /*     D = MD * BETA**ED. */
 
+#line 234 "MC01VD.f"
     eaplec = ea + ec;
+#line 235 "MC01VD.f"
     eb2 = eb << 1;
+#line 236 "MC01VD.f"
     if (eaplec > eb2) {
+#line 237 "MC01VD.f"
 	d__1 = mb * mb;
+#line 237 "MC01VD.f"
 	i__1 = eb2 - eaplec;
+#line 237 "MC01VD.f"
 	mc01sy_(&d__1, &i__1, &beta, &w, &ovflow);
+#line 238 "MC01VD.f"
 	w -= ma * 4. * mc;
+#line 239 "MC01VD.f"
 	mc01sw_(&w, &beta, &md, &ed);
+#line 240 "MC01VD.f"
 	ed += eaplec;
+#line 241 "MC01VD.f"
     } else {
+#line 242 "MC01VD.f"
 	d__1 = ma * 4. * mc;
+#line 242 "MC01VD.f"
 	i__1 = eaplec - eb2;
+#line 242 "MC01VD.f"
 	mc01sy_(&d__1, &i__1, &beta, &w, &ovflow);
+#line 243 "MC01VD.f"
 	w = mb * mb - w;
+#line 244 "MC01VD.f"
 	mc01sw_(&w, &beta, &md, &ed);
+#line 245 "MC01VD.f"
 	ed += eb2;
+#line 246 "MC01VD.f"
     }
 
+#line 248 "MC01VD.f"
     if (ed % 2 != 0) {
+#line 249 "MC01VD.f"
 	++ed;
+#line 250 "MC01VD.f"
 	md /= beta;
+#line 251 "MC01VD.f"
     }
 
 /*     Complex roots. */
 
+#line 255 "MC01VD.f"
     if (md < 0.) {
+#line 256 "MC01VD.f"
 	d__1 = -mb / (ma * 2);
+#line 256 "MC01VD.f"
 	i__1 = eb - ea;
+#line 256 "MC01VD.f"
 	mc01sy_(&d__1, &i__1, &beta, z1re, &ovflow);
+#line 257 "MC01VD.f"
 	if (ovflow) {
+#line 258 "MC01VD.f"
 	    *info = 4;
+#line 259 "MC01VD.f"
 	} else {
+#line 260 "MC01VD.f"
 	    d__1 = sqrt(-md) / (ma * 2);
+#line 260 "MC01VD.f"
 	    i__1 = ed / 2 - ea;
+#line 260 "MC01VD.f"
 	    mc01sy_(&d__1, &i__1, &beta, z1im, &ovflow);
+#line 262 "MC01VD.f"
 	    if (ovflow) {
+#line 263 "MC01VD.f"
 		*info = 4;
+#line 264 "MC01VD.f"
 	    } else {
+#line 265 "MC01VD.f"
 		*z2re = *z1re;
+#line 266 "MC01VD.f"
 		*z2im = -(*z1im);
+#line 267 "MC01VD.f"
 	    }
+#line 268 "MC01VD.f"
 	}
+#line 269 "MC01VD.f"
 	return 0;
+#line 270 "MC01VD.f"
     }
 
 /*     Real roots. */
 
+#line 274 "MC01VD.f"
     md = sqrt(md);
+#line 275 "MC01VD.f"
     ed /= 2;
+#line 276 "MC01VD.f"
     if (ed > eb) {
+#line 277 "MC01VD.f"
 	d__1 = abs(mb);
+#line 277 "MC01VD.f"
 	i__1 = eb - ed;
+#line 277 "MC01VD.f"
 	mc01sy_(&d__1, &i__1, &beta, &w, &ovflow);
+#line 278 "MC01VD.f"
 	w += md;
+#line 279 "MC01VD.f"
 	m1 = -d_sign(&c_b4, &mb) * w / (ma * 2);
+#line 280 "MC01VD.f"
 	i__1 = ed - ea;
+#line 280 "MC01VD.f"
 	mc01sy_(&m1, &i__1, &beta, z1re, &ovflow);
+#line 281 "MC01VD.f"
 	if (ovflow) {
+#line 282 "MC01VD.f"
 	    *z1re = big;
+#line 283 "MC01VD.f"
 	    *info = 3;
+#line 284 "MC01VD.f"
 	}
+#line 285 "MC01VD.f"
 	m2 = -d_sign(&c_b4, &mb) * 2 * mc / w;
+#line 286 "MC01VD.f"
 	i__1 = ec - ed;
+#line 286 "MC01VD.f"
 	mc01sy_(&m2, &i__1, &beta, z2re, &ovflow);
+#line 287 "MC01VD.f"
     } else {
+#line 288 "MC01VD.f"
 	i__1 = ed - eb;
+#line 288 "MC01VD.f"
 	mc01sy_(&md, &i__1, &beta, &w, &ovflow);
+#line 289 "MC01VD.f"
 	w += abs(mb);
+#line 290 "MC01VD.f"
 	m1 = -d_sign(&c_b4, &mb) * w / (ma * 2);
+#line 291 "MC01VD.f"
 	i__1 = eb - ea;
+#line 291 "MC01VD.f"
 	mc01sy_(&m1, &i__1, &beta, z1re, &ovflow);
+#line 292 "MC01VD.f"
 	if (ovflow) {
+#line 293 "MC01VD.f"
 	    *z1re = big;
+#line 294 "MC01VD.f"
 	    *info = 3;
+#line 295 "MC01VD.f"
 	}
+#line 296 "MC01VD.f"
 	m2 = -d_sign(&c_b4, &mb) * 2 * mc / w;
+#line 297 "MC01VD.f"
 	i__1 = ec - eb;
+#line 297 "MC01VD.f"
 	mc01sy_(&m2, &i__1, &beta, z2re, &ovflow);
+#line 298 "MC01VD.f"
     }
+#line 299 "MC01VD.f"
     *z1im = 0.;
+#line 300 "MC01VD.f"
     *z2im = 0.;
 
+#line 302 "MC01VD.f"
     return 0;
 /* *** Last line of MC01VD *** */
 } /* mc01vd_ */

@@ -1,3 +1,4 @@
+#line 1 "TF01OD.f"
 /* TF01OD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TF01OD.f"
 /* Subroutine */ int tf01od_(integer *nh1, integer *nh2, integer *nr, integer 
 	*nc, doublereal *h__, integer *ldh, doublereal *t, integer *ldt, 
 	integer *info)
@@ -144,81 +146,134 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 126 "TF01OD.f"
     /* Parameter adjustments */
+#line 126 "TF01OD.f"
     h_dim1 = *ldh;
+#line 126 "TF01OD.f"
     h_offset = 1 + h_dim1;
+#line 126 "TF01OD.f"
     h__ -= h_offset;
+#line 126 "TF01OD.f"
     t_dim1 = *ldt;
+#line 126 "TF01OD.f"
     t_offset = 1 + t_dim1;
+#line 126 "TF01OD.f"
     t -= t_offset;
+#line 126 "TF01OD.f"
 
+#line 126 "TF01OD.f"
     /* Function Body */
+#line 126 "TF01OD.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 130 "TF01OD.f"
     if (*nh1 < 0) {
+#line 131 "TF01OD.f"
 	*info = -1;
+#line 132 "TF01OD.f"
     } else if (*nh2 < 0) {
+#line 133 "TF01OD.f"
 	*info = -2;
+#line 134 "TF01OD.f"
     } else if (*nr < 0) {
+#line 135 "TF01OD.f"
 	*info = -3;
+#line 136 "TF01OD.f"
     } else if (*nc < 0) {
+#line 137 "TF01OD.f"
 	*info = -4;
+#line 138 "TF01OD.f"
     } else if (*ldh < max(1,*nh1)) {
+#line 139 "TF01OD.f"
 	*info = -6;
+#line 140 "TF01OD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 140 "TF01OD.f"
 	i__1 = 1, i__2 = *nh1 * *nr;
+#line 140 "TF01OD.f"
 	if (*ldt < max(i__1,i__2)) {
+#line 141 "TF01OD.f"
 	    *info = -8;
+#line 142 "TF01OD.f"
 	}
+#line 142 "TF01OD.f"
     }
 
+#line 144 "TF01OD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 148 "TF01OD.f"
 	i__1 = -(*info);
+#line 148 "TF01OD.f"
 	xerbla_("TF01OD", &i__1, (ftnlen)6);
+#line 149 "TF01OD.f"
 	return 0;
+#line 150 "TF01OD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 154 "TF01OD.f"
     i__1 = max(*nh1,*nh2), i__1 = max(i__1,*nr);
+#line 154 "TF01OD.f"
     if (max(i__1,*nc) == 0) {
+#line 154 "TF01OD.f"
 	return 0;
+#line 154 "TF01OD.f"
     }
 
 /*     Construct the first block column of T. */
 
+#line 159 "TF01OD.f"
     ih = 1;
+#line 160 "TF01OD.f"
     nrow = (*nr - 1) * *nh1;
 
+#line 162 "TF01OD.f"
     i__1 = nrow + *nh1;
+#line 162 "TF01OD.f"
     i__2 = *nh1;
+#line 162 "TF01OD.f"
     for (it = 1; i__2 < 0 ? it >= i__1 : it <= i__1; it += i__2) {
+#line 163 "TF01OD.f"
 	dlacpy_("Full", nh1, nh2, &h__[ih * h_dim1 + 1], ldh, &t[it + t_dim1],
 		 ldt, (ftnlen)4);
+#line 164 "TF01OD.f"
 	ih += *nh2;
+#line 165 "TF01OD.f"
 /* L10: */
+#line 165 "TF01OD.f"
     }
 
 /*     Construct the remaining block columns of T. */
 
+#line 169 "TF01OD.f"
     i__2 = *nc * *nh2;
+#line 169 "TF01OD.f"
     i__1 = *nh2;
+#line 169 "TF01OD.f"
     for (jt = *nh2 + 1; i__1 < 0 ? jt >= i__2 : jt <= i__2; jt += i__1) {
+#line 170 "TF01OD.f"
 	dlacpy_("Full", &nrow, nh2, &t[*nh1 + 1 + (jt - *nh2) * t_dim1], ldt, 
 		&t[jt * t_dim1 + 1], ldt, (ftnlen)4);
+#line 172 "TF01OD.f"
 	dlacpy_("Full", nh1, nh2, &h__[ih * h_dim1 + 1], ldh, &t[nrow + 1 + 
 		jt * t_dim1], ldt, (ftnlen)4);
+#line 174 "TF01OD.f"
 	ih += *nh2;
+#line 175 "TF01OD.f"
 /* L20: */
+#line 175 "TF01OD.f"
     }
 
+#line 177 "TF01OD.f"
     return 0;
 /* *** Last line of TF01OD *** */
 } /* tf01od_ */

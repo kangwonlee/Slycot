@@ -1,3 +1,4 @@
+#line 1 "TG01DD.f"
 /* TG01DD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TG01DD.f"
 /* Table of constant values */
 
 static doublereal c_b7 = 0.;
@@ -214,81 +216,145 @@ static doublereal c_b8 = 1.;
 
 /*     Decode COMPZ. */
 
+#line 188 "TG01DD.f"
     /* Parameter adjustments */
+#line 188 "TG01DD.f"
     a_dim1 = *lda;
+#line 188 "TG01DD.f"
     a_offset = 1 + a_dim1;
+#line 188 "TG01DD.f"
     a -= a_offset;
+#line 188 "TG01DD.f"
     e_dim1 = *lde;
+#line 188 "TG01DD.f"
     e_offset = 1 + e_dim1;
+#line 188 "TG01DD.f"
     e -= e_offset;
+#line 188 "TG01DD.f"
     c_dim1 = *ldc;
+#line 188 "TG01DD.f"
     c_offset = 1 + c_dim1;
+#line 188 "TG01DD.f"
     c__ -= c_offset;
+#line 188 "TG01DD.f"
     z_dim1 = *ldz;
+#line 188 "TG01DD.f"
     z_offset = 1 + z_dim1;
+#line 188 "TG01DD.f"
     z__ -= z_offset;
+#line 188 "TG01DD.f"
     --dwork;
+#line 188 "TG01DD.f"
 
+#line 188 "TG01DD.f"
     /* Function Body */
+#line 188 "TG01DD.f"
     if (lsame_(compz, "N", (ftnlen)1, (ftnlen)1)) {
+#line 189 "TG01DD.f"
 	ilz = FALSE_;
+#line 190 "TG01DD.f"
 	icompz = 1;
+#line 191 "TG01DD.f"
     } else if (lsame_(compz, "U", (ftnlen)1, (ftnlen)1)) {
+#line 192 "TG01DD.f"
 	ilz = TRUE_;
+#line 193 "TG01DD.f"
 	icompz = 2;
+#line 194 "TG01DD.f"
     } else if (lsame_(compz, "I", (ftnlen)1, (ftnlen)1)) {
+#line 195 "TG01DD.f"
 	ilz = TRUE_;
+#line 196 "TG01DD.f"
 	icompz = 3;
+#line 197 "TG01DD.f"
     } else {
+#line 198 "TG01DD.f"
 	icompz = 0;
+#line 199 "TG01DD.f"
     }
 
 /*     Test the input parameters. */
 
+#line 203 "TG01DD.f"
     *info = 0;
 /* Computing MAX */
 /* Computing MAX */
+#line 204 "TG01DD.f"
     i__3 = max(*l,*n);
+#line 204 "TG01DD.f"
     i__1 = 1, i__2 = min(*l,*n) + max(i__3,*p);
+#line 204 "TG01DD.f"
     wrkopt = max(i__1,i__2);
+#line 205 "TG01DD.f"
     if (icompz == 0) {
+#line 206 "TG01DD.f"
 	*info = -1;
+#line 207 "TG01DD.f"
     } else if (*l < 0) {
+#line 208 "TG01DD.f"
 	*info = -2;
+#line 209 "TG01DD.f"
     } else if (*n < 0) {
+#line 210 "TG01DD.f"
 	*info = -3;
+#line 211 "TG01DD.f"
     } else if (*p < 0) {
+#line 212 "TG01DD.f"
 	*info = -4;
+#line 213 "TG01DD.f"
     } else if (*lda < max(1,*l)) {
+#line 214 "TG01DD.f"
 	*info = -6;
+#line 215 "TG01DD.f"
     } else if (*lde < max(1,*l)) {
+#line 216 "TG01DD.f"
 	*info = -8;
+#line 217 "TG01DD.f"
     } else if (*ldc < max(1,*p)) {
+#line 218 "TG01DD.f"
 	*info = -10;
+#line 219 "TG01DD.f"
     } else if (ilz && *ldz < *n || *ldz < 1) {
+#line 220 "TG01DD.f"
 	*info = -12;
+#line 221 "TG01DD.f"
     } else if (*ldwork < wrkopt) {
+#line 222 "TG01DD.f"
 	*info = -14;
+#line 223 "TG01DD.f"
     }
+#line 224 "TG01DD.f"
     if (*info != 0) {
+#line 225 "TG01DD.f"
 	i__1 = -(*info);
+#line 225 "TG01DD.f"
 	xerbla_("TG01DD", &i__1, (ftnlen)6);
+#line 226 "TG01DD.f"
 	return 0;
+#line 227 "TG01DD.f"
     }
 
 /*     Initialize Q if necessary. */
 
+#line 231 "TG01DD.f"
     if (icompz == 3) {
+#line 231 "TG01DD.f"
 	dlaset_("Full", n, n, &c_b7, &c_b8, &z__[z_offset], ldz, (ftnlen)4);
+#line 231 "TG01DD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 236 "TG01DD.f"
     if (*l == 0 || *n == 0) {
+#line 237 "TG01DD.f"
 	dwork[1] = 1.;
+#line 238 "TG01DD.f"
 	return 0;
+#line 239 "TG01DD.f"
     }
 
+#line 241 "TG01DD.f"
     ln = min(*l,*n);
 
 /*     Compute the RQ decomposition of E, E = R*Z. */
@@ -296,10 +362,14 @@ static doublereal c_b8 = 1.;
 /*     Workspace: need   MIN(L,N) + L; */
 /*                prefer MIN(L,N) + L*NB. */
 
+#line 248 "TG01DD.f"
     i__1 = *ldwork - ln;
+#line 248 "TG01DD.f"
     dgerqf_(l, n, &e[e_offset], lde, &dwork[1], &dwork[ln + 1], &i__1, info);
 /* Computing MAX */
+#line 249 "TG01DD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[ln + 1] + ln;
+#line 249 "TG01DD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Apply transformation on the rest of matrices. */
@@ -308,60 +378,89 @@ static doublereal c_b8 = 1.;
 /*     Workspace: need   MIN(L,N) + L; */
 /*                prefer MIN(L,N) + L*NB. */
 
+#line 257 "TG01DD.f"
     i__1 = *ldwork - ln;
+#line 257 "TG01DD.f"
     dormrq_("Right", "Transpose", l, n, &ln, &e[*l - ln + 1 + e_dim1], lde, &
 	    dwork[1], &a[a_offset], lda, &dwork[ln + 1], &i__1, info, (ftnlen)
 	    5, (ftnlen)9);
 /* Computing MAX */
+#line 259 "TG01DD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[ln + 1] + ln;
+#line 259 "TG01DD.f"
     wrkopt = max(i__1,i__2);
 
 /*     C <-- C * Z'. */
 /*     Workspace: need   MIN(L,N) + P; */
 /*                prefer MIN(L,N) + P*NB. */
 
+#line 265 "TG01DD.f"
     i__1 = *ldwork - ln;
+#line 265 "TG01DD.f"
     dormrq_("Right", "Transpose", p, n, &ln, &e[*l - ln + 1 + e_dim1], lde, &
 	    dwork[1], &c__[c_offset], ldc, &dwork[ln + 1], &i__1, info, (
 	    ftnlen)5, (ftnlen)9);
 /* Computing MAX */
+#line 267 "TG01DD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[ln + 1] + ln;
+#line 267 "TG01DD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Z <-- Z1 * Z'. */
 /*     Workspace: need   MIN(L,N) + N; */
 /*                prefer MIN(L,N) + N*NB. */
 
+#line 273 "TG01DD.f"
     if (ilz) {
+#line 274 "TG01DD.f"
 	i__1 = *ldwork - ln;
+#line 274 "TG01DD.f"
 	dormrq_("Right", "Transpose", n, n, &ln, &e[*l - ln + 1 + e_dim1], 
 		lde, &dwork[1], &z__[z_offset], ldz, &dwork[ln + 1], &i__1, 
 		info, (ftnlen)5, (ftnlen)9);
 /* Computing MAX */
+#line 277 "TG01DD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[ln + 1] + ln;
+#line 277 "TG01DD.f"
 	wrkopt = max(i__1,i__2);
+#line 278 "TG01DD.f"
     }
 
 /*     Set lower triangle of E to zero. */
 
+#line 282 "TG01DD.f"
     if (*l < *n) {
+#line 283 "TG01DD.f"
 	i__1 = *n - *l;
+#line 283 "TG01DD.f"
 	dlaset_("Full", l, &i__1, &c_b7, &c_b7, &e[e_offset], lde, (ftnlen)4);
+#line 284 "TG01DD.f"
 	if (*l >= 2) {
+#line 284 "TG01DD.f"
 	    i__1 = *l - 1;
+#line 284 "TG01DD.f"
 	    dlaset_("Lower", &i__1, l, &c_b7, &c_b7, &e[(*n - *l + 1) * 
 		    e_dim1 + 2], lde, (ftnlen)5);
+#line 284 "TG01DD.f"
 	}
+#line 286 "TG01DD.f"
     } else {
+#line 287 "TG01DD.f"
 	if (*n >= 2) {
+#line 287 "TG01DD.f"
 	    i__1 = *n - 1;
+#line 287 "TG01DD.f"
 	    dlaset_("Lower", &i__1, n, &c_b7, &c_b7, &e[*l - *n + 2 + e_dim1],
 		     lde, (ftnlen)5);
+#line 287 "TG01DD.f"
 	}
+#line 289 "TG01DD.f"
     }
 
+#line 291 "TG01DD.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 293 "TG01DD.f"
     return 0;
 /* *** Last line of TG01DD *** */
 } /* tg01dd_ */

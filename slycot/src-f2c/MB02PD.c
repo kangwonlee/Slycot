@@ -1,3 +1,4 @@
+#line 1 "MB02PD.f"
 /* MB02PD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02PD.f"
 /* Subroutine */ int mb02pd_(char *fact, char *trans, integer *n, integer *
 	nrhs, doublereal *a, integer *lda, doublereal *af, integer *ldaf, 
 	integer *ipiv, char *equed, doublereal *r__, doublereal *c__, 
@@ -384,235 +386,404 @@
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 344 "MB02PD.f"
     /* Parameter adjustments */
+#line 344 "MB02PD.f"
     a_dim1 = *lda;
+#line 344 "MB02PD.f"
     a_offset = 1 + a_dim1;
+#line 344 "MB02PD.f"
     a -= a_offset;
+#line 344 "MB02PD.f"
     af_dim1 = *ldaf;
+#line 344 "MB02PD.f"
     af_offset = 1 + af_dim1;
+#line 344 "MB02PD.f"
     af -= af_offset;
+#line 344 "MB02PD.f"
     --ipiv;
+#line 344 "MB02PD.f"
     --r__;
+#line 344 "MB02PD.f"
     --c__;
+#line 344 "MB02PD.f"
     b_dim1 = *ldb;
+#line 344 "MB02PD.f"
     b_offset = 1 + b_dim1;
+#line 344 "MB02PD.f"
     b -= b_offset;
+#line 344 "MB02PD.f"
     x_dim1 = *ldx;
+#line 344 "MB02PD.f"
     x_offset = 1 + x_dim1;
+#line 344 "MB02PD.f"
     x -= x_offset;
+#line 344 "MB02PD.f"
     --ferr;
+#line 344 "MB02PD.f"
     --berr;
+#line 344 "MB02PD.f"
     --iwork;
+#line 344 "MB02PD.f"
     --dwork;
+#line 344 "MB02PD.f"
 
+#line 344 "MB02PD.f"
     /* Function Body */
+#line 344 "MB02PD.f"
     *info = 0;
+#line 345 "MB02PD.f"
     nofact = lsame_(fact, "N", (ftnlen)1, (ftnlen)1);
+#line 346 "MB02PD.f"
     equil = lsame_(fact, "E", (ftnlen)1, (ftnlen)1);
+#line 347 "MB02PD.f"
     notran = lsame_(trans, "N", (ftnlen)1, (ftnlen)1);
+#line 348 "MB02PD.f"
     if (nofact || equil) {
+#line 349 "MB02PD.f"
 	*(unsigned char *)equed = 'N';
+#line 350 "MB02PD.f"
 	rowequ = FALSE_;
+#line 351 "MB02PD.f"
 	colequ = FALSE_;
+#line 352 "MB02PD.f"
     } else {
+#line 353 "MB02PD.f"
 	rowequ = lsame_(equed, "R", (ftnlen)1, (ftnlen)1) || lsame_(equed, 
 		"B", (ftnlen)1, (ftnlen)1);
+#line 354 "MB02PD.f"
 	colequ = lsame_(equed, "C", (ftnlen)1, (ftnlen)1) || lsame_(equed, 
 		"B", (ftnlen)1, (ftnlen)1);
+#line 355 "MB02PD.f"
 	smlnum = dlamch_("Safe minimum", (ftnlen)12);
+#line 356 "MB02PD.f"
 	bignum = 1. / smlnum;
+#line 357 "MB02PD.f"
     }
 
 /*     Test the input parameters. */
 
+#line 361 "MB02PD.f"
     if (! nofact && ! equil && ! lsame_(fact, "F", (ftnlen)1, (ftnlen)1)) {
+#line 363 "MB02PD.f"
 	*info = -1;
+#line 364 "MB02PD.f"
     } else if (! notran && ! lsame_(trans, "T", (ftnlen)1, (ftnlen)1) && ! 
 	    lsame_(trans, "C", (ftnlen)1, (ftnlen)1)) {
+#line 366 "MB02PD.f"
 	*info = -2;
+#line 367 "MB02PD.f"
     } else if (*n < 0) {
+#line 368 "MB02PD.f"
 	*info = -3;
+#line 369 "MB02PD.f"
     } else if (*nrhs < 0) {
+#line 370 "MB02PD.f"
 	*info = -4;
+#line 371 "MB02PD.f"
     } else if (*lda < max(1,*n)) {
+#line 372 "MB02PD.f"
 	*info = -6;
+#line 373 "MB02PD.f"
     } else if (*ldaf < max(1,*n)) {
+#line 374 "MB02PD.f"
 	*info = -8;
+#line 375 "MB02PD.f"
     } else if (lsame_(fact, "F", (ftnlen)1, (ftnlen)1) && ! (rowequ || colequ 
 	    || lsame_(equed, "N", (ftnlen)1, (ftnlen)1))) {
+#line 377 "MB02PD.f"
 	*info = -10;
+#line 378 "MB02PD.f"
     } else {
+#line 379 "MB02PD.f"
 	if (rowequ) {
+#line 380 "MB02PD.f"
 	    rcmin = bignum;
+#line 381 "MB02PD.f"
 	    rcmax = 0.;
+#line 382 "MB02PD.f"
 	    i__1 = *n;
+#line 382 "MB02PD.f"
 	    for (j = 1; j <= i__1; ++j) {
 /* Computing MIN */
+#line 383 "MB02PD.f"
 		d__1 = rcmin, d__2 = r__[j];
+#line 383 "MB02PD.f"
 		rcmin = min(d__1,d__2);
 /* Computing MAX */
+#line 384 "MB02PD.f"
 		d__1 = rcmax, d__2 = r__[j];
+#line 384 "MB02PD.f"
 		rcmax = max(d__1,d__2);
+#line 385 "MB02PD.f"
 /* L10: */
+#line 385 "MB02PD.f"
 	    }
+#line 386 "MB02PD.f"
 	    if (rcmin <= 0.) {
+#line 387 "MB02PD.f"
 		*info = -11;
+#line 388 "MB02PD.f"
 	    } else if (*n > 0) {
+#line 389 "MB02PD.f"
 		rowcnd = max(rcmin,smlnum) / min(rcmax,bignum);
+#line 390 "MB02PD.f"
 	    } else {
+#line 391 "MB02PD.f"
 		rowcnd = 1.;
+#line 392 "MB02PD.f"
 	    }
+#line 393 "MB02PD.f"
 	}
+#line 394 "MB02PD.f"
 	if (colequ && *info == 0) {
+#line 395 "MB02PD.f"
 	    rcmin = bignum;
+#line 396 "MB02PD.f"
 	    rcmax = 0.;
+#line 397 "MB02PD.f"
 	    i__1 = *n;
+#line 397 "MB02PD.f"
 	    for (j = 1; j <= i__1; ++j) {
 /* Computing MIN */
+#line 398 "MB02PD.f"
 		d__1 = rcmin, d__2 = c__[j];
+#line 398 "MB02PD.f"
 		rcmin = min(d__1,d__2);
 /* Computing MAX */
+#line 399 "MB02PD.f"
 		d__1 = rcmax, d__2 = c__[j];
+#line 399 "MB02PD.f"
 		rcmax = max(d__1,d__2);
+#line 400 "MB02PD.f"
 /* L20: */
+#line 400 "MB02PD.f"
 	    }
+#line 401 "MB02PD.f"
 	    if (rcmin <= 0.) {
+#line 402 "MB02PD.f"
 		*info = -12;
+#line 403 "MB02PD.f"
 	    } else if (*n > 0) {
+#line 404 "MB02PD.f"
 		colcnd = max(rcmin,smlnum) / min(rcmax,bignum);
+#line 405 "MB02PD.f"
 	    } else {
+#line 406 "MB02PD.f"
 		colcnd = 1.;
+#line 407 "MB02PD.f"
 	    }
+#line 408 "MB02PD.f"
 	}
+#line 409 "MB02PD.f"
 	if (*info == 0) {
+#line 410 "MB02PD.f"
 	    if (*ldb < max(1,*n)) {
+#line 411 "MB02PD.f"
 		*info = -14;
+#line 412 "MB02PD.f"
 	    } else if (*ldx < max(1,*n)) {
+#line 413 "MB02PD.f"
 		*info = -16;
+#line 414 "MB02PD.f"
 	    }
+#line 415 "MB02PD.f"
 	}
+#line 416 "MB02PD.f"
     }
 
+#line 418 "MB02PD.f"
     if (*info != 0) {
+#line 419 "MB02PD.f"
 	i__1 = -(*info);
+#line 419 "MB02PD.f"
 	xerbla_("MB02PD", &i__1, (ftnlen)6);
+#line 420 "MB02PD.f"
 	return 0;
+#line 421 "MB02PD.f"
     }
 
+#line 423 "MB02PD.f"
     if (equil) {
 
 /*        Compute row and column scalings to equilibrate the matrix A. */
 
+#line 427 "MB02PD.f"
 	dgeequ_(n, n, &a[a_offset], lda, &r__[1], &c__[1], &rowcnd, &colcnd, &
 		amax, &infequ);
+#line 428 "MB02PD.f"
 	if (infequ == 0) {
 
 /*           Equilibrate the matrix. */
 
+#line 432 "MB02PD.f"
 	    dlaqge_(n, n, &a[a_offset], lda, &r__[1], &c__[1], &rowcnd, &
 		    colcnd, &amax, equed, (ftnlen)1);
+#line 434 "MB02PD.f"
 	    rowequ = lsame_(equed, "R", (ftnlen)1, (ftnlen)1) || lsame_(equed,
 		     "B", (ftnlen)1, (ftnlen)1);
+#line 435 "MB02PD.f"
 	    colequ = lsame_(equed, "C", (ftnlen)1, (ftnlen)1) || lsame_(equed,
 		     "B", (ftnlen)1, (ftnlen)1);
+#line 436 "MB02PD.f"
 	}
+#line 437 "MB02PD.f"
     }
 
 /*     Scale the right hand side. */
 
+#line 441 "MB02PD.f"
     if (notran) {
+#line 442 "MB02PD.f"
 	if (rowequ) {
+#line 443 "MB02PD.f"
 	    i__1 = *nrhs;
+#line 443 "MB02PD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 444 "MB02PD.f"
 		i__2 = *n;
+#line 444 "MB02PD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 445 "MB02PD.f"
 		    b[i__ + j * b_dim1] = r__[i__] * b[i__ + j * b_dim1];
+#line 446 "MB02PD.f"
 /* L30: */
+#line 446 "MB02PD.f"
 		}
+#line 447 "MB02PD.f"
 /* L40: */
+#line 447 "MB02PD.f"
 	    }
+#line 448 "MB02PD.f"
 	}
+#line 449 "MB02PD.f"
     } else if (colequ) {
+#line 450 "MB02PD.f"
 	i__1 = *nrhs;
+#line 450 "MB02PD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 451 "MB02PD.f"
 	    i__2 = *n;
+#line 451 "MB02PD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 452 "MB02PD.f"
 		b[i__ + j * b_dim1] = c__[i__] * b[i__ + j * b_dim1];
+#line 453 "MB02PD.f"
 /* L50: */
+#line 453 "MB02PD.f"
 	    }
+#line 454 "MB02PD.f"
 /* L60: */
+#line 454 "MB02PD.f"
 	}
+#line 455 "MB02PD.f"
     }
 
+#line 457 "MB02PD.f"
     if (nofact || equil) {
 
 /*        Compute the LU factorization of A. */
 
+#line 461 "MB02PD.f"
 	dlacpy_("Full", n, n, &a[a_offset], lda, &af[af_offset], ldaf, (
 		ftnlen)4);
+#line 462 "MB02PD.f"
 	dgetrf_(n, n, &af[af_offset], ldaf, &ipiv[1], info);
 
 /*        Return if INFO is non-zero. */
 
+#line 466 "MB02PD.f"
 	if (*info != 0) {
+#line 467 "MB02PD.f"
 	    if (*info > 0) {
 
 /*              Compute the reciprocal pivot growth factor of the */
 /*              leading rank-deficient INFO columns of A. */
 
+#line 472 "MB02PD.f"
 		rpvgrw = dlantr_("M", "U", "N", info, info, &af[af_offset], 
 			ldaf, &dwork[1], (ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 474 "MB02PD.f"
 		if (rpvgrw == 0.) {
+#line 475 "MB02PD.f"
 		    rpvgrw = 1.;
+#line 476 "MB02PD.f"
 		} else {
+#line 477 "MB02PD.f"
 		    rpvgrw = dlange_("M", n, info, &a[a_offset], lda, &dwork[
 			    1], (ftnlen)1) / rpvgrw;
+#line 479 "MB02PD.f"
 		}
+#line 480 "MB02PD.f"
 		dwork[1] = rpvgrw;
+#line 481 "MB02PD.f"
 		*rcond = 0.;
+#line 482 "MB02PD.f"
 	    }
+#line 483 "MB02PD.f"
 	    return 0;
+#line 484 "MB02PD.f"
 	}
 
 /*        Compute the norm of the matrix A and the */
 /*        reciprocal pivot growth factor RPVGRW. */
 
+#line 489 "MB02PD.f"
 	if (notran) {
+#line 490 "MB02PD.f"
 	    *(unsigned char *)norm = '1';
+#line 491 "MB02PD.f"
 	} else {
+#line 492 "MB02PD.f"
 	    *(unsigned char *)norm = 'I';
+#line 493 "MB02PD.f"
 	}
+#line 494 "MB02PD.f"
 	anorm = dlange_(norm, n, n, &a[a_offset], lda, &dwork[1], (ftnlen)1);
+#line 495 "MB02PD.f"
 	rpvgrw = dlantr_("M", "U", "N", n, n, &af[af_offset], ldaf, &dwork[1],
 		 (ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 496 "MB02PD.f"
 	if (rpvgrw == 0.) {
+#line 497 "MB02PD.f"
 	    rpvgrw = 1.;
+#line 498 "MB02PD.f"
 	} else {
+#line 499 "MB02PD.f"
 	    rpvgrw = dlange_("M", n, n, &a[a_offset], lda, &dwork[1], (ftnlen)
 		    1) / rpvgrw;
+#line 500 "MB02PD.f"
 	}
 
 /*        Compute the reciprocal of the condition number of A. */
 
+#line 504 "MB02PD.f"
 	dgecon_(norm, n, &af[af_offset], ldaf, &anorm, rcond, &dwork[1], &
 		iwork[1], info, (ftnlen)1);
 
 /*        Set INFO = N+1 if the matrix is singular to working precision. */
 
+#line 509 "MB02PD.f"
 	if (*rcond < dlamch_("Epsilon", (ftnlen)7)) {
+#line 509 "MB02PD.f"
 	    *info = *n + 1;
+#line 509 "MB02PD.f"
 	}
+#line 511 "MB02PD.f"
     }
 
 /*     Compute the solution matrix X. */
 
+#line 515 "MB02PD.f"
     dlacpy_("Full", n, nrhs, &b[b_offset], ldb, &x[x_offset], ldx, (ftnlen)4);
+#line 516 "MB02PD.f"
     dgetrs_(trans, n, nrhs, &af[af_offset], ldaf, &ipiv[1], &x[x_offset], ldx,
 	     info, (ftnlen)1);
 
 /*     Use iterative refinement to improve the computed solution and */
 /*     compute error bounds and backward error estimates for it. */
 
+#line 521 "MB02PD.f"
     dgerfs_(trans, n, nrhs, &a[a_offset], lda, &af[af_offset], ldaf, &ipiv[1],
 	     &b[b_offset], ldb, &x[x_offset], ldx, &ferr[1], &berr[1], &dwork[
 	    1], &iwork[1], info, (ftnlen)1);
@@ -620,41 +791,76 @@
 /*     Transform the solution matrix X to a solution of the original */
 /*     system. */
 
+#line 527 "MB02PD.f"
     if (notran) {
+#line 528 "MB02PD.f"
 	if (colequ) {
+#line 529 "MB02PD.f"
 	    i__1 = *nrhs;
+#line 529 "MB02PD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 530 "MB02PD.f"
 		i__2 = *n;
+#line 530 "MB02PD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 531 "MB02PD.f"
 		    x[i__ + j * x_dim1] = c__[i__] * x[i__ + j * x_dim1];
+#line 532 "MB02PD.f"
 /* L70: */
+#line 532 "MB02PD.f"
 		}
+#line 533 "MB02PD.f"
 /* L80: */
+#line 533 "MB02PD.f"
 	    }
+#line 534 "MB02PD.f"
 	    i__1 = *nrhs;
+#line 534 "MB02PD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 535 "MB02PD.f"
 		ferr[j] /= colcnd;
+#line 536 "MB02PD.f"
 /* L90: */
+#line 536 "MB02PD.f"
 	    }
+#line 537 "MB02PD.f"
 	}
+#line 538 "MB02PD.f"
     } else if (rowequ) {
+#line 539 "MB02PD.f"
 	i__1 = *nrhs;
+#line 539 "MB02PD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 540 "MB02PD.f"
 	    i__2 = *n;
+#line 540 "MB02PD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 541 "MB02PD.f"
 		x[i__ + j * x_dim1] = r__[i__] * x[i__ + j * x_dim1];
+#line 542 "MB02PD.f"
 /* L100: */
+#line 542 "MB02PD.f"
 	    }
+#line 543 "MB02PD.f"
 /* L110: */
+#line 543 "MB02PD.f"
 	}
+#line 544 "MB02PD.f"
 	i__1 = *nrhs;
+#line 544 "MB02PD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 545 "MB02PD.f"
 	    ferr[j] /= rowcnd;
+#line 546 "MB02PD.f"
 /* L120: */
+#line 546 "MB02PD.f"
 	}
+#line 547 "MB02PD.f"
     }
 
+#line 549 "MB02PD.f"
     dwork[1] = rpvgrw;
+#line 550 "MB02PD.f"
     return 0;
 
 /* *** Last line of MB02PD *** */

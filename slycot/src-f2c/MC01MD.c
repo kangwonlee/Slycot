@@ -1,3 +1,4 @@
+#line 1 "MC01MD.f"
 /* MC01MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC01MD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -151,45 +153,76 @@ static integer c__1 = 1;
 
 /*     Test the input scalar arguments. */
 
+#line 133 "MC01MD.f"
     /* Parameter adjustments */
+#line 133 "MC01MD.f"
     --q;
+#line 133 "MC01MD.f"
     --p;
+#line 133 "MC01MD.f"
 
+#line 133 "MC01MD.f"
     /* Function Body */
+#line 133 "MC01MD.f"
     *info = 0;
+#line 134 "MC01MD.f"
     if (*dp < 0) {
+#line 135 "MC01MD.f"
 	*info = -1;
+#line 136 "MC01MD.f"
     } else if (*k <= 0 || *k > *dp + 1) {
+#line 137 "MC01MD.f"
 	*info = -3;
+#line 138 "MC01MD.f"
     }
 
+#line 140 "MC01MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 144 "MC01MD.f"
 	i__1 = -(*info);
+#line 144 "MC01MD.f"
 	xerbla_("MC01MD", &i__1, (ftnlen)6);
+#line 145 "MC01MD.f"
 	return 0;
+#line 146 "MC01MD.f"
     }
 
+#line 148 "MC01MD.f"
     i__1 = *dp + 1;
+#line 148 "MC01MD.f"
     dcopy_(&i__1, &p[1], &c__1, &q[1], &c__1);
+#line 149 "MC01MD.f"
     if (*dp == 0 || *alpha == 0.) {
+#line 149 "MC01MD.f"
 	return 0;
+#line 149 "MC01MD.f"
     }
 
+#line 152 "MC01MD.f"
     i__1 = *k;
+#line 152 "MC01MD.f"
     for (j = 1; j <= i__1; ++j) {
 
+#line 154 "MC01MD.f"
 	i__2 = j;
+#line 154 "MC01MD.f"
 	for (i__ = *dp; i__ >= i__2; --i__) {
+#line 155 "MC01MD.f"
 	    q[i__] += *alpha * q[i__ + 1];
+#line 156 "MC01MD.f"
 /* L20: */
+#line 156 "MC01MD.f"
 	}
 
+#line 158 "MC01MD.f"
 /* L40: */
+#line 158 "MC01MD.f"
     }
 
+#line 160 "MC01MD.f"
     return 0;
 /* *** Last line of MC01MD *** */
 } /* mc01md_ */

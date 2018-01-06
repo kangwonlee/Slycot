@@ -1,3 +1,4 @@
+#line 1 "TB01VY.f"
 /* TB01VY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TB01VY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -211,187 +213,296 @@ static doublereal c_b27 = 1.;
 
 /*     Check the scalar input parameters. */
 
+#line 170 "TB01VY.f"
     /* Parameter adjustments */
+#line 170 "TB01VY.f"
     --theta;
+#line 170 "TB01VY.f"
     a_dim1 = *lda;
+#line 170 "TB01VY.f"
     a_offset = 1 + a_dim1;
+#line 170 "TB01VY.f"
     a -= a_offset;
+#line 170 "TB01VY.f"
     b_dim1 = *ldb;
+#line 170 "TB01VY.f"
     b_offset = 1 + b_dim1;
+#line 170 "TB01VY.f"
     b -= b_offset;
+#line 170 "TB01VY.f"
     c_dim1 = *ldc;
+#line 170 "TB01VY.f"
     c_offset = 1 + c_dim1;
+#line 170 "TB01VY.f"
     c__ -= c_offset;
+#line 170 "TB01VY.f"
     d_dim1 = *ldd;
+#line 170 "TB01VY.f"
     d_offset = 1 + d_dim1;
+#line 170 "TB01VY.f"
     d__ -= d_offset;
+#line 170 "TB01VY.f"
     --x0;
+#line 170 "TB01VY.f"
     --dwork;
+#line 170 "TB01VY.f"
 
+#line 170 "TB01VY.f"
     /* Function Body */
+#line 170 "TB01VY.f"
     lapply = lsame_(apply, "A", (ftnlen)1, (ftnlen)1);
 
+#line 172 "TB01VY.f"
     *info = 0;
+#line 173 "TB01VY.f"
     if (! (lapply || lsame_(apply, "N", (ftnlen)1, (ftnlen)1))) {
+#line 174 "TB01VY.f"
 	*info = -1;
+#line 175 "TB01VY.f"
     } else if (*n < 0) {
+#line 176 "TB01VY.f"
 	*info = -2;
+#line 177 "TB01VY.f"
     } else if (*m < 0) {
+#line 178 "TB01VY.f"
 	*info = -3;
+#line 179 "TB01VY.f"
     } else if (*l < 0) {
+#line 180 "TB01VY.f"
 	*info = -4;
+#line 181 "TB01VY.f"
     } else if (*ltheta < *n * (*l + *m + 1) + *l * *m) {
+#line 182 "TB01VY.f"
 	*info = -6;
+#line 183 "TB01VY.f"
     } else if (*lda < max(1,*n)) {
+#line 184 "TB01VY.f"
 	*info = -8;
+#line 185 "TB01VY.f"
     } else if (*ldb < max(1,*n)) {
+#line 186 "TB01VY.f"
 	*info = -10;
+#line 187 "TB01VY.f"
     } else if (*ldc < max(1,*l)) {
+#line 188 "TB01VY.f"
 	*info = -12;
+#line 189 "TB01VY.f"
     } else if (*ldd < max(1,*l)) {
+#line 190 "TB01VY.f"
 	*info = -14;
+#line 191 "TB01VY.f"
     } else if (*ldwork < *n * (*n + *l + 1)) {
+#line 192 "TB01VY.f"
 	*info = -17;
+#line 193 "TB01VY.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 197 "TB01VY.f"
     if (*info != 0) {
+#line 198 "TB01VY.f"
 	i__1 = -(*info);
+#line 198 "TB01VY.f"
 	xerbla_("TB01VY", &i__1, (ftnlen)6);
+#line 199 "TB01VY.f"
 	return 0;
+#line 200 "TB01VY.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 204 "TB01VY.f"
     i__1 = max(*n,*m);
+#line 204 "TB01VY.f"
     if (max(i__1,*l) == 0) {
+#line 204 "TB01VY.f"
 	return 0;
+#line 204 "TB01VY.f"
     }
 
+#line 207 "TB01VY.f"
     if (*m > 0) {
 
 /*        Copy the matrix B from THETA. */
 
+#line 211 "TB01VY.f"
 	dlacpy_("Full", n, m, &theta[*n * *l + 1], n, &b[b_offset], ldb, (
 		ftnlen)4);
 
 /*        Copy the matrix D. */
 
+#line 215 "TB01VY.f"
 	dlacpy_("Full", l, m, &theta[*n * (*l + *m) + 1], l, &d__[d_offset], 
 		ldd, (ftnlen)4);
+#line 216 "TB01VY.f"
     }
 
+#line 218 "TB01VY.f"
     if (*n == 0) {
+#line 219 "TB01VY.f"
 	return 0;
+#line 220 "TB01VY.f"
     } else if (*l == 0) {
+#line 221 "TB01VY.f"
 	dcopy_(n, &theta[*n * *m + 1], &c__1, &x0[1], &c__1);
+#line 222 "TB01VY.f"
 	return 0;
+#line 223 "TB01VY.f"
     }
 
 /*     Initialize the indices in the workspace. */
 
+#line 227 "TB01VY.f"
     ldca = *n + *l;
 
+#line 229 "TB01VY.f"
     ca = 1;
 
+#line 231 "TB01VY.f"
     jwork = ca + *n * ldca;
+#line 232 "TB01VY.f"
     tobypi = .5 / atan(1.);
 
 /*     Generate the matrices C and A from their parameters. */
 /*     Start with the block matrix [0; I], where 0 is a block of zeros */
 /*     of size L-by-N, and I is the identity matrix of order N. */
 
+#line 238 "TB01VY.f"
     dwork[ca] = 0.;
+#line 239 "TB01VY.f"
     i__1 = *n * (*l + *n);
+#line 239 "TB01VY.f"
     dcopy_(&i__1, &dwork[ca], &c__0, &dwork[ca], &c__1);
+#line 240 "TB01VY.f"
     dwork[ca + *l] = 1.;
+#line 241 "TB01VY.f"
     i__1 = ldca + 1;
+#line 241 "TB01VY.f"
     dcopy_(n, &dwork[ca + *l], &c__0, &dwork[ca + *l], &i__1);
 
 /*     Now, read out THETA(1 : N*L) and perform the transformations */
 /*     defined by the parameters in THETA. */
 
+#line 246 "TB01VY.f"
     for (i__ = *n; i__ >= 1; --i__) {
 
 /*        Save THETAi in the first column of C and use the copy for */
 /*        further processing. */
 
+#line 251 "TB01VY.f"
 	dcopy_(l, &theta[(i__ - 1) * *l + 1], &c__1, &c__[c_offset], &c__1);
+#line 252 "TB01VY.f"
 	ti = dnrm2_(l, &c__[c_offset], &c__1);
+#line 253 "TB01VY.f"
 	if (lapply && ti != 0.) {
 
 /*           Apply the bijective mapping which guarantees that TI < 1. */
 
+#line 257 "TB01VY.f"
 	    factor = tobypi * atan(ti) / ti;
 
 /*           Scale THETAi and apply the same scaling on TI. */
 
+#line 261 "TB01VY.f"
 	    dscal_(l, &factor, &c__[c_offset], &c__1);
+#line 262 "TB01VY.f"
 	    ti *= factor;
+#line 263 "TB01VY.f"
 	}
 
 /*        RI = sqrt( 1 - TI**2 ). */
 
+#line 267 "TB01VY.f"
 	ri = sqrt((1. - ti) * (ti + 1.));
 
 /*        Multiply a certain part of DWORK(CA) with Ui' from the left, */
 /*        where Ui = [ -THETAi, Si; RI, THETAi' ] is (L+1)-by-(L+1), but */
 /*        Ui is not stored. */
 
+#line 273 "TB01VY.f"
 	dgemv_("Transpose", l, n, &c_b18, &dwork[ca + *n - i__], &ldca, &c__[
 		c_offset], &c__1, &c_b20, &dwork[jwork], &c__1, (ftnlen)9);
 
+#line 276 "TB01VY.f"
 	if (ti > 0.) {
+#line 277 "TB01VY.f"
 	    d__1 = (1. - ri) / ti / ti;
+#line 277 "TB01VY.f"
 	    dger_(l, n, &d__1, &c__[c_offset], &c__1, &dwork[jwork], &c__1, &
 		    dwork[ca + *n - i__], &ldca);
+#line 279 "TB01VY.f"
 	} else {
 
 /*           The call below is for the limiting case. */
 
+#line 283 "TB01VY.f"
 	    dger_(l, n, &c_b24, &c__[c_offset], &c__1, &dwork[jwork], &c__1, &
 		    dwork[ca + *n - i__], &ldca);
+#line 285 "TB01VY.f"
 	}
 
+#line 287 "TB01VY.f"
 	dger_(l, n, &c_b27, &c__[c_offset], &c__1, &dwork[ca + *n - i__ + *l],
 		 &ldca, &dwork[ca + *n - i__], &ldca);
+#line 289 "TB01VY.f"
 	daxpy_(n, &ri, &dwork[ca + *n - i__ + *l], &ldca, &dwork[jwork], &
 		c__1);
 
 /*        Move these results to their appropriate locations. */
 
+#line 293 "TB01VY.f"
 	i__1 = *n;
+#line 293 "TB01VY.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 294 "TB01VY.f"
 	    in = ca + *n - i__ + (j - 1) * ldca;
+#line 295 "TB01VY.f"
 	    i__2 = in + 1;
+#line 295 "TB01VY.f"
 	    for (k = in + *l; k >= i__2; --k) {
+#line 296 "TB01VY.f"
 		dwork[k] = dwork[k - 1];
+#line 297 "TB01VY.f"
 /* L10: */
+#line 297 "TB01VY.f"
 	    }
+#line 298 "TB01VY.f"
 	    dwork[in] = dwork[jwork + j - 1];
+#line 299 "TB01VY.f"
 /* L20: */
+#line 299 "TB01VY.f"
 	}
 
+#line 301 "TB01VY.f"
 /* L30: */
+#line 301 "TB01VY.f"
     }
 
 /*     Now, DWORK(CA) = [C; A]. Copy to C and A. */
 
+#line 305 "TB01VY.f"
     i__1 = *n;
+#line 305 "TB01VY.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 306 "TB01VY.f"
 	dcopy_(l, &dwork[ca + (i__ - 1) * ldca], &c__1, &c__[i__ * c_dim1 + 1]
 		, &c__1);
+#line 307 "TB01VY.f"
 	dcopy_(n, &dwork[ca + *l + (i__ - 1) * ldca], &c__1, &a[i__ * a_dim1 
 		+ 1], &c__1);
+#line 308 "TB01VY.f"
 /* L40: */
+#line 308 "TB01VY.f"
     }
 
 /*     Copy the initial state x0. */
 
+#line 312 "TB01VY.f"
     dcopy_(n, &theta[*n * (*l + *m) + *l * *m + 1], &c__1, &x0[1], &c__1);
 
+#line 314 "TB01VY.f"
     return 0;
 
 /* *** Last line of TB01VY *** */

@@ -1,0 +1,9 @@
+extern int mb03oy_(integer *m, integer *n, doublereal *a, integer *lda, doublereal *rcond, doublereal *svlmax, integer *rank, doublereal *sval, integer *jpvt, doublereal *tau, doublereal *dwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dnrm2_ 7 3 4 7 4 */
+/*:ref: idamax_ 4 3 4 7 4 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dlaic1_ 14 9 4 4 7 7 7 7 7 7 7 */
+/*:ref: dlarf_ 14 10 13 4 4 7 4 7 7 4 7 124 */
+/*:ref: dscal_ 14 4 4 7 7 4 */

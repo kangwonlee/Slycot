@@ -1,3 +1,4 @@
+#line 1 "AB09GD.f"
 /* AB09GD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB09GD.f"
 /* Subroutine */ int ab09gd_(char *dico, char *jobcf, char *fact, char *jobmr,
 	 char *equil, char *ordsel, integer *n, integer *m, integer *p, 
 	integer *nr, doublereal *alpha, doublereal *a, integer *lda, 
@@ -432,151 +434,254 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 379 "AB09GD.f"
     /* Parameter adjustments */
+#line 379 "AB09GD.f"
     a_dim1 = *lda;
+#line 379 "AB09GD.f"
     a_offset = 1 + a_dim1;
+#line 379 "AB09GD.f"
     a -= a_offset;
+#line 379 "AB09GD.f"
     b_dim1 = *ldb;
+#line 379 "AB09GD.f"
     b_offset = 1 + b_dim1;
+#line 379 "AB09GD.f"
     b -= b_offset;
+#line 379 "AB09GD.f"
     c_dim1 = *ldc;
+#line 379 "AB09GD.f"
     c_offset = 1 + c_dim1;
+#line 379 "AB09GD.f"
     c__ -= c_offset;
+#line 379 "AB09GD.f"
     d_dim1 = *ldd;
+#line 379 "AB09GD.f"
     d_offset = 1 + d_dim1;
+#line 379 "AB09GD.f"
     d__ -= d_offset;
+#line 379 "AB09GD.f"
     --hsv;
+#line 379 "AB09GD.f"
     --iwork;
+#line 379 "AB09GD.f"
     --dwork;
+#line 379 "AB09GD.f"
 
+#line 379 "AB09GD.f"
     /* Function Body */
+#line 379 "AB09GD.f"
     *info = 0;
+#line 380 "AB09GD.f"
     *iwarn = 0;
+#line 381 "AB09GD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 382 "AB09GD.f"
     fixord = lsame_(ordsel, "F", (ftnlen)1, (ftnlen)1);
+#line 383 "AB09GD.f"
     left = lsame_(jobcf, "L", (ftnlen)1, (ftnlen)1);
+#line 384 "AB09GD.f"
     stabd = lsame_(fact, "S", (ftnlen)1, (ftnlen)1);
+#line 385 "AB09GD.f"
     maxmp = max(*m,*p);
 
 /* Computing MAX */
+#line 387 "AB09GD.f"
     i__1 = *n, i__2 = *m + *p;
+#line 387 "AB09GD.f"
     lwr = (*n << 1) * *n + *n * (max(i__1,i__2) + 5) + *n * (*n + 1) / 2;
+#line 388 "AB09GD.f"
     lw1 = *n * ((maxmp << 1) + *p) + maxmp * (maxmp + *p);
 /* Computing MAX */
 /* Computing MAX */
+#line 389 "AB09GD.f"
     i__2 = *n * (*n + 5), i__3 = *p * (*p + 2), i__2 = max(i__2,i__3), i__3 = 
 	    *p << 2, i__2 = max(i__2,i__3), i__3 = *m << 2;
+#line 389 "AB09GD.f"
     i__1 = *n * *p + max(i__2,i__3);
+#line 389 "AB09GD.f"
     lw2 = lw1 + max(i__1,lwr);
 /* Computing MAX */
 /* Computing MAX */
+#line 391 "AB09GD.f"
     i__2 = *n * (*n + 5), i__3 = *p * 5, i__2 = max(i__2,i__3), i__3 = *m << 
 	    2;
+#line 391 "AB09GD.f"
     i__1 = *n * *p + max(i__2,i__3);
+#line 391 "AB09GD.f"
     lw1 += max(i__1,lwr);
 /* Computing MAX */
+#line 392 "AB09GD.f"
     i__1 = *m * 5, i__2 = *p << 2, i__1 = max(i__1,i__2);
+#line 392 "AB09GD.f"
     lw3 = (*n + *m) * (*m + *p) + max(i__1,lwr);
 /* Computing MAX */
+#line 393 "AB09GD.f"
     i__1 = *m * (*m + 2), i__2 = *m << 2, i__1 = max(i__1,i__2), i__2 = *p << 
 	    2, i__1 = max(i__1,i__2);
+#line 393 "AB09GD.f"
     lw4 = (*n + *m) * (*m + *p) + max(i__1,lwr);
 
 /*     Test the input scalar arguments. */
 
+#line 397 "AB09GD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 398 "AB09GD.f"
 	*info = -1;
+#line 399 "AB09GD.f"
     } else if (! (left || lsame_(jobcf, "R", (ftnlen)1, (ftnlen)1))) {
+#line 400 "AB09GD.f"
 	*info = -2;
+#line 401 "AB09GD.f"
     } else if (! (stabd || lsame_(fact, "I", (ftnlen)1, (ftnlen)1))) {
+#line 402 "AB09GD.f"
 	*info = -3;
+#line 403 "AB09GD.f"
     } else if (! (lsame_(jobmr, "B", (ftnlen)1, (ftnlen)1) || lsame_(jobmr, 
 	    "N", (ftnlen)1, (ftnlen)1))) {
+#line 405 "AB09GD.f"
 	*info = -4;
+#line 406 "AB09GD.f"
     } else if (! (lsame_(equil, "S", (ftnlen)1, (ftnlen)1) || lsame_(equil, 
 	    "N", (ftnlen)1, (ftnlen)1))) {
+#line 408 "AB09GD.f"
 	*info = -5;
+#line 409 "AB09GD.f"
     } else if (! (fixord || lsame_(ordsel, "A", (ftnlen)1, (ftnlen)1))) {
+#line 410 "AB09GD.f"
 	*info = -6;
+#line 411 "AB09GD.f"
     } else if (stabd && (! discr && *alpha >= 0. || discr && (*alpha < 0. || *
 	    alpha >= 1.))) {
+#line 414 "AB09GD.f"
 	*info = -7;
+#line 415 "AB09GD.f"
     } else if (*n < 0) {
+#line 416 "AB09GD.f"
 	*info = -8;
+#line 417 "AB09GD.f"
     } else if (*m < 0) {
+#line 418 "AB09GD.f"
 	*info = -9;
+#line 419 "AB09GD.f"
     } else if (*p < 0) {
+#line 420 "AB09GD.f"
 	*info = -10;
+#line 421 "AB09GD.f"
     } else if (fixord && (*nr < 0 || *nr > *n)) {
+#line 422 "AB09GD.f"
 	*info = -11;
+#line 423 "AB09GD.f"
     } else if (*lda < max(1,*n)) {
+#line 424 "AB09GD.f"
 	*info = -13;
+#line 425 "AB09GD.f"
     } else if (*ldb < max(1,*n)) {
+#line 426 "AB09GD.f"
 	*info = -15;
+#line 427 "AB09GD.f"
     } else if (*ldc < max(1,*p)) {
+#line 428 "AB09GD.f"
 	*info = -17;
+#line 429 "AB09GD.f"
     } else if (*ldd < max(1,*p)) {
+#line 430 "AB09GD.f"
 	*info = -19;
+#line 431 "AB09GD.f"
     } else if (*tol2 > 0. && *tol2 > *tol1) {
+#line 432 "AB09GD.f"
 	*info = -23;
+#line 433 "AB09GD.f"
     } else if (*ldwork < 1 || stabd && left && *ldwork < lw1 || ! stabd && 
 	    left && *ldwork < lw2 || stabd && ! left && *ldwork < lw3 || ! 
 	    stabd && ! left && *ldwork < lw4) {
+#line 438 "AB09GD.f"
 	*info = -27;
+#line 439 "AB09GD.f"
     }
 
+#line 441 "AB09GD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 445 "AB09GD.f"
 	i__1 = -(*info);
+#line 445 "AB09GD.f"
 	xerbla_("AB09GD", &i__1, (ftnlen)6);
+#line 446 "AB09GD.f"
 	return 0;
+#line 447 "AB09GD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 451 "AB09GD.f"
     i__1 = min(*n,*m);
+#line 451 "AB09GD.f"
     if (min(i__1,*p) == 0) {
+#line 452 "AB09GD.f"
 	*nr = 0;
+#line 453 "AB09GD.f"
 	*nq = 0;
+#line 454 "AB09GD.f"
 	iwork[1] = 0;
+#line 455 "AB09GD.f"
 	dwork[1] = 1.;
+#line 456 "AB09GD.f"
 	return 0;
+#line 457 "AB09GD.f"
     }
 
+#line 459 "AB09GD.f"
     if (lsame_(equil, "S", (ftnlen)1, (ftnlen)1)) {
 
 /*        Scale simultaneously the matrices A, B and C: */
 /*        A <- inv(D)*A*D,  B <- inv(D)*B and C <- C*D, where D is a */
 /*        diagonal matrix. */
 
+#line 465 "AB09GD.f"
 	maxred = 100.;
+#line 466 "AB09GD.f"
 	tb01id_("A", n, m, p, &maxred, &a[a_offset], lda, &b[b_offset], ldb, &
 		c__[c_offset], ldc, &dwork[1], info, (ftnlen)1);
+#line 468 "AB09GD.f"
     }
 
 /*     Perform the coprime factor model reduction procedure. */
 
+#line 472 "AB09GD.f"
     kd = 1;
+#line 473 "AB09GD.f"
     if (left) {
 /*                           -1 */
 /*        Compute a LCF G = R  *Q. */
 
+#line 477 "AB09GD.f"
 	mp = *m + *p;
+#line 478 "AB09GD.f"
 	kdr = kd + maxmp * maxmp;
+#line 479 "AB09GD.f"
 	kc = kdr + maxmp * *p;
+#line 480 "AB09GD.f"
 	kb = kc + maxmp * *n;
+#line 481 "AB09GD.f"
 	kbr = kb + *n * maxmp;
+#line 482 "AB09GD.f"
 	kw = kbr + *n * *p;
+#line 483 "AB09GD.f"
 	lwr = *ldwork - kw + 1;
+#line 484 "AB09GD.f"
 	dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[kb], n, (ftnlen)4);
+#line 485 "AB09GD.f"
 	dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[kc], &maxmp, (
 		ftnlen)4);
+#line 486 "AB09GD.f"
 	dlacpy_("Full", p, m, &d__[d_offset], ldd, &dwork[kd], &maxmp, (
 		ftnlen)4);
 
+#line 488 "AB09GD.f"
 	if (stabd) {
 
 /*           Compute a LCF with prescribed stability degree. */
@@ -586,10 +691,12 @@
 /*           Additional workspace:  need   N*P+MAX(N*(N+5),5*P,4*M); */
 /*                                  prefer larger. */
 
+#line 497 "AB09GD.f"
 	    sb08ed_(dico, n, m, p, alpha, &a[a_offset], lda, &dwork[kb], n, &
 		    dwork[kc], &maxmp, &dwork[kd], &maxmp, nq, &ndr, &dwork[
 		    kbr], n, &dwork[kdr], &maxmp, tol3, &dwork[kw], &lwr, 
 		    iwarn, info, (ftnlen)1);
+#line 501 "AB09GD.f"
 	} else {
 
 /*           Compute a LCF with inner denominator. */
@@ -600,38 +707,59 @@
 /*                                         MAX(N*(N+5),P*(P+2),4*P,4*M); */
 /*                                  prefer larger. */
 
+#line 511 "AB09GD.f"
 	    sb08cd_(dico, n, m, p, &a[a_offset], lda, &dwork[kb], n, &dwork[
 		    kc], &maxmp, &dwork[kd], &maxmp, nq, &ndr, &dwork[kbr], n,
 		     &dwork[kdr], &maxmp, tol3, &dwork[kw], &lwr, iwarn, info,
 		     (ftnlen)1);
+#line 515 "AB09GD.f"
 	}
 
+#line 517 "AB09GD.f"
 	*iwarn *= 10;
+#line 518 "AB09GD.f"
 	if (*info != 0) {
+#line 518 "AB09GD.f"
 	    return 0;
+#line 518 "AB09GD.f"
 	}
 
+#line 521 "AB09GD.f"
 	wrkopt = (integer) dwork[kw] + kw - 1;
 
+#line 523 "AB09GD.f"
 	if (*nq == 0) {
+#line 524 "AB09GD.f"
 	    *nr = 0;
+#line 525 "AB09GD.f"
 	    iwork[1] = 0;
+#line 526 "AB09GD.f"
 	    dwork[1] = (doublereal) wrkopt;
+#line 527 "AB09GD.f"
 	    return 0;
+#line 528 "AB09GD.f"
 	}
 
+#line 530 "AB09GD.f"
 	if (maxmp > *m) {
 
 /*           Form the matrices ( BQ, BR ) and ( DQ, DR ) in consecutive */
 /*           columns (see SLICOT Library routines SB08CD/SB08ED). */
 
+#line 535 "AB09GD.f"
 	    kbt = kbr;
+#line 536 "AB09GD.f"
 	    kbr = kb + *n * *m;
+#line 537 "AB09GD.f"
 	    kdt = kdr;
+#line 538 "AB09GD.f"
 	    kdr = kd + maxmp * *m;
+#line 539 "AB09GD.f"
 	    dlacpy_("Full", nq, p, &dwork[kbt], n, &dwork[kbr], n, (ftnlen)4);
+#line 540 "AB09GD.f"
 	    dlacpy_("Full", p, p, &dwork[kdt], &maxmp, &dwork[kdr], &maxmp, (
 		    ftnlen)4);
+#line 542 "AB09GD.f"
 	}
 
 /*        Perform model reduction on ( Q, R ) to determine ( Qr, Rr ). */
@@ -641,24 +769,37 @@
 /*        Additional workspace:  need   N*(MAX(N,M+P)+5) + N*(N+1)/2; */
 /*                               prefer larger. */
 
+#line 551 "AB09GD.f"
 	kt = kw;
+#line 552 "AB09GD.f"
 	kti = kt + *nq * *nq;
+#line 553 "AB09GD.f"
 	kw = kti + *nq * *nq;
+#line 554 "AB09GD.f"
 	i__1 = *ldwork - kw + 1;
+#line 554 "AB09GD.f"
 	ab09bx_(dico, jobmr, ordsel, nq, &mp, p, nr, &a[a_offset], lda, &
 		dwork[kb], n, &dwork[kc], &maxmp, &dwork[kd], &maxmp, &hsv[1],
 		 &dwork[kt], n, &dwork[kti], n, tol1, tol2, &iwork[1], &dwork[
 		kw], &i__1, &iwarnk, &ierr, (ftnlen)1, (ftnlen)1, (ftnlen)1);
 
+#line 559 "AB09GD.f"
 	*iwarn += iwarnk;
+#line 560 "AB09GD.f"
 	if (ierr != 0) {
+#line 561 "AB09GD.f"
 	    *info = 4;
+#line 562 "AB09GD.f"
 	    return 0;
+#line 563 "AB09GD.f"
 	}
 
+#line 565 "AB09GD.f"
 	nminr = iwork[1];
 /* Computing MAX */
+#line 566 "AB09GD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 566 "AB09GD.f"
 	wrkopt = max(i__1,i__2);
 /*                                                -1 */
 /*        Compute the reduced order system Gr = Rr  *Qr. */
@@ -667,7 +808,9 @@
 /*                               MAX(M,P)*(MAX(M,P)+P); */
 /*        Additional workspace:  need   4*P. */
 
+#line 574 "AB09GD.f"
 	kw = kt;
+#line 575 "AB09GD.f"
 	sb08gd_(nr, m, p, &a[a_offset], lda, &dwork[kb], n, &dwork[kc], &
 		maxmp, &dwork[kd], &maxmp, &dwork[kbr], n, &dwork[kdr], &
 		maxmp, &iwork[1], &dwork[kw], info);
@@ -675,26 +818,39 @@
 /*        Copy the reduced system matrices Br, Cr, and Dr to B, C, and D, */
 /*        respectively. */
 
+#line 582 "AB09GD.f"
 	dlacpy_("Full", nr, m, &dwork[kb], n, &b[b_offset], ldb, (ftnlen)4);
+#line 583 "AB09GD.f"
 	dlacpy_("Full", p, nr, &dwork[kc], &maxmp, &c__[c_offset], ldc, (
 		ftnlen)4);
+#line 584 "AB09GD.f"
 	dlacpy_("Full", p, m, &dwork[kd], &maxmp, &d__[d_offset], ldd, (
 		ftnlen)4);
+#line 585 "AB09GD.f"
     } else {
 /*                             -1 */
 /*        Compute a RCF G = Q*R  . */
 
+#line 589 "AB09GD.f"
 	pm = *p + *m;
+#line 590 "AB09GD.f"
 	kdr = kd + *p;
+#line 591 "AB09GD.f"
 	kc = kd + pm * *m;
+#line 592 "AB09GD.f"
 	kcr = kc + *p;
+#line 593 "AB09GD.f"
 	kw = kc + pm * *n;
+#line 594 "AB09GD.f"
 	lwr = *ldwork - kw + 1;
+#line 595 "AB09GD.f"
 	dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[kc], &pm, (ftnlen)4)
 		;
+#line 596 "AB09GD.f"
 	dlacpy_("Full", p, m, &d__[d_offset], ldd, &dwork[kd], &pm, (ftnlen)4)
 		;
 
+#line 598 "AB09GD.f"
 	if (stabd) {
 
 /*           Compute a RCF with prescribed stability degree. */
@@ -703,10 +859,12 @@
 /*           Additional workspace:  need  MAX( N*(N+5), 5*M, 4*P ); */
 /*                                  prefer larger. */
 
+#line 606 "AB09GD.f"
 	    sb08fd_(dico, n, m, p, alpha, &a[a_offset], lda, &b[b_offset], 
 		    ldb, &dwork[kc], &pm, &dwork[kd], &pm, nq, &ndr, &dwork[
 		    kcr], &pm, &dwork[kdr], &pm, tol3, &dwork[kw], &lwr, 
 		    iwarn, info, (ftnlen)1);
+#line 610 "AB09GD.f"
 	} else {
 
 /*           Compute a RCF with inner denominator. */
@@ -715,24 +873,37 @@
 /*           Additional workspace:  need  MAX(N*(N+5),M*(M+2),4*M,4*P); */
 /*                                  prefer larger. */
 
+#line 618 "AB09GD.f"
 	    sb08dd_(dico, n, m, p, &a[a_offset], lda, &b[b_offset], ldb, &
 		    dwork[kc], &pm, &dwork[kd], &pm, nq, &ndr, &dwork[kcr], &
 		    pm, &dwork[kdr], &pm, tol3, &dwork[kw], &lwr, iwarn, info,
 		     (ftnlen)1);
+#line 622 "AB09GD.f"
 	}
 
+#line 624 "AB09GD.f"
 	*iwarn *= 10;
+#line 625 "AB09GD.f"
 	if (*info != 0) {
+#line 625 "AB09GD.f"
 	    return 0;
+#line 625 "AB09GD.f"
 	}
 
+#line 628 "AB09GD.f"
 	wrkopt = (integer) dwork[kw] + kw - 1;
 
+#line 630 "AB09GD.f"
 	if (*nq == 0) {
+#line 631 "AB09GD.f"
 	    *nr = 0;
+#line 632 "AB09GD.f"
 	    iwork[1] = 0;
+#line 633 "AB09GD.f"
 	    dwork[1] = (doublereal) wrkopt;
+#line 634 "AB09GD.f"
 	    return 0;
+#line 635 "AB09GD.f"
 	}
 /*                                   ( Q )              ( Qr ) */
 /*        Perform model reduction on ( R ) to determine ( Rr ). */
@@ -741,24 +912,37 @@
 /*        Additional workspace:  need   N*(MAX(N,M+P)+5) + N*(N+1)/2; */
 /*                               prefer larger. */
 
+#line 643 "AB09GD.f"
 	kt = kw;
+#line 644 "AB09GD.f"
 	kti = kt + *nq * *nq;
+#line 645 "AB09GD.f"
 	kw = kti + *nq * *nq;
+#line 646 "AB09GD.f"
 	i__1 = *ldwork - kw + 1;
+#line 646 "AB09GD.f"
 	ab09bx_(dico, jobmr, ordsel, nq, m, &pm, nr, &a[a_offset], lda, &b[
 		b_offset], ldb, &dwork[kc], &pm, &dwork[kd], &pm, &hsv[1], &
 		dwork[kt], n, &dwork[kti], n, tol1, tol2, &iwork[1], &dwork[
 		kw], &i__1, &iwarnk, &ierr, (ftnlen)1, (ftnlen)1, (ftnlen)1);
 
+#line 651 "AB09GD.f"
 	*iwarn += iwarnk;
+#line 652 "AB09GD.f"
 	if (ierr != 0) {
+#line 653 "AB09GD.f"
 	    *info = 4;
+#line 654 "AB09GD.f"
 	    return 0;
+#line 655 "AB09GD.f"
 	}
 
+#line 657 "AB09GD.f"
 	nminr = iwork[1];
 /* Computing MAX */
+#line 658 "AB09GD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 658 "AB09GD.f"
 	wrkopt = max(i__1,i__2);
 /*                                                   -1 */
 /*        Compute the reduced order system Gr = Qr*Rr  . */
@@ -766,22 +950,30 @@
 /*        Workspace needed:      (N+M)*(M+P); */
 /*        Additional workspace:  need 4*M. */
 
+#line 665 "AB09GD.f"
 	kw = kt;
+#line 666 "AB09GD.f"
 	sb08hd_(nr, m, p, &a[a_offset], lda, &b[b_offset], ldb, &dwork[kc], &
 		pm, &dwork[kd], &pm, &dwork[kcr], &pm, &dwork[kdr], &pm, &
 		iwork[1], &dwork[kw], info);
 
 /*        Copy the reduced system matrices Cr and Dr to C and D. */
 
+#line 672 "AB09GD.f"
 	dlacpy_("Full", p, nr, &dwork[kc], &pm, &c__[c_offset], ldc, (ftnlen)
 		4);
+#line 673 "AB09GD.f"
 	dlacpy_("Full", p, m, &dwork[kd], &pm, &d__[d_offset], ldd, (ftnlen)4)
 		;
+#line 674 "AB09GD.f"
     }
 
+#line 676 "AB09GD.f"
     iwork[1] = nminr;
+#line 677 "AB09GD.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 679 "AB09GD.f"
     return 0;
 /* *** Last line of AB09GD *** */
 } /* ab09gd_ */

@@ -1,3 +1,4 @@
+#line 1 "MB02SD.f"
 /* MB02SD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02SD.f"
 /* Subroutine */ int mb02sd_(integer *n, doublereal *h__, integer *ldh, 
 	integer *ipiv, integer *info)
 {
@@ -127,76 +129,125 @@
 
 /*     Check the scalar input parameters. */
 
+#line 111 "MB02SD.f"
     /* Parameter adjustments */
+#line 111 "MB02SD.f"
     h_dim1 = *ldh;
+#line 111 "MB02SD.f"
     h_offset = 1 + h_dim1;
+#line 111 "MB02SD.f"
     h__ -= h_offset;
+#line 111 "MB02SD.f"
     --ipiv;
+#line 111 "MB02SD.f"
 
+#line 111 "MB02SD.f"
     /* Function Body */
+#line 111 "MB02SD.f"
     *info = 0;
+#line 112 "MB02SD.f"
     if (*n < 0) {
+#line 113 "MB02SD.f"
 	*info = -1;
+#line 114 "MB02SD.f"
     } else if (*ldh < max(1,*n)) {
+#line 115 "MB02SD.f"
 	*info = -3;
+#line 116 "MB02SD.f"
     }
+#line 117 "MB02SD.f"
     if (*info != 0) {
+#line 118 "MB02SD.f"
 	i__1 = -(*info);
+#line 118 "MB02SD.f"
 	xerbla_("MB02SD", &i__1, (ftnlen)6);
+#line 119 "MB02SD.f"
 	return 0;
+#line 120 "MB02SD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 124 "MB02SD.f"
     if (*n == 0) {
+#line 124 "MB02SD.f"
 	return 0;
+#line 124 "MB02SD.f"
     }
 
+#line 127 "MB02SD.f"
     i__1 = *n;
+#line 127 "MB02SD.f"
     for (j = 1; j <= i__1; ++j) {
 
 /*        Find pivot and test for singularity. */
 
+#line 131 "MB02SD.f"
 	jp = j;
+#line 132 "MB02SD.f"
 	if (j < *n) {
+#line 133 "MB02SD.f"
 	    if ((d__1 = h__[j + 1 + j * h_dim1], abs(d__1)) > (d__2 = h__[j + 
 		    j * h_dim1], abs(d__2))) {
+#line 133 "MB02SD.f"
 		jp = j + 1;
+#line 133 "MB02SD.f"
 	    }
+#line 135 "MB02SD.f"
 	}
+#line 136 "MB02SD.f"
 	ipiv[j] = jp;
+#line 137 "MB02SD.f"
 	if (h__[jp + j * h_dim1] != 0.) {
 
 /*           Apply the interchange to columns J:N. */
 
+#line 141 "MB02SD.f"
 	    if (jp != j) {
+#line 141 "MB02SD.f"
 		i__2 = *n - j + 1;
+#line 141 "MB02SD.f"
 		dswap_(&i__2, &h__[j + j * h_dim1], ldh, &h__[jp + j * h_dim1]
 			, ldh);
+#line 141 "MB02SD.f"
 	    }
 
 /*           Compute element J+1 of J-th column. */
 
+#line 146 "MB02SD.f"
 	    if (j < *n) {
+#line 146 "MB02SD.f"
 		h__[j + 1 + j * h_dim1] /= h__[j + j * h_dim1];
+#line 146 "MB02SD.f"
 	    }
 
+#line 149 "MB02SD.f"
 	} else if (*info == 0) {
 
+#line 151 "MB02SD.f"
 	    *info = j;
+#line 152 "MB02SD.f"
 	}
 
+#line 154 "MB02SD.f"
 	if (j < *n) {
 
 /*           Update trailing submatrix. */
 
+#line 158 "MB02SD.f"
 	    i__2 = *n - j;
+#line 158 "MB02SD.f"
 	    d__1 = -h__[j + 1 + j * h_dim1];
+#line 158 "MB02SD.f"
 	    daxpy_(&i__2, &d__1, &h__[j + (j + 1) * h_dim1], ldh, &h__[j + 1 
 		    + (j + 1) * h_dim1], ldh);
+#line 160 "MB02SD.f"
 	}
+#line 161 "MB02SD.f"
 /* L10: */
+#line 161 "MB02SD.f"
     }
+#line 162 "MB02SD.f"
     return 0;
 /* *** Last line of MB02SD *** */
 } /* mb02sd_ */

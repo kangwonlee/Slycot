@@ -1,3 +1,4 @@
+#line 1 "UD01CD.f"
 /* UD01CD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "UD01CD.f"
 /* Table of constant values */
 
 static doublereal c_b5 = 0.;
@@ -161,91 +163,161 @@ static integer c__5 = 5;
 
 /*     .. Executable Statements .. */
 
+#line 128 "UD01CD.f"
     /* Parameter adjustments */
+#line 128 "UD01CD.f"
     p_dim1 = *ldp1;
+#line 128 "UD01CD.f"
     p_dim2 = *ldp2;
+#line 128 "UD01CD.f"
     p_offset = 1 + p_dim1 * (1 + p_dim2);
+#line 128 "UD01CD.f"
     p -= p_offset;
+#line 128 "UD01CD.f"
 
+#line 128 "UD01CD.f"
     /* Function Body */
+#line 128 "UD01CD.f"
     *info = 0;
 
 /*     Check the input scalar arguments. */
 
+#line 132 "UD01CD.f"
     if (*mp < 1) {
+#line 133 "UD01CD.f"
 	*info = -1;
+#line 134 "UD01CD.f"
     } else if (*np < 1) {
+#line 135 "UD01CD.f"
 	*info = -2;
+#line 136 "UD01CD.f"
     } else if (*dp < 0) {
+#line 137 "UD01CD.f"
 	*info = -3;
+#line 138 "UD01CD.f"
     } else if (*nin < 0) {
+#line 139 "UD01CD.f"
 	*info = -4;
+#line 140 "UD01CD.f"
     } else if (*ldp1 < *mp) {
+#line 141 "UD01CD.f"
 	*info = -6;
+#line 142 "UD01CD.f"
     } else if (*ldp2 < *np) {
+#line 143 "UD01CD.f"
 	*info = -7;
+#line 144 "UD01CD.f"
     }
 
+#line 146 "UD01CD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 150 "UD01CD.f"
 	i__1 = -(*info);
+#line 150 "UD01CD.f"
 	xerbla_("UD01CD", &i__1, (ftnlen)6);
+#line 151 "UD01CD.f"
 	return 0;
+#line 152 "UD01CD.f"
     }
 
+#line 154 "UD01CD.f"
     i__1 = *dp + 1;
+#line 154 "UD01CD.f"
     for (k = 1; k <= i__1; ++k) {
+#line 155 "UD01CD.f"
 	dlaset_("Full", mp, np, &c_b5, &c_b5, &p[(k * p_dim2 + 1) * p_dim1 + 
 		1], ldp1, (ftnlen)4);
+#line 156 "UD01CD.f"
 /* L10: */
+#line 156 "UD01CD.f"
     }
 
 /*     Read (i, j, d, P(i,j,k), k=1,...,d+1) of the nonzero elements one */
 /*     by one. */
 
+#line 161 "UD01CD.f"
 L20:
+#line 161 "UD01CD.f"
     io___2.ciunit = *nin;
+#line 161 "UD01CD.f"
     i__1 = s_rsle(&io___2);
+#line 161 "UD01CD.f"
     if (i__1 != 0) {
+#line 161 "UD01CD.f"
 	goto L30;
+#line 161 "UD01CD.f"
     }
+#line 161 "UD01CD.f"
     i__1 = do_lio(&c__3, &c__1, (char *)&i__, (ftnlen)sizeof(integer));
+#line 161 "UD01CD.f"
     if (i__1 != 0) {
+#line 161 "UD01CD.f"
 	goto L30;
+#line 161 "UD01CD.f"
     }
+#line 161 "UD01CD.f"
     i__1 = do_lio(&c__3, &c__1, (char *)&j, (ftnlen)sizeof(integer));
+#line 161 "UD01CD.f"
     if (i__1 != 0) {
+#line 161 "UD01CD.f"
 	goto L30;
+#line 161 "UD01CD.f"
     }
+#line 161 "UD01CD.f"
     i__1 = do_lio(&c__3, &c__1, (char *)&d__, (ftnlen)sizeof(integer));
+#line 161 "UD01CD.f"
     if (i__1 != 0) {
+#line 161 "UD01CD.f"
 	goto L30;
+#line 161 "UD01CD.f"
     }
+#line 161 "UD01CD.f"
     i__1 = e_rsle();
+#line 161 "UD01CD.f"
     if (i__1 != 0) {
+#line 161 "UD01CD.f"
 	goto L30;
+#line 161 "UD01CD.f"
     }
+#line 162 "UD01CD.f"
     if (i__ < 1 || i__ > *mp || j < 1 || j > *np || d__ < 0 || d__ > *dp + 1) 
 	    {
+#line 164 "UD01CD.f"
 	*info = 1;
+#line 165 "UD01CD.f"
 	io___6.ciunit = *nin;
+#line 165 "UD01CD.f"
 	s_rsle(&io___6);
+#line 165 "UD01CD.f"
 	e_rsle();
+#line 166 "UD01CD.f"
     } else {
+#line 167 "UD01CD.f"
 	io___7.ciunit = *nin;
+#line 167 "UD01CD.f"
 	s_rsle(&io___7);
+#line 167 "UD01CD.f"
 	i__1 = d__ + 1;
+#line 167 "UD01CD.f"
 	for (k = 1; k <= i__1; ++k) {
+#line 167 "UD01CD.f"
 	    do_lio(&c__5, &c__1, (char *)&p[i__ + (j + k * p_dim2) * p_dim1], 
 		    (ftnlen)sizeof(doublereal));
+#line 167 "UD01CD.f"
 	}
+#line 167 "UD01CD.f"
 	e_rsle();
+#line 168 "UD01CD.f"
     }
+#line 169 "UD01CD.f"
     goto L20;
 
+#line 171 "UD01CD.f"
 L30:
+#line 172 "UD01CD.f"
     return 0;
 /* *** Last line of UD01CD *** */
 } /* ud01cd_ */

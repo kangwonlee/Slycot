@@ -1,0 +1,11 @@
+extern int sb01fy_(logical *discr, integer *n, integer *m, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *f, integer *ldf, doublereal *v, integer *ldv, integer *info);
+/*:ref: ma02ad_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dlatzm_ 14 11 13 4 4 7 4 7 7 7 4 7 124 */
+/*:ref: sb03oy_ 14 11 12 12 4 7 4 7 4 7 4 7 4 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: mb04ox_ 14 5 4 7 4 7 4 */
+/*:ref: dtrtri_ 14 8 13 13 4 7 4 4 124 124 */
+/*:ref: dlapy2_ 7 2 7 7 */
+/*:ref: drotg_ 14 4 7 7 7 7 */
+/*:ref: dlapy3_ 7 3 7 7 7 */

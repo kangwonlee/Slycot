@@ -1,3 +1,4 @@
+#line 1 "FB01TD.f"
 /* FB01TD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "FB01TD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -429,103 +431,183 @@ static doublereal c_b23 = 1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 389 "FB01TD.f"
     /* Parameter adjustments */
+#line 389 "FB01TD.f"
     sinv_dim1 = *ldsinv;
+#line 389 "FB01TD.f"
     sinv_offset = 1 + sinv_dim1;
+#line 389 "FB01TD.f"
     sinv -= sinv_offset;
+#line 389 "FB01TD.f"
     ainv_dim1 = *ldainv;
+#line 389 "FB01TD.f"
     ainv_offset = 1 + ainv_dim1;
+#line 389 "FB01TD.f"
     ainv -= ainv_offset;
+#line 389 "FB01TD.f"
     ainvb_dim1 = *ldainb;
+#line 389 "FB01TD.f"
     ainvb_offset = 1 + ainvb_dim1;
+#line 389 "FB01TD.f"
     ainvb -= ainvb_offset;
+#line 389 "FB01TD.f"
     rinv_dim1 = *ldrinv;
+#line 389 "FB01TD.f"
     rinv_offset = 1 + rinv_dim1;
+#line 389 "FB01TD.f"
     rinv -= rinv_offset;
+#line 389 "FB01TD.f"
     c_dim1 = *ldc;
+#line 389 "FB01TD.f"
     c_offset = 1 + c_dim1;
+#line 389 "FB01TD.f"
     c__ -= c_offset;
+#line 389 "FB01TD.f"
     qinv_dim1 = *ldqinv;
+#line 389 "FB01TD.f"
     qinv_offset = 1 + qinv_dim1;
+#line 389 "FB01TD.f"
     qinv -= qinv_offset;
+#line 389 "FB01TD.f"
     --x;
+#line 389 "FB01TD.f"
     --rinvy;
+#line 389 "FB01TD.f"
     --z__;
+#line 389 "FB01TD.f"
     --e;
+#line 389 "FB01TD.f"
     --iwork;
+#line 389 "FB01TD.f"
     --dwork;
+#line 389 "FB01TD.f"
 
+#line 389 "FB01TD.f"
     /* Function Body */
+#line 389 "FB01TD.f"
     np = *n + *p;
+#line 390 "FB01TD.f"
     nm = *n + *m;
+#line 391 "FB01TD.f"
     n1 = max(1,*n);
+#line 392 "FB01TD.f"
     m1 = max(1,*m);
+#line 393 "FB01TD.f"
     mp1 = *m + 1;
+#line 394 "FB01TD.f"
     *info = 0;
+#line 395 "FB01TD.f"
     ljobx = lsame_(jobx, "X", (ftnlen)1, (ftnlen)1);
+#line 396 "FB01TD.f"
     lmultr = lsame_(multrc, "P", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 400 "FB01TD.f"
     if (! ljobx && ! lsame_(jobx, "N", (ftnlen)1, (ftnlen)1)) {
+#line 401 "FB01TD.f"
 	*info = -1;
+#line 402 "FB01TD.f"
     } else if (! lmultr && ! lsame_(multrc, "N", (ftnlen)1, (ftnlen)1)) {
+#line 403 "FB01TD.f"
 	*info = -2;
+#line 404 "FB01TD.f"
     } else if (*n < 0) {
+#line 405 "FB01TD.f"
 	*info = -3;
+#line 406 "FB01TD.f"
     } else if (*m < 0) {
+#line 407 "FB01TD.f"
 	*info = -4;
+#line 408 "FB01TD.f"
     } else if (*p < 0) {
+#line 409 "FB01TD.f"
 	*info = -5;
+#line 410 "FB01TD.f"
     } else if (*ldsinv < n1) {
+#line 411 "FB01TD.f"
 	*info = -7;
+#line 412 "FB01TD.f"
     } else if (*ldainv < n1) {
+#line 413 "FB01TD.f"
 	*info = -9;
+#line 414 "FB01TD.f"
     } else if (*ldainb < n1) {
+#line 415 "FB01TD.f"
 	*info = -11;
+#line 416 "FB01TD.f"
     } else if (*ldrinv < 1 || ! lmultr && *ldrinv < *p) {
+#line 417 "FB01TD.f"
 	*info = -13;
+#line 418 "FB01TD.f"
     } else if (*ldc < max(1,*p)) {
+#line 419 "FB01TD.f"
 	*info = -15;
+#line 420 "FB01TD.f"
     } else if (*ldqinv < m1) {
+#line 421 "FB01TD.f"
 	*info = -17;
+#line 422 "FB01TD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 422 "FB01TD.f"
 	i__3 = *n - 1;
+#line 422 "FB01TD.f"
 	i__1 = 2, i__2 = *n * (nm + *m) + *m * 3, i__1 = max(i__1,i__2), i__2 
 		= np * (*n + 1) + *n + max(i__3,mp1), i__1 = max(i__1,i__2), 
 		i__2 = *n * 3;
 /* Computing MAX */
 /* Computing MAX */
+#line 422 "FB01TD.f"
 	i__6 = *n - 1;
+#line 422 "FB01TD.f"
 	i__4 = 1, i__5 = *n * (nm + *m) + *m * 3, i__4 = max(i__4,i__5), i__5 
 		= np * (*n + 1) + *n + max(i__6,mp1);
+#line 422 "FB01TD.f"
 	if (ljobx && *ldwork < max(i__1,i__2) || ! ljobx && *ldwork < max(
 		i__4,i__5)) {
+#line 429 "FB01TD.f"
 	    *info = -25;
+#line 430 "FB01TD.f"
 	}
+#line 430 "FB01TD.f"
     }
 
+#line 432 "FB01TD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 436 "FB01TD.f"
 	i__1 = -(*info);
+#line 436 "FB01TD.f"
 	xerbla_("FB01TD", &i__1, (ftnlen)6);
+#line 437 "FB01TD.f"
 	return 0;
+#line 438 "FB01TD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 442 "FB01TD.f"
     if (max(*n,*p) == 0) {
+#line 443 "FB01TD.f"
 	if (ljobx) {
+#line 444 "FB01TD.f"
 	    dwork[1] = 2.;
+#line 445 "FB01TD.f"
 	    dwork[2] = 1.;
+#line 446 "FB01TD.f"
 	} else {
+#line 447 "FB01TD.f"
 	    dwork[1] = 1.;
+#line 448 "FB01TD.f"
 	}
+#line 449 "FB01TD.f"
 	return 0;
+#line 450 "FB01TD.f"
     }
 
 /*     Construction of the needed part of the pre-array in DWORK. */
@@ -556,18 +638,27 @@ static doublereal c_b23 = 1.;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 480 "FB01TD.f"
     ldw = n1;
+#line 481 "FB01TD.f"
     i32 = *n * *m + 1;
 
+#line 483 "FB01TD.f"
     dlacpy_("Upper", n, m, &ainvb[ainvb_offset], ldainb, &dwork[1], &ldw, (
 	    ftnlen)5);
+#line 484 "FB01TD.f"
     i__1 = min(*m,*n);
+#line 484 "FB01TD.f"
     dlacpy_("Full", &i__1, n, &ainv[ainv_offset], ldainv, &dwork[i32], &ldw, (
 	    ftnlen)4);
+#line 486 "FB01TD.f"
     if (*n > *m) {
+#line 486 "FB01TD.f"
 	i__1 = *n - *m;
+#line 486 "FB01TD.f"
 	dlacpy_("Upper", &i__1, n, &ainv[mp1 + ainv_dim1], ldainv, &dwork[i32 
 		+ *m], &ldw, (ftnlen)5);
+#line 486 "FB01TD.f"
     }
 
 /*                    [ B1  A1 ] */
@@ -575,25 +666,38 @@ static doublereal c_b23 = 1.;
 /*     triangular matrices. */
 /*     Workspace: need N*(M+N+1). */
 
+#line 495 "FB01TD.f"
     ii = 1;
+#line 496 "FB01TD.f"
     i13 = *n * nm + 1;
 /* Computing MAX */
+#line 497 "FB01TD.f"
     i__1 = 1, i__2 = *n * nm + *n;
+#line 497 "FB01TD.f"
     wrkopt = max(i__1,i__2);
 
+#line 499 "FB01TD.f"
     i__1 = *n;
+#line 499 "FB01TD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 500 "FB01TD.f"
 	dcopy_(&i__, &dwork[ii], &c__1, &dwork[i13], &c__1);
+#line 501 "FB01TD.f"
 	dtrmv_("Upper", "No transpose", "Non-unit", &i__, &sinv[sinv_offset], 
 		ldsinv, &dwork[i13], &c__1, (ftnlen)5, (ftnlen)12, (ftnlen)8);
+#line 503 "FB01TD.f"
 	dcopy_(&i__, &dwork[i13], &c__1, &dwork[ii], &c__1);
+#line 504 "FB01TD.f"
 	ii += *n;
+#line 505 "FB01TD.f"
 /* L10: */
+#line 505 "FB01TD.f"
     }
 
 /*                    [ A3 ] */
 /*     Compute SINV x [ A4 ] or SINV x [ B2 A ]. */
 
+#line 510 "FB01TD.f"
     dtrmm_("Left", "Upper", "No transpose", "Non-unit", n, m, &c_b23, &sinv[
 	    sinv_offset], ldsinv, &dwork[ii], &ldw, (ftnlen)4, (ftnlen)5, (
 	    ftnlen)12, (ftnlen)8);
@@ -601,12 +705,15 @@ static doublereal c_b23 = 1.;
 /*     Storing the process noise mean value in (1,3) block of DWORK. */
 /*     Workspace: need N*(M+N) + M. */
 
+#line 516 "FB01TD.f"
     dcopy_(m, &z__[1], &c__1, &dwork[i13], &c__1);
+#line 517 "FB01TD.f"
     dtrmv_("Upper", "No transpose", "Non-unit", m, &qinv[qinv_offset], ldqinv,
 	     &dwork[i13], &c__1, (ftnlen)5, (ftnlen)12, (ftnlen)8);
 
 /*     Computing SINV x X in X. */
 
+#line 522 "FB01TD.f"
     dtrmv_("Upper", "No transpose", "Non-unit", n, &sinv[sinv_offset], ldsinv,
 	     &x[1], &c__1, (ftnlen)5, (ftnlen)12, (ftnlen)8);
 
@@ -615,40 +722,64 @@ static doublereal c_b23 = 1.;
 /*     Step 1: annihilate the matrix SINV x AINVB. */
 /*     Workspace: need N*(N+2*M) + 3*M. */
 
+#line 530 "FB01TD.f"
     i12 = i13 + *m;
+#line 531 "FB01TD.f"
     itau = i12 + *m * *n;
+#line 532 "FB01TD.f"
     jwork = itau + *m;
 
+#line 534 "FB01TD.f"
     mb04kd_("Upper", m, n, n, &qinv[qinv_offset], ldqinv, &dwork[1], &ldw, &
 	    dwork[i32], &ldw, &dwork[i12], &m1, &dwork[itau], &dwork[jwork], (
 	    ftnlen)5);
 /* Computing MAX */
+#line 537 "FB01TD.f"
     i__1 = wrkopt, i__2 = *n * (nm + *m) + *m * 3;
+#line 537 "FB01TD.f"
     wrkopt = max(i__1,i__2);
 
+#line 539 "FB01TD.f"
     if (*n == 0) {
+#line 540 "FB01TD.f"
 	dcopy_(p, &rinvy[1], &c__1, &e[1], &c__1);
+#line 541 "FB01TD.f"
 	if (ljobx) {
+#line 541 "FB01TD.f"
 	    dwork[2] = 1.;
+#line 541 "FB01TD.f"
 	}
+#line 543 "FB01TD.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 544 "FB01TD.f"
 	return 0;
+#line 545 "FB01TD.f"
     }
 
 /*     Apply the transformations to the last column of the pre-array. */
 /*     (Only the updated (3,3) block is now needed.) */
 
+#line 550 "FB01TD.f"
     ij = 1;
 
+#line 552 "FB01TD.f"
     i__1 = *m;
+#line 552 "FB01TD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 553 "FB01TD.f"
 	i__2 = min(i__,*n);
+#line 553 "FB01TD.f"
 	i__3 = min(i__,*n);
+#line 553 "FB01TD.f"
 	d__1 = -dwork[itau + i__ - 1] * (dwork[i13 + i__ - 1] + ddot_(&i__3, &
 		dwork[ij], &c__1, &x[1], &c__1));
+#line 553 "FB01TD.f"
 	daxpy_(&i__2, &d__1, &dwork[ij], &c__1, &x[1], &c__1);
+#line 556 "FB01TD.f"
 	ij += *n;
+#line 557 "FB01TD.f"
 /* L20: */
+#line 557 "FB01TD.f"
     }
 
 /*     Now, the workspace for SINV x AINVB, as well as for the updated */
@@ -661,43 +792,68 @@ static doublereal c_b23 = 1.;
 /*     pre-array. */
 /*     Workspace: need (P+N)*(N+1). */
 
+#line 569 "FB01TD.f"
     i__1 = min(*m,*n);
+#line 569 "FB01TD.f"
     dlacpy_("Full", &i__1, n, &dwork[i32], &ldw, &dwork[1], &ldw, (ftnlen)4);
+#line 570 "FB01TD.f"
     if (*n > *m) {
+#line 570 "FB01TD.f"
 	i__1 = *n - *m;
+#line 570 "FB01TD.f"
 	dlacpy_("Upper", &i__1, n, &dwork[i32 + *m], &ldw, &dwork[mp1], &ldw, 
 		(ftnlen)5);
+#line 570 "FB01TD.f"
     }
+#line 573 "FB01TD.f"
     ldw = max(1,np);
 
+#line 575 "FB01TD.f"
     for (i__ = *n; i__ >= 1; --i__) {
 /* Computing MIN */
+#line 576 "FB01TD.f"
 	i__1 = *n, i__2 = i__ + *m;
+#line 576 "FB01TD.f"
 	for (ij = min(i__1,i__2); ij >= 1; --ij) {
+#line 577 "FB01TD.f"
 	    dwork[np * (i__ - 1) + *p + ij] = dwork[*n * (i__ - 1) + ij];
+#line 578 "FB01TD.f"
 /* L30: */
+#line 578 "FB01TD.f"
 	}
+#line 579 "FB01TD.f"
 /* L40: */
+#line 579 "FB01TD.f"
     }
 
 /*     Copy of RINV x C in the (1,1) block of DWORK. */
 
+#line 583 "FB01TD.f"
     dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[1], &ldw, (ftnlen)4);
+#line 584 "FB01TD.f"
     if (! lmultr) {
+#line 584 "FB01TD.f"
 	dtrmm_("Left", "Upper", "No transpose", "Non-unit", p, n, &c_b23, &
 		rinv[rinv_offset], ldrinv, &dwork[1], &ldw, (ftnlen)4, (
 		ftnlen)5, (ftnlen)12, (ftnlen)8);
+#line 584 "FB01TD.f"
     }
 
 /*     Copy the inclusion measurement in the (1,2) block and the updated */
 /*     X in the (2,2) block of DWORK. */
 
+#line 591 "FB01TD.f"
     i23 = np * *n + 1;
+#line 592 "FB01TD.f"
     i33 = i23 + *p;
+#line 593 "FB01TD.f"
     dcopy_(p, &rinvy[1], &c__1, &dwork[i23], &c__1);
+#line 594 "FB01TD.f"
     dcopy_(n, &x[1], &c__1, &dwork[i33], &c__1);
 /* Computing MAX */
+#line 595 "FB01TD.f"
     i__1 = wrkopt, i__2 = np * (*n + 1);
+#line 595 "FB01TD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Step 2: QR factorization of the first block column of the matrix */
@@ -710,48 +866,71 @@ static doublereal c_b23 = 1.;
 /*                prefer (P+N)*(N+1) + N + (M+1)*NB, where NB is the */
 /*                       optimal block size for DGEQRF called in MB04ID. */
 
+#line 607 "FB01TD.f"
     itau = i23 + np;
+#line 608 "FB01TD.f"
     jwork = itau + *n;
 
 /* Computing MAX */
+#line 610 "FB01TD.f"
     i__2 = *n - mp1;
+#line 610 "FB01TD.f"
     i__1 = max(i__2,0);
+#line 610 "FB01TD.f"
     i__3 = *ldwork - jwork + 1;
+#line 610 "FB01TD.f"
     mb04id_(&np, n, &i__1, &c__1, &dwork[1], &ldw, &dwork[i23], &ldw, &dwork[
 	    itau], &dwork[jwork], &i__3, info);
 /* Computing MAX */
+#line 613 "FB01TD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 613 "FB01TD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Output SINV, X, and E and set the optimal workspace dimension */
 /*     (and the reciprocal of the condition number estimate). */
 
+#line 618 "FB01TD.f"
     dlacpy_("Upper", n, n, &dwork[1], &ldw, &sinv[sinv_offset], ldsinv, (
 	    ftnlen)5);
+#line 619 "FB01TD.f"
     dcopy_(n, &dwork[i23], &c__1, &x[1], &c__1);
+#line 620 "FB01TD.f"
     if (*p > 0) {
+#line 620 "FB01TD.f"
 	dcopy_(p, &dwork[i23 + *n], &c__1, &e[1], &c__1);
+#line 620 "FB01TD.f"
     }
 
+#line 623 "FB01TD.f"
     if (ljobx) {
 
 /*        Compute X. */
 /*        Workspace: need 3*N. */
 
+#line 628 "FB01TD.f"
 	mb02od_("Left", "Upper", "No transpose", "Non-unit", "1-norm", n, &
 		c__1, &c_b23, &sinv[sinv_offset], ldsinv, &x[1], n, &rcond, 
 		tol, &iwork[1], &dwork[1], info, (ftnlen)4, (ftnlen)5, (
 		ftnlen)12, (ftnlen)8, (ftnlen)6);
+#line 631 "FB01TD.f"
 	if (*info == 0) {
 /* Computing MAX */
+#line 632 "FB01TD.f"
 	    i__1 = wrkopt, i__2 = *n * 3;
+#line 632 "FB01TD.f"
 	    wrkopt = max(i__1,i__2);
+#line 633 "FB01TD.f"
 	    dwork[2] = rcond;
+#line 634 "FB01TD.f"
 	}
+#line 635 "FB01TD.f"
     }
 
+#line 637 "FB01TD.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 639 "FB01TD.f"
     return 0;
 /* *** Last line of FB01TD*** */
 } /* fb01td_ */

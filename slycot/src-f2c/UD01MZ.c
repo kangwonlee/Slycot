@@ -1,3 +1,4 @@
+#line 1 "UD01MZ.f"
 /* UD01MZ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "UD01MZ.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -153,115 +155,206 @@ static integer c__2 = 2;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 112 "UD01MZ.f"
     /* Parameter adjustments */
+#line 112 "UD01MZ.f"
     a_dim1 = *lda;
+#line 112 "UD01MZ.f"
     a_offset = 1 + a_dim1;
+#line 112 "UD01MZ.f"
     a -= a_offset;
+#line 112 "UD01MZ.f"
 
+#line 112 "UD01MZ.f"
     /* Function Body */
+#line 112 "UD01MZ.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 116 "UD01MZ.f"
     if (*m < 1) {
+#line 117 "UD01MZ.f"
 	*info = -1;
+#line 118 "UD01MZ.f"
     } else if (*n < 1) {
+#line 119 "UD01MZ.f"
 	*info = -2;
+#line 120 "UD01MZ.f"
     } else if (*l < 1 || *l > 3) {
+#line 121 "UD01MZ.f"
 	*info = -3;
+#line 122 "UD01MZ.f"
     } else if (*nout < 0) {
+#line 123 "UD01MZ.f"
 	*info = -4;
+#line 124 "UD01MZ.f"
     } else if (*lda < *m) {
+#line 125 "UD01MZ.f"
 	*info = -6;
+#line 126 "UD01MZ.f"
     }
 
+#line 128 "UD01MZ.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 132 "UD01MZ.f"
 	i__1 = -(*info);
+#line 132 "UD01MZ.f"
 	xerbla_("UD01MZ", &i__1, (ftnlen)6);
+#line 133 "UD01MZ.f"
 	return 0;
+#line 134 "UD01MZ.f"
     }
 
+#line 136 "UD01MZ.f"
     lentxt = i_len(text, text_len);
 
+#line 138 "UD01MZ.f"
     for (ltext = min(72,lentxt); ltext >= 2; --ltext) {
+#line 139 "UD01MZ.f"
 	if (*(unsigned char *)&text[ltext - 1] != ' ') {
+#line 139 "UD01MZ.f"
 	    goto L40;
+#line 139 "UD01MZ.f"
 	}
+#line 140 "UD01MZ.f"
 /* L20: */
+#line 140 "UD01MZ.f"
     }
 
+#line 142 "UD01MZ.f"
 L40:
+#line 143 "UD01MZ.f"
     io___3.ciunit = *nout;
+#line 143 "UD01MZ.f"
     s_wsfe(&io___3);
+#line 143 "UD01MZ.f"
     do_fio(&c__1, text, ltext);
+#line 143 "UD01MZ.f"
     do_fio(&c__1, (char *)&(*m), (ftnlen)sizeof(integer));
+#line 143 "UD01MZ.f"
     do_fio(&c__1, (char *)&(*n), (ftnlen)sizeof(integer));
+#line 143 "UD01MZ.f"
     e_wsfe();
+#line 144 "UD01MZ.f"
     n1 = (*n - 1) / *l;
+#line 145 "UD01MZ.f"
     j1 = 1;
+#line 146 "UD01MZ.f"
     j2 = *l;
 
+#line 148 "UD01MZ.f"
     i__1 = n1;
+#line 148 "UD01MZ.f"
     for (j = 1; j <= i__1; ++j) {
+#line 149 "UD01MZ.f"
 	io___8.ciunit = *nout;
+#line 149 "UD01MZ.f"
 	s_wsfe(&io___8);
+#line 149 "UD01MZ.f"
 	i__2 = j2;
+#line 149 "UD01MZ.f"
 	for (jj = j1; jj <= i__2; ++jj) {
+#line 149 "UD01MZ.f"
 	    do_fio(&c__1, (char *)&jj, (ftnlen)sizeof(integer));
+#line 149 "UD01MZ.f"
 	}
+#line 149 "UD01MZ.f"
 	e_wsfe();
 
+#line 151 "UD01MZ.f"
 	i__2 = *m;
+#line 151 "UD01MZ.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 152 "UD01MZ.f"
 	    io___11.ciunit = *nout;
+#line 152 "UD01MZ.f"
 	    s_wsfe(&io___11);
+#line 152 "UD01MZ.f"
 	    do_fio(&c__1, (char *)&i__, (ftnlen)sizeof(integer));
+#line 152 "UD01MZ.f"
 	    i__3 = j2;
+#line 152 "UD01MZ.f"
 	    for (jj = j1; jj <= i__3; ++jj) {
+#line 152 "UD01MZ.f"
 		do_fio(&c__2, (char *)&a[i__ + jj * a_dim1], (ftnlen)sizeof(
 			doublereal));
+#line 152 "UD01MZ.f"
 	    }
+#line 152 "UD01MZ.f"
 	    e_wsfe();
+#line 153 "UD01MZ.f"
 /* L60: */
+#line 153 "UD01MZ.f"
 	}
 
+#line 155 "UD01MZ.f"
 	io___12.ciunit = *nout;
+#line 155 "UD01MZ.f"
 	s_wsfe(&io___12);
+#line 155 "UD01MZ.f"
 	e_wsfe();
+#line 156 "UD01MZ.f"
 	j1 += *l;
+#line 157 "UD01MZ.f"
 	j2 += *l;
+#line 158 "UD01MZ.f"
 /* L80: */
+#line 158 "UD01MZ.f"
     }
 
+#line 160 "UD01MZ.f"
     io___13.ciunit = *nout;
+#line 160 "UD01MZ.f"
     s_wsfe(&io___13);
+#line 160 "UD01MZ.f"
     i__1 = *n;
+#line 160 "UD01MZ.f"
     for (j = j1; j <= i__1; ++j) {
+#line 160 "UD01MZ.f"
 	do_fio(&c__1, (char *)&j, (ftnlen)sizeof(integer));
+#line 160 "UD01MZ.f"
     }
+#line 160 "UD01MZ.f"
     e_wsfe();
 
+#line 162 "UD01MZ.f"
     i__1 = *m;
+#line 162 "UD01MZ.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 163 "UD01MZ.f"
 	io___14.ciunit = *nout;
+#line 163 "UD01MZ.f"
 	s_wsfe(&io___14);
+#line 163 "UD01MZ.f"
 	do_fio(&c__1, (char *)&i__, (ftnlen)sizeof(integer));
+#line 163 "UD01MZ.f"
 	i__2 = *n;
+#line 163 "UD01MZ.f"
 	for (jj = j1; jj <= i__2; ++jj) {
+#line 163 "UD01MZ.f"
 	    do_fio(&c__2, (char *)&a[i__ + jj * a_dim1], (ftnlen)sizeof(
 		    doublereal));
+#line 163 "UD01MZ.f"
 	}
+#line 163 "UD01MZ.f"
 	e_wsfe();
+#line 164 "UD01MZ.f"
 /* L100: */
+#line 164 "UD01MZ.f"
     }
 
+#line 166 "UD01MZ.f"
     io___15.ciunit = *nout;
+#line 166 "UD01MZ.f"
     s_wsfe(&io___15);
+#line 166 "UD01MZ.f"
     e_wsfe();
 
+#line 168 "UD01MZ.f"
     return 0;
 
 /* *** Last line of UD01MZ *** */

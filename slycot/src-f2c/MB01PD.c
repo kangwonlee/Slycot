@@ -1,3 +1,4 @@
+#line 1 "MB01PD.f"
 /* MB01PD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01PD.f"
 /* Subroutine */ int mb01pd_(char *scun, char *type__, integer *m, integer *n,
 	 integer *kl, integer *ku, doublereal *anrm, integer *nbl, integer *
 	nrows, doublereal *a, integer *lda, integer *info, ftnlen scun_len, 
@@ -170,136 +172,228 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Save statement .. */
 /*     .. Data statements .. */
+#line 152 "MB01PD.f"
     /* Parameter adjustments */
+#line 152 "MB01PD.f"
     --nrows;
+#line 152 "MB01PD.f"
     a_dim1 = *lda;
+#line 152 "MB01PD.f"
     a_offset = 1 + a_dim1;
+#line 152 "MB01PD.f"
     a -= a_offset;
+#line 152 "MB01PD.f"
 
+#line 152 "MB01PD.f"
     /* Function Body */
 /*     .. */
 /*     .. Executable Statements .. */
 
 /*     Test the input scalar arguments. */
 
+#line 158 "MB01PD.f"
     *info = 0;
+#line 159 "MB01PD.f"
     lscale = lsame_(scun, "S", (ftnlen)1, (ftnlen)1);
+#line 160 "MB01PD.f"
     if (lsame_(type__, "G", (ftnlen)1, (ftnlen)1)) {
+#line 161 "MB01PD.f"
 	itype = 0;
+#line 162 "MB01PD.f"
     } else if (lsame_(type__, "L", (ftnlen)1, (ftnlen)1)) {
+#line 163 "MB01PD.f"
 	itype = 1;
+#line 164 "MB01PD.f"
     } else if (lsame_(type__, "U", (ftnlen)1, (ftnlen)1)) {
+#line 165 "MB01PD.f"
 	itype = 2;
+#line 166 "MB01PD.f"
     } else if (lsame_(type__, "H", (ftnlen)1, (ftnlen)1)) {
+#line 167 "MB01PD.f"
 	itype = 3;
+#line 168 "MB01PD.f"
     } else if (lsame_(type__, "B", (ftnlen)1, (ftnlen)1)) {
+#line 169 "MB01PD.f"
 	itype = 4;
+#line 170 "MB01PD.f"
     } else if (lsame_(type__, "Q", (ftnlen)1, (ftnlen)1)) {
+#line 171 "MB01PD.f"
 	itype = 5;
+#line 172 "MB01PD.f"
     } else if (lsame_(type__, "Z", (ftnlen)1, (ftnlen)1)) {
+#line 173 "MB01PD.f"
 	itype = 6;
+#line 174 "MB01PD.f"
     } else {
+#line 175 "MB01PD.f"
 	itype = -1;
+#line 176 "MB01PD.f"
     }
 
+#line 178 "MB01PD.f"
     mn = min(*m,*n);
 
+#line 180 "MB01PD.f"
     isum = 0;
+#line 181 "MB01PD.f"
     if (*nbl > 0) {
+#line 182 "MB01PD.f"
 	i__1 = *nbl;
+#line 182 "MB01PD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 183 "MB01PD.f"
 	    isum += nrows[i__];
+#line 184 "MB01PD.f"
 /* L10: */
+#line 184 "MB01PD.f"
 	}
+#line 185 "MB01PD.f"
     }
 
+#line 187 "MB01PD.f"
     if (! lscale && ! lsame_(scun, "U", (ftnlen)1, (ftnlen)1)) {
+#line 188 "MB01PD.f"
 	*info = -1;
+#line 189 "MB01PD.f"
     } else if (itype == -1) {
+#line 190 "MB01PD.f"
 	*info = -2;
+#line 191 "MB01PD.f"
     } else if (*m < 0) {
+#line 192 "MB01PD.f"
 	*info = -3;
+#line 193 "MB01PD.f"
     } else if (*n < 0 || (itype == 4 || itype == 5) && *n != *m) {
+#line 195 "MB01PD.f"
 	*info = -4;
+#line 196 "MB01PD.f"
     } else if (*anrm < 0.) {
+#line 197 "MB01PD.f"
 	*info = -7;
+#line 198 "MB01PD.f"
     } else if (*nbl < 0) {
+#line 199 "MB01PD.f"
 	*info = -8;
+#line 200 "MB01PD.f"
     } else if (*nbl > 0 && isum != mn) {
+#line 201 "MB01PD.f"
 	*info = -9;
+#line 202 "MB01PD.f"
     } else if (itype <= 3 && *lda < max(1,*m)) {
+#line 203 "MB01PD.f"
 	*info = -11;
+#line 204 "MB01PD.f"
     } else if (itype >= 4) {
 /* Computing MAX */
+#line 205 "MB01PD.f"
 	i__1 = *m - 1;
+#line 205 "MB01PD.f"
 	if (*kl < 0 || *kl > max(i__1,0)) {
+#line 206 "MB01PD.f"
 	    *info = -5;
+#line 207 "MB01PD.f"
 	} else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 207 "MB01PD.f"
 	    i__1 = *n - 1;
+#line 207 "MB01PD.f"
 	    if (*ku < 0 || *ku > max(i__1,0) || (itype == 4 || itype == 5) && 
 		    *kl != *ku) {
+#line 210 "MB01PD.f"
 		*info = -6;
+#line 211 "MB01PD.f"
 	    } else if (itype == 4 && *lda < *kl + 1 || itype == 5 && *lda < *
 		    ku + 1 || itype == 6 && *lda < (*kl << 1) + *ku + 1) {
+#line 214 "MB01PD.f"
 		*info = -11;
+#line 215 "MB01PD.f"
 	    }
+#line 215 "MB01PD.f"
 	}
+#line 216 "MB01PD.f"
     }
 
+#line 218 "MB01PD.f"
     if (*info != 0) {
+#line 219 "MB01PD.f"
 	i__1 = -(*info);
+#line 219 "MB01PD.f"
 	xerbla_("MB01PD", &i__1, (ftnlen)6);
+#line 220 "MB01PD.f"
 	return 0;
+#line 221 "MB01PD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 225 "MB01PD.f"
     if (mn == 0 || *anrm == 0.) {
+#line 225 "MB01PD.f"
 	return 0;
+#line 225 "MB01PD.f"
     }
 
+#line 228 "MB01PD.f"
     if (first) {
 
 /*        Get machine parameters. */
 
+#line 232 "MB01PD.f"
 	smlnum = dlamch_("S", (ftnlen)1) / dlamch_("P", (ftnlen)1);
+#line 233 "MB01PD.f"
 	bignum = 1. / smlnum;
+#line 234 "MB01PD.f"
 	dlabad_(&smlnum, &bignum);
+#line 235 "MB01PD.f"
 	first = FALSE_;
+#line 236 "MB01PD.f"
     }
 
+#line 238 "MB01PD.f"
     if (lscale) {
 
 /*        Scale A, if its norm is outside range [SMLNUM,BIGNUM]. */
 
+#line 242 "MB01PD.f"
 	if (*anrm < smlnum) {
 
 /*           Scale matrix norm up to SMLNUM. */
 
+#line 246 "MB01PD.f"
 	    mb01qd_(type__, m, n, kl, ku, anrm, &smlnum, nbl, &nrows[1], &a[
 		    a_offset], lda, info, (ftnlen)1);
+#line 248 "MB01PD.f"
 	} else if (*anrm > bignum) {
 
 /*           Scale matrix norm down to BIGNUM. */
 
+#line 252 "MB01PD.f"
 	    mb01qd_(type__, m, n, kl, ku, anrm, &bignum, nbl, &nrows[1], &a[
 		    a_offset], lda, info, (ftnlen)1);
+#line 254 "MB01PD.f"
 	}
 
+#line 256 "MB01PD.f"
     } else {
 
 /*        Undo scaling. */
 
+#line 260 "MB01PD.f"
 	if (*anrm < smlnum) {
+#line 261 "MB01PD.f"
 	    mb01qd_(type__, m, n, kl, ku, &smlnum, anrm, nbl, &nrows[1], &a[
 		    a_offset], lda, info, (ftnlen)1);
+#line 263 "MB01PD.f"
 	} else if (*anrm > bignum) {
+#line 264 "MB01PD.f"
 	    mb01qd_(type__, m, n, kl, ku, &bignum, anrm, nbl, &nrows[1], &a[
 		    a_offset], lda, info, (ftnlen)1);
+#line 266 "MB01PD.f"
 	}
+#line 267 "MB01PD.f"
     }
 
+#line 269 "MB01PD.f"
     return 0;
 /* *** Last line of MB01PD *** */
 } /* mb01pd_ */

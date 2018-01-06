@@ -1,3 +1,4 @@
+#line 1 "MB02XD.f"
 /* MB02XD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02XD.f"
 /* Table of constant values */
 
 static doublereal c_b10 = 1.;
@@ -332,137 +334,228 @@ static integer c__1 = 1;
 
 /*     Decode the scalar input parameters. */
 
+#line 302 "MB02XD.f"
     /* Parameter adjustments */
+#line 302 "MB02XD.f"
     --ipar;
+#line 302 "MB02XD.f"
     --dpar;
+#line 302 "MB02XD.f"
     a_dim1 = *lda;
+#line 302 "MB02XD.f"
     a_offset = 1 + a_dim1;
+#line 302 "MB02XD.f"
     a -= a_offset;
+#line 302 "MB02XD.f"
     b_dim1 = *ldb;
+#line 302 "MB02XD.f"
     b_offset = 1 + b_dim1;
+#line 302 "MB02XD.f"
     b -= b_offset;
+#line 302 "MB02XD.f"
     --ata;
+#line 302 "MB02XD.f"
     --dwork;
+#line 302 "MB02XD.f"
 
+#line 302 "MB02XD.f"
     /* Function Body */
+#line 302 "MB02XD.f"
     mat = lsame_(form, "S", (ftnlen)1, (ftnlen)1);
+#line 303 "MB02XD.f"
     full = lsame_(stor, "F", (ftnlen)1, (ftnlen)1);
+#line 304 "MB02XD.f"
     upper = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
 
 /*     Check the scalar input parameters. */
 
+#line 308 "MB02XD.f"
     *info = 0;
+#line 309 "MB02XD.f"
     if (! (mat || lsame_(form, "F", (ftnlen)1, (ftnlen)1))) {
+#line 310 "MB02XD.f"
 	*info = -1;
+#line 311 "MB02XD.f"
     } else if (! (full || lsame_(stor, "P", (ftnlen)1, (ftnlen)1))) {
+#line 312 "MB02XD.f"
 	*info = -2;
+#line 313 "MB02XD.f"
     } else if (! (upper || lsame_(uplo, "L", (ftnlen)1, (ftnlen)1))) {
+#line 314 "MB02XD.f"
 	*info = -3;
+#line 315 "MB02XD.f"
     } else if (*m < 0) {
+#line 316 "MB02XD.f"
 	*info = -5;
+#line 317 "MB02XD.f"
     } else if (*n < 0) {
+#line 318 "MB02XD.f"
 	*info = -6;
+#line 319 "MB02XD.f"
     } else if (*nrhs < 0) {
+#line 320 "MB02XD.f"
 	*info = -7;
+#line 321 "MB02XD.f"
     } else if (! mat && *lipar < 0) {
+#line 322 "MB02XD.f"
 	*info = -9;
+#line 323 "MB02XD.f"
     } else if (! mat && *ldpar < 0) {
+#line 324 "MB02XD.f"
 	*info = -11;
+#line 325 "MB02XD.f"
     } else if (*lda < 1 || mat && *lda < *m) {
+#line 326 "MB02XD.f"
 	*info = -13;
+#line 327 "MB02XD.f"
     } else if (*ldb < max(1,*n)) {
+#line 328 "MB02XD.f"
 	*info = -15;
+#line 329 "MB02XD.f"
     } else if (*ldata < 1 || full && *ldata < *n) {
+#line 330 "MB02XD.f"
 	*info = -17;
+#line 331 "MB02XD.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 335 "MB02XD.f"
     if (*info != 0) {
+#line 336 "MB02XD.f"
 	i__1 = -(*info);
+#line 336 "MB02XD.f"
 	xerbla_("MB02XD", &i__1, (ftnlen)6);
+#line 337 "MB02XD.f"
 	return 0;
+#line 338 "MB02XD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 342 "MB02XD.f"
     if (*n == 0 || mat && *m == 0) {
+#line 342 "MB02XD.f"
 	return 0;
+#line 342 "MB02XD.f"
     }
 
 /*     Build a triangle of the matrix A'*A. */
 
+#line 347 "MB02XD.f"
     if (mat) {
 
 /*        Matrix A is given in the usual form. */
 
+#line 351 "MB02XD.f"
 	if (full) {
+#line 352 "MB02XD.f"
 	    dsyrk_(uplo, "Transpose", n, m, &c_b10, &a[a_offset], lda, &c_b11,
 		     &ata[1], ldata, (ftnlen)1, (ftnlen)9);
+#line 354 "MB02XD.f"
 	} else if (upper) {
+#line 355 "MB02XD.f"
 	    j1 = 1;
 
+#line 357 "MB02XD.f"
 	    i__1 = *n;
+#line 357 "MB02XD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 358 "MB02XD.f"
 		dgemv_("Transpose", m, &j, &c_b10, &a[a_offset], lda, &a[j * 
 			a_dim1 + 1], &c__1, &c_b11, &ata[j1], &c__1, (ftnlen)
 			9);
+#line 360 "MB02XD.f"
 		j1 += j;
+#line 361 "MB02XD.f"
 /* L10: */
+#line 361 "MB02XD.f"
 	    }
 
+#line 363 "MB02XD.f"
 	} else {
+#line 364 "MB02XD.f"
 	    j1 = 1;
 
+#line 366 "MB02XD.f"
 	    i__1 = *n;
+#line 366 "MB02XD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 367 "MB02XD.f"
 		i__2 = *n - j + 1;
+#line 367 "MB02XD.f"
 		dgemv_("Transpose", m, &i__2, &c_b10, &a[j * a_dim1 + 1], lda,
 			 &a[j * a_dim1 + 1], &c__1, &c_b11, &ata[j1], &c__1, (
 			ftnlen)9);
+#line 369 "MB02XD.f"
 		j1 = j1 + *n - j + 1;
+#line 370 "MB02XD.f"
 /* L20: */
+#line 370 "MB02XD.f"
 	    }
 
+#line 372 "MB02XD.f"
 	}
 
+#line 374 "MB02XD.f"
     } else {
 
 /*        Implicit form, A'*A = f(A). */
 
+#line 378 "MB02XD.f"
 	(*f)(stor, uplo, n, &ipar[1], lipar, &dpar[1], ldpar, &a[a_offset], 
 		lda, &ata[1], ldata, &dwork[1], ldwork, &ierr, (ftnlen)1, (
 		ftnlen)1);
+#line 380 "MB02XD.f"
 	if (ierr != 0) {
+#line 381 "MB02XD.f"
 	    *info = *n + ierr;
+#line 382 "MB02XD.f"
 	    return 0;
+#line 383 "MB02XD.f"
 	}
 
+#line 385 "MB02XD.f"
     }
 
 /*     Factor the matrix A'*A. */
 
+#line 389 "MB02XD.f"
     if (full) {
+#line 390 "MB02XD.f"
 	dpotrf_(uplo, n, &ata[1], ldata, &ierr, (ftnlen)1);
+#line 391 "MB02XD.f"
     } else {
+#line 392 "MB02XD.f"
 	dpptrf_(uplo, n, &ata[1], &ierr, (ftnlen)1);
+#line 393 "MB02XD.f"
     }
 
+#line 395 "MB02XD.f"
     if (ierr != 0) {
+#line 396 "MB02XD.f"
 	*info = ierr;
+#line 397 "MB02XD.f"
 	return 0;
+#line 398 "MB02XD.f"
     }
 
 /*     Solve the set of linear systems. */
 
+#line 402 "MB02XD.f"
     if (full) {
+#line 403 "MB02XD.f"
 	dpotrs_(uplo, n, nrhs, &ata[1], ldata, &b[b_offset], ldb, &ierr, (
 		ftnlen)1);
+#line 404 "MB02XD.f"
     } else {
+#line 405 "MB02XD.f"
 	dpptrs_(uplo, n, nrhs, &ata[1], &b[b_offset], ldb, &ierr, (ftnlen)1);
+#line 406 "MB02XD.f"
     }
 
 /* *** Last line of MB02XD *** */
+#line 409 "MB02XD.f"
     return 0;
 } /* mb02xd_ */
 

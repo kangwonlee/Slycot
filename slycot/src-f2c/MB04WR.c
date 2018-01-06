@@ -1,3 +1,4 @@
+#line 1 "MB04WR.f"
 /* MB04WR.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04WR.f"
 /* Table of constant values */
 
 static doublereal c_b9 = 0.;
@@ -226,97 +228,163 @@ static doublereal c_b10 = 1.;
 
 /*     Check the scalar input parameters. */
 
+#line 203 "MB04WR.f"
     /* Parameter adjustments */
+#line 203 "MB04WR.f"
     q1_dim1 = *ldq1;
+#line 203 "MB04WR.f"
     q1_offset = 1 + q1_dim1;
+#line 203 "MB04WR.f"
     q1 -= q1_offset;
+#line 203 "MB04WR.f"
     q2_dim1 = *ldq2;
+#line 203 "MB04WR.f"
     q2_offset = 1 + q2_dim1;
+#line 203 "MB04WR.f"
     q2 -= q2_offset;
+#line 203 "MB04WR.f"
     --cs;
+#line 203 "MB04WR.f"
     --tau;
+#line 203 "MB04WR.f"
     --dwork;
+#line 203 "MB04WR.f"
 
+#line 203 "MB04WR.f"
     /* Function Body */
+#line 203 "MB04WR.f"
     *info = 0;
+#line 204 "MB04WR.f"
     ltran = lsame_(trans, "T", (ftnlen)1, (ftnlen)1) || lsame_(trans, "C", (
 	    ftnlen)1, (ftnlen)1);
+#line 205 "MB04WR.f"
     compu = lsame_(job, "U", (ftnlen)1, (ftnlen)1);
+#line 206 "MB04WR.f"
     if (! compu && ! lsame_(job, "V", (ftnlen)1, (ftnlen)1)) {
+#line 207 "MB04WR.f"
 	*info = -1;
+#line 208 "MB04WR.f"
     } else if (! ltran && ! lsame_(trans, "N", (ftnlen)1, (ftnlen)1)) {
+#line 209 "MB04WR.f"
 	*info = -2;
+#line 210 "MB04WR.f"
     } else if (*n < 0) {
+#line 211 "MB04WR.f"
 	*info = -3;
+#line 212 "MB04WR.f"
     } else if (*ilo < 1 || *ilo > max(1,*n)) {
+#line 213 "MB04WR.f"
 	*info = -4;
+#line 214 "MB04WR.f"
     } else if (*ldq1 < max(1,*n)) {
+#line 215 "MB04WR.f"
 	*info = -6;
+#line 216 "MB04WR.f"
     } else if (*ldq2 < max(1,*n)) {
+#line 217 "MB04WR.f"
 	*info = -8;
+#line 218 "MB04WR.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 218 "MB04WR.f"
 	i__1 = 1, i__2 = *n - *ilo + 1 << 1;
+#line 218 "MB04WR.f"
 	if (*ldwork < max(i__1,i__2)) {
 /* Computing MAX */
+#line 219 "MB04WR.f"
 	    i__1 = 1, i__2 = *n - *ilo + 1 << 1;
+#line 219 "MB04WR.f"
 	    dwork[1] = (doublereal) max(i__1,i__2);
+#line 220 "MB04WR.f"
 	    *info = -12;
+#line 221 "MB04WR.f"
 	}
+#line 221 "MB04WR.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 225 "MB04WR.f"
     if (*info != 0) {
+#line 226 "MB04WR.f"
 	i__1 = -(*info);
+#line 226 "MB04WR.f"
 	xerbla_("MB04WR", &i__1, (ftnlen)6);
+#line 227 "MB04WR.f"
 	return 0;
+#line 228 "MB04WR.f"
     }
 
 /*     Quick return if possible. */
 
+#line 232 "MB04WR.f"
     if (*n == 0) {
+#line 233 "MB04WR.f"
 	dwork[1] = 1.;
+#line 234 "MB04WR.f"
 	return 0;
+#line 235 "MB04WR.f"
     }
 
+#line 237 "MB04WR.f"
     if (compu) {
+#line 238 "MB04WR.f"
 	i__1 = *ilo - 1;
+#line 238 "MB04WR.f"
 	dlaset_("All", n, &i__1, &c_b9, &c_b10, &q1[q1_offset], ldq1, (ftnlen)
 		3);
+#line 239 "MB04WR.f"
 	i__1 = *ilo - 1;
+#line 239 "MB04WR.f"
 	i__2 = *n - *ilo + 1;
+#line 239 "MB04WR.f"
 	dlaset_("All", &i__1, &i__2, &c_b9, &c_b9, &q1[*ilo * q1_dim1 + 1], 
 		ldq1, (ftnlen)3);
+#line 241 "MB04WR.f"
 	i__1 = *ilo - 1;
+#line 241 "MB04WR.f"
 	dlaset_("All", n, &i__1, &c_b9, &c_b9, &q2[q2_offset], ldq2, (ftnlen)
 		3);
+#line 242 "MB04WR.f"
 	i__1 = *ilo - 1;
+#line 242 "MB04WR.f"
 	i__2 = *n - *ilo + 1;
+#line 242 "MB04WR.f"
 	dlaset_("All", &i__1, &i__2, &c_b9, &c_b9, &q2[*ilo * q2_dim1 + 1], 
 		ldq2, (ftnlen)3);
+#line 244 "MB04WR.f"
 	nh = *n - *ilo + 1;
+#line 245 "MB04WR.f"
     }
+#line 246 "MB04WR.f"
     if (compu && ! ltran) {
 
 /*        Generate U1 and U2. */
 
+#line 250 "MB04WR.f"
 	if (nh > 0) {
+#line 251 "MB04WR.f"
 	    mb04wd_("No Transpose", "No Transpose", &nh, &nh, &nh, &q1[*ilo + 
 		    *ilo * q1_dim1], ldq1, &q2[*ilo + *ilo * q2_dim1], ldq2, &
 		    cs[*ilo], &tau[*ilo], &dwork[1], ldwork, &ierr, (ftnlen)
 		    12, (ftnlen)12);
+#line 254 "MB04WR.f"
 	}
+#line 255 "MB04WR.f"
     } else if (compu && ltran) {
 
 /*        Generate U1**T and U2. */
 
+#line 259 "MB04WR.f"
 	if (nh > 0) {
+#line 260 "MB04WR.f"
 	    mb04wd_("Transpose", "No Transpose", &nh, &nh, &nh, &q1[*ilo + *
 		    ilo * q1_dim1], ldq1, &q2[*ilo + *ilo * q2_dim1], ldq2, &
 		    cs[*ilo], &tau[*ilo], &dwork[1], ldwork, &ierr, (ftnlen)9,
 		     (ftnlen)12);
+#line 263 "MB04WR.f"
 	}
+#line 264 "MB04WR.f"
     } else if (! compu && ! ltran) {
 
 /*        Generate V1**T and V2**T. */
@@ -325,53 +393,97 @@ static doublereal c_b10 = 1.;
 /*        column to the bottom, and set the first ilo rows and */
 /*        columns to those of the unit matrix. */
 
+#line 272 "MB04WR.f"
 	i__1 = *n;
+#line 272 "MB04WR.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 273 "MB04WR.f"
 	    i__2 = max(i__,*ilo) + 1;
+#line 273 "MB04WR.f"
 	    for (j = *n; j >= i__2; --j) {
+#line 274 "MB04WR.f"
 		q1[j + i__ * q1_dim1] = 0.;
+#line 275 "MB04WR.f"
 /* L10: */
+#line 275 "MB04WR.f"
 	    }
+#line 276 "MB04WR.f"
 	    i__2 = *ilo + 1;
+#line 276 "MB04WR.f"
 	    for (j = max(i__,*ilo); j >= i__2; --j) {
+#line 277 "MB04WR.f"
 		q1[j + i__ * q1_dim1] = q1[j - 1 + i__ * q1_dim1];
+#line 278 "MB04WR.f"
 /* L20: */
+#line 278 "MB04WR.f"
 	    }
+#line 279 "MB04WR.f"
 	    for (j = *ilo; j >= 1; --j) {
+#line 280 "MB04WR.f"
 		q1[j + i__ * q1_dim1] = 0.;
+#line 281 "MB04WR.f"
 /* L30: */
+#line 281 "MB04WR.f"
 	    }
+#line 282 "MB04WR.f"
 	    if (i__ <= *ilo) {
+#line 282 "MB04WR.f"
 		q1[i__ + i__ * q1_dim1] = 1.;
+#line 282 "MB04WR.f"
 	    }
+#line 283 "MB04WR.f"
 /* L40: */
+#line 283 "MB04WR.f"
 	}
+#line 284 "MB04WR.f"
 	i__1 = *n;
+#line 284 "MB04WR.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 285 "MB04WR.f"
 	    i__2 = max(i__,*ilo) + 1;
+#line 285 "MB04WR.f"
 	    for (j = *n; j >= i__2; --j) {
+#line 286 "MB04WR.f"
 		q2[j + i__ * q2_dim1] = 0.;
+#line 287 "MB04WR.f"
 /* L50: */
+#line 287 "MB04WR.f"
 	    }
+#line 288 "MB04WR.f"
 	    i__2 = *ilo + 1;
+#line 288 "MB04WR.f"
 	    for (j = max(i__,*ilo); j >= i__2; --j) {
+#line 289 "MB04WR.f"
 		q2[j + i__ * q2_dim1] = q2[j - 1 + i__ * q2_dim1];
+#line 290 "MB04WR.f"
 /* L60: */
+#line 290 "MB04WR.f"
 	    }
+#line 291 "MB04WR.f"
 	    for (j = *ilo; j >= 1; --j) {
+#line 292 "MB04WR.f"
 		q2[j + i__ * q2_dim1] = 0.;
+#line 293 "MB04WR.f"
 /* L70: */
+#line 293 "MB04WR.f"
 	    }
+#line 294 "MB04WR.f"
 /* L80: */
+#line 294 "MB04WR.f"
 	}
 
+#line 296 "MB04WR.f"
 	nh = *n - *ilo;
+#line 297 "MB04WR.f"
 	if (nh > 0) {
+#line 298 "MB04WR.f"
 	    mb04wd_("Transpose", "Transpose", &nh, &nh, &nh, &q1[*ilo + 1 + (*
 		    ilo + 1) * q1_dim1], ldq1, &q2[*ilo + 1 + (*ilo + 1) * 
 		    q2_dim1], ldq2, &cs[*ilo], &tau[*ilo], &dwork[1], ldwork, 
 		    &ierr, (ftnlen)9, (ftnlen)9);
+#line 301 "MB04WR.f"
 	}
+#line 302 "MB04WR.f"
     } else if (! compu && ltran) {
 
 /*        Generate V1 and V2**T. */
@@ -380,49 +492,88 @@ static doublereal c_b10 = 1.;
 /*        column to the right/bottom, and set the first ilo rows and */
 /*        columns to those of the unit matrix. */
 
+#line 310 "MB04WR.f"
 	i__1 = *ilo + 1;
+#line 310 "MB04WR.f"
 	for (j = *n; j >= i__1; --j) {
+#line 311 "MB04WR.f"
 	    i__2 = j - 1;
+#line 311 "MB04WR.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 312 "MB04WR.f"
 		q1[i__ + j * q1_dim1] = 0.;
+#line 313 "MB04WR.f"
 /* L90: */
+#line 313 "MB04WR.f"
 	    }
+#line 314 "MB04WR.f"
 	    i__2 = *n;
+#line 314 "MB04WR.f"
 	    for (i__ = j + 1; i__ <= i__2; ++i__) {
+#line 315 "MB04WR.f"
 		q1[i__ + j * q1_dim1] = q1[i__ + (j - 1) * q1_dim1];
+#line 316 "MB04WR.f"
 /* L100: */
+#line 316 "MB04WR.f"
 	    }
+#line 317 "MB04WR.f"
 /* L110: */
+#line 317 "MB04WR.f"
 	}
+#line 318 "MB04WR.f"
 	dlaset_("All", n, ilo, &c_b9, &c_b10, &q1[q1_offset], ldq1, (ftnlen)3)
 		;
+#line 319 "MB04WR.f"
 	i__1 = *n;
+#line 319 "MB04WR.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 320 "MB04WR.f"
 	    i__2 = max(i__,*ilo) + 1;
+#line 320 "MB04WR.f"
 	    for (j = *n; j >= i__2; --j) {
+#line 321 "MB04WR.f"
 		q2[j + i__ * q2_dim1] = 0.;
+#line 322 "MB04WR.f"
 /* L120: */
+#line 322 "MB04WR.f"
 	    }
+#line 323 "MB04WR.f"
 	    i__2 = *ilo + 1;
+#line 323 "MB04WR.f"
 	    for (j = max(i__,*ilo); j >= i__2; --j) {
+#line 324 "MB04WR.f"
 		q2[j + i__ * q2_dim1] = q2[j - 1 + i__ * q2_dim1];
+#line 325 "MB04WR.f"
 /* L130: */
+#line 325 "MB04WR.f"
 	    }
+#line 326 "MB04WR.f"
 	    for (j = *ilo; j >= 1; --j) {
+#line 327 "MB04WR.f"
 		q2[j + i__ * q2_dim1] = 0.;
+#line 328 "MB04WR.f"
 /* L140: */
+#line 328 "MB04WR.f"
 	    }
+#line 329 "MB04WR.f"
 /* L150: */
+#line 329 "MB04WR.f"
 	}
+#line 330 "MB04WR.f"
 	nh = *n - *ilo;
 
+#line 332 "MB04WR.f"
 	if (nh > 0) {
+#line 333 "MB04WR.f"
 	    mb04wd_("No Transpose", "Transpose", &nh, &nh, &nh, &q1[*ilo + 1 
 		    + (*ilo + 1) * q1_dim1], ldq1, &q2[*ilo + 1 + (*ilo + 1) *
 		     q2_dim1], ldq2, &cs[*ilo], &tau[*ilo], &dwork[1], ldwork,
 		     &ierr, (ftnlen)12, (ftnlen)9);
+#line 336 "MB04WR.f"
 	}
+#line 337 "MB04WR.f"
     }
+#line 338 "MB04WR.f"
     return 0;
 /* *** Last line of MB04WR *** */
 } /* mb04wr_ */

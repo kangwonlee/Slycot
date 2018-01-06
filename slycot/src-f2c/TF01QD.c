@@ -1,3 +1,4 @@
+#line 1 "TF01QD.f"
 /* TF01QD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TF01QD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -195,86 +197,146 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 177 "TF01QD.f"
     /* Parameter adjustments */
+#line 177 "TF01QD.f"
     --iord;
+#line 177 "TF01QD.f"
     --ar;
+#line 177 "TF01QD.f"
     --ma;
+#line 177 "TF01QD.f"
     h_dim1 = *ldh;
+#line 177 "TF01QD.f"
     h_offset = 1 + h_dim1;
+#line 177 "TF01QD.f"
     h__ -= h_offset;
+#line 177 "TF01QD.f"
 
+#line 177 "TF01QD.f"
     /* Function Body */
+#line 177 "TF01QD.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 181 "TF01QD.f"
     if (*nc < 0) {
+#line 182 "TF01QD.f"
 	*info = -1;
+#line 183 "TF01QD.f"
     } else if (*nb < 0) {
+#line 184 "TF01QD.f"
 	*info = -2;
+#line 185 "TF01QD.f"
     } else if (*n < 0) {
+#line 186 "TF01QD.f"
 	*info = -3;
+#line 187 "TF01QD.f"
     } else if (*ldh < max(1,*nc)) {
+#line 188 "TF01QD.f"
 	*info = -8;
+#line 189 "TF01QD.f"
     }
 
+#line 191 "TF01QD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 195 "TF01QD.f"
 	i__1 = -(*info);
+#line 195 "TF01QD.f"
 	xerbla_("TF01QD", &i__1, (ftnlen)6);
+#line 196 "TF01QD.f"
 	return 0;
+#line 197 "TF01QD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 201 "TF01QD.f"
     i__1 = max(*nc,*nb);
+#line 201 "TF01QD.f"
     if (max(i__1,*n) == 0) {
+#line 201 "TF01QD.f"
 	return 0;
+#line 201 "TF01QD.f"
     }
 
+#line 204 "TF01QD.f"
     ldhnb = *ldh * *nb;
+#line 205 "TF01QD.f"
     nl = 1;
+#line 206 "TF01QD.f"
     k = 1;
 
+#line 208 "TF01QD.f"
     i__1 = *nc;
+#line 208 "TF01QD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
 
+#line 210 "TF01QD.f"
 	i__2 = *nb;
+#line 210 "TF01QD.f"
 	for (j = 1; j <= i__2; ++j) {
+#line 211 "TF01QD.f"
 	    nord = iord[k];
+#line 212 "TF01QD.f"
 	    h__[i__ + j * h_dim1] = ma[nl];
+#line 213 "TF01QD.f"
 	    jk = j;
 
+#line 215 "TF01QD.f"
 	    i__3 = nord - 1;
+#line 215 "TF01QD.f"
 	    for (ki = 1; ki <= i__3; ++ki) {
+#line 216 "TF01QD.f"
 		jk += *nb;
+#line 217 "TF01QD.f"
 		i__4 = -ldhnb;
+#line 217 "TF01QD.f"
 		h__[i__ + jk * h_dim1] = ma[nl + ki] - ddot_(&ki, &ar[nl], &
 			c__1, &h__[i__ + j * h_dim1], &i__4);
+#line 219 "TF01QD.f"
 /* L20: */
+#line 219 "TF01QD.f"
 	    }
 
+#line 221 "TF01QD.f"
 	    i__3 = j + (*n - nord - 1) * *nb;
+#line 221 "TF01QD.f"
 	    i__4 = *nb;
+#line 221 "TF01QD.f"
 	    for (jj = j; i__4 < 0 ? jj >= i__3 : jj <= i__3; jj += i__4) {
+#line 222 "TF01QD.f"
 		jk += *nb;
+#line 223 "TF01QD.f"
 		i__5 = -ldhnb;
+#line 223 "TF01QD.f"
 		h__[i__ + jk * h_dim1] = -ddot_(&nord, &ar[nl], &c__1, &h__[
 			i__ + jj * h_dim1], &i__5);
+#line 224 "TF01QD.f"
 /* L40: */
+#line 224 "TF01QD.f"
 	    }
 
+#line 226 "TF01QD.f"
 	    nl += nord;
+#line 227 "TF01QD.f"
 	    ++k;
+#line 228 "TF01QD.f"
 /* L50: */
+#line 228 "TF01QD.f"
 	}
 
+#line 230 "TF01QD.f"
 /* L60: */
+#line 230 "TF01QD.f"
     }
 
+#line 232 "TF01QD.f"
     return 0;
 /* *** Last line of TF01QD *** */
 } /* tf01qd_ */

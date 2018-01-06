@@ -1,3 +1,4 @@
+#line 1 "AB01ND.f"
 /* AB01ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB01ND.f"
 /* Table of constant values */
 
 static doublereal c_b7 = 0.;
@@ -301,125 +303,209 @@ static logical c_false = FALSE_;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 258 "AB01ND.f"
     /* Parameter adjustments */
+#line 258 "AB01ND.f"
     a_dim1 = *lda;
+#line 258 "AB01ND.f"
     a_offset = 1 + a_dim1;
+#line 258 "AB01ND.f"
     a -= a_offset;
+#line 258 "AB01ND.f"
     b_dim1 = *ldb;
+#line 258 "AB01ND.f"
     b_offset = 1 + b_dim1;
+#line 258 "AB01ND.f"
     b -= b_offset;
+#line 258 "AB01ND.f"
     --nblk;
+#line 258 "AB01ND.f"
     z_dim1 = *ldz;
+#line 258 "AB01ND.f"
     z_offset = 1 + z_dim1;
+#line 258 "AB01ND.f"
     z__ -= z_offset;
+#line 258 "AB01ND.f"
     --tau;
+#line 258 "AB01ND.f"
     --iwork;
+#line 258 "AB01ND.f"
     --dwork;
+#line 258 "AB01ND.f"
 
+#line 258 "AB01ND.f"
     /* Function Body */
+#line 258 "AB01ND.f"
     *info = 0;
+#line 259 "AB01ND.f"
     ljobf = lsame_(jobz, "F", (ftnlen)1, (ftnlen)1);
+#line 260 "AB01ND.f"
     ljobi = lsame_(jobz, "I", (ftnlen)1, (ftnlen)1);
+#line 261 "AB01ND.f"
     ljobz = ljobf || ljobi;
 
 /*     Test the input scalar arguments. */
 
+#line 265 "AB01ND.f"
     if (! ljobz && ! lsame_(jobz, "N", (ftnlen)1, (ftnlen)1)) {
+#line 266 "AB01ND.f"
 	*info = -1;
+#line 267 "AB01ND.f"
     } else if (*n < 0) {
+#line 268 "AB01ND.f"
 	*info = -2;
+#line 269 "AB01ND.f"
     } else if (*m < 0) {
+#line 270 "AB01ND.f"
 	*info = -3;
+#line 271 "AB01ND.f"
     } else if (*lda < max(1,*n)) {
+#line 272 "AB01ND.f"
 	*info = -5;
+#line 273 "AB01ND.f"
     } else if (*ldb < max(1,*n)) {
+#line 274 "AB01ND.f"
 	*info = -7;
+#line 275 "AB01ND.f"
     } else if (*ldz < 1 || ljobz && *ldz < *n) {
+#line 276 "AB01ND.f"
 	*info = -12;
+#line 277 "AB01ND.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 277 "AB01ND.f"
 	i__1 = max(1,*n), i__2 = *m * 3;
+#line 277 "AB01ND.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 278 "AB01ND.f"
 	    *info = -17;
+#line 279 "AB01ND.f"
 	}
+#line 279 "AB01ND.f"
     }
 
+#line 281 "AB01ND.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 285 "AB01ND.f"
 	i__1 = -(*info);
+#line 285 "AB01ND.f"
 	xerbla_("AB01ND", &i__1, (ftnlen)6);
+#line 286 "AB01ND.f"
 	return 0;
+#line 287 "AB01ND.f"
     }
 
+#line 289 "AB01ND.f"
     *ncont = 0;
+#line 290 "AB01ND.f"
     *indcon = 0;
 
 /*     Quick return if possible. */
 
+#line 294 "AB01ND.f"
     if (min(*n,*m) == 0) {
+#line 295 "AB01ND.f"
 	if (*n > 0) {
+#line 296 "AB01ND.f"
 	    if (ljobi) {
+#line 297 "AB01ND.f"
 		dlaset_("Full", n, n, &c_b7, &c_b8, &z__[z_offset], ldz, (
 			ftnlen)4);
+#line 298 "AB01ND.f"
 	    } else if (ljobf) {
+#line 299 "AB01ND.f"
 		dlaset_("Full", n, n, &c_b7, &c_b7, &z__[z_offset], ldz, (
 			ftnlen)4);
+#line 300 "AB01ND.f"
 		dlaset_("Full", n, &c__1, &c_b7, &c_b7, &tau[1], n, (ftnlen)4)
 			;
+#line 301 "AB01ND.f"
 	    }
+#line 302 "AB01ND.f"
 	}
+#line 303 "AB01ND.f"
 	dwork[1] = 1.;
+#line 304 "AB01ND.f"
 	return 0;
+#line 305 "AB01ND.f"
     }
 
 /*     Calculate the absolute norms of A and B (used for scaling). */
 
+#line 309 "AB01ND.f"
     anorm = dlange_("M", n, n, &a[a_offset], lda, &dwork[1], (ftnlen)1);
+#line 310 "AB01ND.f"
     bnorm = dlange_("M", n, m, &b[b_offset], ldb, &dwork[1], (ftnlen)1);
 
 /*     Return if matrix B is zero. */
 
+#line 314 "AB01ND.f"
     if (bnorm == 0.) {
+#line 315 "AB01ND.f"
 	if (ljobi) {
+#line 316 "AB01ND.f"
 	    dlaset_("Full", n, n, &c_b7, &c_b8, &z__[z_offset], ldz, (ftnlen)
 		    4);
+#line 317 "AB01ND.f"
 	} else if (ljobf) {
+#line 318 "AB01ND.f"
 	    dlaset_("Full", n, n, &c_b7, &c_b7, &z__[z_offset], ldz, (ftnlen)
 		    4);
+#line 319 "AB01ND.f"
 	    dlaset_("Full", n, &c__1, &c_b7, &c_b7, &tau[1], n, (ftnlen)4);
+#line 320 "AB01ND.f"
 	}
+#line 321 "AB01ND.f"
 	dwork[1] = 1.;
+#line 322 "AB01ND.f"
 	return 0;
+#line 323 "AB01ND.f"
     }
 
 /*     Scale (if needed) the matrices A and B. */
 
+#line 327 "AB01ND.f"
     mb01pd_("Scale", "G", n, n, &c__0, &c__0, &anorm, &c__0, &nblk[1], &a[
 	    a_offset], lda, info, (ftnlen)5, (ftnlen)1);
+#line 329 "AB01ND.f"
     mb01pd_("Scale", "G", n, m, &c__0, &c__0, &bnorm, &c__0, &nblk[1], &b[
 	    b_offset], ldb, info, (ftnlen)5, (ftnlen)1);
 
 /*     Compute the Frobenius norm of [ B  A ] (used for rank estimation). */
 
+#line 334 "AB01ND.f"
     d__1 = dlange_("F", n, m, &b[b_offset], ldb, &dwork[1], (ftnlen)1);
+#line 334 "AB01ND.f"
     d__2 = dlange_("F", n, n, &a[a_offset], lda, &dwork[1], (ftnlen)1);
+#line 334 "AB01ND.f"
     fnrm = dlapy2_(&d__1, &d__2);
 
+#line 337 "AB01ND.f"
     toldef = *tol;
+#line 338 "AB01ND.f"
     if (toldef <= 0.) {
 
 /*        Use the default tolerance in controllability determination. */
 
+#line 342 "AB01ND.f"
 	toldef = (doublereal) (*n * *n) * dlamch_("EPSILON", (ftnlen)7);
+#line 343 "AB01ND.f"
     }
 
+#line 345 "AB01ND.f"
     wrkopt = 1;
+#line 346 "AB01ND.f"
     ni = 0;
+#line 347 "AB01ND.f"
     itau = 1;
+#line 348 "AB01ND.f"
     ncrt = *n;
+#line 349 "AB01ND.f"
     mcrt = *m;
+#line 350 "AB01ND.f"
     iqr = 1;
 
 /*     (Note: Comments in the code beginning "Workspace:" describe the */
@@ -428,6 +514,7 @@ static logical c_false = FALSE_;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 358 "AB01ND.f"
 L10:
 
 /*        Rank-revealing QR decomposition with column pivoting. */
@@ -435,14 +522,21 @@ L10:
 /*        the row IQR (initialized to 1 and then set to rank(B)+1). */
 /*        Workspace: 3*MCRT. */
 
+#line 365 "AB01ND.f"
     mb03oy_(&ncrt, &mcrt, &b[iqr + b_dim1], ldb, &toldef, &fnrm, &rank, sval, 
 	    &iwork[1], &tau[itau], &dwork[1], info);
 
+#line 368 "AB01ND.f"
     if (rank != 0) {
+#line 369 "AB01ND.f"
 	nj = ni;
+#line 370 "AB01ND.f"
 	ni = *ncont;
+#line 371 "AB01ND.f"
 	*ncont += rank;
+#line 372 "AB01ND.f"
 	++(*indcon);
+#line 373 "AB01ND.f"
 	nblk[*indcon] = rank;
 
 /*           Premultiply and postmultiply the appropriate block row */
@@ -450,117 +544,181 @@ L10:
 /*           Workspace: need   NCRT; */
 /*                      prefer NCRT*NB. */
 
+#line 380 "AB01ND.f"
 	dormqr_("Left", "Transpose", &ncrt, &ncrt, &rank, &b[iqr + b_dim1], 
 		ldb, &tau[itau], &a[ni + 1 + (ni + 1) * a_dim1], lda, &dwork[
 		1], ldwork, info, (ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 383 "AB01ND.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 383 "AB01ND.f"
 	wrkopt = max(i__1,i__2);
 
 /*           Workspace: need   N; */
 /*                      prefer N*NB. */
 
+#line 388 "AB01ND.f"
 	dormqr_("Right", "No transpose", n, &ncrt, &rank, &b[iqr + b_dim1], 
 		ldb, &tau[itau], &a[(ni + 1) * a_dim1 + 1], lda, &dwork[1], 
 		ldwork, info, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 391 "AB01ND.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 391 "AB01ND.f"
 	wrkopt = max(i__1,i__2);
 
 /*           If required, save transformations. */
 
+#line 395 "AB01ND.f"
 	if (ljobz && ncrt > 1) {
+#line 396 "AB01ND.f"
 	    i__1 = ncrt - 1;
 /* Computing MIN */
+#line 396 "AB01ND.f"
 	    i__3 = rank, i__4 = ncrt - 1;
+#line 396 "AB01ND.f"
 	    i__2 = min(i__3,i__4);
+#line 396 "AB01ND.f"
 	    dlacpy_("L", &i__1, &i__2, &b[iqr + 1 + b_dim1], ldb, &z__[ni + 2 
 		    + itau * z_dim1], ldz, (ftnlen)1);
+#line 398 "AB01ND.f"
 	}
 
 /*           Zero the subdiagonal elements of the current matrix. */
 
+#line 402 "AB01ND.f"
 	if (rank > 1) {
+#line 402 "AB01ND.f"
 	    i__1 = rank - 1;
+#line 402 "AB01ND.f"
 	    i__2 = rank - 1;
+#line 402 "AB01ND.f"
 	    dlaset_("L", &i__1, &i__2, &c_b7, &c_b7, &b[iqr + 1 + b_dim1], 
 		    ldb, (ftnlen)1);
+#line 402 "AB01ND.f"
 	}
 
 /*           Backward permutation of the columns of B or A. */
 
+#line 408 "AB01ND.f"
 	if (*indcon == 1) {
+#line 409 "AB01ND.f"
 	    dlapmt_(&c_false, &rank, m, &b[iqr + b_dim1], ldb, &iwork[1]);
+#line 410 "AB01ND.f"
 	    iqr = rank + 1;
+#line 411 "AB01ND.f"
 	} else {
+#line 412 "AB01ND.f"
 	    i__1 = mcrt;
+#line 412 "AB01ND.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 413 "AB01ND.f"
 		dcopy_(&rank, &b[iqr + j * b_dim1], &c__1, &a[ni + 1 + (nj + 
 			iwork[j]) * a_dim1], &c__1);
+#line 415 "AB01ND.f"
 /* L20: */
+#line 415 "AB01ND.f"
 	    }
+#line 416 "AB01ND.f"
 	}
 
+#line 418 "AB01ND.f"
 	itau += rank;
+#line 419 "AB01ND.f"
 	if (rank != ncrt) {
+#line 420 "AB01ND.f"
 	    mcrt = rank;
+#line 421 "AB01ND.f"
 	    ncrt -= rank;
+#line 422 "AB01ND.f"
 	    dlacpy_("G", &ncrt, &mcrt, &a[*ncont + 1 + (ni + 1) * a_dim1], 
 		    lda, &b[iqr + b_dim1], ldb, (ftnlen)1);
+#line 424 "AB01ND.f"
 	    dlaset_("G", &ncrt, &mcrt, &c_b7, &c_b7, &a[*ncont + 1 + (ni + 1) 
 		    * a_dim1], lda, (ftnlen)1);
+#line 426 "AB01ND.f"
 	    goto L10;
+#line 427 "AB01ND.f"
 	}
+#line 428 "AB01ND.f"
     }
 
 /*     If required, accumulate transformations. */
 /*     Workspace: need N;  prefer N*NB. */
 
+#line 433 "AB01ND.f"
     if (ljobi) {
 /* Computing MAX */
+#line 434 "AB01ND.f"
 	i__2 = 1, i__3 = itau - 1;
+#line 434 "AB01ND.f"
 	i__1 = max(i__2,i__3);
+#line 434 "AB01ND.f"
 	dorgqr_(n, n, &i__1, &z__[z_offset], ldz, &tau[1], &dwork[1], ldwork, 
 		info);
 /* Computing MAX */
+#line 436 "AB01ND.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 436 "AB01ND.f"
 	wrkopt = max(i__1,i__2);
+#line 437 "AB01ND.f"
     }
 
 /*     Annihilate the trailing blocks of B. */
 
+#line 441 "AB01ND.f"
     if (*n >= iqr) {
+#line 441 "AB01ND.f"
 	i__1 = *n - iqr + 1;
+#line 441 "AB01ND.f"
 	dlaset_("G", &i__1, m, &c_b7, &c_b7, &b[iqr + b_dim1], ldb, (ftnlen)1)
 		;
+#line 441 "AB01ND.f"
     }
 
 /*     Annihilate the trailing elements of TAU, if JOBZ = 'F'. */
 
+#line 446 "AB01ND.f"
     if (ljobf) {
+#line 447 "AB01ND.f"
 	i__1 = *n;
+#line 447 "AB01ND.f"
 	for (j = itau; j <= i__1; ++j) {
+#line 448 "AB01ND.f"
 	    tau[j] = 0.;
+#line 449 "AB01ND.f"
 /* L30: */
+#line 449 "AB01ND.f"
 	}
+#line 450 "AB01ND.f"
     }
 
 /*     Undo scaling of A and B. */
 
+#line 454 "AB01ND.f"
     if (*indcon < *n) {
+#line 455 "AB01ND.f"
 	nbl = *indcon + 1;
+#line 456 "AB01ND.f"
 	nblk[nbl] = *n - *ncont;
+#line 457 "AB01ND.f"
     } else {
+#line 458 "AB01ND.f"
 	nbl = 0;
+#line 459 "AB01ND.f"
     }
+#line 460 "AB01ND.f"
     mb01pd_("Undo", "H", n, n, &c__0, &c__0, &anorm, &nbl, &nblk[1], &a[
 	    a_offset], lda, info, (ftnlen)4, (ftnlen)1);
+#line 462 "AB01ND.f"
     mb01pd_("Undo", "G", &nblk[1], m, &c__0, &c__0, &bnorm, &c__0, &nblk[1], &
 	    b[b_offset], ldb, info, (ftnlen)4, (ftnlen)1);
 
 /*     Set optimal workspace dimension. */
 
+#line 467 "AB01ND.f"
     dwork[1] = (doublereal) wrkopt;
+#line 468 "AB01ND.f"
     return 0;
 /* *** Last line of AB01ND *** */
 } /* ab01nd_ */

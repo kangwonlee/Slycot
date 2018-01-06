@@ -1,3 +1,4 @@
+#line 1 "AB13AD.f"
 /* AB13AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB13AD.f"
 doublereal ab13ad_(char *dico, char *equil, integer *n, integer *m, integer *
 	p, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, 
 	integer *ldb, doublereal *c__, integer *ldc, integer *ns, doublereal *
@@ -259,75 +261,129 @@ doublereal ab13ad_(char *dico, char *equil, integer *n, integer *m, integer *
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 231 "AB13AD.f"
     /* Parameter adjustments */
+#line 231 "AB13AD.f"
     a_dim1 = *lda;
+#line 231 "AB13AD.f"
     a_offset = 1 + a_dim1;
+#line 231 "AB13AD.f"
     a -= a_offset;
+#line 231 "AB13AD.f"
     b_dim1 = *ldb;
+#line 231 "AB13AD.f"
     b_offset = 1 + b_dim1;
+#line 231 "AB13AD.f"
     b -= b_offset;
+#line 231 "AB13AD.f"
     c_dim1 = *ldc;
+#line 231 "AB13AD.f"
     c_offset = 1 + c_dim1;
+#line 231 "AB13AD.f"
     c__ -= c_offset;
+#line 231 "AB13AD.f"
     --hsv;
+#line 231 "AB13AD.f"
     --dwork;
+#line 231 "AB13AD.f"
 
+#line 231 "AB13AD.f"
     /* Function Body */
+#line 231 "AB13AD.f"
     *info = 0;
+#line 232 "AB13AD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 236 "AB13AD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 237 "AB13AD.f"
 	*info = -1;
+#line 238 "AB13AD.f"
     } else if (! (lsame_(equil, "S", (ftnlen)1, (ftnlen)1) || lsame_(equil, 
 	    "N", (ftnlen)1, (ftnlen)1))) {
+#line 240 "AB13AD.f"
 	*info = -2;
+#line 241 "AB13AD.f"
     } else if (*n < 0) {
+#line 242 "AB13AD.f"
 	*info = -3;
+#line 243 "AB13AD.f"
     } else if (*m < 0) {
+#line 244 "AB13AD.f"
 	*info = -4;
+#line 245 "AB13AD.f"
     } else if (*p < 0) {
+#line 246 "AB13AD.f"
 	*info = -5;
+#line 247 "AB13AD.f"
     } else if (discr && (*alpha < 0. || *alpha > 1.) || ! discr && *alpha > 
 	    0.) {
+#line 249 "AB13AD.f"
 	*info = -6;
+#line 250 "AB13AD.f"
     } else if (*lda < max(1,*n)) {
+#line 251 "AB13AD.f"
 	*info = -8;
+#line 252 "AB13AD.f"
     } else if (*ldb < max(1,*n)) {
+#line 253 "AB13AD.f"
 	*info = -10;
+#line 254 "AB13AD.f"
     } else if (*ldc < max(1,*p)) {
+#line 255 "AB13AD.f"
 	*info = -12;
+#line 256 "AB13AD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 256 "AB13AD.f"
 	i__3 = max(*n,*m);
+#line 256 "AB13AD.f"
 	i__1 = 1, i__2 = *n * (max(i__3,*p) + 5) + *n * (*n + 1) / 2;
+#line 256 "AB13AD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 258 "AB13AD.f"
 	    *info = -16;
+#line 259 "AB13AD.f"
 	}
+#line 259 "AB13AD.f"
     }
 
+#line 261 "AB13AD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 265 "AB13AD.f"
 	i__1 = -(*info);
+#line 265 "AB13AD.f"
 	xerbla_("AB13AD", &i__1, (ftnlen)6);
+#line 266 "AB13AD.f"
 	return ret_val;
+#line 267 "AB13AD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 271 "AB13AD.f"
     i__1 = min(*n,*m);
+#line 271 "AB13AD.f"
     if (min(i__1,*p) == 0) {
+#line 272 "AB13AD.f"
 	*ns = 0;
+#line 273 "AB13AD.f"
 	ret_val = 0.;
+#line 274 "AB13AD.f"
 	dwork[1] = 1.;
+#line 275 "AB13AD.f"
 	return ret_val;
+#line 276 "AB13AD.f"
     }
 
+#line 278 "AB13AD.f"
     if (lsame_(equil, "S", (ftnlen)1, (ftnlen)1)) {
 
 /*        Scale simultaneously the matrices A, B and C: */
@@ -335,29 +391,46 @@ doublereal ab13ad_(char *dico, char *equil, integer *n, integer *m, integer *
 /*        diagonal matrix. */
 /*        Workspace: N. */
 
+#line 285 "AB13AD.f"
 	maxred = 100.;
+#line 286 "AB13AD.f"
 	tb01id_("All", n, m, p, &maxred, &a[a_offset], lda, &b[b_offset], ldb,
 		 &c__[c_offset], ldc, &dwork[1], info, (ftnlen)3);
+#line 288 "AB13AD.f"
     }
 
 /*     Correct the value of ALPHA to ensure stability. */
 
+#line 292 "AB13AD.f"
     alpwrk = *alpha;
+#line 293 "AB13AD.f"
     if (discr) {
+#line 294 "AB13AD.f"
 	if (*alpha == 1.) {
+#line 294 "AB13AD.f"
 	    alpwrk = 1. - sqrt(dlamch_("E", (ftnlen)1));
+#line 294 "AB13AD.f"
 	}
+#line 295 "AB13AD.f"
     } else {
+#line 296 "AB13AD.f"
 	if (*alpha == 0.) {
+#line 296 "AB13AD.f"
 	    alpwrk = -sqrt(dlamch_("E", (ftnlen)1));
+#line 296 "AB13AD.f"
 	}
+#line 297 "AB13AD.f"
     }
 
 /*     Allocate working storage. */
 
+#line 301 "AB13AD.f"
     kt = 1;
+#line 302 "AB13AD.f"
     kw1 = *n * *n + 1;
+#line 303 "AB13AD.f"
     kw2 = kw1 + *n;
+#line 304 "AB13AD.f"
     kw = kw2 + *n;
 
 /*     Reduce A to a block diagonal real Schur form, with the */
@@ -369,41 +442,63 @@ doublereal ab13ad_(char *dico, char *equil, integer *n, integer *m, integer *
 /*     Additional workspace:  need   3*N; */
 /*                            prefer larger. */
 
+#line 315 "AB13AD.f"
     i__1 = *ldwork - kw + 1;
+#line 315 "AB13AD.f"
     tb01kd_(dico, "Stable", "General", n, m, p, &alpwrk, &a[a_offset], lda, &
 	    b[b_offset], ldb, &c__[c_offset], ldc, ns, &dwork[kt], n, &dwork[
 	    kw1], &dwork[kw2], &dwork[kw], &i__1, &ierr, (ftnlen)1, (ftnlen)6,
 	     (ftnlen)7);
+#line 318 "AB13AD.f"
     if (ierr != 0) {
+#line 319 "AB13AD.f"
 	if (ierr != 3) {
+#line 320 "AB13AD.f"
 	    *info = 1;
+#line 321 "AB13AD.f"
 	} else {
+#line 322 "AB13AD.f"
 	    *info = 2;
+#line 323 "AB13AD.f"
 	}
+#line 324 "AB13AD.f"
 	return ret_val;
+#line 325 "AB13AD.f"
     }
 
+#line 327 "AB13AD.f"
     wrkopt = dwork[kw] + (doublereal) (kw - 1);
 
+#line 329 "AB13AD.f"
     if (*ns == 0) {
+#line 330 "AB13AD.f"
 	ret_val = 0.;
+#line 331 "AB13AD.f"
     } else {
 
 /*        Workspace:  need   N*(MAX(N,M,P)+5)+N*(N+1)/2; */
 /*                    prefer larger. */
 
+#line 336 "AB13AD.f"
 	ret_val = ab13ax_(dico, ns, m, p, &a[a_offset], lda, &b[b_offset], 
 		ldb, &c__[c_offset], ldc, &hsv[1], &dwork[1], ldwork, &ierr, (
 		ftnlen)1);
 
+#line 339 "AB13AD.f"
 	if (ierr != 0) {
+#line 340 "AB13AD.f"
 	    *info = ierr + 2;
+#line 341 "AB13AD.f"
 	    return ret_val;
+#line 342 "AB13AD.f"
 	}
 
+#line 344 "AB13AD.f"
 	dwork[1] = max(wrkopt,dwork[1]);
+#line 345 "AB13AD.f"
     }
 
+#line 347 "AB13AD.f"
     return ret_val;
 /* *** Last line of AB13AD *** */
 } /* ab13ad_ */

@@ -1,3 +1,4 @@
+#line 1 "TC04AD.f"
 /* TC04AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TC04AD.f"
 /* Table of constant values */
 
 static doublereal c_b12 = 0.;
@@ -302,134 +304,230 @@ static doublereal c_b27 = 1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 258 "TC04AD.f"
     /* Parameter adjustments */
+#line 258 "TC04AD.f"
     --index;
+#line 258 "TC04AD.f"
     pcoeff_dim1 = *ldpco1;
+#line 258 "TC04AD.f"
     pcoeff_dim2 = *ldpco2;
+#line 258 "TC04AD.f"
     pcoeff_offset = 1 + pcoeff_dim1 * (1 + pcoeff_dim2);
+#line 258 "TC04AD.f"
     pcoeff -= pcoeff_offset;
+#line 258 "TC04AD.f"
     qcoeff_dim1 = *ldqco1;
+#line 258 "TC04AD.f"
     qcoeff_dim2 = *ldqco2;
+#line 258 "TC04AD.f"
     qcoeff_offset = 1 + qcoeff_dim1 * (1 + qcoeff_dim2);
+#line 258 "TC04AD.f"
     qcoeff -= qcoeff_offset;
+#line 258 "TC04AD.f"
     a_dim1 = *lda;
+#line 258 "TC04AD.f"
     a_offset = 1 + a_dim1;
+#line 258 "TC04AD.f"
     a -= a_offset;
+#line 258 "TC04AD.f"
     b_dim1 = *ldb;
+#line 258 "TC04AD.f"
     b_offset = 1 + b_dim1;
+#line 258 "TC04AD.f"
     b -= b_offset;
+#line 258 "TC04AD.f"
     c_dim1 = *ldc;
+#line 258 "TC04AD.f"
     c_offset = 1 + c_dim1;
+#line 258 "TC04AD.f"
     c__ -= c_offset;
+#line 258 "TC04AD.f"
     d_dim1 = *ldd;
+#line 258 "TC04AD.f"
     d_offset = 1 + d_dim1;
+#line 258 "TC04AD.f"
     d__ -= d_offset;
+#line 258 "TC04AD.f"
     --iwork;
+#line 258 "TC04AD.f"
     --dwork;
+#line 258 "TC04AD.f"
 
+#line 258 "TC04AD.f"
     /* Function Body */
+#line 258 "TC04AD.f"
     *info = 0;
+#line 259 "TC04AD.f"
     lleri = lsame_(leri, "L", (ftnlen)1, (ftnlen)1);
+#line 260 "TC04AD.f"
     mindex = max(*m,*p);
 
 /*     Test the input scalar arguments. */
 
+#line 264 "TC04AD.f"
     if (! lleri && ! lsame_(leri, "R", (ftnlen)1, (ftnlen)1)) {
+#line 265 "TC04AD.f"
 	*info = -1;
+#line 266 "TC04AD.f"
     } else if (*m < 0) {
+#line 267 "TC04AD.f"
 	*info = -2;
+#line 268 "TC04AD.f"
     } else if (*p < 0) {
+#line 269 "TC04AD.f"
 	*info = -3;
+#line 270 "TC04AD.f"
     } else if (lleri && *ldpco1 < max(1,*p) || ! lleri && *ldpco1 < max(1,*m))
 	     {
+#line 272 "TC04AD.f"
 	*info = -6;
+#line 273 "TC04AD.f"
     } else if (lleri && *ldpco2 < max(1,*p) || ! lleri && *ldpco2 < max(1,*m))
 	     {
+#line 275 "TC04AD.f"
 	*info = -7;
+#line 276 "TC04AD.f"
     } else if (lleri && *ldqco1 < max(1,*p) || ! lleri && *ldqco1 < max(1,
 	    mindex)) {
+#line 278 "TC04AD.f"
 	*info = -9;
+#line 279 "TC04AD.f"
     } else if (lleri && *ldqco2 < max(1,*m) || ! lleri && *ldqco2 < max(1,
 	    mindex)) {
+#line 281 "TC04AD.f"
 	*info = -10;
+#line 282 "TC04AD.f"
     }
 
+#line 284 "TC04AD.f"
     *n = 0;
+#line 285 "TC04AD.f"
     if (*info == 0) {
+#line 286 "TC04AD.f"
 	if (lleri) {
+#line 287 "TC04AD.f"
 	    pwork = *p;
+#line 288 "TC04AD.f"
 	    mwork = *m;
+#line 289 "TC04AD.f"
 	} else {
+#line 290 "TC04AD.f"
 	    pwork = *m;
+#line 291 "TC04AD.f"
 	    mwork = *p;
+#line 292 "TC04AD.f"
 	}
 
+#line 294 "TC04AD.f"
 	maxind = 0;
+#line 295 "TC04AD.f"
 	i__1 = pwork;
+#line 295 "TC04AD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 296 "TC04AD.f"
 	    *n += index[i__];
+#line 297 "TC04AD.f"
 	    if (index[i__] > maxind) {
+#line 297 "TC04AD.f"
 		maxind = index[i__];
+#line 297 "TC04AD.f"
 	    }
+#line 298 "TC04AD.f"
 /* L10: */
+#line 298 "TC04AD.f"
 	}
+#line 299 "TC04AD.f"
 	kpcoef = maxind + 1;
+#line 300 "TC04AD.f"
     }
 
+#line 302 "TC04AD.f"
     if (*lda < max(1,*n)) {
+#line 303 "TC04AD.f"
 	*info = -14;
+#line 304 "TC04AD.f"
     } else if (*ldb < max(1,*n)) {
+#line 305 "TC04AD.f"
 	*info = -16;
+#line 306 "TC04AD.f"
     } else if (*ldc < max(1,mindex)) {
+#line 307 "TC04AD.f"
 	*info = -18;
+#line 308 "TC04AD.f"
     } else if (*ldd < max(1,mindex)) {
+#line 309 "TC04AD.f"
 	*info = -20;
+#line 310 "TC04AD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 310 "TC04AD.f"
 	i__1 = 1, i__2 = mindex * (mindex + 4);
+#line 310 "TC04AD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 311 "TC04AD.f"
 	    *info = -23;
+#line 312 "TC04AD.f"
 	}
+#line 312 "TC04AD.f"
     }
 
+#line 314 "TC04AD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 318 "TC04AD.f"
 	i__1 = -(*info);
+#line 318 "TC04AD.f"
 	xerbla_("TC04AD", &i__1, (ftnlen)6);
+#line 319 "TC04AD.f"
 	return 0;
+#line 320 "TC04AD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 324 "TC04AD.f"
     if (*m == 0 || *p == 0) {
+#line 325 "TC04AD.f"
 	*n = 0;
+#line 326 "TC04AD.f"
 	*rcond = 1.;
+#line 327 "TC04AD.f"
 	dwork[1] = 1.;
+#line 328 "TC04AD.f"
 	return 0;
+#line 329 "TC04AD.f"
     }
 
+#line 331 "TC04AD.f"
     if (! lleri) {
 
 /*        Initialization for right matrix fraction: obtain the dual */
 /*        system. */
 
+#line 336 "TC04AD.f"
 	tc01od_("R", m, p, &kpcoef, &pcoeff[pcoeff_offset], ldpco1, ldpco2, &
 		qcoeff[qcoeff_offset], ldqco1, ldqco2, info, (ftnlen)1);
+#line 338 "TC04AD.f"
     }
 
 /*     Store leading row coefficient matrix of P(s). */
 
+#line 342 "TC04AD.f"
     ldw = max(1,pwork);
+#line 343 "TC04AD.f"
     dlacpy_("Full", &pwork, &pwork, &pcoeff[pcoeff_offset], ldpco1, &dwork[1],
 	     &ldw, (ftnlen)4);
 
 /*     Check if P(s) is row proper: if not, exit. */
 
+#line 347 "TC04AD.f"
     dwnorm = dlange_("1-norm", &pwork, &pwork, &dwork[1], &ldw, &dwork[1], (
 	    ftnlen)6);
 
+#line 349 "TC04AD.f"
     dgetrf_(&pwork, &pwork, &dwork[1], &ldw, &iwork[1], info);
 
 /*     Workspace: need  PWORK*(PWORK + 4). */
@@ -440,105 +538,155 @@ static doublereal c_b27 = 1.;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 359 "TC04AD.f"
     jwork = ldw * pwork + 1;
 
+#line 361 "TC04AD.f"
     dgecon_("1-norm", &pwork, &dwork[1], &ldw, &dwnorm, rcond, &dwork[jwork], 
 	    &iwork[pwork + 1], info, (ftnlen)6);
 
 /* Computing MAX */
+#line 364 "TC04AD.f"
     i__1 = 1, i__2 = pwork * (pwork + 4);
+#line 364 "TC04AD.f"
     wrkopt = max(i__1,i__2);
 
+#line 366 "TC04AD.f"
     if (*rcond <= dlamch_("Epsilon", (ftnlen)7)) {
 
 /*        Error return: P(s) is not row proper. */
 
+#line 370 "TC04AD.f"
 	*info = 1;
+#line 371 "TC04AD.f"
 	return 0;
+#line 372 "TC04AD.f"
     } else {
 
 /*        Calculate the order of equivalent state-space representation, */
 /*        and initialize A. */
 
+#line 377 "TC04AD.f"
 	dlaset_("Full", n, n, &c_b12, &c_b12, &a[a_offset], lda, (ftnlen)4);
 
+#line 379 "TC04AD.f"
 	dwork[jwork] = 1.;
+#line 380 "TC04AD.f"
 	if (*n > 1) {
+#line 380 "TC04AD.f"
 	    i__1 = *n - 1;
+#line 380 "TC04AD.f"
 	    i__2 = *lda + 1;
+#line 380 "TC04AD.f"
 	    dcopy_(&i__1, &dwork[jwork], &c__0, &a[a_dim1 + 2], &i__2);
+#line 380 "TC04AD.f"
 	}
 
 /*        Find the PWORK ordered 'non-trivial' columns row by row, */
 /*        in PWORK row blocks, the I-th having INDEX(I) rows. */
 
+#line 385 "TC04AD.f"
 	ibias = 2;
 
+#line 387 "TC04AD.f"
 	i__1 = pwork;
+#line 387 "TC04AD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 388 "TC04AD.f"
 	    kstop = index[i__] + 1;
+#line 389 "TC04AD.f"
 	    if (kstop != 1) {
+#line 390 "TC04AD.f"
 		ibias += index[i__];
 
 /*              These rows given from the lower coefficients of row I */
 /*              of P(s). */
 
+#line 395 "TC04AD.f"
 		i__2 = kstop;
+#line 395 "TC04AD.f"
 		for (k = 2; k <= i__2; ++k) {
+#line 396 "TC04AD.f"
 		    ia = ibias - k;
 
+#line 398 "TC04AD.f"
 		    i__3 = pwork;
+#line 398 "TC04AD.f"
 		    for (j = 1; j <= i__3; ++j) {
+#line 399 "TC04AD.f"
 			dwork[jwork + j - 1] = -pcoeff[i__ + (j + k * 
 				pcoeff_dim2) * pcoeff_dim1];
+#line 400 "TC04AD.f"
 /* L20: */
+#line 400 "TC04AD.f"
 		    }
 
+#line 402 "TC04AD.f"
 		    dgetrs_("Transpose", &pwork, &c__1, &dwork[1], &ldw, &
 			    iwork[1], &dwork[jwork], &ldw, info, (ftnlen)9);
 
+#line 405 "TC04AD.f"
 		    ja = 0;
 
+#line 407 "TC04AD.f"
 		    i__3 = pwork;
+#line 407 "TC04AD.f"
 		    for (j = 1; j <= i__3; ++j) {
+#line 408 "TC04AD.f"
 			if (index[j] != 0) {
+#line 409 "TC04AD.f"
 			    ja += index[j];
+#line 410 "TC04AD.f"
 			    a[ia + ja * a_dim1] = dwork[jwork + j - 1];
+#line 411 "TC04AD.f"
 			}
+#line 412 "TC04AD.f"
 /* L30: */
+#line 412 "TC04AD.f"
 		    }
 
 /*                 Also, set up B and C (temporarily) for use when */
 /*                 finding B. */
 
+#line 417 "TC04AD.f"
 		    dcopy_(&mwork, &qcoeff[i__ + (k * qcoeff_dim2 + 1) * 
 			    qcoeff_dim1], ldqco1, &b[ia + b_dim1], ldb);
+#line 419 "TC04AD.f"
 		    dcopy_(&pwork, &pcoeff[i__ + (k * pcoeff_dim2 + 1) * 
 			    pcoeff_dim1], ldpco1, &c__[ia * c_dim1 + 1], &
 			    c__1);
+#line 420 "TC04AD.f"
 /* L40: */
+#line 420 "TC04AD.f"
 		}
 
+#line 422 "TC04AD.f"
 	    }
+#line 423 "TC04AD.f"
 /* L50: */
+#line 423 "TC04AD.f"
 	}
 
 /*        Calculate D from the leading coefficients of P and Q. */
 
+#line 427 "TC04AD.f"
 	dlacpy_("Full", &pwork, &mwork, &qcoeff[qcoeff_offset], ldqco1, &d__[
 		d_offset], ldd, (ftnlen)4);
 
+#line 429 "TC04AD.f"
 	dgetrs_("No transpose", &pwork, &mwork, &dwork[1], &ldw, &iwork[1], &
 		d__[d_offset], ldd, info, (ftnlen)12);
 
 /*        For B and C as set up above, desired B = B - (C' * D). */
 
+#line 434 "TC04AD.f"
 	dgemm_("Transpose", "No transpose", n, &mwork, &pwork, &c_b26, &c__[
 		c_offset], ldc, &d__[d_offset], ldd, &c_b27, &b[b_offset], 
 		ldb, (ftnlen)9, (ftnlen)12);
 
 /*        Finally, calculate C: zero, apart from ... */
 
+#line 439 "TC04AD.f"
 	dlaset_("Full", &pwork, n, &c_b12, &c_b12, &c__[c_offset], ldc, (
 		ftnlen)4);
 
@@ -548,47 +696,69 @@ static doublereal c_b27 = 1.;
 /*        Workspace: need   PWORK*(PWORK + 1); */
 /*                   prefer PWORK*PWORK + PWORK*NB. */
 
+#line 447 "TC04AD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 447 "TC04AD.f"
 	dgetri_(&pwork, &dwork[1], &ldw, &iwork[1], &dwork[jwork], &i__1, 
 		info);
 
 /* Computing MAX */
+#line 450 "TC04AD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 450 "TC04AD.f"
 	wrkopt = max(i__1,i__2);
+#line 451 "TC04AD.f"
 	jc = 0;
+#line 452 "TC04AD.f"
 	jw = 1;
 
+#line 454 "TC04AD.f"
 	i__1 = pwork;
+#line 454 "TC04AD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 455 "TC04AD.f"
 	    if (index[j] != 0) {
+#line 456 "TC04AD.f"
 		jc += index[j];
+#line 457 "TC04AD.f"
 		dcopy_(&pwork, &dwork[jw], &c__1, &c__[jc * c_dim1 + 1], &
 			c__1);
+#line 458 "TC04AD.f"
 	    }
+#line 459 "TC04AD.f"
 	    jw += ldw;
+#line 460 "TC04AD.f"
 /* L60: */
+#line 460 "TC04AD.f"
 	}
 
+#line 462 "TC04AD.f"
     }
 
 /*     For right matrix fraction, return to original (dual of dual) */
 /*     system. */
 
+#line 467 "TC04AD.f"
     if (! lleri) {
+#line 468 "TC04AD.f"
 	tc01od_("L", &mwork, &pwork, &kpcoef, &pcoeff[pcoeff_offset], ldpco1, 
 		ldpco2, &qcoeff[qcoeff_offset], ldqco1, ldqco2, info, (ftnlen)
 		1);
 
 /*        Also, obtain dual of state-space representation. */
 
+#line 473 "TC04AD.f"
 	ab07md_("D", n, &mwork, &pwork, &a[a_offset], lda, &b[b_offset], ldb, 
 		&c__[c_offset], ldc, &d__[d_offset], ldd, info, (ftnlen)1);
+#line 475 "TC04AD.f"
     }
 
 /*     Set optimal workspace dimension. */
 
+#line 479 "TC04AD.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 481 "TC04AD.f"
     return 0;
 /* *** Last line of TC04AD *** */
 } /* tc04ad_ */

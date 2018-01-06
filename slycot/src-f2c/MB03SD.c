@@ -1,3 +1,4 @@
+#line 1 "MB03SD.f"
 /* MB03SD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03SD.f"
 /* Table of constant values */
 
 static doublereal c_b9 = 1.;
@@ -261,132 +263,217 @@ static integer c__1 = 1;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 216 "MB03SD.f"
     /* Parameter adjustments */
+#line 216 "MB03SD.f"
     a_dim1 = *lda;
+#line 216 "MB03SD.f"
     a_offset = 1 + a_dim1;
+#line 216 "MB03SD.f"
     a -= a_offset;
+#line 216 "MB03SD.f"
     qg_dim1 = *ldqg;
+#line 216 "MB03SD.f"
     qg_offset = 1 + qg_dim1;
+#line 216 "MB03SD.f"
     qg -= qg_offset;
+#line 216 "MB03SD.f"
     --wr;
+#line 216 "MB03SD.f"
     --wi;
+#line 216 "MB03SD.f"
     --dwork;
+#line 216 "MB03SD.f"
 
+#line 216 "MB03SD.f"
     /* Function Body */
+#line 216 "MB03SD.f"
     *info = 0;
+#line 217 "MB03SD.f"
     n2 = *n * *n;
+#line 218 "MB03SD.f"
     scale = lsame_(jobscl, "S", (ftnlen)1, (ftnlen)1);
+#line 219 "MB03SD.f"
     if (! (scale || lsame_(jobscl, "N", (ftnlen)1, (ftnlen)1))) {
+#line 220 "MB03SD.f"
 	*info = -1;
+#line 221 "MB03SD.f"
     } else if (*n < 0) {
+#line 222 "MB03SD.f"
 	*info = -2;
+#line 223 "MB03SD.f"
     } else if (*lda < max(1,*n)) {
+#line 224 "MB03SD.f"
 	*info = -4;
+#line 225 "MB03SD.f"
     } else if (*ldqg < max(1,*n)) {
+#line 226 "MB03SD.f"
 	*info = -6;
+#line 227 "MB03SD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 227 "MB03SD.f"
 	i__1 = 1, i__2 = n2 + *n;
+#line 227 "MB03SD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 228 "MB03SD.f"
 	    *info = -10;
+#line 229 "MB03SD.f"
 	}
+#line 229 "MB03SD.f"
     }
 
+#line 231 "MB03SD.f"
     if (*info != 0) {
+#line 232 "MB03SD.f"
 	i__1 = -(*info);
+#line 232 "MB03SD.f"
 	xerbla_("MB03SD", &i__1, (ftnlen)6);
+#line 233 "MB03SD.f"
 	return 0;
+#line 234 "MB03SD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 238 "MB03SD.f"
     if (*n == 0) {
+#line 239 "MB03SD.f"
 	dwork[1] = 1.;
+#line 240 "MB03SD.f"
 	return 0;
+#line 241 "MB03SD.f"
     }
 
+#line 243 "MB03SD.f"
     chunk = (*ldwork - n2) / *n;
+#line 244 "MB03SD.f"
     block = min(chunk,*n) > 1;
+#line 245 "MB03SD.f"
     blas3 = chunk >= *n;
 
+#line 247 "MB03SD.f"
     if (blas3) {
+#line 248 "MB03SD.f"
 	jwork = n2 + 1;
+#line 249 "MB03SD.f"
     } else {
+#line 250 "MB03SD.f"
 	jwork = 1;
+#line 251 "MB03SD.f"
     }
 /*                             2 */
 /*     Form the matrix A'' = A'  + G'Q'. */
 
+#line 255 "MB03SD.f"
     dlacpy_("Lower", n, n, &qg[qg_offset], ldqg, &dwork[jwork], n, (ftnlen)5);
+#line 256 "MB03SD.f"
     ma02ed_("Lower", n, &dwork[jwork], n, (ftnlen)5);
 
+#line 258 "MB03SD.f"
     if (blas3) {
 
 /*        Use BLAS 3 calculation. */
 
+#line 262 "MB03SD.f"
 	dsymm_("Left", "Upper", n, n, &c_b9, &qg[(qg_dim1 << 1) + 1], ldqg, &
 		dwork[jwork], n, &c_b10, &dwork[1], n, (ftnlen)4, (ftnlen)5);
 
+#line 265 "MB03SD.f"
     } else if (block) {
+#line 266 "MB03SD.f"
 	jw = n2 + 1;
 
 /*        Use BLAS 3 for as many columns of Q' as possible. */
 
+#line 270 "MB03SD.f"
 	i__1 = *n;
+#line 270 "MB03SD.f"
 	i__2 = chunk;
+#line 270 "MB03SD.f"
 	for (j = 1; i__2 < 0 ? j >= i__1 : j <= i__1; j += i__2) {
 /* Computing MIN */
+#line 271 "MB03SD.f"
 	    i__3 = *n - j + 1;
+#line 271 "MB03SD.f"
 	    bl = min(i__3,chunk);
+#line 272 "MB03SD.f"
 	    dsymm_("Left", "Upper", n, &bl, &c_b9, &qg[(qg_dim1 << 1) + 1], 
 		    ldqg, &dwork[*n * (j - 1) + 1], n, &c_b10, &dwork[jw], n, 
 		    (ftnlen)4, (ftnlen)5);
+#line 274 "MB03SD.f"
 	    dlacpy_("Full", n, &bl, &dwork[jw], n, &dwork[*n * (j - 1) + 1], 
 		    n, (ftnlen)4);
+#line 276 "MB03SD.f"
 /* L10: */
+#line 276 "MB03SD.f"
 	}
 
+#line 278 "MB03SD.f"
     } else {
 
 /*        Use BLAS 2 calculation. */
 
+#line 282 "MB03SD.f"
 	i__2 = *n;
+#line 282 "MB03SD.f"
 	for (j = 1; j <= i__2; ++j) {
+#line 283 "MB03SD.f"
 	    dsymv_("Upper", n, &c_b9, &qg[(qg_dim1 << 1) + 1], ldqg, &dwork[*
 		    n * (j - 1) + 1], &c__1, &c_b10, &wr[1], &c__1, (ftnlen)5)
 		    ;
+#line 285 "MB03SD.f"
 	    dcopy_(n, &wr[1], &c__1, &dwork[*n * (j - 1) + 1], &c__1);
+#line 286 "MB03SD.f"
 /* L20: */
+#line 286 "MB03SD.f"
 	}
 
+#line 288 "MB03SD.f"
     }
 
+#line 290 "MB03SD.f"
     dgemm_("NoTranspose", "NoTranspose", n, n, n, &c_b9, &a[a_offset], lda, &
 	    a[a_offset], lda, &c_b9, &dwork[1], n, (ftnlen)11, (ftnlen)11);
+#line 292 "MB03SD.f"
     if (scale && *n > 2) {
+#line 292 "MB03SD.f"
 	i__2 = *n - 2;
+#line 292 "MB03SD.f"
 	i__1 = *n - 2;
+#line 292 "MB03SD.f"
 	dlaset_("Lower", &i__2, &i__1, &c_b10, &c_b10, &dwork[3], n, (ftnlen)
 		5);
+#line 292 "MB03SD.f"
     }
 /*                               2 */
 /*     Find the eigenvalues of A' + G'Q'. */
 
+#line 297 "MB03SD.f"
     dgebal_(jobscl, n, &dwork[1], n, &ilo, &ihi, &dwork[n2 + 1], &ignore, (
 	    ftnlen)1);
+#line 298 "MB03SD.f"
     dhseqr_("Eigenvalues", "NoSchurVectors", n, &ilo, &ihi, &dwork[1], n, &wr[
 	    1], &wi[1], dummy, &c__1, &dwork[n2 + 1], n, info, (ftnlen)11, (
 	    ftnlen)14);
+#line 300 "MB03SD.f"
     if (*info == 0) {
 
 /*        Eigenvalues of H' are the square roots of those computed above. */
 
+#line 304 "MB03SD.f"
 	i__2 = *n;
+#line 304 "MB03SD.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 305 "MB03SD.f"
 	    x = wr[i__];
+#line 306 "MB03SD.f"
 	    y = wi[i__];
+#line 307 "MB03SD.f"
 	    ma01ad_(&x, &y, &wr[i__], &wi[i__]);
+#line 308 "MB03SD.f"
 /* L30: */
+#line 308 "MB03SD.f"
 	}
 
 /*        Sort eigenvalues into decreasing order by real part and, for */
@@ -396,40 +483,66 @@ static integer c__1 = 1;
 /*        This ensures that complex conjugate pairs remain */
 /*        together.) */
 
+#line 317 "MB03SD.f"
 	sorted = FALSE_;
 
+#line 319 "MB03SD.f"
 	for (m = *n; m >= 1; --m) {
+#line 320 "MB03SD.f"
 	    if (sorted) {
+#line 320 "MB03SD.f"
 		goto L60;
+#line 320 "MB03SD.f"
 	    }
+#line 321 "MB03SD.f"
 	    sorted = TRUE_;
 
+#line 323 "MB03SD.f"
 	    i__2 = m - 1;
+#line 323 "MB03SD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 324 "MB03SD.f"
 		if (wr[i__] < wr[i__ + 1] || wr[i__] == 0. && wr[i__ + 1] == 
 			0. && wi[i__] < wi[i__ + 1]) {
+#line 327 "MB03SD.f"
 		    swap = wr[i__];
+#line 328 "MB03SD.f"
 		    wr[i__] = wr[i__ + 1];
+#line 329 "MB03SD.f"
 		    wr[i__ + 1] = swap;
+#line 330 "MB03SD.f"
 		    swap = wi[i__];
+#line 331 "MB03SD.f"
 		    wi[i__] = wi[i__ + 1];
+#line 332 "MB03SD.f"
 		    wi[i__ + 1] = swap;
 
+#line 334 "MB03SD.f"
 		    sorted = FALSE_;
 
+#line 336 "MB03SD.f"
 		}
+#line 337 "MB03SD.f"
 /* L40: */
+#line 337 "MB03SD.f"
 	    }
 
+#line 339 "MB03SD.f"
 /* L50: */
+#line 339 "MB03SD.f"
 	}
 
+#line 341 "MB03SD.f"
 L60:
 
+#line 343 "MB03SD.f"
 	;
+#line 343 "MB03SD.f"
     }
 
+#line 345 "MB03SD.f"
     dwork[1] = (doublereal) (n2 << 1);
+#line 346 "MB03SD.f"
     return 0;
 /*     *** Last line of MB03SD *** */
 } /* mb03sd_ */

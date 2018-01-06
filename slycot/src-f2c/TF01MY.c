@@ -1,3 +1,4 @@
+#line 1 "TF01MY.f"
 /* TF01MY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TF01MY.f"
 /* Table of constant values */
 
 static doublereal c_b4 = 0.;
@@ -210,89 +212,154 @@ static integer c_n1 = -1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 180 "TF01MY.f"
     /* Parameter adjustments */
+#line 180 "TF01MY.f"
     a_dim1 = *lda;
+#line 180 "TF01MY.f"
     a_offset = 1 + a_dim1;
+#line 180 "TF01MY.f"
     a -= a_offset;
+#line 180 "TF01MY.f"
     b_dim1 = *ldb;
+#line 180 "TF01MY.f"
     b_offset = 1 + b_dim1;
+#line 180 "TF01MY.f"
     b -= b_offset;
+#line 180 "TF01MY.f"
     c_dim1 = *ldc;
+#line 180 "TF01MY.f"
     c_offset = 1 + c_dim1;
+#line 180 "TF01MY.f"
     c__ -= c_offset;
+#line 180 "TF01MY.f"
     d_dim1 = *ldd;
+#line 180 "TF01MY.f"
     d_offset = 1 + d_dim1;
+#line 180 "TF01MY.f"
     d__ -= d_offset;
+#line 180 "TF01MY.f"
     u_dim1 = *ldu;
+#line 180 "TF01MY.f"
     u_offset = 1 + u_dim1;
+#line 180 "TF01MY.f"
     u -= u_offset;
+#line 180 "TF01MY.f"
     --x;
+#line 180 "TF01MY.f"
     y_dim1 = *ldy;
+#line 180 "TF01MY.f"
     y_offset = 1 + y_dim1;
+#line 180 "TF01MY.f"
     y -= y_offset;
+#line 180 "TF01MY.f"
     --dwork;
+#line 180 "TF01MY.f"
 
+#line 180 "TF01MY.f"
     /* Function Body */
+#line 180 "TF01MY.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 184 "TF01MY.f"
     maxn = max(1,*n);
+#line 185 "TF01MY.f"
     if (*n < 0) {
+#line 186 "TF01MY.f"
 	*info = -1;
+#line 187 "TF01MY.f"
     } else if (*m < 0) {
+#line 188 "TF01MY.f"
 	*info = -2;
+#line 189 "TF01MY.f"
     } else if (*p < 0) {
+#line 190 "TF01MY.f"
 	*info = -3;
+#line 191 "TF01MY.f"
     } else if (*ny < 0) {
+#line 192 "TF01MY.f"
 	*info = -4;
+#line 193 "TF01MY.f"
     } else if (*lda < maxn) {
+#line 194 "TF01MY.f"
 	*info = -6;
+#line 195 "TF01MY.f"
     } else if (*ldb < maxn) {
+#line 196 "TF01MY.f"
 	*info = -8;
+#line 197 "TF01MY.f"
     } else if (*ldc < max(1,*p)) {
+#line 198 "TF01MY.f"
 	*info = -10;
+#line 199 "TF01MY.f"
     } else if (*ldd < max(1,*p)) {
+#line 200 "TF01MY.f"
 	*info = -12;
+#line 201 "TF01MY.f"
     } else if (*ldu < max(1,*ny)) {
+#line 202 "TF01MY.f"
 	*info = -14;
+#line 203 "TF01MY.f"
     } else if (*ldy < max(1,*ny)) {
+#line 204 "TF01MY.f"
 	*info = -17;
+#line 205 "TF01MY.f"
     } else if (*ldwork < *n) {
+#line 206 "TF01MY.f"
 	*info = -19;
+#line 207 "TF01MY.f"
     }
 
+#line 209 "TF01MY.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 213 "TF01MY.f"
 	i__1 = -(*info);
+#line 213 "TF01MY.f"
 	xerbla_("TF01MY", &i__1, (ftnlen)6);
+#line 214 "TF01MY.f"
 	return 0;
+#line 215 "TF01MY.f"
     }
 
 /*     Quick return if possible. */
 
+#line 219 "TF01MY.f"
     if (min(*ny,*p) == 0) {
+#line 220 "TF01MY.f"
 	return 0;
+#line 221 "TF01MY.f"
     } else if (*n == 0) {
 
 /*        Non-dynamic system: compute the output vectors. */
 
+#line 225 "TF01MY.f"
 	if (*m == 0) {
+#line 226 "TF01MY.f"
 	    dlaset_("Full", ny, p, &c_b4, &c_b4, &y[y_offset], ldy, (ftnlen)4)
 		    ;
+#line 227 "TF01MY.f"
 	} else {
+#line 228 "TF01MY.f"
 	    dgemm_("No transpose", "Transpose", ny, p, m, &c_b8, &u[u_offset],
 		     ldu, &d__[d_offset], ldd, &c_b4, &y[y_offset], ldy, (
 		    ftnlen)12, (ftnlen)9);
+#line 230 "TF01MY.f"
 	}
+#line 231 "TF01MY.f"
 	return 0;
+#line 232 "TF01MY.f"
     }
 
 /*     Determine the block size (taken as for LAPACK routine DGETRF). */
 
+#line 236 "TF01MY.f"
     i__1 = max(*m,*p);
+#line 236 "TF01MY.f"
     nb = ilaenv_(&c__1, "DGETRF", " ", ny, &i__1, &c_n1, &c_n1, (ftnlen)6, (
 	    ftnlen)1);
 
@@ -300,9 +367,12 @@ static integer c_n1 = -1;
 /*     the provided workspace and initialize. */
 
 /* Computing MIN */
+#line 241 "TF01MY.f"
     i__1 = *ldwork / *n, i__2 = nb * nb / *n, i__1 = min(i__1,i__2);
+#line 241 "TF01MY.f"
     ns = min(i__1,*ny);
 
+#line 243 "TF01MY.f"
     if (ns <= 1 || *ny * max(*m,*p) <= nb * nb) {
 
 /*        LDWORK < 2*N or small problem: */
@@ -310,133 +380,187 @@ static integer c_n1 = -1;
 /*                     for computing the output corresponding to D = 0. */
 /*        One row of the array Y is computed for each loop index value. */
 
+#line 250 "TF01MY.f"
 	i__1 = *ny;
+#line 250 "TF01MY.f"
 	for (ik = 1; ik <= i__1; ++ik) {
+#line 251 "TF01MY.f"
 	    dgemv_("No transpose", p, n, &c_b8, &c__[c_offset], ldc, &x[1], &
 		    c__1, &c_b4, &y[ik + y_dim1], ldy, (ftnlen)12);
 
+#line 254 "TF01MY.f"
 	    dgemv_("No transpose", n, n, &c_b8, &a[a_offset], lda, &x[1], &
 		    c__1, &c_b4, &dwork[1], &c__1, (ftnlen)12);
+#line 256 "TF01MY.f"
 	    dgemv_("No transpose", n, m, &c_b8, &b[b_offset], ldb, &u[ik + 
 		    u_dim1], ldu, &c_b8, &dwork[1], &c__1, (ftnlen)12);
 
+#line 259 "TF01MY.f"
 	    dcopy_(n, &dwork[1], &c__1, &x[1], &c__1);
+#line 260 "TF01MY.f"
 /* L10: */
+#line 260 "TF01MY.f"
 	}
 
+#line 262 "TF01MY.f"
     } else {
 
 /*        LDWORK >= 2*N and large problem: */
 /*        some BLAS 3 calculations can also be used. */
 
+#line 267 "TF01MY.f"
 	iyl = *ny / ns * ns;
+#line 268 "TF01MY.f"
 	if (*m == 0) {
+#line 269 "TF01MY.f"
 	    upd = 0.;
+#line 270 "TF01MY.f"
 	} else {
+#line 271 "TF01MY.f"
 	    upd = 1.;
+#line 272 "TF01MY.f"
 	}
 
+#line 274 "TF01MY.f"
 	dcopy_(n, &x[1], &c__1, &dwork[1], &c__1);
 
+#line 276 "TF01MY.f"
 	i__1 = iyl;
+#line 276 "TF01MY.f"
 	i__2 = ns;
+#line 276 "TF01MY.f"
 	for (ik = 1; i__2 < 0 ? ik >= i__1 : ik <= i__1; ik += i__2) {
 
 /*           Compute the current NS-1 state vectors in the workspace. */
 
+#line 280 "TF01MY.f"
 	    i__3 = ns - 1;
+#line 280 "TF01MY.f"
 	    dgemm_("No transpose", "Transpose", n, &i__3, m, &c_b8, &b[
 		    b_offset], ldb, &u[ik + u_dim1], ldu, &c_b4, &dwork[*n + 
 		    1], &maxn, (ftnlen)12, (ftnlen)9);
 
+#line 283 "TF01MY.f"
 	    i__3 = ns - 1;
+#line 283 "TF01MY.f"
 	    for (is = 1; is <= i__3; ++is) {
+#line 284 "TF01MY.f"
 		dgemv_("No transpose", n, n, &c_b8, &a[a_offset], lda, &dwork[
 			(is - 1) * *n + 1], &c__1, &upd, &dwork[is * *n + 1], 
 			&c__1, (ftnlen)12);
+#line 286 "TF01MY.f"
 /* L20: */
+#line 286 "TF01MY.f"
 	    }
 
 /*           Initialize the current NS output vectors. */
 
+#line 290 "TF01MY.f"
 	    dgemm_("Transpose", "Transpose", &ns, p, n, &c_b8, &dwork[1], &
 		    maxn, &c__[c_offset], ldc, &c_b4, &y[ik + y_dim1], ldy, (
 		    ftnlen)9, (ftnlen)9);
 
 /*           Prepare the next iteration. */
 
+#line 295 "TF01MY.f"
 	    dgemv_("No transpose", n, m, &c_b8, &b[b_offset], ldb, &u[ik + ns 
 		    - 1 + u_dim1], ldu, &c_b4, &dwork[1], &c__1, (ftnlen)12);
+#line 297 "TF01MY.f"
 	    dgemv_("No transpose", n, n, &c_b8, &a[a_offset], lda, &dwork[(ns 
 		    - 1) * *n + 1], &c__1, &upd, &dwork[1], &c__1, (ftnlen)12)
 		    ;
+#line 299 "TF01MY.f"
 /* L30: */
+#line 299 "TF01MY.f"
 	}
 
+#line 301 "TF01MY.f"
 	irem = *ny - iyl;
 
+#line 303 "TF01MY.f"
 	if (irem > 1) {
 
 /*           Compute the last IREM output vectors. */
 /*           First, compute the current IREM-1 state vectors. */
 
+#line 308 "TF01MY.f"
 	    ik = iyl + 1;
+#line 309 "TF01MY.f"
 	    i__2 = irem - 1;
+#line 309 "TF01MY.f"
 	    dgemm_("No transpose", "Transpose", n, &i__2, m, &c_b8, &b[
 		    b_offset], ldb, &u[ik + u_dim1], ldu, &c_b4, &dwork[*n + 
 		    1], &maxn, (ftnlen)12, (ftnlen)9);
 
+#line 312 "TF01MY.f"
 	    i__2 = irem - 1;
+#line 312 "TF01MY.f"
 	    for (is = 1; is <= i__2; ++is) {
+#line 313 "TF01MY.f"
 		dgemv_("No transpose", n, n, &c_b8, &a[a_offset], lda, &dwork[
 			(is - 1) * *n + 1], &c__1, &upd, &dwork[is * *n + 1], 
 			&c__1, (ftnlen)12);
+#line 315 "TF01MY.f"
 /* L40: */
+#line 315 "TF01MY.f"
 	    }
 
 /*           Initialize the last IREM output vectors. */
 
+#line 319 "TF01MY.f"
 	    dgemm_("Transpose", "Transpose", &irem, p, n, &c_b8, &dwork[1], &
 		    maxn, &c__[c_offset], ldc, &c_b4, &y[ik + y_dim1], ldy, (
 		    ftnlen)9, (ftnlen)9);
 
 /*           Prepare the final state vector. */
 
+#line 324 "TF01MY.f"
 	    dgemv_("No transpose", n, m, &c_b8, &b[b_offset], ldb, &u[ik + 
 		    irem - 1 + u_dim1], ldu, &c_b4, &dwork[1], &c__1, (ftnlen)
 		    12);
+#line 326 "TF01MY.f"
 	    dgemv_("No transpose", n, n, &c_b8, &a[a_offset], lda, &dwork[(
 		    irem - 1) * *n + 1], &c__1, &upd, &dwork[1], &c__1, (
 		    ftnlen)12);
 
+#line 329 "TF01MY.f"
 	} else if (irem == 1) {
 
 /*           Compute the last 1 output vectors. */
 
+#line 333 "TF01MY.f"
 	    dgemv_("No transpose", p, n, &c_b8, &c__[c_offset], ldc, &dwork[1]
 		    , &c__1, &c_b4, &y[ik + y_dim1], ldy, (ftnlen)12);
 
 /*           Prepare the final state vector. */
 
+#line 338 "TF01MY.f"
 	    dcopy_(n, &dwork[1], &c__1, &dwork[*n + 1], &c__1);
+#line 339 "TF01MY.f"
 	    dgemv_("No transpose", n, m, &c_b8, &b[b_offset], ldb, &u[ik + 
 		    u_dim1], ldu, &c_b4, &dwork[1], &c__1, (ftnlen)12);
+#line 341 "TF01MY.f"
 	    dgemv_("No transpose", n, n, &c_b8, &a[a_offset], lda, &dwork[*n 
 		    + 1], &c__1, &upd, &dwork[1], &c__1, (ftnlen)12);
+#line 343 "TF01MY.f"
 	}
 
 /*        Set the final state vector. */
 
+#line 347 "TF01MY.f"
 	dcopy_(n, &dwork[1], &c__1, &x[1], &c__1);
 
+#line 349 "TF01MY.f"
     }
 
 /*     Add the direct contribution of the input to the output vectors. */
 
+#line 353 "TF01MY.f"
     dgemm_("No transpose", "Transpose", ny, p, m, &c_b8, &u[u_offset], ldu, &
 	    d__[d_offset], ldd, &c_b8, &y[y_offset], ldy, (ftnlen)12, (ftnlen)
 	    9);
 
+#line 356 "TF01MY.f"
     return 0;
 /* *** Last line of TF01MY *** */
 } /* tf01my_ */

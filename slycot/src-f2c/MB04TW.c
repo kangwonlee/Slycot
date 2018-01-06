@@ -1,3 +1,4 @@
+#line 1 "MB04TW.f"
 /* MB04TW.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04TW.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -171,29 +173,50 @@ static integer c__1 = 1;
 /*     .. External Subroutines .. */
 /*     .. Executable Statements .. */
 
+#line 149 "MB04TW.f"
     /* Parameter adjustments */
+#line 149 "MB04TW.f"
     a_dim1 = *lda;
+#line 149 "MB04TW.f"
     a_offset = 1 + a_dim1;
+#line 149 "MB04TW.f"
     a -= a_offset;
+#line 149 "MB04TW.f"
     e_dim1 = *lde;
+#line 149 "MB04TW.f"
     e_offset = 1 + e_dim1;
+#line 149 "MB04TW.f"
     e -= e_offset;
+#line 149 "MB04TW.f"
     q_dim1 = *ldq;
+#line 149 "MB04TW.f"
     q_offset = 1 + q_dim1;
+#line 149 "MB04TW.f"
     q -= q_offset;
+#line 149 "MB04TW.f"
 
+#line 149 "MB04TW.f"
     /* Function Body */
+#line 149 "MB04TW.f"
     if (*m <= 0 || *n <= 0 || *nre <= 0 || *nce <= 0) {
+#line 149 "MB04TW.f"
 	return 0;
+#line 149 "MB04TW.f"
     }
 
+#line 152 "MB04TW.f"
     ipvt = *ifire - 1;
 
+#line 154 "MB04TW.f"
     i__1 = *ifice + *nce - 1;
+#line 154 "MB04TW.f"
     for (j = *ifice; j <= i__1; ++j) {
+#line 155 "MB04TW.f"
 	++ipvt;
 
+#line 157 "MB04TW.f"
 	i__2 = *ifire + *nre - 1;
+#line 157 "MB04TW.f"
 	for (i__ = ipvt + 1; i__ <= i__2; ++i__) {
 
 /*           Determine the Givens transformation on rows i and ipvt */
@@ -204,24 +227,38 @@ static integer c__1 = 1;
 /*           (from columns ifica up to n). */
 /*           Update the row transformation matrix Q, if needed. */
 
+#line 167 "MB04TW.f"
 	    drotg_(&e[ipvt + j * e_dim1], &e[i__ + j * e_dim1], &sc, &ss);
+#line 168 "MB04TW.f"
 	    i__3 = *n - j;
+#line 168 "MB04TW.f"
 	    drot_(&i__3, &e[ipvt + (j + 1) * e_dim1], lde, &e[i__ + (j + 1) * 
 		    e_dim1], lde, &sc, &ss);
+#line 169 "MB04TW.f"
 	    e[i__ + j * e_dim1] = 0.;
+#line 170 "MB04TW.f"
 	    i__3 = *n - *ifica + 1;
+#line 170 "MB04TW.f"
 	    drot_(&i__3, &a[ipvt + *ifica * a_dim1], lda, &a[i__ + *ifica * 
 		    a_dim1], lda, &sc, &ss);
+#line 172 "MB04TW.f"
 	    if (*updatq) {
+#line 172 "MB04TW.f"
 		drot_(m, &q[ipvt * q_dim1 + 1], &c__1, &q[i__ * q_dim1 + 1], &
 			c__1, &sc, &ss);
+#line 172 "MB04TW.f"
 	    }
+#line 174 "MB04TW.f"
 /* L20: */
+#line 174 "MB04TW.f"
 	}
 
+#line 176 "MB04TW.f"
 /* L40: */
+#line 176 "MB04TW.f"
     }
 
+#line 178 "MB04TW.f"
     return 0;
 /* *** Last line of MB04TW *** */
 } /* mb04tw_ */

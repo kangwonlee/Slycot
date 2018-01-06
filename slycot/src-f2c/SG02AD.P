@@ -1,0 +1,25 @@
+extern int sg02ad_(char *dico, char *jobb, char *fact, char *uplo, char *jobl, char *scal, char *sort, char *acc, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *b, integer *ldb, doublereal *q, integer *ldq, doublereal *r__, integer *ldr, doublereal *l, integer *ldl, doublereal *rcondu, doublereal *x, integer *ldx, doublereal *alfar, doublereal *alfai, doublereal *beta, doublereal *s, integer *lds, doublereal *t, integer *ldt, doublereal *u, integer *ldu, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, logical *bwork, integer *iwarn, integer *info, ftnlen dico_len, ftnlen jobb_len, ftnlen fact_len, ftnlen uplo_len, ftnlen jobl_len, ftnlen scal_len, ftnlen sort_len, ftnlen acc_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlansy_ 7 8 13 13 4 7 4 7 124 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dlascl_ 14 11 13 4 4 7 7 4 4 7 4 4 124 */
+/*:ref: sb02oy_ 14 38 13 13 13 13 13 13 13 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 4 124 124 124 124 124 124 124 */
+/*:ref: sb02ov_ 12 :*/
+/*:ref: dgges_ 14 24 13 13 13 212 4 7 4 7 4 4 7 7 7 7 4 7 4 7 4 12 4 124 124 124 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: sb02ow_ 12 :*/
+/*:ref: sb02ou_ 12 :*/
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dgeqrf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dorgqr_ 14 9 4 4 4 7 4 7 7 4 4 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: mb02pd_ 14 25 13 13 4 4 7 4 7 4 4 13 7 7 7 4 7 4 7 7 7 4 7 4 124 124 124 */
+/*:ref: mb01sd_ 14 8 13 4 4 7 4 7 7 124 */
+/*:ref: mb02vd_ 14 10 13 4 4 7 4 4 7 4 4 124 */
+/*:ref: dgecon_ 14 10 13 4 7 4 7 7 7 4 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */

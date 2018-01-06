@@ -1,0 +1,13 @@
+extern int mb02pd_(char *fact, char *trans, integer *n, integer *nrhs, doublereal *a, integer *lda, doublereal *af, integer *ldaf, integer *ipiv, char *equed, doublereal *r__, doublereal *c__, doublereal *b, integer *ldb, doublereal *x, integer *ldx, doublereal *rcond, doublereal *ferr, doublereal *berr, integer *iwork, doublereal *dwork, integer *info, ftnlen fact_len, ftnlen trans_len, ftnlen equed_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dgeequ_ 14 10 4 4 7 4 7 7 7 7 7 4 */
+/*:ref: dlaqge_ 14 11 4 4 7 4 7 7 7 7 7 13 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dgetrf_ 14 6 4 4 7 4 4 4 */
+/*:ref: dlantr_ 7 11 13 13 13 4 4 7 4 7 124 124 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dgecon_ 14 10 13 4 7 4 7 7 7 4 4 124 */
+/*:ref: dgetrs_ 14 10 13 4 4 7 4 4 7 4 4 124 */
+/*:ref: dgerfs_ 14 18 13 4 4 7 4 7 4 4 7 4 7 4 7 7 7 4 4 124 */

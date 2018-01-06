@@ -1,3 +1,4 @@
+#line 1 "SG03BV.f"
 /* SG03BV.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SG03BV.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -331,65 +333,110 @@ static integer c__4 = 4;
 
 /*     Decode input parameter. */
 
+#line 278 "SG03BV.f"
     /* Parameter adjustments */
+#line 278 "SG03BV.f"
     a_dim1 = *lda;
+#line 278 "SG03BV.f"
     a_offset = 1 + a_dim1;
+#line 278 "SG03BV.f"
     a -= a_offset;
+#line 278 "SG03BV.f"
     e_dim1 = *lde;
+#line 278 "SG03BV.f"
     e_offset = 1 + e_dim1;
+#line 278 "SG03BV.f"
     e -= e_offset;
+#line 278 "SG03BV.f"
     b_dim1 = *ldb;
+#line 278 "SG03BV.f"
     b_offset = 1 + b_dim1;
+#line 278 "SG03BV.f"
     b -= b_offset;
+#line 278 "SG03BV.f"
     --dwork;
+#line 278 "SG03BV.f"
 
+#line 278 "SG03BV.f"
     /* Function Body */
+#line 278 "SG03BV.f"
     notrns = lsame_(trans, "N", (ftnlen)1, (ftnlen)1);
 
 /*     Check the scalar input parameters. */
 
+#line 282 "SG03BV.f"
     if (! (notrns || lsame_(trans, "T", (ftnlen)1, (ftnlen)1))) {
+#line 283 "SG03BV.f"
 	*info = -1;
+#line 284 "SG03BV.f"
     } else if (*n < 0) {
+#line 285 "SG03BV.f"
 	*info = -2;
+#line 286 "SG03BV.f"
     } else if (*lda < max(1,*n)) {
+#line 287 "SG03BV.f"
 	*info = -4;
+#line 288 "SG03BV.f"
     } else if (*lde < max(1,*n)) {
+#line 289 "SG03BV.f"
 	*info = -6;
+#line 290 "SG03BV.f"
     } else if (*ldb < max(1,*n)) {
+#line 291 "SG03BV.f"
 	*info = -8;
+#line 292 "SG03BV.f"
     } else {
+#line 293 "SG03BV.f"
 	*info = 0;
+#line 294 "SG03BV.f"
     }
+#line 295 "SG03BV.f"
     if (*info != 0) {
+#line 296 "SG03BV.f"
 	i__1 = -(*info);
+#line 296 "SG03BV.f"
 	xerbla_("SG03BV", &i__1, (ftnlen)6);
+#line 297 "SG03BV.f"
 	return 0;
+#line 298 "SG03BV.f"
     }
 
+#line 300 "SG03BV.f"
     *scale = 1.;
 
 /*     Quick return if possible. */
 
+#line 304 "SG03BV.f"
     if (*n == 0) {
+#line 304 "SG03BV.f"
 	return 0;
+#line 304 "SG03BV.f"
     }
 
 /*     Set constants to control overflow. */
 
+#line 309 "SG03BV.f"
     eps = dlamch_("P", (ftnlen)1);
+#line 310 "SG03BV.f"
     smlnum = dlamch_("S", (ftnlen)1) / eps;
+#line 311 "SG03BV.f"
     bignum = 1. / smlnum;
+#line 312 "SG03BV.f"
     dlabad_(&smlnum, &bignum);
 
 /*     Set work space pointers and leading dimension of matrices in */
 /*     work space. */
 
+#line 317 "SG03BV.f"
     uiipt = 1;
+#line 318 "SG03BV.f"
     wpt = (*n << 1) - 1;
+#line 319 "SG03BV.f"
     ypt = (*n << 2) - 3;
+#line 320 "SG03BV.f"
     ldws = *n - 1;
 
+#line 322 "SG03BV.f"
     if (notrns) {
 
 /*        Solve equation (1). */
@@ -397,71 +444,123 @@ static integer c__4 = 4;
 /*        Main Loop. Compute block row U(KL:KH,KL:N). KB denotes the */
 /*        number of rows in this block row. */
 
+#line 329 "SG03BV.f"
 	kh = 0;
 /*        WHILE ( KH .LT. N ) DO */
+#line 331 "SG03BV.f"
 L20:
+#line 331 "SG03BV.f"
 	if (kh < *n) {
+#line 332 "SG03BV.f"
 	    kl = kh + 1;
+#line 333 "SG03BV.f"
 	    if (kl == *n) {
+#line 334 "SG03BV.f"
 		kh = *n;
+#line 335 "SG03BV.f"
 		kb = 1;
+#line 336 "SG03BV.f"
 	    } else {
+#line 337 "SG03BV.f"
 		if (a[kl + 1 + kl * a_dim1] == 0.) {
+#line 338 "SG03BV.f"
 		    kh = kl;
+#line 339 "SG03BV.f"
 		    kb = 1;
+#line 340 "SG03BV.f"
 		} else {
+#line 341 "SG03BV.f"
 		    kh = kl + 1;
+#line 342 "SG03BV.f"
 		    kb = 2;
+#line 343 "SG03BV.f"
 		}
+#line 344 "SG03BV.f"
 	    }
 
 /*           STEP I: Compute block U(KL:KH,KL:KH) and the auxiliary */
 /*                   matrices M1 and M2. (For the moment the result */
 /*                   U(KL:KH,KL:KH) is stored in UI). */
 
+#line 350 "SG03BV.f"
 	    if (kb == 1) {
+#line 351 "SG03BV.f"
 		delta1 = a[kl + kl * a_dim1] * -2. * e[kl + kl * e_dim1];
+#line 352 "SG03BV.f"
 		if (delta1 <= 0.) {
+#line 353 "SG03BV.f"
 		    *info = 3;
+#line 354 "SG03BV.f"
 		    return 0;
+#line 355 "SG03BV.f"
 		}
+#line 356 "SG03BV.f"
 		delta1 = sqrt(delta1);
+#line 357 "SG03BV.f"
 		z__ = (d__1 = b[kl + kl * b_dim1], abs(d__1)) * 2. * smlnum;
+#line 358 "SG03BV.f"
 		if (z__ > delta1) {
+#line 359 "SG03BV.f"
 		    scale1 = delta1 / z__;
+#line 360 "SG03BV.f"
 		    *scale = scale1 * *scale;
+#line 361 "SG03BV.f"
 		    i__1 = *n;
+#line 361 "SG03BV.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 362 "SG03BV.f"
 			dscal_(&i__, &scale1, &b[i__ * b_dim1 + 1], &c__1);
+#line 363 "SG03BV.f"
 /* L40: */
+#line 363 "SG03BV.f"
 		    }
+#line 364 "SG03BV.f"
 		}
+#line 365 "SG03BV.f"
 		ui[0] = b[kl + kl * b_dim1] / delta1;
+#line 366 "SG03BV.f"
 		m1[0] = a[kl + kl * a_dim1] / e[kl + kl * e_dim1];
+#line 367 "SG03BV.f"
 		m2[0] = delta1 / e[kl + kl * e_dim1];
+#line 368 "SG03BV.f"
 	    } else {
 
 /*              If a pair of complex conjugate eigenvalues occurs, apply */
 /*              (complex) Hammarling algorithm for the 2-by-2 problem. */
 
+#line 373 "SG03BV.f"
 		sg03bx_("C", "N", &a[kl + kl * a_dim1], lda, &e[kl + kl * 
 			e_dim1], lde, &b[kl + kl * b_dim1], ldb, ui, &c__2, &
 			scale1, m1, &c__2, m2, &c__2, &info1, (ftnlen)1, (
 			ftnlen)1);
+#line 376 "SG03BV.f"
 		if (info1 != 0) {
+#line 377 "SG03BV.f"
 		    *info = info1;
+#line 378 "SG03BV.f"
 		    return 0;
+#line 379 "SG03BV.f"
 		}
+#line 380 "SG03BV.f"
 		if (scale1 != 1.) {
+#line 381 "SG03BV.f"
 		    *scale = scale1 * *scale;
+#line 382 "SG03BV.f"
 		    i__1 = *n;
+#line 382 "SG03BV.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 383 "SG03BV.f"
 			dscal_(&i__, &scale1, &b[i__ * b_dim1 + 1], &c__1);
+#line 384 "SG03BV.f"
 /* L60: */
+#line 384 "SG03BV.f"
 		    }
+#line 385 "SG03BV.f"
 		}
+#line 386 "SG03BV.f"
 	    }
 
+#line 388 "SG03BV.f"
 	    if (kh < *n) {
 
 /*              STEP II: Compute U(KL:KH,KH+1:N) by solving a generalized */
@@ -470,40 +569,62 @@ L20:
 
 /*              Form right hand side of the Sylvester equation. */
 
+#line 396 "SG03BV.f"
 		i__1 = *n - kh;
+#line 396 "SG03BV.f"
 		dgemm_("T", "N", &i__1, &kb, &kb, &c_b19, &b[kl + (kh + 1) * 
 			b_dim1], ldb, m2, &c__2, &c_b21, &dwork[uiipt], &ldws,
 			 (ftnlen)1, (ftnlen)1);
+#line 398 "SG03BV.f"
 		i__1 = *n - kh;
+#line 398 "SG03BV.f"
 		dgemm_("T", "T", &i__1, &kb, &kb, &c_b19, &a[kl + (kh + 1) * 
 			a_dim1], lda, ui, &c__2, &c_b26, &dwork[uiipt], &ldws,
 			 (ftnlen)1, (ftnlen)1);
+#line 400 "SG03BV.f"
 		dgemm_("T", "N", &kb, &kb, &kb, &c_b26, ui, &c__2, m1, &c__2, 
 			&c_b21, tm, &c__2, (ftnlen)1, (ftnlen)1);
+#line 402 "SG03BV.f"
 		i__1 = *n - kh;
+#line 402 "SG03BV.f"
 		dgemm_("T", "N", &i__1, &kb, &kb, &c_b19, &e[kl + (kh + 1) * 
 			e_dim1], lde, tm, &c__2, &c_b26, &dwork[uiipt], &ldws,
 			 (ftnlen)1, (ftnlen)1);
 
 /*              Solve generalized Sylvester equation. */
 
+#line 407 "SG03BV.f"
 		dlaset_("A", &kb, &kb, &c_b21, &c_b26, tm, &c__2, (ftnlen)1);
+#line 408 "SG03BV.f"
 		i__1 = *n - kh;
+#line 408 "SG03BV.f"
 		sg03bw_("N", &i__1, &kb, &a[kh + 1 + (kh + 1) * a_dim1], lda, 
 			tm, &c__2, &e[kh + 1 + (kh + 1) * e_dim1], lde, m1, &
 			c__2, &dwork[uiipt], &ldws, &scale1, &info1, (ftnlen)
 			1);
+#line 411 "SG03BV.f"
 		if (info1 != 0) {
+#line 411 "SG03BV.f"
 		    *info = 1;
+#line 411 "SG03BV.f"
 		}
+#line 413 "SG03BV.f"
 		if (scale1 != 1.) {
+#line 414 "SG03BV.f"
 		    *scale = scale1 * *scale;
+#line 415 "SG03BV.f"
 		    i__1 = *n;
+#line 415 "SG03BV.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 416 "SG03BV.f"
 			dscal_(&i__, &scale1, &b[i__ * b_dim1 + 1], &c__1);
+#line 417 "SG03BV.f"
 /* L80: */
+#line 417 "SG03BV.f"
 		    }
+#line 418 "SG03BV.f"
 		    dscal_(&c__4, &scale1, ui, &c__1);
+#line 419 "SG03BV.f"
 		}
 
 /*              STEP III: Form the right hand side matrix */
@@ -513,25 +634,39 @@ L20:
 
 /*              Compute auxiliary vectors (or matrices) W and Y. */
 
+#line 428 "SG03BV.f"
 		i__1 = *n - kh;
+#line 428 "SG03BV.f"
 		dlacpy_("A", &i__1, &kb, &dwork[uiipt], &ldws, &dwork[wpt], &
 			ldws, (ftnlen)1);
+#line 430 "SG03BV.f"
 		i__1 = *n - kh;
+#line 430 "SG03BV.f"
 		dtrmm_("L", "U", "T", "N", &i__1, &kb, &c_b26, &e[kh + 1 + (
 			kh + 1) * e_dim1], lde, &dwork[wpt], &ldws, (ftnlen)1,
 			 (ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 432 "SG03BV.f"
 		i__1 = *n - kh;
+#line 432 "SG03BV.f"
 		dgemm_("T", "T", &i__1, &kb, &kb, &c_b26, &e[kl + (kh + 1) * 
 			e_dim1], lde, ui, &c__2, &c_b26, &dwork[wpt], &ldws, (
 			ftnlen)1, (ftnlen)1);
+#line 434 "SG03BV.f"
 		i__1 = kh;
+#line 434 "SG03BV.f"
 		for (i__ = kl; i__ <= i__1; ++i__) {
+#line 435 "SG03BV.f"
 		    i__2 = *n - kh;
+#line 435 "SG03BV.f"
 		    dcopy_(&i__2, &b[i__ + (kh + 1) * b_dim1], ldb, &dwork[
 			    ypt + ldws * (i__ - kl)], &c__1);
+#line 437 "SG03BV.f"
 /* L100: */
+#line 437 "SG03BV.f"
 		}
+#line 438 "SG03BV.f"
 		i__1 = *n - kh;
+#line 438 "SG03BV.f"
 		dgemm_("N", "T", &i__1, &kb, &kb, &c_b19, &dwork[wpt], &ldws, 
 			m2, &c__2, &c_b26, &dwork[ypt], &ldws, (ftnlen)1, (
 			ftnlen)1);
@@ -544,55 +679,87 @@ L20:
 /*                          (                    ) */
 /*                          (       Y**T         ) . */
 
+#line 449 "SG03BV.f"
 		i__1 = kb;
+#line 449 "SG03BV.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 450 "SG03BV.f"
 		    i__2 = *n - kh;
+#line 450 "SG03BV.f"
 		    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 451 "SG03BV.f"
 			x = b[kh + i__ + (kh + i__) * b_dim1];
+#line 452 "SG03BV.f"
 			z__ = dwork[ypt + i__ - 1 + (j - 1) * ldws];
+#line 453 "SG03BV.f"
 			drotg_(&x, &z__, &c__, &s);
+#line 454 "SG03BV.f"
 			i__3 = *n - kh - i__ + 1;
+#line 454 "SG03BV.f"
 			drot_(&i__3, &b[kh + i__ + (kh + i__) * b_dim1], ldb, 
 				&dwork[ypt + i__ - 1 + (j - 1) * ldws], &c__1,
 				 &c__, &s);
+#line 456 "SG03BV.f"
 /* L120: */
+#line 456 "SG03BV.f"
 		    }
+#line 457 "SG03BV.f"
 /* L140: */
+#line 457 "SG03BV.f"
 		}
 
 /*              Make main diagonal elements of B(KH+1:N,KH+1:N) positive. */
 
+#line 461 "SG03BV.f"
 		i__1 = *n;
+#line 461 "SG03BV.f"
 		for (i__ = kh + 1; i__ <= i__1; ++i__) {
+#line 462 "SG03BV.f"
 		    if (b[i__ + i__ * b_dim1] < 0.) {
+#line 462 "SG03BV.f"
 			i__2 = *n - i__ + 1;
+#line 462 "SG03BV.f"
 			dscal_(&i__2, &c_b19, &b[i__ + i__ * b_dim1], ldb);
+#line 462 "SG03BV.f"
 		    }
+#line 464 "SG03BV.f"
 /* L160: */
+#line 464 "SG03BV.f"
 		}
 
 /*              Overwrite right hand side with the part of the solution */
 /*              computed in step II. */
 
+#line 469 "SG03BV.f"
 		i__1 = kh;
+#line 469 "SG03BV.f"
 		for (j = kl; j <= i__1; ++j) {
+#line 470 "SG03BV.f"
 		    i__2 = *n - kh;
+#line 470 "SG03BV.f"
 		    dcopy_(&i__2, &dwork[uiipt + (j - kl) * ldws], &c__1, &b[
 			    j + (kh + 1) * b_dim1], ldb);
+#line 472 "SG03BV.f"
 /* L180: */
+#line 472 "SG03BV.f"
 		}
+#line 473 "SG03BV.f"
 	    }
 
 /*           Overwrite right hand side with the part of the solution */
 /*           computed in step I. */
 
+#line 478 "SG03BV.f"
 	    dlacpy_("U", &kb, &kb, ui, &c__2, &b[kl + kl * b_dim1], ldb, (
 		    ftnlen)1);
 
+#line 480 "SG03BV.f"
 	    goto L20;
+#line 481 "SG03BV.f"
 	}
 /*        END WHILE 20 */
 
+#line 484 "SG03BV.f"
     } else {
 
 /*        Solve equation (2). */
@@ -600,71 +767,123 @@ L20:
 /*        Main Loop. Compute block column U(1:KH,KL:KH). KB denotes the */
 /*        number of columns in this block column. */
 
+#line 491 "SG03BV.f"
 	kl = *n + 1;
 /*        WHILE ( KL .GT. 1 ) DO */
+#line 493 "SG03BV.f"
 L200:
+#line 493 "SG03BV.f"
 	if (kl > 1) {
+#line 494 "SG03BV.f"
 	    kh = kl - 1;
+#line 495 "SG03BV.f"
 	    if (kh == 1) {
+#line 496 "SG03BV.f"
 		kl = 1;
+#line 497 "SG03BV.f"
 		kb = 1;
+#line 498 "SG03BV.f"
 	    } else {
+#line 499 "SG03BV.f"
 		if (a[kh + (kh - 1) * a_dim1] == 0.) {
+#line 500 "SG03BV.f"
 		    kl = kh;
+#line 501 "SG03BV.f"
 		    kb = 1;
+#line 502 "SG03BV.f"
 		} else {
+#line 503 "SG03BV.f"
 		    kl = kh - 1;
+#line 504 "SG03BV.f"
 		    kb = 2;
+#line 505 "SG03BV.f"
 		}
+#line 506 "SG03BV.f"
 	    }
 
 /*           STEP I: Compute block U(KL:KH,KL:KH) and the auxiliary */
 /*                   matrices M1 and M2. (For the moment the result */
 /*                   U(KL:KH,KL:KH) is stored in UI). */
 
+#line 512 "SG03BV.f"
 	    if (kb == 1) {
+#line 513 "SG03BV.f"
 		delta1 = a[kl + kl * a_dim1] * -2. * e[kl + kl * e_dim1];
+#line 514 "SG03BV.f"
 		if (delta1 <= 0.) {
+#line 515 "SG03BV.f"
 		    *info = 3;
+#line 516 "SG03BV.f"
 		    return 0;
+#line 517 "SG03BV.f"
 		}
+#line 518 "SG03BV.f"
 		delta1 = sqrt(delta1);
+#line 519 "SG03BV.f"
 		z__ = (d__1 = b[kl + kl * b_dim1], abs(d__1)) * 2. * smlnum;
+#line 520 "SG03BV.f"
 		if (z__ > delta1) {
+#line 521 "SG03BV.f"
 		    scale1 = delta1 / z__;
+#line 522 "SG03BV.f"
 		    *scale = scale1 * *scale;
+#line 523 "SG03BV.f"
 		    i__1 = *n;
+#line 523 "SG03BV.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 524 "SG03BV.f"
 			dscal_(&i__, &scale1, &b[i__ * b_dim1 + 1], &c__1);
+#line 525 "SG03BV.f"
 /* L220: */
+#line 525 "SG03BV.f"
 		    }
+#line 526 "SG03BV.f"
 		}
+#line 527 "SG03BV.f"
 		ui[0] = b[kl + kl * b_dim1] / delta1;
+#line 528 "SG03BV.f"
 		m1[0] = a[kl + kl * a_dim1] / e[kl + kl * e_dim1];
+#line 529 "SG03BV.f"
 		m2[0] = delta1 / e[kl + kl * e_dim1];
+#line 530 "SG03BV.f"
 	    } else {
 
 /*              If a pair of complex conjugate eigenvalues occurs, apply */
 /*              (complex) Hammarling algorithm for the 2-by-2 problem. */
 
+#line 535 "SG03BV.f"
 		sg03bx_("C", "T", &a[kl + kl * a_dim1], lda, &e[kl + kl * 
 			e_dim1], lde, &b[kl + kl * b_dim1], ldb, ui, &c__2, &
 			scale1, m1, &c__2, m2, &c__2, &info1, (ftnlen)1, (
 			ftnlen)1);
+#line 538 "SG03BV.f"
 		if (info1 != 0) {
+#line 539 "SG03BV.f"
 		    *info = info1;
+#line 540 "SG03BV.f"
 		    return 0;
+#line 541 "SG03BV.f"
 		}
+#line 542 "SG03BV.f"
 		if (scale1 != 1.) {
+#line 543 "SG03BV.f"
 		    *scale = scale1 * *scale;
+#line 544 "SG03BV.f"
 		    i__1 = *n;
+#line 544 "SG03BV.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 545 "SG03BV.f"
 			dscal_(&i__, &scale1, &b[i__ * b_dim1 + 1], &c__1);
+#line 546 "SG03BV.f"
 /* L240: */
+#line 546 "SG03BV.f"
 		    }
+#line 547 "SG03BV.f"
 		}
+#line 548 "SG03BV.f"
 	    }
 
+#line 550 "SG03BV.f"
 	    if (kl > 1) {
 
 /*              STEP II: Compute U(1:KL-1,KL:KH) by solving a generalized */
@@ -673,39 +892,61 @@ L200:
 
 /*              Form right hand side of the Sylvester equation. */
 
+#line 558 "SG03BV.f"
 		i__1 = kl - 1;
+#line 558 "SG03BV.f"
 		dgemm_("N", "T", &i__1, &kb, &kb, &c_b19, &b[kl * b_dim1 + 1],
 			 ldb, m2, &c__2, &c_b21, &dwork[uiipt], &ldws, (
 			ftnlen)1, (ftnlen)1);
+#line 560 "SG03BV.f"
 		i__1 = kl - 1;
+#line 560 "SG03BV.f"
 		dgemm_("N", "N", &i__1, &kb, &kb, &c_b19, &a[kl * a_dim1 + 1],
 			 lda, ui, &c__2, &c_b26, &dwork[uiipt], &ldws, (
 			ftnlen)1, (ftnlen)1);
+#line 562 "SG03BV.f"
 		dgemm_("N", "T", &kb, &kb, &kb, &c_b26, ui, &c__2, m1, &c__2, 
 			&c_b21, tm, &c__2, (ftnlen)1, (ftnlen)1);
+#line 564 "SG03BV.f"
 		i__1 = kl - 1;
+#line 564 "SG03BV.f"
 		dgemm_("N", "N", &i__1, &kb, &kb, &c_b19, &e[kl * e_dim1 + 1],
 			 lde, tm, &c__2, &c_b26, &dwork[uiipt], &ldws, (
 			ftnlen)1, (ftnlen)1);
 
 /*              Solve generalized Sylvester equation. */
 
+#line 569 "SG03BV.f"
 		dlaset_("A", &kb, &kb, &c_b21, &c_b26, tm, &c__2, (ftnlen)1);
+#line 570 "SG03BV.f"
 		i__1 = kl - 1;
+#line 570 "SG03BV.f"
 		sg03bw_("T", &i__1, &kb, &a[a_offset], lda, tm, &c__2, &e[
 			e_offset], lde, m1, &c__2, &dwork[uiipt], &ldws, &
 			scale1, &info1, (ftnlen)1);
+#line 572 "SG03BV.f"
 		if (info1 != 0) {
+#line 572 "SG03BV.f"
 		    *info = 1;
+#line 572 "SG03BV.f"
 		}
+#line 574 "SG03BV.f"
 		if (scale1 != 1.) {
+#line 575 "SG03BV.f"
 		    *scale = scale1 * *scale;
+#line 576 "SG03BV.f"
 		    i__1 = *n;
+#line 576 "SG03BV.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 577 "SG03BV.f"
 			dscal_(&i__, &scale1, &b[i__ * b_dim1 + 1], &c__1);
+#line 578 "SG03BV.f"
 /* L260: */
+#line 578 "SG03BV.f"
 		    }
+#line 579 "SG03BV.f"
 		    dscal_(&c__4, &scale1, ui, &c__1);
+#line 580 "SG03BV.f"
 		}
 
 /*              STEP III: Form the right hand side matrix */
@@ -715,21 +956,31 @@ L200:
 
 /*              Compute auxiliary vectors (or matrices) W and Y. */
 
+#line 589 "SG03BV.f"
 		i__1 = kl - 1;
+#line 589 "SG03BV.f"
 		dlacpy_("A", &i__1, &kb, &dwork[uiipt], &ldws, &dwork[wpt], &
 			ldws, (ftnlen)1);
+#line 591 "SG03BV.f"
 		i__1 = kl - 1;
+#line 591 "SG03BV.f"
 		dtrmm_("L", "U", "N", "N", &i__1, &kb, &c_b26, &e[e_dim1 + 1],
 			 lde, &dwork[wpt], &ldws, (ftnlen)1, (ftnlen)1, (
 			ftnlen)1, (ftnlen)1);
+#line 593 "SG03BV.f"
 		i__1 = kl - 1;
+#line 593 "SG03BV.f"
 		dgemm_("N", "N", &i__1, &kb, &kb, &c_b26, &e[kl * e_dim1 + 1],
 			 lde, ui, &c__2, &c_b26, &dwork[wpt], &ldws, (ftnlen)
 			1, (ftnlen)1);
+#line 595 "SG03BV.f"
 		i__1 = kl - 1;
+#line 595 "SG03BV.f"
 		dlacpy_("A", &i__1, &kb, &b[kl * b_dim1 + 1], ldb, &dwork[ypt]
 			, &ldws, (ftnlen)1);
+#line 597 "SG03BV.f"
 		i__1 = kl - 1;
+#line 597 "SG03BV.f"
 		dgemm_("N", "N", &i__1, &kb, &kb, &c_b19, &dwork[wpt], &ldws, 
 			m2, &c__2, &c_b26, &dwork[ypt], &ldws, (ftnlen)1, (
 			ftnlen)1);
@@ -741,50 +992,76 @@ L200:
 /*                          (  B(1:KL-1,1:KL-1)   Y  ) */
 /*                          (                        ). */
 
+#line 607 "SG03BV.f"
 		i__1 = kb;
+#line 607 "SG03BV.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 608 "SG03BV.f"
 		    for (i__ = kl - 1; i__ >= 1; --i__) {
+#line 609 "SG03BV.f"
 			x = b[i__ + i__ * b_dim1];
+#line 610 "SG03BV.f"
 			z__ = dwork[ypt + i__ - 1 + (j - 1) * ldws];
+#line 611 "SG03BV.f"
 			drotg_(&x, &z__, &c__, &s);
+#line 612 "SG03BV.f"
 			drot_(&i__, &b[i__ * b_dim1 + 1], &c__1, &dwork[ypt + 
 				(j - 1) * ldws], &c__1, &c__, &s);
+#line 614 "SG03BV.f"
 /* L280: */
+#line 614 "SG03BV.f"
 		    }
+#line 615 "SG03BV.f"
 /* L300: */
+#line 615 "SG03BV.f"
 		}
 
 /*              Make main diagonal elements of B(1:KL-1,1:KL-1) positive. */
 
+#line 619 "SG03BV.f"
 		i__1 = kl - 1;
+#line 619 "SG03BV.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 620 "SG03BV.f"
 		    if (b[i__ + i__ * b_dim1] < 0.) {
+#line 620 "SG03BV.f"
 			dscal_(&i__, &c_b19, &b[i__ * b_dim1 + 1], &c__1);
+#line 620 "SG03BV.f"
 		    }
+#line 622 "SG03BV.f"
 /* L320: */
+#line 622 "SG03BV.f"
 		}
 
 /*              Overwrite right hand side with the part of the solution */
 /*              computed in step II. */
 
+#line 627 "SG03BV.f"
 		i__1 = kl - 1;
+#line 627 "SG03BV.f"
 		dlacpy_("A", &i__1, &kb, &dwork[uiipt], &ldws, &b[kl * b_dim1 
 			+ 1], ldb, (ftnlen)1);
 
+#line 630 "SG03BV.f"
 	    }
 
 /*           Overwrite right hand side with the part of the solution */
 /*           computed in step I. */
 
+#line 635 "SG03BV.f"
 	    dlacpy_("U", &kb, &kb, ui, &c__2, &b[kl + kl * b_dim1], ldb, (
 		    ftnlen)1);
 
+#line 637 "SG03BV.f"
 	    goto L200;
+#line 638 "SG03BV.f"
 	}
 /*        END WHILE 200 */
 
+#line 641 "SG03BV.f"
     }
 
+#line 643 "SG03BV.f"
     return 0;
 /* *** Last line of SG03BV *** */
 } /* sg03bv_ */

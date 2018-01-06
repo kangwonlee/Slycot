@@ -1,3 +1,4 @@
+#line 1 "MA02DD.f"
 /* MA02DD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MA02DD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -130,67 +132,112 @@ static integer c__1 = 1;
 
 /*     For efficiency reasons, the parameters are not checked for errors. */
 
+#line 111 "MA02DD.f"
     /* Parameter adjustments */
+#line 111 "MA02DD.f"
     a_dim1 = *lda;
+#line 111 "MA02DD.f"
     a_offset = 1 + a_dim1;
+#line 111 "MA02DD.f"
     a -= a_offset;
+#line 111 "MA02DD.f"
     --ap;
+#line 111 "MA02DD.f"
 
+#line 111 "MA02DD.f"
     /* Function Body */
+#line 111 "MA02DD.f"
     luplo = lsame_(uplo, "L", (ftnlen)1, (ftnlen)1);
+#line 112 "MA02DD.f"
     ij = 1;
+#line 113 "MA02DD.f"
     if (lsame_(job, "P", (ftnlen)1, (ftnlen)1)) {
+#line 114 "MA02DD.f"
 	if (luplo) {
 
 /*           Pack the lower triangle of A. */
 
+#line 118 "MA02DD.f"
 	    i__1 = *n;
+#line 118 "MA02DD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 119 "MA02DD.f"
 		i__2 = *n - j + 1;
+#line 119 "MA02DD.f"
 		dcopy_(&i__2, &a[j + j * a_dim1], &c__1, &ap[ij], &c__1);
+#line 120 "MA02DD.f"
 		ij = ij + *n - j + 1;
+#line 121 "MA02DD.f"
 /* L20: */
+#line 121 "MA02DD.f"
 	    }
 
+#line 123 "MA02DD.f"
 	} else {
 
 /*           Pack the upper triangle of A. */
 
+#line 127 "MA02DD.f"
 	    i__1 = *n;
+#line 127 "MA02DD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 128 "MA02DD.f"
 		dcopy_(&j, &a[j * a_dim1 + 1], &c__1, &ap[ij], &c__1);
+#line 129 "MA02DD.f"
 		ij += j;
+#line 130 "MA02DD.f"
 /* L40: */
+#line 130 "MA02DD.f"
 	    }
 
+#line 132 "MA02DD.f"
 	}
+#line 133 "MA02DD.f"
     } else {
+#line 134 "MA02DD.f"
 	if (luplo) {
 
 /*           Unpack the lower triangle of A. */
 
+#line 138 "MA02DD.f"
 	    i__1 = *n;
+#line 138 "MA02DD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 139 "MA02DD.f"
 		i__2 = *n - j + 1;
+#line 139 "MA02DD.f"
 		dcopy_(&i__2, &ap[ij], &c__1, &a[j + j * a_dim1], &c__1);
+#line 140 "MA02DD.f"
 		ij = ij + *n - j + 1;
+#line 141 "MA02DD.f"
 /* L60: */
+#line 141 "MA02DD.f"
 	    }
 
+#line 143 "MA02DD.f"
 	} else {
 
 /*           Unpack the upper triangle of A. */
 
+#line 147 "MA02DD.f"
 	    i__1 = *n;
+#line 147 "MA02DD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 148 "MA02DD.f"
 		dcopy_(&j, &ap[ij], &c__1, &a[j * a_dim1 + 1], &c__1);
+#line 149 "MA02DD.f"
 		ij += j;
+#line 150 "MA02DD.f"
 /* L80: */
+#line 150 "MA02DD.f"
 	    }
 
+#line 152 "MA02DD.f"
 	}
+#line 153 "MA02DD.f"
     }
 
+#line 155 "MA02DD.f"
     return 0;
 /* *** Last line of MA02DD *** */
 } /* ma02dd_ */

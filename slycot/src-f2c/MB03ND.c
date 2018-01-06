@@ -1,3 +1,4 @@
+#line 1 "MB03ND.f"
 /* MB03ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03ND.f"
 integer mb03nd_(integer *n, doublereal *theta, doublereal *q2, doublereal *e2,
 	 doublereal *pivmin, integer *info)
 {
@@ -192,64 +194,113 @@ integer mb03nd_(integer *n, doublereal *theta, doublereal *q2, doublereal *e2,
 
 /*     Test the input scalar arguments.  PIVMIN is not checked. */
 
+#line 179 "MB03ND.f"
     /* Parameter adjustments */
+#line 179 "MB03ND.f"
     --e2;
+#line 179 "MB03ND.f"
     --q2;
+#line 179 "MB03ND.f"
 
+#line 179 "MB03ND.f"
     /* Function Body */
+#line 179 "MB03ND.f"
     *info = 0;
+#line 180 "MB03ND.f"
     if (*n < 0) {
+#line 181 "MB03ND.f"
 	*info = -1;
 
 /*        Error return. */
 
+#line 185 "MB03ND.f"
 	i__1 = -(*info);
+#line 185 "MB03ND.f"
 	xerbla_("MB03ND", &i__1, (ftnlen)6);
+#line 186 "MB03ND.f"
 	return ret_val;
+#line 187 "MB03ND.f"
     }
 
 /*     Quick return if possible. */
 
+#line 191 "MB03ND.f"
     if (*n == 0 || *theta < 0.) {
+#line 192 "MB03ND.f"
 	ret_val = 0;
+#line 193 "MB03ND.f"
 	return ret_val;
+#line 194 "MB03ND.f"
     }
 
+#line 196 "MB03ND.f"
     numeig = *n;
+#line 197 "MB03ND.f"
     t = -(*theta);
+#line 198 "MB03ND.f"
     r__ = t;
+#line 199 "MB03ND.f"
     if (abs(r__) < *pivmin) {
+#line 199 "MB03ND.f"
 	r__ = -(*pivmin);
+#line 199 "MB03ND.f"
     }
 
+#line 201 "MB03ND.f"
     i__1 = *n - 1;
+#line 201 "MB03ND.f"
     for (j = 1; j <= i__1; ++j) {
+#line 202 "MB03ND.f"
 	r__ = t - q2[j] / r__;
+#line 203 "MB03ND.f"
 	if (abs(r__) < *pivmin) {
+#line 203 "MB03ND.f"
 	    r__ = -(*pivmin);
+#line 203 "MB03ND.f"
 	}
+#line 204 "MB03ND.f"
 	if (r__ > 0.) {
+#line 204 "MB03ND.f"
 	    --numeig;
+#line 204 "MB03ND.f"
 	}
+#line 205 "MB03ND.f"
 	r__ = t - e2[j] / r__;
+#line 206 "MB03ND.f"
 	if (abs(r__) < *pivmin) {
+#line 206 "MB03ND.f"
 	    r__ = -(*pivmin);
+#line 206 "MB03ND.f"
 	}
+#line 207 "MB03ND.f"
 	if (r__ > 0.) {
+#line 207 "MB03ND.f"
 	    --numeig;
+#line 207 "MB03ND.f"
 	}
+#line 208 "MB03ND.f"
 /* L20: */
+#line 208 "MB03ND.f"
     }
 
+#line 210 "MB03ND.f"
     r__ = t - q2[*n] / r__;
+#line 211 "MB03ND.f"
     if (abs(r__) < *pivmin) {
+#line 211 "MB03ND.f"
 	r__ = -(*pivmin);
+#line 211 "MB03ND.f"
     }
+#line 212 "MB03ND.f"
     if (r__ > 0.) {
+#line 212 "MB03ND.f"
 	--numeig;
+#line 212 "MB03ND.f"
     }
+#line 213 "MB03ND.f"
     ret_val = numeig;
 
+#line 215 "MB03ND.f"
     return ret_val;
 /* *** Last line of MB03ND *** */
 } /* mb03nd_ */

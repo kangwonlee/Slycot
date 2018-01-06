@@ -1,3 +1,4 @@
+#line 1 "SB01MD.f"
 /* SB01MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB01MD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -206,271 +208,457 @@ static doublereal c_b25 = 0.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 173 "SB01MD.f"
     /* Parameter adjustments */
+#line 173 "SB01MD.f"
     a_dim1 = *lda;
+#line 173 "SB01MD.f"
     a_offset = 1 + a_dim1;
+#line 173 "SB01MD.f"
     a -= a_offset;
+#line 173 "SB01MD.f"
     --b;
+#line 173 "SB01MD.f"
     --wr;
+#line 173 "SB01MD.f"
     --wi;
+#line 173 "SB01MD.f"
     z_dim1 = *ldz;
+#line 173 "SB01MD.f"
     z_offset = 1 + z_dim1;
+#line 173 "SB01MD.f"
     z__ -= z_offset;
+#line 173 "SB01MD.f"
     --g;
+#line 173 "SB01MD.f"
     --dwork;
+#line 173 "SB01MD.f"
 
+#line 173 "SB01MD.f"
     /* Function Body */
+#line 173 "SB01MD.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 177 "SB01MD.f"
     if (*ncont < 0) {
+#line 178 "SB01MD.f"
 	*info = -1;
+#line 179 "SB01MD.f"
     } else if (*n < *ncont) {
+#line 180 "SB01MD.f"
 	*info = -2;
+#line 181 "SB01MD.f"
     } else if (*lda < max(1,*ncont)) {
+#line 182 "SB01MD.f"
 	*info = -4;
+#line 183 "SB01MD.f"
     } else if (*ldz < max(1,*n)) {
+#line 184 "SB01MD.f"
 	*info = -9;
+#line 185 "SB01MD.f"
     }
 
+#line 187 "SB01MD.f"
     if (*info != 0) {
 
 /*        Error return */
 
+#line 191 "SB01MD.f"
 	i__1 = -(*info);
+#line 191 "SB01MD.f"
 	xerbla_("SB01MD", &i__1, (ftnlen)6);
+#line 192 "SB01MD.f"
 	return 0;
+#line 193 "SB01MD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 197 "SB01MD.f"
     if (*ncont == 0 || *n == 0) {
+#line 197 "SB01MD.f"
 	return 0;
+#line 197 "SB01MD.f"
     }
 
 /*     Return if the system is not complete controllable. */
 
+#line 202 "SB01MD.f"
     if (b[1] == 0.) {
+#line 202 "SB01MD.f"
 	return 0;
+#line 202 "SB01MD.f"
     }
 
+#line 205 "SB01MD.f"
     if (*ncont == 1) {
 
 /*        1-by-1 case. */
 
+#line 209 "SB01MD.f"
 	p = a[a_dim1 + 1] - wr[1];
+#line 210 "SB01MD.f"
 	a[a_dim1 + 1] = wr[1];
+#line 211 "SB01MD.f"
 	g[1] = p / b[1];
+#line 212 "SB01MD.f"
 	z__[z_dim1 + 1] = 1.;
+#line 213 "SB01MD.f"
 	return 0;
+#line 214 "SB01MD.f"
     }
 
 /*     General case.  Save the contents of WI in DWORK. */
 
+#line 218 "SB01MD.f"
     ncont2 = *ncont << 1;
+#line 219 "SB01MD.f"
     dcopy_(ncont, &wi[1], &c__1, &dwork[ncont2 + 1], &c__1);
 
+#line 221 "SB01MD.f"
     b1 = b[1];
+#line 222 "SB01MD.f"
     b[1] = 1.;
+#line 223 "SB01MD.f"
     l = 0;
+#line 224 "SB01MD.f"
     ll = 0;
+#line 225 "SB01MD.f"
 L20:
+#line 226 "SB01MD.f"
     ++l;
+#line 227 "SB01MD.f"
     ++ll;
+#line 228 "SB01MD.f"
     compl = dwork[ncont2 + l] != 0.;
+#line 229 "SB01MD.f"
     if (l != *ncont) {
+#line 230 "SB01MD.f"
 	lp1 = l + 1;
+#line 231 "SB01MD.f"
 	nl = *ncont - l;
+#line 232 "SB01MD.f"
 	if (ll != 2) {
+#line 233 "SB01MD.f"
 	    if (compl) {
 
 /*              Compute complex eigenvector. */
 
+#line 237 "SB01MD.f"
 		dwork[*ncont] = 1.;
+#line 238 "SB01MD.f"
 		dwork[ncont2] = 1.;
+#line 239 "SB01MD.f"
 		p = wr[l];
+#line 240 "SB01MD.f"
 		t = dwork[ncont2 + l];
+#line 241 "SB01MD.f"
 		q = t * dwork[ncont2 + lp1];
+#line 242 "SB01MD.f"
 		dwork[ncont2 + l] = 1.;
+#line 243 "SB01MD.f"
 		dwork[ncont2 + lp1] = q;
 
+#line 245 "SB01MD.f"
 		i__1 = lp1;
+#line 245 "SB01MD.f"
 		for (i__ = *ncont; i__ >= i__1; --i__) {
+#line 246 "SB01MD.f"
 		    im1 = i__ - 1;
+#line 247 "SB01MD.f"
 		    i__2 = *ncont - im1;
+#line 247 "SB01MD.f"
 		    dwork[im1] = (p * dwork[i__] + q * dwork[*ncont + i__] - 
 			    ddot_(&i__2, &a[i__ + i__ * a_dim1], lda, &dwork[
 			    i__], &c__1)) / a[i__ + im1 * a_dim1];
+#line 250 "SB01MD.f"
 		    i__2 = *ncont - im1;
+#line 250 "SB01MD.f"
 		    dwork[*ncont + im1] = (p * dwork[*ncont + i__] + dwork[
 			    i__] - ddot_(&i__2, &a[i__ + i__ * a_dim1], lda, &
 			    dwork[*ncont + i__], &c__1)) / a[i__ + im1 * 
 			    a_dim1];
+#line 253 "SB01MD.f"
 /* L40: */
+#line 253 "SB01MD.f"
 		}
 
+#line 255 "SB01MD.f"
 	    } else {
 
 /*              Compute real eigenvector. */
 
+#line 259 "SB01MD.f"
 		dwork[*ncont] = 1.;
+#line 260 "SB01MD.f"
 		p = wr[l];
 
+#line 262 "SB01MD.f"
 		i__1 = lp1;
+#line 262 "SB01MD.f"
 		for (i__ = *ncont; i__ >= i__1; --i__) {
+#line 263 "SB01MD.f"
 		    im1 = i__ - 1;
+#line 264 "SB01MD.f"
 		    i__2 = *ncont - im1;
+#line 264 "SB01MD.f"
 		    dwork[im1] = (p * dwork[i__] - ddot_(&i__2, &a[i__ + i__ *
 			     a_dim1], lda, &dwork[i__], &c__1)) / a[i__ + im1 
 			    * a_dim1];
+#line 267 "SB01MD.f"
 /* L60: */
+#line 267 "SB01MD.f"
 		}
 
+#line 269 "SB01MD.f"
 	    }
+#line 270 "SB01MD.f"
 	}
 
 /*        Transform eigenvector. */
 
+#line 274 "SB01MD.f"
 	i__1 = l;
+#line 274 "SB01MD.f"
 	for (k = *ncont - 1; k >= i__1; --k) {
+#line 275 "SB01MD.f"
 	    if (ll != 2) {
+#line 276 "SB01MD.f"
 		r__ = dwork[k];
+#line 277 "SB01MD.f"
 		s = dwork[k + 1];
+#line 278 "SB01MD.f"
 	    } else {
+#line 279 "SB01MD.f"
 		r__ = dwork[*ncont + k];
+#line 280 "SB01MD.f"
 		s = dwork[*ncont + k + 1];
+#line 281 "SB01MD.f"
 	    }
+#line 282 "SB01MD.f"
 	    dlartg_(&r__, &s, &p, &q, &t);
+#line 283 "SB01MD.f"
 	    dwork[k] = t;
+#line 284 "SB01MD.f"
 	    if (ll != 2) {
 /* Computing MAX */
+#line 285 "SB01MD.f"
 		i__2 = k - 1;
+#line 285 "SB01MD.f"
 		nj = max(i__2,l);
+#line 286 "SB01MD.f"
 	    } else {
+#line 287 "SB01MD.f"
 		dwork[*ncont + k] = t;
+#line 288 "SB01MD.f"
 		nj = l - 1;
+#line 289 "SB01MD.f"
 	    }
 
 /*           Transform  A. */
 
+#line 293 "SB01MD.f"
 	    i__2 = *ncont - nj + 1;
+#line 293 "SB01MD.f"
 	    drot_(&i__2, &a[k + nj * a_dim1], lda, &a[k + 1 + nj * a_dim1], 
 		    lda, &p, &q);
 
+#line 295 "SB01MD.f"
 	    if (compl && ll == 1) {
+#line 296 "SB01MD.f"
 		ni = *ncont;
+#line 297 "SB01MD.f"
 	    } else {
 /* Computing MIN */
+#line 298 "SB01MD.f"
 		i__2 = k + 2;
+#line 298 "SB01MD.f"
 		ni = min(i__2,*ncont);
+#line 299 "SB01MD.f"
 	    }
+#line 300 "SB01MD.f"
 	    drot_(&ni, &a[k * a_dim1 + 1], &c__1, &a[(k + 1) * a_dim1 + 1], &
 		    c__1, &p, &q);
 
+#line 302 "SB01MD.f"
 	    if (k == l) {
 
 /*              Transform  B. */
 
+#line 306 "SB01MD.f"
 		t = b[k];
+#line 307 "SB01MD.f"
 		b[k] = p * t;
+#line 308 "SB01MD.f"
 		b[k + 1] = -q * t;
+#line 309 "SB01MD.f"
 	    }
 
 /*           Accumulate transformations. */
 
+#line 313 "SB01MD.f"
 	    drot_(ncont, &z__[k * z_dim1 + 1], &c__1, &z__[(k + 1) * z_dim1 + 
 		    1], &c__1, &p, &q);
 
+#line 315 "SB01MD.f"
 	    if (compl && ll != 2) {
+#line 316 "SB01MD.f"
 		t = dwork[*ncont + k];
+#line 317 "SB01MD.f"
 		dwork[*ncont + k] = p * t + q * dwork[*ncont + k + 1];
+#line 318 "SB01MD.f"
 		dwork[*ncont + k + 1] = p * dwork[*ncont + k + 1] - q * t;
+#line 319 "SB01MD.f"
 	    }
+#line 320 "SB01MD.f"
 /* L80: */
+#line 320 "SB01MD.f"
 	}
 
+#line 322 "SB01MD.f"
     }
 
+#line 324 "SB01MD.f"
     if (! compl) {
 
 /*        Find one element of  G. */
 
+#line 328 "SB01MD.f"
 	k = l;
+#line 329 "SB01MD.f"
 	r__ = b[l];
+#line 330 "SB01MD.f"
 	if (l != *ncont) {
+#line 331 "SB01MD.f"
 	    if ((d__1 = b[lp1], abs(d__1)) > (d__2 = b[l], abs(d__2))) {
+#line 332 "SB01MD.f"
 		k = lp1;
+#line 333 "SB01MD.f"
 		r__ = b[lp1];
+#line 334 "SB01MD.f"
 	    }
+#line 335 "SB01MD.f"
 	}
+#line 336 "SB01MD.f"
 	p = a[k + l * a_dim1];
+#line 337 "SB01MD.f"
 	if (k == l) {
+#line 337 "SB01MD.f"
 	    p -= wr[l];
+#line 337 "SB01MD.f"
 	}
+#line 338 "SB01MD.f"
 	p /= r__;
 
+#line 340 "SB01MD.f"
 	d__1 = -p;
+#line 340 "SB01MD.f"
 	daxpy_(&lp1, &d__1, &b[1], &c__1, &a[l * a_dim1 + 1], &c__1);
 
+#line 342 "SB01MD.f"
 	g[l] = p / b1;
+#line 343 "SB01MD.f"
 	if (l != *ncont) {
+#line 344 "SB01MD.f"
 	    ll = 0;
+#line 345 "SB01MD.f"
 	    goto L20;
+#line 346 "SB01MD.f"
 	}
+#line 347 "SB01MD.f"
     } else if (ll == 1) {
+#line 348 "SB01MD.f"
 	goto L20;
+#line 349 "SB01MD.f"
     } else {
 
 /*        Find two elements of  G. */
 
+#line 353 "SB01MD.f"
 	k = l;
+#line 354 "SB01MD.f"
 	r__ = b[l];
+#line 355 "SB01MD.f"
 	if (l != *ncont) {
+#line 356 "SB01MD.f"
 	    if ((d__1 = b[lp1], abs(d__1)) > (d__2 = b[l], abs(d__2))) {
+#line 357 "SB01MD.f"
 		k = lp1;
+#line 358 "SB01MD.f"
 		r__ = b[lp1];
+#line 359 "SB01MD.f"
 	    }
+#line 360 "SB01MD.f"
 	}
+#line 361 "SB01MD.f"
 	p = a[k + (l - 1) * a_dim1];
+#line 362 "SB01MD.f"
 	q = a[k + l * a_dim1];
+#line 363 "SB01MD.f"
 	if (k == l) {
+#line 364 "SB01MD.f"
 	    p -= dwork[*ncont + l] / dwork[l - 1] * dwork[ncont2 + l];
+#line 365 "SB01MD.f"
 	    q = q - wr[l] + dwork[*ncont + l - 1] / dwork[l - 1] * dwork[
 		    ncont2 + l];
+#line 367 "SB01MD.f"
 	}
+#line 368 "SB01MD.f"
 	p /= r__;
+#line 369 "SB01MD.f"
 	q /= r__;
 
+#line 371 "SB01MD.f"
 	d__1 = -p;
+#line 371 "SB01MD.f"
 	daxpy_(&lp1, &d__1, &b[1], &c__1, &a[(l - 1) * a_dim1 + 1], &c__1);
+#line 372 "SB01MD.f"
 	d__1 = -q;
+#line 372 "SB01MD.f"
 	daxpy_(&lp1, &d__1, &b[1], &c__1, &a[l * a_dim1 + 1], &c__1);
 
+#line 374 "SB01MD.f"
 	g[l - 1] = p / b1;
+#line 375 "SB01MD.f"
 	g[l] = q / b1;
+#line 376 "SB01MD.f"
 	if (l != *ncont) {
+#line 377 "SB01MD.f"
 	    ll = 0;
+#line 378 "SB01MD.f"
 	    goto L20;
+#line 379 "SB01MD.f"
 	}
+#line 380 "SB01MD.f"
     }
 
 /*     Transform  G. */
 
+#line 384 "SB01MD.f"
     dgemv_("No transpose", ncont, ncont, &c_b23, &z__[z_offset], ldz, &g[1], &
 	    c__1, &c_b25, &dwork[1], &c__1, (ftnlen)12);
+#line 386 "SB01MD.f"
     dcopy_(ncont, &dwork[1], &c__1, &g[1], &c__1);
+#line 387 "SB01MD.f"
     dscal_(ncont, &b1, &b[1], &c__1);
 
 /*     Annihilate A after the first subdiagonal. */
 
+#line 391 "SB01MD.f"
     if (*ncont > 2) {
+#line 391 "SB01MD.f"
 	i__1 = *ncont - 2;
+#line 391 "SB01MD.f"
 	i__2 = *ncont - 2;
+#line 391 "SB01MD.f"
 	dlaset_("Lower", &i__1, &i__2, &c_b25, &c_b25, &a[a_dim1 + 3], lda, (
 		ftnlen)5);
+#line 391 "SB01MD.f"
     }
 
+#line 395 "SB01MD.f"
     return 0;
 /* *** Last line of SB01MD *** */
 } /* sb01md_ */

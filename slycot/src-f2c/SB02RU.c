@@ -1,3 +1,4 @@
+#line 1 "SB02RU.f"
 /* SB02RU.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB02RU.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -265,87 +267,153 @@ static doublereal c_b57 = -1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 223 "SB02RU.f"
     /* Parameter adjustments */
+#line 223 "SB02RU.f"
     a_dim1 = *lda;
+#line 223 "SB02RU.f"
     a_offset = 1 + a_dim1;
+#line 223 "SB02RU.f"
     a -= a_offset;
+#line 223 "SB02RU.f"
     g_dim1 = *ldg;
+#line 223 "SB02RU.f"
     g_offset = 1 + g_dim1;
+#line 223 "SB02RU.f"
     g -= g_offset;
+#line 223 "SB02RU.f"
     q_dim1 = *ldq;
+#line 223 "SB02RU.f"
     q_offset = 1 + q_dim1;
+#line 223 "SB02RU.f"
     q -= q_offset;
+#line 223 "SB02RU.f"
     s_dim1 = *lds;
+#line 223 "SB02RU.f"
     s_offset = 1 + s_dim1;
+#line 223 "SB02RU.f"
     s -= s_offset;
+#line 223 "SB02RU.f"
     --iwork;
+#line 223 "SB02RU.f"
     --dwork;
+#line 223 "SB02RU.f"
 
+#line 223 "SB02RU.f"
     /* Function Body */
+#line 223 "SB02RU.f"
     n2 = *n + *n;
+#line 224 "SB02RU.f"
     *info = 0;
+#line 225 "SB02RU.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 226 "SB02RU.f"
     luplo = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 227 "SB02RU.f"
     notrna = lsame_(trana, "N", (ftnlen)1, (ftnlen)1);
+#line 228 "SB02RU.f"
     if (discr) {
+#line 228 "SB02RU.f"
 	lhinv = lsame_(hinv, "D", (ftnlen)1, (ftnlen)1);
+#line 228 "SB02RU.f"
     }
 
 /*     Test the input scalar arguments. */
 
+#line 233 "SB02RU.f"
     if (! discr && ! lsame_(dico, "C", (ftnlen)1, (ftnlen)1)) {
+#line 234 "SB02RU.f"
 	*info = -1;
+#line 235 "SB02RU.f"
     } else if (discr) {
+#line 236 "SB02RU.f"
 	if (! lhinv && ! lsame_(hinv, "I", (ftnlen)1, (ftnlen)1)) {
+#line 236 "SB02RU.f"
 	    *info = -2;
+#line 236 "SB02RU.f"
 	}
+#line 238 "SB02RU.f"
     } else if (*info == 0) {
+#line 239 "SB02RU.f"
 	if (! notrna && ! lsame_(trana, "T", (ftnlen)1, (ftnlen)1) && ! 
 		lsame_(trana, "C", (ftnlen)1, (ftnlen)1)) {
+#line 241 "SB02RU.f"
 	    *info = -3;
+#line 242 "SB02RU.f"
 	} else if (! luplo && ! lsame_(uplo, "L", (ftnlen)1, (ftnlen)1)) {
+#line 243 "SB02RU.f"
 	    *info = -4;
+#line 244 "SB02RU.f"
 	} else if (*n < 0) {
+#line 245 "SB02RU.f"
 	    *info = -5;
+#line 246 "SB02RU.f"
 	} else if (*lda < max(1,*n)) {
+#line 247 "SB02RU.f"
 	    *info = -7;
+#line 248 "SB02RU.f"
 	} else if (*ldg < max(1,*n)) {
+#line 249 "SB02RU.f"
 	    *info = -9;
+#line 250 "SB02RU.f"
 	} else if (*ldq < max(1,*n)) {
+#line 251 "SB02RU.f"
 	    *info = -11;
+#line 252 "SB02RU.f"
 	} else if (*lds < max(1,n2)) {
+#line 253 "SB02RU.f"
 	    *info = -13;
+#line 254 "SB02RU.f"
 	} else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 254 "SB02RU.f"
 	    i__1 = 2, i__2 = *n * 6;
+#line 254 "SB02RU.f"
 	    if (*ldwork < 0 || discr && *ldwork < max(i__1,i__2)) {
+#line 256 "SB02RU.f"
 		*info = -16;
+#line 257 "SB02RU.f"
 	    }
+#line 257 "SB02RU.f"
 	}
+#line 258 "SB02RU.f"
     }
 
+#line 260 "SB02RU.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 264 "SB02RU.f"
 	i__1 = -(*info);
+#line 264 "SB02RU.f"
 	xerbla_("SB02RU", &i__1, (ftnlen)6);
+#line 265 "SB02RU.f"
 	return 0;
+#line 266 "SB02RU.f"
     }
 
 /*     Quick return if possible. */
 
+#line 270 "SB02RU.f"
     if (*n == 0) {
+#line 271 "SB02RU.f"
 	if (discr) {
+#line 272 "SB02RU.f"
 	    dwork[1] = 1.;
+#line 273 "SB02RU.f"
 	    dwork[2] = 1.;
+#line 274 "SB02RU.f"
 	}
+#line 275 "SB02RU.f"
 	return 0;
+#line 276 "SB02RU.f"
     }
 
 /*     The code tries to exploit data locality as much as possible, */
 /*     assuming that LDS is greater than LDA, LDQ, and/or LDG. */
 
+#line 281 "SB02RU.f"
     if (! discr) {
 
 /*        Continuous-time case: Construct Hamiltonian matrix column-wise. */
@@ -353,103 +421,177 @@ static doublereal c_b57 = -1.;
 /*        Copy op(A) in S(1:N,1:N), and construct full Q */
 /*        in S(N+1:2*N,1:N) and change the sign. */
 
+#line 288 "SB02RU.f"
 	i__1 = *n;
+#line 288 "SB02RU.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 289 "SB02RU.f"
 	    if (notrna) {
+#line 290 "SB02RU.f"
 		dcopy_(n, &a[j * a_dim1 + 1], &c__1, &s[j * s_dim1 + 1], &
 			c__1);
+#line 291 "SB02RU.f"
 	    } else {
+#line 292 "SB02RU.f"
 		dcopy_(n, &a[j + a_dim1], lda, &s[j * s_dim1 + 1], &c__1);
+#line 293 "SB02RU.f"
 	    }
 
+#line 295 "SB02RU.f"
 	    if (luplo) {
 
+#line 297 "SB02RU.f"
 		i__2 = j;
+#line 297 "SB02RU.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 298 "SB02RU.f"
 		    s[*n + i__ + j * s_dim1] = -q[i__ + j * q_dim1];
+#line 299 "SB02RU.f"
 /* L20: */
+#line 299 "SB02RU.f"
 		}
 
+#line 301 "SB02RU.f"
 		i__2 = *n;
+#line 301 "SB02RU.f"
 		for (i__ = j + 1; i__ <= i__2; ++i__) {
+#line 302 "SB02RU.f"
 		    s[*n + i__ + j * s_dim1] = -q[j + i__ * q_dim1];
+#line 303 "SB02RU.f"
 /* L40: */
+#line 303 "SB02RU.f"
 		}
 
+#line 305 "SB02RU.f"
 	    } else {
 
+#line 307 "SB02RU.f"
 		i__2 = j - 1;
+#line 307 "SB02RU.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 308 "SB02RU.f"
 		    s[*n + i__ + j * s_dim1] = -q[j + i__ * q_dim1];
+#line 309 "SB02RU.f"
 /* L60: */
+#line 309 "SB02RU.f"
 		}
 
+#line 311 "SB02RU.f"
 		i__2 = *n;
+#line 311 "SB02RU.f"
 		for (i__ = j; i__ <= i__2; ++i__) {
+#line 312 "SB02RU.f"
 		    s[*n + i__ + j * s_dim1] = -q[i__ + j * q_dim1];
+#line 313 "SB02RU.f"
 /* L80: */
+#line 313 "SB02RU.f"
 		}
 
+#line 315 "SB02RU.f"
 	    }
+#line 316 "SB02RU.f"
 /* L100: */
+#line 316 "SB02RU.f"
 	}
 
 /*        Construct full G in S(1:N,N+1:2*N) and change the sign, and */
 /*        construct -op(A)' in S(N+1:2*N,N+1:2*N). */
 
+#line 321 "SB02RU.f"
 	i__1 = *n;
+#line 321 "SB02RU.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 322 "SB02RU.f"
 	    nj = *n + j;
+#line 323 "SB02RU.f"
 	    if (luplo) {
 
+#line 325 "SB02RU.f"
 		i__2 = j;
+#line 325 "SB02RU.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 326 "SB02RU.f"
 		    s[i__ + nj * s_dim1] = -g[i__ + j * g_dim1];
+#line 327 "SB02RU.f"
 /* L120: */
+#line 327 "SB02RU.f"
 		}
 
+#line 329 "SB02RU.f"
 		i__2 = *n;
+#line 329 "SB02RU.f"
 		for (i__ = j + 1; i__ <= i__2; ++i__) {
+#line 330 "SB02RU.f"
 		    s[i__ + nj * s_dim1] = -g[j + i__ * g_dim1];
+#line 331 "SB02RU.f"
 /* L140: */
+#line 331 "SB02RU.f"
 		}
 
+#line 333 "SB02RU.f"
 	    } else {
 
+#line 335 "SB02RU.f"
 		i__2 = j - 1;
+#line 335 "SB02RU.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 336 "SB02RU.f"
 		    s[i__ + nj * s_dim1] = -g[j + i__ * g_dim1];
+#line 337 "SB02RU.f"
 /* L160: */
+#line 337 "SB02RU.f"
 		}
 
+#line 339 "SB02RU.f"
 		i__2 = *n;
+#line 339 "SB02RU.f"
 		for (i__ = j; i__ <= i__2; ++i__) {
+#line 340 "SB02RU.f"
 		    s[i__ + nj * s_dim1] = -g[i__ + j * g_dim1];
+#line 341 "SB02RU.f"
 /* L180: */
+#line 341 "SB02RU.f"
 		}
 
+#line 343 "SB02RU.f"
 	    }
 
+#line 345 "SB02RU.f"
 	    if (notrna) {
 
+#line 347 "SB02RU.f"
 		i__2 = *n;
+#line 347 "SB02RU.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 348 "SB02RU.f"
 		    s[*n + i__ + nj * s_dim1] = -a[j + i__ * a_dim1];
+#line 349 "SB02RU.f"
 /* L200: */
+#line 349 "SB02RU.f"
 		}
 
+#line 351 "SB02RU.f"
 	    } else {
 
+#line 353 "SB02RU.f"
 		i__2 = *n;
+#line 353 "SB02RU.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 354 "SB02RU.f"
 		    s[*n + i__ + nj * s_dim1] = -a[i__ + j * a_dim1];
+#line 355 "SB02RU.f"
 /* L220: */
+#line 355 "SB02RU.f"
 		}
 
+#line 357 "SB02RU.f"
 	    }
+#line 358 "SB02RU.f"
 /* L240: */
+#line 358 "SB02RU.f"
 	}
 
+#line 360 "SB02RU.f"
     } else {
 
 /*        Discrete-time case: Construct the symplectic matrix (2) or (3). */
@@ -457,16 +599,24 @@ static doublereal c_b57 = -1.;
 /*        Fill in the remaining triangles of the symmetric matrices Q */
 /*        and G. */
 
+#line 367 "SB02RU.f"
 	ma02ed_(uplo, n, &q[q_offset], ldq, (ftnlen)1);
+#line 368 "SB02RU.f"
 	ma02ed_(uplo, n, &g[g_offset], ldg, (ftnlen)1);
 
 /*        Prepare the construction of S in (2) or (3). */
 
+#line 372 "SB02RU.f"
 	np1 = *n + 1;
+#line 373 "SB02RU.f"
 	if (notrna) {
+#line 374 "SB02RU.f"
 	    *(unsigned char *)tranat = 'T';
+#line 375 "SB02RU.f"
 	} else {
+#line 376 "SB02RU.f"
 	    *(unsigned char *)tranat = 'N';
+#line 377 "SB02RU.f"
 	}
 
 /*        Solve  op(A)'*X = Q  in  S(N+1:2*N,1:N),  using the LU */
@@ -474,6 +624,7 @@ static doublereal c_b57 = -1.;
 /*        iterative refinement. No equilibration of  A  is used. */
 /*        Workspace:  6*N. */
 
+#line 384 "SB02RU.f"
 	mb02pd_("No equilibration", tranat, n, n, &a[a_offset], lda, &s[
 		s_offset], lds, &iwork[1], equed, &dwork[1], &dwork[1], &q[
 		q_offset], ldq, &s[np1 + s_dim1], lds, &rcond, &dwork[1], &
@@ -483,35 +634,51 @@ static doublereal c_b57 = -1.;
 /*        Return if the matrix is exactly singular or singular to */
 /*        working precision. */
 
+#line 392 "SB02RU.f"
 	if (*info > 0) {
+#line 393 "SB02RU.f"
 	    dwork[1] = rcond;
+#line 394 "SB02RU.f"
 	    dwork[2] = dwork[n2 + 1];
+#line 395 "SB02RU.f"
 	    return 0;
+#line 396 "SB02RU.f"
 	}
 
+#line 398 "SB02RU.f"
 	rconda = rcond;
+#line 399 "SB02RU.f"
 	pivotg = dwork[n2 + 1];
 
+#line 401 "SB02RU.f"
 	if (lhinv) {
 
 /*           Complete the construction of S in (2). */
 
 /*           Transpose  X  in-situ. */
 
+#line 407 "SB02RU.f"
 	    i__1 = *n - 1;
+#line 407 "SB02RU.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 408 "SB02RU.f"
 		i__2 = *n - j;
+#line 408 "SB02RU.f"
 		dswap_(&i__2, &s[np1 + j + j * s_dim1], &c__1, &s[*n + j + (j 
 			+ 1) * s_dim1], lds);
+#line 409 "SB02RU.f"
 /* L260: */
+#line 409 "SB02RU.f"
 	    }
 
 /*           Solve  op(A)*X = I_n  in  S(N+1:2*N,N+1:2*N),  using the LU */
 /*           factorization of  op(A),  computed in  S(1:N,1:N),  and */
 /*           iterative refinement. */
 
+#line 415 "SB02RU.f"
 	    dlaset_("Full", n, n, &c_b33, &c_b34, &s[np1 * s_dim1 + 1], lds, (
 		    ftnlen)4);
+#line 416 "SB02RU.f"
 	    mb02pd_("Factored", trana, n, n, &a[a_offset], lda, &s[s_offset], 
 		    lds, &iwork[1], equed, &dwork[1], &dwork[1], &s[np1 * 
 		    s_dim1 + 1], lds, &s[np1 + np1 * s_dim1], lds, &rcond, &
@@ -522,6 +689,7 @@ static doublereal c_b57 = -1.;
 /*           factorization of  op(A),  computed in  S(1:N,1:N),  and */
 /*           iterative refinement. */
 
+#line 425 "SB02RU.f"
 	    mb02pd_("Factored", trana, n, n, &a[a_offset], lda, &s[s_offset], 
 		    lds, &iwork[1], equed, &dwork[1], &dwork[1], &g[g_offset],
 		     ldg, &s[np1 * s_dim1 + 1], lds, &rcond, &dwork[1], &
@@ -531,47 +699,66 @@ static doublereal c_b57 = -1.;
 /*                      -1 */
 /*           Copy  op(A)    from  S(N+1:2*N,N+1:2*N)  in  S(1:N,1:N). */
 
+#line 433 "SB02RU.f"
 	    dlacpy_("Full", n, n, &s[np1 + np1 * s_dim1], lds, &s[s_offset], 
 		    lds, (ftnlen)4);
 
 /*                                    -1 */
 /*           Compute  op(A)' + Q*op(A)  *G  in  S(N+1:2*N,N+1:2*N). */
 
+#line 438 "SB02RU.f"
 	    if (notrna) {
+#line 439 "SB02RU.f"
 		ma02ad_("Full", n, n, &a[a_offset], lda, &s[np1 + np1 * 
 			s_dim1], lds, (ftnlen)4);
+#line 440 "SB02RU.f"
 	    } else {
+#line 441 "SB02RU.f"
 		dlacpy_("Full", n, n, &a[a_offset], lda, &s[np1 + np1 * 
 			s_dim1], lds, (ftnlen)4);
+#line 442 "SB02RU.f"
 	    }
+#line 443 "SB02RU.f"
 	    dgemm_("No transpose", "No transpose", n, n, n, &c_b34, &q[
 		    q_offset], ldq, &s[np1 * s_dim1 + 1], lds, &c_b34, &s[np1 
 		    + np1 * s_dim1], lds, (ftnlen)12, (ftnlen)12);
 
+#line 446 "SB02RU.f"
 	} else {
 
 /*           Complete the construction of S in (3). */
 
 /*           Change the sign of  X. */
 
+#line 452 "SB02RU.f"
 	    i__1 = *n;
+#line 452 "SB02RU.f"
 	    for (j = 1; j <= i__1; ++j) {
 
+#line 454 "SB02RU.f"
 		i__2 = n2;
+#line 454 "SB02RU.f"
 		for (i__ = np1; i__ <= i__2; ++i__) {
+#line 455 "SB02RU.f"
 		    s[i__ + j * s_dim1] = -s[i__ + j * s_dim1];
+#line 456 "SB02RU.f"
 /* L280: */
+#line 456 "SB02RU.f"
 		}
 
+#line 458 "SB02RU.f"
 /* L300: */
+#line 458 "SB02RU.f"
 	    }
 
 /*           Solve  op(A)'*X = I_n  in  S(N+1:2*N,N+1:2*N),  using the LU */
 /*           factorization of  op(A),  computed in  S(1:N,1:N),  and */
 /*           iterative refinement. */
 
+#line 464 "SB02RU.f"
 	    dlaset_("Full", n, n, &c_b33, &c_b34, &s[np1 * s_dim1 + 1], lds, (
 		    ftnlen)4);
+#line 465 "SB02RU.f"
 	    mb02pd_("Factored", tranat, n, n, &a[a_offset], lda, &s[s_offset],
 		     lds, &iwork[1], equed, &dwork[1], &dwork[1], &s[np1 * 
 		    s_dim1 + 1], lds, &s[np1 + np1 * s_dim1], lds, &rcond, &
@@ -582,6 +769,7 @@ static doublereal c_b57 = -1.;
 /*           factorization of  op(A),  obtained in  S(1:N,1:N),  and */
 /*           iterative refinement. */
 
+#line 474 "SB02RU.f"
 	    mb02pd_("Factored", trana, n, n, &a[a_offset], lda, &s[s_offset], 
 		    lds, &iwork[1], equed, &dwork[1], &dwork[1], &g[g_offset],
 		     ldg, &s[np1 * s_dim1 + 1], lds, &rcond, &dwork[1], &
@@ -590,37 +778,59 @@ static doublereal c_b57 = -1.;
 
 /*           Change the sign of  X  and transpose it in-situ. */
 
+#line 481 "SB02RU.f"
 	    i__1 = n2;
+#line 481 "SB02RU.f"
 	    for (j = np1; j <= i__1; ++j) {
 
+#line 483 "SB02RU.f"
 		i__2 = *n;
+#line 483 "SB02RU.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 484 "SB02RU.f"
 		    temp = -s[i__ + j * s_dim1];
+#line 485 "SB02RU.f"
 		    s[i__ + j * s_dim1] = -s[j - *n + (i__ + *n) * s_dim1];
+#line 486 "SB02RU.f"
 		    s[j - *n + (i__ + *n) * s_dim1] = temp;
+#line 487 "SB02RU.f"
 /* L320: */
+#line 487 "SB02RU.f"
 		}
 
+#line 489 "SB02RU.f"
 /* L340: */
+#line 489 "SB02RU.f"
 	    }
 /*                                   -T */
 /*           Compute  op(A) + G*op(A)  *Q  in  S(1:N,1:N). */
 
+#line 493 "SB02RU.f"
 	    if (notrna) {
+#line 494 "SB02RU.f"
 		dlacpy_("Full", n, n, &a[a_offset], lda, &s[s_offset], lds, (
 			ftnlen)4);
+#line 495 "SB02RU.f"
 	    } else {
+#line 496 "SB02RU.f"
 		ma02ad_("Full", n, n, &a[a_offset], lda, &s[s_offset], lds, (
 			ftnlen)4);
+#line 497 "SB02RU.f"
 	    }
+#line 498 "SB02RU.f"
 	    dgemm_("No transpose", "No transpose", n, n, n, &c_b57, &g[
 		    g_offset], ldg, &s[np1 + s_dim1], lds, &c_b34, &s[
 		    s_offset], lds, (ftnlen)12, (ftnlen)12);
 
+#line 501 "SB02RU.f"
 	}
+#line 502 "SB02RU.f"
 	dwork[1] = rconda;
+#line 503 "SB02RU.f"
 	dwork[2] = pivotg;
+#line 504 "SB02RU.f"
     }
+#line 505 "SB02RU.f"
     return 0;
 
 /* *** Last line of SB02RU *** */

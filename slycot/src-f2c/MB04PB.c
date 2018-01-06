@@ -1,3 +1,4 @@
+#line 1 "MB04PB.f"
 /* MB04PB.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04PB.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -226,150 +228,240 @@ static doublereal c_b20 = 1.;
 
 /*     Check the scalar input parameters. */
 
+#line 190 "MB04PB.f"
     /* Parameter adjustments */
+#line 190 "MB04PB.f"
     a_dim1 = *lda;
+#line 190 "MB04PB.f"
     a_offset = 1 + a_dim1;
+#line 190 "MB04PB.f"
     a -= a_offset;
+#line 190 "MB04PB.f"
     qg_dim1 = *ldqg;
+#line 190 "MB04PB.f"
     qg_offset = 1 + qg_dim1;
+#line 190 "MB04PB.f"
     qg -= qg_offset;
+#line 190 "MB04PB.f"
     --cs;
+#line 190 "MB04PB.f"
     --tau;
+#line 190 "MB04PB.f"
     --dwork;
+#line 190 "MB04PB.f"
 
+#line 190 "MB04PB.f"
     /* Function Body */
+#line 190 "MB04PB.f"
     *info = 0;
+#line 191 "MB04PB.f"
     if (*n < 0) {
+#line 192 "MB04PB.f"
 	*info = -1;
+#line 193 "MB04PB.f"
     } else if (*ilo < 1 || *ilo > max(1,*n)) {
+#line 194 "MB04PB.f"
 	*info = -2;
+#line 195 "MB04PB.f"
     } else if (*lda < max(1,*n)) {
+#line 196 "MB04PB.f"
 	*info = -4;
+#line 197 "MB04PB.f"
     } else if (*ldqg < max(1,*n)) {
+#line 198 "MB04PB.f"
 	*info = -6;
+#line 199 "MB04PB.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 199 "MB04PB.f"
 	i__1 = 1, i__2 = *n - 1;
+#line 199 "MB04PB.f"
 	if (*ldwork < max(i__1,i__2)) {
 /* Computing MAX */
+#line 200 "MB04PB.f"
 	    i__1 = 1, i__2 = *n - 1;
+#line 200 "MB04PB.f"
 	    dwork[1] = (doublereal) max(i__1,i__2);
+#line 201 "MB04PB.f"
 	    *info = -10;
+#line 202 "MB04PB.f"
 	}
+#line 202 "MB04PB.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 206 "MB04PB.f"
     if (*info != 0) {
+#line 207 "MB04PB.f"
 	i__1 = -(*info);
+#line 207 "MB04PB.f"
 	xerbla_("MB04PB", &i__1, (ftnlen)6);
+#line 208 "MB04PB.f"
 	return 0;
+#line 209 "MB04PB.f"
     }
 
 /*     Set elements 1:ILO-1 of TAU and CS. */
 
+#line 213 "MB04PB.f"
     i__1 = *ilo - 1;
+#line 213 "MB04PB.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 214 "MB04PB.f"
 	tau[i__] = 0.;
+#line 215 "MB04PB.f"
 	cs[(i__ << 1) - 1] = 1.;
+#line 216 "MB04PB.f"
 	cs[i__ * 2] = 0.;
+#line 217 "MB04PB.f"
 /* L10: */
+#line 217 "MB04PB.f"
     }
 
 /*     Quick return if possible. */
 
+#line 221 "MB04PB.f"
     if (*n <= *ilo) {
+#line 222 "MB04PB.f"
 	dwork[1] = 1.;
+#line 223 "MB04PB.f"
 	return 0;
+#line 224 "MB04PB.f"
     }
 
 /*     Determine the block size. */
 
+#line 228 "MB04PB.f"
     nh = *n - *ilo + 1;
+#line 229 "MB04PB.f"
     nb = ue01md_(&c__1, "MB04PB", " ", n, ilo, &c_n1, (ftnlen)6, (ftnlen)1);
+#line 230 "MB04PB.f"
     nbmin = 2;
+#line 231 "MB04PB.f"
     wrkopt = *n - 1;
+#line 232 "MB04PB.f"
     if (nb > 1 && nb < nh) {
 
 /*        Determine when to cross over from blocked to unblocked code. */
 
 /* Computing MAX */
+#line 236 "MB04PB.f"
 	i__1 = nb, i__2 = ue01md_(&c__3, "MB04PB", " ", n, ilo, &c_n1, (
 		ftnlen)6, (ftnlen)1);
+#line 236 "MB04PB.f"
 	nx = max(i__1,i__2);
+#line 237 "MB04PB.f"
 	if (nx < nh) {
 
 /*           Check whether workspace is large enough for blocked code. */
 
+#line 241 "MB04PB.f"
 	    wrkopt = (*n << 3) * nb + nb * 3;
+#line 242 "MB04PB.f"
 	    if (*ldwork < wrkopt) {
 
 /*              Not enough workspace available. Determine minimum value */
 /*              of NB, and reduce NB. */
 
 /* Computing MAX */
+#line 247 "MB04PB.f"
 		i__1 = 2, i__2 = ue01md_(&c__2, "MB04PB", " ", n, ilo, &c_n1, 
 			(ftnlen)6, (ftnlen)1);
+#line 247 "MB04PB.f"
 		nbmin = max(i__1,i__2);
+#line 248 "MB04PB.f"
 		nb = *ldwork / ((*n << 3) + 3);
+#line 249 "MB04PB.f"
 	    }
+#line 250 "MB04PB.f"
 	}
+#line 251 "MB04PB.f"
     }
 
+#line 253 "MB04PB.f"
     nnb = *n * nb;
+#line 254 "MB04PB.f"
     pxa = 1;
+#line 255 "MB04PB.f"
     pya = pxa + (nnb << 1);
+#line 256 "MB04PB.f"
     pxq = pya + (nnb << 1);
+#line 257 "MB04PB.f"
     pxg = pxq + (nnb << 1);
+#line 258 "MB04PB.f"
     pdw = pxg + (nnb << 1);
 
+#line 260 "MB04PB.f"
     if (nb < nbmin || nb >= nh) {
 
 /*        Use unblocked code. */
 
+#line 264 "MB04PB.f"
 	i__ = *ilo;
 
+#line 266 "MB04PB.f"
     } else {
+#line 267 "MB04PB.f"
 	i__1 = *n - nx - 1;
+#line 267 "MB04PB.f"
 	i__2 = nb;
+#line 267 "MB04PB.f"
 	for (i__ = *ilo; i__2 < 0 ? i__ >= i__1 : i__ <= i__1; i__ += i__2) {
 /* Computing MIN */
+#line 268 "MB04PB.f"
 	    i__3 = nb, i__4 = *n - i__;
+#line 268 "MB04PB.f"
 	    ib = min(i__3,i__4);
+#line 269 "MB04PB.f"
 	    nib = *n * ib;
 
 /*           Reduce rows and columns i:i+nb-1 to PVL form and return the */
 /*           matrices XA, XG, XQ, and YA which are needed to update the */
 /*           unreduced parts of the matrices. */
 
+#line 275 "MB04PB.f"
 	    i__3 = *n - i__ + 1;
+#line 275 "MB04PB.f"
 	    i__4 = i__ - 1;
+#line 275 "MB04PB.f"
 	    mb04pa_(&c_true, &i__3, &i__4, &ib, &a[i__ * a_dim1 + 1], lda, &
 		    qg[i__ * qg_dim1 + 1], ldqg, &dwork[pxa], n, &dwork[pxg], 
 		    n, &dwork[pxq], n, &dwork[pya], n, &cs[(i__ << 1) - 1], &
 		    tau[i__], &dwork[pdw]);
+#line 279 "MB04PB.f"
 	    if (*n > i__ + ib) {
 
 /*              Update the submatrix A(1:n,i+ib+1:n). */
 
+#line 283 "MB04PB.f"
 		i__3 = *n - i__ - ib;
+#line 283 "MB04PB.f"
 		i__4 = *n - i__ - ib;
+#line 283 "MB04PB.f"
 		dgemm_("No transpose", "Transpose", &i__3, &i__4, &ib, &c_b20,
 			 &qg[i__ + ib + 1 + i__ * qg_dim1], ldqg, &dwork[pxa 
 			+ ib + 1], n, &c_b20, &a[i__ + ib + 1 + (i__ + ib + 1)
 			 * a_dim1], lda, (ftnlen)12, (ftnlen)9);
+#line 286 "MB04PB.f"
 		i__3 = *n - i__ - ib;
+#line 286 "MB04PB.f"
 		i__4 = *n - i__ - ib;
+#line 286 "MB04PB.f"
 		dgemm_("No transpose", "Transpose", &i__3, &i__4, &ib, &c_b20,
 			 &a[i__ + ib + 1 + i__ * a_dim1], lda, &dwork[pxa + 
 			nib + ib + 1], n, &c_b20, &a[i__ + ib + 1 + (i__ + ib 
 			+ 1) * a_dim1], lda, (ftnlen)12, (ftnlen)9);
+#line 290 "MB04PB.f"
 		i__3 = *n - i__ - ib;
+#line 290 "MB04PB.f"
 		dgemm_("No transpose", "Transpose", n, &i__3, &ib, &c_b20, &
 			dwork[pya], n, &qg[i__ + ib + 1 + i__ * qg_dim1], 
 			ldqg, &c_b20, &a[(i__ + ib + 1) * a_dim1 + 1], lda, (
 			ftnlen)12, (ftnlen)9);
+#line 293 "MB04PB.f"
 		i__3 = *n - i__ - ib;
+#line 293 "MB04PB.f"
 		dgemm_("No transpose", "Transpose", n, &i__3, &ib, &c_b20, &
 			dwork[pya + nib], n, &a[i__ + ib + 1 + i__ * a_dim1], 
 			lda, &c_b20, &a[(i__ + ib + 1) * a_dim1 + 1], lda, (
@@ -377,12 +469,16 @@ static doublereal c_b20 = 1.;
 
 /*              Update the submatrix Q(i+ib+1:n,i+ib+1:n). */
 
+#line 299 "MB04PB.f"
 		i__3 = *n - i__ - ib;
+#line 299 "MB04PB.f"
 		dsyr2k_("Lower", "No Transpose", &i__3, &ib, &c_b20, &dwork[
 			pxq + ib + 1], n, &qg[i__ + ib + 1 + i__ * qg_dim1], 
 			ldqg, &c_b20, &qg[i__ + ib + 1 + (i__ + ib + 1) * 
 			qg_dim1], ldqg, (ftnlen)5, (ftnlen)12);
+#line 302 "MB04PB.f"
 		i__3 = *n - i__ - ib;
+#line 302 "MB04PB.f"
 		dsyr2k_("Lower", "No Transpose", &i__3, &ib, &c_b20, &dwork[
 			pxq + nib + ib + 1], n, &a[i__ + ib + 1 + i__ * 
 			a_dim1], lda, &c_b20, &qg[i__ + ib + 1 + (i__ + ib + 
@@ -390,40 +486,57 @@ static doublereal c_b20 = 1.;
 
 /*              Update the submatrix G(1:n,1:n). */
 
+#line 308 "MB04PB.f"
 		i__3 = i__ + ib;
+#line 308 "MB04PB.f"
 		i__4 = *n - i__ - ib;
+#line 308 "MB04PB.f"
 		dgemm_("No transpose", "Transpose", &i__3, &i__4, &ib, &c_b20,
 			 &dwork[pxg], n, &qg[i__ + ib + 1 + i__ * qg_dim1], 
 			ldqg, &c_b20, &qg[(i__ + ib + 2) * qg_dim1 + 1], ldqg,
 			 (ftnlen)12, (ftnlen)9);
+#line 311 "MB04PB.f"
 		i__3 = i__ + ib;
+#line 311 "MB04PB.f"
 		i__4 = *n - i__ - ib;
+#line 311 "MB04PB.f"
 		dgemm_("No transpose", "Transpose", &i__3, &i__4, &ib, &c_b20,
 			 &dwork[pxg + nib], n, &a[i__ + ib + 1 + i__ * a_dim1]
 			, lda, &c_b20, &qg[(i__ + ib + 2) * qg_dim1 + 1], 
 			ldqg, (ftnlen)12, (ftnlen)9);
+#line 314 "MB04PB.f"
 		i__3 = *n - i__ - ib;
+#line 314 "MB04PB.f"
 		dsyr2k_("Upper", "No Transpose", &i__3, &ib, &c_b20, &dwork[
 			pxg + ib + i__], n, &qg[i__ + ib + 1 + i__ * qg_dim1],
 			 ldqg, &c_b20, &qg[i__ + ib + 1 + (i__ + ib + 2) * 
 			qg_dim1], ldqg, (ftnlen)5, (ftnlen)12);
+#line 317 "MB04PB.f"
 		i__3 = *n - i__ - ib;
+#line 317 "MB04PB.f"
 		dsyr2k_("Upper", "No Transpose", &i__3, &ib, &c_b20, &dwork[
 			pxg + nib + ib + i__], n, &a[i__ + ib + 1 + i__ * 
 			a_dim1], lda, &c_b20, &qg[i__ + ib + 1 + (i__ + ib + 
 			2) * qg_dim1], ldqg, (ftnlen)5, (ftnlen)12);
+#line 320 "MB04PB.f"
 	    }
+#line 321 "MB04PB.f"
 /* L20: */
+#line 321 "MB04PB.f"
 	}
+#line 322 "MB04PB.f"
     }
 
 /*     Unblocked code to reduce the rest of the matrices. */
 
+#line 326 "MB04PB.f"
     mb04pu_(n, &i__, &a[a_offset], lda, &qg[qg_offset], ldqg, &cs[1], &tau[1],
 	     &dwork[1], ldwork, &ierr);
 
+#line 329 "MB04PB.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 331 "MB04PB.f"
     return 0;
 /* *** Last line of MB04PB *** */
 } /* mb04pb_ */

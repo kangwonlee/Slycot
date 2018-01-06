@@ -1,3 +1,4 @@
+#line 1 "SB02MW.f"
 /* SB02MW.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB02MW.f"
 logical sb02mw_(doublereal *reig, doublereal *ieig)
 {
     /* System generated locals */
@@ -88,8 +90,10 @@ logical sb02mw_(doublereal *reig, doublereal *ieig)
 /*     .. External Functions .. */
 /*     .. Executable Statements .. */
 
+#line 75 "SB02MW.f"
     ret_val = dlapy2_(reig, ieig) < 1.;
 
+#line 77 "SB02MW.f"
     return ret_val;
 /* *** Last line of SB02MW *** */
 } /* sb02mw_ */

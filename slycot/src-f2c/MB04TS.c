@@ -1,3 +1,4 @@
+#line 1 "MB04TS.f"
 /* MB04TS.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04TS.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -284,385 +286,637 @@ static integer c__1 = 1;
 
 /*     Check the scalar input parameters. */
 
+#line 256 "MB04TS.f"
     /* Parameter adjustments */
+#line 256 "MB04TS.f"
     a_dim1 = *lda;
+#line 256 "MB04TS.f"
     a_offset = 1 + a_dim1;
+#line 256 "MB04TS.f"
     a -= a_offset;
+#line 256 "MB04TS.f"
     b_dim1 = *ldb;
+#line 256 "MB04TS.f"
     b_offset = 1 + b_dim1;
+#line 256 "MB04TS.f"
     b -= b_offset;
+#line 256 "MB04TS.f"
     g_dim1 = *ldg;
+#line 256 "MB04TS.f"
     g_offset = 1 + g_dim1;
+#line 256 "MB04TS.f"
     g -= g_offset;
+#line 256 "MB04TS.f"
     q_dim1 = *ldq;
+#line 256 "MB04TS.f"
     q_offset = 1 + q_dim1;
+#line 256 "MB04TS.f"
     q -= q_offset;
+#line 256 "MB04TS.f"
     --csl;
+#line 256 "MB04TS.f"
     --csr;
+#line 256 "MB04TS.f"
     --taul;
+#line 256 "MB04TS.f"
     --taur;
+#line 256 "MB04TS.f"
     --dwork;
+#line 256 "MB04TS.f"
 
+#line 256 "MB04TS.f"
     /* Function Body */
+#line 256 "MB04TS.f"
     *info = 0;
+#line 257 "MB04TS.f"
     ltra = lsame_(trana, "T", (ftnlen)1, (ftnlen)1) || lsame_(trana, "C", (
 	    ftnlen)1, (ftnlen)1);
+#line 258 "MB04TS.f"
     ltrb = lsame_(tranb, "T", (ftnlen)1, (ftnlen)1) || lsame_(tranb, "C", (
 	    ftnlen)1, (ftnlen)1);
+#line 259 "MB04TS.f"
     if (! ltra && ! lsame_(trana, "N", (ftnlen)1, (ftnlen)1)) {
+#line 260 "MB04TS.f"
 	*info = -1;
+#line 261 "MB04TS.f"
     } else if (! ltrb && ! lsame_(tranb, "N", (ftnlen)1, (ftnlen)1)) {
+#line 262 "MB04TS.f"
 	*info = -2;
+#line 263 "MB04TS.f"
     } else if (*n < 0) {
+#line 264 "MB04TS.f"
 	*info = -3;
+#line 265 "MB04TS.f"
     } else if (*ilo < 1 || *ilo > max(1,*n)) {
+#line 266 "MB04TS.f"
 	*info = -4;
+#line 267 "MB04TS.f"
     } else if (*lda < max(1,*n)) {
+#line 268 "MB04TS.f"
 	*info = -6;
+#line 269 "MB04TS.f"
     } else if (*ldb < max(1,*n)) {
+#line 270 "MB04TS.f"
 	*info = -8;
+#line 271 "MB04TS.f"
     } else if (*ldg < max(1,*n)) {
+#line 272 "MB04TS.f"
 	*info = -10;
+#line 273 "MB04TS.f"
     } else if (*ldq < max(1,*n)) {
+#line 274 "MB04TS.f"
 	*info = -12;
+#line 275 "MB04TS.f"
     } else if (*ldwork < max(1,*n)) {
+#line 276 "MB04TS.f"
 	dwork[1] = (doublereal) max(1,*n);
+#line 277 "MB04TS.f"
 	*info = -18;
+#line 278 "MB04TS.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 282 "MB04TS.f"
     if (*info != 0) {
+#line 283 "MB04TS.f"
 	i__1 = -(*info);
+#line 283 "MB04TS.f"
 	xerbla_("MB04TS", &i__1, (ftnlen)6);
+#line 284 "MB04TS.f"
 	return 0;
+#line 285 "MB04TS.f"
     }
 
 /*     Quick return if possible. */
 
+#line 289 "MB04TS.f"
     if (*n == 0) {
+#line 290 "MB04TS.f"
 	dwork[1] = 1.;
+#line 291 "MB04TS.f"
 	return 0;
+#line 292 "MB04TS.f"
     }
 
+#line 294 "MB04TS.f"
     i__1 = *n;
+#line 294 "MB04TS.f"
     for (i__ = *ilo; i__ <= i__1; ++i__) {
+#line 295 "MB04TS.f"
 	alpha = q[i__ + i__ * q_dim1];
+#line 296 "MB04TS.f"
 	if (i__ < *n) {
 
 /*           Generate elementary reflector HU(i) to annihilate Q(i+1:n,i) */
 
+#line 300 "MB04TS.f"
 	    i__2 = *n - i__ + 1;
+#line 300 "MB04TS.f"
 	    dlarfg_(&i__2, &alpha, &q[i__ + 1 + i__ * q_dim1], &c__1, &nu);
 
 /*           Apply HU(i) from the left. */
 
+#line 304 "MB04TS.f"
 	    q[i__ + i__ * q_dim1] = 1.;
+#line 305 "MB04TS.f"
 	    i__2 = *n - i__ + 1;
+#line 305 "MB04TS.f"
 	    i__3 = *n - i__;
+#line 305 "MB04TS.f"
 	    dlarf_("Left", &i__2, &i__3, &q[i__ + i__ * q_dim1], &c__1, &nu, &
 		    q[i__ + (i__ + 1) * q_dim1], ldq, &dwork[1], (ftnlen)4);
+#line 307 "MB04TS.f"
 	    if (ltra) {
+#line 308 "MB04TS.f"
 		i__2 = *n - i__ + 1;
+#line 308 "MB04TS.f"
 		i__3 = *n - i__ + 1;
+#line 308 "MB04TS.f"
 		dlarf_("Right", &i__2, &i__3, &q[i__ + i__ * q_dim1], &c__1, &
 			nu, &a[i__ + i__ * a_dim1], lda, &dwork[1], (ftnlen)5)
 			;
+#line 310 "MB04TS.f"
 	    } else {
+#line 311 "MB04TS.f"
 		i__2 = *n - i__ + 1;
+#line 311 "MB04TS.f"
 		i__3 = *n - i__ + 1;
+#line 311 "MB04TS.f"
 		dlarf_("Left", &i__2, &i__3, &q[i__ + i__ * q_dim1], &c__1, &
 			nu, &a[i__ + i__ * a_dim1], lda, &dwork[1], (ftnlen)4)
 			;
+#line 313 "MB04TS.f"
 	    }
+#line 314 "MB04TS.f"
 	    if (ltrb) {
+#line 315 "MB04TS.f"
 		i__2 = *n - i__ + 1;
+#line 315 "MB04TS.f"
 		dlarf_("Right", n, &i__2, &q[i__ + i__ * q_dim1], &c__1, &nu, 
 			&b[i__ * b_dim1 + 1], ldb, &dwork[1], (ftnlen)5);
+#line 317 "MB04TS.f"
 	    } else {
+#line 318 "MB04TS.f"
 		i__2 = *n - i__ + 1;
+#line 318 "MB04TS.f"
 		dlarf_("Left", &i__2, n, &q[i__ + i__ * q_dim1], &c__1, &nu, &
 			b[i__ + b_dim1], ldb, &dwork[1], (ftnlen)4);
+#line 320 "MB04TS.f"
 	    }
+#line 321 "MB04TS.f"
 	    i__2 = *n - i__ + 1;
+#line 321 "MB04TS.f"
 	    dlarf_("Left", &i__2, n, &q[i__ + i__ * q_dim1], &c__1, &nu, &g[
 		    i__ + g_dim1], ldg, &dwork[1], (ftnlen)4);
+#line 323 "MB04TS.f"
 	    q[i__ + i__ * q_dim1] = nu;
+#line 324 "MB04TS.f"
 	} else {
+#line 325 "MB04TS.f"
 	    q[i__ + i__ * q_dim1] = 0.;
+#line 326 "MB04TS.f"
 	}
 
 /*        Generate symplectic Givens rotator GU(i) to annihilate Q(i,i). */
 
+#line 330 "MB04TS.f"
 	temp = a[i__ + i__ * a_dim1];
+#line 331 "MB04TS.f"
 	dlartg_(&temp, &alpha, &c__, &s, &a[i__ + i__ * a_dim1]);
 
 /*        Apply G(i) from the left. */
 
+#line 335 "MB04TS.f"
 	if (ltra) {
+#line 336 "MB04TS.f"
 	    i__2 = *n - i__;
+#line 336 "MB04TS.f"
 	    drot_(&i__2, &a[i__ + 1 + i__ * a_dim1], &c__1, &q[i__ + (i__ + 1)
 		     * q_dim1], ldq, &c__, &s);
+#line 337 "MB04TS.f"
 	} else {
+#line 338 "MB04TS.f"
 	    i__2 = *n - i__;
+#line 338 "MB04TS.f"
 	    drot_(&i__2, &a[i__ + (i__ + 1) * a_dim1], lda, &q[i__ + (i__ + 1)
 		     * q_dim1], ldq, &c__, &s);
+#line 339 "MB04TS.f"
 	}
+#line 340 "MB04TS.f"
 	if (ltrb) {
+#line 341 "MB04TS.f"
 	    drot_(n, &g[i__ + g_dim1], ldg, &b[i__ * b_dim1 + 1], &c__1, &c__,
 		     &s);
+#line 342 "MB04TS.f"
 	} else {
+#line 343 "MB04TS.f"
 	    drot_(n, &g[i__ + g_dim1], ldg, &b[i__ + b_dim1], ldb, &c__, &s);
+#line 344 "MB04TS.f"
 	}
+#line 345 "MB04TS.f"
 	csl[(i__ << 1) - 1] = c__;
+#line 346 "MB04TS.f"
 	csl[i__ * 2] = s;
 
+#line 348 "MB04TS.f"
 	if (i__ < *n) {
+#line 349 "MB04TS.f"
 	    if (ltra) {
 
 /*              Generate elementary reflector FU(i) to annihilate */
 /*              A(i,i+1:n). */
 
+#line 354 "MB04TS.f"
 		i__2 = *n - i__ + 1;
+#line 354 "MB04TS.f"
 		dlarfg_(&i__2, &a[i__ + i__ * a_dim1], &a[i__ + (i__ + 1) * 
 			a_dim1], lda, &taul[i__]);
 
 /*              Apply FU(i) from the left. */
 
+#line 358 "MB04TS.f"
 		temp = a[i__ + i__ * a_dim1];
+#line 359 "MB04TS.f"
 		a[i__ + i__ * a_dim1] = 1.;
+#line 360 "MB04TS.f"
 		i__2 = *n - i__;
+#line 360 "MB04TS.f"
 		i__3 = *n - i__ + 1;
+#line 360 "MB04TS.f"
 		dlarf_("Right", &i__2, &i__3, &a[i__ + i__ * a_dim1], lda, &
 			taul[i__], &a[i__ + 1 + i__ * a_dim1], lda, &dwork[1],
 			 (ftnlen)5);
+#line 362 "MB04TS.f"
 		i__2 = *n - i__ + 1;
+#line 362 "MB04TS.f"
 		i__3 = *n - i__;
+#line 362 "MB04TS.f"
 		dlarf_("Left", &i__2, &i__3, &a[i__ + i__ * a_dim1], lda, &
 			taul[i__], &q[i__ + (i__ + 1) * q_dim1], ldq, &dwork[
 			1], (ftnlen)4);
+#line 364 "MB04TS.f"
 		if (ltrb) {
+#line 365 "MB04TS.f"
 		    i__2 = *n - i__ + 1;
+#line 365 "MB04TS.f"
 		    dlarf_("Right", n, &i__2, &a[i__ + i__ * a_dim1], lda, &
 			    taul[i__], &b[i__ * b_dim1 + 1], ldb, &dwork[1], (
 			    ftnlen)5);
+#line 367 "MB04TS.f"
 		} else {
+#line 368 "MB04TS.f"
 		    i__2 = *n - i__ + 1;
+#line 368 "MB04TS.f"
 		    dlarf_("Left", &i__2, n, &a[i__ + i__ * a_dim1], lda, &
 			    taul[i__], &b[i__ + b_dim1], ldb, &dwork[1], (
 			    ftnlen)4);
+#line 370 "MB04TS.f"
 		}
+#line 371 "MB04TS.f"
 		i__2 = *n - i__ + 1;
+#line 371 "MB04TS.f"
 		dlarf_("Left", &i__2, n, &a[i__ + i__ * a_dim1], lda, &taul[
 			i__], &g[i__ + g_dim1], ldg, &dwork[1], (ftnlen)4);
+#line 373 "MB04TS.f"
 		a[i__ + i__ * a_dim1] = temp;
+#line 374 "MB04TS.f"
 	    } else {
 
 /*              Generate elementary reflector FU(i) to annihilate */
 /*              A(i+1:n,i). */
 
+#line 379 "MB04TS.f"
 		i__2 = *n - i__ + 1;
+#line 379 "MB04TS.f"
 		dlarfg_(&i__2, &a[i__ + i__ * a_dim1], &a[i__ + 1 + i__ * 
 			a_dim1], &c__1, &taul[i__]);
 
 /*              Apply FU(i) from the left. */
 
+#line 383 "MB04TS.f"
 		temp = a[i__ + i__ * a_dim1];
+#line 384 "MB04TS.f"
 		a[i__ + i__ * a_dim1] = 1.;
+#line 385 "MB04TS.f"
 		i__2 = *n - i__ + 1;
+#line 385 "MB04TS.f"
 		i__3 = *n - i__;
+#line 385 "MB04TS.f"
 		dlarf_("Left", &i__2, &i__3, &a[i__ + i__ * a_dim1], &c__1, &
 			taul[i__], &a[i__ + (i__ + 1) * a_dim1], lda, &dwork[
 			1], (ftnlen)4);
+#line 387 "MB04TS.f"
 		i__2 = *n - i__ + 1;
+#line 387 "MB04TS.f"
 		i__3 = *n - i__;
+#line 387 "MB04TS.f"
 		dlarf_("Left", &i__2, &i__3, &a[i__ + i__ * a_dim1], &c__1, &
 			taul[i__], &q[i__ + (i__ + 1) * q_dim1], ldq, &dwork[
 			1], (ftnlen)4);
+#line 389 "MB04TS.f"
 		if (ltrb) {
+#line 390 "MB04TS.f"
 		    i__2 = *n - i__ + 1;
+#line 390 "MB04TS.f"
 		    dlarf_("Right", n, &i__2, &a[i__ + i__ * a_dim1], &c__1, &
 			    taul[i__], &b[i__ * b_dim1 + 1], ldb, &dwork[1], (
 			    ftnlen)5);
+#line 392 "MB04TS.f"
 		} else {
+#line 393 "MB04TS.f"
 		    i__2 = *n - i__ + 1;
+#line 393 "MB04TS.f"
 		    dlarf_("Left", &i__2, n, &a[i__ + i__ * a_dim1], &c__1, &
 			    taul[i__], &b[i__ + b_dim1], ldb, &dwork[1], (
 			    ftnlen)4);
+#line 395 "MB04TS.f"
 		}
+#line 396 "MB04TS.f"
 		i__2 = *n - i__ + 1;
+#line 396 "MB04TS.f"
 		dlarf_("Left", &i__2, n, &a[i__ + i__ * a_dim1], &c__1, &taul[
 			i__], &g[i__ + g_dim1], ldg, &dwork[1], (ftnlen)4);
+#line 398 "MB04TS.f"
 		a[i__ + i__ * a_dim1] = temp;
+#line 399 "MB04TS.f"
 	    }
+#line 400 "MB04TS.f"
 	} else {
+#line 401 "MB04TS.f"
 	    taul[i__] = 0.;
+#line 402 "MB04TS.f"
 	}
+#line 403 "MB04TS.f"
 	if (i__ < *n) {
+#line 403 "MB04TS.f"
 	    alpha = q[i__ + (i__ + 1) * q_dim1];
+#line 403 "MB04TS.f"
 	}
+#line 405 "MB04TS.f"
 	if (i__ < *n - 1) {
 
 /*           Generate elementary reflector HV(i) to annihilate Q(i,i+2:n) */
 
+#line 409 "MB04TS.f"
 	    i__2 = *n - i__;
+#line 409 "MB04TS.f"
 	    dlarfg_(&i__2, &alpha, &q[i__ + (i__ + 2) * q_dim1], ldq, &nu);
 
 /*           Apply HV(i) from the right. */
 
+#line 413 "MB04TS.f"
 	    q[i__ + (i__ + 1) * q_dim1] = 1.;
+#line 414 "MB04TS.f"
 	    i__2 = *n - i__;
+#line 414 "MB04TS.f"
 	    i__3 = *n - i__;
+#line 414 "MB04TS.f"
 	    dlarf_("Right", &i__2, &i__3, &q[i__ + (i__ + 1) * q_dim1], ldq, &
 		    nu, &q[i__ + 1 + (i__ + 1) * q_dim1], ldq, &dwork[1], (
 		    ftnlen)5);
+#line 416 "MB04TS.f"
 	    if (ltra) {
+#line 417 "MB04TS.f"
 		i__2 = *n - i__;
+#line 417 "MB04TS.f"
 		dlarf_("Left", &i__2, n, &q[i__ + (i__ + 1) * q_dim1], ldq, &
 			nu, &a[i__ + 1 + a_dim1], lda, &dwork[1], (ftnlen)4);
+#line 419 "MB04TS.f"
 	    } else {
+#line 420 "MB04TS.f"
 		i__2 = *n - i__;
+#line 420 "MB04TS.f"
 		dlarf_("Right", n, &i__2, &q[i__ + (i__ + 1) * q_dim1], ldq, &
 			nu, &a[(i__ + 1) * a_dim1 + 1], lda, &dwork[1], (
 			ftnlen)5);
+#line 422 "MB04TS.f"
 	    }
+#line 423 "MB04TS.f"
 	    if (ltrb) {
+#line 424 "MB04TS.f"
 		i__2 = *n - i__;
+#line 424 "MB04TS.f"
 		i__3 = *n - i__ + 1;
+#line 424 "MB04TS.f"
 		dlarf_("Left", &i__2, &i__3, &q[i__ + (i__ + 1) * q_dim1], 
 			ldq, &nu, &b[i__ + 1 + i__ * b_dim1], ldb, &dwork[1], 
 			(ftnlen)4);
+#line 426 "MB04TS.f"
 	    } else {
+#line 427 "MB04TS.f"
 		i__2 = *n - i__ + 1;
+#line 427 "MB04TS.f"
 		i__3 = *n - i__;
+#line 427 "MB04TS.f"
 		dlarf_("Right", &i__2, &i__3, &q[i__ + (i__ + 1) * q_dim1], 
 			ldq, &nu, &b[i__ + (i__ + 1) * b_dim1], ldb, &dwork[1]
 			, (ftnlen)5);
+#line 429 "MB04TS.f"
 	    }
+#line 430 "MB04TS.f"
 	    i__2 = *n - i__;
+#line 430 "MB04TS.f"
 	    dlarf_("Right", n, &i__2, &q[i__ + (i__ + 1) * q_dim1], ldq, &nu, 
 		    &g[(i__ + 1) * g_dim1 + 1], ldg, &dwork[1], (ftnlen)5);
+#line 432 "MB04TS.f"
 	    q[i__ + (i__ + 1) * q_dim1] = nu;
+#line 433 "MB04TS.f"
 	} else if (i__ < *n) {
+#line 434 "MB04TS.f"
 	    q[i__ + (i__ + 1) * q_dim1] = 0.;
+#line 435 "MB04TS.f"
 	}
+#line 436 "MB04TS.f"
 	if (i__ < *n) {
 
 /*           Generate symplectic Givens rotator GV(i) to annihilate */
 /*           Q(i,i+1). */
 
+#line 441 "MB04TS.f"
 	    if (ltrb) {
+#line 442 "MB04TS.f"
 		temp = b[i__ + 1 + i__ * b_dim1];
+#line 443 "MB04TS.f"
 		dlartg_(&temp, &alpha, &c__, &s, &b[i__ + 1 + i__ * b_dim1]);
+#line 444 "MB04TS.f"
 		s = -s;
+#line 445 "MB04TS.f"
 		i__2 = *n - i__;
+#line 445 "MB04TS.f"
 		drot_(&i__2, &q[i__ + 1 + (i__ + 1) * q_dim1], &c__1, &b[i__ 
 			+ 1 + (i__ + 1) * b_dim1], ldb, &c__, &s);
+#line 446 "MB04TS.f"
 	    } else {
+#line 447 "MB04TS.f"
 		temp = b[i__ + (i__ + 1) * b_dim1];
+#line 448 "MB04TS.f"
 		dlartg_(&temp, &alpha, &c__, &s, &b[i__ + (i__ + 1) * b_dim1])
 			;
+#line 449 "MB04TS.f"
 		s = -s;
+#line 450 "MB04TS.f"
 		i__2 = *n - i__;
+#line 450 "MB04TS.f"
 		drot_(&i__2, &q[i__ + 1 + (i__ + 1) * q_dim1], &c__1, &b[i__ 
 			+ 1 + (i__ + 1) * b_dim1], &c__1, &c__, &s);
+#line 451 "MB04TS.f"
 	    }
+#line 452 "MB04TS.f"
 	    if (ltra) {
+#line 453 "MB04TS.f"
 		drot_(n, &a[i__ + 1 + a_dim1], lda, &g[(i__ + 1) * g_dim1 + 1]
 			, &c__1, &c__, &s);
+#line 454 "MB04TS.f"
 	    } else {
+#line 455 "MB04TS.f"
 		drot_(n, &a[(i__ + 1) * a_dim1 + 1], &c__1, &g[(i__ + 1) * 
 			g_dim1 + 1], &c__1, &c__, &s);
+#line 456 "MB04TS.f"
 	    }
+#line 457 "MB04TS.f"
 	    csr[(i__ << 1) - 1] = c__;
+#line 458 "MB04TS.f"
 	    csr[i__ * 2] = s;
+#line 459 "MB04TS.f"
 	}
+#line 460 "MB04TS.f"
 	if (i__ < *n - 1) {
+#line 461 "MB04TS.f"
 	    if (ltrb) {
 
 /*              Generate elementary reflector FV(i) to annihilate */
 /*              B(i+2:n,i). */
 
+#line 466 "MB04TS.f"
 		i__2 = *n - i__;
+#line 466 "MB04TS.f"
 		dlarfg_(&i__2, &b[i__ + 1 + i__ * b_dim1], &b[i__ + 2 + i__ * 
 			b_dim1], &c__1, &taur[i__]);
 
 /*              Apply FV(i) from the right. */
 
+#line 470 "MB04TS.f"
 		temp = b[i__ + 1 + i__ * b_dim1];
+#line 471 "MB04TS.f"
 		b[i__ + 1 + i__ * b_dim1] = 1.;
+#line 472 "MB04TS.f"
 		i__2 = *n - i__;
+#line 472 "MB04TS.f"
 		i__3 = *n - i__;
+#line 472 "MB04TS.f"
 		dlarf_("Left", &i__2, &i__3, &b[i__ + 1 + i__ * b_dim1], &
 			c__1, &taur[i__], &b[i__ + 1 + (i__ + 1) * b_dim1], 
 			ldb, &dwork[1], (ftnlen)4);
+#line 474 "MB04TS.f"
 		i__2 = *n - i__;
+#line 474 "MB04TS.f"
 		i__3 = *n - i__;
+#line 474 "MB04TS.f"
 		dlarf_("Right", &i__2, &i__3, &b[i__ + 1 + i__ * b_dim1], &
 			c__1, &taur[i__], &q[i__ + 1 + (i__ + 1) * q_dim1], 
 			ldq, &dwork[1], (ftnlen)5);
+#line 476 "MB04TS.f"
 		if (ltra) {
+#line 477 "MB04TS.f"
 		    i__2 = *n - i__;
+#line 477 "MB04TS.f"
 		    dlarf_("Left", &i__2, n, &b[i__ + 1 + i__ * b_dim1], &
 			    c__1, &taur[i__], &a[i__ + 1 + a_dim1], lda, &
 			    dwork[1], (ftnlen)4);
+#line 479 "MB04TS.f"
 		} else {
+#line 480 "MB04TS.f"
 		    i__2 = *n - i__;
+#line 480 "MB04TS.f"
 		    dlarf_("Right", n, &i__2, &b[i__ + 1 + i__ * b_dim1], &
 			    c__1, &taur[i__], &a[(i__ + 1) * a_dim1 + 1], lda,
 			     &dwork[1], (ftnlen)5);
+#line 482 "MB04TS.f"
 		}
+#line 483 "MB04TS.f"
 		i__2 = *n - i__;
+#line 483 "MB04TS.f"
 		dlarf_("Right", n, &i__2, &b[i__ + 1 + i__ * b_dim1], &c__1, &
 			taur[i__], &g[(i__ + 1) * g_dim1 + 1], ldg, &dwork[1],
 			 (ftnlen)5);
+#line 485 "MB04TS.f"
 		b[i__ + 1 + i__ * b_dim1] = temp;
+#line 486 "MB04TS.f"
 	    } else {
 
 /*              Generate elementary reflector FV(i) to annihilate */
 /*              B(i,i+2:n). */
 
+#line 491 "MB04TS.f"
 		i__2 = *n - i__;
+#line 491 "MB04TS.f"
 		dlarfg_(&i__2, &b[i__ + (i__ + 1) * b_dim1], &b[i__ + (i__ + 
 			2) * b_dim1], ldb, &taur[i__]);
 
 /*              Apply FV(i) from the right. */
 
+#line 495 "MB04TS.f"
 		temp = b[i__ + (i__ + 1) * b_dim1];
+#line 496 "MB04TS.f"
 		b[i__ + (i__ + 1) * b_dim1] = 1.;
+#line 497 "MB04TS.f"
 		i__2 = *n - i__;
+#line 497 "MB04TS.f"
 		i__3 = *n - i__;
+#line 497 "MB04TS.f"
 		dlarf_("Right", &i__2, &i__3, &b[i__ + (i__ + 1) * b_dim1], 
 			ldb, &taur[i__], &b[i__ + 1 + (i__ + 1) * b_dim1], 
 			ldb, &dwork[1], (ftnlen)5);
+#line 499 "MB04TS.f"
 		i__2 = *n - i__;
+#line 499 "MB04TS.f"
 		i__3 = *n - i__;
+#line 499 "MB04TS.f"
 		dlarf_("Right", &i__2, &i__3, &b[i__ + (i__ + 1) * b_dim1], 
 			ldb, &taur[i__], &q[i__ + 1 + (i__ + 1) * q_dim1], 
 			ldq, &dwork[1], (ftnlen)5);
+#line 501 "MB04TS.f"
 		if (ltra) {
+#line 502 "MB04TS.f"
 		    i__2 = *n - i__;
+#line 502 "MB04TS.f"
 		    dlarf_("Left", &i__2, n, &b[i__ + (i__ + 1) * b_dim1], 
 			    ldb, &taur[i__], &a[i__ + 1 + a_dim1], lda, &
 			    dwork[1], (ftnlen)4);
+#line 504 "MB04TS.f"
 		} else {
+#line 505 "MB04TS.f"
 		    i__2 = *n - i__;
+#line 505 "MB04TS.f"
 		    dlarf_("Right", n, &i__2, &b[i__ + (i__ + 1) * b_dim1], 
 			    ldb, &taur[i__], &a[(i__ + 1) * a_dim1 + 1], lda, 
 			    &dwork[1], (ftnlen)5);
+#line 507 "MB04TS.f"
 		}
+#line 508 "MB04TS.f"
 		i__2 = *n - i__;
+#line 508 "MB04TS.f"
 		dlarf_("Right", n, &i__2, &b[i__ + (i__ + 1) * b_dim1], ldb, &
 			taur[i__], &g[(i__ + 1) * g_dim1 + 1], ldg, &dwork[1],
 			 (ftnlen)5);
+#line 510 "MB04TS.f"
 		b[i__ + (i__ + 1) * b_dim1] = temp;
+#line 511 "MB04TS.f"
 	    }
+#line 512 "MB04TS.f"
 	} else if (i__ < *n) {
+#line 513 "MB04TS.f"
 	    taur[i__] = 0.;
+#line 514 "MB04TS.f"
 	}
+#line 515 "MB04TS.f"
 /* L10: */
+#line 515 "MB04TS.f"
     }
+#line 516 "MB04TS.f"
     dwork[1] = (doublereal) max(1,*n);
+#line 517 "MB04TS.f"
     return 0;
 /* *** Last line of MB04TS *** */
 } /* mb04ts_ */

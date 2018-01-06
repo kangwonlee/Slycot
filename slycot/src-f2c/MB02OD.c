@@ -1,3 +1,4 @@
+#line 1 "MB02OD.f"
 /* MB02OD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02OD.f"
 /* Subroutine */ int mb02od_(char *side, char *uplo, char *trans, char *diag, 
 	char *norm, integer *m, integer *n, doublereal *alpha, doublereal *a, 
 	integer *lda, doublereal *b, integer *ldb, doublereal *rcond, 
@@ -225,81 +227,139 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 206 "MB02OD.f"
     /* Parameter adjustments */
+#line 206 "MB02OD.f"
     a_dim1 = *lda;
+#line 206 "MB02OD.f"
     a_offset = 1 + a_dim1;
+#line 206 "MB02OD.f"
     a -= a_offset;
+#line 206 "MB02OD.f"
     b_dim1 = *ldb;
+#line 206 "MB02OD.f"
     b_offset = 1 + b_dim1;
+#line 206 "MB02OD.f"
     b -= b_offset;
+#line 206 "MB02OD.f"
     --iwork;
+#line 206 "MB02OD.f"
     --dwork;
+#line 206 "MB02OD.f"
 
+#line 206 "MB02OD.f"
     /* Function Body */
+#line 206 "MB02OD.f"
     lside = lsame_(side, "L", (ftnlen)1, (ftnlen)1);
+#line 207 "MB02OD.f"
     if (lside) {
+#line 208 "MB02OD.f"
 	nrowa = *m;
+#line 209 "MB02OD.f"
     } else {
+#line 210 "MB02OD.f"
 	nrowa = *n;
+#line 211 "MB02OD.f"
     }
+#line 212 "MB02OD.f"
     onenrm = *(unsigned char *)norm == '1' || lsame_(norm, "O", (ftnlen)1, (
 	    ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 216 "MB02OD.f"
     *info = 0;
+#line 217 "MB02OD.f"
     if (! lside && ! lsame_(side, "R", (ftnlen)1, (ftnlen)1)) {
+#line 218 "MB02OD.f"
 	*info = -1;
+#line 219 "MB02OD.f"
     } else if (! lsame_(uplo, "U", (ftnlen)1, (ftnlen)1) && ! lsame_(uplo, 
 	    "L", (ftnlen)1, (ftnlen)1)) {
+#line 221 "MB02OD.f"
 	*info = -2;
+#line 222 "MB02OD.f"
     } else if (! lsame_(trans, "N", (ftnlen)1, (ftnlen)1) && ! lsame_(trans, 
 	    "T", (ftnlen)1, (ftnlen)1) && ! lsame_(trans, "C", (ftnlen)1, (
 	    ftnlen)1)) {
+#line 225 "MB02OD.f"
 	*info = -3;
+#line 226 "MB02OD.f"
     } else if (! lsame_(diag, "U", (ftnlen)1, (ftnlen)1) && ! lsame_(diag, 
 	    "N", (ftnlen)1, (ftnlen)1)) {
+#line 228 "MB02OD.f"
 	*info = -4;
+#line 229 "MB02OD.f"
     } else if (! onenrm && ! lsame_(norm, "I", (ftnlen)1, (ftnlen)1)) {
+#line 230 "MB02OD.f"
 	*info = -5;
+#line 231 "MB02OD.f"
     } else if (*m < 0) {
+#line 232 "MB02OD.f"
 	*info = -6;
+#line 233 "MB02OD.f"
     } else if (*n < 0) {
+#line 234 "MB02OD.f"
 	*info = -7;
+#line 235 "MB02OD.f"
     } else if (*lda < max(1,nrowa)) {
+#line 236 "MB02OD.f"
 	*info = -10;
+#line 237 "MB02OD.f"
     } else if (*ldb < max(1,*m)) {
+#line 238 "MB02OD.f"
 	*info = -12;
+#line 239 "MB02OD.f"
     }
 
+#line 241 "MB02OD.f"
     if (*info != 0) {
+#line 242 "MB02OD.f"
 	i__1 = -(*info);
+#line 242 "MB02OD.f"
 	xerbla_("MB02OD", &i__1, (ftnlen)6);
+#line 243 "MB02OD.f"
 	return 0;
+#line 244 "MB02OD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 248 "MB02OD.f"
     if (nrowa == 0) {
+#line 249 "MB02OD.f"
 	*rcond = 1.;
+#line 250 "MB02OD.f"
 	return 0;
+#line 251 "MB02OD.f"
     }
 
+#line 253 "MB02OD.f"
     toldef = *tol;
+#line 254 "MB02OD.f"
     if (toldef <= 0.) {
+#line 254 "MB02OD.f"
 	toldef = (doublereal) (nrowa * nrowa) * dlamch_("Epsilon", (ftnlen)7);
+#line 254 "MB02OD.f"
     }
 
+#line 257 "MB02OD.f"
     dtrcon_(norm, uplo, diag, &nrowa, &a[a_offset], lda, rcond, &dwork[1], &
 	    iwork[1], info, (ftnlen)1, (ftnlen)1, (ftnlen)1);
 
+#line 260 "MB02OD.f"
     if (*rcond > toldef) {
+#line 261 "MB02OD.f"
 	dtrsm_(side, uplo, trans, diag, m, n, alpha, &a[a_offset], lda, &b[
 		b_offset], ldb, (ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 263 "MB02OD.f"
     } else {
+#line 264 "MB02OD.f"
 	*info = 1;
+#line 265 "MB02OD.f"
     }
 /* *** Last line of MB02OD *** */
+#line 267 "MB02OD.f"
     return 0;
 } /* mb02od_ */
 

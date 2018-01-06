@@ -1,3 +1,4 @@
+#line 1 "MA02BZ.f"
 /* MA02BZ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MA02BZ.f"
 /* Table of constant values */
 
 static integer c_n1 = -1;
@@ -109,40 +111,67 @@ static integer c__1 = 1;
 /*     .. External Subroutines .. */
 /*     .. Executable Statements .. */
 
+#line 89 "MA02BZ.f"
     /* Parameter adjustments */
+#line 89 "MA02BZ.f"
     a_dim1 = *lda;
+#line 89 "MA02BZ.f"
     a_offset = 1 + a_dim1;
+#line 89 "MA02BZ.f"
     a -= a_offset;
+#line 89 "MA02BZ.f"
 
+#line 89 "MA02BZ.f"
     /* Function Body */
+#line 89 "MA02BZ.f"
     bsides = lsame_(side, "B", (ftnlen)1, (ftnlen)1);
 
+#line 91 "MA02BZ.f"
     if ((lsame_(side, "L", (ftnlen)1, (ftnlen)1) || bsides) && *m > 1) {
 
 /*        Compute P*A. */
 
+#line 95 "MA02BZ.f"
 	m2 = *m / 2;
+#line 96 "MA02BZ.f"
 	k = *m - m2 + 1;
+#line 97 "MA02BZ.f"
 	i__1 = *n;
+#line 97 "MA02BZ.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 98 "MA02BZ.f"
 	    zswap_(&m2, &a[j * a_dim1 + 1], &c_n1, &a[k + j * a_dim1], &c__1);
+#line 99 "MA02BZ.f"
 /* L10: */
+#line 99 "MA02BZ.f"
 	}
+#line 100 "MA02BZ.f"
     }
+#line 101 "MA02BZ.f"
     if ((lsame_(side, "R", (ftnlen)1, (ftnlen)1) || bsides) && *n > 1) {
 
 /*        Compute A*P. */
 
+#line 105 "MA02BZ.f"
 	n2 = *n / 2;
+#line 106 "MA02BZ.f"
 	k = *n - n2 + 1;
+#line 107 "MA02BZ.f"
 	i__1 = *m;
+#line 107 "MA02BZ.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 108 "MA02BZ.f"
 	    i__2 = -(*lda);
+#line 108 "MA02BZ.f"
 	    zswap_(&n2, &a[i__ + a_dim1], &i__2, &a[i__ + k * a_dim1], lda);
+#line 109 "MA02BZ.f"
 /* L20: */
+#line 109 "MA02BZ.f"
 	}
+#line 110 "MA02BZ.f"
     }
 
+#line 112 "MA02BZ.f"
     return 0;
 /* *** Last line of MA02BZ *** */
 } /* ma02bz_ */

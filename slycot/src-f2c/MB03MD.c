@@ -1,3 +1,4 @@
+#line 1 "MB03MD.f"
 /* MB03MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03MD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -245,64 +247,103 @@ static integer c__1 = 1;
 
 /*     Test some input scalar arguments. */
 
+#line 226 "MB03MD.f"
     /* Parameter adjustments */
+#line 226 "MB03MD.f"
     --e2;
+#line 226 "MB03MD.f"
     --q2;
+#line 226 "MB03MD.f"
     --e;
+#line 226 "MB03MD.f"
     --q;
+#line 226 "MB03MD.f"
 
+#line 226 "MB03MD.f"
     /* Function Body */
+#line 226 "MB03MD.f"
     *iwarn = 0;
+#line 227 "MB03MD.f"
     *info = 0;
+#line 228 "MB03MD.f"
     if (*n < 0) {
+#line 229 "MB03MD.f"
 	*info = -1;
+#line 230 "MB03MD.f"
     } else if (*l < 0 || *l > *n) {
+#line 231 "MB03MD.f"
 	*info = -2;
+#line 232 "MB03MD.f"
     }
 
+#line 234 "MB03MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 238 "MB03MD.f"
 	i__1 = -(*info);
+#line 238 "MB03MD.f"
 	xerbla_("MB03MD", &i__1, (ftnlen)6);
+#line 239 "MB03MD.f"
 	return 0;
+#line 240 "MB03MD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 244 "MB03MD.f"
     if (*n == 0) {
+#line 244 "MB03MD.f"
 	return 0;
+#line 244 "MB03MD.f"
     }
 
 /*     Step 1: initialisation of THETA. */
 /*             ----------------------- */
+#line 249 "MB03MD.f"
     if (*l == 0) {
+#line 249 "MB03MD.f"
 	*theta = 0.;
+#line 249 "MB03MD.f"
     }
+#line 250 "MB03MD.f"
     if (*theta < 0.) {
+#line 251 "MB03MD.f"
 	if (*l == 1) {
 
 /*           An upper bound which is close if S(N-1) >> S(N): */
 
+#line 255 "MB03MD.f"
 	    *theta = mb03my_(n, &q[1], &c__1);
+#line 256 "MB03MD.f"
 	    if (*n == 1) {
+#line 256 "MB03MD.f"
 		return 0;
+#line 256 "MB03MD.f"
 	    }
+#line 258 "MB03MD.f"
 	} else {
 
 /*           An experimentally established estimate which is good if */
 /*           S(N-L) >> S(N-L+1): */
 
+#line 263 "MB03MD.f"
 	    *theta = (d__1 = q[*n - *l + 1], abs(d__1));
+#line 264 "MB03MD.f"
 	}
+#line 265 "MB03MD.f"
     }
 
 /*     Step 2: Check quality of initial estimate THETA. */
 /*             --------------------------------------- */
+#line 269 "MB03MD.f"
     num = mb03nd_(n, theta, &q2[1], &e2[1], pivmin, info);
+#line 270 "MB03MD.f"
     if (num == *l) {
+#line 270 "MB03MD.f"
 	return 0;
+#line 270 "MB03MD.f"
     }
 
 /*     Step 3: initialisation starting values for bisection method. */
@@ -311,31 +352,50 @@ static integer c__1 = 1;
 /*     order. Then, the computed Y and Z will be such that */
 /*     (number of S(i) <= Y) < L < (number of S(i) <= Z). */
 
+#line 279 "MB03MD.f"
     if (num < *l) {
+#line 280 "MB03MD.f"
 	th = abs(q[1]);
+#line 281 "MB03MD.f"
 	z__ = 0.;
+#line 282 "MB03MD.f"
 	y = *theta;
+#line 283 "MB03MD.f"
 	numz = *n;
 
+#line 285 "MB03MD.f"
 	i__1 = *n - 1;
+#line 285 "MB03MD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 286 "MB03MD.f"
 	    h__ = (d__1 = q[i__ + 1], abs(d__1));
 /* Computing MAX */
+#line 287 "MB03MD.f"
 	    d__2 = max(th,h__) + (d__1 = e[i__], abs(d__1));
+#line 287 "MB03MD.f"
 	    z__ = max(d__2,z__);
+#line 288 "MB03MD.f"
 	    th = h__;
+#line 289 "MB03MD.f"
 /* L20: */
+#line 289 "MB03MD.f"
 	}
 
 /*        Widen the Gershgorin interval a bit for machines with sloppy */
 /*        arithmetic. */
 
+#line 294 "MB03MD.f"
 	z__ = z__ + abs(z__) * 2. * dlamch_("Epsilon", (ftnlen)7) * (
 		doublereal) (*n) + *pivmin * 2.;
+#line 296 "MB03MD.f"
     } else {
+#line 297 "MB03MD.f"
 	z__ = *theta;
+#line 298 "MB03MD.f"
 	y = 0.;
+#line 299 "MB03MD.f"
 	numz = num;
+#line 300 "MB03MD.f"
     }
 
 /*     Step 4: Bisection method for finding the upper bound on the L */
@@ -348,21 +408,35 @@ static integer c__1 = 1;
 
 /*     WHILE ( ( NUM .NE. L ) .AND. */
 /*             ( ( Z-Y ) .GT. MAX( TOL, PIVMIN, RELTOL*ABS( Z ) ) ) ) DO */
+#line 312 "MB03MD.f"
 L40:
 /* Computing MAX */
 /* Computing MAX */
+#line 312 "MB03MD.f"
     d__4 = abs(y), d__5 = abs(z__);
+#line 312 "MB03MD.f"
     d__2 = max(*tol,*pivmin), d__3 = *reltol * max(d__4,d__5);
+#line 312 "MB03MD.f"
     if (num != *l && (d__1 = z__ - y, abs(d__1)) > max(d__2,d__3)) {
+#line 316 "MB03MD.f"
 	th = (y + z__) / 2.;
+#line 317 "MB03MD.f"
 	num = mb03nd_(n, &th, &q2[1], &e2[1], pivmin, info);
+#line 318 "MB03MD.f"
 	if (num < *l) {
+#line 319 "MB03MD.f"
 	    y = th;
+#line 320 "MB03MD.f"
 	} else {
+#line 321 "MB03MD.f"
 	    z__ = th;
+#line 322 "MB03MD.f"
 	    numz = num;
+#line 323 "MB03MD.f"
 	}
+#line 324 "MB03MD.f"
 	goto L40;
+#line 325 "MB03MD.f"
     }
 /*     END WHILE 40 */
 
@@ -371,14 +445,22 @@ L40:
 /*     TOL from each other. S(N-L) and S(N-L+1) are then assumed to */
 /*     coincide. L is increased, and a warning is given. */
 
+#line 333 "MB03MD.f"
     if (num != *l) {
+#line 334 "MB03MD.f"
 	*l = numz;
+#line 335 "MB03MD.f"
 	*theta = z__;
+#line 336 "MB03MD.f"
 	*iwarn = 1;
+#line 337 "MB03MD.f"
     } else {
+#line 338 "MB03MD.f"
 	*theta = th;
+#line 339 "MB03MD.f"
     }
 
+#line 341 "MB03MD.f"
     return 0;
 /* *** Last line of MB03MD *** */
 } /* mb03md_ */

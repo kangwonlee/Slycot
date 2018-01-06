@@ -1,3 +1,4 @@
+#line 1 "NF01BA.f"
 /* NF01BA.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "NF01BA.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -84,24 +86,43 @@ static doublereal c_b3 = -1.;
 
 /*     .. Executable Statements .. */
 
+#line 56 "NF01BA.f"
     /* Parameter adjustments */
+#line 56 "NF01BA.f"
     --ipar;
+#line 56 "NF01BA.f"
     z_dim1 = *ldz;
+#line 56 "NF01BA.f"
     z_offset = 1 + z_dim1;
+#line 56 "NF01BA.f"
     z__ -= z_offset;
+#line 56 "NF01BA.f"
     y_dim1 = *ldy;
+#line 56 "NF01BA.f"
     y_offset = 1 + y_dim1;
+#line 56 "NF01BA.f"
     y -= y_offset;
+#line 56 "NF01BA.f"
     --x;
+#line 56 "NF01BA.f"
     --e;
+#line 56 "NF01BA.f"
     j_dim1 = *ldj;
+#line 56 "NF01BA.f"
     j_offset = 1 + j_dim1;
+#line 56 "NF01BA.f"
     j -= j_offset;
+#line 56 "NF01BA.f"
     --jte;
+#line 56 "NF01BA.f"
     --dwork;
+#line 56 "NF01BA.f"
 
+#line 56 "NF01BA.f"
     /* Function Body */
+#line 56 "NF01BA.f"
     *info = 0;
+#line 57 "NF01BA.f"
     if (*iflag == 1) {
 
 /*        Call NF01AY to compute the output y of the Wiener system (in E) */
@@ -112,45 +133,67 @@ static doublereal c_b3 = -1.;
 /*        Workspace: need:    2*NN, NN = IPAR(3) (number of neurons); */
 /*                   prefer:  larger. */
 
+#line 67 "NF01BA.f"
 	i__1 = *lipar - 2;
+#line 67 "NF01BA.f"
 	nf01ay_(nsmp, &ipar[2], &c__1, &ipar[3], &i__1, &x[1], n, &z__[
 		z_offset], ldz, &e[1], nsmp, &dwork[1], ldwork, info);
+#line 69 "NF01BA.f"
 	daxpy_(nsmp, &c_b3, &y[y_offset], &c__1, &e[1], &c__1);
+#line 70 "NF01BA.f"
 	dwork[1] = (doublereal) (ipar[3] << 1);
 
+#line 72 "NF01BA.f"
     } else if (*iflag == 2) {
 
 /*        Call NF01BY to compute the Jacobian in a compressed form. */
 /*        IPAR(2), IPAR(3) must have the same content as for IFLAG = 1. */
 /*        Workspace: need:    0. */
 
+#line 78 "NF01BA.f"
 	i__1 = *lipar - 2;
+#line 78 "NF01BA.f"
 	nf01by_("C", nsmp, &ipar[2], &c__1, &ipar[3], &i__1, &x[1], n, &z__[
 		z_offset], ldz, &e[1], &j[j_offset], ldj, &jte[1], &dwork[1], 
 		ldwork, info, (ftnlen)1);
+#line 80 "NF01BA.f"
 	*nfevl = 0;
+#line 81 "NF01BA.f"
 	dwork[1] = 0.;
 
+#line 83 "NF01BA.f"
     } else if (*iflag == 3) {
 
 /*        Set the parameter LDJ, the length of the array J, and the sizes */
 /*        of the workspace for FCN (IFLAG = 1 or 2), and JPJ. */
 
+#line 88 "NF01BA.f"
 	*ldj = *nsmp;
+#line 89 "NF01BA.f"
 	ipar[1] = *nsmp * *n;
+#line 90 "NF01BA.f"
 	ipar[2] = ipar[3] << 1;
+#line 91 "NF01BA.f"
 	ipar[3] = 0;
+#line 92 "NF01BA.f"
 	ipar[4] = *nsmp;
 
+#line 94 "NF01BA.f"
     } else if (*iflag == 0) {
 
 /*        Special call for printing intermediate results. */
 
+#line 98 "NF01BA.f"
 	err = dnrm2_(nsmp, &e[1], &c__1);
+#line 99 "NF01BA.f"
 	s_wsfe(&io___2);
+#line 99 "NF01BA.f"
 	do_fio(&c__1, (char *)&err, (ftnlen)sizeof(doublereal));
+#line 99 "NF01BA.f"
 	e_wsfe();
+#line 100 "NF01BA.f"
     }
+#line 101 "NF01BA.f"
     return 0;
 
 /* *** Last line of NF01BA *** */

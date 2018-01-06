@@ -1,3 +1,4 @@
+#line 1 "AB05ND.f"
 /* AB05ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB05ND.f"
 /* Table of constant values */
 
 static doublereal c_b6 = 0.;
@@ -325,370 +327,600 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 294 "AB05ND.f"
     /* Parameter adjustments */
+#line 294 "AB05ND.f"
     a1_dim1 = *lda1;
+#line 294 "AB05ND.f"
     a1_offset = 1 + a1_dim1;
+#line 294 "AB05ND.f"
     a1 -= a1_offset;
+#line 294 "AB05ND.f"
     b1_dim1 = *ldb1;
+#line 294 "AB05ND.f"
     b1_offset = 1 + b1_dim1;
+#line 294 "AB05ND.f"
     b1 -= b1_offset;
+#line 294 "AB05ND.f"
     c1_dim1 = *ldc1;
+#line 294 "AB05ND.f"
     c1_offset = 1 + c1_dim1;
+#line 294 "AB05ND.f"
     c1 -= c1_offset;
+#line 294 "AB05ND.f"
     d1_dim1 = *ldd1;
+#line 294 "AB05ND.f"
     d1_offset = 1 + d1_dim1;
+#line 294 "AB05ND.f"
     d1 -= d1_offset;
+#line 294 "AB05ND.f"
     a2_dim1 = *lda2;
+#line 294 "AB05ND.f"
     a2_offset = 1 + a2_dim1;
+#line 294 "AB05ND.f"
     a2 -= a2_offset;
+#line 294 "AB05ND.f"
     b2_dim1 = *ldb2;
+#line 294 "AB05ND.f"
     b2_offset = 1 + b2_dim1;
+#line 294 "AB05ND.f"
     b2 -= b2_offset;
+#line 294 "AB05ND.f"
     c2_dim1 = *ldc2;
+#line 294 "AB05ND.f"
     c2_offset = 1 + c2_dim1;
+#line 294 "AB05ND.f"
     c2 -= c2_offset;
+#line 294 "AB05ND.f"
     d2_dim1 = *ldd2;
+#line 294 "AB05ND.f"
     d2_offset = 1 + d2_dim1;
+#line 294 "AB05ND.f"
     d2 -= d2_offset;
+#line 294 "AB05ND.f"
     a_dim1 = *lda;
+#line 294 "AB05ND.f"
     a_offset = 1 + a_dim1;
+#line 294 "AB05ND.f"
     a -= a_offset;
+#line 294 "AB05ND.f"
     b_dim1 = *ldb;
+#line 294 "AB05ND.f"
     b_offset = 1 + b_dim1;
+#line 294 "AB05ND.f"
     b -= b_offset;
+#line 294 "AB05ND.f"
     c_dim1 = *ldc;
+#line 294 "AB05ND.f"
     c_offset = 1 + c_dim1;
+#line 294 "AB05ND.f"
     c__ -= c_offset;
+#line 294 "AB05ND.f"
     d_dim1 = *ldd;
+#line 294 "AB05ND.f"
     d_offset = 1 + d_dim1;
+#line 294 "AB05ND.f"
     d__ -= d_offset;
+#line 294 "AB05ND.f"
     --iwork;
+#line 294 "AB05ND.f"
     --dwork;
+#line 294 "AB05ND.f"
 
+#line 294 "AB05ND.f"
     /* Function Body */
+#line 294 "AB05ND.f"
     lover = lsame_(over, "O", (ftnlen)1, (ftnlen)1);
+#line 295 "AB05ND.f"
     ldwm1 = max(1,*m1);
+#line 296 "AB05ND.f"
     *n = *n1 + *n2;
+#line 297 "AB05ND.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 301 "AB05ND.f"
     if (! lover && ! lsame_(over, "N", (ftnlen)1, (ftnlen)1)) {
+#line 302 "AB05ND.f"
 	*info = -1;
+#line 303 "AB05ND.f"
     } else if (*n1 < 0) {
+#line 304 "AB05ND.f"
 	*info = -2;
+#line 305 "AB05ND.f"
     } else if (*m1 < 0) {
+#line 306 "AB05ND.f"
 	*info = -3;
+#line 307 "AB05ND.f"
     } else if (*p1 < 0) {
+#line 308 "AB05ND.f"
 	*info = -4;
+#line 309 "AB05ND.f"
     } else if (*n2 < 0) {
+#line 310 "AB05ND.f"
 	*info = -5;
+#line 311 "AB05ND.f"
     } else if (*lda1 < max(1,*n1)) {
+#line 312 "AB05ND.f"
 	*info = -8;
+#line 313 "AB05ND.f"
     } else if (*ldb1 < max(1,*n1)) {
+#line 314 "AB05ND.f"
 	*info = -10;
+#line 315 "AB05ND.f"
     } else if (*n1 > 0 && *ldc1 < max(1,*p1) || *n1 == 0 && *ldc1 < 1) {
+#line 317 "AB05ND.f"
 	*info = -12;
+#line 318 "AB05ND.f"
     } else if (*ldd1 < max(1,*p1)) {
+#line 319 "AB05ND.f"
 	*info = -14;
+#line 320 "AB05ND.f"
     } else if (*lda2 < max(1,*n2)) {
+#line 321 "AB05ND.f"
 	*info = -16;
+#line 322 "AB05ND.f"
     } else if (*ldb2 < max(1,*n2)) {
+#line 323 "AB05ND.f"
 	*info = -18;
+#line 324 "AB05ND.f"
     } else if (*n2 > 0 && *ldc2 < ldwm1 || *n2 == 0 && *ldc2 < 1) {
+#line 326 "AB05ND.f"
 	*info = -20;
+#line 327 "AB05ND.f"
     } else if (*ldd2 < ldwm1) {
+#line 328 "AB05ND.f"
 	*info = -22;
+#line 329 "AB05ND.f"
     } else if (*lda < max(1,*n)) {
+#line 330 "AB05ND.f"
 	*info = -25;
+#line 331 "AB05ND.f"
     } else if (*ldb < max(1,*n)) {
+#line 332 "AB05ND.f"
 	*info = -27;
+#line 333 "AB05ND.f"
     } else if (*n > 0 && *ldc < max(1,*p1) || *n == 0 && *ldc < 1) {
+#line 335 "AB05ND.f"
 	*info = -29;
+#line 336 "AB05ND.f"
     } else if (*ldd < max(1,*p1)) {
+#line 337 "AB05ND.f"
 	*info = -31;
+#line 338 "AB05ND.f"
     } else {
 /* Computing MAX */
+#line 339 "AB05ND.f"
 	i__1 = *p1 * *p1, i__2 = *m1 * *m1, i__1 = max(i__1,i__2), i__2 = *n1 
 		* *p1;
+#line 339 "AB05ND.f"
 	ldw = max(i__1,i__2);
+#line 340 "AB05ND.f"
 	if (lover) {
+#line 341 "AB05ND.f"
 	    if (*m1 > *n * *n2) {
 /* Computing MAX */
+#line 341 "AB05ND.f"
 		i__1 = ldw, i__2 = *m1 * (*m1 + 1);
+#line 341 "AB05ND.f"
 		ldw = max(i__1,i__2);
+#line 341 "AB05ND.f"
 	    }
+#line 343 "AB05ND.f"
 	    ldw = *n1 * *p1 + ldw;
+#line 344 "AB05ND.f"
 	}
+#line 345 "AB05ND.f"
 	if (*ldwork < max(1,ldw)) {
+#line 345 "AB05ND.f"
 	    *info = -34;
+#line 345 "AB05ND.f"
 	}
+#line 347 "AB05ND.f"
     }
 
+#line 349 "AB05ND.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 353 "AB05ND.f"
 	i__1 = -(*info);
+#line 353 "AB05ND.f"
 	xerbla_("AB05ND", &i__1, (ftnlen)6);
+#line 354 "AB05ND.f"
 	return 0;
+#line 355 "AB05ND.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 359 "AB05ND.f"
     i__1 = *n, i__2 = min(*m1,*p1);
+#line 359 "AB05ND.f"
     if (max(i__1,i__2) == 0) {
+#line 359 "AB05ND.f"
 	return 0;
+#line 359 "AB05ND.f"
     }
 
+#line 362 "AB05ND.f"
     if (*p1 > 0) {
 
 /*        Form  ( I  +  alpha * D1 * D2 ). */
 
+#line 366 "AB05ND.f"
 	dlaset_("F", p1, p1, &c_b6, &c_b7, &dwork[1], p1, (ftnlen)1);
+#line 367 "AB05ND.f"
 	dgemm_("No transpose", "No transpose", p1, p1, m1, alpha, &d1[
 		d1_offset], ldd1, &d2[d2_offset], ldd2, &c_b7, &dwork[1], p1, 
 		(ftnlen)12, (ftnlen)12);
 
 /*        Factorize this matrix. */
 
+#line 372 "AB05ND.f"
 	dgetrf_(p1, p1, &dwork[1], p1, &iwork[1], info);
 
+#line 374 "AB05ND.f"
 	if (*info != 0) {
+#line 374 "AB05ND.f"
 	    return 0;
+#line 374 "AB05ND.f"
 	}
 
 /*        Form  E21 * D1. */
 
+#line 379 "AB05ND.f"
 	if (lover && *ldd1 <= *ldd) {
+#line 380 "AB05ND.f"
 	    if (*ldd1 < *ldd) {
 
+#line 382 "AB05ND.f"
 		for (j = *m1; j >= 1; --j) {
+#line 383 "AB05ND.f"
 		    for (i__ = *p1; i__ >= 1; --i__) {
+#line 384 "AB05ND.f"
 			d__[i__ + j * d_dim1] = d1[i__ + j * d1_dim1];
+#line 385 "AB05ND.f"
 /* L10: */
+#line 385 "AB05ND.f"
 		    }
+#line 386 "AB05ND.f"
 /* L20: */
+#line 386 "AB05ND.f"
 		}
 
+#line 388 "AB05ND.f"
 	    }
+#line 389 "AB05ND.f"
 	} else {
+#line 390 "AB05ND.f"
 	    dlacpy_("F", p1, m1, &d1[d1_offset], ldd1, &d__[d_offset], ldd, (
 		    ftnlen)1);
+#line 391 "AB05ND.f"
 	}
 
+#line 393 "AB05ND.f"
 	dgetrs_("No transpose", p1, m1, &dwork[1], p1, &iwork[1], &d__[
 		d_offset], ldd, info, (ftnlen)12);
+#line 395 "AB05ND.f"
 	if (*n1 > 0) {
 
 /*           Form  E21 * C1. */
 
+#line 399 "AB05ND.f"
 	    if (lover) {
 
 /*              First save  C1. */
 
+#line 403 "AB05ND.f"
 		ldw = ldw - *p1 * *n1 + 1;
+#line 404 "AB05ND.f"
 		dlacpy_("F", p1, n1, &c1[c1_offset], ldc1, &dwork[ldw], p1, (
 			ftnlen)1);
 
+#line 406 "AB05ND.f"
 		if (*ldc1 != *ldc) {
+#line 406 "AB05ND.f"
 		    dlacpy_("F", p1, n1, &dwork[ldw], p1, &c__[c_offset], ldc,
 			     (ftnlen)1);
+#line 406 "AB05ND.f"
 		}
+#line 408 "AB05ND.f"
 	    } else {
+#line 409 "AB05ND.f"
 		dlacpy_("F", p1, n1, &c1[c1_offset], ldc1, &c__[c_offset], 
 			ldc, (ftnlen)1);
+#line 410 "AB05ND.f"
 	    }
 
+#line 412 "AB05ND.f"
 	    dgetrs_("No transpose", p1, n1, &dwork[1], p1, &iwork[1], &c__[
 		    c_offset], ldc, info, (ftnlen)12);
+#line 414 "AB05ND.f"
 	}
 
 /*        Form  E12  =  I  -  alpha * D2 * ( E21 * D1 ). */
 
+#line 418 "AB05ND.f"
 	dlaset_("F", m1, m1, &c_b6, &c_b7, &dwork[1], &ldwm1, (ftnlen)1);
+#line 419 "AB05ND.f"
 	d__1 = -(*alpha);
+#line 419 "AB05ND.f"
 	dgemm_("No transpose", "No transpose", m1, m1, p1, &d__1, &d2[
 		d2_offset], ldd2, &d__[d_offset], ldd, &c_b7, &dwork[1], &
 		ldwm1, (ftnlen)12, (ftnlen)12);
 
+#line 422 "AB05ND.f"
     } else {
+#line 423 "AB05ND.f"
 	dlaset_("F", m1, m1, &c_b6, &c_b7, &dwork[1], &ldwm1, (ftnlen)1);
+#line 424 "AB05ND.f"
     }
 
+#line 426 "AB05ND.f"
     if (lover && *lda1 <= *lda) {
+#line 427 "AB05ND.f"
 	if (*lda1 < *lda) {
 
+#line 429 "AB05ND.f"
 	    for (j = *n1; j >= 1; --j) {
+#line 430 "AB05ND.f"
 		for (i__ = *n1; i__ >= 1; --i__) {
+#line 431 "AB05ND.f"
 		    a[i__ + j * a_dim1] = a1[i__ + j * a1_dim1];
+#line 432 "AB05ND.f"
 /* L30: */
+#line 432 "AB05ND.f"
 		}
+#line 433 "AB05ND.f"
 /* L40: */
+#line 433 "AB05ND.f"
 	    }
 
+#line 435 "AB05ND.f"
 	}
+#line 436 "AB05ND.f"
     } else {
+#line 437 "AB05ND.f"
 	dlacpy_("F", n1, n1, &a1[a1_offset], lda1, &a[a_offset], lda, (ftnlen)
 		1);
+#line 438 "AB05ND.f"
     }
 
+#line 440 "AB05ND.f"
     if (*n1 > 0 && *m1 > 0) {
 
 /*        Form  B1 * E12. */
 
+#line 444 "AB05ND.f"
 	if (lover) {
 
 /*           Use the blocks (1,2) and (2,2) of A as workspace. */
 
+#line 448 "AB05ND.f"
 	    if (*n1 * *m1 <= *n * *n2) {
 
 /*              Use BLAS 3 code. */
 
+#line 452 "AB05ND.f"
 		dlacpy_("F", n1, m1, &b1[b1_offset], ldb1, &a[(*n1 + 1) * 
 			a_dim1 + 1], n1, (ftnlen)1);
+#line 453 "AB05ND.f"
 		dgemm_("No transpose", "No transpose", n1, m1, m1, &c_b7, &a[(
 			*n1 + 1) * a_dim1 + 1], n1, &dwork[1], &ldwm1, &c_b6, 
 			&b[b_offset], ldb, (ftnlen)12, (ftnlen)12);
+#line 456 "AB05ND.f"
 	    } else if (*ldb1 < *ldb) {
 
+#line 458 "AB05ND.f"
 		for (j = *m1; j >= 1; --j) {
+#line 459 "AB05ND.f"
 		    for (i__ = *n1; i__ >= 1; --i__) {
+#line 460 "AB05ND.f"
 			b[i__ + j * b_dim1] = b1[i__ + j * b1_dim1];
+#line 461 "AB05ND.f"
 /* L50: */
+#line 461 "AB05ND.f"
 		    }
+#line 462 "AB05ND.f"
 /* L60: */
+#line 462 "AB05ND.f"
 		}
 
+#line 464 "AB05ND.f"
 		if (*m1 <= *n * *n2) {
 
 /*                 Use BLAS 2 code. */
 
+#line 468 "AB05ND.f"
 		    i__1 = *n1;
+#line 468 "AB05ND.f"
 		    for (j = 1; j <= i__1; ++j) {
+#line 469 "AB05ND.f"
 			dcopy_(m1, &b[j + b_dim1], ldb, &a[(*n1 + 1) * a_dim1 
 				+ 1], &c__1);
+#line 470 "AB05ND.f"
 			dgemv_("Transpose", m1, m1, &c_b7, &dwork[1], &ldwm1, 
 				&a[(*n1 + 1) * a_dim1 + 1], &c__1, &c_b6, &b[
 				j + b_dim1], ldb, (ftnlen)9);
+#line 472 "AB05ND.f"
 /* L70: */
+#line 472 "AB05ND.f"
 		    }
 
+#line 474 "AB05ND.f"
 		} else {
 
 /*                 Use additional workspace. */
 
+#line 478 "AB05ND.f"
 		    i__1 = *n1;
+#line 478 "AB05ND.f"
 		    for (j = 1; j <= i__1; ++j) {
+#line 479 "AB05ND.f"
 			dcopy_(m1, &b[j + b_dim1], ldb, &dwork[*m1 * *m1 + 1],
 				 &c__1);
+#line 480 "AB05ND.f"
 			dgemv_("Transpose", m1, m1, &c_b7, &dwork[1], &ldwm1, 
 				&dwork[*m1 * *m1 + 1], &c__1, &c_b6, &b[j + 
 				b_dim1], ldb, (ftnlen)9);
+#line 482 "AB05ND.f"
 /* L80: */
+#line 482 "AB05ND.f"
 		    }
 
+#line 484 "AB05ND.f"
 		}
 
+#line 486 "AB05ND.f"
 	    } else if (*m1 <= *n * *n2) {
 
 /*              Use BLAS 2 code. */
 
+#line 490 "AB05ND.f"
 		i__1 = *n1;
+#line 490 "AB05ND.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 491 "AB05ND.f"
 		    dcopy_(m1, &b1[j + b1_dim1], ldb1, &a[(*n1 + 1) * a_dim1 
 			    + 1], &c__1);
+#line 492 "AB05ND.f"
 		    dgemv_("Transpose", m1, m1, &c_b7, &dwork[1], &ldwm1, &a[(
 			    *n1 + 1) * a_dim1 + 1], &c__1, &c_b6, &b[j + 
 			    b_dim1], ldb, (ftnlen)9);
+#line 494 "AB05ND.f"
 /* L90: */
+#line 494 "AB05ND.f"
 		}
 
+#line 496 "AB05ND.f"
 	    } else {
 
 /*              Use additional workspace. */
 
+#line 500 "AB05ND.f"
 		i__1 = *n1;
+#line 500 "AB05ND.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 501 "AB05ND.f"
 		    dcopy_(m1, &b1[j + b1_dim1], ldb1, &dwork[*m1 * *m1 + 1], 
 			    &c__1);
+#line 502 "AB05ND.f"
 		    dgemv_("Transpose", m1, m1, &c_b7, &dwork[1], &ldwm1, &
 			    dwork[*m1 * *m1 + 1], &c__1, &c_b6, &b[j + b_dim1]
 			    , ldb, (ftnlen)9);
+#line 504 "AB05ND.f"
 /* L100: */
+#line 504 "AB05ND.f"
 		}
 
+#line 506 "AB05ND.f"
 	    }
+#line 507 "AB05ND.f"
 	} else {
+#line 508 "AB05ND.f"
 	    dgemm_("No transpose", "No transpose", n1, m1, m1, &c_b7, &b1[
 		    b1_offset], ldb1, &dwork[1], &ldwm1, &c_b6, &b[b_offset], 
 		    ldb, (ftnlen)12, (ftnlen)12);
+#line 510 "AB05ND.f"
 	}
+#line 511 "AB05ND.f"
     }
 
+#line 513 "AB05ND.f"
     if (*n2 > 0) {
 
 /*        Complete matrices  B  and  C. */
 
+#line 517 "AB05ND.f"
 	if (*p1 > 0) {
+#line 518 "AB05ND.f"
 	    dgemm_("No transpose", "No transpose", n2, m1, p1, &c_b7, &b2[
 		    b2_offset], ldb2, &d__[d_offset], ldd, &c_b6, &b[*n1 + 1 
 		    + b_dim1], ldb, (ftnlen)12, (ftnlen)12);
+#line 520 "AB05ND.f"
 	    d__1 = -(*alpha);
+#line 520 "AB05ND.f"
 	    dgemm_("No transpose", "No transpose", p1, n2, m1, &d__1, &d__[
 		    d_offset], ldd, &c2[c2_offset], ldc2, &c_b6, &c__[(*n1 + 
 		    1) * c_dim1 + 1], ldc, (ftnlen)12, (ftnlen)12);
+#line 523 "AB05ND.f"
 	} else if (*m1 > 0) {
+#line 524 "AB05ND.f"
 	    dlaset_("F", n2, m1, &c_b6, &c_b6, &b[*n1 + 1 + b_dim1], ldb, (
 		    ftnlen)1);
+#line 525 "AB05ND.f"
 	}
+#line 526 "AB05ND.f"
     }
 
+#line 528 "AB05ND.f"
     if (*n1 > 0 && *p1 > 0) {
 
 /*        Form upper left quadrant of  A. */
 
+#line 532 "AB05ND.f"
 	d__1 = -(*alpha);
+#line 532 "AB05ND.f"
 	dgemm_("No transpose", "No transpose", n1, p1, m1, &d__1, &b[b_offset]
 		, ldb, &d2[d2_offset], ldd2, &c_b6, &dwork[1], n1, (ftnlen)12,
 		 (ftnlen)12);
 
+#line 535 "AB05ND.f"
 	if (lover) {
+#line 536 "AB05ND.f"
 	    dgemm_("No transpose", "No transpose", n1, n1, p1, &c_b7, &dwork[
 		    1], n1, &dwork[ldw], p1, &c_b7, &a[a_offset], lda, (
 		    ftnlen)12, (ftnlen)12);
+#line 538 "AB05ND.f"
 	} else {
+#line 539 "AB05ND.f"
 	    dgemm_("No transpose", "No transpose", n1, n1, p1, &c_b7, &dwork[
 		    1], n1, &c1[c1_offset], ldc1, &c_b7, &a[a_offset], lda, (
 		    ftnlen)12, (ftnlen)12);
+#line 541 "AB05ND.f"
 	}
+#line 542 "AB05ND.f"
     }
 
+#line 544 "AB05ND.f"
     if (*n2 > 0) {
 
 /*        Form lower right quadrant of  A. */
 
+#line 548 "AB05ND.f"
 	dlacpy_("F", n2, n2, &a2[a2_offset], lda2, &a[*n1 + 1 + (*n1 + 1) * 
 		a_dim1], lda, (ftnlen)1);
+#line 549 "AB05ND.f"
 	if (*m1 > 0) {
+#line 549 "AB05ND.f"
 	    d__1 = -(*alpha);
+#line 549 "AB05ND.f"
 	    dgemm_("No transpose", "No transpose", n2, n2, m1, &d__1, &b[*n1 
 		    + 1 + b_dim1], ldb, &c2[c2_offset], ldc2, &c_b7, &a[*n1 + 
 		    1 + (*n1 + 1) * a_dim1], lda, (ftnlen)12, (ftnlen)12);
+#line 549 "AB05ND.f"
 	}
 
 /*        Complete the matrix  A. */
 
+#line 556 "AB05ND.f"
 	dgemm_("No transpose", "No transpose", n2, n1, p1, &c_b7, &b2[
 		b2_offset], ldb2, &c__[c_offset], ldc, &c_b6, &a[*n1 + 1 + 
 		a_dim1], lda, (ftnlen)12, (ftnlen)12);
+#line 558 "AB05ND.f"
 	d__1 = -(*alpha);
+#line 558 "AB05ND.f"
 	dgemm_("No transpose", "No transpose", n1, n2, m1, &d__1, &b[b_offset]
 		, ldb, &c2[c2_offset], ldc2, &c_b6, &a[(*n1 + 1) * a_dim1 + 1]
 		, lda, (ftnlen)12, (ftnlen)12);
+#line 560 "AB05ND.f"
     }
 
+#line 562 "AB05ND.f"
     return 0;
 /* *** Last line of AB05ND *** */
 } /* ab05nd_ */

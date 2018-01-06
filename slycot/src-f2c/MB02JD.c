@@ -1,3 +1,4 @@
+#line 1 "MB02JD.f"
 /* MB02JD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02JD.f"
 /* Table of constant values */
 
 static doublereal c_b10 = 1.;
@@ -270,431 +272,734 @@ static integer c__2 = 2;
 
 /*     Decode the scalar input parameters. */
 
+#line 227 "MB02JD.f"
     /* Parameter adjustments */
+#line 227 "MB02JD.f"
     tc_dim1 = *ldtc;
+#line 227 "MB02JD.f"
     tc_offset = 1 + tc_dim1;
+#line 227 "MB02JD.f"
     tc -= tc_offset;
+#line 227 "MB02JD.f"
     tr_dim1 = *ldtr;
+#line 227 "MB02JD.f"
     tr_offset = 1 + tr_dim1;
+#line 227 "MB02JD.f"
     tr -= tr_offset;
+#line 227 "MB02JD.f"
     q_dim1 = *ldq;
+#line 227 "MB02JD.f"
     q_offset = 1 + q_dim1;
+#line 227 "MB02JD.f"
     q -= q_offset;
+#line 227 "MB02JD.f"
     r_dim1 = *ldr;
+#line 227 "MB02JD.f"
     r_offset = 1 + r_dim1;
+#line 227 "MB02JD.f"
     r__ -= r_offset;
+#line 227 "MB02JD.f"
     --dwork;
+#line 227 "MB02JD.f"
 
+#line 227 "MB02JD.f"
     /* Function Body */
+#line 227 "MB02JD.f"
     *info = 0;
+#line 228 "MB02JD.f"
     compq = lsame_(job, "Q", (ftnlen)1, (ftnlen)1);
+#line 229 "MB02JD.f"
     if (compq) {
 /* Computing MAX */
+#line 230 "MB02JD.f"
 	i__1 = *m * *k, i__2 = (*n - max(1,*p)) * *l;
+#line 230 "MB02JD.f"
 	wrkmin = (*m * *k + (*n - 1) * *l) * (*l + (*k << 1)) + 1 + *l * 6 + 
 		max(i__1,i__2);
+#line 232 "MB02JD.f"
     } else {
+#line 233 "MB02JD.f"
 	wrkmin = (*n - 1) * *l * (*l + (*k << 1)) + 1 + *l * 6 + (*n - max(*p,
 		1)) * *l;
+#line 235 "MB02JD.f"
 	if (*p == 0) {
 /* Computing MAX */
+#line 236 "MB02JD.f"
 	    i__1 = wrkmin, i__2 = *m * *k * (*l + 1) + *l;
+#line 236 "MB02JD.f"
 	    wrkmin = max(i__1,i__2);
+#line 237 "MB02JD.f"
 	}
+#line 238 "MB02JD.f"
     }
 
 /*     Check the scalar input parameters. */
 
+#line 242 "MB02JD.f"
     if (! (compq || lsame_(job, "R", (ftnlen)1, (ftnlen)1))) {
+#line 243 "MB02JD.f"
 	*info = -1;
+#line 244 "MB02JD.f"
     } else if (*k < 0) {
+#line 245 "MB02JD.f"
 	*info = -2;
+#line 246 "MB02JD.f"
     } else if (*l < 0) {
+#line 247 "MB02JD.f"
 	*info = -3;
+#line 248 "MB02JD.f"
     } else if (*m < 0) {
+#line 249 "MB02JD.f"
 	*info = -4;
+#line 250 "MB02JD.f"
     } else if (*n < 0) {
+#line 251 "MB02JD.f"
 	*info = -5;
+#line 252 "MB02JD.f"
     } else /* if(complicated condition) */ {
 /* Computing MIN */
+#line 252 "MB02JD.f"
 	i__1 = *m * *k, i__2 = *n * *l;
+#line 252 "MB02JD.f"
 	if (*p * *l >= min(i__1,i__2) + *l || *p < 0) {
+#line 253 "MB02JD.f"
 	    *info = -6;
+#line 254 "MB02JD.f"
 	} else /* if(complicated condition) */ {
 /* Computing MIN */
+#line 254 "MB02JD.f"
 	    i__1 = *m * *k, i__2 = *n * *l;
+#line 254 "MB02JD.f"
 	    if ((*p + *s) * *l >= min(i__1,i__2) + *l || *s < 0) {
+#line 255 "MB02JD.f"
 		*info = -7;
+#line 256 "MB02JD.f"
 	    } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 256 "MB02JD.f"
 		i__1 = 1, i__2 = *m * *k;
+#line 256 "MB02JD.f"
 		if (*ldtc < max(i__1,i__2)) {
+#line 257 "MB02JD.f"
 		    *info = -9;
+#line 258 "MB02JD.f"
 		} else if (*ldtr < max(1,*k)) {
+#line 259 "MB02JD.f"
 		    *info = -11;
+#line 260 "MB02JD.f"
 		} else if (*ldq < 1 || compq && *ldq < *m * *k) {
+#line 261 "MB02JD.f"
 		    *info = -13;
+#line 262 "MB02JD.f"
 		} else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MIN */
+#line 262 "MB02JD.f"
 		    i__3 = *n, i__4 = *n - *p + 1;
+#line 262 "MB02JD.f"
 		    i__1 = 1, i__2 = min(i__3,i__4) * *l;
+#line 262 "MB02JD.f"
 		    if (*ldr < max(i__1,i__2)) {
+#line 263 "MB02JD.f"
 			*info = -15;
+#line 264 "MB02JD.f"
 		    } else if (*ldwork < wrkmin) {
+#line 265 "MB02JD.f"
 			dwork[1] = (doublereal) wrkmin;
+#line 266 "MB02JD.f"
 			*info = -17;
+#line 267 "MB02JD.f"
 		    }
+#line 267 "MB02JD.f"
 		}
+#line 267 "MB02JD.f"
 	    }
+#line 267 "MB02JD.f"
 	}
+#line 267 "MB02JD.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 271 "MB02JD.f"
     if (*info != 0) {
+#line 272 "MB02JD.f"
 	i__1 = -(*info);
+#line 272 "MB02JD.f"
 	xerbla_("MB02JD", &i__1, (ftnlen)6);
+#line 273 "MB02JD.f"
 	return 0;
+#line 274 "MB02JD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 278 "MB02JD.f"
     i__1 = min(*m,*n), i__2 = *k * *l, i__1 = min(i__1,i__2);
+#line 278 "MB02JD.f"
     if (min(i__1,*s) == 0) {
+#line 279 "MB02JD.f"
 	dwork[1] = 1.;
+#line 280 "MB02JD.f"
 	return 0;
+#line 281 "MB02JD.f"
     }
 
 /*     Catch M*K <= L. */
 
+#line 285 "MB02JD.f"
     wrkopt = 1;
+#line 286 "MB02JD.f"
     if (*m * *k <= *l) {
+#line 287 "MB02JD.f"
 	i__1 = *m * *k;
+#line 287 "MB02JD.f"
 	i__2 = *m * *k;
+#line 287 "MB02JD.f"
 	dlacpy_("All", &i__1, l, &tc[tc_offset], ldtc, &dwork[1], &i__2, (
 		ftnlen)3);
+#line 288 "MB02JD.f"
 	pdw = *m * *k * *l + 1;
+#line 289 "MB02JD.f"
 	i__1 = *m * *k;
+#line 289 "MB02JD.f"
 	i__2 = *m * *k;
+#line 289 "MB02JD.f"
 	i__3 = *ldwork - pdw - *m * *k + 1;
+#line 289 "MB02JD.f"
 	dgeqrf_(&i__1, l, &dwork[1], &i__2, &dwork[pdw], &dwork[pdw + *m * *k]
 		, &i__3, &ierr);
 /* Computing MAX */
+#line 291 "MB02JD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[pdw + *m * *k] + pdw + *m * *k 
 		- 1;
+#line 291 "MB02JD.f"
 	wrkopt = max(i__1,i__2);
+#line 292 "MB02JD.f"
 	i__1 = *m * *k;
+#line 292 "MB02JD.f"
 	i__2 = *m * *k;
+#line 292 "MB02JD.f"
 	ma02ad_("Upper part", &i__1, l, &dwork[1], &i__2, &r__[r_offset], ldr,
 		 (ftnlen)10);
+#line 293 "MB02JD.f"
 	i__1 = *m * *k;
+#line 293 "MB02JD.f"
 	i__2 = *m * *k;
+#line 293 "MB02JD.f"
 	i__3 = *m * *k;
+#line 293 "MB02JD.f"
 	i__4 = *m * *k;
+#line 293 "MB02JD.f"
 	i__5 = *ldwork - pdw - *m * *k + 1;
+#line 293 "MB02JD.f"
 	dorgqr_(&i__1, &i__2, &i__3, &dwork[1], &i__4, &dwork[pdw], &dwork[
 		pdw + *m * *k], &i__5, &ierr);
 /* Computing MAX */
+#line 295 "MB02JD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[pdw + *m * *k] + pdw + *m * *k 
 		- 1;
+#line 295 "MB02JD.f"
 	wrkopt = max(i__1,i__2);
+#line 296 "MB02JD.f"
 	if (compq) {
+#line 297 "MB02JD.f"
 	    i__1 = *m * *k;
+#line 297 "MB02JD.f"
 	    i__2 = *m * *k;
+#line 297 "MB02JD.f"
 	    i__3 = *m * *k;
+#line 297 "MB02JD.f"
 	    dlacpy_("All", &i__1, &i__2, &dwork[1], &i__3, &q[q_offset], ldq, 
 		    (ftnlen)3);
+#line 298 "MB02JD.f"
 	}
+#line 299 "MB02JD.f"
 	pdw = *m * *k * *m * *k + 1;
+#line 300 "MB02JD.f"
 	if (*n > 1) {
+#line 301 "MB02JD.f"
 	    i__1 = *n - 1;
+#line 301 "MB02JD.f"
 	    i__2 = *m * *k;
+#line 301 "MB02JD.f"
 	    i__3 = *m * *k;
+#line 301 "MB02JD.f"
 	    i__4 = *ldwork - pdw + 1;
+#line 301 "MB02JD.f"
 	    mb02kd_("Row", "Transpose", k, l, m, &i__1, &i__2, &c_b10, &c_b11,
 		     &tc[tc_offset], ldtc, &tr[tr_offset], ldtr, &dwork[1], &
 		    i__3, &r__[*l + 1 + r_dim1], ldr, &dwork[pdw], &i__4, &
 		    ierr, (ftnlen)3, (ftnlen)9);
+#line 304 "MB02JD.f"
 	}
 /* Computing MAX */
+#line 305 "MB02JD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[pdw] + pdw - 1;
+#line 305 "MB02JD.f"
 	wrkopt = max(i__1,i__2);
+#line 306 "MB02JD.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 307 "MB02JD.f"
 	return 0;
+#line 308 "MB02JD.f"
     }
 
 /*     Compute the generator if P = 0. */
 
+#line 312 "MB02JD.f"
     if (*p == 0) {
 
 /*        1st column of the generator. */
 
+#line 316 "MB02JD.f"
 	if (compq) {
+#line 317 "MB02JD.f"
 	    i__1 = *m * *k;
+#line 317 "MB02JD.f"
 	    dlacpy_("All", &i__1, l, &tc[tc_offset], ldtc, &q[q_offset], ldq, 
 		    (ftnlen)3);
+#line 318 "MB02JD.f"
 	    i__1 = *m * *k;
+#line 318 "MB02JD.f"
 	    i__2 = *ldwork - *l;
+#line 318 "MB02JD.f"
 	    dgeqrf_(&i__1, l, &q[q_offset], ldq, &dwork[1], &dwork[*l + 1], &
 		    i__2, &ierr);
 /* Computing MAX */
+#line 320 "MB02JD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[*l + 1] + *l;
+#line 320 "MB02JD.f"
 	    wrkopt = max(i__1,i__2);
+#line 321 "MB02JD.f"
 	    ma02ad_("Upper part", l, l, &q[q_offset], ldq, &r__[r_offset], 
 		    ldr, (ftnlen)10);
+#line 322 "MB02JD.f"
 	    i__1 = *m * *k;
+#line 322 "MB02JD.f"
 	    i__2 = *ldwork - *l;
+#line 322 "MB02JD.f"
 	    dorgqr_(&i__1, l, l, &q[q_offset], ldq, &dwork[1], &dwork[*l + 1],
 		     &i__2, &ierr);
 /* Computing MAX */
+#line 324 "MB02JD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[*l + 1] + *l;
+#line 324 "MB02JD.f"
 	    wrkopt = max(i__1,i__2);
+#line 325 "MB02JD.f"
 	    if (*n > 1) {
+#line 326 "MB02JD.f"
 		i__1 = *n - 1;
+#line 326 "MB02JD.f"
 		mb02kd_("Row", "Transpose", k, l, m, &i__1, l, &c_b10, &c_b11,
 			 &tc[tc_offset], ldtc, &tr[tr_offset], ldtr, &q[
 			q_offset], ldq, &r__[*l + 1 + r_dim1], ldr, &dwork[1],
 			 ldwork, &ierr, (ftnlen)3, (ftnlen)9);
+#line 329 "MB02JD.f"
 	    }
 /* Computing MAX */
+#line 330 "MB02JD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 330 "MB02JD.f"
 	    wrkopt = max(i__1,i__2);
+#line 331 "MB02JD.f"
 	} else {
+#line 332 "MB02JD.f"
 	    pdw = *m * *k * *l + 1;
+#line 333 "MB02JD.f"
 	    i__1 = *m * *k;
+#line 333 "MB02JD.f"
 	    i__2 = *m * *k;
+#line 333 "MB02JD.f"
 	    dlacpy_("All", &i__1, l, &tc[tc_offset], ldtc, &dwork[1], &i__2, (
 		    ftnlen)3);
+#line 334 "MB02JD.f"
 	    i__1 = *m * *k;
+#line 334 "MB02JD.f"
 	    i__2 = *m * *k;
+#line 334 "MB02JD.f"
 	    i__3 = *ldwork - pdw - *l + 1;
+#line 334 "MB02JD.f"
 	    dgeqrf_(&i__1, l, &dwork[1], &i__2, &dwork[pdw], &dwork[pdw + *l],
 		     &i__3, &ierr);
 /* Computing MAX */
+#line 336 "MB02JD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[pdw + *l] + pdw + *l - 1;
+#line 336 "MB02JD.f"
 	    wrkopt = max(i__1,i__2);
+#line 337 "MB02JD.f"
 	    i__1 = *m * *k;
+#line 337 "MB02JD.f"
 	    ma02ad_("Upper part", l, l, &dwork[1], &i__1, &r__[r_offset], ldr,
 		     (ftnlen)10);
+#line 338 "MB02JD.f"
 	    i__1 = *m * *k;
+#line 338 "MB02JD.f"
 	    i__2 = *m * *k;
+#line 338 "MB02JD.f"
 	    i__3 = *ldwork - pdw - *l + 1;
+#line 338 "MB02JD.f"
 	    dorgqr_(&i__1, l, l, &dwork[1], &i__2, &dwork[pdw], &dwork[pdw + *
 		    l], &i__3, &ierr);
 /* Computing MAX */
+#line 340 "MB02JD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[pdw + *l] + pdw + *l - 1;
+#line 340 "MB02JD.f"
 	    wrkopt = max(i__1,i__2);
+#line 341 "MB02JD.f"
 	    if (*n > 1) {
+#line 342 "MB02JD.f"
 		i__1 = *n - 1;
+#line 342 "MB02JD.f"
 		i__2 = *m * *k;
+#line 342 "MB02JD.f"
 		i__3 = *ldwork - pdw + 1;
+#line 342 "MB02JD.f"
 		mb02kd_("Row", "Transpose", k, l, m, &i__1, l, &c_b10, &c_b11,
 			 &tc[tc_offset], ldtc, &tr[tr_offset], ldtr, &dwork[1]
 			, &i__2, &r__[*l + 1 + r_dim1], ldr, &dwork[pdw], &
 			i__3, &ierr, (ftnlen)3, (ftnlen)9);
+#line 346 "MB02JD.f"
 	    }
 /* Computing MAX */
+#line 347 "MB02JD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[pdw] + pdw - 1;
+#line 347 "MB02JD.f"
 	    wrkopt = max(i__1,i__2);
+#line 348 "MB02JD.f"
 	}
 
 /*        Quick return if N = 1. */
 
+#line 352 "MB02JD.f"
 	if (*n == 1) {
+#line 353 "MB02JD.f"
 	    dwork[1] = (doublereal) wrkopt;
+#line 354 "MB02JD.f"
 	    return 0;
+#line 355 "MB02JD.f"
 	}
 
 /*        2nd column of the generator. */
 
+#line 359 "MB02JD.f"
 	pnr = (*n - 1) * *l * *k + 2;
+#line 360 "MB02JD.f"
 	i__1 = (*n - 1) * *l;
+#line 360 "MB02JD.f"
 	i__2 = (*n - 1) * *l;
+#line 360 "MB02JD.f"
 	ma02ad_("All", k, &i__1, &tr[tr_offset], ldtr, &dwork[2], &i__2, (
 		ftnlen)3);
 
 /*        3rd and 4th column of the generator. */
 
+#line 364 "MB02JD.f"
 	i__1 = (*n - 1) * *l;
+#line 364 "MB02JD.f"
 	i__2 = (*n - 1) * *l;
+#line 364 "MB02JD.f"
 	dlacpy_("All", &i__1, l, &r__[*l + 1 + r_dim1], ldr, &dwork[pnr], &
 		i__2, (ftnlen)3);
+#line 366 "MB02JD.f"
 	pt = (*m - 1) * *k + 1;
+#line 367 "MB02JD.f"
 	pdw = pnr + (*n - 1) * *l * *l;
 
 /* Computing MIN */
+#line 369 "MB02JD.f"
 	i__2 = *m, i__3 = *n - 1;
+#line 369 "MB02JD.f"
 	i__1 = min(i__2,i__3);
+#line 369 "MB02JD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 370 "MB02JD.f"
 	    i__2 = (*n - 1) * *l;
+#line 370 "MB02JD.f"
 	    ma02ad_("All", k, l, &tc[pt + tc_dim1], ldtc, &dwork[pdw], &i__2, 
 		    (ftnlen)3);
+#line 372 "MB02JD.f"
 	    pt -= *k;
+#line 373 "MB02JD.f"
 	    pdw += *l;
+#line 374 "MB02JD.f"
 /* L10: */
+#line 374 "MB02JD.f"
 	}
 
+#line 376 "MB02JD.f"
 	pt = 1;
 
+#line 378 "MB02JD.f"
 	i__1 = *n - 1;
+#line 378 "MB02JD.f"
 	for (i__ = *m + 1; i__ <= i__1; ++i__) {
+#line 379 "MB02JD.f"
 	    i__2 = (*n - 1) * *l;
+#line 379 "MB02JD.f"
 	    ma02ad_("All", k, l, &tr[pt * tr_dim1 + 1], ldtr, &dwork[pdw], &
 		    i__2, (ftnlen)3);
+#line 381 "MB02JD.f"
 	    pt += *l;
+#line 382 "MB02JD.f"
 	    pdw += *l;
+#line 383 "MB02JD.f"
 /* L20: */
+#line 383 "MB02JD.f"
 	}
 
+#line 385 "MB02JD.f"
 	if (compq) {
+#line 386 "MB02JD.f"
 	    pdq = ((*k << 1) + *l) * (*n - 1) * *l + 2;
+#line 387 "MB02JD.f"
 	    pdw = ((*k << 1) + *l) * ((*n - 1) * *l + *m * *k) + 2;
+#line 388 "MB02JD.f"
 	    pnq = pdq + *m * *k * *k;
+#line 389 "MB02JD.f"
 	    i__1 = *m * *k;
+#line 389 "MB02JD.f"
 	    dlaset_("All", k, k, &c_b11, &c_b10, &dwork[pdq], &i__1, (ftnlen)
 		    3);
+#line 390 "MB02JD.f"
 	    i__1 = (*m - 1) * *k;
+#line 390 "MB02JD.f"
 	    i__2 = *m * *k;
+#line 390 "MB02JD.f"
 	    dlaset_("All", &i__1, k, &c_b11, &c_b11, &dwork[pdq + *k], &i__2, 
 		    (ftnlen)3);
+#line 392 "MB02JD.f"
 	    i__1 = *m * *k;
+#line 392 "MB02JD.f"
 	    i__2 = *m * *k;
+#line 392 "MB02JD.f"
 	    dlacpy_("All", &i__1, l, &q[q_offset], ldq, &dwork[pnq], &i__2, (
 		    ftnlen)3);
+#line 393 "MB02JD.f"
 	    i__1 = *m * *k;
+#line 393 "MB02JD.f"
 	    i__2 = *m * *k;
+#line 393 "MB02JD.f"
 	    dlaset_("All", &i__1, k, &c_b11, &c_b11, &dwork[pnq + *m * *l * *
 		    k], &i__2, (ftnlen)3);
+#line 395 "MB02JD.f"
 	} else {
+#line 396 "MB02JD.f"
 	    pdw = ((*k << 1) + *l) * (*n - 1) * *l + 2;
+#line 397 "MB02JD.f"
 	}
+#line 398 "MB02JD.f"
 	pre = 1;
+#line 399 "MB02JD.f"
 	stps = *s - 1;
+#line 400 "MB02JD.f"
     } else {
 
 /*        Set workspace pointers. */
 
+#line 404 "MB02JD.f"
 	pnr = (*n - 1) * *l * *k + 2;
+#line 405 "MB02JD.f"
 	if (compq) {
+#line 406 "MB02JD.f"
 	    pdq = ((*k << 1) + *l) * (*n - 1) * *l + 2;
+#line 407 "MB02JD.f"
 	    pdw = ((*k << 1) + *l) * ((*n - 1) * *l + *m * *k) + 2;
+#line 408 "MB02JD.f"
 	    pnq = pdq + *m * *k * *k;
+#line 409 "MB02JD.f"
 	} else {
+#line 410 "MB02JD.f"
 	    pdw = ((*k << 1) + *l) * (*n - 1) * *l + 2;
+#line 411 "MB02JD.f"
 	}
+#line 412 "MB02JD.f"
 	pre = *p;
+#line 413 "MB02JD.f"
 	stps = *s;
+#line 414 "MB02JD.f"
     }
 
 /*     Determine suitable size for the block Housholder reflectors. */
 
+#line 418 "MB02JD.f"
     if (compq) {
 /* Computing MAX */
+#line 419 "MB02JD.f"
 	i__1 = *l + *m * *k, i__2 = (*n - pre + 1) * *l;
+#line 419 "MB02JD.f"
 	len = max(i__1,i__2);
+#line 420 "MB02JD.f"
     } else {
+#line 421 "MB02JD.f"
 	len = (*n - pre + 1) * *l;
+#line 422 "MB02JD.f"
     }
 /* Computing MIN */
+#line 423 "MB02JD.f"
     i__1 = ilaenv_(&c__1, "DGELQF", " ", &len, l, &c_n1, &c_n1, (ftnlen)6, (
 	    ftnlen)1);
+#line 423 "MB02JD.f"
     nb = min(i__1,*l);
+#line 424 "MB02JD.f"
     kk = pdw + *l * 6 - 1;
 /* Computing MAX */
+#line 425 "MB02JD.f"
     i__1 = wrkopt, i__2 = kk + len * nb;
+#line 425 "MB02JD.f"
     wrkopt = max(i__1,i__2);
+#line 426 "MB02JD.f"
     kk = *ldwork - kk;
+#line 427 "MB02JD.f"
     if (kk < len * nb) {
+#line 427 "MB02JD.f"
 	nb = kk / len;
+#line 427 "MB02JD.f"
     }
 /* Computing MAX */
+#line 428 "MB02JD.f"
     i__1 = 2, i__2 = ilaenv_(&c__2, "DGELQF", " ", &len, l, &c_n1, &c_n1, (
 	    ftnlen)6, (ftnlen)1);
+#line 428 "MB02JD.f"
     nbmin = max(i__1,i__2);
+#line 429 "MB02JD.f"
     if (nb < nbmin) {
+#line 429 "MB02JD.f"
 	nb = 0;
+#line 429 "MB02JD.f"
     }
+#line 430 "MB02JD.f"
     colr = *l + 1;
 
 /*     Generator reduction process. */
 
+#line 434 "MB02JD.f"
     len = (*n - pre) * *l;
+#line 435 "MB02JD.f"
     shfr = (pre - 1) * *l;
+#line 436 "MB02JD.f"
     i__1 = pre + stps - 1;
+#line 436 "MB02JD.f"
     for (i__ = pre; i__ <= i__1; ++i__) {
 
 /*        IF M*K < N*L the last block might have less than L columns. */
 
 /* Computing MIN */
+#line 440 "MB02JD.f"
 	i__2 = *l, i__3 = *m * *k - i__ * *l;
+#line 440 "MB02JD.f"
 	kk = min(i__2,i__3);
+#line 441 "MB02JD.f"
 	dlacpy_("Lower", &len, &kk, &r__[colr - *l + (colr - *l) * r_dim1], 
 		ldr, &r__[colr + colr * r_dim1], ldr, (ftnlen)5);
+#line 443 "MB02JD.f"
 	i__2 = kk + *k;
+#line 443 "MB02JD.f"
 	i__3 = *l + *k;
+#line 443 "MB02JD.f"
 	i__4 = (*n - 1) * *l;
+#line 443 "MB02JD.f"
 	i__5 = (*n - 1) * *l;
+#line 443 "MB02JD.f"
 	i__6 = *ldwork - pdw - *l * 6 + 1;
+#line 443 "MB02JD.f"
 	mb02cu_("Column", &kk, &i__2, &i__3, &nb, &r__[colr + colr * r_dim1], 
 		ldr, &dwork[shfr + 2], &i__4, &dwork[pnr + shfr], &i__5, &rnk,
 		 ipvt, &dwork[pdw], &c_b11, &dwork[pdw + *l * 6], &i__6, &
 		ierr, (ftnlen)6);
+#line 447 "MB02JD.f"
 	if (ierr != 0) {
 
 /*           Error return:  The rank condition is (numerically) not */
 /*                          satisfied. */
 
+#line 452 "MB02JD.f"
 	    *info = 1;
+#line 453 "MB02JD.f"
 	    return 0;
+#line 454 "MB02JD.f"
 	}
+#line 455 "MB02JD.f"
 	if (len > kk) {
+#line 456 "MB02JD.f"
 	    i__2 = len - kk;
+#line 456 "MB02JD.f"
 	    i__3 = kk + *k;
+#line 456 "MB02JD.f"
 	    i__4 = *l + *k;
+#line 456 "MB02JD.f"
 	    i__5 = (*n - 1) * *l;
+#line 456 "MB02JD.f"
 	    i__6 = (*n - 1) * *l;
+#line 456 "MB02JD.f"
 	    i__7 = (*n - 1) * *l;
+#line 456 "MB02JD.f"
 	    i__8 = (*n - 1) * *l;
+#line 456 "MB02JD.f"
 	    i__9 = *ldwork - pdw - *l * 6 + 1;
+#line 456 "MB02JD.f"
 	    mb02cv_("Column", "NoStructure", &kk, &i__2, &i__3, &i__4, &nb, &
 		    c_n1, &r__[colr + colr * r_dim1], ldr, &dwork[shfr + 2], &
 		    i__5, &dwork[pnr + shfr], &i__6, &r__[colr + kk + colr * 
 		    r_dim1], ldr, &dwork[shfr + kk + 2], &i__7, &dwork[pnr + 
 		    shfr + kk], &i__8, &dwork[pdw], &dwork[pdw + *l * 6], &
 		    i__9, &ierr, (ftnlen)6, (ftnlen)11);
+#line 463 "MB02JD.f"
 	}
+#line 464 "MB02JD.f"
 	if (compq) {
+#line 465 "MB02JD.f"
 	    dlaset_("All", k, &kk, &c_b11, &c_b11, &q[colr * q_dim1 + 1], ldq,
 		     (ftnlen)3);
+#line 466 "MB02JD.f"
 	    if (*m > 1) {
+#line 467 "MB02JD.f"
 		i__2 = (*m - 1) * *k;
+#line 467 "MB02JD.f"
 		dlacpy_("All", &i__2, &kk, &q[(colr - *l) * q_dim1 + 1], ldq, 
 			&q[*k + 1 + colr * q_dim1], ldq, (ftnlen)3);
+#line 469 "MB02JD.f"
 	    }
+#line 470 "MB02JD.f"
 	    i__2 = *m * *k;
+#line 470 "MB02JD.f"
 	    i__3 = kk + *k;
+#line 470 "MB02JD.f"
 	    i__4 = *l + *k;
+#line 470 "MB02JD.f"
 	    i__5 = (*n - 1) * *l;
+#line 470 "MB02JD.f"
 	    i__6 = (*n - 1) * *l;
+#line 470 "MB02JD.f"
 	    i__7 = *m * *k;
+#line 470 "MB02JD.f"
 	    i__8 = *m * *k;
+#line 470 "MB02JD.f"
 	    i__9 = *ldwork - pdw - *l * 6 + 1;
+#line 470 "MB02JD.f"
 	    mb02cv_("Column", "NoStructure", &kk, &i__2, &i__3, &i__4, &nb, &
 		    c_n1, &r__[colr + colr * r_dim1], ldr, &dwork[shfr + 2], &
 		    i__5, &dwork[pnr + shfr], &i__6, &q[colr * q_dim1 + 1], 
 		    ldq, &dwork[pdq], &i__7, &dwork[pnq], &i__8, &dwork[pdw], 
 		    &dwork[pdw + *l * 6], &i__9, &ierr, (ftnlen)6, (ftnlen)11)
 		    ;
+#line 476 "MB02JD.f"
 	}
+#line 477 "MB02JD.f"
 	len -= *l;
+#line 478 "MB02JD.f"
 	colr += *l;
+#line 479 "MB02JD.f"
 	shfr += *l;
+#line 480 "MB02JD.f"
 /* L30: */
+#line 480 "MB02JD.f"
     }
 
+#line 482 "MB02JD.f"
     dwork[1] = (doublereal) wrkopt;
+#line 483 "MB02JD.f"
     return 0;
 
 /* *** Last line of MB02JD *** */

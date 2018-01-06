@@ -1,3 +1,4 @@
+#line 1 "MC01SY.f"
 /* MC01SY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC01SY.f"
 /* Subroutine */ int mc01sy_(doublereal *m, integer *e, integer *b, 
 	doublereal *a, logical *ovflow)
 {
@@ -93,70 +95,117 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 85 "MC01SY.f"
     *ovflow = FALSE_;
 
+#line 87 "MC01SY.f"
     if (*m == 0. || *e == 0) {
+#line 88 "MC01SY.f"
 	*a = *m;
+#line 89 "MC01SY.f"
 	return 0;
+#line 90 "MC01SY.f"
     }
 
 /*     Determination of the mantissa MT and the exponent ET of the */
 /*     standard floating-point representation. */
 
+#line 95 "MC01SY.f"
     emin = (integer) dlamch_("Minimum exponent", (ftnlen)16);
+#line 96 "MC01SY.f"
     emax = (integer) dlamch_("Largest exponent", (ftnlen)16);
+#line 97 "MC01SY.f"
     mt = *m;
+#line 98 "MC01SY.f"
     et = *e;
 /*     WHILE ( ABS( MT ) >= B ) DO */
+#line 100 "MC01SY.f"
 L20:
+#line 100 "MC01SY.f"
     if (abs(mt) >= (doublereal) (*b)) {
+#line 101 "MC01SY.f"
 	mt /= *b;
+#line 102 "MC01SY.f"
 	++et;
+#line 103 "MC01SY.f"
 	goto L20;
+#line 104 "MC01SY.f"
     }
 /*     END WHILE 20 */
 /*     WHILE ( ABS( MT ) < 1 ) DO */
+#line 107 "MC01SY.f"
 L40:
+#line 107 "MC01SY.f"
     if (abs(mt) < 1.) {
+#line 108 "MC01SY.f"
 	mt *= *b;
+#line 109 "MC01SY.f"
 	--et;
+#line 110 "MC01SY.f"
 	goto L40;
+#line 111 "MC01SY.f"
     }
 /*     END WHILE 40 */
 
+#line 114 "MC01SY.f"
     if (et < emin) {
+#line 115 "MC01SY.f"
 	*a = 0.;
+#line 116 "MC01SY.f"
 	return 0;
+#line 117 "MC01SY.f"
     }
 
+#line 119 "MC01SY.f"
     if (et >= emax) {
+#line 120 "MC01SY.f"
 	*ovflow = TRUE_;
+#line 121 "MC01SY.f"
 	return 0;
+#line 122 "MC01SY.f"
     }
 
 /*     Computation of the value of A by the relation */
 /*     M * B**E = A * (BASE)**EXPON */
 
+#line 127 "MC01SY.f"
     expon = abs(et);
+#line 128 "MC01SY.f"
     *a = mt;
+#line 129 "MC01SY.f"
     base = (doublereal) (*b);
+#line 130 "MC01SY.f"
     if (et < 0) {
+#line 130 "MC01SY.f"
 	base = 1. / base;
+#line 130 "MC01SY.f"
     }
 /*     WHILE ( not EXPON = 0 ) DO */
+#line 132 "MC01SY.f"
 L60:
+#line 132 "MC01SY.f"
     if (expon != 0) {
+#line 133 "MC01SY.f"
 	if (expon % 2 == 0) {
+#line 134 "MC01SY.f"
 	    base *= base;
+#line 135 "MC01SY.f"
 	    expon /= 2;
+#line 136 "MC01SY.f"
 	} else {
+#line 137 "MC01SY.f"
 	    *a *= base;
+#line 138 "MC01SY.f"
 	    --expon;
+#line 139 "MC01SY.f"
 	}
+#line 140 "MC01SY.f"
 	goto L60;
+#line 141 "MC01SY.f"
     }
 /*     END WHILE 60 */
 
+#line 144 "MC01SY.f"
     return 0;
 /* *** Last line of MC01SY *** */
 } /* mc01sy_ */

@@ -1,3 +1,4 @@
+#line 1 "SB03OV.f"
 /* SB03OV.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB03OV.f"
 /* Subroutine */ int sb03ov_(doublereal *a, doublereal *b, doublereal *c__, 
 	doublereal *s)
 {
@@ -99,24 +101,42 @@
 /*     .. External Functions .. */
 /*     .. Executable Statements .. */
 
+#line 90 "SB03OV.f"
     /* Parameter adjustments */
+#line 90 "SB03OV.f"
     --c__;
+#line 90 "SB03OV.f"
     --a;
+#line 90 "SB03OV.f"
 
+#line 90 "SB03OV.f"
     /* Function Body */
+#line 90 "SB03OV.f"
     d__ = dlapy3_(&a[1], &a[2], b);
+#line 91 "SB03OV.f"
     if (d__ == 0.) {
+#line 92 "SB03OV.f"
 	c__[1] = 1.;
+#line 93 "SB03OV.f"
 	c__[2] = 0.;
+#line 94 "SB03OV.f"
 	*s = 0.;
+#line 95 "SB03OV.f"
     } else {
+#line 96 "SB03OV.f"
 	c__[1] = a[1] / d__;
+#line 97 "SB03OV.f"
 	c__[2] = a[2] / d__;
+#line 98 "SB03OV.f"
 	*s = *b / d__;
+#line 99 "SB03OV.f"
 	a[1] = d__;
+#line 100 "SB03OV.f"
 	a[2] = 0.;
+#line 101 "SB03OV.f"
     }
 
+#line 103 "SB03OV.f"
     return 0;
 /* *** Last line of SB03OV *** */
 } /* sb03ov_ */

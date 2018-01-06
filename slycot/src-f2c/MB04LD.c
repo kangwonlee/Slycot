@@ -1,3 +1,4 @@
+#line 1 "MB04LD.f"
 /* MB04LD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04LD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -192,57 +194,94 @@ static doublereal c_b12 = 0.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 162 "MB04LD.f"
     /* Parameter adjustments */
+#line 162 "MB04LD.f"
     l_dim1 = *ldl;
+#line 162 "MB04LD.f"
     l_offset = 1 + l_dim1;
+#line 162 "MB04LD.f"
     l -= l_offset;
+#line 162 "MB04LD.f"
     a_dim1 = *lda;
+#line 162 "MB04LD.f"
     a_offset = 1 + a_dim1;
+#line 162 "MB04LD.f"
     a -= a_offset;
+#line 162 "MB04LD.f"
     b_dim1 = *ldb;
+#line 162 "MB04LD.f"
     b_offset = 1 + b_dim1;
+#line 162 "MB04LD.f"
     b -= b_offset;
+#line 162 "MB04LD.f"
     c_dim1 = *ldc;
+#line 162 "MB04LD.f"
     c_offset = 1 + c_dim1;
+#line 162 "MB04LD.f"
     c__ -= c_offset;
+#line 162 "MB04LD.f"
     --tau;
+#line 162 "MB04LD.f"
     --dwork;
+#line 162 "MB04LD.f"
 
+#line 162 "MB04LD.f"
     /* Function Body */
+#line 162 "MB04LD.f"
     if (min(*m,*n) == 0) {
+#line 162 "MB04LD.f"
 	return 0;
+#line 162 "MB04LD.f"
     }
 
+#line 165 "MB04LD.f"
     luplo = lsame_(uplo, "L", (ftnlen)1, (ftnlen)1);
+#line 166 "MB04LD.f"
     im = *m;
 
+#line 168 "MB04LD.f"
     i__1 = *n;
+#line 168 "MB04LD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
 
 /*        Annihilate the I-th row of A and apply the transformations to */
 /*        the entire block matrix, exploiting its structure. */
 
+#line 173 "MB04LD.f"
 	if (luplo) {
+#line 173 "MB04LD.f"
 	    im = min(i__,*m);
+#line 173 "MB04LD.f"
 	}
+#line 174 "MB04LD.f"
 	i__2 = im + 1;
+#line 174 "MB04LD.f"
 	dlarfg_(&i__2, &l[i__ + i__ * l_dim1], &a[i__ + a_dim1], lda, &tau[
 		i__]);
+#line 175 "MB04LD.f"
 	if (tau[i__] != 0.) {
 
 /*           [    w   ]    [ L(I+1:N,I) A(I+1:N,1:IM) ]   [ 1 ] */
 /*           [        ] := [                          ] * [   ] */
 /*           [ C(:,I) ]    [      0        B(:,1:IM)  ]   [ v ] */
 
+#line 181 "MB04LD.f"
 	    if (i__ < *n) {
+#line 182 "MB04LD.f"
 		i__2 = *n - i__;
+#line 182 "MB04LD.f"
 		dcopy_(&i__2, &l[i__ + 1 + i__ * l_dim1], &c__1, &dwork[1], &
 			c__1);
+#line 183 "MB04LD.f"
 		i__2 = *n - i__;
+#line 183 "MB04LD.f"
 		dgemv_("No transpose", &i__2, &im, &c_b7, &a[i__ + 1 + a_dim1]
 			, lda, &a[i__ + a_dim1], lda, &c_b7, &dwork[1], &c__1,
 			 (ftnlen)12);
+#line 185 "MB04LD.f"
 	    }
+#line 186 "MB04LD.f"
 	    dgemv_("No transpose", p, &im, &c_b7, &b[b_offset], ldb, &a[i__ + 
 		    a_dim1], lda, &c_b12, &c__[i__ * c_dim1 + 1], &c__1, (
 		    ftnlen)12);
@@ -255,24 +294,39 @@ static doublereal c_b12 = 0.;
 /*                                         - tau * [        ] * [ 1 , v'] */
 /*                                                 [ C(:,I) ] */
 
+#line 197 "MB04LD.f"
 	    if (i__ < *n) {
+#line 198 "MB04LD.f"
 		i__2 = *n - i__;
+#line 198 "MB04LD.f"
 		d__1 = -tau[i__];
+#line 198 "MB04LD.f"
 		daxpy_(&i__2, &d__1, &dwork[1], &c__1, &l[i__ + 1 + i__ * 
 			l_dim1], &c__1);
+#line 199 "MB04LD.f"
 		i__2 = *n - i__;
+#line 199 "MB04LD.f"
 		d__1 = -tau[i__];
+#line 199 "MB04LD.f"
 		dger_(&i__2, &im, &d__1, &dwork[1], &c__1, &a[i__ + a_dim1], 
 			lda, &a[i__ + 1 + a_dim1], lda);
+#line 201 "MB04LD.f"
 	    }
+#line 202 "MB04LD.f"
 	    d__1 = -tau[i__];
+#line 202 "MB04LD.f"
 	    dscal_(p, &d__1, &c__[i__ * c_dim1 + 1], &c__1);
+#line 203 "MB04LD.f"
 	    dger_(p, &im, &c_b7, &c__[i__ * c_dim1 + 1], &c__1, &a[i__ + 
 		    a_dim1], lda, &b[b_offset], ldb);
+#line 204 "MB04LD.f"
 	}
+#line 205 "MB04LD.f"
 /* L10: */
+#line 205 "MB04LD.f"
     }
 
+#line 207 "MB04LD.f"
     return 0;
 /* *** Last line of MB04LD *** */
 } /* mb04ld_ */

@@ -1,3 +1,4 @@
+#line 1 "TG01WD.f"
 /* TG01WD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TG01WD.f"
 /* Table of constant values */
 
 static doublereal c_b9 = 1.;
@@ -222,71 +224,127 @@ static integer c__1 = 1;
 
 /*     .. Executable Statements .. */
 
+#line 188 "TG01WD.f"
     /* Parameter adjustments */
+#line 188 "TG01WD.f"
     a_dim1 = *lda;
+#line 188 "TG01WD.f"
     a_offset = 1 + a_dim1;
+#line 188 "TG01WD.f"
     a -= a_offset;
+#line 188 "TG01WD.f"
     e_dim1 = *lde;
+#line 188 "TG01WD.f"
     e_offset = 1 + e_dim1;
+#line 188 "TG01WD.f"
     e -= e_offset;
+#line 188 "TG01WD.f"
     b_dim1 = *ldb;
+#line 188 "TG01WD.f"
     b_offset = 1 + b_dim1;
+#line 188 "TG01WD.f"
     b -= b_offset;
+#line 188 "TG01WD.f"
     c_dim1 = *ldc;
+#line 188 "TG01WD.f"
     c_offset = 1 + c_dim1;
+#line 188 "TG01WD.f"
     c__ -= c_offset;
+#line 188 "TG01WD.f"
     q_dim1 = *ldq;
+#line 188 "TG01WD.f"
     q_offset = 1 + q_dim1;
+#line 188 "TG01WD.f"
     q -= q_offset;
+#line 188 "TG01WD.f"
     z_dim1 = *ldz;
+#line 188 "TG01WD.f"
     z_offset = 1 + z_dim1;
+#line 188 "TG01WD.f"
     z__ -= z_offset;
+#line 188 "TG01WD.f"
     --alphar;
+#line 188 "TG01WD.f"
     --alphai;
+#line 188 "TG01WD.f"
     --beta;
+#line 188 "TG01WD.f"
     --dwork;
+#line 188 "TG01WD.f"
 
+#line 188 "TG01WD.f"
     /* Function Body */
+#line 188 "TG01WD.f"
     *info = 0;
 
 /*     Check the scalar input parameters. */
 
+#line 192 "TG01WD.f"
     if (*n < 0) {
+#line 193 "TG01WD.f"
 	*info = -1;
+#line 194 "TG01WD.f"
     } else if (*m < 0) {
+#line 195 "TG01WD.f"
 	*info = -2;
+#line 196 "TG01WD.f"
     } else if (*p < 0) {
+#line 197 "TG01WD.f"
 	*info = -3;
+#line 198 "TG01WD.f"
     } else if (*lda < max(1,*n)) {
+#line 199 "TG01WD.f"
 	*info = -5;
+#line 200 "TG01WD.f"
     } else if (*lde < max(1,*n)) {
+#line 201 "TG01WD.f"
 	*info = -7;
+#line 202 "TG01WD.f"
     } else if (*ldb < max(1,*n)) {
+#line 203 "TG01WD.f"
 	*info = -9;
+#line 204 "TG01WD.f"
     } else if (*ldc < max(1,*p)) {
+#line 205 "TG01WD.f"
 	*info = -11;
+#line 206 "TG01WD.f"
     } else if (*ldq < max(1,*n)) {
+#line 207 "TG01WD.f"
 	*info = -13;
+#line 208 "TG01WD.f"
     } else if (*ldz < max(1,*n)) {
+#line 209 "TG01WD.f"
 	*info = -15;
+#line 210 "TG01WD.f"
     } else if (*ldwork < (*n << 3) + 16) {
+#line 211 "TG01WD.f"
 	*info = -20;
+#line 212 "TG01WD.f"
     }
 
+#line 214 "TG01WD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 218 "TG01WD.f"
 	i__1 = -(*info);
+#line 218 "TG01WD.f"
 	xerbla_("TG01WD", &i__1, (ftnlen)6);
+#line 219 "TG01WD.f"
 	return 0;
+#line 220 "TG01WD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 224 "TG01WD.f"
     if (*n == 0) {
+#line 225 "TG01WD.f"
 	dwork[1] = 1.;
+#line 226 "TG01WD.f"
 	return 0;
+#line 227 "TG01WD.f"
     }
 
 /*     Reduce (A,E) to real generalized Schur form using an orthogonal */
@@ -297,108 +355,162 @@ static integer c__1 = 1;
 /*     Workspace:  need   8*N+16; */
 /*                 prefer larger. */
 
+#line 237 "TG01WD.f"
     dgges_("Vectors", "Vectors", "Not ordered", (L_fp)delctg_, n, &a[a_offset]
 	    , lda, &e[e_offset], lde, &sdim, &alphar[1], &alphai[1], &beta[1],
 	     &q[q_offset], ldq, &z__[z_offset], ldz, &dwork[1], ldwork, bwork,
 	     info, (ftnlen)7, (ftnlen)7, (ftnlen)11);
+#line 240 "TG01WD.f"
     if (*info != 0) {
+#line 240 "TG01WD.f"
 	return 0;
+#line 240 "TG01WD.f"
     }
+#line 242 "TG01WD.f"
     maxwrk = (integer) dwork[1];
 
 /*     Apply the transformation: B <-- Q'*B. Use BLAS 3, if enough space. */
 
+#line 246 "TG01WD.f"
     chunk = *ldwork / *n;
+#line 247 "TG01WD.f"
     block = *m > 1;
+#line 248 "TG01WD.f"
     blas3 = chunk >= *m && block;
 
+#line 250 "TG01WD.f"
     if (blas3) {
 
 /*        Enough workspace for a fast BLAS 3 algorithm. */
 
+#line 254 "TG01WD.f"
 	dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[1], n, (ftnlen)4);
+#line 255 "TG01WD.f"
 	dgemm_("Transpose", "No transpose", n, m, n, &c_b9, &q[q_offset], ldq,
 		 &dwork[1], n, &c_b10, &b[b_offset], ldb, (ftnlen)9, (ftnlen)
 		12);
 
+#line 258 "TG01WD.f"
     } else if (block) {
 
 /*        Use as many columns of B as possible. */
 
+#line 262 "TG01WD.f"
 	i__1 = *m;
+#line 262 "TG01WD.f"
 	i__2 = chunk;
+#line 262 "TG01WD.f"
 	for (j = 1; i__2 < 0 ? j >= i__1 : j <= i__1; j += i__2) {
 /* Computing MIN */
+#line 263 "TG01WD.f"
 	    i__3 = *m - j + 1;
+#line 263 "TG01WD.f"
 	    bl = min(i__3,chunk);
+#line 264 "TG01WD.f"
 	    dlacpy_("Full", n, &bl, &b[j * b_dim1 + 1], ldb, &dwork[1], n, (
 		    ftnlen)4);
+#line 265 "TG01WD.f"
 	    dgemm_("Transpose", "NoTranspose", n, &bl, n, &c_b9, &q[q_offset],
 		     ldq, &dwork[1], n, &c_b10, &b[j * b_dim1 + 1], ldb, (
 		    ftnlen)9, (ftnlen)11);
+#line 267 "TG01WD.f"
 /* L10: */
+#line 267 "TG01WD.f"
 	}
 
+#line 269 "TG01WD.f"
     } else {
 
 /*        Use a BLAS 2 algorithm. Here, M <= 1. */
 
+#line 273 "TG01WD.f"
 	if (*m > 0) {
+#line 274 "TG01WD.f"
 	    dcopy_(n, &b[b_offset], &c__1, &dwork[1], &c__1);
+#line 275 "TG01WD.f"
 	    dgemv_("Transpose", n, n, &c_b9, &q[q_offset], ldq, &dwork[1], &
 		    c__1, &c_b10, &b[b_offset], &c__1, (ftnlen)9);
+#line 277 "TG01WD.f"
 	}
+#line 278 "TG01WD.f"
     }
 /* Computing MAX */
+#line 279 "TG01WD.f"
     i__2 = maxwrk, i__1 = *n * *m;
+#line 279 "TG01WD.f"
     maxwrk = max(i__2,i__1);
 
 /*     Apply the transformation: C <-- C*Z.  Use BLAS 3, if enough space. */
 
+#line 283 "TG01WD.f"
     block = *p > 1;
+#line 284 "TG01WD.f"
     blas3 = chunk >= *p && block;
 
+#line 286 "TG01WD.f"
     if (blas3) {
+#line 287 "TG01WD.f"
 	dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[1], p, (ftnlen)4);
+#line 288 "TG01WD.f"
 	dgemm_("No transpose", "No transpose", p, n, n, &c_b9, &dwork[1], p, &
 		z__[z_offset], ldz, &c_b10, &c__[c_offset], ldc, (ftnlen)12, (
 		ftnlen)12);
 
+#line 291 "TG01WD.f"
     } else if (block) {
 
 /*        Use as many rows of C as possible. */
 
+#line 295 "TG01WD.f"
 	i__2 = *p;
+#line 295 "TG01WD.f"
 	i__1 = chunk;
+#line 295 "TG01WD.f"
 	for (i__ = 1; i__1 < 0 ? i__ >= i__2 : i__ <= i__2; i__ += i__1) {
 /* Computing MIN */
+#line 296 "TG01WD.f"
 	    i__3 = *p - i__ + 1;
+#line 296 "TG01WD.f"
 	    bl = min(i__3,chunk);
+#line 297 "TG01WD.f"
 	    dlacpy_("Full", &bl, n, &c__[i__ + c_dim1], ldc, &dwork[1], &bl, (
 		    ftnlen)4);
+#line 298 "TG01WD.f"
 	    dgemm_("NoTranspose", "NoTranspose", &bl, n, n, &c_b9, &dwork[1], 
 		    &bl, &z__[z_offset], ldz, &c_b10, &c__[i__ + c_dim1], ldc,
 		     (ftnlen)11, (ftnlen)11);
+#line 300 "TG01WD.f"
 /* L20: */
+#line 300 "TG01WD.f"
 	}
 
+#line 302 "TG01WD.f"
     } else {
 
 /*        Use a BLAS 2 algorithm. Here, P <= 1. */
 
+#line 306 "TG01WD.f"
 	if (*p > 0) {
+#line 307 "TG01WD.f"
 	    dcopy_(n, &c__[c_offset], ldc, &dwork[1], &c__1);
+#line 308 "TG01WD.f"
 	    dgemv_("Transpose", n, n, &c_b9, &z__[z_offset], ldz, &dwork[1], &
 		    c__1, &c_b10, &c__[c_offset], ldc, (ftnlen)9);
+#line 310 "TG01WD.f"
 	}
 
+#line 312 "TG01WD.f"
     }
 /* Computing MAX */
+#line 313 "TG01WD.f"
     i__1 = maxwrk, i__2 = *p * *n;
+#line 313 "TG01WD.f"
     maxwrk = max(i__1,i__2);
 
+#line 315 "TG01WD.f"
     dwork[1] = (doublereal) maxwrk;
 
+#line 317 "TG01WD.f"
     return 0;
 /* *** Last line of TG01WD *** */
 } /* tg01wd_ */

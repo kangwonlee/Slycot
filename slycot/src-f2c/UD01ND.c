@@ -1,3 +1,4 @@
+#line 1 "UD01ND.f"
 /* UD01ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "UD01ND.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -167,130 +169,234 @@ static integer c__1 = 1;
 
 /*     .. Executable Statements .. */
 
+#line 127 "UD01ND.f"
     /* Parameter adjustments */
+#line 127 "UD01ND.f"
     p_dim1 = *ldp1;
+#line 127 "UD01ND.f"
     p_dim2 = *ldp2;
+#line 127 "UD01ND.f"
     p_offset = 1 + p_dim1 * (1 + p_dim2);
+#line 127 "UD01ND.f"
     p -= p_offset;
+#line 127 "UD01ND.f"
 
+#line 127 "UD01ND.f"
     /* Function Body */
+#line 127 "UD01ND.f"
     *info = 0;
 
 /*     Check the input scalar arguments. */
 
+#line 131 "UD01ND.f"
     if (*mp < 1) {
+#line 132 "UD01ND.f"
 	*info = -1;
+#line 133 "UD01ND.f"
     } else if (*np < 1) {
+#line 134 "UD01ND.f"
 	*info = -2;
+#line 135 "UD01ND.f"
     } else if (*dp < 0) {
+#line 136 "UD01ND.f"
 	*info = -3;
+#line 137 "UD01ND.f"
     } else if (*l < 1 || *l > 5) {
+#line 138 "UD01ND.f"
 	*info = -4;
+#line 139 "UD01ND.f"
     } else if (*nout < 0) {
+#line 140 "UD01ND.f"
 	*info = -5;
+#line 141 "UD01ND.f"
     } else if (*ldp1 < *mp) {
+#line 142 "UD01ND.f"
 	*info = -7;
+#line 143 "UD01ND.f"
     } else if (*ldp2 < *np) {
+#line 144 "UD01ND.f"
 	*info = -8;
+#line 145 "UD01ND.f"
     }
 
+#line 147 "UD01ND.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 151 "UD01ND.f"
 	i__1 = -(*info);
+#line 151 "UD01ND.f"
 	xerbla_("UD01ND", &i__1, (ftnlen)6);
+#line 152 "UD01ND.f"
 	return 0;
+#line 153 "UD01ND.f"
     }
 
+#line 155 "UD01ND.f"
     lentxt = i_len(text, text_len);
+#line 156 "UD01ND.f"
     ltext = min(72,lentxt);
 /*     WHILE ( TEXT(LTEXT:LTEXT) =  ' ' ) DO */
+#line 158 "UD01ND.f"
 L10:
+#line 158 "UD01ND.f"
     if (*(unsigned char *)&text[ltext - 1] == ' ') {
+#line 159 "UD01ND.f"
 	--ltext;
+#line 160 "UD01ND.f"
 	goto L10;
+#line 161 "UD01ND.f"
     }
 /*     END WHILE 10 */
 
+#line 164 "UD01ND.f"
     i__1 = *dp + 1;
+#line 164 "UD01ND.f"
     for (k = 1; k <= i__1; ++k) {
+#line 165 "UD01ND.f"
 	if (ltext == 0) {
+#line 166 "UD01ND.f"
 	    io___4.ciunit = *nout;
+#line 166 "UD01ND.f"
 	    s_wsfe(&io___4);
+#line 166 "UD01ND.f"
 	    e_wsfe();
+#line 167 "UD01ND.f"
 	} else {
+#line 168 "UD01ND.f"
 	    io___5.ciunit = *nout;
+#line 168 "UD01ND.f"
 	    s_wsfe(&io___5);
+#line 168 "UD01ND.f"
 	    do_fio(&c__1, text, ltext);
+#line 168 "UD01ND.f"
 	    i__2 = k - 1;
+#line 168 "UD01ND.f"
 	    do_fio(&c__1, (char *)&i__2, (ftnlen)sizeof(integer));
+#line 168 "UD01ND.f"
 	    do_fio(&c__1, (char *)&(*mp), (ftnlen)sizeof(integer));
+#line 168 "UD01ND.f"
 	    do_fio(&c__1, (char *)&(*np), (ftnlen)sizeof(integer));
+#line 168 "UD01ND.f"
 	    e_wsfe();
+#line 169 "UD01ND.f"
 	}
+#line 170 "UD01ND.f"
 	n1 = (*np - 1) / *l;
+#line 171 "UD01ND.f"
 	j1 = 1;
+#line 172 "UD01ND.f"
 	j2 = *l;
 
+#line 174 "UD01ND.f"
 	i__2 = n1;
+#line 174 "UD01ND.f"
 	for (j = 1; j <= i__2; ++j) {
+#line 175 "UD01ND.f"
 	    io___10.ciunit = *nout;
+#line 175 "UD01ND.f"
 	    s_wsfe(&io___10);
+#line 175 "UD01ND.f"
 	    i__3 = j2;
+#line 175 "UD01ND.f"
 	    for (jj = j1; jj <= i__3; ++jj) {
+#line 175 "UD01ND.f"
 		do_fio(&c__1, (char *)&jj, (ftnlen)sizeof(integer));
+#line 175 "UD01ND.f"
 	    }
+#line 175 "UD01ND.f"
 	    e_wsfe();
 
+#line 177 "UD01ND.f"
 	    i__3 = *mp;
+#line 177 "UD01ND.f"
 	    for (i__ = 1; i__ <= i__3; ++i__) {
+#line 178 "UD01ND.f"
 		io___13.ciunit = *nout;
+#line 178 "UD01ND.f"
 		s_wsfe(&io___13);
+#line 178 "UD01ND.f"
 		do_fio(&c__1, (char *)&i__, (ftnlen)sizeof(integer));
+#line 178 "UD01ND.f"
 		i__4 = j2;
+#line 178 "UD01ND.f"
 		for (jj = j1; jj <= i__4; ++jj) {
+#line 178 "UD01ND.f"
 		    do_fio(&c__1, (char *)&p[i__ + (jj + k * p_dim2) * p_dim1]
 			    , (ftnlen)sizeof(doublereal));
+#line 178 "UD01ND.f"
 		}
+#line 178 "UD01ND.f"
 		e_wsfe();
+#line 179 "UD01ND.f"
 /* L20: */
+#line 179 "UD01ND.f"
 	    }
 
+#line 181 "UD01ND.f"
 	    j1 += *l;
+#line 182 "UD01ND.f"
 	    j2 += *l;
+#line 183 "UD01ND.f"
 /* L30: */
+#line 183 "UD01ND.f"
 	}
 
+#line 185 "UD01ND.f"
 	io___14.ciunit = *nout;
+#line 185 "UD01ND.f"
 	s_wsfe(&io___14);
+#line 185 "UD01ND.f"
 	i__2 = *np;
+#line 185 "UD01ND.f"
 	for (j = j1; j <= i__2; ++j) {
+#line 185 "UD01ND.f"
 	    do_fio(&c__1, (char *)&j, (ftnlen)sizeof(integer));
+#line 185 "UD01ND.f"
 	}
+#line 185 "UD01ND.f"
 	e_wsfe();
 
+#line 187 "UD01ND.f"
 	i__2 = *mp;
+#line 187 "UD01ND.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 188 "UD01ND.f"
 	    io___15.ciunit = *nout;
+#line 188 "UD01ND.f"
 	    s_wsfe(&io___15);
+#line 188 "UD01ND.f"
 	    do_fio(&c__1, (char *)&i__, (ftnlen)sizeof(integer));
+#line 188 "UD01ND.f"
 	    i__3 = *np;
+#line 188 "UD01ND.f"
 	    for (jj = j1; jj <= i__3; ++jj) {
+#line 188 "UD01ND.f"
 		do_fio(&c__1, (char *)&p[i__ + (jj + k * p_dim2) * p_dim1], (
 			ftnlen)sizeof(doublereal));
+#line 188 "UD01ND.f"
 	    }
+#line 188 "UD01ND.f"
 	    e_wsfe();
+#line 189 "UD01ND.f"
 /* L40: */
+#line 189 "UD01ND.f"
 	}
 
+#line 191 "UD01ND.f"
 /* L50: */
+#line 191 "UD01ND.f"
     }
 
+#line 193 "UD01ND.f"
     io___16.ciunit = *nout;
+#line 193 "UD01ND.f"
     s_wsfe(&io___16);
+#line 193 "UD01ND.f"
     e_wsfe();
 
+#line 195 "UD01ND.f"
     return 0;
 
 

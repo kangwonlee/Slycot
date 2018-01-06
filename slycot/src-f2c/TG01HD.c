@@ -1,3 +1,4 @@
+#line 1 "TG01HD.f"
 /* TG01HD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TG01HD.f"
 /* Subroutine */ int tg01hd_(char *jobcon, char *compq, char *compz, integer *
 	n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *e,
 	 integer *lde, doublereal *b, integer *ldb, doublereal *c__, integer *
@@ -440,162 +442,292 @@
 
 /*     Decode JOBCON. */
 
+#line 422 "TG01HD.f"
     /* Parameter adjustments */
+#line 422 "TG01HD.f"
     a_dim1 = *lda;
+#line 422 "TG01HD.f"
     a_offset = 1 + a_dim1;
+#line 422 "TG01HD.f"
     a -= a_offset;
+#line 422 "TG01HD.f"
     e_dim1 = *lde;
+#line 422 "TG01HD.f"
     e_offset = 1 + e_dim1;
+#line 422 "TG01HD.f"
     e -= e_offset;
+#line 422 "TG01HD.f"
     b_dim1 = *ldb;
+#line 422 "TG01HD.f"
     b_offset = 1 + b_dim1;
+#line 422 "TG01HD.f"
     b -= b_offset;
+#line 422 "TG01HD.f"
     c_dim1 = *ldc;
+#line 422 "TG01HD.f"
     c_offset = 1 + c_dim1;
+#line 422 "TG01HD.f"
     c__ -= c_offset;
+#line 422 "TG01HD.f"
     q_dim1 = *ldq;
+#line 422 "TG01HD.f"
     q_offset = 1 + q_dim1;
+#line 422 "TG01HD.f"
     q -= q_offset;
+#line 422 "TG01HD.f"
     z_dim1 = *ldz;
+#line 422 "TG01HD.f"
     z_offset = 1 + z_dim1;
+#line 422 "TG01HD.f"
     z__ -= z_offset;
+#line 422 "TG01HD.f"
     --rtau;
+#line 422 "TG01HD.f"
     --iwork;
+#line 422 "TG01HD.f"
     --dwork;
+#line 422 "TG01HD.f"
 
+#line 422 "TG01HD.f"
     /* Function Body */
+#line 422 "TG01HD.f"
     if (lsame_(jobcon, "C", (ftnlen)1, (ftnlen)1)) {
+#line 423 "TG01HD.f"
 	fincon = TRUE_;
+#line 424 "TG01HD.f"
 	infcon = TRUE_;
+#line 425 "TG01HD.f"
     } else if (lsame_(jobcon, "F", (ftnlen)1, (ftnlen)1)) {
+#line 426 "TG01HD.f"
 	fincon = TRUE_;
+#line 427 "TG01HD.f"
 	infcon = FALSE_;
+#line 428 "TG01HD.f"
     } else if (lsame_(jobcon, "I", (ftnlen)1, (ftnlen)1)) {
+#line 429 "TG01HD.f"
 	fincon = FALSE_;
+#line 430 "TG01HD.f"
 	infcon = TRUE_;
+#line 431 "TG01HD.f"
     } else {
+#line 432 "TG01HD.f"
 	fincon = FALSE_;
+#line 433 "TG01HD.f"
 	infcon = FALSE_;
+#line 434 "TG01HD.f"
     }
 
 /*     Decode COMPQ. */
 
+#line 438 "TG01HD.f"
     if (lsame_(compq, "N", (ftnlen)1, (ftnlen)1)) {
+#line 439 "TG01HD.f"
 	ilq = FALSE_;
+#line 440 "TG01HD.f"
 	icompq = 1;
+#line 441 "TG01HD.f"
     } else if (lsame_(compq, "U", (ftnlen)1, (ftnlen)1)) {
+#line 442 "TG01HD.f"
 	ilq = TRUE_;
+#line 443 "TG01HD.f"
 	icompq = 2;
+#line 444 "TG01HD.f"
     } else if (lsame_(compq, "I", (ftnlen)1, (ftnlen)1)) {
+#line 445 "TG01HD.f"
 	ilq = TRUE_;
+#line 446 "TG01HD.f"
 	icompq = 3;
+#line 447 "TG01HD.f"
     } else {
+#line 448 "TG01HD.f"
 	icompq = 0;
+#line 449 "TG01HD.f"
     }
 
 /*     Decode COMPZ. */
 
+#line 453 "TG01HD.f"
     if (lsame_(compz, "N", (ftnlen)1, (ftnlen)1)) {
+#line 454 "TG01HD.f"
 	ilz = FALSE_;
+#line 455 "TG01HD.f"
 	icompz = 1;
+#line 456 "TG01HD.f"
     } else if (lsame_(compz, "U", (ftnlen)1, (ftnlen)1)) {
+#line 457 "TG01HD.f"
 	ilz = TRUE_;
+#line 458 "TG01HD.f"
 	icompz = 2;
+#line 459 "TG01HD.f"
     } else if (lsame_(compz, "I", (ftnlen)1, (ftnlen)1)) {
+#line 460 "TG01HD.f"
 	ilz = TRUE_;
+#line 461 "TG01HD.f"
 	icompz = 3;
+#line 462 "TG01HD.f"
     } else {
+#line 463 "TG01HD.f"
 	icompz = 0;
+#line 464 "TG01HD.f"
     }
 
 /*     Test the input scalar parameters. */
 
+#line 468 "TG01HD.f"
     *info = 0;
+#line 469 "TG01HD.f"
     if (! fincon && ! infcon) {
+#line 470 "TG01HD.f"
 	*info = -1;
+#line 471 "TG01HD.f"
     } else if (icompq <= 0) {
+#line 472 "TG01HD.f"
 	*info = -2;
+#line 473 "TG01HD.f"
     } else if (icompz <= 0) {
+#line 474 "TG01HD.f"
 	*info = -3;
+#line 475 "TG01HD.f"
     } else if (*n < 0) {
+#line 476 "TG01HD.f"
 	*info = -4;
+#line 477 "TG01HD.f"
     } else if (*m < 0) {
+#line 478 "TG01HD.f"
 	*info = -5;
+#line 479 "TG01HD.f"
     } else if (*p < 0) {
+#line 480 "TG01HD.f"
 	*info = -6;
+#line 481 "TG01HD.f"
     } else if (*lda < max(1,*n)) {
+#line 482 "TG01HD.f"
 	*info = -8;
+#line 483 "TG01HD.f"
     } else if (*lde < max(1,*n)) {
+#line 484 "TG01HD.f"
 	*info = -10;
+#line 485 "TG01HD.f"
     } else if (*ldb < max(1,*n)) {
+#line 486 "TG01HD.f"
 	*info = -12;
+#line 487 "TG01HD.f"
     } else if (*ldc < max(1,*p)) {
+#line 488 "TG01HD.f"
 	*info = -14;
+#line 489 "TG01HD.f"
     } else if (ilq && *ldq < *n || *ldq < 1) {
+#line 490 "TG01HD.f"
 	*info = -16;
+#line 491 "TG01HD.f"
     } else if (ilz && *ldz < *n || *ldz < 1) {
+#line 492 "TG01HD.f"
 	*info = -18;
+#line 493 "TG01HD.f"
     } else if (*tol >= 1.) {
+#line 494 "TG01HD.f"
 	*info = -23;
+#line 495 "TG01HD.f"
     }
+#line 496 "TG01HD.f"
     if (*info != 0) {
+#line 497 "TG01HD.f"
 	i__1 = -(*info);
+#line 497 "TG01HD.f"
 	xerbla_("TG01HD", &i__1, (ftnlen)6);
+#line 498 "TG01HD.f"
 	return 0;
+#line 499 "TG01HD.f"
     }
 
+#line 501 "TG01HD.f"
     *(unsigned char *)jobq = *(unsigned char *)compq;
+#line 502 "TG01HD.f"
     *(unsigned char *)jobz = *(unsigned char *)compz;
 
+#line 504 "TG01HD.f"
     if (fincon) {
 
 /*        Perform finite controllability form reduction. */
 
 /* Computing MAX */
+#line 508 "TG01HD.f"
 	i__2 = 0, i__3 = *n - 1;
+#line 508 "TG01HD.f"
 	i__1 = max(i__2,i__3);
+#line 508 "TG01HD.f"
 	tg01hx_(jobq, jobz, n, n, m, p, n, &i__1, &a[a_offset], lda, &e[
 		e_offset], lde, &b[b_offset], ldb, &c__[c_offset], ldc, &q[
 		q_offset], ldq, &z__[z_offset], ldz, &nr, nrblck, &rtau[1], 
 		tol, &iwork[1], &dwork[1], info, (ftnlen)1, (ftnlen)1);
+#line 511 "TG01HD.f"
 	if (*nrblck > 1) {
+#line 512 "TG01HD.f"
 	    lba = rtau[1] + rtau[2] - 1;
+#line 513 "TG01HD.f"
 	} else if (*nrblck == 1) {
+#line 514 "TG01HD.f"
 	    lba = rtau[1] - 1;
+#line 515 "TG01HD.f"
 	} else {
+#line 516 "TG01HD.f"
 	    lba = 0;
+#line 517 "TG01HD.f"
 	}
+#line 518 "TG01HD.f"
 	if (ilq) {
+#line 518 "TG01HD.f"
 	    *(unsigned char *)jobq = 'U';
+#line 518 "TG01HD.f"
 	}
+#line 519 "TG01HD.f"
 	if (ilz) {
+#line 519 "TG01HD.f"
 	    *(unsigned char *)jobz = 'U';
+#line 519 "TG01HD.f"
 	}
+#line 520 "TG01HD.f"
     } else {
+#line 521 "TG01HD.f"
 	nr = *n;
 /* Computing MAX */
+#line 522 "TG01HD.f"
 	i__1 = 0, i__2 = *n - 1;
+#line 522 "TG01HD.f"
 	lba = max(i__1,i__2);
+#line 523 "TG01HD.f"
     }
 
+#line 525 "TG01HD.f"
     if (infcon) {
 
 /*        Perform infinite controllability form reduction. */
 
+#line 529 "TG01HD.f"
 	tg01hx_(jobq, jobz, n, n, m, p, &nr, &lba, &e[e_offset], lde, &a[
 		a_offset], lda, &b[b_offset], ldb, &c__[c_offset], ldc, &q[
 		q_offset], ldq, &z__[z_offset], ldz, ncont, nrblck, &rtau[1], 
 		tol, &iwork[1], &dwork[1], info, (ftnlen)1, (ftnlen)1);
+#line 532 "TG01HD.f"
 	if (fincon) {
+#line 533 "TG01HD.f"
 	    *niucon = nr - *ncont;
+#line 534 "TG01HD.f"
 	} else {
+#line 535 "TG01HD.f"
 	    *niucon = 0;
+#line 536 "TG01HD.f"
 	}
+#line 537 "TG01HD.f"
     } else {
+#line 538 "TG01HD.f"
 	*ncont = nr;
+#line 539 "TG01HD.f"
 	*niucon = 0;
+#line 540 "TG01HD.f"
     }
 
+#line 542 "TG01HD.f"
     return 0;
 
 /* *** Last line of TG01HD *** */

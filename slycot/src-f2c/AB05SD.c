@@ -1,3 +1,4 @@
+#line 1 "AB05SD.f"
 /* AB05SD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB05SD.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -252,208 +254,345 @@ static integer c__1 = 1;
 
 /*     Check the input scalar arguments. */
 
+#line 213 "AB05SD.f"
     /* Parameter adjustments */
+#line 213 "AB05SD.f"
     a_dim1 = *lda;
+#line 213 "AB05SD.f"
     a_offset = 1 + a_dim1;
+#line 213 "AB05SD.f"
     a -= a_offset;
+#line 213 "AB05SD.f"
     b_dim1 = *ldb;
+#line 213 "AB05SD.f"
     b_offset = 1 + b_dim1;
+#line 213 "AB05SD.f"
     b -= b_offset;
+#line 213 "AB05SD.f"
     c_dim1 = *ldc;
+#line 213 "AB05SD.f"
     c_offset = 1 + c_dim1;
+#line 213 "AB05SD.f"
     c__ -= c_offset;
+#line 213 "AB05SD.f"
     d_dim1 = *ldd;
+#line 213 "AB05SD.f"
     d_offset = 1 + d_dim1;
+#line 213 "AB05SD.f"
     d__ -= d_offset;
+#line 213 "AB05SD.f"
     f_dim1 = *ldf;
+#line 213 "AB05SD.f"
     f_offset = 1 + f_dim1;
+#line 213 "AB05SD.f"
     f -= f_offset;
+#line 213 "AB05SD.f"
     --iwork;
+#line 213 "AB05SD.f"
     --dwork;
+#line 213 "AB05SD.f"
 
+#line 213 "AB05SD.f"
     /* Function Body */
+#line 213 "AB05SD.f"
     unitf = lsame_(fbtype, "I", (ftnlen)1, (ftnlen)1);
+#line 214 "AB05SD.f"
     outpf = lsame_(fbtype, "O", (ftnlen)1, (ftnlen)1);
+#line 215 "AB05SD.f"
     ljobd = lsame_(jobd, "D", (ftnlen)1, (ftnlen)1);
+#line 216 "AB05SD.f"
     ldwn = max(1,*n);
+#line 217 "AB05SD.f"
     ldwp = max(1,*p);
 
+#line 219 "AB05SD.f"
     *info = 0;
 
+#line 221 "AB05SD.f"
     if (! unitf && ! outpf) {
+#line 222 "AB05SD.f"
 	*info = -1;
+#line 223 "AB05SD.f"
     } else if (! ljobd && ! lsame_(jobd, "Z", (ftnlen)1, (ftnlen)1)) {
+#line 224 "AB05SD.f"
 	*info = -2;
+#line 225 "AB05SD.f"
     } else if (*n < 0) {
+#line 226 "AB05SD.f"
 	*info = -3;
+#line 227 "AB05SD.f"
     } else if (*m < 0) {
+#line 228 "AB05SD.f"
 	*info = -4;
+#line 229 "AB05SD.f"
     } else if (*p < 0 || unitf && *p != *m) {
+#line 230 "AB05SD.f"
 	*info = -5;
+#line 231 "AB05SD.f"
     } else if (*lda < ldwn) {
+#line 232 "AB05SD.f"
 	*info = -7;
+#line 233 "AB05SD.f"
     } else if (*ldb < ldwn) {
+#line 234 "AB05SD.f"
 	*info = -9;
+#line 235 "AB05SD.f"
     } else if (*n > 0 && *ldc < ldwp || *n == 0 && *ldc < 1) {
+#line 237 "AB05SD.f"
 	*info = -11;
+#line 238 "AB05SD.f"
     } else if (ljobd && *ldd < ldwp || ! ljobd && *ldd < 1) {
+#line 240 "AB05SD.f"
 	*info = -13;
+#line 241 "AB05SD.f"
     } else if (outpf && *alpha != 0. && *ldf < max(1,*m) || (unitf || *alpha 
 	    == 0.) && *ldf < 1) {
+#line 243 "AB05SD.f"
 	*info = -16;
+#line 244 "AB05SD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 244 "AB05SD.f"
 	i__1 = max(1,*m), i__2 = *p * *p + (*p << 2);
+#line 244 "AB05SD.f"
 	if (ljobd && *ldwork < max(i__1,i__2) || ! ljobd && *ldwork < max(1,*
 		m)) {
+#line 246 "AB05SD.f"
 	    *info = -20;
+#line 247 "AB05SD.f"
 	}
+#line 247 "AB05SD.f"
     }
 
+#line 249 "AB05SD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 253 "AB05SD.f"
 	i__1 = -(*info);
+#line 253 "AB05SD.f"
 	xerbla_("AB05SD", &i__1, (ftnlen)6);
+#line 254 "AB05SD.f"
 	return 0;
+#line 255 "AB05SD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 259 "AB05SD.f"
     *rcond = 1.;
 /* Computing MAX */
+#line 260 "AB05SD.f"
     i__1 = *n, i__2 = min(*m,*p);
+#line 260 "AB05SD.f"
     if (max(i__1,i__2) == 0 || *alpha == 0.) {
+#line 260 "AB05SD.f"
 	return 0;
+#line 260 "AB05SD.f"
     }
 
+#line 263 "AB05SD.f"
     if (ljobd) {
+#line 264 "AB05SD.f"
 	iw = *p * *p + 1;
 
 /*        Compute I - alpha*D*F. */
 
+#line 268 "AB05SD.f"
 	if (unitf) {
+#line 269 "AB05SD.f"
 	    dlacpy_("F", p, p, &d__[d_offset], ldd, &dwork[1], &ldwp, (ftnlen)
 		    1);
+#line 270 "AB05SD.f"
 	    if (*alpha != -1.) {
+#line 270 "AB05SD.f"
 		d__1 = -(*alpha);
+#line 270 "AB05SD.f"
 		dlascl_("G", &c__0, &c__0, &c_b11, &d__1, p, p, &dwork[1], &
 			ldwp, info, (ftnlen)1);
+#line 270 "AB05SD.f"
 	    }
+#line 273 "AB05SD.f"
 	} else {
+#line 274 "AB05SD.f"
 	    d__1 = -(*alpha);
+#line 274 "AB05SD.f"
 	    dgemm_("N", "N", p, p, m, &d__1, &d__[d_offset], ldd, &f[f_offset]
 		    , ldf, &c_b14, &dwork[1], &ldwp, (ftnlen)1, (ftnlen)1);
+#line 276 "AB05SD.f"
 	}
 
+#line 278 "AB05SD.f"
 	dummy[0] = 1.;
+#line 279 "AB05SD.f"
 	i__1 = *p + 1;
+#line 279 "AB05SD.f"
 	daxpy_(p, &c_b11, dummy, &c__0, &dwork[1], &i__1);
 
 /*        Compute Cc = E*C, Dc = E*D, where E = (I - alpha*D*F)**-1. */
 
+#line 283 "AB05SD.f"
 	enorm = dlange_("1", p, p, &dwork[1], &ldwp, &dwork[iw], (ftnlen)1);
+#line 284 "AB05SD.f"
 	dgetrf_(p, p, &dwork[1], &ldwp, &iwork[1], info);
+#line 285 "AB05SD.f"
 	if (*info > 0) {
 
 /*           Error return. */
 
+#line 289 "AB05SD.f"
 	    *rcond = 0.;
+#line 290 "AB05SD.f"
 	    *info = 1;
+#line 291 "AB05SD.f"
 	    return 0;
+#line 292 "AB05SD.f"
 	}
+#line 293 "AB05SD.f"
 	dgecon_("1", p, &dwork[1], &ldwp, &enorm, rcond, &dwork[iw], &iwork[*
 		p + 1], info, (ftnlen)1);
+#line 295 "AB05SD.f"
 	if (*rcond <= dlamch_("E", (ftnlen)1)) {
 
 /*           Error return. */
 
+#line 299 "AB05SD.f"
 	    *info = 1;
+#line 300 "AB05SD.f"
 	    return 0;
+#line 301 "AB05SD.f"
 	}
 
+#line 303 "AB05SD.f"
 	if (*n > 0) {
+#line 303 "AB05SD.f"
 	    dgetrs_("N", p, n, &dwork[1], &ldwp, &iwork[1], &c__[c_offset], 
 		    ldc, info, (ftnlen)1);
+#line 303 "AB05SD.f"
 	}
+#line 305 "AB05SD.f"
 	dgetrs_("N", p, m, &dwork[1], &ldwp, &iwork[1], &d__[d_offset], ldd, 
 		info, (ftnlen)1);
+#line 306 "AB05SD.f"
     }
 
+#line 308 "AB05SD.f"
     if (*n == 0) {
+#line 308 "AB05SD.f"
 	return 0;
+#line 308 "AB05SD.f"
     }
 
 /*     Compute Ac = A + alpha*B*F*Cc and Bc = B + alpha*B*F*Dc. */
 
+#line 313 "AB05SD.f"
     if (unitf) {
+#line 314 "AB05SD.f"
 	dgemm_("N", "N", n, n, m, alpha, &b[b_offset], ldb, &c__[c_offset], 
 		ldc, &c_b11, &a[a_offset], lda, (ftnlen)1, (ftnlen)1);
+#line 316 "AB05SD.f"
 	if (ljobd) {
 
+#line 318 "AB05SD.f"
 	    if (*ldwork < *n * *m) {
 
 /*              Not enough working space for using DGEMM. */
 
+#line 322 "AB05SD.f"
 		i__1 = *n;
+#line 322 "AB05SD.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 323 "AB05SD.f"
 		    dcopy_(p, &b[i__ + b_dim1], ldb, &dwork[1], &c__1);
+#line 324 "AB05SD.f"
 		    dgemv_("T", p, p, alpha, &d__[d_offset], ldd, &dwork[1], &
 			    c__1, &c_b11, &b[i__ + b_dim1], ldb, (ftnlen)1);
+#line 326 "AB05SD.f"
 /* L10: */
+#line 326 "AB05SD.f"
 		}
 
+#line 328 "AB05SD.f"
 	    } else {
+#line 329 "AB05SD.f"
 		dlacpy_("F", n, m, &b[b_offset], ldb, &dwork[1], &ldwn, (
 			ftnlen)1);
+#line 330 "AB05SD.f"
 		dgemm_("N", "N", n, p, m, alpha, &dwork[1], &ldwn, &d__[
 			d_offset], ldd, &c_b11, &b[b_offset], ldb, (ftnlen)1, 
 			(ftnlen)1);
+#line 332 "AB05SD.f"
 	    }
+#line 333 "AB05SD.f"
 	}
+#line 334 "AB05SD.f"
     } else {
 
+#line 336 "AB05SD.f"
 	if (*ldwork < *n * *p) {
 
 /*           Not enough working space for using DGEMM. */
 
+#line 340 "AB05SD.f"
 	    i__1 = *n;
+#line 340 "AB05SD.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 341 "AB05SD.f"
 		dgemv_("N", m, p, alpha, &f[f_offset], ldf, &c__[i__ * c_dim1 
 			+ 1], &c__1, &c_b14, &dwork[1], &c__1, (ftnlen)1);
+#line 343 "AB05SD.f"
 		dgemv_("N", n, m, &c_b11, &b[b_offset], ldb, &dwork[1], &c__1,
 			 &c_b11, &a[i__ * a_dim1 + 1], &c__1, (ftnlen)1);
+#line 345 "AB05SD.f"
 /* L20: */
+#line 345 "AB05SD.f"
 	    }
 
+#line 347 "AB05SD.f"
 	    if (ljobd) {
 
+#line 349 "AB05SD.f"
 		i__1 = *n;
+#line 349 "AB05SD.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 350 "AB05SD.f"
 		    dgemv_("T", m, p, alpha, &f[f_offset], ldf, &b[i__ + 
 			    b_dim1], ldb, &c_b14, &dwork[1], &c__1, (ftnlen)1)
 			    ;
+#line 352 "AB05SD.f"
 		    dgemv_("T", p, m, &c_b11, &d__[d_offset], ldd, &dwork[1], 
 			    &c__1, &c_b11, &b[i__ + b_dim1], ldb, (ftnlen)1);
+#line 354 "AB05SD.f"
 /* L30: */
+#line 354 "AB05SD.f"
 		}
 
+#line 356 "AB05SD.f"
 	    }
+#line 357 "AB05SD.f"
 	} else {
 
+#line 359 "AB05SD.f"
 	    dgemm_("N", "N", n, p, m, alpha, &b[b_offset], ldb, &f[f_offset], 
 		    ldf, &c_b14, &dwork[1], &ldwn, (ftnlen)1, (ftnlen)1);
+#line 361 "AB05SD.f"
 	    dgemm_("N", "N", n, n, p, &c_b11, &dwork[1], &ldwn, &c__[c_offset]
 		    , ldc, &c_b11, &a[a_offset], lda, (ftnlen)1, (ftnlen)1);
+#line 363 "AB05SD.f"
 	    if (ljobd) {
+#line 363 "AB05SD.f"
 		dgemm_("N", "N", n, m, p, &c_b11, &dwork[1], &ldwn, &d__[
 			d_offset], ldd, &c_b11, &b[b_offset], ldb, (ftnlen)1, 
 			(ftnlen)1);
+#line 363 "AB05SD.f"
 	    }
+#line 366 "AB05SD.f"
 	}
+#line 367 "AB05SD.f"
     }
 
+#line 369 "AB05SD.f"
     return 0;
 /* *** Last line of AB05SD *** */
 } /* ab05sd_ */

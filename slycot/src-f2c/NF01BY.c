@@ -1,3 +1,4 @@
+#line 1 "NF01BY.f"
 /* NF01BY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "NF01BY.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -220,142 +222,247 @@ static doublereal c_b24 = 0.;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 188 "NF01BY.f"
     /* Parameter adjustments */
+#line 188 "NF01BY.f"
     --ipar;
+#line 188 "NF01BY.f"
     --wb;
+#line 188 "NF01BY.f"
     z_dim1 = *ldz;
+#line 188 "NF01BY.f"
     z_offset = 1 + z_dim1;
+#line 188 "NF01BY.f"
     z__ -= z_offset;
+#line 188 "NF01BY.f"
     --e;
+#line 188 "NF01BY.f"
     j_dim1 = *ldj;
+#line 188 "NF01BY.f"
     j_offset = 1 + j_dim1;
+#line 188 "NF01BY.f"
     j -= j_offset;
+#line 188 "NF01BY.f"
     --jte;
+#line 188 "NF01BY.f"
     --dwork;
+#line 188 "NF01BY.f"
 
+#line 188 "NF01BY.f"
     /* Function Body */
+#line 188 "NF01BY.f"
     wjte = lsame_(cjte, "C", (ftnlen)1, (ftnlen)1);
+#line 189 "NF01BY.f"
     *info = 0;
+#line 190 "NF01BY.f"
     nn = ipar[1];
+#line 191 "NF01BY.f"
     nwb = nn * (*nz + 2) + 1;
+#line 192 "NF01BY.f"
     if (! (wjte || lsame_(cjte, "N", (ftnlen)1, (ftnlen)1))) {
+#line 193 "NF01BY.f"
 	*info = -1;
+#line 194 "NF01BY.f"
     } else if (*nsmp < 0) {
+#line 195 "NF01BY.f"
 	*info = -2;
+#line 196 "NF01BY.f"
     } else if (*nz < 0) {
+#line 197 "NF01BY.f"
 	*info = -3;
+#line 198 "NF01BY.f"
     } else if (*l != 1) {
+#line 199 "NF01BY.f"
 	*info = -4;
+#line 200 "NF01BY.f"
     } else if (*lipar < 1) {
+#line 201 "NF01BY.f"
 	*info = -6;
+#line 202 "NF01BY.f"
     } else if (ipar[1] < 0) {
+#line 203 "NF01BY.f"
 	if (*info != 0) {
+#line 204 "NF01BY.f"
 	    i__1 = -(*info);
+#line 204 "NF01BY.f"
 	    xerbla_("NF01BY", &i__1, (ftnlen)6);
+#line 205 "NF01BY.f"
 	} else {
+#line 206 "NF01BY.f"
 	    ipar[1] = *nsmp * (abs(nn) * (*nz + 2) + 1);
+#line 207 "NF01BY.f"
 	    *ldj = *nsmp;
+#line 208 "NF01BY.f"
 	}
+#line 209 "NF01BY.f"
 	return 0;
+#line 210 "NF01BY.f"
     } else if (*lwb < nwb) {
+#line 211 "NF01BY.f"
 	*info = -8;
+#line 212 "NF01BY.f"
     } else if (*ldz < max(1,*nsmp)) {
+#line 213 "NF01BY.f"
 	*info = -10;
+#line 214 "NF01BY.f"
     } else if (*ldj < max(1,*nsmp)) {
+#line 215 "NF01BY.f"
 	*info = -13;
+#line 216 "NF01BY.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 220 "NF01BY.f"
     if (*info != 0) {
+#line 221 "NF01BY.f"
 	i__1 = -(*info);
+#line 221 "NF01BY.f"
 	xerbla_("NF01BY", &i__1, (ftnlen)6);
+#line 222 "NF01BY.f"
 	return 0;
+#line 223 "NF01BY.f"
     }
 
 /*     Quick return if possible. */
 
+#line 227 "NF01BY.f"
     if (min(*nsmp,*nz) == 0) {
+#line 227 "NF01BY.f"
 	return 0;
+#line 227 "NF01BY.f"
     }
 
 /*     Set parameters to avoid overflows and increase accuracy for */
 /*     extreme values. */
 
+#line 233 "NF01BY.f"
     smlnum = dlamch_("Safe minimum", (ftnlen)12) / dlamch_("Precision", (
 	    ftnlen)9);
+#line 234 "NF01BY.f"
     bignum = 1. / smlnum;
+#line 235 "NF01BY.f"
     dlabad_(&smlnum, &bignum);
+#line 236 "NF01BY.f"
     smlnum = log(smlnum);
+#line 237 "NF01BY.f"
     bignum = log(bignum);
 
+#line 239 "NF01BY.f"
     ws = *nz * nn + 1;
+#line 240 "NF01BY.f"
     ib = ws + nn;
+#line 241 "NF01BY.f"
     bp1 = ib + nn;
 
+#line 243 "NF01BY.f"
     j[bp1 * j_dim1 + 1] = 1.;
+#line 244 "NF01BY.f"
     dcopy_(nsmp, &j[bp1 * j_dim1 + 1], &c__0, &j[bp1 * j_dim1 + 1], &c__1);
 
+#line 246 "NF01BY.f"
     i__1 = nn - 1;
+#line 246 "NF01BY.f"
     for (i__ = 0; i__ <= i__1; ++i__) {
+#line 247 "NF01BY.f"
 	dcopy_(nsmp, &wb[ib + i__], &c__0, &j[(ws + i__) * j_dim1 + 1], &c__1)
 		;
+#line 248 "NF01BY.f"
 /* L10: */
+#line 248 "NF01BY.f"
     }
 
+#line 250 "NF01BY.f"
     dgemm_("NoTranspose", "NoTranspose", nsmp, &nn, nz, &c_b15, &z__[z_offset]
 	    , ldz, &wb[1], nz, &c_b15, &j[ws * j_dim1 + 1], ldj, (ftnlen)11, (
 	    ftnlen)11);
+#line 252 "NF01BY.f"
     di = 1;
 
+#line 254 "NF01BY.f"
     i__1 = nn - 1;
+#line 254 "NF01BY.f"
     for (i__ = 0; i__ <= i__1; ++i__) {
 
+#line 256 "NF01BY.f"
 	i__2 = *nsmp;
+#line 256 "NF01BY.f"
 	for (k = 1; k <= i__2; ++k) {
+#line 257 "NF01BY.f"
 	    tmp = j[k + (ws + i__) * j_dim1];
+#line 258 "NF01BY.f"
 	    if (abs(tmp) >= bignum) {
+#line 259 "NF01BY.f"
 		if (tmp > 0.) {
+#line 260 "NF01BY.f"
 		    j[k + (ws + i__) * j_dim1] = -1.;
+#line 261 "NF01BY.f"
 		} else {
+#line 262 "NF01BY.f"
 		    j[k + (ws + i__) * j_dim1] = 1.;
+#line 263 "NF01BY.f"
 		}
+#line 264 "NF01BY.f"
 	    } else if (abs(tmp) <= smlnum) {
+#line 265 "NF01BY.f"
 		j[k + (ws + i__) * j_dim1] = 0.;
+#line 266 "NF01BY.f"
 	    } else {
+#line 267 "NF01BY.f"
 		j[k + (ws + i__) * j_dim1] = 2. / (exp(tmp) + 1.) - 1.;
+#line 268 "NF01BY.f"
 	    }
 /* Computing 2nd power */
+#line 269 "NF01BY.f"
 	    d__1 = j[k + (ws + i__) * j_dim1];
+#line 269 "NF01BY.f"
 	    j[k + (ib + i__) * j_dim1] = wb[ws + i__] * (1. - d__1 * d__1);
+#line 270 "NF01BY.f"
 /* L20: */
+#line 270 "NF01BY.f"
 	}
 
+#line 272 "NF01BY.f"
 	i__2 = *nz - 1;
+#line 272 "NF01BY.f"
 	for (k = 0; k <= i__2; ++k) {
 
+#line 274 "NF01BY.f"
 	    i__3 = *nsmp;
+#line 274 "NF01BY.f"
 	    for (m = 1; m <= i__3; ++m) {
+#line 275 "NF01BY.f"
 		j[m + (di + k) * j_dim1] = j[m + (ib + i__) * j_dim1] * z__[m 
 			+ (k + 1) * z_dim1];
+#line 276 "NF01BY.f"
 /* L30: */
+#line 276 "NF01BY.f"
 	    }
 
+#line 278 "NF01BY.f"
 /* L40: */
+#line 278 "NF01BY.f"
 	}
 
+#line 280 "NF01BY.f"
 	di += *nz;
+#line 281 "NF01BY.f"
 /* L50: */
+#line 281 "NF01BY.f"
     }
 
+#line 283 "NF01BY.f"
     if (wjte) {
 
 /*        Compute J'e. */
 
+#line 287 "NF01BY.f"
 	dgemv_("Transpose", nsmp, &nwb, &c_b22, &j[j_offset], ldj, &e[1], &
 		c__1, &c_b24, &jte[1], &c__1, (ftnlen)9);
+#line 289 "NF01BY.f"
     }
 
+#line 291 "NF01BY.f"
     return 0;
 
 /* *** Last line of NF01BY *** */

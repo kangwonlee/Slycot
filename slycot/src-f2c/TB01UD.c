@@ -1,3 +1,4 @@
+#line 1 "TB01UD.f"
 /* TB01UD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TB01UD.f"
 /* Table of constant values */
 
 static doublereal c_b9 = 0.;
@@ -319,121 +321,205 @@ static logical c_false = FALSE_;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 277 "TB01UD.f"
     /* Parameter adjustments */
+#line 277 "TB01UD.f"
     a_dim1 = *lda;
+#line 277 "TB01UD.f"
     a_offset = 1 + a_dim1;
+#line 277 "TB01UD.f"
     a -= a_offset;
+#line 277 "TB01UD.f"
     b_dim1 = *ldb;
+#line 277 "TB01UD.f"
     b_offset = 1 + b_dim1;
+#line 277 "TB01UD.f"
     b -= b_offset;
+#line 277 "TB01UD.f"
     c_dim1 = *ldc;
+#line 277 "TB01UD.f"
     c_offset = 1 + c_dim1;
+#line 277 "TB01UD.f"
     c__ -= c_offset;
+#line 277 "TB01UD.f"
     --nblk;
+#line 277 "TB01UD.f"
     z_dim1 = *ldz;
+#line 277 "TB01UD.f"
     z_offset = 1 + z_dim1;
+#line 277 "TB01UD.f"
     z__ -= z_offset;
+#line 277 "TB01UD.f"
     --tau;
+#line 277 "TB01UD.f"
     --iwork;
+#line 277 "TB01UD.f"
     --dwork;
+#line 277 "TB01UD.f"
 
+#line 277 "TB01UD.f"
     /* Function Body */
+#line 277 "TB01UD.f"
     *info = 0;
+#line 278 "TB01UD.f"
     ljobf = lsame_(jobz, "F", (ftnlen)1, (ftnlen)1);
+#line 279 "TB01UD.f"
     ljobi = lsame_(jobz, "I", (ftnlen)1, (ftnlen)1);
+#line 280 "TB01UD.f"
     ljobz = ljobf || ljobi;
 
 /*     Test the input scalar arguments. */
 
+#line 284 "TB01UD.f"
     if (! ljobz && ! lsame_(jobz, "N", (ftnlen)1, (ftnlen)1)) {
+#line 285 "TB01UD.f"
 	*info = -1;
+#line 286 "TB01UD.f"
     } else if (*n < 0) {
+#line 287 "TB01UD.f"
 	*info = -2;
+#line 288 "TB01UD.f"
     } else if (*m < 0) {
+#line 289 "TB01UD.f"
 	*info = -3;
+#line 290 "TB01UD.f"
     } else if (*p < 0) {
+#line 291 "TB01UD.f"
 	*info = -4;
+#line 292 "TB01UD.f"
     } else if (*lda < max(1,*n)) {
+#line 293 "TB01UD.f"
 	*info = -6;
+#line 294 "TB01UD.f"
     } else if (*ldb < max(1,*n)) {
+#line 295 "TB01UD.f"
 	*info = -8;
+#line 296 "TB01UD.f"
     } else if (*ldc < max(1,*p)) {
+#line 297 "TB01UD.f"
 	*info = -10;
+#line 298 "TB01UD.f"
     } else if (! ljobz && *ldz < 1 || ljobz && *ldz < max(1,*n)) {
+#line 300 "TB01UD.f"
 	*info = -15;
+#line 301 "TB01UD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 301 "TB01UD.f"
 	i__1 = max(1,*n), i__2 = *m * 3, i__1 = max(i__1,i__2);
+#line 301 "TB01UD.f"
 	if (*ldwork < max(i__1,*p)) {
+#line 302 "TB01UD.f"
 	    *info = -20;
+#line 303 "TB01UD.f"
 	}
+#line 303 "TB01UD.f"
     }
 
+#line 305 "TB01UD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 309 "TB01UD.f"
 	i__1 = -(*info);
+#line 309 "TB01UD.f"
 	xerbla_("TB01UD", &i__1, (ftnlen)6);
+#line 310 "TB01UD.f"
 	return 0;
+#line 311 "TB01UD.f"
     }
 
+#line 313 "TB01UD.f"
     *ncont = 0;
+#line 314 "TB01UD.f"
     *indcon = 0;
 
 /*     Calculate the absolute norms of A and B (used for scaling). */
 
+#line 318 "TB01UD.f"
     anorm = dlange_("M", n, n, &a[a_offset], lda, &dwork[1], (ftnlen)1);
+#line 319 "TB01UD.f"
     bnorm = dlange_("M", n, m, &b[b_offset], ldb, &dwork[1], (ftnlen)1);
 
 /*     Quick return if possible. */
 
+#line 323 "TB01UD.f"
     if (min(*n,*m) == 0 || bnorm == 0.) {
+#line 324 "TB01UD.f"
 	if (*n > 0) {
+#line 325 "TB01UD.f"
 	    if (ljobi) {
+#line 326 "TB01UD.f"
 		dlaset_("Full", n, n, &c_b9, &c_b10, &z__[z_offset], ldz, (
 			ftnlen)4);
+#line 327 "TB01UD.f"
 	    } else if (ljobf) {
+#line 328 "TB01UD.f"
 		dlaset_("Full", n, n, &c_b9, &c_b9, &z__[z_offset], ldz, (
 			ftnlen)4);
+#line 329 "TB01UD.f"
 		dlaset_("Full", n, &c__1, &c_b9, &c_b9, &tau[1], n, (ftnlen)4)
 			;
+#line 330 "TB01UD.f"
 	    }
+#line 331 "TB01UD.f"
 	}
+#line 332 "TB01UD.f"
 	dwork[1] = 1.;
+#line 333 "TB01UD.f"
 	return 0;
+#line 334 "TB01UD.f"
     }
 
 /*     Scale (if needed) the matrices A and B. */
 
+#line 338 "TB01UD.f"
     mb01pd_("S", "G", n, n, &c__0, &c__0, &anorm, &c__0, &nblk[1], &a[
 	    a_offset], lda, info, (ftnlen)1, (ftnlen)1);
+#line 339 "TB01UD.f"
     mb01pd_("S", "G", n, m, &c__0, &c__0, &bnorm, &c__0, &nblk[1], &b[
 	    b_offset], ldb, info, (ftnlen)1, (ftnlen)1);
 
 /*     Compute the Frobenius norm of [ B  A ] (used for rank estimation). */
 
+#line 343 "TB01UD.f"
     d__1 = dlange_("F", n, m, &b[b_offset], ldb, &dwork[1], (ftnlen)1);
+#line 343 "TB01UD.f"
     d__2 = dlange_("F", n, n, &a[a_offset], lda, &dwork[1], (ftnlen)1);
+#line 343 "TB01UD.f"
     fnrm = dlapy2_(&d__1, &d__2);
 
+#line 346 "TB01UD.f"
     toldef = *tol;
+#line 347 "TB01UD.f"
     if (toldef <= 0.) {
 
 /*        Use the default tolerance in controllability determination. */
 
+#line 351 "TB01UD.f"
 	toldef = (doublereal) (*n * *n) * dlamch_("EPSILON", (ftnlen)7);
+#line 352 "TB01UD.f"
     }
 
+#line 354 "TB01UD.f"
     if (fnrm < toldef) {
+#line 354 "TB01UD.f"
 	fnrm = 1.;
+#line 354 "TB01UD.f"
     }
 
+#line 357 "TB01UD.f"
     wrkopt = 1;
+#line 358 "TB01UD.f"
     ni = 0;
+#line 359 "TB01UD.f"
     itau = 1;
+#line 360 "TB01UD.f"
     ncrt = *n;
+#line 361 "TB01UD.f"
     mcrt = *m;
+#line 362 "TB01UD.f"
     iqr = 1;
 
 /*     (Note: Comments in the code beginning "Workspace:" describe the */
@@ -442,6 +528,7 @@ static logical c_false = FALSE_;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 370 "TB01UD.f"
 L10:
 
 /*        Rank-revealing QR decomposition with column pivoting. */
@@ -449,14 +536,21 @@ L10:
 /*        the row IQR (initialized to 1 and then set to rank(B)+1). */
 /*        Workspace: 3*MCRT. */
 
+#line 377 "TB01UD.f"
     mb03oy_(&ncrt, &mcrt, &b[iqr + b_dim1], ldb, &toldef, &fnrm, &rank, sval, 
 	    &iwork[1], &tau[itau], &dwork[1], info);
 
+#line 380 "TB01UD.f"
     if (rank != 0) {
+#line 381 "TB01UD.f"
 	nj = ni;
+#line 382 "TB01UD.f"
 	ni = *ncont;
+#line 383 "TB01UD.f"
 	*ncont += rank;
+#line 384 "TB01UD.f"
 	++(*indcon);
+#line 385 "TB01UD.f"
 	nblk[*indcon] = rank;
 
 /*           Premultiply and postmultiply the appropriate block row */
@@ -464,126 +558,192 @@ L10:
 /*           Workspace: need   NCRT; */
 /*                      prefer NCRT*NB. */
 
+#line 392 "TB01UD.f"
 	dormqr_("Left", "Transpose", &ncrt, &ncrt, &rank, &b[iqr + b_dim1], 
 		ldb, &tau[itau], &a[ni + 1 + (ni + 1) * a_dim1], lda, &dwork[
 		1], ldwork, info, (ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 395 "TB01UD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 395 "TB01UD.f"
 	wrkopt = max(i__1,i__2);
 
 /*           Workspace: need   N; */
 /*                      prefer N*NB. */
 
+#line 400 "TB01UD.f"
 	dormqr_("Right", "No transpose", n, &ncrt, &rank, &b[iqr + b_dim1], 
 		ldb, &tau[itau], &a[(ni + 1) * a_dim1 + 1], lda, &dwork[1], 
 		ldwork, info, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 403 "TB01UD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 403 "TB01UD.f"
 	wrkopt = max(i__1,i__2);
 
 /*           Postmultiply the appropriate block column of C by Q. */
 /*           Workspace: need   P; */
 /*                      prefer P*NB. */
 
+#line 409 "TB01UD.f"
 	dormqr_("Right", "No transpose", p, &ncrt, &rank, &b[iqr + b_dim1], 
 		ldb, &tau[itau], &c__[(ni + 1) * c_dim1 + 1], ldc, &dwork[1], 
 		ldwork, info, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 412 "TB01UD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 412 "TB01UD.f"
 	wrkopt = max(i__1,i__2);
 
 /*           If required, save transformations. */
 
+#line 416 "TB01UD.f"
 	if (ljobz && ncrt > 1) {
+#line 417 "TB01UD.f"
 	    i__1 = ncrt - 1;
 /* Computing MIN */
+#line 417 "TB01UD.f"
 	    i__3 = rank, i__4 = ncrt - 1;
+#line 417 "TB01UD.f"
 	    i__2 = min(i__3,i__4);
+#line 417 "TB01UD.f"
 	    dlacpy_("L", &i__1, &i__2, &b[iqr + 1 + b_dim1], ldb, &z__[ni + 2 
 		    + itau * z_dim1], ldz, (ftnlen)1);
+#line 419 "TB01UD.f"
 	}
 
 /*           Zero the subdiagonal elements of the current matrix. */
 
+#line 423 "TB01UD.f"
 	if (rank > 1) {
+#line 423 "TB01UD.f"
 	    i__1 = rank - 1;
+#line 423 "TB01UD.f"
 	    i__2 = rank - 1;
+#line 423 "TB01UD.f"
 	    dlaset_("L", &i__1, &i__2, &c_b9, &c_b9, &b[iqr + 1 + b_dim1], 
 		    ldb, (ftnlen)1);
+#line 423 "TB01UD.f"
 	}
 
 /*           Backward permutation of the columns of B or A. */
 
+#line 429 "TB01UD.f"
 	if (*indcon == 1) {
+#line 430 "TB01UD.f"
 	    dlapmt_(&c_false, &rank, m, &b[iqr + b_dim1], ldb, &iwork[1]);
+#line 431 "TB01UD.f"
 	    iqr = rank + 1;
+#line 432 "TB01UD.f"
 	} else {
+#line 433 "TB01UD.f"
 	    i__1 = mcrt;
+#line 433 "TB01UD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 434 "TB01UD.f"
 		dcopy_(&rank, &b[iqr + j * b_dim1], &c__1, &a[ni + 1 + (nj + 
 			iwork[j]) * a_dim1], &c__1);
+#line 436 "TB01UD.f"
 /* L20: */
+#line 436 "TB01UD.f"
 	    }
+#line 437 "TB01UD.f"
 	}
 
+#line 439 "TB01UD.f"
 	itau += rank;
+#line 440 "TB01UD.f"
 	if (rank != ncrt) {
+#line 441 "TB01UD.f"
 	    mcrt = rank;
+#line 442 "TB01UD.f"
 	    ncrt -= rank;
+#line 443 "TB01UD.f"
 	    dlacpy_("G", &ncrt, &mcrt, &a[*ncont + 1 + (ni + 1) * a_dim1], 
 		    lda, &b[iqr + b_dim1], ldb, (ftnlen)1);
+#line 445 "TB01UD.f"
 	    dlaset_("G", &ncrt, &mcrt, &c_b9, &c_b9, &a[*ncont + 1 + (ni + 1) 
 		    * a_dim1], lda, (ftnlen)1);
+#line 447 "TB01UD.f"
 	    goto L10;
+#line 448 "TB01UD.f"
 	}
+#line 449 "TB01UD.f"
     }
 
 /*     If required, accumulate transformations. */
 /*     Workspace: need N;  prefer N*NB. */
 
+#line 454 "TB01UD.f"
     if (ljobi) {
+#line 455 "TB01UD.f"
 	i__1 = itau - 1;
+#line 455 "TB01UD.f"
 	dorgqr_(n, n, &i__1, &z__[z_offset], ldz, &tau[1], &dwork[1], ldwork, 
 		info);
 /* Computing MAX */
+#line 457 "TB01UD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 457 "TB01UD.f"
 	wrkopt = max(i__1,i__2);
+#line 458 "TB01UD.f"
     }
 
 /*     Annihilate the trailing blocks of B. */
 
+#line 462 "TB01UD.f"
     if (iqr <= *n) {
+#line 462 "TB01UD.f"
 	i__1 = *n - iqr + 1;
+#line 462 "TB01UD.f"
 	dlaset_("G", &i__1, m, &c_b9, &c_b9, &b[iqr + b_dim1], ldb, (ftnlen)1)
 		;
+#line 462 "TB01UD.f"
     }
 
 /*     Annihilate the trailing elements of TAU, if JOBZ = 'F'. */
 
+#line 467 "TB01UD.f"
     if (ljobf) {
+#line 468 "TB01UD.f"
 	i__1 = *n;
+#line 468 "TB01UD.f"
 	for (j = itau; j <= i__1; ++j) {
+#line 469 "TB01UD.f"
 	    tau[j] = 0.;
+#line 470 "TB01UD.f"
 /* L30: */
+#line 470 "TB01UD.f"
 	}
+#line 471 "TB01UD.f"
     }
 
 /*     Undo scaling of A and B. */
 
+#line 475 "TB01UD.f"
     if (*indcon < *n) {
+#line 476 "TB01UD.f"
 	nbl = *indcon + 1;
+#line 477 "TB01UD.f"
 	nblk[nbl] = *n - *ncont;
+#line 478 "TB01UD.f"
     } else {
+#line 479 "TB01UD.f"
 	nbl = 0;
+#line 480 "TB01UD.f"
     }
+#line 481 "TB01UD.f"
     mb01pd_("U", "H", n, n, &c__0, &c__0, &anorm, &nbl, &nblk[1], &a[a_offset]
 	    , lda, info, (ftnlen)1, (ftnlen)1);
+#line 483 "TB01UD.f"
     mb01pd_("U", "G", &nblk[1], m, &c__0, &c__0, &bnorm, &c__0, &nblk[1], &b[
 	    b_offset], ldb, info, (ftnlen)1, (ftnlen)1);
 
 /*     Set optimal workspace dimension. */
 
+#line 488 "TB01UD.f"
     dwork[1] = (doublereal) wrkopt;
+#line 489 "TB01UD.f"
     return 0;
 /* *** Last line of TB01UD *** */
 } /* tb01ud_ */

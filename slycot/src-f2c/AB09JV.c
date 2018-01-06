@@ -1,3 +1,4 @@
+#line 1 "AB09JV.f"
 /* AB09JV.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB09JV.f"
 /* Table of constant values */
 
 static doublereal c_b17 = -1.;
@@ -436,154 +438,271 @@ static integer c__0 = 0;
 
 /*     .. Executable Statements .. */
 
+#line 373 "AB09JV.f"
     /* Parameter adjustments */
+#line 373 "AB09JV.f"
     a_dim1 = *lda;
+#line 373 "AB09JV.f"
     a_offset = 1 + a_dim1;
+#line 373 "AB09JV.f"
     a -= a_offset;
+#line 373 "AB09JV.f"
     b_dim1 = *ldb;
+#line 373 "AB09JV.f"
     b_offset = 1 + b_dim1;
+#line 373 "AB09JV.f"
     b -= b_offset;
+#line 373 "AB09JV.f"
     c_dim1 = *ldc;
+#line 373 "AB09JV.f"
     c_offset = 1 + c_dim1;
+#line 373 "AB09JV.f"
     c__ -= c_offset;
+#line 373 "AB09JV.f"
     d_dim1 = *ldd;
+#line 373 "AB09JV.f"
     d_offset = 1 + d_dim1;
+#line 373 "AB09JV.f"
     d__ -= d_offset;
+#line 373 "AB09JV.f"
     av_dim1 = *ldav;
+#line 373 "AB09JV.f"
     av_offset = 1 + av_dim1;
+#line 373 "AB09JV.f"
     av -= av_offset;
+#line 373 "AB09JV.f"
     ev_dim1 = *ldev;
+#line 373 "AB09JV.f"
     ev_offset = 1 + ev_dim1;
+#line 373 "AB09JV.f"
     ev -= ev_offset;
+#line 373 "AB09JV.f"
     bv_dim1 = *ldbv;
+#line 373 "AB09JV.f"
     bv_offset = 1 + bv_dim1;
+#line 373 "AB09JV.f"
     bv -= bv_offset;
+#line 373 "AB09JV.f"
     cv_dim1 = *ldcv;
+#line 373 "AB09JV.f"
     cv_offset = 1 + cv_dim1;
+#line 373 "AB09JV.f"
     cv -= cv_offset;
+#line 373 "AB09JV.f"
     dv_dim1 = *lddv;
+#line 373 "AB09JV.f"
     dv_offset = 1 + dv_dim1;
+#line 373 "AB09JV.f"
     dv -= dv_offset;
+#line 373 "AB09JV.f"
     --iwork;
+#line 373 "AB09JV.f"
     --dwork;
+#line 373 "AB09JV.f"
 
+#line 373 "AB09JV.f"
     /* Function Body */
+#line 373 "AB09JV.f"
     conjs = lsame_(job, "C", (ftnlen)1, (ftnlen)1);
+#line 374 "AB09JV.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 375 "AB09JV.f"
     unitev = lsame_(jobev, "I", (ftnlen)1, (ftnlen)1);
+#line 376 "AB09JV.f"
     stabck = lsame_(stbchk, "C", (ftnlen)1, (ftnlen)1);
 
+#line 378 "AB09JV.f"
     *info = 0;
+#line 379 "AB09JV.f"
     if (unitev) {
+#line 380 "AB09JV.f"
 	if (discr && conjs) {
+#line 381 "AB09JV.f"
 	    ia = *nv << 1;
+#line 382 "AB09JV.f"
 	} else {
+#line 383 "AB09JV.f"
 	    ia = 0;
+#line 384 "AB09JV.f"
 	}
 /* Computing MAX */
 /* Computing MAX */
+#line 385 "AB09JV.f"
 	i__3 = ia, i__4 = *pv * *n, i__3 = max(i__3,i__4), i__4 = *pv * *m;
+#line 385 "AB09JV.f"
 	i__1 = 1, i__2 = *nv * (*nv + 5), i__1 = max(i__1,i__2), i__2 = *nv * 
 		*n + max(i__3,i__4);
+#line 385 "AB09JV.f"
 	lw = max(i__1,i__2);
+#line 386 "AB09JV.f"
     } else {
 /* Computing MAX */
 /* Computing MAX */
+#line 387 "AB09JV.f"
 	i__3 = *nv * 11 + 16, i__4 = *p * *nv, i__3 = max(i__3,i__4), i__4 = *
 		pv * *nv;
 /* Computing MAX */
+#line 387 "AB09JV.f"
 	i__5 = *nv * *n + *n * *n, i__6 = *pv * *n, i__5 = max(i__5,i__6), 
 		i__6 = *pv * *m;
+#line 387 "AB09JV.f"
 	i__1 = (*nv << 1) * *nv + max(i__3,i__4), i__2 = *nv * *n + max(i__5,
 		i__6);
+#line 387 "AB09JV.f"
 	lw = max(i__1,i__2);
+#line 389 "AB09JV.f"
     }
 
 /*     Test the input scalar arguments. */
 
+#line 393 "AB09JV.f"
     ldwn = max(1,*n);
+#line 394 "AB09JV.f"
     ldw = max(1,*nv);
+#line 395 "AB09JV.f"
     if (! (lsame_(job, "V", (ftnlen)1, (ftnlen)1) || conjs)) {
+#line 396 "AB09JV.f"
 	*info = -1;
+#line 397 "AB09JV.f"
     } else if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 398 "AB09JV.f"
 	*info = -2;
+#line 399 "AB09JV.f"
     } else if (! (lsame_(jobev, "G", (ftnlen)1, (ftnlen)1) || unitev)) {
+#line 400 "AB09JV.f"
 	*info = -3;
+#line 401 "AB09JV.f"
     } else if (! (lsame_(stbchk, "N", (ftnlen)1, (ftnlen)1) || stabck)) {
+#line 402 "AB09JV.f"
 	*info = -4;
+#line 403 "AB09JV.f"
     } else if (*n < 0) {
+#line 404 "AB09JV.f"
 	*info = -5;
+#line 405 "AB09JV.f"
     } else if (*m < 0) {
+#line 406 "AB09JV.f"
 	*info = -6;
+#line 407 "AB09JV.f"
     } else if (*p < 0) {
+#line 408 "AB09JV.f"
 	*info = -7;
+#line 409 "AB09JV.f"
     } else if (*nv < 0) {
+#line 410 "AB09JV.f"
 	*info = -8;
+#line 411 "AB09JV.f"
     } else if (*pv < 0) {
+#line 412 "AB09JV.f"
 	*info = -9;
+#line 413 "AB09JV.f"
     } else if (*lda < ldwn) {
+#line 414 "AB09JV.f"
 	*info = -11;
+#line 415 "AB09JV.f"
     } else if (*ldb < ldwn) {
+#line 416 "AB09JV.f"
 	*info = -13;
+#line 417 "AB09JV.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 417 "AB09JV.f"
 	i__1 = max(1,*p);
+#line 417 "AB09JV.f"
 	if (*ldc < max(i__1,*pv)) {
+#line 418 "AB09JV.f"
 	    *info = -15;
+#line 419 "AB09JV.f"
 	} else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 419 "AB09JV.f"
 	    i__1 = max(1,*p);
+#line 419 "AB09JV.f"
 	    if (*ldd < max(i__1,*pv)) {
+#line 420 "AB09JV.f"
 		*info = -17;
+#line 421 "AB09JV.f"
 	    } else if (*ldav < ldw) {
+#line 422 "AB09JV.f"
 		*info = -19;
+#line 423 "AB09JV.f"
 	    } else if (*ldev < 1 || ! unitev && *ldev < *nv) {
+#line 424 "AB09JV.f"
 		*info = -21;
+#line 425 "AB09JV.f"
 	    } else if (*ldbv < ldw) {
+#line 426 "AB09JV.f"
 		*info = -23;
+#line 427 "AB09JV.f"
 	    } else if (! conjs && *ldcv < max(1,*pv) || conjs && *ldcv < max(
 		    1,*p)) {
+#line 429 "AB09JV.f"
 		*info = -25;
+#line 430 "AB09JV.f"
 	    } else if (! conjs && *lddv < max(1,*pv) || conjs && *lddv < max(
 		    1,*p)) {
+#line 432 "AB09JV.f"
 		*info = -27;
+#line 433 "AB09JV.f"
 	    } else if (*ldwork < lw) {
+#line 434 "AB09JV.f"
 		*info = -30;
+#line 435 "AB09JV.f"
 	    }
+#line 435 "AB09JV.f"
 	}
+#line 435 "AB09JV.f"
     }
 
+#line 437 "AB09JV.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 441 "AB09JV.f"
 	i__1 = -(*info);
+#line 441 "AB09JV.f"
 	xerbla_("AB09JV", &i__1, (ftnlen)6);
+#line 442 "AB09JV.f"
 	return 0;
+#line 443 "AB09JV.f"
     }
 
 /*     Quick return if possible. */
 
+#line 447 "AB09JV.f"
     if (*p == 0 || *pv == 0) {
+#line 448 "AB09JV.f"
 	dwork[1] = 1.;
+#line 449 "AB09JV.f"
 	return 0;
+#line 450 "AB09JV.f"
     }
 
 /*     Set options for stability/antistability checking. */
 
+#line 454 "AB09JV.f"
     if (discr) {
+#line 455 "AB09JV.f"
 	alpha = 1.;
+#line 456 "AB09JV.f"
     } else {
+#line 457 "AB09JV.f"
 	alpha = 0.;
+#line 458 "AB09JV.f"
     }
 
+#line 460 "AB09JV.f"
     work = 1.;
+#line 461 "AB09JV.f"
     tolinf = dlamch_("Epsilon", (ftnlen)7);
 
+#line 463 "AB09JV.f"
     if (unitev) {
 
 /*        EV is the identity matrix. */
 
+#line 467 "AB09JV.f"
 	if (*nv > 0) {
 
 /*           Reduce AV to the real Schur form using an orthogonal */
@@ -593,46 +712,74 @@ static integer c__0 = 0;
 /*           Workspace needed:  NV*(NV+5); */
 /*                              prefer larger. */
 
+#line 476 "AB09JV.f"
 	    kw = *nv * (*nv + 2) + 1;
+#line 477 "AB09JV.f"
 	    if (conjs) {
+#line 478 "AB09JV.f"
 		*(unsigned char *)stdom = 'S';
+#line 479 "AB09JV.f"
 		alpha += sqrt(tolinf);
+#line 480 "AB09JV.f"
 		i__1 = *ldwork - kw + 1;
+#line 480 "AB09JV.f"
 		tb01wd_(nv, pv, p, &av[av_offset], ldav, &bv[bv_offset], ldbv,
 			 &cv[cv_offset], ldcv, &dwork[(*nv << 1) + 1], nv, &
 			dwork[1], &dwork[*nv + 1], &dwork[kw], &i__1, &ierr);
+#line 483 "AB09JV.f"
 	    } else {
+#line 484 "AB09JV.f"
 		*(unsigned char *)stdom = 'U';
+#line 485 "AB09JV.f"
 		alpha -= sqrt(tolinf);
+#line 486 "AB09JV.f"
 		i__1 = *ldwork - kw + 1;
+#line 486 "AB09JV.f"
 		tb01wd_(nv, p, pv, &av[av_offset], ldav, &bv[bv_offset], ldbv,
 			 &cv[cv_offset], ldcv, &dwork[(*nv << 1) + 1], nv, &
 			dwork[1], &dwork[*nv + 1], &dwork[kw], &i__1, &ierr);
+#line 489 "AB09JV.f"
 	    }
+#line 490 "AB09JV.f"
 	    if (ierr != 0) {
+#line 491 "AB09JV.f"
 		*info = 1;
+#line 492 "AB09JV.f"
 		return 0;
+#line 493 "AB09JV.f"
 	    }
+#line 494 "AB09JV.f"
 	    if (stabck) {
 
 /*              Check stability/antistability of eigenvalues of AV. */
 
+#line 498 "AB09JV.f"
 		ab09jx_(dico, stdom, "S", nv, &alpha, &dwork[1], &dwork[*nv + 
 			1], &dwork[1], &tolinf, &ierr, (ftnlen)1, (ftnlen)1, (
 			ftnlen)1);
+#line 500 "AB09JV.f"
 		if (ierr != 0) {
+#line 501 "AB09JV.f"
 		    *info = 4;
+#line 502 "AB09JV.f"
 		    return 0;
+#line 503 "AB09JV.f"
 		}
+#line 504 "AB09JV.f"
 	    }
 
 /* Computing MAX */
+#line 506 "AB09JV.f"
 	    d__1 = work, d__2 = dwork[kw] + (doublereal) (kw - 1);
+#line 506 "AB09JV.f"
 	    work = max(d__1,d__2);
 
+#line 508 "AB09JV.f"
 	}
 
+#line 510 "AB09JV.f"
 	kw = *nv * *n + 1;
+#line 511 "AB09JV.f"
 	if (conjs) {
 
 /*           Compute the projection of conj(V)*G. */
@@ -644,10 +791,12 @@ static integer c__0 = 0;
 /*           Compute -CV'*C. */
 /*           Workspace needed: NV*N. */
 
+#line 522 "AB09JV.f"
 	    dgemm_("T", "N", nv, n, p, &c_b17, &cv[cv_offset], ldcv, &c__[
 		    c_offset], ldc, &c_b18, &dwork[1], &ldw, (ftnlen)1, (
 		    ftnlen)1);
 
+#line 525 "AB09JV.f"
 	    if (discr) {
 
 /*              Compute X and SCALE satisfying */
@@ -656,12 +805,17 @@ static integer c__0 = 0;
 
 /*              Additional workspace needed: 2*NV. */
 
+#line 533 "AB09JV.f"
 		sb04py_("T", "N", &c_n1, nv, n, &av[av_offset], ldav, &a[
 			a_offset], lda, &dwork[1], &ldw, &scale, &dwork[kw], &
 			ierr, (ftnlen)1, (ftnlen)1);
+#line 535 "AB09JV.f"
 		if (ierr != 0) {
+#line 536 "AB09JV.f"
 		    *info = 3;
+#line 537 "AB09JV.f"
 		    return 0;
+#line 538 "AB09JV.f"
 		}
 
 /*              Construct CS = DV'*C + BV'*X*A/SCALE, */
@@ -671,49 +825,65 @@ static integer c__0 = 0;
 
 /*              C <- DV'*C. */
 
+#line 547 "AB09JV.f"
 		dgemm_("T", "N", pv, n, p, &c_b24, &dv[dv_offset], lddv, &c__[
 			c_offset], ldc, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 			ftnlen)1);
+#line 549 "AB09JV.f"
 		dlacpy_("Full", pv, n, &dwork[kw], pv, &c__[c_offset], ldc, (
 			ftnlen)4);
 
 /*              D <- DV'*D. */
 
+#line 553 "AB09JV.f"
 		dgemm_("T", "N", pv, m, p, &c_b24, &dv[dv_offset], lddv, &d__[
 			d_offset], ldd, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 			ftnlen)1);
+#line 555 "AB09JV.f"
 		dlacpy_("Full", pv, m, &dwork[kw], pv, &d__[d_offset], ldd, (
 			ftnlen)4);
 
 /*              C <- C + BV'*X*A/SCALE. */
 
+#line 559 "AB09JV.f"
 		d__1 = 1. / scale;
+#line 559 "AB09JV.f"
 		dgemm_("T", "N", pv, n, nv, &d__1, &bv[bv_offset], ldbv, &
 			dwork[1], &ldw, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 			ftnlen)1);
+#line 561 "AB09JV.f"
 		dgemm_("N", "N", pv, n, n, &c_b24, &dwork[kw], pv, &a[
 			a_offset], lda, &c_b24, &c__[c_offset], ldc, (ftnlen)
 			1, (ftnlen)1);
 
 /*              D <- D + BV'*X*B/SCALE. */
 
+#line 566 "AB09JV.f"
 		dgemm_("N", "N", pv, m, n, &c_b24, &dwork[kw], pv, &b[
 			b_offset], ldb, &c_b24, &d__[d_offset], ldd, (ftnlen)
 			1, (ftnlen)1);
+#line 568 "AB09JV.f"
 	    } else {
 
 /*              Compute X and SCALE satisfying */
 
 /*              AV'*X + X*A + SCALE*CV'*C = 0. */
 
+#line 574 "AB09JV.f"
 		if (*n > 0) {
+#line 575 "AB09JV.f"
 		    dtrsyl_("T", "N", &c__1, nv, n, &av[av_offset], ldav, &a[
 			    a_offset], lda, &dwork[1], &ldw, &scale, &ierr, (
 			    ftnlen)1, (ftnlen)1);
+#line 577 "AB09JV.f"
 		    if (ierr != 0) {
+#line 578 "AB09JV.f"
 			*info = 3;
+#line 579 "AB09JV.f"
 			return 0;
+#line 580 "AB09JV.f"
 		    }
+#line 581 "AB09JV.f"
 		}
 
 /*              Construct CS = DV'*C + BV'*X/SCALE, */
@@ -722,24 +892,32 @@ static integer c__0 = 0;
 
 /*              Construct C <- DV'*C + BV'*X/SCALE. */
 
+#line 589 "AB09JV.f"
 		dgemm_("T", "N", pv, n, p, &c_b24, &dv[dv_offset], lddv, &c__[
 			c_offset], ldc, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 			ftnlen)1);
+#line 591 "AB09JV.f"
 		dlacpy_("Full", pv, n, &dwork[kw], pv, &c__[c_offset], ldc, (
 			ftnlen)4);
+#line 592 "AB09JV.f"
 		d__1 = 1. / scale;
+#line 592 "AB09JV.f"
 		dgemm_("T", "N", pv, n, nv, &d__1, &bv[bv_offset], ldbv, &
 			dwork[1], &ldw, &c_b24, &c__[c_offset], ldc, (ftnlen)
 			1, (ftnlen)1);
 
 /*              Construct D <- DV'*D. */
 
+#line 597 "AB09JV.f"
 		dgemm_("T", "N", pv, m, p, &c_b24, &dv[dv_offset], lddv, &d__[
 			d_offset], ldd, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 			ftnlen)1);
+#line 599 "AB09JV.f"
 		dlacpy_("Full", pv, m, &dwork[kw], pv, &d__[d_offset], ldd, (
 			ftnlen)4);
+#line 600 "AB09JV.f"
 	    }
+#line 601 "AB09JV.f"
 	} else {
 
 /*           Compute the projection of V*G. */
@@ -749,6 +927,7 @@ static integer c__0 = 0;
 /*           Compute -BV*C. */
 /*           Workspace needed: NV*N. */
 
+#line 610 "AB09JV.f"
 	    dgemm_("N", "N", nv, n, p, &c_b17, &bv[bv_offset], ldbv, &c__[
 		    c_offset], ldc, &c_b18, &dwork[1], &ldw, (ftnlen)1, (
 		    ftnlen)1);
@@ -757,14 +936,21 @@ static integer c__0 = 0;
 
 /*           AV*X - X*A + SCALE*BV*C = 0. */
 
+#line 617 "AB09JV.f"
 	    if (*n > 0) {
+#line 618 "AB09JV.f"
 		dtrsyl_("N", "N", &c_n1, nv, n, &av[av_offset], ldav, &a[
 			a_offset], lda, &dwork[1], &ldw, &scale, &ierr, (
 			ftnlen)1, (ftnlen)1);
+#line 620 "AB09JV.f"
 		if (ierr != 0) {
+#line 621 "AB09JV.f"
 		    *info = 3;
+#line 622 "AB09JV.f"
 		    return 0;
+#line 623 "AB09JV.f"
 		}
+#line 624 "AB09JV.f"
 	    }
 
 /*           Construct CS = DV*C + CV*X/SCALE, */
@@ -773,29 +959,39 @@ static integer c__0 = 0;
 
 /*           Construct C <- DV*C + CV*X/SCALE. */
 
+#line 632 "AB09JV.f"
 	    dgemm_("N", "N", pv, n, p, &c_b24, &dv[dv_offset], lddv, &c__[
 		    c_offset], ldc, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 		    ftnlen)1);
+#line 634 "AB09JV.f"
 	    dlacpy_("Full", pv, n, &dwork[kw], pv, &c__[c_offset], ldc, (
 		    ftnlen)4);
+#line 635 "AB09JV.f"
 	    d__1 = 1. / scale;
+#line 635 "AB09JV.f"
 	    dgemm_("N", "N", pv, n, nv, &d__1, &cv[cv_offset], ldcv, &dwork[1]
 		    , &ldw, &c_b24, &c__[c_offset], ldc, (ftnlen)1, (ftnlen)1)
 		    ;
 
 /*           Construct D <- DV*D. */
 
+#line 640 "AB09JV.f"
 	    dgemm_("N", "N", pv, m, p, &c_b24, &dv[dv_offset], lddv, &d__[
 		    d_offset], ldd, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 		    ftnlen)1);
+#line 642 "AB09JV.f"
 	    dlacpy_("Full", pv, m, &dwork[kw], pv, &d__[d_offset], ldd, (
 		    ftnlen)4);
+#line 643 "AB09JV.f"
 	}
+#line 644 "AB09JV.f"
     } else {
 
 /*        EV is a general matrix. */
 
+#line 648 "AB09JV.f"
 	if (*nv > 0) {
+#line 649 "AB09JV.f"
 	    tolinf *= dlange_("1", nv, nv, &ev[ev_offset], ldev, &dwork[1], (
 		    ftnlen)1);
 
@@ -807,30 +1003,48 @@ static integer c__0 = 0;
 /*           Workspace needed:  2*NV*NV + MAX( 11*NV+16, NV*P, NV*PV ); */
 /*                              prefer larger. */
 
+#line 659 "AB09JV.f"
 	    kq = 1;
+#line 660 "AB09JV.f"
 	    kz = kq + *nv * *nv;
+#line 661 "AB09JV.f"
 	    kar = kz + *nv * *nv;
+#line 662 "AB09JV.f"
 	    kai = kar + *nv;
+#line 663 "AB09JV.f"
 	    kb = kai + *nv;
+#line 664 "AB09JV.f"
 	    kw = kb + *nv;
 
+#line 666 "AB09JV.f"
 	    if (conjs) {
+#line 667 "AB09JV.f"
 		*(unsigned char *)stdom = 'S';
+#line 668 "AB09JV.f"
 		alpha += sqrt(tolinf);
 
 /*              Transpose AV and EV, if non-scalar. */
 
+#line 672 "AB09JV.f"
 		i__1 = *nv - 1;
+#line 672 "AB09JV.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 673 "AB09JV.f"
 		    i__2 = *nv - i__;
+#line 673 "AB09JV.f"
 		    dswap_(&i__2, &av[i__ + 1 + i__ * av_dim1], &c__1, &av[
 			    i__ + (i__ + 1) * av_dim1], ldav);
+#line 674 "AB09JV.f"
 		    i__2 = *nv - i__;
+#line 674 "AB09JV.f"
 		    dswap_(&i__2, &ev[i__ + 1 + i__ * ev_dim1], &c__1, &ev[
 			    i__ + (i__ + 1) * ev_dim1], ldev);
+#line 675 "AB09JV.f"
 /* L10: */
+#line 675 "AB09JV.f"
 		}
 
+#line 677 "AB09JV.f"
 		if (discr) {
 
 /*                 Reduce (EV',AV') to a generalized real Schur form */
@@ -839,14 +1053,18 @@ static integer c__0 = 0;
 /*                 and Q'*AV'*Z results upper triangular. */
 /*                 Total workspace needed: 2*NV*NV + 11*NV + 16. */
 
+#line 685 "AB09JV.f"
 		    *(unsigned char *)evtype = 'R';
+#line 686 "AB09JV.f"
 		    i__1 = *ldwork - kw + 1;
+#line 686 "AB09JV.f"
 		    dgges_("Vectors", "Vectors", "Not ordered", (L_fp)delctg_,
 			     nv, &ev[ev_offset], ldev, &av[av_offset], ldav, &
 			    sdim, &dwork[kar], &dwork[kai], &dwork[kb], &
 			    dwork[kq], &ldw, &dwork[kz], &ldw, &dwork[kw], &
 			    i__1, bwork, &ierr, (ftnlen)7, (ftnlen)7, (ftnlen)
 			    11);
+#line 691 "AB09JV.f"
 		} else {
 
 /*                 Reduce (AV',EV') to a generalized real Schur form */
@@ -855,50 +1073,73 @@ static integer c__0 = 0;
 /*                 and Q'*EV'*Z results upper triangular. */
 /*                 Total workspace needed: 2*NV*NV + 11*NV + 16. */
 
+#line 699 "AB09JV.f"
 		    *(unsigned char *)evtype = 'G';
+#line 700 "AB09JV.f"
 		    i__1 = *ldwork - kw + 1;
+#line 700 "AB09JV.f"
 		    dgges_("Vectors", "Vectors", "Not ordered", (L_fp)delctg_,
 			     nv, &av[av_offset], ldav, &ev[ev_offset], ldev, &
 			    sdim, &dwork[kar], &dwork[kai], &dwork[kb], &
 			    dwork[kq], &ldw, &dwork[kz], &ldw, &dwork[kw], &
 			    i__1, bwork, &ierr, (ftnlen)7, (ftnlen)7, (ftnlen)
 			    11);
+#line 705 "AB09JV.f"
 		}
+#line 706 "AB09JV.f"
 		if (ierr != 0) {
+#line 707 "AB09JV.f"
 		    *info = 1;
+#line 708 "AB09JV.f"
 		    return 0;
+#line 709 "AB09JV.f"
 		}
+#line 710 "AB09JV.f"
 		if (stabck) {
 
 /*                 Check stability/antistability of generalized */
 /*                 eigenvalues of the pair (AV,EV). */
 
+#line 715 "AB09JV.f"
 		    ab09jx_(dico, stdom, evtype, nv, &alpha, &dwork[kar], &
 			    dwork[kai], &dwork[kb], &tolinf, &ierr, (ftnlen)1,
 			     (ftnlen)1, (ftnlen)1);
+#line 718 "AB09JV.f"
 		    if (ierr != 0) {
+#line 719 "AB09JV.f"
 			*info = 4;
+#line 720 "AB09JV.f"
 			return 0;
+#line 721 "AB09JV.f"
 		    }
+#line 722 "AB09JV.f"
 		}
 /* Computing MAX */
+#line 723 "AB09JV.f"
 		d__1 = work, d__2 = dwork[kw] + (doublereal) (kw - 1);
+#line 723 "AB09JV.f"
 		work = max(d__1,d__2);
 
 /*              Compute Z'*BV and CV*Q. */
 /*              Total workspace needed: 2*NV*NV + NV*MAX(P,PV). */
 
+#line 728 "AB09JV.f"
 		kw = kar;
+#line 729 "AB09JV.f"
 		dlacpy_("Full", nv, pv, &bv[bv_offset], ldbv, &dwork[kw], &
 			ldw, (ftnlen)4);
+#line 730 "AB09JV.f"
 		dgemm_("T", "N", nv, pv, nv, &c_b24, &dwork[kz], &ldw, &dwork[
 			kw], &ldw, &c_b18, &bv[bv_offset], ldbv, (ftnlen)1, (
 			ftnlen)1);
+#line 732 "AB09JV.f"
 		dlacpy_("Full", p, nv, &cv[cv_offset], ldcv, &dwork[kw], p, (
 			ftnlen)4);
+#line 733 "AB09JV.f"
 		dgemm_("N", "N", p, nv, nv, &c_b24, &dwork[kw], p, &dwork[kq],
 			 &ldw, &c_b18, &cv[cv_offset], ldcv, (ftnlen)1, (
 			ftnlen)1);
+#line 735 "AB09JV.f"
 	    } else {
 
 /*              Reduce (AV,EV) to a generalized real Schur form */
@@ -907,64 +1148,97 @@ static integer c__0 = 0;
 /*              and Q'*EV*Z results upper triangular. */
 /*              Total workspace needed: 2*NV*NV + 11*NV + 16. */
 
+#line 743 "AB09JV.f"
 		*(unsigned char *)stdom = 'U';
+#line 744 "AB09JV.f"
 		*(unsigned char *)evtype = 'G';
+#line 745 "AB09JV.f"
 		alpha -= sqrt(tolinf);
+#line 746 "AB09JV.f"
 		i__1 = *ldwork - kw + 1;
+#line 746 "AB09JV.f"
 		dgges_("Vectors", "Vectors", "Not ordered", (L_fp)delctg_, nv,
 			 &av[av_offset], ldav, &ev[ev_offset], ldev, &sdim, &
 			dwork[kar], &dwork[kai], &dwork[kb], &dwork[kq], &ldw,
 			 &dwork[kz], &ldw, &dwork[kw], &i__1, bwork, &ierr, (
 			ftnlen)7, (ftnlen)7, (ftnlen)11);
+#line 751 "AB09JV.f"
 		if (ierr != 0) {
+#line 752 "AB09JV.f"
 		    *info = 1;
+#line 753 "AB09JV.f"
 		    return 0;
+#line 754 "AB09JV.f"
 		}
+#line 755 "AB09JV.f"
 		if (stabck) {
 
 /*                 Check stability/antistability of generalized */
 /*                 eigenvalues of the pair (AV,EV). */
 
+#line 760 "AB09JV.f"
 		    ab09jx_(dico, stdom, evtype, nv, &alpha, &dwork[kar], &
 			    dwork[kai], &dwork[kb], &tolinf, &ierr, (ftnlen)1,
 			     (ftnlen)1, (ftnlen)1);
+#line 763 "AB09JV.f"
 		    if (ierr != 0) {
+#line 764 "AB09JV.f"
 			*info = 4;
+#line 765 "AB09JV.f"
 			return 0;
+#line 766 "AB09JV.f"
 		    }
+#line 767 "AB09JV.f"
 		}
 /* Computing MAX */
+#line 768 "AB09JV.f"
 		d__1 = work, d__2 = dwork[kw] + (doublereal) (kw - 1);
+#line 768 "AB09JV.f"
 		work = max(d__1,d__2);
 
 /*              Compute Q'*BV and CV*Z. */
 /*              Total workspace needed: 2*NV*NV + NV*MAX(P,PV). */
 
+#line 773 "AB09JV.f"
 		kw = kar;
+#line 774 "AB09JV.f"
 		dlacpy_("Full", nv, p, &bv[bv_offset], ldbv, &dwork[kw], &ldw,
 			 (ftnlen)4);
+#line 775 "AB09JV.f"
 		dgemm_("T", "N", nv, p, nv, &c_b24, &dwork[kq], &ldw, &dwork[
 			kw], &ldw, &c_b18, &bv[bv_offset], ldbv, (ftnlen)1, (
 			ftnlen)1);
+#line 777 "AB09JV.f"
 		dlacpy_("Full", pv, nv, &cv[cv_offset], ldcv, &dwork[kw], pv, 
 			(ftnlen)4);
+#line 778 "AB09JV.f"
 		dgemm_("N", "N", pv, nv, nv, &c_b24, &dwork[kw], pv, &dwork[
 			kz], &ldw, &c_b18, &cv[cv_offset], ldcv, (ftnlen)1, (
 			ftnlen)1);
+#line 780 "AB09JV.f"
 	    }
 /* Computing MAX */
+#line 781 "AB09JV.f"
 	    d__1 = work, d__2 = (doublereal) ((*nv << 1) * *nv + *nv * max(*p,
 		    *pv));
+#line 781 "AB09JV.f"
 	    work = max(d__1,d__2);
 
+#line 783 "AB09JV.f"
 	}
 
+#line 785 "AB09JV.f"
 	kc = 1;
+#line 786 "AB09JV.f"
 	kf = kc + *nv * *n;
+#line 787 "AB09JV.f"
 	ke = kf + *nv * *n;
+#line 788 "AB09JV.f"
 	kw = ke + *n * *n;
+#line 789 "AB09JV.f"
 	dlaset_("Full", nv, n, &c_b18, &c_b18, &dwork[kf], &ldw, (ftnlen)4);
 
+#line 791 "AB09JV.f"
 	if (conjs) {
 
 /*           Compute the projection of conj(V)*G. */
@@ -974,10 +1248,12 @@ static integer c__0 = 0;
 /*           Compute CV'*C. */
 /*           Workspace needed: NV*N. */
 
+#line 800 "AB09JV.f"
 	    dgemm_("T", "N", nv, n, p, &c_b24, &cv[cv_offset], ldcv, &c__[
 		    c_offset], ldc, &c_b18, &dwork[kc], &ldw, (ftnlen)1, (
 		    ftnlen)1);
 
+#line 803 "AB09JV.f"
 	    if (discr) {
 
 /*              Compute X and SCALE satisfying */
@@ -991,19 +1267,28 @@ static integer c__0 = 0;
 /*              real    NV*N + N*N; */
 /*              integer NV+N+6. */
 
+#line 816 "AB09JV.f"
 		if (*n > 0) {
+#line 817 "AB09JV.f"
 		    dlaset_("Full", n, n, &c_b18, &c_b24, &dwork[ke], &ldwn, (
 			    ftnlen)4);
+#line 819 "AB09JV.f"
 		    i__1 = *ldwork - kw + 1;
+#line 819 "AB09JV.f"
 		    dtgsyl_("N", &c__0, nv, n, &ev[ev_offset], ldev, &a[
 			    a_offset], lda, &dwork[kc], &ldw, &av[av_offset], 
 			    ldav, &dwork[ke], &ldwn, &dwork[kf], &ldw, &scale,
 			     &dif, &dwork[kw], &i__1, &iwork[1], &ierr, (
 			    ftnlen)1);
+#line 823 "AB09JV.f"
 		    if (ierr != 0) {
+#line 824 "AB09JV.f"
 			*info = 2;
+#line 825 "AB09JV.f"
 			return 0;
+#line 826 "AB09JV.f"
 		    }
+#line 827 "AB09JV.f"
 		}
 
 /*              Construct C <- DV'*C + BV'*X*A/SCALE, */
@@ -1013,36 +1298,46 @@ static integer c__0 = 0;
 
 /*              C <- DV'*C. */
 
+#line 836 "AB09JV.f"
 		kw = kf;
+#line 837 "AB09JV.f"
 		dgemm_("T", "N", pv, n, p, &c_b24, &dv[dv_offset], lddv, &c__[
 			c_offset], ldc, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 			ftnlen)1);
+#line 839 "AB09JV.f"
 		dlacpy_("Full", pv, n, &dwork[kw], pv, &c__[c_offset], ldc, (
 			ftnlen)4);
 
 /*              D <- DV'*D. */
 
+#line 843 "AB09JV.f"
 		dgemm_("T", "N", pv, m, p, &c_b24, &dv[dv_offset], lddv, &d__[
 			d_offset], ldd, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 			ftnlen)1);
+#line 845 "AB09JV.f"
 		dlacpy_("Full", pv, m, &dwork[kw], pv, &d__[d_offset], ldd, (
 			ftnlen)4);
 
 /*              C <- C + BV'*X*A/SCALE. */
 
+#line 849 "AB09JV.f"
 		d__1 = 1. / scale;
+#line 849 "AB09JV.f"
 		dgemm_("T", "N", pv, n, nv, &d__1, &bv[bv_offset], ldbv, &
 			dwork[kc], &ldw, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 			ftnlen)1);
+#line 851 "AB09JV.f"
 		dgemm_("N", "N", pv, n, n, &c_b24, &dwork[kw], pv, &a[
 			a_offset], lda, &c_b24, &c__[c_offset], ldc, (ftnlen)
 			1, (ftnlen)1);
 
 /*              D <- D + BV'*X*B/SCALE. */
 
+#line 856 "AB09JV.f"
 		dgemm_("N", "N", pv, m, n, &c_b24, &dwork[kw], pv, &b[
 			b_offset], ldb, &c_b24, &d__[d_offset], ldd, (ftnlen)
 			1, (ftnlen)1);
+#line 858 "AB09JV.f"
 	    } else {
 
 /*              Compute X and SCALE satisfying */
@@ -1056,10 +1351,14 @@ static integer c__0 = 0;
 /*              real    NV*N+N*N; */
 /*              integer NV+N+6. */
 
+#line 871 "AB09JV.f"
 		if (*n > 0) {
+#line 872 "AB09JV.f"
 		    dlaset_("Full", n, n, &c_b18, &c_b17, &dwork[ke], &ldwn, (
 			    ftnlen)4);
+#line 874 "AB09JV.f"
 		    i__1 = *ldwork - kw + 1;
+#line 874 "AB09JV.f"
 		    dtgsyl_("N", &c__0, nv, n, &av[av_offset], ldav, &a[
 			    a_offset], lda, &dwork[kc], &ldw, &ev[ev_offset], 
 			    ldev, &dwork[ke], &ldwn, &dwork[kf], &ldw, &scale,
@@ -1068,33 +1367,47 @@ static integer c__0 = 0;
 
 /*                 Note that the computed solution in DWORK(KC) is -X. */
 
+#line 881 "AB09JV.f"
 		    if (ierr != 0) {
+#line 882 "AB09JV.f"
 			*info = 2;
+#line 883 "AB09JV.f"
 			return 0;
+#line 884 "AB09JV.f"
 		    }
+#line 885 "AB09JV.f"
 		}
 
 /*              Construct C <- DV'*C + BV'*X/SCALE. */
 
+#line 889 "AB09JV.f"
 		kw = kf;
+#line 890 "AB09JV.f"
 		dgemm_("T", "N", pv, n, p, &c_b24, &dv[dv_offset], lddv, &c__[
 			c_offset], ldc, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 			ftnlen)1);
+#line 892 "AB09JV.f"
 		dlacpy_("Full", pv, n, &dwork[kw], pv, &c__[c_offset], ldc, (
 			ftnlen)4);
+#line 893 "AB09JV.f"
 		d__1 = -1. / scale;
+#line 893 "AB09JV.f"
 		dgemm_("T", "N", pv, n, nv, &d__1, &bv[bv_offset], ldbv, &
 			dwork[kc], &ldw, &c_b24, &c__[c_offset], ldc, (ftnlen)
 			1, (ftnlen)1);
 
 /*              Construct D <- DV'*D. */
 
+#line 898 "AB09JV.f"
 		dgemm_("T", "N", pv, m, p, &c_b24, &dv[dv_offset], lddv, &d__[
 			d_offset], ldd, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 			ftnlen)1);
+#line 900 "AB09JV.f"
 		dlacpy_("Full", pv, m, &dwork[kw], pv, &d__[d_offset], ldd, (
 			ftnlen)4);
+#line 901 "AB09JV.f"
 	    }
+#line 902 "AB09JV.f"
 	} else {
 
 /*           Compute the projection of V*G. */
@@ -1104,6 +1417,7 @@ static integer c__0 = 0;
 /*           Compute -BV*C. */
 /*           Workspace needed: NV*N. */
 
+#line 911 "AB09JV.f"
 	    dgemm_("N", "N", nv, n, p, &c_b17, &bv[bv_offset], ldbv, &c__[
 		    c_offset], ldc, &c_b18, &dwork[1], &ldw, (ftnlen)1, (
 		    ftnlen)1);
@@ -1119,47 +1433,68 @@ static integer c__0 = 0;
 /*           real    NV*N + N*N; */
 /*           integer NV+N+6. */
 
+#line 925 "AB09JV.f"
 	    if (*n > 0) {
+#line 926 "AB09JV.f"
 		dlaset_("Full", n, n, &c_b18, &c_b24, &dwork[ke], &ldwn, (
 			ftnlen)4);
+#line 927 "AB09JV.f"
 		i__1 = *ldwork - kw + 1;
+#line 927 "AB09JV.f"
 		dtgsyl_("N", &c__0, nv, n, &av[av_offset], ldav, &a[a_offset],
 			 lda, &dwork[kc], &ldw, &ev[ev_offset], ldev, &dwork[
 			ke], &ldwn, &dwork[kf], &ldw, &scale, &dif, &dwork[kw]
 			, &i__1, &iwork[1], &ierr, (ftnlen)1);
+#line 931 "AB09JV.f"
 		if (ierr != 0) {
+#line 932 "AB09JV.f"
 		    *info = 2;
+#line 933 "AB09JV.f"
 		    return 0;
+#line 934 "AB09JV.f"
 		}
+#line 935 "AB09JV.f"
 	    }
 
 /*           Construct C <- DV*C + CV*X/SCALE. */
 
+#line 939 "AB09JV.f"
 	    kw = kf;
+#line 940 "AB09JV.f"
 	    dgemm_("N", "N", pv, n, p, &c_b24, &dv[dv_offset], lddv, &c__[
 		    c_offset], ldc, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 		    ftnlen)1);
+#line 942 "AB09JV.f"
 	    dlacpy_("Full", pv, n, &dwork[kw], pv, &c__[c_offset], ldc, (
 		    ftnlen)4);
+#line 943 "AB09JV.f"
 	    d__1 = 1. / scale;
+#line 943 "AB09JV.f"
 	    dgemm_("N", "N", pv, n, nv, &d__1, &cv[cv_offset], ldcv, &dwork[1]
 		    , &ldw, &c_b24, &c__[c_offset], ldc, (ftnlen)1, (ftnlen)1)
 		    ;
 
 /*           Construct D <- DV*D. */
 
+#line 948 "AB09JV.f"
 	    dgemm_("N", "N", pv, m, p, &c_b24, &dv[dv_offset], lddv, &d__[
 		    d_offset], ldd, &c_b18, &dwork[kw], pv, (ftnlen)1, (
 		    ftnlen)1);
+#line 950 "AB09JV.f"
 	    dlacpy_("Full", pv, m, &dwork[kw], pv, &d__[d_offset], ldd, (
 		    ftnlen)4);
+#line 951 "AB09JV.f"
 	}
+#line 952 "AB09JV.f"
     }
 
 /* Computing MAX */
+#line 954 "AB09JV.f"
     d__1 = work, d__2 = (doublereal) lw;
+#line 954 "AB09JV.f"
     dwork[1] = max(d__1,d__2);
 
+#line 956 "AB09JV.f"
     return 0;
 /* *** Last line of AB09JV *** */
 } /* ab09jv_ */

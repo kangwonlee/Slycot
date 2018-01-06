@@ -1,0 +1,11 @@
+extern int sb04pd_(char *dico, char *facta, char *factb, char *trana, char *tranb, integer *isgn, integer *m, integer *n, doublereal *a, integer *lda, doublereal *u, integer *ldu, doublereal *b, integer *ldb, doublereal *v, integer *ldv, doublereal *c__, integer *ldc, doublereal *scale, doublereal *dwork, integer *ldwork, integer *info, ftnlen dico_len, ftnlen facta_len, ftnlen factb_len, ftnlen trana_len, ftnlen tranb_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: select_ 12 :*/
+/*:ref: dgees_ 14 17 13 13 212 4 7 4 4 7 7 7 4 7 4 12 4 124 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: dtrsyl_ 14 15 13 13 4 4 4 7 4 7 4 7 4 7 4 124 124 */
+/*:ref: sb04py_ 14 16 13 13 4 4 4 7 4 7 4 7 4 7 7 4 124 124 */

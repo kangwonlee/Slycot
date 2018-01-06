@@ -1,3 +1,4 @@
+#line 1 "MA02JD.f"
 /* MA02JD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MA02JD.f"
 /* Table of constant values */
 
 static doublereal c_b4 = 1.;
@@ -146,76 +148,121 @@ doublereal ma02jd_(logical *ltran1, logical *ltran2, integer *n, doublereal *
 
 /*     .. Executable Statements .. */
 
+#line 120 "MA02JD.f"
     /* Parameter adjustments */
+#line 120 "MA02JD.f"
     q1_dim1 = *ldq1;
+#line 120 "MA02JD.f"
     q1_offset = 1 + q1_dim1;
+#line 120 "MA02JD.f"
     q1 -= q1_offset;
+#line 120 "MA02JD.f"
     q2_dim1 = *ldq2;
+#line 120 "MA02JD.f"
     q2_offset = 1 + q2_dim1;
+#line 120 "MA02JD.f"
     q2 -= q2_offset;
+#line 120 "MA02JD.f"
     res_dim1 = *ldres;
+#line 120 "MA02JD.f"
     res_offset = 1 + res_dim1;
+#line 120 "MA02JD.f"
     res -= res_offset;
+#line 120 "MA02JD.f"
 
+#line 120 "MA02JD.f"
     /* Function Body */
+#line 120 "MA02JD.f"
     if (*ltran1) {
+#line 121 "MA02JD.f"
 	dgemm_("No Transpose", "Transpose", n, n, n, &c_b4, &q1[q1_offset], 
 		ldq1, &q1[q1_offset], ldq1, &c_b5, &res[res_offset], ldres, (
 		ftnlen)12, (ftnlen)9);
+#line 123 "MA02JD.f"
     } else {
+#line 124 "MA02JD.f"
 	dgemm_("Transpose", "No Transpose", n, n, n, &c_b4, &q1[q1_offset], 
 		ldq1, &q1[q1_offset], ldq1, &c_b5, &res[res_offset], ldres, (
 		ftnlen)9, (ftnlen)12);
+#line 126 "MA02JD.f"
     }
+#line 127 "MA02JD.f"
     if (*ltran2) {
+#line 128 "MA02JD.f"
 	dgemm_("No Transpose", "Transpose", n, n, n, &c_b4, &q2[q2_offset], 
 		ldq2, &q2[q2_offset], ldq2, &c_b4, &res[res_offset], ldres, (
 		ftnlen)12, (ftnlen)9);
+#line 130 "MA02JD.f"
     } else {
+#line 131 "MA02JD.f"
 	dgemm_("Transpose", "No Transpose", n, n, n, &c_b4, &q2[q2_offset], 
 		ldq2, &q2[q2_offset], ldq2, &c_b4, &res[res_offset], ldres, (
 		ftnlen)9, (ftnlen)12);
+#line 133 "MA02JD.f"
     }
+#line 134 "MA02JD.f"
     i__1 = *n;
+#line 134 "MA02JD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 135 "MA02JD.f"
 	res[i__ + i__ * res_dim1] += -1.;
+#line 136 "MA02JD.f"
 /* L10: */
+#line 136 "MA02JD.f"
     }
+#line 137 "MA02JD.f"
     temp = dlange_("Frobenius", n, n, &res[res_offset], ldres, dummy, (ftnlen)
 	    9);
+#line 138 "MA02JD.f"
     if (*ltran1 && *ltran2) {
+#line 139 "MA02JD.f"
 	dgemm_("No Transpose", "Transpose", n, n, n, &c_b4, &q2[q2_offset], 
 		ldq2, &q1[q1_offset], ldq1, &c_b5, &res[res_offset], ldres, (
 		ftnlen)12, (ftnlen)9);
+#line 141 "MA02JD.f"
 	dgemm_("No Transpose", "Transpose", n, n, n, &c_b4, &q1[q1_offset], 
 		ldq1, &q2[q2_offset], ldq2, &c_b27, &res[res_offset], ldres, (
 		ftnlen)12, (ftnlen)9);
+#line 143 "MA02JD.f"
     } else if (*ltran1) {
+#line 144 "MA02JD.f"
 	dgemm_("Transpose", "Transpose", n, n, n, &c_b4, &q2[q2_offset], ldq2,
 		 &q1[q1_offset], ldq1, &c_b5, &res[res_offset], ldres, (
 		ftnlen)9, (ftnlen)9);
+#line 146 "MA02JD.f"
 	dgemm_("No Transpose", "No Transpose", n, n, n, &c_b4, &q1[q1_offset],
 		 ldq1, &q2[q2_offset], ldq2, &c_b27, &res[res_offset], ldres, 
 		(ftnlen)12, (ftnlen)12);
+#line 148 "MA02JD.f"
     } else if (*ltran2) {
+#line 149 "MA02JD.f"
 	dgemm_("No Transpose", "No Transpose", n, n, n, &c_b4, &q2[q2_offset],
 		 ldq2, &q1[q1_offset], ldq1, &c_b5, &res[res_offset], ldres, (
 		ftnlen)12, (ftnlen)12);
+#line 151 "MA02JD.f"
 	dgemm_("Transpose", "Transpose", n, n, n, &c_b4, &q1[q1_offset], ldq1,
 		 &q2[q2_offset], ldq2, &c_b27, &res[res_offset], ldres, (
 		ftnlen)9, (ftnlen)9);
+#line 153 "MA02JD.f"
     } else {
+#line 154 "MA02JD.f"
 	dgemm_("Transpose", "No Transpose", n, n, n, &c_b4, &q2[q2_offset], 
 		ldq2, &q1[q1_offset], ldq1, &c_b5, &res[res_offset], ldres, (
 		ftnlen)9, (ftnlen)12);
+#line 156 "MA02JD.f"
 	dgemm_("Transpose", "No Transpose", n, n, n, &c_b4, &q1[q1_offset], 
 		ldq1, &q2[q2_offset], ldq2, &c_b27, &res[res_offset], ldres, (
 		ftnlen)9, (ftnlen)12);
+#line 158 "MA02JD.f"
     }
+#line 159 "MA02JD.f"
     d__1 = dlange_("Frobenius", n, n, &res[res_offset], ldres, dummy, (ftnlen)
 	    9);
+#line 159 "MA02JD.f"
     temp = dlapy2_(&temp, &d__1);
+#line 161 "MA02JD.f"
     ret_val = sqrt(2.) * temp;
+#line 162 "MA02JD.f"
     return ret_val;
 /* *** Last line of MA02JD *** */
 } /* ma02jd_ */

@@ -1,3 +1,4 @@
+#line 1 "AB8NXZ.f"
 /* AB8NXZ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB8NXZ.f"
 /* Table of constant values */
 
 static doublecomplex c_b1 = {0.,0.};
@@ -255,109 +257,189 @@ static logical c_true = TRUE_;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 213 "AB8NXZ.f"
     /* Parameter adjustments */
+#line 213 "AB8NXZ.f"
     abcd_dim1 = *ldabcd;
+#line 213 "AB8NXZ.f"
     abcd_offset = 1 + abcd_dim1;
+#line 213 "AB8NXZ.f"
     abcd -= abcd_offset;
+#line 213 "AB8NXZ.f"
     --infz;
+#line 213 "AB8NXZ.f"
     --kronl;
+#line 213 "AB8NXZ.f"
     --iwork;
+#line 213 "AB8NXZ.f"
     --dwork;
+#line 213 "AB8NXZ.f"
     --zwork;
+#line 213 "AB8NXZ.f"
 
+#line 213 "AB8NXZ.f"
     /* Function Body */
+#line 213 "AB8NXZ.f"
     np = *n + *p;
+#line 214 "AB8NXZ.f"
     mpm = min(*p,*m);
+#line 215 "AB8NXZ.f"
     *info = 0;
+#line 216 "AB8NXZ.f"
     lquery = *lzwork == -1;
 
 /*     Test the input scalar arguments. */
 
+#line 220 "AB8NXZ.f"
     if (*n < 0) {
+#line 221 "AB8NXZ.f"
 	*info = -1;
+#line 222 "AB8NXZ.f"
     } else if (*m < 0) {
+#line 223 "AB8NXZ.f"
 	*info = -2;
+#line 224 "AB8NXZ.f"
     } else if (*p < 0) {
+#line 225 "AB8NXZ.f"
 	*info = -3;
+#line 226 "AB8NXZ.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 226 "AB8NXZ.f"
 	i__1 = *p - *m;
+#line 226 "AB8NXZ.f"
 	if (*ro != *p && *ro != max(i__1,0)) {
+#line 227 "AB8NXZ.f"
 	    *info = -4;
+#line 228 "AB8NXZ.f"
 	} else if (*sigma != 0 && *sigma != *m) {
+#line 229 "AB8NXZ.f"
 	    *info = -5;
+#line 230 "AB8NXZ.f"
 	} else if (*svlmax < 0.) {
+#line 231 "AB8NXZ.f"
 	    *info = -6;
+#line 232 "AB8NXZ.f"
 	} else if (*ldabcd < max(1,np)) {
+#line 233 "AB8NXZ.f"
 	    *info = -8;
+#line 234 "AB8NXZ.f"
 	} else if (*ninfz < 0) {
+#line 235 "AB8NXZ.f"
 	    *info = -9;
+#line 236 "AB8NXZ.f"
 	} else {
 /* Computing MAX */
 /* Computing MAX */
+#line 237 "AB8NXZ.f"
 	    i__3 = *m * 3 - 1;
 /* Computing MAX */
+#line 237 "AB8NXZ.f"
 	    i__4 = *p * 3 - 1, i__4 = max(i__4,np), i__5 = *n + *m;
+#line 237 "AB8NXZ.f"
 	    i__1 = 1, i__2 = mpm + max(i__3,*n), i__1 = max(i__1,i__2), i__2 =
 		     min(*p,*n) + max(i__4,i__5);
+#line 237 "AB8NXZ.f"
 	    jwork = max(i__1,i__2);
+#line 239 "AB8NXZ.f"
 	    if (lquery) {
+#line 240 "AB8NXZ.f"
 		if (*m > 0) {
 /* Computing MIN */
+#line 241 "AB8NXZ.f"
 		    i__1 = 64, i__2 = ilaenv_(&c__1, "ZUNMQR", "LC", p, n, &
 			    mpm, &c_n1, (ftnlen)6, (ftnlen)2);
+#line 241 "AB8NXZ.f"
 		    nb = min(i__1,i__2);
 /* Computing MAX */
+#line 243 "AB8NXZ.f"
 		    i__1 = jwork, i__2 = mpm + max(1,*n) * nb;
+#line 243 "AB8NXZ.f"
 		    wrkopt = max(i__1,i__2);
+#line 244 "AB8NXZ.f"
 		} else {
+#line 245 "AB8NXZ.f"
 		    wrkopt = jwork;
+#line 246 "AB8NXZ.f"
 		}
 /* Computing MIN */
+#line 247 "AB8NXZ.f"
 		i__3 = min(*p,*n);
+#line 247 "AB8NXZ.f"
 		i__1 = 64, i__2 = ilaenv_(&c__1, "ZUNMRQ", "RC", &np, n, &
 			i__3, &c_n1, (ftnlen)6, (ftnlen)2);
+#line 247 "AB8NXZ.f"
 		nb = min(i__1,i__2);
 /* Computing MAX */
+#line 249 "AB8NXZ.f"
 		i__1 = wrkopt, i__2 = min(*p,*n) + max(1,np) * nb;
+#line 249 "AB8NXZ.f"
 		wrkopt = max(i__1,i__2);
 /* Computing MIN */
+#line 250 "AB8NXZ.f"
 		i__3 = *m + *n;
+#line 250 "AB8NXZ.f"
 		i__4 = min(*p,*n);
+#line 250 "AB8NXZ.f"
 		i__1 = 64, i__2 = ilaenv_(&c__1, "ZUNMRQ", "LN", n, &i__3, &
 			i__4, &c_n1, (ftnlen)6, (ftnlen)2);
+#line 250 "AB8NXZ.f"
 		nb = min(i__1,i__2);
 /* Computing MAX */
 /* Computing MAX */
+#line 252 "AB8NXZ.f"
 		i__3 = 1, i__4 = *m + *n;
+#line 252 "AB8NXZ.f"
 		i__1 = wrkopt, i__2 = min(*p,*n) + max(i__3,i__4) * nb;
+#line 252 "AB8NXZ.f"
 		wrkopt = max(i__1,i__2);
+#line 253 "AB8NXZ.f"
 	    } else if (*lzwork < jwork) {
+#line 254 "AB8NXZ.f"
 		*info = -19;
+#line 255 "AB8NXZ.f"
 	    }
+#line 256 "AB8NXZ.f"
 	}
+#line 256 "AB8NXZ.f"
     }
 
+#line 258 "AB8NXZ.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 262 "AB8NXZ.f"
 	i__1 = -(*info);
+#line 262 "AB8NXZ.f"
 	xerbla_("AB8NXZ", &i__1, (ftnlen)6);
+#line 263 "AB8NXZ.f"
 	return 0;
+#line 264 "AB8NXZ.f"
     } else if (lquery) {
+#line 265 "AB8NXZ.f"
 	zwork[1].r = (doublereal) wrkopt, zwork[1].i = 0.;
+#line 266 "AB8NXZ.f"
 	return 0;
+#line 267 "AB8NXZ.f"
     }
 
+#line 269 "AB8NXZ.f"
     *mu = *p;
+#line 270 "AB8NXZ.f"
     *nu = *n;
 
+#line 272 "AB8NXZ.f"
     iz = 0;
+#line 273 "AB8NXZ.f"
     ik = 1;
+#line 274 "AB8NXZ.f"
     mm1 = *m + 1;
+#line 275 "AB8NXZ.f"
     itau = 1;
+#line 276 "AB8NXZ.f"
     *nkrol = 0;
+#line 277 "AB8NXZ.f"
     wrkopt = 1;
 
 /*     Main reduction loop: */
@@ -379,9 +461,13 @@ static logical c_true = TRUE_;
 /*                     -->      RO  [ B2   A21 ]      D := [B2;RD] */
 /*                            SIGMA [ RD   C11 ]      C := [A21;C11] */
 
+#line 298 "AB8NXZ.f"
 L20:
+#line 298 "AB8NXZ.f"
     if (*mu == 0) {
+#line 298 "AB8NXZ.f"
 	goto L80;
+#line 298 "AB8NXZ.f"
     }
 
 /*     (Note: Comments in the code beginning "xWorkspace:", where x is */
@@ -389,33 +475,52 @@ L20:
 /*     complex workspace needed at that point in the code, respectively, */
 /*     as well as the preferred amount for good performance.) */
 
+#line 306 "AB8NXZ.f"
     ro1 = *ro;
+#line 307 "AB8NXZ.f"
     mnu = *m + *nu;
+#line 308 "AB8NXZ.f"
     if (*m > 0) {
+#line 309 "AB8NXZ.f"
 	if (*sigma != 0) {
+#line 310 "AB8NXZ.f"
 	    irow = *nu + 1;
 
 /*           Compress rows of D.  First exploit triangular shape. */
 /*           CWorkspace: need   M+N-1. */
 
+#line 315 "AB8NXZ.f"
 	    i__1 = *sigma;
+#line 315 "AB8NXZ.f"
 	    for (i1 = 1; i1 <= i__1; ++i1) {
+#line 316 "AB8NXZ.f"
 		i__2 = *ro + 1;
+#line 316 "AB8NXZ.f"
 		zlarfg_(&i__2, &abcd[irow + i1 * abcd_dim1], &abcd[irow + 1 + 
 			i1 * abcd_dim1], &c__1, &tc);
+#line 318 "AB8NXZ.f"
 		i__2 = *ro + 1;
+#line 318 "AB8NXZ.f"
 		i__3 = mnu - i1;
+#line 318 "AB8NXZ.f"
 		d_cnjg(&z__1, &tc);
+#line 318 "AB8NXZ.f"
 		zlatzm_("L", &i__2, &i__3, &abcd[irow + 1 + i1 * abcd_dim1], &
 			c__1, &z__1, &abcd[irow + (i1 + 1) * abcd_dim1], &
 			abcd[irow + 1 + (i1 + 1) * abcd_dim1], ldabcd, &zwork[
 			1], (ftnlen)1);
+#line 321 "AB8NXZ.f"
 		++irow;
+#line 322 "AB8NXZ.f"
 /* L40: */
+#line 322 "AB8NXZ.f"
 	    }
+#line 323 "AB8NXZ.f"
 	    i__1 = *ro + *sigma - 1;
+#line 323 "AB8NXZ.f"
 	    zlaset_("Lower", &i__1, sigma, &c_b1, &c_b1, &abcd[*nu + 2 + 
 		    abcd_dim1], ldabcd, (ftnlen)5);
+#line 325 "AB8NXZ.f"
 	}
 
 /*        Continue with Householder with column pivoting. */
@@ -427,78 +532,123 @@ L20:
 /*        RWorkspace: need   2*M; */
 /*        CWorkspace: need   min(RO1,M) + 3*M - 1.  RO1 <= P. */
 
+#line 336 "AB8NXZ.f"
 	if (*sigma < *m) {
+#line 337 "AB8NXZ.f"
 	    jwork = itau + min(ro1,*m);
+#line 338 "AB8NXZ.f"
 	    i1 = *sigma + 1;
+#line 339 "AB8NXZ.f"
 	    irow = *nu + i1;
+#line 340 "AB8NXZ.f"
 	    i__1 = *m - *sigma;
+#line 340 "AB8NXZ.f"
 	    mb3oyz_(&ro1, &i__1, &abcd[irow + i1 * abcd_dim1], ldabcd, tol, 
 		    svlmax, &rank, sval, &iwork[1], &zwork[itau], &dwork[1], &
 		    zwork[jwork], info);
 /* Computing MAX */
+#line 343 "AB8NXZ.f"
 	    i__1 = wrkopt, i__2 = jwork + *m * 3 - 2;
+#line 343 "AB8NXZ.f"
 	    wrkopt = max(i__1,i__2);
 
 /*           Apply the column permutations to matrices B and part of D. */
 
+#line 347 "AB8NXZ.f"
 	    i__1 = *nu + *sigma;
+#line 347 "AB8NXZ.f"
 	    i__2 = *m - *sigma;
+#line 347 "AB8NXZ.f"
 	    zlapmt_(&c_true, &i__1, &i__2, &abcd[i1 * abcd_dim1 + 1], ldabcd, 
 		    &iwork[1]);
 
+#line 350 "AB8NXZ.f"
 	    if (rank > 0) {
 
 /*              Apply the Householder transformations to the submatrix C. */
 /*              CWorkspace:    need   min(RO1,M) + NU; */
 /*                             prefer min(RO1,M) + NU*NB. */
 
+#line 356 "AB8NXZ.f"
 		i__1 = *lzwork - jwork + 1;
+#line 356 "AB8NXZ.f"
 		zunmqr_("Left", "Conjugate", &ro1, nu, &rank, &abcd[irow + i1 
 			* abcd_dim1], ldabcd, &zwork[itau], &abcd[irow + mm1 *
 			 abcd_dim1], ldabcd, &zwork[jwork], &i__1, info, (
 			ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 360 "AB8NXZ.f"
 		i__3 = jwork;
+#line 360 "AB8NXZ.f"
 		i__1 = wrkopt, i__2 = (integer) zwork[i__3].r + jwork - 1;
+#line 360 "AB8NXZ.f"
 		wrkopt = max(i__1,i__2);
+#line 361 "AB8NXZ.f"
 		if (ro1 > 1) {
+#line 361 "AB8NXZ.f"
 		    i__1 = ro1 - 1;
 /* Computing MIN */
+#line 361 "AB8NXZ.f"
 		    i__3 = ro1 - 1;
+#line 361 "AB8NXZ.f"
 		    i__2 = min(i__3,rank);
+#line 361 "AB8NXZ.f"
 		    zlaset_("Lower", &i__1, &i__2, &c_b1, &c_b1, &abcd[irow + 
 			    1 + i1 * abcd_dim1], ldabcd, (ftnlen)5);
+#line 361 "AB8NXZ.f"
 		}
+#line 364 "AB8NXZ.f"
 		ro1 -= rank;
+#line 365 "AB8NXZ.f"
 	    }
+#line 366 "AB8NXZ.f"
 	}
+#line 367 "AB8NXZ.f"
     }
 
+#line 369 "AB8NXZ.f"
     tau = ro1;
+#line 370 "AB8NXZ.f"
     *sigma = *mu - tau;
 
 /*     Determination of the orders of the infinite zeros. */
 
+#line 374 "AB8NXZ.f"
     if (iz > 0) {
+#line 375 "AB8NXZ.f"
 	infz[iz] = infz[iz] + *ro - tau;
+#line 376 "AB8NXZ.f"
 	*ninfz += iz * (*ro - tau);
+#line 377 "AB8NXZ.f"
     }
+#line 378 "AB8NXZ.f"
     if (ro1 == 0) {
+#line 378 "AB8NXZ.f"
 	goto L80;
+#line 378 "AB8NXZ.f"
     }
+#line 380 "AB8NXZ.f"
     ++iz;
 
+#line 382 "AB8NXZ.f"
     if (*nu <= 0) {
+#line 383 "AB8NXZ.f"
 	*mu = *sigma;
+#line 384 "AB8NXZ.f"
 	*nu = 0;
+#line 385 "AB8NXZ.f"
 	*ro = 0;
+#line 386 "AB8NXZ.f"
     } else {
 
 /*        Compress the columns of C2 using RQ factorization with row */
 /*        pivoting, P * C2 = R * Q. */
 
+#line 391 "AB8NXZ.f"
 	i1 = *nu + *sigma + 1;
+#line 392 "AB8NXZ.f"
 	mntau = min(tau,*nu);
+#line 393 "AB8NXZ.f"
 	jwork = itau + mntau;
 
 /*        The rank of C2 is the number of (estimated) singular values */
@@ -507,28 +657,39 @@ L20:
 /*        RWorkspace: need 2*TAU; */
 /*        CWorkspace: need min(TAU,NU) + 3*TAU - 1. */
 
+#line 401 "AB8NXZ.f"
 	mb3pyz_(&tau, nu, &abcd[i1 + mm1 * abcd_dim1], ldabcd, tol, svlmax, &
 		rank, sval, &iwork[1], &zwork[itau], &dwork[1], &zwork[jwork],
 		 info);
 /* Computing MAX */
+#line 404 "AB8NXZ.f"
 	i__1 = wrkopt, i__2 = jwork + tau * 3 - 1;
+#line 404 "AB8NXZ.f"
 	wrkopt = max(i__1,i__2);
+#line 405 "AB8NXZ.f"
 	if (rank > 0) {
+#line 406 "AB8NXZ.f"
 	    irow = i1 + tau - rank;
 
 /*           Apply Q' to the first NU columns of [A; C1] from the right. */
 /*           CWorkspace: need   min(TAU,NU) + NU + SIGMA; SIGMA <= P; */
 /*                       prefer min(TAU,NU) + (NU  + SIGMA)*NB. */
 
+#line 412 "AB8NXZ.f"
 	    i__1 = i1 - 1;
+#line 412 "AB8NXZ.f"
 	    i__2 = *lzwork - jwork + 1;
+#line 412 "AB8NXZ.f"
 	    zunmrq_("Right", "ConjTranspose", &i__1, nu, &rank, &abcd[irow + 
 		    mm1 * abcd_dim1], ldabcd, &zwork[mntau - rank + 1], &abcd[
 		    mm1 * abcd_dim1 + 1], ldabcd, &zwork[jwork], &i__2, info, 
 		    (ftnlen)5, (ftnlen)13);
 /* Computing MAX */
+#line 416 "AB8NXZ.f"
 	    i__3 = jwork;
+#line 416 "AB8NXZ.f"
 	    i__1 = wrkopt, i__2 = (integer) zwork[i__3].r + jwork - 1;
+#line 416 "AB8NXZ.f"
 	    wrkopt = max(i__1,i__2);
 
 /*           Apply Q to the first NU rows and M + NU columns of [ B  A ] */
@@ -536,46 +697,72 @@ L20:
 /*           CWorkspace: need   min(TAU,NU) + M + NU; */
 /*                       prefer min(TAU,NU) + (M + NU)*NB. */
 
+#line 423 "AB8NXZ.f"
 	    i__1 = *lzwork - jwork + 1;
+#line 423 "AB8NXZ.f"
 	    zunmrq_("Left", "NoTranspose", nu, &mnu, &rank, &abcd[irow + mm1 *
 		     abcd_dim1], ldabcd, &zwork[mntau - rank + 1], &abcd[
 		    abcd_offset], ldabcd, &zwork[jwork], &i__1, info, (ftnlen)
 		    4, (ftnlen)11);
 /* Computing MAX */
+#line 427 "AB8NXZ.f"
 	    i__3 = jwork;
+#line 427 "AB8NXZ.f"
 	    i__1 = wrkopt, i__2 = (integer) zwork[i__3].r + jwork - 1;
+#line 427 "AB8NXZ.f"
 	    wrkopt = max(i__1,i__2);
 
+#line 429 "AB8NXZ.f"
 	    i__1 = *nu - rank;
+#line 429 "AB8NXZ.f"
 	    zlaset_("Full", &rank, &i__1, &c_b1, &c_b1, &abcd[irow + mm1 * 
 		    abcd_dim1], ldabcd, (ftnlen)4);
+#line 431 "AB8NXZ.f"
 	    if (rank > 1) {
+#line 431 "AB8NXZ.f"
 		i__1 = rank - 1;
+#line 431 "AB8NXZ.f"
 		i__2 = rank - 1;
+#line 431 "AB8NXZ.f"
 		zlaset_("Lower", &i__1, &i__2, &c_b1, &c_b1, &abcd[irow + 1 + 
 			(mm1 + *nu - rank) * abcd_dim1], ldabcd, (ftnlen)5);
+#line 431 "AB8NXZ.f"
 	    }
+#line 434 "AB8NXZ.f"
 	}
 
+#line 436 "AB8NXZ.f"
 	*ro = rank;
+#line 437 "AB8NXZ.f"
     }
 
 /*     Determine the left Kronecker indices (row indices). */
 
+#line 441 "AB8NXZ.f"
     kronl[ik] = kronl[ik] + tau - *ro;
+#line 442 "AB8NXZ.f"
     *nkrol += kronl[ik];
+#line 443 "AB8NXZ.f"
     ++ik;
 
 /*     C and D are updated to [A21 ; C11] and [B2 ; RD]. */
 
+#line 447 "AB8NXZ.f"
     *nu -= *ro;
+#line 448 "AB8NXZ.f"
     *mu = *sigma + *ro;
+#line 449 "AB8NXZ.f"
     if (*ro != 0) {
+#line 449 "AB8NXZ.f"
 	goto L20;
+#line 449 "AB8NXZ.f"
     }
 
+#line 452 "AB8NXZ.f"
 L80:
+#line 453 "AB8NXZ.f"
     zwork[1].r = (doublereal) wrkopt, zwork[1].i = 0.;
+#line 454 "AB8NXZ.f"
     return 0;
 /* *** Last line of AB8NXZ *** */
 } /* ab8nxz_ */

@@ -1,3 +1,4 @@
+#line 1 "NF01BS.f"
 /* NF01BS.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "NF01BS.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -269,94 +271,171 @@ static logical c_true = TRUE_;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 233 "NF01BS.f"
     /* Parameter adjustments */
+#line 233 "NF01BS.f"
     --dwork;
+#line 233 "NF01BS.f"
     --ipvt;
+#line 233 "NF01BS.f"
     --jnorms;
+#line 233 "NF01BS.f"
     --e;
+#line 233 "NF01BS.f"
     --j;
+#line 233 "NF01BS.f"
     --ipar;
+#line 233 "NF01BS.f"
 
+#line 233 "NF01BS.f"
     /* Function Body */
+#line 233 "NF01BS.f"
     *info = 0;
+#line 234 "NF01BS.f"
     if (*n < 0) {
+#line 235 "NF01BS.f"
 	*info = -1;
+#line 236 "NF01BS.f"
     } else if (*lipar < 4) {
+#line 237 "NF01BS.f"
 	*info = -3;
+#line 238 "NF01BS.f"
     } else if (*fnorm < 0.) {
+#line 239 "NF01BS.f"
 	*info = -4;
+#line 240 "NF01BS.f"
     } else if (*ldj < max(1,*n)) {
+#line 241 "NF01BS.f"
 	*info = -6;
+#line 242 "NF01BS.f"
     } else {
+#line 243 "NF01BS.f"
 	st = ipar[1];
+#line 244 "NF01BS.f"
 	bn = ipar[2];
+#line 245 "NF01BS.f"
 	bsm = ipar[3];
+#line 246 "NF01BS.f"
 	bsn = ipar[4];
+#line 247 "NF01BS.f"
 	nths = bn * bsn;
+#line 248 "NF01BS.f"
 	mmn = bsm - bsn;
+#line 249 "NF01BS.f"
 	if (bn > 0) {
+#line 250 "NF01BS.f"
 	    m = bn * bsm;
+#line 251 "NF01BS.f"
 	} else {
+#line 252 "NF01BS.f"
 	    m = *n;
+#line 253 "NF01BS.f"
 	}
 /* Computing MIN */
+#line 254 "NF01BS.f"
 	i__1 = min(st,bn), i__1 = min(i__1,bsm);
+#line 254 "NF01BS.f"
 	if (min(i__1,bsn) < 0) {
+#line 255 "NF01BS.f"
 	    *info = -2;
+#line 256 "NF01BS.f"
 	} else if (*n != nths + st) {
+#line 257 "NF01BS.f"
 	    *info = -1;
+#line 258 "NF01BS.f"
 	} else if (m < *n) {
+#line 259 "NF01BS.f"
 	    *info = -2;
+#line 260 "NF01BS.f"
 	} else if (*ldj < max(1,m)) {
+#line 261 "NF01BS.f"
 	    *info = -6;
+#line 262 "NF01BS.f"
 	} else {
+#line 263 "NF01BS.f"
 	    if (*n == 0) {
+#line 264 "NF01BS.f"
 		jwork = 1;
+#line 265 "NF01BS.f"
 	    } else if (bn <= 1 || bsn == 0) {
+#line 266 "NF01BS.f"
 		if (bn <= 1 && bsm == 1 && *n == 1) {
+#line 267 "NF01BS.f"
 		    jwork = 1;
+#line 268 "NF01BS.f"
 		} else {
+#line 269 "NF01BS.f"
 		    jwork = (*n << 2) + 1;
+#line 270 "NF01BS.f"
 		}
+#line 271 "NF01BS.f"
 	    } else {
 /* Computing MAX */
+#line 272 "NF01BS.f"
 		i__1 = bsn * 3 + 1;
+#line 272 "NF01BS.f"
 		jwork = bsn + max(i__1,st);
+#line 273 "NF01BS.f"
 		if (bsm > bsn) {
 /* Computing MAX */
+#line 274 "NF01BS.f"
 		    i__1 = jwork, i__2 = (st << 2) + 1;
+#line 274 "NF01BS.f"
 		    jwork = max(i__1,i__2);
+#line 275 "NF01BS.f"
 		    if (bsm < bsn << 1) {
 /* Computing MAX */
+#line 275 "NF01BS.f"
 			i__1 = jwork, i__2 = mmn * (bn - 1);
+#line 275 "NF01BS.f"
 			jwork = max(i__1,i__2);
+#line 275 "NF01BS.f"
 		    }
+#line 277 "NF01BS.f"
 		}
+#line 278 "NF01BS.f"
 	    }
+#line 279 "NF01BS.f"
 	    if (*ldwork < jwork) {
+#line 279 "NF01BS.f"
 		*info = -12;
+#line 279 "NF01BS.f"
 	    }
+#line 281 "NF01BS.f"
 	}
+#line 282 "NF01BS.f"
     }
 
+#line 284 "NF01BS.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 288 "NF01BS.f"
 	i__1 = -(*info);
+#line 288 "NF01BS.f"
 	xerbla_("NF01BS", &i__1, (ftnlen)6);
+#line 289 "NF01BS.f"
 	return 0;
+#line 290 "NF01BS.f"
     }
 
 /*     Quick return if possible. */
 
+#line 294 "NF01BS.f"
     *gnorm = 0.;
+#line 295 "NF01BS.f"
     if (*n == 0) {
+#line 296 "NF01BS.f"
 	*ldj = 1;
+#line 297 "NF01BS.f"
 	dwork[1] = 1.;
+#line 298 "NF01BS.f"
 	return 0;
+#line 299 "NF01BS.f"
     }
 
+#line 301 "NF01BS.f"
     if (bn <= 1 || bsn == 0) {
 
 /*        Special case, l <= 1 or BSN = 0: the Jacobian is represented */
@@ -370,30 +449,45 @@ static logical c_true = TRUE_;
 /*        Workspace: need:    4*N + 1; */
 /*                   prefer:  3*N + ( N+1 )*NB. */
 
+#line 314 "NF01BS.f"
 	md03bx_(&m, n, fnorm, &j[1], ldj, &e[1], &jnorms[1], gnorm, &ipvt[1], 
 		&dwork[1], ldwork, info);
+#line 316 "NF01BS.f"
 	return 0;
+#line 317 "NF01BS.f"
     }
 
 /*     General case: l > 1 and BSN > 0. */
 /*     Initialize the column pivoting indices. */
 
+#line 322 "NF01BS.f"
     i__1 = *n;
+#line 322 "NF01BS.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 323 "NF01BS.f"
 	ipvt[i__] = 0;
+#line 324 "NF01BS.f"
 /* L10: */
+#line 324 "NF01BS.f"
     }
 
 /*     Compute the QR factorization with pivoting of J. */
 /*     Pivoting is done separately on each block column of J. */
 
+#line 329 "NF01BS.f"
     wrkopt = 1;
+#line 330 "NF01BS.f"
     ibsn = 1;
+#line 331 "NF01BS.f"
     jl = *ldj * bsn + 1;
+#line 332 "NF01BS.f"
     jwork = bsn + 1;
 
+#line 334 "NF01BS.f"
     i__1 = m;
+#line 334 "NF01BS.f"
     i__2 = bsm;
+#line 334 "NF01BS.f"
     for (ibsm = 1; i__2 < 0 ? ibsm >= i__1 : ibsm <= i__1; ibsm += i__2) {
 
 /*        Compute the QR factorization with pivoting of J_k, and apply Q' */
@@ -401,50 +495,74 @@ static logical c_true = TRUE_;
 /*        Workspace: need:    4*BSN + 1; */
 /*                   prefer:  3*BSN + ( BSN+1 )*NB. */
 
+#line 341 "NF01BS.f"
 	i__3 = *ldwork - jwork + 1;
+#line 341 "NF01BS.f"
 	dgeqp3_(&bsm, &bsn, &j[ibsm], ldj, &ipvt[ibsn], &dwork[1], &dwork[
 		jwork], &i__3, info);
 /* Computing MAX */
+#line 343 "NF01BS.f"
 	i__3 = wrkopt, i__4 = (integer) dwork[jwork] + jwork - 1;
+#line 343 "NF01BS.f"
 	wrkopt = max(i__3,i__4);
+#line 344 "NF01BS.f"
 	if (ibsm > 1) {
 
 /*           Adjust the column pivoting indices. */
 
+#line 348 "NF01BS.f"
 	    i__3 = ibsn + bsn - 1;
+#line 348 "NF01BS.f"
 	    for (i__ = ibsn; i__ <= i__3; ++i__) {
+#line 349 "NF01BS.f"
 		ipvt[i__] = ipvt[i__] + ibsn - 1;
+#line 350 "NF01BS.f"
 /* L20: */
+#line 350 "NF01BS.f"
 	    }
 
+#line 352 "NF01BS.f"
 	}
 
+#line 354 "NF01BS.f"
 	if (st > 0) {
 
 /*           Workspace: need:    BSN + ST; */
 /*                      prefer:  BSN + ST*NB. */
 
+#line 359 "NF01BS.f"
 	    i__3 = *ldwork - jwork + 1;
+#line 359 "NF01BS.f"
 	    dormqr_("Left", "Transpose", &bsm, &st, &bsn, &j[ibsm], ldj, &
 		    dwork[1], &j[jl], ldj, &dwork[jwork], &i__3, info, (
 		    ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 362 "NF01BS.f"
 	    i__3 = wrkopt, i__4 = (integer) dwork[jwork] + jwork - 1;
+#line 362 "NF01BS.f"
 	    wrkopt = max(i__3,i__4);
+#line 363 "NF01BS.f"
 	}
 
 /*        Workspace: need:    BSN + 1; */
 /*                   prefer:  BSN + NB. */
 
+#line 368 "NF01BS.f"
 	i__3 = *ldwork - jwork + 1;
+#line 368 "NF01BS.f"
 	dormqr_("Left", "Transpose", &bsm, &c__1, &bsn, &j[ibsm], ldj, &dwork[
 		1], &e[ibsm], &bsm, &dwork[jwork], &i__3, info, (ftnlen)4, (
 		ftnlen)9);
+#line 371 "NF01BS.f"
 	jl += bsm;
+#line 372 "NF01BS.f"
 	ibsn += bsn;
+#line 373 "NF01BS.f"
 /* L30: */
+#line 373 "NF01BS.f"
     }
 
+#line 375 "NF01BS.f"
     if (mmn > 0) {
 
 /*        Case BSM > BSN. */
@@ -454,150 +572,254 @@ static logical c_true = TRUE_;
 /*        submatrices to the bottom. In the same loops, reshape the */
 /*        first block column of R to have the leading dimension N. */
 
+#line 384 "NF01BS.f"
 	l = ipvt[1];
+#line 385 "NF01BS.f"
 	jnorms[l] = abs(j[1]);
+#line 386 "NF01BS.f"
 	ibsm = bsm + 1;
+#line 387 "NF01BS.f"
 	ibsn = bsn + 1;
 
+#line 389 "NF01BS.f"
 	i__2 = bn - 1;
+#line 389 "NF01BS.f"
 	for (k = 1; k <= i__2; ++k) {
+#line 390 "NF01BS.f"
 	    j[ibsn] = j[ibsm];
+#line 391 "NF01BS.f"
 	    l = ipvt[ibsn];
+#line 392 "NF01BS.f"
 	    jnorms[l] = (d__1 = j[ibsn], abs(d__1));
+#line 393 "NF01BS.f"
 	    ibsm += bsm;
+#line 394 "NF01BS.f"
 	    ibsn += bsn;
+#line 395 "NF01BS.f"
 /* L40: */
+#line 395 "NF01BS.f"
 	}
 
+#line 397 "NF01BS.f"
 	ibsn += st;
 
+#line 399 "NF01BS.f"
 	i__2 = bsn;
+#line 399 "NF01BS.f"
 	for (i__ = 2; i__ <= i__2; ++i__) {
+#line 400 "NF01BS.f"
 	    ibsm = (i__ - 1) * *ldj + 1;
+#line 401 "NF01BS.f"
 	    jl = i__;
 
+#line 403 "NF01BS.f"
 	    i__1 = bn;
+#line 403 "NF01BS.f"
 	    for (k = 1; k <= i__1; ++k) {
 
+#line 405 "NF01BS.f"
 		i__3 = i__ - 1;
+#line 405 "NF01BS.f"
 		for (l = 0; l <= i__3; ++l) {
+#line 406 "NF01BS.f"
 		    j[ibsn + l] = j[ibsm + l];
+#line 407 "NF01BS.f"
 /* L45: */
+#line 407 "NF01BS.f"
 		}
 
+#line 409 "NF01BS.f"
 		l = ipvt[jl];
+#line 410 "NF01BS.f"
 		jnorms[l] = dnrm2_(&i__, &j[ibsn], &c__1);
+#line 411 "NF01BS.f"
 		ibsm += bsm;
+#line 412 "NF01BS.f"
 		ibsn += bsn;
+#line 413 "NF01BS.f"
 		jl += bsn;
+#line 414 "NF01BS.f"
 /* L50: */
+#line 414 "NF01BS.f"
 	    }
 
+#line 416 "NF01BS.f"
 	    ibsn += st;
+#line 417 "NF01BS.f"
 /* L60: */
+#line 417 "NF01BS.f"
 	}
 
 /*        Permute the rows of the second block column of Jc and of */
 /*        the vector e. */
 
+#line 422 "NF01BS.f"
 	jl = *ldj * bsn;
+#line 423 "NF01BS.f"
 	if (bsm >= bsn << 1) {
 
 /*           A swap operation can be used. */
 
+#line 427 "NF01BS.f"
 	    i__2 = st;
+#line 427 "NF01BS.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 428 "NF01BS.f"
 		ibsn = bsn + 1;
 
+#line 430 "NF01BS.f"
 		i__1 = m;
+#line 430 "NF01BS.f"
 		i__3 = bsm;
+#line 430 "NF01BS.f"
 		for (ibsm = bsm + 1; i__3 < 0 ? ibsm >= i__1 : ibsm <= i__1; 
 			ibsm += i__3) {
+#line 431 "NF01BS.f"
 		    dswap_(&mmn, &j[jl + ibsm], &c__1, &j[jl + ibsn], &c__1);
+#line 432 "NF01BS.f"
 		    ibsn += bsn;
+#line 433 "NF01BS.f"
 /* L70: */
+#line 433 "NF01BS.f"
 		}
 
+#line 435 "NF01BS.f"
 		jl += *ldj;
+#line 436 "NF01BS.f"
 /* L80: */
+#line 436 "NF01BS.f"
 	    }
 
 /*           Permute the rows of e. */
 
+#line 440 "NF01BS.f"
 	    ibsn = bsn + 1;
 
+#line 442 "NF01BS.f"
 	    i__2 = m;
+#line 442 "NF01BS.f"
 	    i__3 = bsm;
+#line 442 "NF01BS.f"
 	    for (ibsm = bsm + 1; i__3 < 0 ? ibsm >= i__2 : ibsm <= i__2; ibsm 
 		    += i__3) {
+#line 443 "NF01BS.f"
 		dswap_(&mmn, &e[ibsm], &c__1, &e[ibsn], &c__1);
+#line 444 "NF01BS.f"
 		ibsn += bsn;
+#line 445 "NF01BS.f"
 /* L90: */
+#line 445 "NF01BS.f"
 	    }
 
+#line 447 "NF01BS.f"
 	} else {
 
 /*           A swap operation cannot be used. */
 /*           Workspace: need:    ( BSM-BSN )*( BN-1 ). */
 
+#line 452 "NF01BS.f"
 	    i__3 = st;
+#line 452 "NF01BS.f"
 	    for (i__ = 1; i__ <= i__3; ++i__) {
+#line 453 "NF01BS.f"
 		ibsn = bsn + 1;
+#line 454 "NF01BS.f"
 		jlm = jl + ibsn;
+#line 455 "NF01BS.f"
 		jwork = 1;
 
+#line 457 "NF01BS.f"
 		i__2 = m;
+#line 457 "NF01BS.f"
 		i__1 = bsm;
+#line 457 "NF01BS.f"
 		for (ibsm = bsm + 1; i__1 < 0 ? ibsm >= i__2 : ibsm <= i__2; 
 			ibsm += i__1) {
+#line 458 "NF01BS.f"
 		    dcopy_(&mmn, &j[jlm], &c__1, &dwork[jwork], &c__1);
 
+#line 460 "NF01BS.f"
 		    i__4 = jl + bsn - 1;
+#line 460 "NF01BS.f"
 		    for (k = jl; k <= i__4; ++k) {
+#line 461 "NF01BS.f"
 			j[ibsn + k] = j[ibsm + k];
+#line 462 "NF01BS.f"
 /* L105: */
+#line 462 "NF01BS.f"
 		    }
 
+#line 464 "NF01BS.f"
 		    jlm += bsm;
+#line 465 "NF01BS.f"
 		    ibsn += bsn;
+#line 466 "NF01BS.f"
 		    jwork += mmn;
+#line 467 "NF01BS.f"
 /* L100: */
+#line 467 "NF01BS.f"
 		}
 
+#line 469 "NF01BS.f"
 		i__1 = mmn * (bn - 1);
+#line 469 "NF01BS.f"
 		dcopy_(&i__1, &dwork[1], &c__1, &j[jl + ibsn], &c__1);
+#line 470 "NF01BS.f"
 		jl += *ldj;
+#line 471 "NF01BS.f"
 /* L110: */
+#line 471 "NF01BS.f"
 	    }
 
 /*           Permute the rows of e. */
 
+#line 475 "NF01BS.f"
 	    ibsn = bsn + 1;
+#line 476 "NF01BS.f"
 	    jlm = ibsn;
+#line 477 "NF01BS.f"
 	    jwork = 1;
 
+#line 479 "NF01BS.f"
 	    i__3 = m;
+#line 479 "NF01BS.f"
 	    i__1 = bsm;
+#line 479 "NF01BS.f"
 	    for (ibsm = bsm + 1; i__1 < 0 ? ibsm >= i__3 : ibsm <= i__3; ibsm 
 		    += i__1) {
+#line 480 "NF01BS.f"
 		dcopy_(&mmn, &e[jlm], &c__1, &dwork[jwork], &c__1);
 
+#line 482 "NF01BS.f"
 		i__2 = bsn - 1;
+#line 482 "NF01BS.f"
 		for (k = 0; k <= i__2; ++k) {
+#line 483 "NF01BS.f"
 		    e[ibsn + k] = e[ibsm + k];
+#line 484 "NF01BS.f"
 /* L115: */
+#line 484 "NF01BS.f"
 		}
 
+#line 486 "NF01BS.f"
 		jlm += bsm;
+#line 487 "NF01BS.f"
 		ibsn += bsn;
+#line 488 "NF01BS.f"
 		jwork += mmn;
+#line 489 "NF01BS.f"
 /* L120: */
+#line 489 "NF01BS.f"
 	    }
 
+#line 491 "NF01BS.f"
 	    i__1 = mmn * (bn - 1);
+#line 491 "NF01BS.f"
 	    dcopy_(&i__1, &dwork[1], &c__1, &e[ibsn], &c__1);
+#line 492 "NF01BS.f"
 	}
 
+#line 494 "NF01BS.f"
 	if (st > 0) {
 
 /*           Compute the QR factorization with pivoting of the submatrix */
@@ -606,140 +828,225 @@ static logical c_true = TRUE_;
 /*           Workspace: need:    4*ST + 1; */
 /*                      prefer:  3*ST + ( ST+1 )*NB. */
 
+#line 502 "NF01BS.f"
 	    jl = (*ldj + bn) * bsn + 1;
+#line 503 "NF01BS.f"
 	    itau = 1;
+#line 504 "NF01BS.f"
 	    jwork = itau + st;
+#line 505 "NF01BS.f"
 	    i__1 = mmn * bn;
+#line 505 "NF01BS.f"
 	    i__3 = *ldwork - jwork + 1;
+#line 505 "NF01BS.f"
 	    dgeqp3_(&i__1, &st, &j[jl], ldj, &ipvt[nths + 1], &dwork[itau], &
 		    dwork[jwork], &i__3, info);
 /* Computing MAX */
+#line 508 "NF01BS.f"
 	    i__1 = wrkopt, i__3 = (integer) dwork[jwork] + jwork - 1;
+#line 508 "NF01BS.f"
 	    wrkopt = max(i__1,i__3);
 
 /*           Permute columns of the upper part of the second block */
 /*           column of Jc. */
 
+#line 513 "NF01BS.f"
 	    dlapmt_(&c_true, &nths, &st, &j[jl - nths], ldj, &ipvt[nths + 1]);
 
 /*           Adjust the column pivoting indices. */
 
+#line 518 "NF01BS.f"
 	    i__1 = *n;
+#line 518 "NF01BS.f"
 	    for (i__ = nths + 1; i__ <= i__1; ++i__) {
+#line 519 "NF01BS.f"
 		ipvt[i__] += nths;
+#line 520 "NF01BS.f"
 /* L130: */
+#line 520 "NF01BS.f"
 	    }
 
 /*           Workspace: need:    ST + 1; */
 /*                      prefer:  ST + NB. */
 
+#line 525 "NF01BS.f"
 	    i__1 = mmn * bn;
+#line 525 "NF01BS.f"
 	    i__3 = *ldwork - jwork + 1;
+#line 525 "NF01BS.f"
 	    dormqr_("Left", "Transpose", &i__1, &c__1, &st, &j[jl], ldj, &
 		    dwork[itau], &e[ibsn], ldj, &dwork[jwork], &i__3, info, (
 		    ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 528 "NF01BS.f"
 	    i__1 = wrkopt, i__3 = (integer) dwork[jwork] + jwork - 1;
+#line 528 "NF01BS.f"
 	    wrkopt = max(i__1,i__3);
 
 /*           Reshape the second block column of R to have the leading */
 /*           dimension N. */
 
+#line 533 "NF01BS.f"
 	    ibsn = *n * bsn + 1;
+#line 534 "NF01BS.f"
 	    dlacpy_("Full", n, &st, &j[*ldj * bsn + 1], ldj, &j[ibsn], n, (
 		    ftnlen)4);
 
 /*           Compute the original column norms for the second block */
 /*           column. */
 
+#line 539 "NF01BS.f"
 	    i__1 = *n;
+#line 539 "NF01BS.f"
 	    for (i__ = nths + 1; i__ <= i__1; ++i__) {
+#line 540 "NF01BS.f"
 		l = ipvt[i__];
+#line 541 "NF01BS.f"
 		jnorms[l] = dnrm2_(&i__, &j[ibsn], &c__1);
+#line 542 "NF01BS.f"
 		ibsn += *n;
+#line 543 "NF01BS.f"
 /* L140: */
+#line 543 "NF01BS.f"
 	    }
 
+#line 545 "NF01BS.f"
 	}
 
+#line 547 "NF01BS.f"
     } else {
 
 /*        Case BSM = BSN. */
 /*        Compute the original column norms for the first block column */
 /*        of Jc. */
 
+#line 553 "NF01BS.f"
 	ibsn = 1;
 
+#line 555 "NF01BS.f"
 	i__1 = bsn;
+#line 555 "NF01BS.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 556 "NF01BS.f"
 	    jl = i__;
 
+#line 558 "NF01BS.f"
 	    i__3 = bn;
+#line 558 "NF01BS.f"
 	    for (k = 1; k <= i__3; ++k) {
+#line 559 "NF01BS.f"
 		l = ipvt[jl];
+#line 560 "NF01BS.f"
 		jnorms[l] = dnrm2_(&i__, &j[ibsn], &c__1);
+#line 561 "NF01BS.f"
 		ibsn += bsn;
+#line 562 "NF01BS.f"
 		jl += bsn;
+#line 563 "NF01BS.f"
 /* L150: */
+#line 563 "NF01BS.f"
 	    }
 
+#line 565 "NF01BS.f"
 	    ibsn += st;
+#line 566 "NF01BS.f"
 /* L160: */
+#line 566 "NF01BS.f"
 	}
 
+#line 568 "NF01BS.f"
 	i__1 = *n;
+#line 568 "NF01BS.f"
 	for (i__ = nths + 1; i__ <= i__1; ++i__) {
+#line 569 "NF01BS.f"
 	    ipvt[i__] = i__;
+#line 570 "NF01BS.f"
 /* L170: */
+#line 570 "NF01BS.f"
 	}
 
+#line 572 "NF01BS.f"
     }
 
 /*     Compute the norm of the scaled gradient. */
 
+#line 576 "NF01BS.f"
     if (*fnorm != 0.) {
 
+#line 578 "NF01BS.f"
 	i__1 = nths;
+#line 578 "NF01BS.f"
 	i__3 = bsn;
+#line 578 "NF01BS.f"
 	for (ibsn = 1; i__3 < 0 ? ibsn >= i__1 : ibsn <= i__1; ibsn += i__3) {
+#line 579 "NF01BS.f"
 	    ibsni = ibsn;
 
+#line 581 "NF01BS.f"
 	    i__2 = bsn;
+#line 581 "NF01BS.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 582 "NF01BS.f"
 		l = ipvt[ibsn + i__ - 1];
+#line 583 "NF01BS.f"
 		if (jnorms[l] != 0.) {
+#line 584 "NF01BS.f"
 		    sum = ddot_(&i__, &j[ibsni], &c__1, &e[ibsn], &c__1) / *
 			    fnorm;
 /* Computing MAX */
+#line 585 "NF01BS.f"
 		    d__2 = *gnorm, d__3 = (d__1 = sum / jnorms[l], abs(d__1));
+#line 585 "NF01BS.f"
 		    *gnorm = max(d__2,d__3);
+#line 586 "NF01BS.f"
 		}
+#line 587 "NF01BS.f"
 		ibsni += *n;
+#line 588 "NF01BS.f"
 /* L180: */
+#line 588 "NF01BS.f"
 	    }
 
+#line 590 "NF01BS.f"
 /* L190: */
+#line 590 "NF01BS.f"
 	}
 
+#line 592 "NF01BS.f"
 	ibsni = *n * bsn + 1;
 
+#line 594 "NF01BS.f"
 	i__3 = *n;
+#line 594 "NF01BS.f"
 	for (i__ = nths + 1; i__ <= i__3; ++i__) {
+#line 595 "NF01BS.f"
 	    l = ipvt[i__];
+#line 596 "NF01BS.f"
 	    if (jnorms[l] != 0.) {
+#line 597 "NF01BS.f"
 		sum = ddot_(&i__, &j[ibsni], &c__1, &e[1], &c__1) / *fnorm;
 /* Computing MAX */
+#line 598 "NF01BS.f"
 		d__2 = *gnorm, d__3 = (d__1 = sum / jnorms[l], abs(d__1));
+#line 598 "NF01BS.f"
 		*gnorm = max(d__2,d__3);
+#line 599 "NF01BS.f"
 	    }
+#line 600 "NF01BS.f"
 	    ibsni += *n;
+#line 601 "NF01BS.f"
 /* L200: */
+#line 601 "NF01BS.f"
 	}
 
+#line 603 "NF01BS.f"
     }
 
+#line 605 "NF01BS.f"
     *ldj = *n;
+#line 606 "NF01BS.f"
     dwork[1] = (doublereal) wrkopt;
+#line 607 "NF01BS.f"
     return 0;
 
 /* *** Last line of NF01BS *** */

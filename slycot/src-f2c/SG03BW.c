@@ -1,3 +1,4 @@
+#line 1 "SG03BW.f"
 /* SG03BW.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SG03BW.f"
 /* Table of constant values */
 
 static integer c__4 = 4;
@@ -222,61 +224,109 @@ static doublereal c_b23 = -1.;
 
 /*     Decode input parameters. */
 
+#line 190 "SG03BW.f"
     /* Parameter adjustments */
+#line 190 "SG03BW.f"
     a_dim1 = *lda;
+#line 190 "SG03BW.f"
     a_offset = 1 + a_dim1;
+#line 190 "SG03BW.f"
     a -= a_offset;
+#line 190 "SG03BW.f"
     c_dim1 = *ldc;
+#line 190 "SG03BW.f"
     c_offset = 1 + c_dim1;
+#line 190 "SG03BW.f"
     c__ -= c_offset;
+#line 190 "SG03BW.f"
     e_dim1 = *lde;
+#line 190 "SG03BW.f"
     e_offset = 1 + e_dim1;
+#line 190 "SG03BW.f"
     e -= e_offset;
+#line 190 "SG03BW.f"
     d_dim1 = *ldd;
+#line 190 "SG03BW.f"
     d_offset = 1 + d_dim1;
+#line 190 "SG03BW.f"
     d__ -= d_offset;
+#line 190 "SG03BW.f"
     x_dim1 = *ldx;
+#line 190 "SG03BW.f"
     x_offset = 1 + x_dim1;
+#line 190 "SG03BW.f"
     x -= x_offset;
+#line 190 "SG03BW.f"
 
+#line 190 "SG03BW.f"
     /* Function Body */
+#line 190 "SG03BW.f"
     notrns = lsame_(trans, "N", (ftnlen)1, (ftnlen)1);
 
 /*     Check the scalar input parameters. */
 
+#line 194 "SG03BW.f"
     if (! (notrns || lsame_(trans, "T", (ftnlen)1, (ftnlen)1))) {
+#line 195 "SG03BW.f"
 	*info = -1;
+#line 196 "SG03BW.f"
     } else if (*m < 0) {
+#line 197 "SG03BW.f"
 	*info = -2;
+#line 198 "SG03BW.f"
     } else if (*n != 1 && *n != 2) {
+#line 199 "SG03BW.f"
 	*info = -3;
+#line 200 "SG03BW.f"
     } else if (*lda < max(1,*m)) {
+#line 201 "SG03BW.f"
 	*info = -5;
+#line 202 "SG03BW.f"
     } else if (*ldc < max(1,*n)) {
+#line 203 "SG03BW.f"
 	*info = -7;
+#line 204 "SG03BW.f"
     } else if (*lde < max(1,*m)) {
+#line 205 "SG03BW.f"
 	*info = -9;
+#line 206 "SG03BW.f"
     } else if (*ldd < max(1,*n)) {
+#line 207 "SG03BW.f"
 	*info = -11;
+#line 208 "SG03BW.f"
     } else if (*ldx < max(1,*m)) {
+#line 209 "SG03BW.f"
 	*info = -13;
+#line 210 "SG03BW.f"
     } else {
+#line 211 "SG03BW.f"
 	*info = 0;
+#line 212 "SG03BW.f"
     }
+#line 213 "SG03BW.f"
     if (*info != 0) {
+#line 214 "SG03BW.f"
 	i__1 = -(*info);
+#line 214 "SG03BW.f"
 	xerbla_("SG03BW", &i__1, (ftnlen)6);
+#line 215 "SG03BW.f"
 	return 0;
+#line 216 "SG03BW.f"
     }
 
+#line 218 "SG03BW.f"
     *scale = 1.;
 
 /*     Quick return if possible. */
 
+#line 222 "SG03BW.f"
     if (*m == 0) {
+#line 222 "SG03BW.f"
 	return 0;
+#line 222 "SG03BW.f"
     }
 
+#line 225 "SG03BW.f"
     if (notrns) {
 
 /*        Solve equation (1). */
@@ -284,22 +334,38 @@ static doublereal c_b23 = -1.;
 /*        Compute block row X(MA:ME,:). MB denotes the number of rows in */
 /*        this block row. */
 
+#line 232 "SG03BW.f"
 	me = 0;
 /*        WHILE ( ME .NE. M ) DO */
+#line 234 "SG03BW.f"
 L20:
+#line 234 "SG03BW.f"
 	if (me != *m) {
+#line 235 "SG03BW.f"
 	    ma = me + 1;
+#line 236 "SG03BW.f"
 	    if (ma == *m) {
+#line 237 "SG03BW.f"
 		me = *m;
+#line 238 "SG03BW.f"
 		mb = 1;
+#line 239 "SG03BW.f"
 	    } else {
+#line 240 "SG03BW.f"
 		if (a[ma + 1 + ma * a_dim1] == 0.) {
+#line 241 "SG03BW.f"
 		    me = ma;
+#line 242 "SG03BW.f"
 		    mb = 1;
+#line 243 "SG03BW.f"
 		} else {
+#line 244 "SG03BW.f"
 		    me = ma + 1;
+#line 245 "SG03BW.f"
 		    mb = 2;
+#line 246 "SG03BW.f"
 		}
+#line 247 "SG03BW.f"
 	    }
 
 /*           Assemble Kronecker product system of linear equations with */
@@ -311,90 +377,161 @@ L20:
 
 /*              RHS = vec(X(MA:ME,:)). */
 
+#line 258 "SG03BW.f"
 	    if (*n == 1) {
+#line 259 "SG03BW.f"
 		dimmat = mb;
+#line 260 "SG03BW.f"
 		i__1 = mb;
+#line 260 "SG03BW.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 261 "SG03BW.f"
 		    mai = ma + i__ - 1;
+#line 262 "SG03BW.f"
 		    i__2 = mb;
+#line 262 "SG03BW.f"
 		    for (j = 1; j <= i__2; ++j) {
+#line 263 "SG03BW.f"
 			maj = ma + j - 1;
+#line 264 "SG03BW.f"
 			mat[i__ + (j << 2) - 5] = c__[c_dim1 + 1] * a[maj + 
 				mai * a_dim1];
+#line 265 "SG03BW.f"
 			if (maj <= mai) {
+#line 265 "SG03BW.f"
 			    mat[i__ + (j << 2) - 5] += d__[d_dim1 + 1] * e[
 				    maj + mai * e_dim1];
+#line 265 "SG03BW.f"
 			}
+#line 267 "SG03BW.f"
 /* L40: */
+#line 267 "SG03BW.f"
 		    }
+#line 268 "SG03BW.f"
 		    rhs[i__ - 1] = x[mai + x_dim1];
+#line 269 "SG03BW.f"
 /* L60: */
+#line 269 "SG03BW.f"
 		}
+#line 270 "SG03BW.f"
 	    } else {
+#line 271 "SG03BW.f"
 		dimmat = mb << 1;
+#line 272 "SG03BW.f"
 		i__1 = mb;
+#line 272 "SG03BW.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 273 "SG03BW.f"
 		    mai = ma + i__ - 1;
+#line 274 "SG03BW.f"
 		    i__2 = mb;
+#line 274 "SG03BW.f"
 		    for (j = 1; j <= i__2; ++j) {
+#line 275 "SG03BW.f"
 			maj = ma + j - 1;
+#line 276 "SG03BW.f"
 			mat[i__ + (j << 2) - 5] = c__[c_dim1 + 1] * a[maj + 
 				mai * a_dim1];
+#line 277 "SG03BW.f"
 			mat[mb + i__ + (j << 2) - 5] = c__[(c_dim1 << 1) + 1] 
 				* a[maj + mai * a_dim1];
+#line 278 "SG03BW.f"
 			mat[i__ + (mb + j << 2) - 5] = c__[c_dim1 + 2] * a[
 				maj + mai * a_dim1];
+#line 279 "SG03BW.f"
 			mat[mb + i__ + (mb + j << 2) - 5] = c__[(c_dim1 << 1) 
 				+ 2] * a[maj + mai * a_dim1];
+#line 280 "SG03BW.f"
 			if (maj <= mai) {
+#line 281 "SG03BW.f"
 			    mat[i__ + (j << 2) - 5] += d__[d_dim1 + 1] * e[
 				    maj + mai * e_dim1];
+#line 282 "SG03BW.f"
 			    mat[mb + i__ + (j << 2) - 5] += d__[(d_dim1 << 1) 
 				    + 1] * e[maj + mai * e_dim1];
+#line 283 "SG03BW.f"
 			    mat[i__ + (mb + j << 2) - 5] += d__[d_dim1 + 2] * 
 				    e[maj + mai * e_dim1];
+#line 284 "SG03BW.f"
 			    mat[mb + i__ + (mb + j << 2) - 5] += d__[(d_dim1 
 				    << 1) + 2] * e[maj + mai * e_dim1];
+#line 286 "SG03BW.f"
 			}
+#line 287 "SG03BW.f"
 /* L80: */
+#line 287 "SG03BW.f"
 		    }
+#line 288 "SG03BW.f"
 		    rhs[i__ - 1] = x[mai + x_dim1];
+#line 289 "SG03BW.f"
 		    rhs[mb + i__ - 1] = x[mai + (x_dim1 << 1)];
+#line 290 "SG03BW.f"
 /* L100: */
+#line 290 "SG03BW.f"
 		}
+#line 291 "SG03BW.f"
 	    }
 
 /*           Solve the system of linear equations. */
 
+#line 295 "SG03BW.f"
 	    mb02uv_(&dimmat, mat, &c__4, piv1, piv2, &info1);
+#line 296 "SG03BW.f"
 	    if (info1 != 0) {
+#line 296 "SG03BW.f"
 		*info = 1;
+#line 296 "SG03BW.f"
 	    }
+#line 298 "SG03BW.f"
 	    mb02uu_(&dimmat, mat, &c__4, rhs, piv1, piv2, &scale1);
+#line 299 "SG03BW.f"
 	    if (scale1 != 1.) {
+#line 300 "SG03BW.f"
 		*scale = scale1 * *scale;
+#line 301 "SG03BW.f"
 		i__1 = *n;
+#line 301 "SG03BW.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 302 "SG03BW.f"
 		    dscal_(m, &scale1, &x[i__ * x_dim1 + 1], &c__1);
+#line 303 "SG03BW.f"
 /* L120: */
+#line 303 "SG03BW.f"
 		}
+#line 304 "SG03BW.f"
 	    }
 
+#line 306 "SG03BW.f"
 	    if (*n == 1) {
+#line 307 "SG03BW.f"
 		i__1 = mb;
+#line 307 "SG03BW.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 308 "SG03BW.f"
 		    mai = ma + i__ - 1;
+#line 309 "SG03BW.f"
 		    x[mai + x_dim1] = rhs[i__ - 1];
+#line 310 "SG03BW.f"
 /* L140: */
+#line 310 "SG03BW.f"
 		}
+#line 311 "SG03BW.f"
 	    } else {
+#line 312 "SG03BW.f"
 		i__1 = mb;
+#line 312 "SG03BW.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 313 "SG03BW.f"
 		    mai = ma + i__ - 1;
+#line 314 "SG03BW.f"
 		    x[mai + x_dim1] = rhs[i__ - 1];
+#line 315 "SG03BW.f"
 		    x[mai + (x_dim1 << 1)] = rhs[mb + i__ - 1];
+#line 316 "SG03BW.f"
 /* L160: */
+#line 316 "SG03BW.f"
 		}
+#line 317 "SG03BW.f"
 	    }
 
 /*           Update right hand sides. */
@@ -403,27 +540,38 @@ L20:
 
 /*           X(ME+1:M,:) = X(ME+1:M,:) - E(MA:ME,ME+1:M)'*X(MA:ME,:)*D */
 
+#line 325 "SG03BW.f"
 	    if (me < *m) {
+#line 326 "SG03BW.f"
 		dgemm_("N", "N", &mb, n, n, &c_b18, &x[ma + x_dim1], ldx, &
 			c__[c_offset], ldc, &c_b19, tm, &c__2, (ftnlen)1, (
 			ftnlen)1);
+#line 328 "SG03BW.f"
 		i__1 = *m - me;
+#line 328 "SG03BW.f"
 		dgemm_("T", "N", &i__1, n, &mb, &c_b23, &a[ma + (me + 1) * 
 			a_dim1], lda, tm, &c__2, &c_b18, &x[me + 1 + x_dim1], 
 			ldx, (ftnlen)1, (ftnlen)1);
+#line 330 "SG03BW.f"
 		dgemm_("N", "N", &mb, n, n, &c_b18, &x[ma + x_dim1], ldx, &
 			d__[d_offset], ldd, &c_b19, tm, &c__2, (ftnlen)1, (
 			ftnlen)1);
+#line 332 "SG03BW.f"
 		i__1 = *m - me;
+#line 332 "SG03BW.f"
 		dgemm_("T", "N", &i__1, n, &mb, &c_b23, &e[ma + (me + 1) * 
 			e_dim1], lde, tm, &c__2, &c_b18, &x[me + 1 + x_dim1], 
 			ldx, (ftnlen)1, (ftnlen)1);
+#line 334 "SG03BW.f"
 	    }
 
+#line 336 "SG03BW.f"
 	    goto L20;
+#line 337 "SG03BW.f"
 	}
 /*        END WHILE 20 */
 
+#line 340 "SG03BW.f"
     } else {
 
 /*        Solve equation (2). */
@@ -431,22 +579,38 @@ L20:
 /*        Compute block row X(MA:ME,:). MB denotes the number of rows in */
 /*        this block row. */
 
+#line 347 "SG03BW.f"
 	ma = *m + 1;
 /*        WHILE ( MA .NE. 1 ) DO */
+#line 349 "SG03BW.f"
 L180:
+#line 349 "SG03BW.f"
 	if (ma != 1) {
+#line 350 "SG03BW.f"
 	    me = ma - 1;
+#line 351 "SG03BW.f"
 	    if (me == 1) {
+#line 352 "SG03BW.f"
 		ma = 1;
+#line 353 "SG03BW.f"
 		mb = 1;
+#line 354 "SG03BW.f"
 	    } else {
+#line 355 "SG03BW.f"
 		if (a[me + (me - 1) * a_dim1] == 0.) {
+#line 356 "SG03BW.f"
 		    ma = me;
+#line 357 "SG03BW.f"
 		    mb = 1;
+#line 358 "SG03BW.f"
 		} else {
+#line 359 "SG03BW.f"
 		    ma = me - 1;
+#line 360 "SG03BW.f"
 		    mb = 2;
+#line 361 "SG03BW.f"
 		}
+#line 362 "SG03BW.f"
 	    }
 
 /*           Assemble Kronecker product system of linear equations with */
@@ -458,90 +622,161 @@ L180:
 
 /*              RHS = vec(X(MA:ME,:)). */
 
+#line 373 "SG03BW.f"
 	    if (*n == 1) {
+#line 374 "SG03BW.f"
 		dimmat = mb;
+#line 375 "SG03BW.f"
 		i__1 = mb;
+#line 375 "SG03BW.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 376 "SG03BW.f"
 		    mai = ma + i__ - 1;
+#line 377 "SG03BW.f"
 		    i__2 = mb;
+#line 377 "SG03BW.f"
 		    for (j = 1; j <= i__2; ++j) {
+#line 378 "SG03BW.f"
 			maj = ma + j - 1;
+#line 379 "SG03BW.f"
 			mat[i__ + (j << 2) - 5] = c__[c_dim1 + 1] * a[mai + 
 				maj * a_dim1];
+#line 380 "SG03BW.f"
 			if (maj >= mai) {
+#line 380 "SG03BW.f"
 			    mat[i__ + (j << 2) - 5] += d__[d_dim1 + 1] * e[
 				    mai + maj * e_dim1];
+#line 380 "SG03BW.f"
 			}
+#line 382 "SG03BW.f"
 /* L200: */
+#line 382 "SG03BW.f"
 		    }
+#line 383 "SG03BW.f"
 		    rhs[i__ - 1] = x[mai + x_dim1];
+#line 384 "SG03BW.f"
 /* L220: */
+#line 384 "SG03BW.f"
 		}
+#line 385 "SG03BW.f"
 	    } else {
+#line 386 "SG03BW.f"
 		dimmat = mb << 1;
+#line 387 "SG03BW.f"
 		i__1 = mb;
+#line 387 "SG03BW.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 388 "SG03BW.f"
 		    mai = ma + i__ - 1;
+#line 389 "SG03BW.f"
 		    i__2 = mb;
+#line 389 "SG03BW.f"
 		    for (j = 1; j <= i__2; ++j) {
+#line 390 "SG03BW.f"
 			maj = ma + j - 1;
+#line 391 "SG03BW.f"
 			mat[i__ + (j << 2) - 5] = c__[c_dim1 + 1] * a[mai + 
 				maj * a_dim1];
+#line 392 "SG03BW.f"
 			mat[mb + i__ + (j << 2) - 5] = c__[c_dim1 + 2] * a[
 				mai + maj * a_dim1];
+#line 393 "SG03BW.f"
 			mat[i__ + (mb + j << 2) - 5] = c__[(c_dim1 << 1) + 1] 
 				* a[mai + maj * a_dim1];
+#line 394 "SG03BW.f"
 			mat[mb + i__ + (mb + j << 2) - 5] = c__[(c_dim1 << 1) 
 				+ 2] * a[mai + maj * a_dim1];
+#line 395 "SG03BW.f"
 			if (maj >= mai) {
+#line 396 "SG03BW.f"
 			    mat[i__ + (j << 2) - 5] += d__[d_dim1 + 1] * e[
 				    mai + maj * e_dim1];
+#line 397 "SG03BW.f"
 			    mat[mb + i__ + (j << 2) - 5] += d__[d_dim1 + 2] * 
 				    e[mai + maj * e_dim1];
+#line 398 "SG03BW.f"
 			    mat[i__ + (mb + j << 2) - 5] += d__[(d_dim1 << 1) 
 				    + 1] * e[mai + maj * e_dim1];
+#line 399 "SG03BW.f"
 			    mat[mb + i__ + (mb + j << 2) - 5] += d__[(d_dim1 
 				    << 1) + 2] * e[mai + maj * e_dim1];
+#line 401 "SG03BW.f"
 			}
+#line 402 "SG03BW.f"
 /* L240: */
+#line 402 "SG03BW.f"
 		    }
+#line 403 "SG03BW.f"
 		    rhs[i__ - 1] = x[mai + x_dim1];
+#line 404 "SG03BW.f"
 		    rhs[mb + i__ - 1] = x[mai + (x_dim1 << 1)];
+#line 405 "SG03BW.f"
 /* L260: */
+#line 405 "SG03BW.f"
 		}
+#line 406 "SG03BW.f"
 	    }
 
 /*           Solve the system of linear equations. */
 
+#line 410 "SG03BW.f"
 	    mb02uv_(&dimmat, mat, &c__4, piv1, piv2, &info1);
+#line 411 "SG03BW.f"
 	    if (info1 != 0) {
+#line 411 "SG03BW.f"
 		*info = 1;
+#line 411 "SG03BW.f"
 	    }
+#line 413 "SG03BW.f"
 	    mb02uu_(&dimmat, mat, &c__4, rhs, piv1, piv2, &scale1);
+#line 414 "SG03BW.f"
 	    if (scale1 != 1.) {
+#line 415 "SG03BW.f"
 		*scale = scale1 * *scale;
+#line 416 "SG03BW.f"
 		i__1 = *n;
+#line 416 "SG03BW.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 417 "SG03BW.f"
 		    dscal_(m, &scale1, &x[i__ * x_dim1 + 1], &c__1);
+#line 418 "SG03BW.f"
 /* L280: */
+#line 418 "SG03BW.f"
 		}
+#line 419 "SG03BW.f"
 	    }
 
+#line 421 "SG03BW.f"
 	    if (*n == 1) {
+#line 422 "SG03BW.f"
 		i__1 = mb;
+#line 422 "SG03BW.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 423 "SG03BW.f"
 		    mai = ma + i__ - 1;
+#line 424 "SG03BW.f"
 		    x[mai + x_dim1] = rhs[i__ - 1];
+#line 425 "SG03BW.f"
 /* L300: */
+#line 425 "SG03BW.f"
 		}
+#line 426 "SG03BW.f"
 	    } else {
+#line 427 "SG03BW.f"
 		i__1 = mb;
+#line 427 "SG03BW.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 428 "SG03BW.f"
 		    mai = ma + i__ - 1;
+#line 429 "SG03BW.f"
 		    x[mai + x_dim1] = rhs[i__ - 1];
+#line 430 "SG03BW.f"
 		    x[mai + (x_dim1 << 1)] = rhs[mb + i__ - 1];
+#line 431 "SG03BW.f"
 /* L320: */
+#line 431 "SG03BW.f"
 		}
+#line 432 "SG03BW.f"
 	    }
 
 /*           Update right hand sides. */
@@ -550,29 +785,41 @@ L180:
 
 /*              X(1:MA-1,:) = X(1:MA-1,:) - E(1:MA-1,MA:ME)*X(MA:ME,:)*D' */
 
+#line 440 "SG03BW.f"
 	    if (ma > 1) {
+#line 441 "SG03BW.f"
 		dgemm_("N", "T", &mb, n, n, &c_b18, &x[ma + x_dim1], ldx, &
 			c__[c_offset], ldc, &c_b19, tm, &c__2, (ftnlen)1, (
 			ftnlen)1);
+#line 443 "SG03BW.f"
 		i__1 = ma - 1;
+#line 443 "SG03BW.f"
 		dgemm_("N", "N", &i__1, n, &mb, &c_b23, &a[ma * a_dim1 + 1], 
 			lda, tm, &c__2, &c_b18, &x[x_offset], ldx, (ftnlen)1, 
 			(ftnlen)1);
+#line 445 "SG03BW.f"
 		dgemm_("N", "T", &mb, n, n, &c_b18, &x[ma + x_dim1], ldx, &
 			d__[d_offset], ldd, &c_b19, tm, &c__2, (ftnlen)1, (
 			ftnlen)1);
+#line 447 "SG03BW.f"
 		i__1 = ma - 1;
+#line 447 "SG03BW.f"
 		dgemm_("N", "N", &i__1, n, &mb, &c_b23, &e[ma * e_dim1 + 1], 
 			lde, tm, &c__2, &c_b18, &x[x_offset], ldx, (ftnlen)1, 
 			(ftnlen)1);
+#line 449 "SG03BW.f"
 	    }
 
+#line 451 "SG03BW.f"
 	    goto L180;
+#line 452 "SG03BW.f"
 	}
 /*        END WHILE 180 */
 
+#line 455 "SG03BW.f"
     }
 
+#line 457 "SG03BW.f"
     return 0;
 /* *** Last line of SG03BW *** */
 } /* sg03bw_ */

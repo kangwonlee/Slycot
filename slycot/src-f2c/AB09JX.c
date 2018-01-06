@@ -1,3 +1,4 @@
+#line 1 "AB09JX.f"
 /* AB09JX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB09JX.f"
 /* Subroutine */ int ab09jx_(char *dico, char *stdom, char *evtype, integer *
 	n, doublereal *alpha, doublereal *er, doublereal *ei, doublereal *ed, 
 	doublereal *tolinf, integer *info, ftnlen dico_len, ftnlen stdom_len, 
@@ -156,127 +158,230 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 142 "AB09JX.f"
     /* Parameter adjustments */
+#line 142 "AB09JX.f"
     --ed;
+#line 142 "AB09JX.f"
     --ei;
+#line 142 "AB09JX.f"
     --er;
+#line 142 "AB09JX.f"
 
+#line 142 "AB09JX.f"
     /* Function Body */
+#line 142 "AB09JX.f"
     *info = 0;
+#line 143 "AB09JX.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 144 "AB09JX.f"
     stab = lsame_(stdom, "S", (ftnlen)1, (ftnlen)1);
+#line 145 "AB09JX.f"
     stdevp = lsame_(evtype, "S", (ftnlen)1, (ftnlen)1);
+#line 146 "AB09JX.f"
     recevp = lsame_(evtype, "R", (ftnlen)1, (ftnlen)1);
 
 /*     Check the scalar input arguments. */
 
+#line 150 "AB09JX.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 151 "AB09JX.f"
 	*info = -1;
+#line 152 "AB09JX.f"
     } else if (! (stab || lsame_(stdom, "U", (ftnlen)1, (ftnlen)1))) {
+#line 153 "AB09JX.f"
 	*info = -2;
+#line 154 "AB09JX.f"
     } else if (! (stdevp || lsame_(evtype, "G", (ftnlen)1, (ftnlen)1) || 
 	    recevp)) {
+#line 156 "AB09JX.f"
 	*info = -3;
+#line 157 "AB09JX.f"
     } else if (*n < 0) {
+#line 158 "AB09JX.f"
 	*info = -4;
+#line 159 "AB09JX.f"
     } else if (discr && *alpha < 0.) {
+#line 160 "AB09JX.f"
 	*info = -5;
+#line 161 "AB09JX.f"
     } else if (*tolinf < 0. || *tolinf >= 1.) {
+#line 162 "AB09JX.f"
 	*info = -9;
+#line 163 "AB09JX.f"
     }
 
+#line 165 "AB09JX.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 169 "AB09JX.f"
 	i__1 = -(*info);
+#line 169 "AB09JX.f"
 	xerbla_("AB09JX", &i__1, (ftnlen)6);
+#line 170 "AB09JX.f"
 	return 0;
+#line 171 "AB09JX.f"
     }
 
 /*     Quick return if possible. */
 
+#line 175 "AB09JX.f"
     if (*n == 0) {
+#line 175 "AB09JX.f"
 	return 0;
+#line 175 "AB09JX.f"
     }
 
+#line 178 "AB09JX.f"
     if (stab) {
 
 /*        Check the stability of finite eigenvalues. */
 
+#line 182 "AB09JX.f"
 	scale = 1.;
+#line 183 "AB09JX.f"
 	if (discr) {
+#line 184 "AB09JX.f"
 	    i__1 = *n;
+#line 184 "AB09JX.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 185 "AB09JX.f"
 		absev = dlapy2_(&er[i__], &ei[i__]);
+#line 186 "AB09JX.f"
 		if (recevp) {
+#line 187 "AB09JX.f"
 		    scale = absev;
+#line 188 "AB09JX.f"
 		    absev = (d__1 = ed[i__], abs(d__1));
+#line 189 "AB09JX.f"
 		} else if (! stdevp) {
+#line 190 "AB09JX.f"
 		    scale = ed[i__];
+#line 191 "AB09JX.f"
 		}
+#line 192 "AB09JX.f"
 		if (abs(scale) > *tolinf && absev >= *alpha * scale) {
+#line 194 "AB09JX.f"
 		    *info = 1;
+#line 195 "AB09JX.f"
 		    return 0;
+#line 196 "AB09JX.f"
 		}
+#line 197 "AB09JX.f"
 /* L10: */
+#line 197 "AB09JX.f"
 	    }
+#line 198 "AB09JX.f"
 	} else {
+#line 199 "AB09JX.f"
 	    i__1 = *n;
+#line 199 "AB09JX.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 200 "AB09JX.f"
 		rpev = er[i__];
+#line 201 "AB09JX.f"
 		if (recevp) {
+#line 202 "AB09JX.f"
 		    scale = rpev;
+#line 203 "AB09JX.f"
 		    rpev = ed[i__];
+#line 204 "AB09JX.f"
 		} else if (! stdevp) {
+#line 205 "AB09JX.f"
 		    scale = ed[i__];
+#line 206 "AB09JX.f"
 		}
+#line 207 "AB09JX.f"
 		if (abs(scale) > *tolinf && rpev >= *alpha * scale) {
+#line 209 "AB09JX.f"
 		    *info = 1;
+#line 210 "AB09JX.f"
 		    return 0;
+#line 211 "AB09JX.f"
 		}
+#line 212 "AB09JX.f"
 /* L20: */
+#line 212 "AB09JX.f"
 	    }
+#line 213 "AB09JX.f"
 	}
+#line 214 "AB09JX.f"
     } else {
 
 /*        Check the anti-stability of finite eigenvalues. */
 
+#line 218 "AB09JX.f"
 	if (discr) {
+#line 219 "AB09JX.f"
 	    i__1 = *n;
+#line 219 "AB09JX.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 220 "AB09JX.f"
 		absev = dlapy2_(&er[i__], &ei[i__]);
+#line 221 "AB09JX.f"
 		if (recevp) {
+#line 222 "AB09JX.f"
 		    scale = absev;
+#line 223 "AB09JX.f"
 		    absev = (d__1 = ed[i__], abs(d__1));
+#line 224 "AB09JX.f"
 		} else if (! stdevp) {
+#line 225 "AB09JX.f"
 		    scale = ed[i__];
+#line 226 "AB09JX.f"
 		}
+#line 227 "AB09JX.f"
 		if (abs(scale) > *tolinf && absev <= *alpha * scale) {
+#line 229 "AB09JX.f"
 		    *info = 1;
+#line 230 "AB09JX.f"
 		    return 0;
+#line 231 "AB09JX.f"
 		}
+#line 232 "AB09JX.f"
 /* L30: */
+#line 232 "AB09JX.f"
 	    }
+#line 233 "AB09JX.f"
 	} else {
+#line 234 "AB09JX.f"
 	    i__1 = *n;
+#line 234 "AB09JX.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 235 "AB09JX.f"
 		rpev = er[i__];
+#line 236 "AB09JX.f"
 		if (recevp) {
+#line 237 "AB09JX.f"
 		    scale = rpev;
+#line 238 "AB09JX.f"
 		    rpev = ed[i__];
+#line 239 "AB09JX.f"
 		} else if (! stdevp) {
+#line 240 "AB09JX.f"
 		    scale = ed[i__];
+#line 241 "AB09JX.f"
 		}
+#line 242 "AB09JX.f"
 		if (abs(scale) > *tolinf && rpev <= *alpha * scale) {
+#line 244 "AB09JX.f"
 		    *info = 1;
+#line 245 "AB09JX.f"
 		    return 0;
+#line 246 "AB09JX.f"
 		}
+#line 247 "AB09JX.f"
 /* L40: */
+#line 247 "AB09JX.f"
 	    }
+#line 248 "AB09JX.f"
 	}
+#line 249 "AB09JX.f"
     }
 
+#line 251 "AB09JX.f"
     return 0;
 /* *** Last line of AB09JX *** */
 } /* ab09jx_ */

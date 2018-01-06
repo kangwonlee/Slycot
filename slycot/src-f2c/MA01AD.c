@@ -1,3 +1,4 @@
+#line 1 "MA01AD.f"
 /* MA01AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MA01AD.f"
 /* Subroutine */ int ma01ad_(doublereal *xr, doublereal *xi, doublereal *yr, 
 	doublereal *yi)
 {
@@ -96,22 +98,38 @@
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 83 "MA01AD.f"
     s = sqrt((dlapy2_(xr, xi) + abs(*xr)) * .5);
+#line 84 "MA01AD.f"
     if (*xr >= 0.) {
+#line 84 "MA01AD.f"
 	*yr = s;
+#line 84 "MA01AD.f"
     }
+#line 85 "MA01AD.f"
     if (*xi < 0.) {
+#line 85 "MA01AD.f"
 	s = -s;
+#line 85 "MA01AD.f"
     }
+#line 86 "MA01AD.f"
     if (*xr <= 0.) {
+#line 87 "MA01AD.f"
 	*yi = s;
+#line 88 "MA01AD.f"
 	if (*xr < 0.) {
+#line 88 "MA01AD.f"
 	    *yr = *xi / s * .5;
+#line 88 "MA01AD.f"
 	}
+#line 89 "MA01AD.f"
     } else {
+#line 90 "MA01AD.f"
 	*yi = *xi / *yr * .5;
+#line 91 "MA01AD.f"
     }
 
+#line 93 "MA01AD.f"
     return 0;
 /*     *** Last line of MA01AD *** */
 } /* ma01ad_ */

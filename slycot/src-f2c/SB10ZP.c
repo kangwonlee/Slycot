@@ -1,3 +1,4 @@
+#line 1 "SB10ZP.f"
 /* SB10ZP.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB10ZP.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -205,150 +207,240 @@ static doublereal c_b35 = -1.;
 
 /*     Test input parameters and workspace. */
 
+#line 161 "SB10ZP.f"
     /* Parameter adjustments */
+#line 161 "SB10ZP.f"
     a_dim1 = *lda;
+#line 161 "SB10ZP.f"
     a_offset = 1 + a_dim1;
+#line 161 "SB10ZP.f"
     a -= a_offset;
+#line 161 "SB10ZP.f"
     --b;
+#line 161 "SB10ZP.f"
     --c__;
+#line 161 "SB10ZP.f"
     --d__;
+#line 161 "SB10ZP.f"
     --iwork;
+#line 161 "SB10ZP.f"
     --dwork;
+#line 161 "SB10ZP.f"
 
+#line 161 "SB10ZP.f"
     /* Function Body */
+#line 161 "SB10ZP.f"
     *info = 0;
+#line 162 "SB10ZP.f"
     if (*discfl != 0 && *discfl != 1) {
+#line 163 "SB10ZP.f"
 	*info = -1;
+#line 164 "SB10ZP.f"
     } else if (*n < 0) {
+#line 165 "SB10ZP.f"
 	*info = -2;
+#line 166 "SB10ZP.f"
     } else if (*lda < max(1,*n)) {
+#line 167 "SB10ZP.f"
 	*info = -4;
+#line 168 "SB10ZP.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 168 "SB10ZP.f"
 	i__1 = *n * *n + *n * 5, i__2 = *n * 6 + 1 + min(1,*n);
+#line 168 "SB10ZP.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 169 "SB10ZP.f"
 	    *info = -10;
+#line 170 "SB10ZP.f"
 	}
+#line 170 "SB10ZP.f"
     }
 
+#line 172 "SB10ZP.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 176 "SB10ZP.f"
 	i__1 = -(*info);
+#line 176 "SB10ZP.f"
 	xerbla_("SB10ZP", &i__1, (ftnlen)6);
+#line 177 "SB10ZP.f"
 	return 0;
+#line 178 "SB10ZP.f"
     }
 
 /*     Quick return if possible. */
 
+#line 182 "SB10ZP.f"
     if (*n == 0) {
+#line 183 "SB10ZP.f"
 	dwork[1] = 1.;
+#line 184 "SB10ZP.f"
 	return 0;
+#line 185 "SB10ZP.f"
     }
 
 /*     Workspace usage 1. */
 
+#line 189 "SB10ZP.f"
     rep = 1;
+#line 190 "SB10ZP.f"
     imp = rep + *n;
+#line 191 "SB10ZP.f"
     rez = imp + *n;
+#line 192 "SB10ZP.f"
     imz = rez + *n;
+#line 193 "SB10ZP.f"
     iwa = rez;
+#line 194 "SB10ZP.f"
     idw1 = iwa + *n * *n;
+#line 195 "SB10ZP.f"
     ldw1 = *ldwork - idw1 + 1;
 
 /*     1. Discrete --> continuous transformation if needed. */
 
+#line 199 "SB10ZP.f"
     if (*discfl == 1) {
 
 /*        Workspace:  need    max(1,N); */
 /*                            prefer  larger. */
 
+#line 204 "SB10ZP.f"
 	ab04md_("D", n, &c__1, &c__1, &c_b6, &c_b6, &a[a_offset], lda, &b[1], 
 		lda, &c__[1], &c__1, &d__[1], &c__1, &iwork[1], &dwork[1], 
 		ldwork, &info2, (ftnlen)1);
+#line 206 "SB10ZP.f"
 	if (info2 != 0) {
+#line 207 "SB10ZP.f"
 	    *info = 1;
+#line 208 "SB10ZP.f"
 	    return 0;
+#line 209 "SB10ZP.f"
 	}
+#line 210 "SB10ZP.f"
 	maxwrk = (integer) dwork[1];
+#line 211 "SB10ZP.f"
     } else {
+#line 212 "SB10ZP.f"
 	maxwrk = 0;
+#line 213 "SB10ZP.f"
     }
 
 /*     2. Determine the factors for restoring system gain. */
 
+#line 217 "SB10ZP.f"
     scald = d__[1];
+#line 218 "SB10ZP.f"
     scalc = sqrt((abs(scald)));
+#line 219 "SB10ZP.f"
     scalb = d_sign(&scalc, &scald);
 
 /*     3. Find the system poles, i.e., the eigenvalues of A. */
 /*        Workspace:  need    N*N + 2*N + 3*N; */
 /*                            prefer  larger. */
 
+#line 225 "SB10ZP.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &dwork[iwa], n, (ftnlen)4);
 
+#line 227 "SB10ZP.f"
     dgeev_("N", "N", n, &dwork[iwa], n, &dwork[rep], &dwork[imp], &dwork[idw1]
 	    , &c__1, &dwork[idw1], &c__1, &dwork[idw1], &ldw1, &info2, (
 	    ftnlen)1, (ftnlen)1);
+#line 230 "SB10ZP.f"
     if (info2 != 0) {
+#line 231 "SB10ZP.f"
 	*info = 2;
+#line 232 "SB10ZP.f"
 	return 0;
+#line 233 "SB10ZP.f"
     }
 /* Computing MAX */
+#line 234 "SB10ZP.f"
     i__1 = maxwrk, i__2 = (integer) (dwork[idw1] + idw1 - 1);
+#line 234 "SB10ZP.f"
     maxwrk = max(i__1,i__2);
 
 /*     4. Compute the inverse system [Ai, Bi; Ci, Di]. */
 /*        Workspace:  need    N*N + 2*N + 4; */
 /*                            prefer  larger. */
 
+#line 240 "SB10ZP.f"
     ab07nd_(n, &c__1, &a[a_offset], lda, &b[1], lda, &c__[1], &c__1, &d__[1], 
 	    &c__1, &rcond, &iwork[1], &dwork[idw1], &ldw1, &info2);
+#line 242 "SB10ZP.f"
     if (info2 != 0) {
+#line 243 "SB10ZP.f"
 	*info = 3;
+#line 244 "SB10ZP.f"
 	return 0;
+#line 245 "SB10ZP.f"
     }
 /* Computing MAX */
+#line 246 "SB10ZP.f"
     i__1 = maxwrk, i__2 = (integer) (dwork[idw1] + idw1 - 1);
+#line 246 "SB10ZP.f"
     maxwrk = max(i__1,i__2);
 
 /*     5. Find the system zeros, i.e., the eigenvalues of Ai. */
 /*        Workspace:  need    4*N + 3*N; */
 /*                            prefer  larger. */
 
+#line 252 "SB10ZP.f"
     idw1 = imz + *n;
+#line 253 "SB10ZP.f"
     ldw1 = *ldwork - idw1 + 1;
 
+#line 255 "SB10ZP.f"
     dgeev_("N", "N", n, &a[a_offset], lda, &dwork[rez], &dwork[imz], &dwork[
 	    idw1], &c__1, &dwork[idw1], &c__1, &dwork[idw1], &ldw1, &info2, (
 	    ftnlen)1, (ftnlen)1);
+#line 258 "SB10ZP.f"
     if (info2 != 0) {
+#line 259 "SB10ZP.f"
 	*info = 4;
+#line 260 "SB10ZP.f"
 	return 0;
+#line 261 "SB10ZP.f"
     }
 /* Computing MAX */
+#line 262 "SB10ZP.f"
     i__1 = maxwrk, i__2 = (integer) (dwork[idw1] + idw1 - 1);
+#line 262 "SB10ZP.f"
     maxwrk = max(i__1,i__2);
 
 /*     6. Exchange the zeros and the poles with positive real parts with */
 /*        their negatives. */
 
+#line 267 "SB10ZP.f"
     i__1 = *n - 1;
+#line 267 "SB10ZP.f"
     for (i__ = 0; i__ <= i__1; ++i__) {
+#line 268 "SB10ZP.f"
 	if (dwork[rep + i__] > 0.) {
+#line 268 "SB10ZP.f"
 	    dwork[rep + i__] = -dwork[rep + i__];
+#line 268 "SB10ZP.f"
 	}
+#line 270 "SB10ZP.f"
 	if (dwork[rez + i__] > 0.) {
+#line 270 "SB10ZP.f"
 	    dwork[rez + i__] = -dwork[rez + i__];
+#line 270 "SB10ZP.f"
 	}
+#line 272 "SB10ZP.f"
 /* L10: */
+#line 272 "SB10ZP.f"
     }
 
 /*     Workspace usage 2. */
 
+#line 276 "SB10ZP.f"
     iwp = idw1;
+#line 277 "SB10ZP.f"
     idw2 = iwp + *n + 1;
+#line 278 "SB10ZP.f"
     iwps = 1;
 
 /*     7. Construct the nominator and the denominator */
@@ -357,60 +449,92 @@ static doublereal c_b35 = -1.;
 /*        MC01PD subroutine produces them in increasing powers of s. */
 /*        Workspace:  need    6*N + 2. */
 
+#line 286 "SB10ZP.f"
     mc01pd_(n, &dwork[rep], &dwork[imp], &dwork[iwp], &dwork[idw2], &info2);
+#line 288 "SB10ZP.f"
     i__1 = *n + 1;
+#line 288 "SB10ZP.f"
     dcopy_(&i__1, &dwork[iwp], &c_n1, &dwork[iwps], &c__1);
 
 /*     Workspace usage 3. */
 
+#line 292 "SB10ZP.f"
     iwq = idw1;
+#line 293 "SB10ZP.f"
     iwqs = iwps + *n + 1;
+#line 294 "SB10ZP.f"
     idw3 = iwqs + *n + 1;
 
+#line 296 "SB10ZP.f"
     mc01pd_(n, &dwork[rez], &dwork[imz], &dwork[iwq], &dwork[idw2], &info2);
+#line 298 "SB10ZP.f"
     i__1 = *n + 1;
+#line 298 "SB10ZP.f"
     dcopy_(&i__1, &dwork[iwq], &c_n1, &dwork[iwqs], &c__1);
 
 /*     9. Make the conversion T(s) --> [A, B; C, D]. */
 /*        Workspace:  need    2*N + 2 + N + max(N,3); */
 /*                            prefer  larger. */
 
+#line 304 "SB10ZP.f"
     index[0] = *n;
+#line 305 "SB10ZP.f"
     i__1 = *ldwork - idw3 + 1;
+#line 305 "SB10ZP.f"
     td04ad_("R", &c__1, &c__1, index, &dwork[iwps], &c__1, &dwork[iwqs], &
 	    c__1, &c__1, n, &a[a_offset], lda, &b[1], lda, &c__[1], &c__1, &
 	    d__[1], &c__1, &c_b35, &iwork[1], &dwork[idw3], &i__1, &info2, (
 	    ftnlen)1);
+#line 308 "SB10ZP.f"
     if (info2 != 0) {
+#line 309 "SB10ZP.f"
 	*info = 5;
+#line 310 "SB10ZP.f"
 	return 0;
+#line 311 "SB10ZP.f"
     }
 /* Computing MAX */
+#line 312 "SB10ZP.f"
     i__1 = maxwrk, i__2 = (integer) (dwork[idw3] + idw3 - 1);
+#line 312 "SB10ZP.f"
     maxwrk = max(i__1,i__2);
 
 /*    10. Scale the transformed system to the previous gain. */
 
+#line 316 "SB10ZP.f"
     if (*n > 0) {
+#line 317 "SB10ZP.f"
 	dscal_(n, &scalb, &b[1], &c__1);
+#line 318 "SB10ZP.f"
 	c__[*n] = scalc * c__[*n];
+#line 319 "SB10ZP.f"
     }
 
+#line 321 "SB10ZP.f"
     d__[1] = scald;
 
 /*     11. Continuous --> discrete transformation if needed. */
 
+#line 325 "SB10ZP.f"
     if (*discfl == 1) {
+#line 326 "SB10ZP.f"
 	ab04md_("C", n, &c__1, &c__1, &c_b6, &c_b6, &a[a_offset], lda, &b[1], 
 		lda, &c__[1], &c__1, &d__[1], &c__1, &iwork[1], &dwork[1], 
 		ldwork, &info2, (ftnlen)1);
+#line 329 "SB10ZP.f"
 	if (info2 != 0) {
+#line 330 "SB10ZP.f"
 	    *info = 6;
+#line 331 "SB10ZP.f"
 	    return 0;
+#line 332 "SB10ZP.f"
 	}
+#line 333 "SB10ZP.f"
     }
 
+#line 335 "SB10ZP.f"
     dwork[1] = (doublereal) maxwrk;
+#line 336 "SB10ZP.f"
     return 0;
 
 /* *** Last line of SB10ZP *** */

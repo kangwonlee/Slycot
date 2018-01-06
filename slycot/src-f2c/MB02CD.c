@@ -1,3 +1,4 @@
+#line 1 "MB02CD.f"
 /* MB02CD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02CD.f"
 /* Table of constant values */
 
 static doublereal c_b17 = 1.;
@@ -265,136 +267,225 @@ static integer c__1 = 1;
 
 /*     Decode the scalar input parameters. */
 
+#line 230 "MB02CD.f"
     /* Parameter adjustments */
+#line 230 "MB02CD.f"
     t_dim1 = *ldt;
+#line 230 "MB02CD.f"
     t_offset = 1 + t_dim1;
+#line 230 "MB02CD.f"
     t -= t_offset;
+#line 230 "MB02CD.f"
     g_dim1 = *ldg;
+#line 230 "MB02CD.f"
     g_offset = 1 + g_dim1;
+#line 230 "MB02CD.f"
     g -= g_offset;
+#line 230 "MB02CD.f"
     r_dim1 = *ldr;
+#line 230 "MB02CD.f"
     r_offset = 1 + r_dim1;
+#line 230 "MB02CD.f"
     r__ -= r_offset;
+#line 230 "MB02CD.f"
     l_dim1 = *ldl;
+#line 230 "MB02CD.f"
     l_offset = 1 + l_dim1;
+#line 230 "MB02CD.f"
     l -= l_offset;
+#line 230 "MB02CD.f"
     --cs;
+#line 230 "MB02CD.f"
     --dwork;
+#line 230 "MB02CD.f"
 
+#line 230 "MB02CD.f"
     /* Function Body */
+#line 230 "MB02CD.f"
     *info = 0;
+#line 231 "MB02CD.f"
     compl = lsame_(job, "L", (ftnlen)1, (ftnlen)1) || lsame_(job, "A", (
 	    ftnlen)1, (ftnlen)1);
+#line 232 "MB02CD.f"
     compg = lsame_(job, "G", (ftnlen)1, (ftnlen)1) || lsame_(job, "R", (
 	    ftnlen)1, (ftnlen)1) || compl;
+#line 233 "MB02CD.f"
     compr = lsame_(job, "R", (ftnlen)1, (ftnlen)1) || lsame_(job, "A", (
 	    ftnlen)1, (ftnlen)1) || lsame_(job, "O", (ftnlen)1, (ftnlen)1);
+#line 235 "MB02CD.f"
     isrow = lsame_(typet, "R", (ftnlen)1, (ftnlen)1);
 
 /*     Check the scalar input parameters. */
 
+#line 239 "MB02CD.f"
     if (! (compg || compr)) {
+#line 240 "MB02CD.f"
 	*info = -1;
+#line 241 "MB02CD.f"
     } else if (! (isrow || lsame_(typet, "C", (ftnlen)1, (ftnlen)1))) {
+#line 242 "MB02CD.f"
 	*info = -2;
+#line 243 "MB02CD.f"
     } else if (*k < 0) {
+#line 244 "MB02CD.f"
 	*info = -3;
+#line 245 "MB02CD.f"
     } else if (*n < 0) {
+#line 246 "MB02CD.f"
 	*info = -4;
+#line 247 "MB02CD.f"
     } else if (*ldt < 1 || isrow && *ldt < *k || ! isrow && *ldt < *n * *k) {
+#line 249 "MB02CD.f"
 	*info = -6;
+#line 250 "MB02CD.f"
     } else if (*ldg < 1 || compg && (isrow && *ldg < *k << 1 || ! isrow && *
 	    ldg < *n * *k)) {
+#line 253 "MB02CD.f"
 	*info = -8;
+#line 254 "MB02CD.f"
     } else if (*ldr < 1 || compr && *ldr < *n * *k) {
+#line 255 "MB02CD.f"
 	*info = -10;
+#line 256 "MB02CD.f"
     } else if (*ldl < 1 || compl && *ldl < *n * *k) {
+#line 257 "MB02CD.f"
 	*info = -12;
+#line 258 "MB02CD.f"
     } else if (*lcs < (*n - 1) * 3 * *k) {
+#line 259 "MB02CD.f"
 	*info = -14;
+#line 260 "MB02CD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 260 "MB02CD.f"
 	i__1 = 1, i__2 = (*n - 1) * *k;
+#line 260 "MB02CD.f"
 	if (*ldwork < max(i__1,i__2)) {
 /* Computing MAX */
+#line 261 "MB02CD.f"
 	    i__1 = 1, i__2 = (*n - 1) * *k;
+#line 261 "MB02CD.f"
 	    dwork[1] = (doublereal) max(i__1,i__2);
+#line 262 "MB02CD.f"
 	    *info = -16;
+#line 263 "MB02CD.f"
 	}
+#line 263 "MB02CD.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 267 "MB02CD.f"
     if (*info != 0) {
+#line 268 "MB02CD.f"
 	i__1 = -(*info);
+#line 268 "MB02CD.f"
 	xerbla_("MB02CD", &i__1, (ftnlen)6);
+#line 269 "MB02CD.f"
 	return 0;
+#line 270 "MB02CD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 274 "MB02CD.f"
     if (min(*k,*n) == 0) {
+#line 275 "MB02CD.f"
 	dwork[1] = 1.;
+#line 276 "MB02CD.f"
 	return 0;
+#line 277 "MB02CD.f"
     }
 
+#line 279 "MB02CD.f"
     maxwrk = 1;
+#line 280 "MB02CD.f"
     if (isrow) {
 
 /*        T is the first block row of a block Toeplitz matrix. */
 /*        Bring T to proper form by triangularizing its first block. */
 
+#line 285 "MB02CD.f"
 	dpotrf_("Upper", k, &t[t_offset], ldt, &ierr, (ftnlen)5);
+#line 286 "MB02CD.f"
 	if (ierr != 0) {
 
 /*           Error return:  The matrix is not positive definite. */
 
+#line 290 "MB02CD.f"
 	    *info = 1;
+#line 291 "MB02CD.f"
 	    return 0;
+#line 292 "MB02CD.f"
 	}
 
+#line 294 "MB02CD.f"
 	if (*n > 1) {
+#line 294 "MB02CD.f"
 	    i__1 = (*n - 1) * *k;
+#line 294 "MB02CD.f"
 	    dtrsm_("Left", "Upper", "Transpose", "NonUnit", k, &i__1, &c_b17, 
 		    &t[t_offset], ldt, &t[(*k + 1) * t_dim1 + 1], ldt, (
 		    ftnlen)4, (ftnlen)5, (ftnlen)9, (ftnlen)7);
+#line 294 "MB02CD.f"
 	}
 
 /*        Initialize the output matrices. */
 
+#line 300 "MB02CD.f"
 	if (compg) {
+#line 301 "MB02CD.f"
 	    i__1 = *k << 1;
+#line 301 "MB02CD.f"
 	    i__2 = *n * *k;
+#line 301 "MB02CD.f"
 	    dlaset_("All", &i__1, &i__2, &c_b19, &c_b19, &g[g_offset], ldg, (
 		    ftnlen)3);
+#line 302 "MB02CD.f"
 	    i__1 = *ldg + 1;
+#line 302 "MB02CD.f"
 	    dlaset_("All", &c__1, k, &c_b17, &c_b17, &g[*k + 1 + g_dim1], &
 		    i__1, (ftnlen)3);
+#line 303 "MB02CD.f"
 	    dtrsm_("Left", "Upper", "Transpose", "NonUnit", k, k, &c_b17, &t[
 		    t_offset], ldt, &g[*k + 1 + g_dim1], ldg, (ftnlen)4, (
 		    ftnlen)5, (ftnlen)9, (ftnlen)7);
+#line 305 "MB02CD.f"
 	    if (*n > 1) {
+#line 305 "MB02CD.f"
 		i__1 = (*n - 1) * *k;
+#line 305 "MB02CD.f"
 		dlacpy_("Upper", k, &i__1, &t[t_offset], ldt, &g[*k + 1 + (*k 
 			+ 1) * g_dim1], ldg, (ftnlen)5);
+#line 305 "MB02CD.f"
 	    }
+#line 308 "MB02CD.f"
 	    dlacpy_("Lower", k, k, &g[*k + 1 + g_dim1], ldg, &g[g_offset], 
 		    ldg, (ftnlen)5);
+#line 309 "MB02CD.f"
 	}
 
+#line 311 "MB02CD.f"
 	if (compl) {
+#line 312 "MB02CD.f"
 	    dlacpy_("Lower", k, k, &g[*k + 1 + g_dim1], ldg, &l[l_offset], 
 		    ldl, (ftnlen)5);
+#line 313 "MB02CD.f"
 	}
 
+#line 315 "MB02CD.f"
 	if (compr) {
+#line 316 "MB02CD.f"
 	    i__1 = *n * *k;
+#line 316 "MB02CD.f"
 	    dlacpy_("Upper", k, &i__1, &t[t_offset], ldt, &r__[r_offset], ldr,
 		     (ftnlen)5);
+#line 317 "MB02CD.f"
 	}
 
 /*        Processing the generator. */
 
+#line 321 "MB02CD.f"
 	if (compg) {
 
 /*           Here we use G as working array for holding the generator. */
@@ -414,84 +505,126 @@ static integer c__1 = 1;
 /*           (N-1)*K locations of DWORK are used by SLICOT Library */
 /*           routine MB02CY. */
 
+#line 340 "MB02CD.f"
 	    i__1 = *n;
+#line 340 "MB02CD.f"
 	    for (i__ = 2; i__ <= i__1; ++i__) {
+#line 341 "MB02CD.f"
 		startr = (i__ - 1) * *k + 1;
+#line 342 "MB02CD.f"
 		starti = (*n - i__ + 1) * *k + 1;
+#line 343 "MB02CD.f"
 		startt = (i__ - 2) * 3 * *k + 1;
 
 /*              Transformations acting on the generator: */
 
+#line 347 "MB02CD.f"
 		i__2 = *k * 3;
+#line 347 "MB02CD.f"
 		mb02cx_("Row", k, k, k, &g[*k + 1 + (*k + 1) * g_dim1], ldg, &
 			t[startr * t_dim1 + 1], ldt, &cs[startt], &i__2, &
 			dwork[1], ldwork, &ierr, (ftnlen)3);
 
+#line 351 "MB02CD.f"
 		if (ierr != 0) {
 
 /*                 Error return:  The matrix is not positive definite. */
 
+#line 355 "MB02CD.f"
 		    *info = 1;
+#line 356 "MB02CD.f"
 		    return 0;
+#line 357 "MB02CD.f"
 		}
 
 /* Computing MAX */
+#line 359 "MB02CD.f"
 		i__2 = maxwrk, i__3 = (integer) dwork[1];
+#line 359 "MB02CD.f"
 		maxwrk = max(i__2,i__3);
+#line 360 "MB02CD.f"
 		if (*n > i__) {
+#line 361 "MB02CD.f"
 		    i__2 = (*n - i__) * *k;
+#line 361 "MB02CD.f"
 		    i__3 = *k * 3;
+#line 361 "MB02CD.f"
 		    mb02cy_("Row", "NoStructure", k, k, &i__2, k, &g[*k + 1 + 
 			    ((*k << 1) + 1) * g_dim1], ldg, &t[(startr + *k) *
 			     t_dim1 + 1], ldt, &t[startr * t_dim1 + 1], ldt, &
 			    cs[startt], &i__3, &dwork[1], ldwork, &ierr, (
 			    ftnlen)3, (ftnlen)11);
 /* Computing MAX */
+#line 365 "MB02CD.f"
 		    i__2 = maxwrk, i__3 = (integer) dwork[1];
+#line 365 "MB02CD.f"
 		    maxwrk = max(i__2,i__3);
+#line 366 "MB02CD.f"
 		}
 
+#line 368 "MB02CD.f"
 		if (compr) {
+#line 369 "MB02CD.f"
 		    i__2 = (*n - i__ + 1) * *k;
+#line 369 "MB02CD.f"
 		    dlacpy_("Upper", k, &i__2, &g[*k + 1 + (*k + 1) * g_dim1],
 			     ldg, &r__[startr + startr * r_dim1], ldr, (
 			    ftnlen)5);
+#line 371 "MB02CD.f"
 		}
 
 /*              Transformations acting on the inverse generator: */
 
+#line 375 "MB02CD.f"
 		dlaset_("All", k, k, &c_b19, &c_b19, &g[*k + 1 + starti * 
 			g_dim1], ldg, (ftnlen)3);
+#line 377 "MB02CD.f"
 		i__2 = *k * 3;
+#line 377 "MB02CD.f"
 		mb02cy_("Row", "Triangular", k, k, k, k, &g[*k + 1 + g_dim1], 
 			ldg, &g[startr * g_dim1 + 1], ldg, &t[startr * t_dim1 
 			+ 1], ldt, &cs[startt], &i__2, &dwork[1], ldwork, &
 			ierr, (ftnlen)3, (ftnlen)10);
 /* Computing MAX */
+#line 380 "MB02CD.f"
 		i__2 = maxwrk, i__3 = (integer) dwork[1];
+#line 380 "MB02CD.f"
 		maxwrk = max(i__2,i__3);
 
+#line 382 "MB02CD.f"
 		i__2 = (i__ - 1) * *k;
+#line 382 "MB02CD.f"
 		i__3 = *k * 3;
+#line 382 "MB02CD.f"
 		mb02cy_("Row", "NoStructure", k, k, &i__2, k, &g[*k + 1 + 
 			starti * g_dim1], ldg, &g[g_offset], ldg, &t[startr * 
 			t_dim1 + 1], ldt, &cs[startt], &i__3, &dwork[1], 
 			ldwork, &ierr, (ftnlen)3, (ftnlen)11);
 /* Computing MAX */
+#line 385 "MB02CD.f"
 		i__2 = maxwrk, i__3 = (integer) dwork[1];
+#line 385 "MB02CD.f"
 		maxwrk = max(i__2,i__3);
 
+#line 387 "MB02CD.f"
 		if (compl) {
+#line 388 "MB02CD.f"
 		    i__2 = (i__ - 1) * *k;
+#line 388 "MB02CD.f"
 		    dlacpy_("All", k, &i__2, &g[*k + 1 + starti * g_dim1], 
 			    ldg, &l[startr + l_dim1], ldl, (ftnlen)3);
+#line 390 "MB02CD.f"
 		    dlacpy_("Lower", k, k, &g[*k + 1 + g_dim1], ldg, &l[
 			    startr + ((i__ - 1) * *k + 1) * l_dim1], ldl, (
 			    ftnlen)5);
+#line 392 "MB02CD.f"
 		}
+#line 393 "MB02CD.f"
 /* L10: */
+#line 393 "MB02CD.f"
 	    }
 
+#line 395 "MB02CD.f"
 	} else {
 
 /*           Here R is used as working array for holding the generator. */
@@ -499,109 +632,168 @@ static integer c__1 = 1;
 /*           The current row of R contains the first row of the */
 /*           generator. */
 
+#line 402 "MB02CD.f"
 	    if (*n > 1) {
+#line 402 "MB02CD.f"
 		i__1 = (*n - 1) * *k;
+#line 402 "MB02CD.f"
 		dlacpy_("Upper", k, &i__1, &t[t_offset], ldt, &r__[*k + 1 + (*
 			k + 1) * r_dim1], ldr, (ftnlen)5);
+#line 402 "MB02CD.f"
 	    }
 
+#line 406 "MB02CD.f"
 	    i__1 = *n;
+#line 406 "MB02CD.f"
 	    for (i__ = 2; i__ <= i__1; ++i__) {
+#line 407 "MB02CD.f"
 		startr = (i__ - 1) * *k + 1;
+#line 408 "MB02CD.f"
 		startt = (i__ - 2) * 3 * *k + 1;
+#line 409 "MB02CD.f"
 		i__2 = *k * 3;
+#line 409 "MB02CD.f"
 		mb02cx_("Row", k, k, k, &r__[startr + startr * r_dim1], ldr, &
 			t[startr * t_dim1 + 1], ldt, &cs[startt], &i__2, &
 			dwork[1], ldwork, &ierr, (ftnlen)3);
+#line 412 "MB02CD.f"
 		if (ierr != 0) {
 
 /*                 Error return:  The matrix is not positive definite. */
 
+#line 416 "MB02CD.f"
 		    *info = 1;
+#line 417 "MB02CD.f"
 		    return 0;
+#line 418 "MB02CD.f"
 		}
 
 /* Computing MAX */
+#line 420 "MB02CD.f"
 		i__2 = maxwrk, i__3 = (integer) dwork[1];
+#line 420 "MB02CD.f"
 		maxwrk = max(i__2,i__3);
+#line 421 "MB02CD.f"
 		if (*n > i__) {
+#line 422 "MB02CD.f"
 		    i__2 = (*n - i__) * *k;
+#line 422 "MB02CD.f"
 		    i__3 = *k * 3;
+#line 422 "MB02CD.f"
 		    mb02cy_("Row", "NoStructure", k, k, &i__2, k, &r__[startr 
 			    + (startr + *k) * r_dim1], ldr, &t[(startr + *k) *
 			     t_dim1 + 1], ldt, &t[startr * t_dim1 + 1], ldt, &
 			    cs[startt], &i__3, &dwork[1], ldwork, &ierr, (
 			    ftnlen)3, (ftnlen)11);
 /* Computing MAX */
+#line 426 "MB02CD.f"
 		    i__2 = maxwrk, i__3 = (integer) dwork[1];
+#line 426 "MB02CD.f"
 		    maxwrk = max(i__2,i__3);
 
+#line 428 "MB02CD.f"
 		    i__2 = (*n - i__) * *k;
+#line 428 "MB02CD.f"
 		    dlacpy_("Upper", k, &i__2, &r__[startr + startr * r_dim1],
 			     ldr, &r__[startr + *k + (startr + *k) * r_dim1], 
 			    ldr, (ftnlen)5);
+#line 430 "MB02CD.f"
 		}
+#line 431 "MB02CD.f"
 /* L20: */
+#line 431 "MB02CD.f"
 	    }
 
+#line 433 "MB02CD.f"
 	}
 
+#line 435 "MB02CD.f"
     } else {
 
 /*        T is the first block column of a block Toeplitz matrix. */
 /*        Bring T to proper form by triangularizing its first block. */
 
+#line 440 "MB02CD.f"
 	dpotrf_("Lower", k, &t[t_offset], ldt, &ierr, (ftnlen)5);
+#line 441 "MB02CD.f"
 	if (ierr != 0) {
 
 /*           Error return:  The matrix is not positive definite. */
 
+#line 445 "MB02CD.f"
 	    *info = 1;
+#line 446 "MB02CD.f"
 	    return 0;
+#line 447 "MB02CD.f"
 	}
 
+#line 449 "MB02CD.f"
 	if (*n > 1) {
+#line 449 "MB02CD.f"
 	    i__1 = (*n - 1) * *k;
+#line 449 "MB02CD.f"
 	    dtrsm_("Right", "Lower", "Transpose", "NonUnit", &i__1, k, &c_b17,
 		     &t[t_offset], ldt, &t[*k + 1 + t_dim1], ldt, (ftnlen)5, (
 		    ftnlen)5, (ftnlen)9, (ftnlen)7);
+#line 449 "MB02CD.f"
 	}
 
 /*        Initialize the output matrices. */
 
+#line 455 "MB02CD.f"
 	if (compg) {
+#line 456 "MB02CD.f"
 	    i__1 = *n * *k;
+#line 456 "MB02CD.f"
 	    i__2 = *k << 1;
+#line 456 "MB02CD.f"
 	    dlaset_("All", &i__1, &i__2, &c_b19, &c_b19, &g[g_offset], ldg, (
 		    ftnlen)3);
+#line 457 "MB02CD.f"
 	    i__1 = *ldg + 1;
+#line 457 "MB02CD.f"
 	    dlaset_("All", &c__1, k, &c_b17, &c_b17, &g[(*k + 1) * g_dim1 + 1]
 		    , &i__1, (ftnlen)3);
+#line 458 "MB02CD.f"
 	    dtrsm_("Right", "Lower", "Transpose", "NonUnit", k, k, &c_b17, &t[
 		    t_offset], ldt, &g[(*k + 1) * g_dim1 + 1], ldg, (ftnlen)5,
 		     (ftnlen)5, (ftnlen)9, (ftnlen)7);
+#line 460 "MB02CD.f"
 	    if (*n > 1) {
+#line 460 "MB02CD.f"
 		i__1 = (*n - 1) * *k;
+#line 460 "MB02CD.f"
 		dlacpy_("Lower", &i__1, k, &t[t_offset], ldt, &g[*k + 1 + (*k 
 			+ 1) * g_dim1], ldg, (ftnlen)5);
+#line 460 "MB02CD.f"
 	    }
+#line 463 "MB02CD.f"
 	    dlacpy_("Upper", k, k, &g[(*k + 1) * g_dim1 + 1], ldg, &g[
 		    g_offset], ldg, (ftnlen)5);
+#line 464 "MB02CD.f"
 	}
 
+#line 466 "MB02CD.f"
 	if (compl) {
+#line 467 "MB02CD.f"
 	    dlacpy_("Upper", k, k, &g[(*k + 1) * g_dim1 + 1], ldg, &l[
 		    l_offset], ldl, (ftnlen)5);
+#line 468 "MB02CD.f"
 	}
 
+#line 470 "MB02CD.f"
 	if (compr) {
+#line 471 "MB02CD.f"
 	    i__1 = *n * *k;
+#line 471 "MB02CD.f"
 	    dlacpy_("Lower", &i__1, k, &t[t_offset], ldt, &r__[r_offset], ldr,
 		     (ftnlen)5);
+#line 472 "MB02CD.f"
 	}
 
 /*        Processing the generator. */
 
+#line 476 "MB02CD.f"
 	if (compg) {
 
 /*           Here we use G as working array for holding the generator. */
@@ -621,84 +813,126 @@ static integer c__1 = 1;
 /*           (N-1)*K locations of DWORK are used by SLICOT Library */
 /*           routine MB02CY. */
 
+#line 495 "MB02CD.f"
 	    i__1 = *n;
+#line 495 "MB02CD.f"
 	    for (i__ = 2; i__ <= i__1; ++i__) {
+#line 496 "MB02CD.f"
 		startr = (i__ - 1) * *k + 1;
+#line 497 "MB02CD.f"
 		starti = (*n - i__ + 1) * *k + 1;
+#line 498 "MB02CD.f"
 		startt = (i__ - 2) * 3 * *k + 1;
 
 /*              Transformations acting on the generator: */
 
+#line 502 "MB02CD.f"
 		i__2 = *k * 3;
+#line 502 "MB02CD.f"
 		mb02cx_("Column", k, k, k, &g[*k + 1 + (*k + 1) * g_dim1], 
 			ldg, &t[startr + t_dim1], ldt, &cs[startt], &i__2, &
 			dwork[1], ldwork, &ierr, (ftnlen)6);
 
+#line 506 "MB02CD.f"
 		if (ierr != 0) {
 
 /*                 Error return:  The matrix is not positive definite. */
 
+#line 510 "MB02CD.f"
 		    *info = 1;
+#line 511 "MB02CD.f"
 		    return 0;
+#line 512 "MB02CD.f"
 		}
 
 /* Computing MAX */
+#line 514 "MB02CD.f"
 		i__2 = maxwrk, i__3 = (integer) dwork[1];
+#line 514 "MB02CD.f"
 		maxwrk = max(i__2,i__3);
+#line 515 "MB02CD.f"
 		if (*n > i__) {
+#line 516 "MB02CD.f"
 		    i__2 = (*n - i__) * *k;
+#line 516 "MB02CD.f"
 		    i__3 = *k * 3;
+#line 516 "MB02CD.f"
 		    mb02cy_("Column", "NoStructure", k, k, &i__2, k, &g[(*k <<
 			     1) + 1 + (*k + 1) * g_dim1], ldg, &t[startr + *k 
 			    + t_dim1], ldt, &t[startr + t_dim1], ldt, &cs[
 			    startt], &i__3, &dwork[1], ldwork, &ierr, (ftnlen)
 			    6, (ftnlen)11);
 /* Computing MAX */
+#line 520 "MB02CD.f"
 		    i__2 = maxwrk, i__3 = (integer) dwork[1];
+#line 520 "MB02CD.f"
 		    maxwrk = max(i__2,i__3);
+#line 521 "MB02CD.f"
 		}
 
+#line 523 "MB02CD.f"
 		if (compr) {
+#line 524 "MB02CD.f"
 		    i__2 = (*n - i__ + 1) * *k;
+#line 524 "MB02CD.f"
 		    dlacpy_("Lower", &i__2, k, &g[*k + 1 + (*k + 1) * g_dim1],
 			     ldg, &r__[startr + startr * r_dim1], ldr, (
 			    ftnlen)5);
+#line 526 "MB02CD.f"
 		}
 
 /*              Transformations acting on the inverse generator: */
 
+#line 530 "MB02CD.f"
 		dlaset_("All", k, k, &c_b19, &c_b19, &g[starti + (*k + 1) * 
 			g_dim1], ldg, (ftnlen)3);
+#line 532 "MB02CD.f"
 		i__2 = *k * 3;
+#line 532 "MB02CD.f"
 		mb02cy_("Column", "Triangular", k, k, k, k, &g[(*k + 1) * 
 			g_dim1 + 1], ldg, &g[startr + g_dim1], ldg, &t[startr 
 			+ t_dim1], ldt, &cs[startt], &i__2, &dwork[1], ldwork,
 			 &ierr, (ftnlen)6, (ftnlen)10);
 /* Computing MAX */
+#line 536 "MB02CD.f"
 		i__2 = maxwrk, i__3 = (integer) dwork[1];
+#line 536 "MB02CD.f"
 		maxwrk = max(i__2,i__3);
 
+#line 538 "MB02CD.f"
 		i__2 = (i__ - 1) * *k;
+#line 538 "MB02CD.f"
 		i__3 = *k * 3;
+#line 538 "MB02CD.f"
 		mb02cy_("Column", "NoStructure", k, k, &i__2, k, &g[starti + (
 			*k + 1) * g_dim1], ldg, &g[g_offset], ldg, &t[startr 
 			+ t_dim1], ldt, &cs[startt], &i__3, &dwork[1], ldwork,
 			 &ierr, (ftnlen)6, (ftnlen)11);
 /* Computing MAX */
+#line 541 "MB02CD.f"
 		i__2 = maxwrk, i__3 = (integer) dwork[1];
+#line 541 "MB02CD.f"
 		maxwrk = max(i__2,i__3);
 
+#line 543 "MB02CD.f"
 		if (compl) {
+#line 544 "MB02CD.f"
 		    i__2 = (i__ - 1) * *k;
+#line 544 "MB02CD.f"
 		    dlacpy_("All", &i__2, k, &g[starti + (*k + 1) * g_dim1], 
 			    ldg, &l[startr * l_dim1 + 1], ldl, (ftnlen)3);
+#line 546 "MB02CD.f"
 		    dlacpy_("Upper", k, k, &g[(*k + 1) * g_dim1 + 1], ldg, &l[
 			    (i__ - 1) * *k + 1 + startr * l_dim1], ldl, (
 			    ftnlen)5);
+#line 548 "MB02CD.f"
 		}
+#line 549 "MB02CD.f"
 /* L30: */
+#line 549 "MB02CD.f"
 	    }
 
+#line 551 "MB02CD.f"
 	} else {
 
 /*           Here R is used as working array for holding the generator. */
@@ -706,56 +940,87 @@ static integer c__1 = 1;
 /*           The current column of R contains the first column of the */
 /*           generator. */
 
+#line 558 "MB02CD.f"
 	    if (*n > 1) {
+#line 558 "MB02CD.f"
 		i__1 = (*n - 1) * *k;
+#line 558 "MB02CD.f"
 		dlacpy_("Lower", &i__1, k, &t[t_offset], ldt, &r__[*k + 1 + (*
 			k + 1) * r_dim1], ldr, (ftnlen)5);
+#line 558 "MB02CD.f"
 	    }
 
+#line 562 "MB02CD.f"
 	    i__1 = *n;
+#line 562 "MB02CD.f"
 	    for (i__ = 2; i__ <= i__1; ++i__) {
+#line 563 "MB02CD.f"
 		startr = (i__ - 1) * *k + 1;
+#line 564 "MB02CD.f"
 		startt = (i__ - 2) * 3 * *k + 1;
+#line 565 "MB02CD.f"
 		i__2 = *k * 3;
+#line 565 "MB02CD.f"
 		mb02cx_("Column", k, k, k, &r__[startr + startr * r_dim1], 
 			ldr, &t[startr + t_dim1], ldt, &cs[startt], &i__2, &
 			dwork[1], ldwork, &ierr, (ftnlen)6);
+#line 568 "MB02CD.f"
 		if (ierr != 0) {
 
 /*                 Error return:  The matrix is not positive definite. */
 
+#line 572 "MB02CD.f"
 		    *info = 1;
+#line 573 "MB02CD.f"
 		    return 0;
+#line 574 "MB02CD.f"
 		}
 
 /* Computing MAX */
+#line 576 "MB02CD.f"
 		i__2 = maxwrk, i__3 = (integer) dwork[1];
+#line 576 "MB02CD.f"
 		maxwrk = max(i__2,i__3);
+#line 577 "MB02CD.f"
 		if (*n > i__) {
+#line 578 "MB02CD.f"
 		    i__2 = (*n - i__) * *k;
+#line 578 "MB02CD.f"
 		    i__3 = *k * 3;
+#line 578 "MB02CD.f"
 		    mb02cy_("Column", "NoStructure", k, k, &i__2, k, &r__[
 			    startr + *k + startr * r_dim1], ldr, &t[startr + *
 			    k + t_dim1], ldt, &t[startr + t_dim1], ldt, &cs[
 			    startt], &i__3, &dwork[1], ldwork, &ierr, (ftnlen)
 			    6, (ftnlen)11);
 /* Computing MAX */
+#line 582 "MB02CD.f"
 		    i__2 = maxwrk, i__3 = (integer) dwork[1];
+#line 582 "MB02CD.f"
 		    maxwrk = max(i__2,i__3);
 
+#line 584 "MB02CD.f"
 		    i__2 = (*n - i__) * *k;
+#line 584 "MB02CD.f"
 		    dlacpy_("Lower", &i__2, k, &r__[startr + startr * r_dim1],
 			     ldr, &r__[startr + *k + (startr + *k) * r_dim1], 
 			    ldr, (ftnlen)5);
+#line 586 "MB02CD.f"
 		}
+#line 587 "MB02CD.f"
 /* L40: */
+#line 587 "MB02CD.f"
 	    }
 
+#line 589 "MB02CD.f"
 	}
+#line 590 "MB02CD.f"
     }
 
+#line 592 "MB02CD.f"
     dwork[1] = (doublereal) maxwrk;
 
+#line 594 "MB02CD.f"
     return 0;
 
 /* *** Last line of MB02CD *** */

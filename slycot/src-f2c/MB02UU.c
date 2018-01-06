@@ -1,3 +1,4 @@
+#line 1 "MB02UU.f"
 /* MB02UU.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02UU.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -120,87 +122,150 @@ static integer c__1 = 1;
 
 /*     Set constants to control owerflow. */
 
+#line 102 "MB02UU.f"
     /* Parameter adjustments */
+#line 102 "MB02UU.f"
     a_dim1 = *lda;
+#line 102 "MB02UU.f"
     a_offset = 1 + a_dim1;
+#line 102 "MB02UU.f"
     a -= a_offset;
+#line 102 "MB02UU.f"
     --rhs;
+#line 102 "MB02UU.f"
     --ipiv;
+#line 102 "MB02UU.f"
     --jpiv;
+#line 102 "MB02UU.f"
 
+#line 102 "MB02UU.f"
     /* Function Body */
+#line 102 "MB02UU.f"
     eps = dlamch_("Precision", (ftnlen)9);
+#line 103 "MB02UU.f"
     smlnum = dlamch_("Safe minimum", (ftnlen)12) / eps;
+#line 104 "MB02UU.f"
     bignum = 1. / smlnum;
+#line 105 "MB02UU.f"
     dlabad_(&smlnum, &bignum);
 
 /*     Apply permutations IPIV to RHS. */
 
+#line 109 "MB02UU.f"
     i__1 = *n - 1;
+#line 109 "MB02UU.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 110 "MB02UU.f"
 	ip = ipiv[i__];
+#line 111 "MB02UU.f"
 	if (ip != i__) {
+#line 112 "MB02UU.f"
 	    temp = rhs[i__];
+#line 113 "MB02UU.f"
 	    rhs[i__] = rhs[ip];
+#line 114 "MB02UU.f"
 	    rhs[ip] = temp;
+#line 115 "MB02UU.f"
 	}
+#line 116 "MB02UU.f"
 /* L20: */
+#line 116 "MB02UU.f"
     }
 
 /*     Solve for L part. */
 
+#line 120 "MB02UU.f"
     i__1 = *n - 1;
+#line 120 "MB02UU.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 121 "MB02UU.f"
 	i__2 = *n - i__;
+#line 121 "MB02UU.f"
 	d__1 = -rhs[i__];
+#line 121 "MB02UU.f"
 	daxpy_(&i__2, &d__1, &a[i__ + 1 + i__ * a_dim1], &c__1, &rhs[i__ + 1],
 		 &c__1);
+#line 122 "MB02UU.f"
 /* L40: */
+#line 122 "MB02UU.f"
     }
 
 /*     Solve for U part. */
 
 /*     Check for scaling. */
 
+#line 128 "MB02UU.f"
     factor = (doublereal) (*n) * 2.;
+#line 129 "MB02UU.f"
     i__ = 1;
+#line 130 "MB02UU.f"
 L60:
+#line 131 "MB02UU.f"
     if (factor * smlnum * (d__1 = rhs[i__], abs(d__1)) <= (d__2 = a[i__ + i__ 
 	    * a_dim1], abs(d__2))) {
+#line 133 "MB02UU.f"
 	++i__;
+#line 134 "MB02UU.f"
 	if (i__ <= *n) {
+#line 134 "MB02UU.f"
 	    goto L60;
+#line 134 "MB02UU.f"
 	}
+#line 135 "MB02UU.f"
 	*scale = 1.;
+#line 136 "MB02UU.f"
     } else {
+#line 137 "MB02UU.f"
 	*scale = 1. / factor / (d__1 = rhs[idamax_(n, &rhs[1], &c__1)], abs(
 		d__1));
+#line 138 "MB02UU.f"
 	dscal_(n, scale, &rhs[1], &c__1);
+#line 139 "MB02UU.f"
     }
 
+#line 141 "MB02UU.f"
     for (i__ = *n; i__ >= 1; --i__) {
+#line 142 "MB02UU.f"
 	temp = 1. / a[i__ + i__ * a_dim1];
+#line 143 "MB02UU.f"
 	rhs[i__] *= temp;
+#line 144 "MB02UU.f"
 	i__1 = *n;
+#line 144 "MB02UU.f"
 	for (j = i__ + 1; j <= i__1; ++j) {
+#line 145 "MB02UU.f"
 	    rhs[i__] -= rhs[j] * (a[i__ + j * a_dim1] * temp);
+#line 146 "MB02UU.f"
 /* L80: */
+#line 146 "MB02UU.f"
 	}
+#line 147 "MB02UU.f"
 /* L100: */
+#line 147 "MB02UU.f"
     }
 
 /*     Apply permutations JPIV to the solution (RHS). */
 
+#line 151 "MB02UU.f"
     for (i__ = *n - 1; i__ >= 1; --i__) {
+#line 152 "MB02UU.f"
 	ip = jpiv[i__];
+#line 153 "MB02UU.f"
 	if (ip != i__) {
+#line 154 "MB02UU.f"
 	    temp = rhs[i__];
+#line 155 "MB02UU.f"
 	    rhs[i__] = rhs[ip];
+#line 156 "MB02UU.f"
 	    rhs[ip] = temp;
+#line 157 "MB02UU.f"
 	}
+#line 158 "MB02UU.f"
 /* L120: */
+#line 158 "MB02UU.f"
     }
 
+#line 160 "MB02UU.f"
     return 0;
 /* *** Last line of MB02UU *** */
 } /* mb02uu_ */

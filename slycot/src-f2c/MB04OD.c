@@ -1,3 +1,4 @@
+#line 1 "MB04OD.f"
 /* MB04OD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04OD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -187,39 +189,66 @@ static integer c__1 = 1;
 
 /*     For efficiency reasons, the parameters are not checked. */
 
+#line 167 "MB04OD.f"
     /* Parameter adjustments */
+#line 167 "MB04OD.f"
     r_dim1 = *ldr;
+#line 167 "MB04OD.f"
     r_offset = 1 + r_dim1;
+#line 167 "MB04OD.f"
     r__ -= r_offset;
+#line 167 "MB04OD.f"
     a_dim1 = *lda;
+#line 167 "MB04OD.f"
     a_offset = 1 + a_dim1;
+#line 167 "MB04OD.f"
     a -= a_offset;
+#line 167 "MB04OD.f"
     b_dim1 = *ldb;
+#line 167 "MB04OD.f"
     b_offset = 1 + b_dim1;
+#line 167 "MB04OD.f"
     b -= b_offset;
+#line 167 "MB04OD.f"
     c_dim1 = *ldc;
+#line 167 "MB04OD.f"
     c_offset = 1 + c_dim1;
+#line 167 "MB04OD.f"
     c__ -= c_offset;
+#line 167 "MB04OD.f"
     --tau;
+#line 167 "MB04OD.f"
     --dwork;
+#line 167 "MB04OD.f"
 
+#line 167 "MB04OD.f"
     /* Function Body */
+#line 167 "MB04OD.f"
     if (min(*n,*p) == 0) {
+#line 167 "MB04OD.f"
 	return 0;
+#line 167 "MB04OD.f"
     }
 
+#line 170 "MB04OD.f"
     luplo = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 171 "MB04OD.f"
     if (luplo) {
 
+#line 173 "MB04OD.f"
 	i__1 = *n;
+#line 173 "MB04OD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
 
 /*           Annihilate the I-th column of A and apply the */
 /*           transformations to the entire block matrix, exploiting */
 /*           its structure. */
 
+#line 179 "MB04OD.f"
 	    im = min(i__,*p);
+#line 180 "MB04OD.f"
 	    i__2 = im + 1;
+#line 180 "MB04OD.f"
 	    dlarfg_(&i__2, &r__[i__ + i__ * r_dim1], &a[i__ * a_dim1 + 1], &
 		    c__1, &tau[i__]);
 
@@ -232,11 +261,15 @@ static integer c__1 = 1;
 /*           [               ] := [               ] - tau * [   ] * w . */
 /*           [ A(1:IM,I+1:N) ]    [ A(1:IM,I+1:N) ]         [ v ] */
 
+#line 191 "MB04OD.f"
 	    if (*n - i__ > 0) {
+#line 191 "MB04OD.f"
 		i__2 = *n - i__;
+#line 191 "MB04OD.f"
 		mb04oy_(&im, &i__2, &a[i__ * a_dim1 + 1], &tau[i__], &r__[i__ 
 			+ (i__ + 1) * r_dim1], ldr, &a[(i__ + 1) * a_dim1 + 1]
 			, lda, &dwork[1]);
+#line 191 "MB04OD.f"
 	    }
 
 /*           Compute */
@@ -249,23 +282,33 @@ static integer c__1 = 1;
 /*           [ C(1:IM,:) ]    [ C(1:IM,:) ]         [ v ] */
 
 
+#line 205 "MB04OD.f"
 	    if (*m > 0) {
+#line 205 "MB04OD.f"
 		mb04oy_(&im, m, &a[i__ * a_dim1 + 1], &tau[i__], &b[i__ + 
 			b_dim1], ldb, &c__[c_offset], ldc, &dwork[1]);
+#line 205 "MB04OD.f"
 	    }
+#line 208 "MB04OD.f"
 /* L10: */
+#line 208 "MB04OD.f"
 	}
 
+#line 210 "MB04OD.f"
     } else {
 
+#line 212 "MB04OD.f"
 	i__1 = *n - 1;
+#line 212 "MB04OD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
 
 /*           Annihilate the I-th column of A and apply the */
 /*           transformations to the first block column, exploiting its */
 /*           structure. */
 
+#line 218 "MB04OD.f"
 	    i__2 = *p + 1;
+#line 218 "MB04OD.f"
 	    dlarfg_(&i__2, &r__[i__ + i__ * r_dim1], &a[i__ * a_dim1 + 1], &
 		    c__1, &tau[i__]);
 
@@ -278,21 +321,30 @@ static integer c__1 = 1;
 /*           [            ] := [            ] - tau * [   ] * w . */
 /*           [ A(:,I+1:N) ]    [ A(:,I+1:N) ]         [ v ] */
 
+#line 229 "MB04OD.f"
 	    i__2 = *n - i__;
+#line 229 "MB04OD.f"
 	    mb04oy_(p, &i__2, &a[i__ * a_dim1 + 1], &tau[i__], &r__[i__ + (
 		    i__ + 1) * r_dim1], ldr, &a[(i__ + 1) * a_dim1 + 1], lda, 
 		    &dwork[1]);
+#line 231 "MB04OD.f"
 /* L20: */
+#line 231 "MB04OD.f"
 	}
 
+#line 233 "MB04OD.f"
 	i__1 = *p + 1;
+#line 233 "MB04OD.f"
 	dlarfg_(&i__1, &r__[*n + *n * r_dim1], &a[*n * a_dim1 + 1], &c__1, &
 		tau[*n]);
+#line 234 "MB04OD.f"
 	if (*m > 0) {
 
 /*           Apply the transformations to the second block column. */
 
+#line 238 "MB04OD.f"
 	    i__1 = *n;
+#line 238 "MB04OD.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
 
 /*              Compute */
@@ -304,13 +356,19 @@ static integer c__1 = 1;
 /*              [        ] := [        ] - tau * [   ] * w. */
 /*              [   C    ]    [   C    ]         [ v ] */
 
+#line 249 "MB04OD.f"
 		mb04oy_(p, m, &a[i__ * a_dim1 + 1], &tau[i__], &b[i__ + 
 			b_dim1], ldb, &c__[c_offset], ldc, &dwork[1]);
+#line 251 "MB04OD.f"
 /* L30: */
+#line 251 "MB04OD.f"
 	    }
 
+#line 253 "MB04OD.f"
 	}
+#line 254 "MB04OD.f"
     }
+#line 255 "MB04OD.f"
     return 0;
 /* *** Last line of MB04OD *** */
 } /* mb04od_ */

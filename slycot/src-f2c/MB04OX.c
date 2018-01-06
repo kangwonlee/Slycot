@@ -1,3 +1,4 @@
+#line 1 "MB04OX.f"
 /* MB04OX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04OX.f"
 /* Subroutine */ int mb04ox_(integer *n, doublereal *a, integer *lda, 
 	doublereal *x, integer *incx)
 {
@@ -113,29 +115,49 @@
 
 /*     For efficiency reasons, the parameters are not checked. */
 
+#line 92 "MB04OX.f"
     /* Parameter adjustments */
+#line 92 "MB04OX.f"
     a_dim1 = *lda;
+#line 92 "MB04OX.f"
     a_offset = 1 + a_dim1;
+#line 92 "MB04OX.f"
     a -= a_offset;
+#line 92 "MB04OX.f"
     --x;
+#line 92 "MB04OX.f"
 
+#line 92 "MB04OX.f"
     /* Function Body */
+#line 92 "MB04OX.f"
     ix = 1;
 
+#line 94 "MB04OX.f"
     i__1 = *n - 1;
+#line 94 "MB04OX.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 95 "MB04OX.f"
 	dlartg_(&a[i__ + i__ * a_dim1], &x[ix], &ci, &si, &temp);
+#line 96 "MB04OX.f"
 	a[i__ + i__ * a_dim1] = temp;
+#line 97 "MB04OX.f"
 	ix += *incx;
+#line 98 "MB04OX.f"
 	i__2 = *n - i__;
+#line 98 "MB04OX.f"
 	drot_(&i__2, &a[i__ + (i__ + 1) * a_dim1], lda, &x[ix], incx, &ci, &
 		si);
+#line 99 "MB04OX.f"
 /* L20: */
+#line 99 "MB04OX.f"
     }
 
+#line 101 "MB04OX.f"
     dlartg_(&a[*n + *n * a_dim1], &x[ix], &ci, &si, &temp);
+#line 102 "MB04OX.f"
     a[*n + *n * a_dim1] = temp;
 
+#line 104 "MB04OX.f"
     return 0;
 /* *** Last line of MB04OX *** */
 } /* mb04ox_ */

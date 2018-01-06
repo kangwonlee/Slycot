@@ -1,3 +1,4 @@
+#line 1 "SG03AD.f"
 /* SG03AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SG03AD.f"
 /* Table of constant values */
 
 static doublereal c_b20 = 0.;
@@ -448,126 +450,229 @@ static integer c__1 = 1;
 
 /*     Decode input parameters. */
 
+#line 403 "SG03AD.f"
     /* Parameter adjustments */
+#line 403 "SG03AD.f"
     a_dim1 = *lda;
+#line 403 "SG03AD.f"
     a_offset = 1 + a_dim1;
+#line 403 "SG03AD.f"
     a -= a_offset;
+#line 403 "SG03AD.f"
     e_dim1 = *lde;
+#line 403 "SG03AD.f"
     e_offset = 1 + e_dim1;
+#line 403 "SG03AD.f"
     e -= e_offset;
+#line 403 "SG03AD.f"
     q_dim1 = *ldq;
+#line 403 "SG03AD.f"
     q_offset = 1 + q_dim1;
+#line 403 "SG03AD.f"
     q -= q_offset;
+#line 403 "SG03AD.f"
     z_dim1 = *ldz;
+#line 403 "SG03AD.f"
     z_offset = 1 + z_dim1;
+#line 403 "SG03AD.f"
     z__ -= z_offset;
+#line 403 "SG03AD.f"
     x_dim1 = *ldx;
+#line 403 "SG03AD.f"
     x_offset = 1 + x_dim1;
+#line 403 "SG03AD.f"
     x -= x_offset;
+#line 403 "SG03AD.f"
     --alphar;
+#line 403 "SG03AD.f"
     --alphai;
+#line 403 "SG03AD.f"
     --beta;
+#line 403 "SG03AD.f"
     --iwork;
+#line 403 "SG03AD.f"
     --dwork;
+#line 403 "SG03AD.f"
 
+#line 403 "SG03AD.f"
     /* Function Body */
+#line 403 "SG03AD.f"
     isdisc = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 404 "SG03AD.f"
     wantx = lsame_(job, "X", (ftnlen)1, (ftnlen)1);
+#line 405 "SG03AD.f"
     wantsp = lsame_(job, "S", (ftnlen)1, (ftnlen)1);
+#line 406 "SG03AD.f"
     wantbh = lsame_(job, "B", (ftnlen)1, (ftnlen)1);
+#line 407 "SG03AD.f"
     isfact = lsame_(fact, "F", (ftnlen)1, (ftnlen)1);
+#line 408 "SG03AD.f"
     istran = lsame_(trans, "T", (ftnlen)1, (ftnlen)1);
+#line 409 "SG03AD.f"
     isuppr = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
 
 /*     Check the scalar input parameters. */
 
+#line 413 "SG03AD.f"
     if (! (isdisc || lsame_(dico, "C", (ftnlen)1, (ftnlen)1))) {
+#line 414 "SG03AD.f"
 	*info = -1;
+#line 415 "SG03AD.f"
     } else if (! (wantx || wantsp || wantbh)) {
+#line 416 "SG03AD.f"
 	*info = -2;
+#line 417 "SG03AD.f"
     } else if (! (isfact || lsame_(fact, "N", (ftnlen)1, (ftnlen)1))) {
+#line 418 "SG03AD.f"
 	*info = -3;
+#line 419 "SG03AD.f"
     } else if (! (istran || lsame_(trans, "N", (ftnlen)1, (ftnlen)1))) {
+#line 420 "SG03AD.f"
 	*info = -4;
+#line 421 "SG03AD.f"
     } else if (! (isuppr || lsame_(uplo, "L", (ftnlen)1, (ftnlen)1))) {
+#line 422 "SG03AD.f"
 	*info = -5;
+#line 423 "SG03AD.f"
     } else if (*n < 0) {
+#line 424 "SG03AD.f"
 	*info = -6;
+#line 425 "SG03AD.f"
     } else if (*lda < max(1,*n)) {
+#line 426 "SG03AD.f"
 	*info = -8;
+#line 427 "SG03AD.f"
     } else if (*lde < max(1,*n)) {
+#line 428 "SG03AD.f"
 	*info = -10;
+#line 429 "SG03AD.f"
     } else if (*ldq < max(1,*n)) {
+#line 430 "SG03AD.f"
 	*info = -12;
+#line 431 "SG03AD.f"
     } else if (*ldz < max(1,*n)) {
+#line 432 "SG03AD.f"
 	*info = -14;
+#line 433 "SG03AD.f"
     } else if (*ldx < max(1,*n)) {
+#line 434 "SG03AD.f"
 	*info = -16;
+#line 435 "SG03AD.f"
     } else {
+#line 436 "SG03AD.f"
 	*info = 0;
+#line 437 "SG03AD.f"
     }
+#line 438 "SG03AD.f"
     if (*info == 0) {
 
 /*        Compute minimal workspace. */
 
+#line 442 "SG03AD.f"
 	if (wantx) {
+#line 443 "SG03AD.f"
 	    if (isfact) {
+#line 444 "SG03AD.f"
 		minwrk = max(*n,1);
+#line 445 "SG03AD.f"
 	    } else {
 /* Computing MAX */
+#line 446 "SG03AD.f"
 		i__1 = *n << 2;
+#line 446 "SG03AD.f"
 		minwrk = max(i__1,1);
+#line 447 "SG03AD.f"
 	    }
+#line 448 "SG03AD.f"
 	} else {
+#line 449 "SG03AD.f"
 	    if (isfact) {
 /* Computing MAX */
+#line 450 "SG03AD.f"
 		i__1 = (*n << 1) * *n;
+#line 450 "SG03AD.f"
 		minwrk = max(i__1,1);
+#line 451 "SG03AD.f"
 	    } else {
 /* Computing MAX */
+#line 452 "SG03AD.f"
 		i__1 = (*n << 1) * *n, i__2 = *n << 2, i__1 = max(i__1,i__2);
+#line 452 "SG03AD.f"
 		minwrk = max(i__1,1);
+#line 453 "SG03AD.f"
 	    }
+#line 454 "SG03AD.f"
 	}
+#line 455 "SG03AD.f"
 	if (minwrk > *ldwork) {
+#line 456 "SG03AD.f"
 	    *info = -25;
+#line 457 "SG03AD.f"
 	}
+#line 458 "SG03AD.f"
     }
+#line 459 "SG03AD.f"
     if (*info != 0) {
+#line 460 "SG03AD.f"
 	i__1 = -(*info);
+#line 460 "SG03AD.f"
 	xerbla_("SG03AD", &i__1, (ftnlen)6);
+#line 461 "SG03AD.f"
 	return 0;
+#line 462 "SG03AD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 466 "SG03AD.f"
     if (*n == 0) {
+#line 467 "SG03AD.f"
 	*scale = 1.;
+#line 468 "SG03AD.f"
 	if (! wantx) {
+#line 468 "SG03AD.f"
 	    *sep = 0.;
+#line 468 "SG03AD.f"
 	}
+#line 469 "SG03AD.f"
 	if (wantbh) {
+#line 469 "SG03AD.f"
 	    *ferr = 0.;
+#line 469 "SG03AD.f"
 	}
+#line 470 "SG03AD.f"
 	dwork[1] = 1.;
+#line 471 "SG03AD.f"
 	return 0;
+#line 472 "SG03AD.f"
     }
 
+#line 474 "SG03AD.f"
     if (isfact) {
 
 /*        Make sure the upper Hessenberg part of A is quasitriangular. */
 
+#line 478 "SG03AD.f"
 	i__1 = *n - 2;
+#line 478 "SG03AD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 479 "SG03AD.f"
 	    if (a[i__ + 1 + i__ * a_dim1] != 0. && a[i__ + 2 + (i__ + 1) * 
 		    a_dim1] != 0.) {
+#line 480 "SG03AD.f"
 		*info = 1;
+#line 481 "SG03AD.f"
 		return 0;
+#line 482 "SG03AD.f"
 	    }
+#line 483 "SG03AD.f"
 /* L20: */
+#line 483 "SG03AD.f"
 	}
+#line 484 "SG03AD.f"
     }
 
+#line 486 "SG03AD.f"
     if (! isfact) {
 
 /*        Reduce A - lambda * E to generalized Schur form. */
@@ -577,19 +682,29 @@ static integer c__1 = 1;
 
 /*        ( Workspace: >= MAX(1,4*N) ) */
 
+#line 495 "SG03AD.f"
 	dgegs_("Vectors", "Vectors", n, &a[a_offset], lda, &e[e_offset], lde, 
 		&alphar[1], &alphai[1], &beta[1], &q[q_offset], ldq, &z__[
 		z_offset], ldz, &dwork[1], ldwork, &info1, (ftnlen)7, (ftnlen)
 		7);
+#line 498 "SG03AD.f"
 	if (info1 != 0) {
+#line 499 "SG03AD.f"
 	    *info = 2;
+#line 500 "SG03AD.f"
 	    return 0;
+#line 501 "SG03AD.f"
 	}
+#line 502 "SG03AD.f"
 	optwrk = (integer) dwork[1];
+#line 503 "SG03AD.f"
     } else {
+#line 504 "SG03AD.f"
 	optwrk = minwrk;
+#line 505 "SG03AD.f"
     }
 
+#line 507 "SG03AD.f"
     if (wantbh || wantx) {
 
 /*        Transform right hand side. */
@@ -600,54 +715,88 @@ static integer c__1 = 1;
 
 /*        ( Workspace: >= N ) */
 
+#line 517 "SG03AD.f"
 	if (*ldwork < *n * *n) {
+#line 518 "SG03AD.f"
 	    if (istran) {
+#line 519 "SG03AD.f"
 		mb01rw_(uplo, "Transpose", n, n, &x[x_offset], ldx, &q[
 			q_offset], ldq, &dwork[1], &info1, (ftnlen)1, (ftnlen)
 			9);
+#line 521 "SG03AD.f"
 	    } else {
+#line 522 "SG03AD.f"
 		mb01rw_(uplo, "Transpose", n, n, &x[x_offset], ldx, &z__[
 			z_offset], ldz, &dwork[1], &info1, (ftnlen)1, (ftnlen)
 			9);
+#line 524 "SG03AD.f"
 	    }
+#line 525 "SG03AD.f"
 	} else {
+#line 526 "SG03AD.f"
 	    if (istran) {
+#line 527 "SG03AD.f"
 		mb01rd_(uplo, "Transpose", n, n, &c_b20, &c_b21, &x[x_offset],
 			 ldx, &q[q_offset], ldq, &x[x_offset], ldx, &dwork[1],
 			 ldwork, info, (ftnlen)1, (ftnlen)9);
+#line 529 "SG03AD.f"
 	    } else {
+#line 530 "SG03AD.f"
 		mb01rd_(uplo, "Transpose", n, n, &c_b20, &c_b21, &x[x_offset],
 			 ldx, &z__[z_offset], ldz, &x[x_offset], ldx, &dwork[
 			1], ldwork, info, (ftnlen)1, (ftnlen)9);
+#line 532 "SG03AD.f"
 	    }
+#line 533 "SG03AD.f"
 	}
+#line 534 "SG03AD.f"
 	if (! isuppr) {
+#line 535 "SG03AD.f"
 	    i__1 = *n - 1;
+#line 535 "SG03AD.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 536 "SG03AD.f"
 		i__2 = *n - i__;
+#line 536 "SG03AD.f"
 		dcopy_(&i__2, &x[i__ + 1 + i__ * x_dim1], &c__1, &x[i__ + (
 			i__ + 1) * x_dim1], ldx);
+#line 537 "SG03AD.f"
 /* L40: */
+#line 537 "SG03AD.f"
 	    }
+#line 538 "SG03AD.f"
 	}
 /* Computing MAX */
+#line 539 "SG03AD.f"
 	i__1 = optwrk, i__2 = *n * *n;
+#line 539 "SG03AD.f"
 	optwrk = max(i__1,i__2);
 
 /*        Solve reduced generalized Lyapunov equation. */
 
+#line 543 "SG03AD.f"
 	if (isdisc) {
+#line 544 "SG03AD.f"
 	    sg03ax_(trans, n, &a[a_offset], lda, &e[e_offset], lde, &x[
 		    x_offset], ldx, scale, &info1, (ftnlen)1);
+#line 545 "SG03AD.f"
 	    if (info1 != 0) {
+#line 545 "SG03AD.f"
 		*info = 3;
+#line 545 "SG03AD.f"
 	    }
+#line 547 "SG03AD.f"
 	} else {
+#line 548 "SG03AD.f"
 	    sg03ay_(trans, n, &a[a_offset], lda, &e[e_offset], lde, &x[
 		    x_offset], ldx, scale, &info1, (ftnlen)1);
+#line 549 "SG03AD.f"
 	    if (info1 != 0) {
+#line 549 "SG03AD.f"
 		*info = 4;
+#line 549 "SG03AD.f"
 	    }
+#line 551 "SG03AD.f"
 	}
 
 /*        Transform the solution matrix back. */
@@ -658,36 +807,57 @@ static integer c__1 = 1;
 
 /*        ( Workspace: >= N ) */
 
+#line 561 "SG03AD.f"
 	if (*ldwork < *n * *n) {
+#line 562 "SG03AD.f"
 	    if (istran) {
+#line 563 "SG03AD.f"
 		mb01rw_("Upper", "NoTranspose", n, n, &x[x_offset], ldx, &z__[
 			z_offset], ldz, &dwork[1], &info1, (ftnlen)5, (ftnlen)
 			11);
+#line 565 "SG03AD.f"
 	    } else {
+#line 566 "SG03AD.f"
 		mb01rw_("Upper", "NoTranspose", n, n, &x[x_offset], ldx, &q[
 			q_offset], ldq, &dwork[1], &info1, (ftnlen)5, (ftnlen)
 			11);
+#line 568 "SG03AD.f"
 	    }
+#line 569 "SG03AD.f"
 	} else {
+#line 570 "SG03AD.f"
 	    if (istran) {
+#line 571 "SG03AD.f"
 		mb01rd_("Upper", "NoTranspose", n, n, &c_b20, &c_b21, &x[
 			x_offset], ldx, &z__[z_offset], ldz, &x[x_offset], 
 			ldx, &dwork[1], ldwork, info, (ftnlen)5, (ftnlen)11);
+#line 573 "SG03AD.f"
 	    } else {
+#line 574 "SG03AD.f"
 		mb01rd_("Upper", "NoTranspose", n, n, &c_b20, &c_b21, &x[
 			x_offset], ldx, &q[q_offset], ldq, &x[x_offset], ldx, 
 			&dwork[1], ldwork, info, (ftnlen)5, (ftnlen)11);
+#line 576 "SG03AD.f"
 	    }
+#line 577 "SG03AD.f"
 	}
+#line 578 "SG03AD.f"
 	i__1 = *n - 1;
+#line 578 "SG03AD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 579 "SG03AD.f"
 	    i__2 = *n - i__;
+#line 579 "SG03AD.f"
 	    dcopy_(&i__2, &x[i__ + (i__ + 1) * x_dim1], ldx, &x[i__ + 1 + i__ 
 		    * x_dim1], &c__1);
+#line 580 "SG03AD.f"
 /* L60: */
+#line 580 "SG03AD.f"
 	}
+#line 581 "SG03AD.f"
     }
 
+#line 583 "SG03AD.f"
     if (wantbh || wantsp) {
 
 /*        Estimate the 1-norm of the inverse Kronecker product matrix */
@@ -695,65 +865,113 @@ static integer c__1 = 1;
 
 /*        ( Workspace: 2*N*N ) */
 
+#line 590 "SG03AD.f"
 	est = 0.;
+#line 591 "SG03AD.f"
 	kase = 0;
+#line 592 "SG03AD.f"
 L80:
+#line 593 "SG03AD.f"
 	i__1 = *n * *n;
+#line 593 "SG03AD.f"
 	dlacon_(&i__1, &dwork[*n * *n + 1], &dwork[1], &iwork[1], &est, &kase)
 		;
+#line 594 "SG03AD.f"
 	if (kase != 0) {
+#line 595 "SG03AD.f"
 	    if (kase == 1 && ! istran || kase != 1 && istran) {
+#line 597 "SG03AD.f"
 		*(unsigned char *)etrans = 'N';
+#line 598 "SG03AD.f"
 	    } else {
+#line 599 "SG03AD.f"
 		*(unsigned char *)etrans = 'T';
+#line 600 "SG03AD.f"
 	    }
+#line 601 "SG03AD.f"
 	    if (isdisc) {
+#line 602 "SG03AD.f"
 		sg03ax_(etrans, n, &a[a_offset], lda, &e[e_offset], lde, &
 			dwork[1], n, &scale1, &info1, (ftnlen)1);
+#line 604 "SG03AD.f"
 		if (info1 != 0) {
+#line 604 "SG03AD.f"
 		    *info = 3;
+#line 604 "SG03AD.f"
 		}
+#line 606 "SG03AD.f"
 	    } else {
+#line 607 "SG03AD.f"
 		sg03ay_(etrans, n, &a[a_offset], lda, &e[e_offset], lde, &
 			dwork[1], n, &scale1, &info1, (ftnlen)1);
+#line 609 "SG03AD.f"
 		if (info1 != 0) {
+#line 609 "SG03AD.f"
 		    *info = 4;
+#line 609 "SG03AD.f"
 		}
+#line 611 "SG03AD.f"
 	    }
+#line 612 "SG03AD.f"
 	    goto L80;
+#line 613 "SG03AD.f"
 	}
+#line 614 "SG03AD.f"
 	*sep = scale1 / est;
+#line 615 "SG03AD.f"
     }
 
 /*     Estimate the relative forward error. */
 
 /*     ( Workspace: 2*N ) */
 
+#line 621 "SG03AD.f"
     if (wantbh) {
+#line 622 "SG03AD.f"
 	eps = dlamch_("Precision", (ftnlen)9);
+#line 623 "SG03AD.f"
 	i__1 = *n;
+#line 623 "SG03AD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
 /* Computing MIN */
+#line 624 "SG03AD.f"
 	    i__3 = i__ + 1;
+#line 624 "SG03AD.f"
 	    i__2 = min(i__3,*n);
+#line 624 "SG03AD.f"
 	    dwork[i__] = dnrm2_(&i__2, &a[i__ * a_dim1 + 1], &c__1);
+#line 625 "SG03AD.f"
 	    dwork[*n + i__] = dnrm2_(&i__, &e[i__ * e_dim1 + 1], &c__1);
+#line 626 "SG03AD.f"
 /* L100: */
+#line 626 "SG03AD.f"
 	}
+#line 627 "SG03AD.f"
 	norma = dnrm2_(n, &dwork[1], &c__1);
+#line 628 "SG03AD.f"
 	norme = dnrm2_(n, &dwork[*n + 1], &c__1);
+#line 629 "SG03AD.f"
 	if (isdisc) {
 /* Computing 2nd power */
+#line 630 "SG03AD.f"
 	    d__1 = norma;
 /* Computing 2nd power */
+#line 630 "SG03AD.f"
 	    d__2 = norme;
+#line 630 "SG03AD.f"
 	    *ferr = (d__1 * d__1 + d__2 * d__2) * eps / *sep;
+#line 631 "SG03AD.f"
 	} else {
+#line 632 "SG03AD.f"
 	    *ferr = norma * 2. * norme * eps / *sep;
+#line 633 "SG03AD.f"
 	}
+#line 634 "SG03AD.f"
     }
 
+#line 636 "SG03AD.f"
     dwork[1] = (doublereal) max(optwrk,minwrk);
+#line 637 "SG03AD.f"
     return 0;
 /* *** Last line of SG03AD *** */
 } /* sg03ad_ */

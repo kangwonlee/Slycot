@@ -1,3 +1,4 @@
+#line 1 "AB05OD.f"
 /* AB05OD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB05OD.f"
 /* Table of constant values */
 
 static doublereal c_b10 = 0.;
@@ -287,223 +289,391 @@ static doublereal c_b32 = 1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 263 "AB05OD.f"
     /* Parameter adjustments */
+#line 263 "AB05OD.f"
     a1_dim1 = *lda1;
+#line 263 "AB05OD.f"
     a1_offset = 1 + a1_dim1;
+#line 263 "AB05OD.f"
     a1 -= a1_offset;
+#line 263 "AB05OD.f"
     b1_dim1 = *ldb1;
+#line 263 "AB05OD.f"
     b1_offset = 1 + b1_dim1;
+#line 263 "AB05OD.f"
     b1 -= b1_offset;
+#line 263 "AB05OD.f"
     c1_dim1 = *ldc1;
+#line 263 "AB05OD.f"
     c1_offset = 1 + c1_dim1;
+#line 263 "AB05OD.f"
     c1 -= c1_offset;
+#line 263 "AB05OD.f"
     d1_dim1 = *ldd1;
+#line 263 "AB05OD.f"
     d1_offset = 1 + d1_dim1;
+#line 263 "AB05OD.f"
     d1 -= d1_offset;
+#line 263 "AB05OD.f"
     a2_dim1 = *lda2;
+#line 263 "AB05OD.f"
     a2_offset = 1 + a2_dim1;
+#line 263 "AB05OD.f"
     a2 -= a2_offset;
+#line 263 "AB05OD.f"
     b2_dim1 = *ldb2;
+#line 263 "AB05OD.f"
     b2_offset = 1 + b2_dim1;
+#line 263 "AB05OD.f"
     b2 -= b2_offset;
+#line 263 "AB05OD.f"
     c2_dim1 = *ldc2;
+#line 263 "AB05OD.f"
     c2_offset = 1 + c2_dim1;
+#line 263 "AB05OD.f"
     c2 -= c2_offset;
+#line 263 "AB05OD.f"
     d2_dim1 = *ldd2;
+#line 263 "AB05OD.f"
     d2_offset = 1 + d2_dim1;
+#line 263 "AB05OD.f"
     d2 -= d2_offset;
+#line 263 "AB05OD.f"
     a_dim1 = *lda;
+#line 263 "AB05OD.f"
     a_offset = 1 + a_dim1;
+#line 263 "AB05OD.f"
     a -= a_offset;
+#line 263 "AB05OD.f"
     b_dim1 = *ldb;
+#line 263 "AB05OD.f"
     b_offset = 1 + b_dim1;
+#line 263 "AB05OD.f"
     b -= b_offset;
+#line 263 "AB05OD.f"
     c_dim1 = *ldc;
+#line 263 "AB05OD.f"
     c_offset = 1 + c_dim1;
+#line 263 "AB05OD.f"
     c__ -= c_offset;
+#line 263 "AB05OD.f"
     d_dim1 = *ldd;
+#line 263 "AB05OD.f"
     d_offset = 1 + d_dim1;
+#line 263 "AB05OD.f"
     d__ -= d_offset;
+#line 263 "AB05OD.f"
 
+#line 263 "AB05OD.f"
     /* Function Body */
+#line 263 "AB05OD.f"
     lover = lsame_(over, "O", (ftnlen)1, (ftnlen)1);
+#line 264 "AB05OD.f"
     *n = *n1 + *n2;
+#line 265 "AB05OD.f"
     *m = *m1 + *m2;
+#line 266 "AB05OD.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 270 "AB05OD.f"
     if (! lover && ! lsame_(over, "N", (ftnlen)1, (ftnlen)1)) {
+#line 271 "AB05OD.f"
 	*info = -1;
+#line 272 "AB05OD.f"
     } else if (*n1 < 0) {
+#line 273 "AB05OD.f"
 	*info = -2;
+#line 274 "AB05OD.f"
     } else if (*m1 < 0) {
+#line 275 "AB05OD.f"
 	*info = -3;
+#line 276 "AB05OD.f"
     } else if (*p1 < 0) {
+#line 277 "AB05OD.f"
 	*info = -4;
+#line 278 "AB05OD.f"
     } else if (*n2 < 0) {
+#line 279 "AB05OD.f"
 	*info = -5;
+#line 280 "AB05OD.f"
     } else if (*m2 < 0) {
+#line 281 "AB05OD.f"
 	*info = -6;
+#line 282 "AB05OD.f"
     } else if (*lda1 < max(1,*n1)) {
+#line 283 "AB05OD.f"
 	*info = -9;
+#line 284 "AB05OD.f"
     } else if (*ldb1 < max(1,*n1)) {
+#line 285 "AB05OD.f"
 	*info = -11;
+#line 286 "AB05OD.f"
     } else if (*n1 > 0 && *ldc1 < max(1,*p1) || *n1 == 0 && *ldc1 < 1) {
+#line 288 "AB05OD.f"
 	*info = -13;
+#line 289 "AB05OD.f"
     } else if (*ldd1 < max(1,*p1)) {
+#line 290 "AB05OD.f"
 	*info = -15;
+#line 291 "AB05OD.f"
     } else if (*lda2 < max(1,*n2)) {
+#line 292 "AB05OD.f"
 	*info = -17;
+#line 293 "AB05OD.f"
     } else if (*ldb2 < max(1,*n2)) {
+#line 294 "AB05OD.f"
 	*info = -19;
+#line 295 "AB05OD.f"
     } else if (*n2 > 0 && *ldc2 < max(1,*p1) || *n2 == 0 && *ldc2 < 1) {
+#line 297 "AB05OD.f"
 	*info = -21;
+#line 298 "AB05OD.f"
     } else if (*ldd2 < max(1,*p1)) {
+#line 299 "AB05OD.f"
 	*info = -23;
+#line 300 "AB05OD.f"
     } else if (*lda < max(1,*n)) {
+#line 301 "AB05OD.f"
 	*info = -27;
+#line 302 "AB05OD.f"
     } else if (*ldb < max(1,*n)) {
+#line 303 "AB05OD.f"
 	*info = -29;
+#line 304 "AB05OD.f"
     } else if (*n > 0 && *ldc < max(1,*p1) || *n == 0 && *ldc < 1) {
+#line 306 "AB05OD.f"
 	*info = -31;
+#line 307 "AB05OD.f"
     } else if (*ldd < max(1,*p1)) {
+#line 308 "AB05OD.f"
 	*info = -33;
+#line 309 "AB05OD.f"
     }
 
+#line 311 "AB05OD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 315 "AB05OD.f"
 	i__1 = -(*info);
+#line 315 "AB05OD.f"
 	xerbla_("AB05OD", &i__1, (ftnlen)6);
+#line 316 "AB05OD.f"
 	return 0;
+#line 317 "AB05OD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 321 "AB05OD.f"
     i__1 = *n, i__2 = min(*m,*p1);
+#line 321 "AB05OD.f"
     if (max(i__1,i__2) == 0) {
+#line 321 "AB05OD.f"
 	return 0;
+#line 321 "AB05OD.f"
     }
 
 /*     First form the matrix  A. */
 
+#line 326 "AB05OD.f"
     if (lover && *lda1 <= *lda) {
+#line 327 "AB05OD.f"
 	if (*lda1 < *lda) {
 
+#line 329 "AB05OD.f"
 	    for (j = *n1; j >= 1; --j) {
+#line 330 "AB05OD.f"
 		for (i__ = *n1; i__ >= 1; --i__) {
+#line 331 "AB05OD.f"
 		    a[i__ + j * a_dim1] = a1[i__ + j * a1_dim1];
+#line 332 "AB05OD.f"
 /* L10: */
+#line 332 "AB05OD.f"
 		}
+#line 333 "AB05OD.f"
 /* L20: */
+#line 333 "AB05OD.f"
 	    }
 
+#line 335 "AB05OD.f"
 	}
+#line 336 "AB05OD.f"
     } else {
+#line 337 "AB05OD.f"
 	dlacpy_("F", n1, n1, &a1[a1_offset], lda1, &a[a_offset], lda, (ftnlen)
 		1);
+#line 338 "AB05OD.f"
     }
 
+#line 340 "AB05OD.f"
     if (*n2 > 0) {
+#line 341 "AB05OD.f"
 	dlacpy_("F", n2, n2, &a2[a2_offset], lda2, &a[*n1 + 1 + (*n1 + 1) * 
 		a_dim1], lda, (ftnlen)1);
+#line 342 "AB05OD.f"
 	dlaset_("F", n1, n2, &c_b10, &c_b10, &a[(*n1 + 1) * a_dim1 + 1], lda, 
 		(ftnlen)1);
+#line 343 "AB05OD.f"
 	dlaset_("F", n2, n1, &c_b10, &c_b10, &a[*n1 + 1 + a_dim1], lda, (
 		ftnlen)1);
+#line 344 "AB05OD.f"
     }
 
 /*     Now form the matrix  B. */
 
+#line 348 "AB05OD.f"
     if (lover && *ldb1 <= *ldb) {
+#line 349 "AB05OD.f"
 	if (*ldb1 < *ldb) {
 
+#line 351 "AB05OD.f"
 	    for (j = *m1; j >= 1; --j) {
+#line 352 "AB05OD.f"
 		for (i__ = *n1; i__ >= 1; --i__) {
+#line 353 "AB05OD.f"
 		    b[i__ + j * b_dim1] = b1[i__ + j * b1_dim1];
+#line 354 "AB05OD.f"
 /* L30: */
+#line 354 "AB05OD.f"
 		}
+#line 355 "AB05OD.f"
 /* L40: */
+#line 355 "AB05OD.f"
 	    }
 
+#line 357 "AB05OD.f"
 	}
+#line 358 "AB05OD.f"
     } else {
+#line 359 "AB05OD.f"
 	dlacpy_("F", n1, m1, &b1[b1_offset], ldb1, &b[b_offset], ldb, (ftnlen)
 		1);
+#line 360 "AB05OD.f"
     }
 
+#line 362 "AB05OD.f"
     if (*m2 > 0) {
+#line 363 "AB05OD.f"
 	if (*n2 > 0) {
+#line 363 "AB05OD.f"
 	    dlacpy_("F", n2, m2, &b2[b2_offset], ldb2, &b[*n1 + 1 + (*m1 + 1) 
 		    * b_dim1], ldb, (ftnlen)1);
+#line 363 "AB05OD.f"
 	}
+#line 365 "AB05OD.f"
 	dlaset_("F", n1, m2, &c_b10, &c_b10, &b[(*m1 + 1) * b_dim1 + 1], ldb, 
 		(ftnlen)1);
+#line 366 "AB05OD.f"
     }
+#line 367 "AB05OD.f"
     if (*n2 > 0) {
+#line 367 "AB05OD.f"
 	dlaset_("F", n2, m1, &c_b10, &c_b10, &b[*n1 + 1 + b_dim1], ldb, (
 		ftnlen)1);
+#line 367 "AB05OD.f"
     }
 
 /*     Now form the matrix  C. */
 
+#line 372 "AB05OD.f"
     if (lover && *ldc1 <= *ldc) {
+#line 373 "AB05OD.f"
 	if (*ldc1 < *ldc) {
 
+#line 375 "AB05OD.f"
 	    for (j = *n1; j >= 1; --j) {
+#line 376 "AB05OD.f"
 		for (i__ = *p1; i__ >= 1; --i__) {
+#line 377 "AB05OD.f"
 		    c__[i__ + j * c_dim1] = c1[i__ + j * c1_dim1];
+#line 378 "AB05OD.f"
 /* L50: */
+#line 378 "AB05OD.f"
 		}
+#line 379 "AB05OD.f"
 /* L60: */
+#line 379 "AB05OD.f"
 	    }
 
+#line 381 "AB05OD.f"
 	}
+#line 382 "AB05OD.f"
     } else {
+#line 383 "AB05OD.f"
 	dlacpy_("F", p1, n1, &c1[c1_offset], ldc1, &c__[c_offset], ldc, (
 		ftnlen)1);
+#line 384 "AB05OD.f"
     }
 
+#line 386 "AB05OD.f"
     if (*n2 > 0) {
+#line 387 "AB05OD.f"
 	dlacpy_("F", p1, n2, &c2[c2_offset], ldc2, &c__[(*n1 + 1) * c_dim1 + 
 		1], ldc, (ftnlen)1);
+#line 388 "AB05OD.f"
 	if (*alpha != 1.) {
+#line 388 "AB05OD.f"
 	    dlascl_("G", &c__0, &c__0, &c_b32, alpha, p1, n2, &c__[(*n1 + 1) *
 		     c_dim1 + 1], ldc, info, (ftnlen)1);
+#line 388 "AB05OD.f"
 	}
+#line 391 "AB05OD.f"
     }
 
 /*     Now form the matrix  D. */
 
+#line 395 "AB05OD.f"
     if (lover && *ldd1 <= *ldd) {
+#line 396 "AB05OD.f"
 	if (*ldd1 < *ldd) {
 
+#line 398 "AB05OD.f"
 	    for (j = *m1; j >= 1; --j) {
+#line 399 "AB05OD.f"
 		for (i__ = *p1; i__ >= 1; --i__) {
+#line 400 "AB05OD.f"
 		    d__[i__ + j * d_dim1] = d1[i__ + j * d1_dim1];
+#line 401 "AB05OD.f"
 /* L70: */
+#line 401 "AB05OD.f"
 		}
+#line 402 "AB05OD.f"
 /* L80: */
+#line 402 "AB05OD.f"
 	    }
 
+#line 404 "AB05OD.f"
 	}
+#line 405 "AB05OD.f"
     } else {
+#line 406 "AB05OD.f"
 	dlacpy_("F", p1, m1, &d1[d1_offset], ldd1, &d__[d_offset], ldd, (
 		ftnlen)1);
+#line 407 "AB05OD.f"
     }
 
+#line 409 "AB05OD.f"
     if (*m2 > 0) {
+#line 410 "AB05OD.f"
 	dlacpy_("F", p1, m2, &d2[d2_offset], ldd2, &d__[(*m1 + 1) * d_dim1 + 
 		1], ldd, (ftnlen)1);
+#line 411 "AB05OD.f"
 	if (*alpha != 1.) {
+#line 411 "AB05OD.f"
 	    dlascl_("G", &c__0, &c__0, &c_b32, alpha, p1, m2, &d__[(*m1 + 1) *
 		     d_dim1 + 1], ldd, info, (ftnlen)1);
+#line 411 "AB05OD.f"
 	}
+#line 414 "AB05OD.f"
     }
 
+#line 416 "AB05OD.f"
     return 0;
 /* *** Last line of AB05OD *** */
 } /* ab05od_ */

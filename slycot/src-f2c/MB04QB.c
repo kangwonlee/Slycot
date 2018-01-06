@@ -1,3 +1,4 @@
+#line 1 "MB04QB.f"
 /* MB04QB.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04QB.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -280,154 +282,261 @@ static integer c__2 = 2;
 
 /*     Decode the scalar input parameters. */
 
+#line 235 "MB04QB.f"
     /* Parameter adjustments */
+#line 235 "MB04QB.f"
     v_dim1 = *ldv;
+#line 235 "MB04QB.f"
     v_offset = 1 + v_dim1;
+#line 235 "MB04QB.f"
     v -= v_offset;
+#line 235 "MB04QB.f"
     w_dim1 = *ldw;
+#line 235 "MB04QB.f"
     w_offset = 1 + w_dim1;
+#line 235 "MB04QB.f"
     w -= w_offset;
+#line 235 "MB04QB.f"
     c_dim1 = *ldc;
+#line 235 "MB04QB.f"
     c_offset = 1 + c_dim1;
+#line 235 "MB04QB.f"
     c__ -= c_offset;
+#line 235 "MB04QB.f"
     d_dim1 = *ldd;
+#line 235 "MB04QB.f"
     d_offset = 1 + d_dim1;
+#line 235 "MB04QB.f"
     d__ -= d_offset;
+#line 235 "MB04QB.f"
     --cs;
+#line 235 "MB04QB.f"
     --tau;
+#line 235 "MB04QB.f"
     --dwork;
+#line 235 "MB04QB.f"
 
+#line 235 "MB04QB.f"
     /* Function Body */
+#line 235 "MB04QB.f"
     *info = 0;
+#line 236 "MB04QB.f"
     lcolv = lsame_(storev, "C", (ftnlen)1, (ftnlen)1);
+#line 237 "MB04QB.f"
     lcolw = lsame_(storew, "C", (ftnlen)1, (ftnlen)1);
+#line 238 "MB04QB.f"
     ltrc = lsame_(tranc, "T", (ftnlen)1, (ftnlen)1) || lsame_(tranc, "C", (
 	    ftnlen)1, (ftnlen)1);
+#line 239 "MB04QB.f"
     ltrd = lsame_(trand, "T", (ftnlen)1, (ftnlen)1) || lsame_(trand, "C", (
 	    ftnlen)1, (ftnlen)1);
+#line 240 "MB04QB.f"
     ltrq = lsame_(tranq, "T", (ftnlen)1, (ftnlen)1);
 
 /*     Check the scalar input parameters. */
 
+#line 244 "MB04QB.f"
     if (! (ltrc || lsame_(tranc, "N", (ftnlen)1, (ftnlen)1))) {
+#line 245 "MB04QB.f"
 	*info = -1;
+#line 246 "MB04QB.f"
     } else if (! (ltrd || lsame_(trand, "N", (ftnlen)1, (ftnlen)1))) {
+#line 247 "MB04QB.f"
 	*info = -2;
+#line 248 "MB04QB.f"
     } else if (! (ltrq || lsame_(tranq, "N", (ftnlen)1, (ftnlen)1))) {
+#line 249 "MB04QB.f"
 	*info = -3;
+#line 250 "MB04QB.f"
     } else if (! (lcolv || lsame_(storev, "R", (ftnlen)1, (ftnlen)1))) {
+#line 251 "MB04QB.f"
 	*info = -4;
+#line 252 "MB04QB.f"
     } else if (! (lcolw || lsame_(storew, "R", (ftnlen)1, (ftnlen)1))) {
+#line 253 "MB04QB.f"
 	*info = -5;
+#line 254 "MB04QB.f"
     } else if (*m < 0) {
+#line 255 "MB04QB.f"
 	*info = -6;
+#line 256 "MB04QB.f"
     } else if (*n < 0) {
+#line 257 "MB04QB.f"
 	*info = -7;
+#line 258 "MB04QB.f"
     } else if (*k < 0 || *k > *m) {
+#line 259 "MB04QB.f"
 	*info = -8;
+#line 260 "MB04QB.f"
     } else if (lcolv && *ldv < max(1,*m) || ! lcolv && *ldv < max(1,*k)) {
+#line 262 "MB04QB.f"
 	*info = -10;
+#line 263 "MB04QB.f"
     } else if (lcolw && *ldw < max(1,*m) || ! lcolw && *ldw < max(1,*k)) {
+#line 265 "MB04QB.f"
 	*info = -12;
+#line 266 "MB04QB.f"
     } else if (ltrc && *ldc < max(1,*n) || ! ltrc && *ldc < max(1,*m)) {
+#line 268 "MB04QB.f"
 	*info = -14;
+#line 269 "MB04QB.f"
     } else if (ltrd && *ldd < max(1,*n) || ! ltrd && *ldd < max(1,*m)) {
+#line 271 "MB04QB.f"
 	*info = -16;
+#line 272 "MB04QB.f"
     } else if (*ldwork < max(1,*n)) {
+#line 273 "MB04QB.f"
 	dwork[1] = (doublereal) max(1,*n);
+#line 274 "MB04QB.f"
 	*info = -20;
+#line 275 "MB04QB.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 279 "MB04QB.f"
     if (*info != 0) {
+#line 280 "MB04QB.f"
 	i__1 = -(*info);
+#line 280 "MB04QB.f"
 	xerbla_("MB04QB", &i__1, (ftnlen)6);
+#line 281 "MB04QB.f"
 	return 0;
+#line 282 "MB04QB.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 286 "MB04QB.f"
     i__1 = min(*k,*m);
+#line 286 "MB04QB.f"
     if (min(i__1,*n) == 0) {
+#line 287 "MB04QB.f"
 	dwork[1] = 1.;
+#line 288 "MB04QB.f"
 	return 0;
+#line 289 "MB04QB.f"
     }
 
+#line 291 "MB04QB.f"
     nbmin = 2;
+#line 292 "MB04QB.f"
     nx = 0;
+#line 293 "MB04QB.f"
     wrkopt = *n;
 /* Writing concatenation */
+#line 294 "MB04QB.f"
     i__2[0] = 1, a__1[0] = tranc;
+#line 294 "MB04QB.f"
     i__2[1] = 1, a__1[1] = trand;
+#line 294 "MB04QB.f"
     i__2[2] = 1, a__1[2] = tranq;
+#line 294 "MB04QB.f"
     s_cat(ch__1, a__1, i__2, &c__3, (ftnlen)3);
+#line 294 "MB04QB.f"
     nb = ue01md_(&c__1, "MB04QB", ch__1, m, n, k, (ftnlen)6, (ftnlen)3);
+#line 295 "MB04QB.f"
     if (nb > 1 && nb < *k) {
 
 /*        Determine when to cross over from blocked to unblocked code. */
 
 /* Computing MAX */
 /* Writing concatenation */
+#line 299 "MB04QB.f"
 	i__2[0] = 1, a__1[0] = tranc;
+#line 299 "MB04QB.f"
 	i__2[1] = 1, a__1[1] = trand;
+#line 299 "MB04QB.f"
 	i__2[2] = 1, a__1[2] = tranq;
+#line 299 "MB04QB.f"
 	s_cat(ch__1, a__1, i__2, &c__3, (ftnlen)3);
+#line 299 "MB04QB.f"
 	i__1 = 0, i__3 = ue01md_(&c__3, "MB04QB", ch__1, m, n, k, (ftnlen)6, (
 		ftnlen)3);
+#line 299 "MB04QB.f"
 	nx = max(i__1,i__3);
+#line 301 "MB04QB.f"
 	if (nx < *k) {
 
 /*           Determine if workspace is large enough for blocked code. */
 
 /* Computing MAX */
+#line 305 "MB04QB.f"
 	    i__1 = wrkopt, i__3 = *n * 9 * nb + nb * 15 * nb;
+#line 305 "MB04QB.f"
 	    wrkopt = max(i__1,i__3);
+#line 306 "MB04QB.f"
 	    if (*ldwork < wrkopt) {
 
 /*              Not enough workspace to use optimal NB:  reduce NB and */
 /*              determine the minimum value of NB. */
 
+#line 311 "MB04QB.f"
 		nb = (integer) ((sqrt((doublereal) (*n * 81 * *n + *ldwork * 
 			60)) - (doublereal) (*n * 9)) / 30.);
 /* Computing MAX */
 /* Writing concatenation */
+#line 313 "MB04QB.f"
 		i__2[0] = 1, a__1[0] = tranc;
+#line 313 "MB04QB.f"
 		i__2[1] = 1, a__1[1] = trand;
+#line 313 "MB04QB.f"
 		i__2[2] = 1, a__1[2] = tranq;
+#line 313 "MB04QB.f"
 		s_cat(ch__1, a__1, i__2, &c__3, (ftnlen)3);
+#line 313 "MB04QB.f"
 		i__1 = 2, i__3 = ue01md_(&c__2, "MB04QB", ch__1, m, n, k, (
 			ftnlen)6, (ftnlen)3);
+#line 313 "MB04QB.f"
 		nbmin = max(i__1,i__3);
+#line 315 "MB04QB.f"
 	    }
+#line 316 "MB04QB.f"
 	}
+#line 317 "MB04QB.f"
     }
 
+#line 319 "MB04QB.f"
     pdrs = 1;
+#line 320 "MB04QB.f"
     pdt = pdrs + nb * 6 * nb;
+#line 321 "MB04QB.f"
     pdw = pdt + nb * 9 * nb;
+#line 322 "MB04QB.f"
     ic = 1;
+#line 323 "MB04QB.f"
     jc = 1;
+#line 324 "MB04QB.f"
     id = 1;
+#line 325 "MB04QB.f"
     jd = 1;
 
+#line 327 "MB04QB.f"
     if (ltrq) {
 
 /*        Use blocked code initially. */
 
+#line 331 "MB04QB.f"
 	if (nb >= nbmin && nb < *k && nx < *k) {
+#line 332 "MB04QB.f"
 	    i__1 = *k - nx;
+#line 332 "MB04QB.f"
 	    i__3 = nb;
+#line 332 "MB04QB.f"
 	    for (i__ = 1; i__3 < 0 ? i__ >= i__1 : i__ <= i__1; i__ += i__3) {
 /* Computing MIN */
+#line 333 "MB04QB.f"
 		i__4 = *k - i__ + 1;
+#line 333 "MB04QB.f"
 		ib = min(i__4,nb);
 
 /*              Form the triangular factors of the symplectic block */
 /*              reflector SH. */
 
+#line 338 "MB04QB.f"
 		i__4 = *m - i__ + 1;
+#line 338 "MB04QB.f"
 		mb04qf_("Forward", storev, storew, &i__4, &ib, &v[i__ + i__ * 
 			v_dim1], ldv, &w[i__ + i__ * w_dim1], ldw, &cs[(i__ <<
 			 1) - 1], &tau[i__], &dwork[pdrs], &nb, &dwork[pdt], &
@@ -436,17 +545,29 @@ static integer c__2 = 2;
 /*              Apply SH' to [ op(C)(i:m,:); op(D)(i:m,:) ] from the */
 /*              left. */
 
+#line 346 "MB04QB.f"
 		if (ltrc) {
+#line 347 "MB04QB.f"
 		    jc = i__;
+#line 348 "MB04QB.f"
 		} else {
+#line 349 "MB04QB.f"
 		    ic = i__;
+#line 350 "MB04QB.f"
 		}
+#line 351 "MB04QB.f"
 		if (ltrd) {
+#line 352 "MB04QB.f"
 		    jd = i__;
+#line 353 "MB04QB.f"
 		} else {
+#line 354 "MB04QB.f"
 		    id = i__;
+#line 355 "MB04QB.f"
 		}
+#line 356 "MB04QB.f"
 		i__4 = *m - i__ + 1;
+#line 356 "MB04QB.f"
 		mb04qc_("No Structure", tranc, trand, tranq, "Forward", 
 			storev, storew, &i__4, n, &ib, &v[i__ + i__ * v_dim1],
 			 ldv, &w[i__ + i__ * w_dim1], ldw, &dwork[pdrs], &nb, 
@@ -454,83 +575,133 @@ static integer c__2 = 2;
 			id + jd * d_dim1], ldd, &dwork[pdw], (ftnlen)12, (
 			ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)7, (ftnlen)1, 
 			(ftnlen)1);
+#line 361 "MB04QB.f"
 /* L10: */
+#line 361 "MB04QB.f"
 	    }
+#line 362 "MB04QB.f"
 	} else {
+#line 363 "MB04QB.f"
 	    i__ = 1;
+#line 364 "MB04QB.f"
 	}
 
 /*        Use unblocked code to update last or only block. */
 
+#line 368 "MB04QB.f"
 	if (i__ <= *k) {
+#line 369 "MB04QB.f"
 	    if (ltrc) {
+#line 370 "MB04QB.f"
 		jc = i__;
+#line 371 "MB04QB.f"
 	    } else {
+#line 372 "MB04QB.f"
 		ic = i__;
+#line 373 "MB04QB.f"
 	    }
+#line 374 "MB04QB.f"
 	    if (ltrd) {
+#line 375 "MB04QB.f"
 		jd = i__;
+#line 376 "MB04QB.f"
 	    } else {
+#line 377 "MB04QB.f"
 		id = i__;
+#line 378 "MB04QB.f"
 	    }
+#line 379 "MB04QB.f"
 	    i__3 = *m - i__ + 1;
+#line 379 "MB04QB.f"
 	    i__1 = *k - i__ + 1;
+#line 379 "MB04QB.f"
 	    mb04qu_(tranc, trand, tranq, storev, storew, &i__3, n, &i__1, &v[
 		    i__ + i__ * v_dim1], ldv, &w[i__ + i__ * w_dim1], ldw, &
 		    c__[ic + jc * c_dim1], ldc, &d__[id + jd * d_dim1], ldd, &
 		    cs[(i__ << 1) - 1], &tau[i__], &dwork[1], ldwork, &ierr, (
 		    ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 383 "MB04QB.f"
 	}
+#line 384 "MB04QB.f"
     } else {
+#line 385 "MB04QB.f"
 	if (nb >= nbmin && nb < *k && nx < *k) {
 
 /*           Use blocked code after the last block. */
 /*           The first kk columns are handled by the block method. */
 
+#line 390 "MB04QB.f"
 	    ki = (*k - nx - 1) / nb * nb;
 /* Computing MIN */
+#line 391 "MB04QB.f"
 	    i__3 = *k, i__1 = ki + nb;
+#line 391 "MB04QB.f"
 	    kk = min(i__3,i__1);
+#line 392 "MB04QB.f"
 	} else {
+#line 393 "MB04QB.f"
 	    kk = 0;
+#line 394 "MB04QB.f"
 	}
 
 /*        Use unblocked code for the last or only block. */
 
+#line 398 "MB04QB.f"
 	if (kk < *k) {
+#line 399 "MB04QB.f"
 	    if (ltrc) {
+#line 400 "MB04QB.f"
 		jc = kk + 1;
+#line 401 "MB04QB.f"
 	    } else {
+#line 402 "MB04QB.f"
 		ic = kk + 1;
+#line 403 "MB04QB.f"
 	    }
+#line 404 "MB04QB.f"
 	    if (ltrd) {
+#line 405 "MB04QB.f"
 		jd = kk + 1;
+#line 406 "MB04QB.f"
 	    } else {
+#line 407 "MB04QB.f"
 		id = kk + 1;
+#line 408 "MB04QB.f"
 	    }
+#line 409 "MB04QB.f"
 	    i__3 = *m - kk;
+#line 409 "MB04QB.f"
 	    i__1 = *k - kk;
+#line 409 "MB04QB.f"
 	    mb04qu_(tranc, trand, tranq, storev, storew, &i__3, n, &i__1, &v[
 		    kk + 1 + (kk + 1) * v_dim1], ldv, &w[kk + 1 + (kk + 1) * 
 		    w_dim1], ldw, &c__[ic + jc * c_dim1], ldc, &d__[id + jd * 
 		    d_dim1], ldd, &cs[(kk << 1) + 1], &tau[kk + 1], &dwork[1],
 		     ldwork, &ierr, (ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)
 		    1, (ftnlen)1);
+#line 413 "MB04QB.f"
 	}
 
 /*        Blocked code. */
 
+#line 417 "MB04QB.f"
 	if (kk > 0) {
+#line 418 "MB04QB.f"
 	    i__3 = -nb;
+#line 418 "MB04QB.f"
 	    for (i__ = ki + 1; i__3 < 0 ? i__ >= 1 : i__ <= 1; i__ += i__3) {
 /* Computing MIN */
+#line 419 "MB04QB.f"
 		i__1 = nb, i__4 = *k - i__ + 1;
+#line 419 "MB04QB.f"
 		ib = min(i__1,i__4);
 
 /*              Form the triangular factors of the symplectic block */
 /*              reflector SH. */
 
+#line 424 "MB04QB.f"
 		i__1 = *m - i__ + 1;
+#line 424 "MB04QB.f"
 		mb04qf_("Forward", storev, storew, &i__1, &ib, &v[i__ + i__ * 
 			v_dim1], ldv, &w[i__ + i__ * w_dim1], ldw, &cs[(i__ <<
 			 1) - 1], &tau[i__], &dwork[pdrs], &nb, &dwork[pdt], &
@@ -539,17 +710,29 @@ static integer c__2 = 2;
 /*              Apply SH to [ op(C)(i:m,:); op(D)(i:m,:) ] from */
 /*              the left. */
 
+#line 432 "MB04QB.f"
 		if (ltrc) {
+#line 433 "MB04QB.f"
 		    jc = i__;
+#line 434 "MB04QB.f"
 		} else {
+#line 435 "MB04QB.f"
 		    ic = i__;
+#line 436 "MB04QB.f"
 		}
+#line 437 "MB04QB.f"
 		if (ltrd) {
+#line 438 "MB04QB.f"
 		    jd = i__;
+#line 439 "MB04QB.f"
 		} else {
+#line 440 "MB04QB.f"
 		    id = i__;
+#line 441 "MB04QB.f"
 		}
+#line 442 "MB04QB.f"
 		i__1 = *m - i__ + 1;
+#line 442 "MB04QB.f"
 		mb04qc_("No Structure", tranc, trand, tranq, "Forward", 
 			storev, storew, &i__1, n, &ib, &v[i__ + i__ * v_dim1],
 			 ldv, &w[i__ + i__ * w_dim1], ldw, &dwork[pdrs], &nb, 
@@ -557,12 +740,18 @@ static integer c__2 = 2;
 			id + jd * d_dim1], ldd, &dwork[pdw], (ftnlen)12, (
 			ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)7, (ftnlen)1, 
 			(ftnlen)1);
+#line 447 "MB04QB.f"
 /* L20: */
+#line 447 "MB04QB.f"
 	    }
+#line 448 "MB04QB.f"
 	}
+#line 449 "MB04QB.f"
     }
+#line 450 "MB04QB.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 452 "MB04QB.f"
     return 0;
 /* *** Last line of MB04QB *** */
 } /* mb04qb_ */

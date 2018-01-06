@@ -1,3 +1,4 @@
+#line 1 "IB01PD.f"
 /* IB01PD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "IB01PD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -516,98 +518,188 @@ static doublereal c_b173 = -1.;
 
 /*     Decode the scalar input parameters. */
 
+#line 422 "IB01PD.f"
     /* Parameter adjustments */
+#line 422 "IB01PD.f"
     r_dim1 = *ldr;
+#line 422 "IB01PD.f"
     r_offset = 1 + r_dim1;
+#line 422 "IB01PD.f"
     r__ -= r_offset;
+#line 422 "IB01PD.f"
     a_dim1 = *lda;
+#line 422 "IB01PD.f"
     a_offset = 1 + a_dim1;
+#line 422 "IB01PD.f"
     a -= a_offset;
+#line 422 "IB01PD.f"
     c_dim1 = *ldc;
+#line 422 "IB01PD.f"
     c_offset = 1 + c_dim1;
+#line 422 "IB01PD.f"
     c__ -= c_offset;
+#line 422 "IB01PD.f"
     b_dim1 = *ldb;
+#line 422 "IB01PD.f"
     b_offset = 1 + b_dim1;
+#line 422 "IB01PD.f"
     b -= b_offset;
+#line 422 "IB01PD.f"
     d_dim1 = *ldd;
+#line 422 "IB01PD.f"
     d_offset = 1 + d_dim1;
+#line 422 "IB01PD.f"
     d__ -= d_offset;
+#line 422 "IB01PD.f"
     q_dim1 = *ldq;
+#line 422 "IB01PD.f"
     q_offset = 1 + q_dim1;
+#line 422 "IB01PD.f"
     q -= q_offset;
+#line 422 "IB01PD.f"
     ry_dim1 = *ldry;
+#line 422 "IB01PD.f"
     ry_offset = 1 + ry_dim1;
+#line 422 "IB01PD.f"
     ry -= ry_offset;
+#line 422 "IB01PD.f"
     s_dim1 = *lds;
+#line 422 "IB01PD.f"
     s_offset = 1 + s_dim1;
+#line 422 "IB01PD.f"
     s -= s_offset;
+#line 422 "IB01PD.f"
     o_dim1 = *ldo;
+#line 422 "IB01PD.f"
     o_offset = 1 + o_dim1;
+#line 422 "IB01PD.f"
     o -= o_offset;
+#line 422 "IB01PD.f"
     --iwork;
+#line 422 "IB01PD.f"
     --dwork;
+#line 422 "IB01PD.f"
 
+#line 422 "IB01PD.f"
     /* Function Body */
+#line 422 "IB01PD.f"
     moesp = lsame_(meth, "M", (ftnlen)1, (ftnlen)1);
+#line 423 "IB01PD.f"
     n4sid = lsame_(meth, "N", (ftnlen)1, (ftnlen)1);
+#line 424 "IB01PD.f"
     withal = lsame_(job, "A", (ftnlen)1, (ftnlen)1);
+#line 425 "IB01PD.f"
     withc = lsame_(job, "C", (ftnlen)1, (ftnlen)1) || withal;
+#line 426 "IB01PD.f"
     withd = lsame_(job, "D", (ftnlen)1, (ftnlen)1) || withal;
+#line 427 "IB01PD.f"
     withb = lsame_(job, "B", (ftnlen)1, (ftnlen)1) || withd;
+#line 428 "IB01PD.f"
     withco = lsame_(jobcv, "C", (ftnlen)1, (ftnlen)1);
+#line 429 "IB01PD.f"
     mnobr = *m * *nobr;
+#line 430 "IB01PD.f"
     lnobr = *l * *nobr;
+#line 431 "IB01PD.f"
     lmnobr = lnobr + mnobr;
+#line 432 "IB01PD.f"
     lmmnob = lnobr + (mnobr << 1);
+#line 433 "IB01PD.f"
     mnobrn = mnobr + *n;
+#line 434 "IB01PD.f"
     lnobrn = lnobr - *n;
+#line 435 "IB01PD.f"
     ldun2 = lnobr - *l;
+#line 436 "IB01PD.f"
     ldunn = ldun2 * *n;
+#line 437 "IB01PD.f"
     lmmnol = lmmnob + *l;
+#line 438 "IB01PD.f"
     nr = lmnobr + lmnobr;
+#line 439 "IB01PD.f"
     npl = *n + *l;
+#line 440 "IB01PD.f"
     n2 = *n + *n;
+#line 441 "IB01PD.f"
     nn = *n * *n;
+#line 442 "IB01PD.f"
     minwrk = 1;
+#line 443 "IB01PD.f"
     *iwarn = 0;
+#line 444 "IB01PD.f"
     *info = 0;
 
 /*     Check the scalar input parameters. */
 
+#line 448 "IB01PD.f"
     if (! (moesp || n4sid)) {
+#line 449 "IB01PD.f"
 	*info = -1;
+#line 450 "IB01PD.f"
     } else if (! (withb || withc)) {
+#line 451 "IB01PD.f"
 	*info = -2;
+#line 452 "IB01PD.f"
     } else if (! (withco || lsame_(jobcv, "N", (ftnlen)1, (ftnlen)1))) {
+#line 453 "IB01PD.f"
 	*info = -3;
+#line 454 "IB01PD.f"
     } else if (*nobr <= 1) {
+#line 455 "IB01PD.f"
 	*info = -4;
+#line 456 "IB01PD.f"
     } else if (*n <= 0 || *n >= *nobr) {
+#line 457 "IB01PD.f"
 	*info = -5;
+#line 458 "IB01PD.f"
     } else if (*m < 0) {
+#line 459 "IB01PD.f"
 	*info = -6;
+#line 460 "IB01PD.f"
     } else if (*l <= 0) {
+#line 461 "IB01PD.f"
 	*info = -7;
+#line 462 "IB01PD.f"
     } else if (withco && *nsmpl < nr) {
+#line 463 "IB01PD.f"
 	*info = -8;
+#line 464 "IB01PD.f"
     } else if (*ldr < nr) {
+#line 465 "IB01PD.f"
 	*info = -10;
+#line 466 "IB01PD.f"
     } else if (*lda < 1 || (withc || withb && n4sid) && *lda < *n) {
+#line 468 "IB01PD.f"
 	*info = -12;
+#line 469 "IB01PD.f"
     } else if (*ldc < 1 || (withc || withb && n4sid) && *ldc < *l) {
+#line 471 "IB01PD.f"
 	*info = -14;
+#line 472 "IB01PD.f"
     } else if (*ldb < 1 || withb && *ldb < *n && *m > 0) {
+#line 474 "IB01PD.f"
 	*info = -16;
+#line 475 "IB01PD.f"
     } else if (*ldd < 1 || withd && *ldd < *l && *m > 0) {
+#line 477 "IB01PD.f"
 	*info = -18;
+#line 478 "IB01PD.f"
     } else if (*ldq < 1 || withco && *ldq < *n) {
+#line 479 "IB01PD.f"
 	*info = -20;
+#line 480 "IB01PD.f"
     } else if (*ldry < 1 || withco && *ldry < *l) {
+#line 481 "IB01PD.f"
 	*info = -22;
+#line 482 "IB01PD.f"
     } else if (*lds < 1 || withco && *lds < *n) {
+#line 483 "IB01PD.f"
 	*info = -24;
+#line 484 "IB01PD.f"
     } else if (*ldo < 1 || (withco || n4sid) && *ldo < lnobr) {
+#line 486 "IB01PD.f"
 	*info = -26;
+#line 487 "IB01PD.f"
     } else {
 
 /*        Compute workspace. */
@@ -617,114 +709,176 @@ static doublereal c_b173 = -1.;
 /*         NB refers to the optimal block size for the immediately */
 /*         following subroutine, as returned by ILAENV.) */
 
+#line 496 "IB01PD.f"
 	iaw = 0;
+#line 497 "IB01PD.f"
 	minwrk = ldunn + (*n << 2);
+#line 498 "IB01PD.f"
 	maxwrk = ldunn + *n + *n * ilaenv_(&c__1, "DGEQRF", " ", &ldun2, n, &
 		c_n1, &c_n1, (ftnlen)6, (ftnlen)1);
+#line 500 "IB01PD.f"
 	if (moesp) {
+#line 501 "IB01PD.f"
 	    id = 0;
+#line 502 "IB01PD.f"
 	    if (withc) {
 /* Computing MAX */
+#line 503 "IB01PD.f"
 		i__1 = minwrk, i__2 = (ldunn << 1) + n2, i__1 = max(i__1,i__2)
 			, i__2 = ldunn + nn + *n * 7;
+#line 503 "IB01PD.f"
 		minwrk = max(i__1,i__2);
 /* Computing MAX */
+#line 504 "IB01PD.f"
 		i__1 = maxwrk, i__2 = (ldunn << 1) + *n + *n * ilaenv_(&c__1, 
 			"DORMQR", "LT", &ldun2, n, n, &c_n1, (ftnlen)6, (
 			ftnlen)2);
+#line 504 "IB01PD.f"
 		maxwrk = max(i__1,i__2);
+#line 506 "IB01PD.f"
 	    }
+#line 507 "IB01PD.f"
 	} else {
+#line 508 "IB01PD.f"
 	    id = *n;
+#line 509 "IB01PD.f"
 	}
 
+#line 511 "IB01PD.f"
 	if (*m > 0 && withb || n4sid) {
 /* Computing MAX */
+#line 512 "IB01PD.f"
 	    i__1 = minwrk, i__2 = (ldunn << 1) + nn + id + *n * 7;
+#line 512 "IB01PD.f"
 	    minwrk = max(i__1,i__2);
+#line 513 "IB01PD.f"
 	    if (moesp) {
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
+#line 513 "IB01PD.f"
 		i__5 = lnobr * 3 + 1;
+#line 513 "IB01PD.f"
 		i__3 = *l + mnobr, i__4 = lnobr + max(i__5,*m);
+#line 513 "IB01PD.f"
 		i__1 = minwrk, i__2 = ldunn + *n + mnobr * 6, i__1 = max(i__1,
 			i__2), i__2 = ldunn + *n + max(i__3,i__4);
+#line 513 "IB01PD.f"
 		minwrk = max(i__1,i__2);
+#line 513 "IB01PD.f"
 	    }
+#line 517 "IB01PD.f"
 	} else {
+#line 518 "IB01PD.f"
 	    if (moesp) {
+#line 518 "IB01PD.f"
 		iaw = *n + nn;
+#line 518 "IB01PD.f"
 	    }
+#line 520 "IB01PD.f"
 	}
 
+#line 522 "IB01PD.f"
 	if (n4sid || withco) {
 /* Computing MAX */
 /* Computing MAX */
+#line 523 "IB01PD.f"
 	    i__3 = *n * 5;
+#line 523 "IB01PD.f"
 	    i__1 = minwrk, i__2 = ldunn + iaw + n2 + max(i__3,lmmnol), i__1 = 
 		    max(i__1,i__2), i__2 = id + (mnobrn << 2) + 1, i__1 = max(
 		    i__1,i__2), i__2 = id + mnobrn + npl;
+#line 523 "IB01PD.f"
 	    minwrk = max(i__1,i__2);
 /* Computing MAX */
 /* Computing MAX */
+#line 525 "IB01PD.f"
 	    i__3 = *n * ilaenv_(&c__1, "DGEQRF", " ", &lnobr, n, &c_n1, &c_n1,
 		     (ftnlen)6, (ftnlen)1), i__4 = lmmnob * ilaenv_(&c__1, 
 		    "DORMQR", "LT", &lnobr, &lmmnob, n, &c_n1, (ftnlen)6, (
 		    ftnlen)2), i__3 = max(i__3,i__4), i__4 = lmmnol * ilaenv_(
 		    &c__1, "DORMQR", "LT", &ldun2, &lmmnol, n, &c_n1, (ftnlen)
 		    6, (ftnlen)2);
+#line 525 "IB01PD.f"
 	    i__1 = maxwrk, i__2 = ldunn + iaw + n2 + max(i__3,i__4), i__1 = 
 		    max(i__1,i__2), i__2 = id + *n + *n * ilaenv_(&c__1, 
 		    "DGEQRF", " ", &lmnobr, n, &c_n1, &c_n1, (ftnlen)6, (
 		    ftnlen)1), i__1 = max(i__1,i__2), i__2 = id + *n + npl * 
 		    ilaenv_(&c__1, "DORMQR", "LT", &lmnobr, &npl, n, &c_n1, (
 		    ftnlen)6, (ftnlen)2);
+#line 525 "IB01PD.f"
 	    maxwrk = max(i__1,i__2);
+#line 536 "IB01PD.f"
 	    if (n4sid && (*m > 0 && withb)) {
 /* Computing MAX */
 /* Computing MAX */
 /* Computing 2nd power */
+#line 536 "IB01PD.f"
 		i__5 = npl;
+#line 536 "IB01PD.f"
 		i__3 = i__5 * i__5, i__4 = (*m << 2) * npl + 1;
+#line 536 "IB01PD.f"
 		i__1 = minwrk, i__2 = mnobr * npl * (*m * npl + 1) + max(i__3,
 			i__4);
+#line 536 "IB01PD.f"
 		minwrk = max(i__1,i__2);
+#line 536 "IB01PD.f"
 	    }
+#line 539 "IB01PD.f"
 	}
+#line 540 "IB01PD.f"
 	maxwrk = max(minwrk,maxwrk);
 
+#line 542 "IB01PD.f"
 	if (*ldwork < minwrk) {
+#line 543 "IB01PD.f"
 	    *info = -30;
+#line 544 "IB01PD.f"
 	    dwork[1] = (doublereal) minwrk;
+#line 545 "IB01PD.f"
 	}
+#line 546 "IB01PD.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 550 "IB01PD.f"
     if (*info != 0) {
+#line 551 "IB01PD.f"
 	i__1 = -(*info);
+#line 551 "IB01PD.f"
 	xerbla_("IB01PD", &i__1, (ftnlen)6);
+#line 552 "IB01PD.f"
 	return 0;
+#line 553 "IB01PD.f"
     }
 
+#line 555 "IB01PD.f"
     nr2 = mnobr + 1;
+#line 556 "IB01PD.f"
     nr3 = lmnobr + 1;
+#line 557 "IB01PD.f"
     nr4 = lmmnob + 1;
 
 /*     Set the precision parameters. A threshold value  EPS**(2/3)  is */
 /*     used for deciding to use pivoting or not, where  EPS  is the */
 /*     relative machine precision (see LAPACK Library routine DLAMCH). */
 
+#line 563 "IB01PD.f"
     eps = dlamch_("Precision", (ftnlen)9);
+#line 564 "IB01PD.f"
     thresh = pow_dd(&eps, &c_b43);
+#line 565 "IB01PD.f"
     svlmax = 0.;
+#line 566 "IB01PD.f"
     rcond4 = 1.;
 
 /*     Let  Un  be the matrix of left singular vectors (stored in  R_22). */
 /*     Copy  un1 = GaL = Un(1:(s-1)*L,1:n)  in the workspace. */
 
+#line 571 "IB01PD.f"
     igal = 1;
+#line 572 "IB01PD.f"
     dlacpy_("Full", &ldun2, n, &r__[nr2 + nr2 * r_dim1], ldr, &dwork[igal], &
 	    ldun2, (ftnlen)4);
 
@@ -732,38 +886,62 @@ static doublereal c_b173 = -1.;
 /*     Workspace: need   L*(NOBR-1)*N+2*N, */
 /*                prefer L*(NOBR-1)*N+N+N*NB. */
 
+#line 579 "IB01PD.f"
     itau1 = igal + ldunn;
+#line 580 "IB01PD.f"
     jwork = itau1 + *n;
+#line 581 "IB01PD.f"
     ldw = jwork;
+#line 582 "IB01PD.f"
     i__1 = *ldwork - jwork + 1;
+#line 582 "IB01PD.f"
     dgeqrf_(&ldun2, n, &dwork[igal], &ldun2, &dwork[itau1], &dwork[jwork], &
 	    i__1, &ierr);
 
 /*     Compute the reciprocal of the condition number of r1. */
 /*     Workspace: need L*(NOBR-1)*N+4*N. */
 
+#line 588 "IB01PD.f"
     dtrcon_("1-norm", "Upper", "NonUnit", n, &dwork[igal], &ldun2, &rcond1, &
 	    dwork[jwork], &iwork[1], info, (ftnlen)6, (ftnlen)5, (ftnlen)7);
 
+#line 591 "IB01PD.f"
     toll1 = *tol;
+#line 592 "IB01PD.f"
     if (toll1 <= 0.) {
+#line 592 "IB01PD.f"
 	toll1 = nn * eps;
+#line 592 "IB01PD.f"
     }
 
+#line 595 "IB01PD.f"
     if (*m > 0 && withb || n4sid) {
+#line 596 "IB01PD.f"
 	*(unsigned char *)jobp = 'P';
+#line 597 "IB01PD.f"
 	if (withal) {
+#line 598 "IB01PD.f"
 	    *(unsigned char *)jobpy = 'D';
+#line 599 "IB01PD.f"
 	} else {
+#line 600 "IB01PD.f"
 	    *(unsigned char *)jobpy = *(unsigned char *)job;
+#line 601 "IB01PD.f"
 	}
+#line 602 "IB01PD.f"
     } else {
+#line 603 "IB01PD.f"
 	*(unsigned char *)jobp = 'N';
+#line 604 "IB01PD.f"
     }
 
+#line 606 "IB01PD.f"
     if (moesp) {
+#line 607 "IB01PD.f"
 	ncol = 0;
+#line 608 "IB01PD.f"
 	iun2 = jwork;
+#line 609 "IB01PD.f"
 	if (withc) {
 
 /*           Set  C = Un(1:L,1:n)  and then compute the system matrix A. */
@@ -771,8 +949,10 @@ static doublereal c_b173 = -1.;
 /*           Set  un2 = Un(L+1:L*s,1:n)  in  DWORK(IUN2). */
 /*           Workspace: need   2*L*(NOBR-1)*N+N. */
 
+#line 616 "IB01PD.f"
 	    dlacpy_("Full", l, n, &r__[nr2 + nr2 * r_dim1], ldr, &c__[
 		    c_offset], ldc, (ftnlen)4);
+#line 617 "IB01PD.f"
 	    dlacpy_("Full", &ldun2, n, &r__[nr2 + *l + nr2 * r_dim1], ldr, &
 		    dwork[iun2], &ldun2, (ftnlen)4);
 
@@ -784,32 +964,49 @@ static doublereal c_b173 = -1.;
 /*           Workspace: need   2*L*(NOBR-1)*N+2*N; */
 /*                      prefer 2*L*(NOBR-1)*N+N+N*NB. */
 
+#line 628 "IB01PD.f"
 	    jwork = iun2 + ldunn;
+#line 629 "IB01PD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 629 "IB01PD.f"
 	    dormqr_("Left", "Transpose", &ldun2, n, n, &dwork[igal], &ldun2, &
 		    dwork[itau1], &dwork[iun2], &ldun2, &dwork[jwork], &i__1, 
 		    &ierr, (ftnlen)4, (ftnlen)9);
+#line 632 "IB01PD.f"
 	    dlacpy_("Full", n, n, &dwork[iun2], &ldun2, &a[a_offset], lda, (
 		    ftnlen)4);
+#line 633 "IB01PD.f"
 	    ncol = *n;
+#line 634 "IB01PD.f"
 	    jwork = iun2;
+#line 635 "IB01PD.f"
 	}
 
+#line 637 "IB01PD.f"
 	if (rcond1 > max(toll1,thresh)) {
 
 /*           The triangular factor r1 is considered to be of full rank. */
 /*           Solve for  A  (if requested),  r1*A = un2(1:n,:)  in  A. */
 
+#line 642 "IB01PD.f"
 	    if (withc) {
+#line 643 "IB01PD.f"
 		dtrtrs_("Upper", "NoTranspose", "NonUnit", n, n, &dwork[igal],
 			 &ldun2, &a[a_offset], lda, &ierr, (ftnlen)5, (ftnlen)
 			11, (ftnlen)7);
+#line 645 "IB01PD.f"
 		if (ierr > 0) {
+#line 646 "IB01PD.f"
 		    *info = 3;
+#line 647 "IB01PD.f"
 		    return 0;
+#line 648 "IB01PD.f"
 		}
+#line 649 "IB01PD.f"
 	    }
+#line 650 "IB01PD.f"
 	    rank = *n;
+#line 651 "IB01PD.f"
 	} else {
 
 /*           Rank-deficient triangular factor r1.  Use SVD of r1, */
@@ -823,67 +1020,102 @@ static doublereal c_b173 = -1.;
 /*                                    c = 2  if  B and D  are needed; */
 /*                      prefer larger. */
 
+#line 664 "IB01PD.f"
 	    iu = iun2;
+#line 665 "IB01PD.f"
 	    isv = iu + nn;
+#line 666 "IB01PD.f"
 	    jwork = isv + *n;
+#line 667 "IB01PD.f"
 	    if (*m > 0 && withb) {
 
 /*              Save the elementary reflectors used for computing r1, */
 /*              if  B, D  are needed. */
 /*              Workspace: need   2*L*(NOBR-1)*N+2*N+N*N. */
 
+#line 673 "IB01PD.f"
 		ihous = jwork;
+#line 674 "IB01PD.f"
 		jwork = ihous + ldunn;
+#line 675 "IB01PD.f"
 		dlacpy_("Lower", &ldun2, n, &dwork[igal], &ldun2, &dwork[
 			ihous], &ldun2, (ftnlen)5);
+#line 677 "IB01PD.f"
 	    } else {
+#line 678 "IB01PD.f"
 		ihous = igal;
+#line 679 "IB01PD.f"
 	    }
 
+#line 681 "IB01PD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 681 "IB01PD.f"
 	    mb02ud_("Not factored", "Left", "NoTranspose", jobp, n, &ncol, &
 		    c_b63, &toll1, &rank, &dwork[igal], &ldun2, &dwork[iu], n,
 		     &dwork[isv], &a[a_offset], lda, &r__[nr3 + nr2 * r_dim1],
 		     ldr, &dwork[jwork], &i__1, &ierr, (ftnlen)12, (ftnlen)4, 
 		    (ftnlen)11, (ftnlen)1);
+#line 685 "IB01PD.f"
 	    if (ierr != 0) {
+#line 686 "IB01PD.f"
 		*info = 2;
+#line 687 "IB01PD.f"
 		return 0;
+#line 688 "IB01PD.f"
 	    }
 /* Computing MAX */
+#line 689 "IB01PD.f"
 	    i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 689 "IB01PD.f"
 	    maxwrk = max(i__1,i__2);
 
+#line 691 "IB01PD.f"
 	    if (rank == 0) {
+#line 692 "IB01PD.f"
 		*(unsigned char *)jobp = 'N';
+#line 693 "IB01PD.f"
 	    } else if (*m > 0 && withb) {
 
 /*              Compute  pinv(GaL)  in  R(NR3,NR2)  if  B, D  are needed. */
 /*              Workspace: need   2*L*(NOBR-1)*N+N*N+3*N; */
 /*                         prefer 2*L*(NOBR-1)*N+N*N+2*N+N*NB. */
 
+#line 699 "IB01PD.f"
 		i__1 = ldun2 - *n;
+#line 699 "IB01PD.f"
 		dlaset_("Full", n, &i__1, &c_b66, &c_b66, &r__[nr3 + (nr2 + *
 			n) * r_dim1], ldr, (ftnlen)4);
+#line 701 "IB01PD.f"
 		i__1 = *ldwork - jwork + 1;
+#line 701 "IB01PD.f"
 		dormqr_("Right", "Transpose", n, &ldun2, n, &dwork[ihous], &
 			ldun2, &dwork[itau1], &r__[nr3 + nr2 * r_dim1], ldr, &
 			dwork[jwork], &i__1, &ierr, (ftnlen)5, (ftnlen)9);
 /* Computing MAX */
+#line 705 "IB01PD.f"
 		i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 705 "IB01PD.f"
 		maxwrk = max(i__1,i__2);
+#line 706 "IB01PD.f"
 		if (withco) {
 
 /*                 Save  pinv(GaL)  in  DWORK(IGAL). */
 
+#line 710 "IB01PD.f"
 		    dlacpy_("Full", n, &ldun2, &r__[nr3 + nr2 * r_dim1], ldr, 
 			    &dwork[igal], n, (ftnlen)4);
+#line 712 "IB01PD.f"
 		}
+#line 713 "IB01PD.f"
 		jwork = iun2;
+#line 714 "IB01PD.f"
 	    }
+#line 715 "IB01PD.f"
 	    ldw = jwork;
+#line 716 "IB01PD.f"
 	}
 
+#line 718 "IB01PD.f"
 	if (*m > 0 && withb) {
 
 /*           Computation of  B  and  D. */
@@ -891,33 +1123,42 @@ static doublereal c_b173 = -1.;
 /*           Compute the reciprocal of the condition number of R_1c. */
 /*           Workspace: need L*(NOBR-1)*N+N+3*M*NOBR. */
 
+#line 725 "IB01PD.f"
 	    dtrcon_("1-norm", "Upper", "NonUnit", &mnobr, &r__[nr3 + r_dim1], 
 		    ldr, &rcond2, &dwork[jwork], &iwork[1], &ierr, (ftnlen)6, 
 		    (ftnlen)5, (ftnlen)7);
 
+#line 728 "IB01PD.f"
 	    toll = *tol;
+#line 729 "IB01PD.f"
 	    if (toll <= 0.) {
+#line 729 "IB01PD.f"
 		toll = mnobr * mnobr * eps;
+#line 729 "IB01PD.f"
 	    }
 
 /*           Compute the right hand side and solve for  K  (in  R_23), */
 /*              K*R_1c' = u2'*R_2c', */
 /*           where  u2 = Un(:,n+1:L*s),  and  K  is  (Ls-n) x ms. */
 
+#line 736 "IB01PD.f"
 	    dgemm_("Transpose", "Transpose", &lnobrn, &mnobr, &lnobr, &c_b63, 
 		    &r__[nr2 + (nr2 + *n) * r_dim1], ldr, &r__[nr2 * r_dim1 + 
 		    1], ldr, &c_b66, &r__[nr2 + nr3 * r_dim1], ldr, (ftnlen)9,
 		     (ftnlen)9);
 
+#line 740 "IB01PD.f"
 	    if (rcond2 > max(toll,thresh)) {
 
 /*              The triangular factor R_1c is considered to be of full */
 /*              rank. Solve for  K,  K*R_1c' = u2'*R_2c'. */
 
+#line 745 "IB01PD.f"
 		dtrsm_("Right", "Upper", "Transpose", "Non-unit", &lnobrn, &
 			mnobr, &c_b63, &r__[nr3 + r_dim1], ldr, &r__[nr2 + 
 			nr3 * r_dim1], ldr, (ftnlen)5, (ftnlen)5, (ftnlen)9, (
 			ftnlen)8);
+#line 748 "IB01PD.f"
 	    } else {
 
 /*              Rank-deficient triangular factor  R_1c.  Use SVD of  R_1c */
@@ -927,23 +1168,35 @@ static doublereal c_b173 = -1.;
 /*              Workspace: need   L*(NOBR-1)*N+N+6*M*NOBR; */
 /*                         prefer larger. */
 
+#line 757 "IB01PD.f"
 		isv = ldw;
+#line 758 "IB01PD.f"
 		jwork = isv + mnobr;
+#line 759 "IB01PD.f"
 		i__1 = *ldwork - jwork + 1;
+#line 759 "IB01PD.f"
 		mb02ud_("Not factored", "Right", "Transpose", "No pinv", &
 			lnobrn, &mnobr, &c_b63, &toll, &rank11, &r__[nr3 + 
 			r_dim1], ldr, &r__[nr3 + nr3 * r_dim1], ldr, &dwork[
 			isv], &r__[nr2 + nr3 * r_dim1], ldr, &dwork[jwork], &
 			c__1, &dwork[jwork], &i__1, &ierr, (ftnlen)12, (
 			ftnlen)5, (ftnlen)9, (ftnlen)7);
+#line 764 "IB01PD.f"
 		if (ierr != 0) {
+#line 765 "IB01PD.f"
 		    *info = 2;
+#line 766 "IB01PD.f"
 		    return 0;
+#line 767 "IB01PD.f"
 		}
 /* Computing MAX */
+#line 768 "IB01PD.f"
 		i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 768 "IB01PD.f"
 		maxwrk = max(i__1,i__2);
+#line 769 "IB01PD.f"
 		jwork = ldw;
+#line 770 "IB01PD.f"
 	    }
 
 /*           Compute the triangular factor of the structured matrix  Q */
@@ -954,11 +1207,16 @@ static doublereal c_b173 = -1.;
 /*                                                max(3*L*NOBR+1,M)); */
 /*                      prefer larger. */
 
+#line 780 "IB01PD.f"
 	    if (withco) {
+#line 780 "IB01PD.f"
 		dlacpy_("Full", &lnobr, n, &r__[nr2 + nr2 * r_dim1], ldr, &o[
 			o_offset], ldo, (ftnlen)4);
+#line 780 "IB01PD.f"
 	    }
+#line 782 "IB01PD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 782 "IB01PD.f"
 	    ib01py_(meth, jobpy, nobr, n, m, l, &rank, &r__[nr2 + nr2 * 
 		    r_dim1], ldr, &dwork[igal], &ldun2, &dwork[itau1], &r__[
 		    nr3 + nr2 * r_dim1], ldr, &r__[nr2 + nr3 * r_dim1], ldr, &
@@ -966,43 +1224,68 @@ static doublereal c_b173 = -1.;
 		    ldr, &b[b_offset], ldb, &d__[d_offset], ldd, tol, &iwork[
 		    1], &dwork[jwork], &i__1, iwarn, info, (ftnlen)1, (ftnlen)
 		    1);
+#line 788 "IB01PD.f"
 	    if (*info != 0) {
+#line 788 "IB01PD.f"
 		return 0;
+#line 788 "IB01PD.f"
 	    }
 /* Computing MAX */
+#line 790 "IB01PD.f"
 	    i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 790 "IB01PD.f"
 	    maxwrk = max(i__1,i__2);
+#line 791 "IB01PD.f"
 	    rcond4 = dwork[jwork + 1];
+#line 792 "IB01PD.f"
 	    if (withco) {
+#line 792 "IB01PD.f"
 		dlacpy_("Full", &lnobr, n, &o[o_offset], ldo, &r__[nr2 + 
 			r_dim1], ldr, (ftnlen)4);
+#line 792 "IB01PD.f"
 	    }
 
+#line 795 "IB01PD.f"
 	} else {
+#line 796 "IB01PD.f"
 	    rcond2 = 1.;
+#line 797 "IB01PD.f"
 	}
 
+#line 799 "IB01PD.f"
 	if (! withco) {
+#line 800 "IB01PD.f"
 	    rcond3 = 1.;
+#line 801 "IB01PD.f"
 	    goto L30;
+#line 802 "IB01PD.f"
 	}
+#line 803 "IB01PD.f"
     } else {
 
 /*        For N4SID, set  RCOND2  to one. */
 
+#line 807 "IB01PD.f"
 	rcond2 = 1.;
+#line 808 "IB01PD.f"
     }
 
 /*     If needed, save the first  n  columns, representing  Gam,  of the */
 /*     matrix of left singular vectors,  Un,  in  R_21  and in  O. */
 
+#line 813 "IB01PD.f"
     if (n4sid || withc && ! withal) {
+#line 814 "IB01PD.f"
 	if (*m > 0) {
+#line 814 "IB01PD.f"
 	    dlacpy_("Full", &lnobr, n, &r__[nr2 + nr2 * r_dim1], ldr, &r__[
 		    nr2 + r_dim1], ldr, (ftnlen)4);
+#line 814 "IB01PD.f"
 	}
+#line 817 "IB01PD.f"
 	dlacpy_("Full", &lnobr, n, &r__[nr2 + nr2 * r_dim1], ldr, &o[o_offset]
 		, ldo, (ftnlen)4);
+#line 818 "IB01PD.f"
     }
 
 /*     Computations for covariance matrices, and system matrices (N4SID). */
@@ -1018,9 +1301,13 @@ static doublereal c_b173 = -1.;
 /*                             and  METH = 'M'; */
 /*                Aw = 0,      otherwise. */
 
+#line 833 "IB01PD.f"
     itau2 = ldw;
+#line 834 "IB01PD.f"
     jwork = itau2 + *n;
+#line 835 "IB01PD.f"
     i__1 = *ldwork - jwork + 1;
+#line 835 "IB01PD.f"
     dgeqrf_(&lnobr, n, &r__[nr2 + r_dim1], ldr, &dwork[itau2], &dwork[jwork], 
 	    &i__1, &ierr);
 
@@ -1032,11 +1319,16 @@ static doublereal c_b173 = -1.;
 /*     Workspace: need   L*(NOBR-1)*N+Aw+2*N+(2*M+L)*NOBR; */
 /*                prefer L*(NOBR-1)*N+Aw+2*N+(2*M+L)*NOBR*NB. */
 
+#line 846 "IB01PD.f"
     if (moesp || withb && ! withal) {
+#line 846 "IB01PD.f"
 	ma02ad_("Full", &lmmnob, &lnobr, &r__[nr4 * r_dim1 + 1], ldr, &r__[
 		nr4 + r_dim1], ldr, (ftnlen)4);
+#line 846 "IB01PD.f"
     }
+#line 849 "IB01PD.f"
     i__1 = *ldwork - jwork + 1;
+#line 849 "IB01PD.f"
     dormqr_("Left", "Transpose", &lnobr, &lmmnob, n, &r__[nr2 + r_dim1], ldr, 
 	    &dwork[itau2], &r__[nr4 + r_dim1], ldr, &dwork[jwork], &i__1, &
 	    ierr, (ftnlen)4, (ftnlen)9);
@@ -1044,24 +1336,35 @@ static doublereal c_b173 = -1.;
 /*     Solve for  Y,  RY = Z  in  Z  and save the transpose of the */
 /*     solution  Y  in the second block-column of  R. */
 
+#line 856 "IB01PD.f"
     dtrtrs_("Upper", "NoTranspose", "NonUnit", n, &lmmnob, &r__[nr2 + r_dim1],
 	     ldr, &r__[nr4 + r_dim1], ldr, &ierr, (ftnlen)5, (ftnlen)11, (
 	    ftnlen)7);
+#line 858 "IB01PD.f"
     if (ierr > 0) {
+#line 859 "IB01PD.f"
 	*info = 3;
+#line 860 "IB01PD.f"
 	return 0;
+#line 861 "IB01PD.f"
     }
+#line 862 "IB01PD.f"
     ma02ad_("Full", n, &lmmnob, &r__[nr4 + r_dim1], ldr, &r__[nr2 * r_dim1 + 
 	    1], ldr, (ftnlen)4);
+#line 863 "IB01PD.f"
     nr4mn = nr4 - *n;
+#line 864 "IB01PD.f"
     nr4pl = nr4 + *l;
+#line 865 "IB01PD.f"
     nrow = lmmnol;
 
 /*     SHIFT is .TRUE. if some columns of  R_14 : R_44L  should be */
 /*     shifted to the right, to avoid overwriting useful information. */
 
+#line 870 "IB01PD.f"
     shift = *m == 0 && lnobr < n2;
 
+#line 872 "IB01PD.f"
     if (rcond1 > max(toll1,thresh)) {
 
 /*        The triangular factor  r1  of  GaL  (GaL = Q1*r1)  is */
@@ -1074,9 +1377,12 @@ static doublereal c_b173 = -1.;
 /*        Workspace: need   L*(NOBR-1)*N+Aw+2*N+ (2*M+L)*NOBR + L; */
 /*                   prefer L*(NOBR-1)*N+Aw+2*N+((2*M+L)*NOBR + L)*NB. */
 
+#line 884 "IB01PD.f"
 	ma02ad_("Full", &lmmnol, &ldun2, &r__[nr4pl * r_dim1 + 1], ldr, &r__[
 		nr4pl + r_dim1], ldr, (ftnlen)4);
+#line 886 "IB01PD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 886 "IB01PD.f"
 	dormqr_("Left", "Transpose", &ldun2, &lmmnol, n, &dwork[igal], &ldun2,
 		 &dwork[itau1], &r__[nr4pl + r_dim1], ldr, &dwork[jwork], &
 		i__1, &ierr, (ftnlen)4, (ftnlen)9);
@@ -1084,29 +1390,45 @@ static doublereal c_b173 = -1.;
 /*        Solve for  X,  r1*X = Z1  in  Z1,  and copy the transpose of  X */
 /*        into the last part of the third block-column of  R. */
 
+#line 893 "IB01PD.f"
 	dtrtrs_("Upper", "NoTranspose", "NonUnit", n, &lmmnol, &dwork[igal], &
 		ldun2, &r__[nr4pl + r_dim1], ldr, &ierr, (ftnlen)5, (ftnlen)
 		11, (ftnlen)7);
+#line 895 "IB01PD.f"
 	if (ierr > 0) {
+#line 896 "IB01PD.f"
 	    *info = 3;
+#line 897 "IB01PD.f"
 	    return 0;
+#line 898 "IB01PD.f"
 	}
 
+#line 900 "IB01PD.f"
 	if (shift) {
+#line 901 "IB01PD.f"
 	    nr4mn = nr4;
 
+#line 903 "IB01PD.f"
 	    for (i__ = *l - 1; i__ >= 0; --i__) {
+#line 904 "IB01PD.f"
 		dcopy_(&lmmnol, &r__[(nr4 + i__) * r_dim1 + 1], &c__1, &r__[(
 			nr4 + *n + i__) * r_dim1 + 1], &c__1);
+#line 905 "IB01PD.f"
 /* L10: */
+#line 905 "IB01PD.f"
 	    }
 
+#line 907 "IB01PD.f"
 	}
+#line 908 "IB01PD.f"
 	ma02ad_("Full", n, &lmmnol, &r__[nr4pl + r_dim1], ldr, &r__[nr4mn * 
 		r_dim1 + 1], ldr, (ftnlen)4);
+#line 910 "IB01PD.f"
 	nrow = 0;
+#line 911 "IB01PD.f"
     }
 
+#line 913 "IB01PD.f"
     if (n4sid || nrow > 0) {
 
 /*        METH = 'N'  or rank-deficient triangular factor r1. */
@@ -1120,71 +1442,112 @@ static doublereal c_b173 = -1.;
 /*        Workspace for N4SID: need   2*L*(NOBR-1)*N+N*N+8*N; */
 /*                             prefer larger. */
 
+#line 926 "IB01PD.f"
 	if (moesp) {
+#line 927 "IB01PD.f"
 	    *(unsigned char *)fact = 'F';
+#line 928 "IB01PD.f"
 	    if (*m > 0 && withb) {
+#line 928 "IB01PD.f"
 		dlacpy_("Full", n, &ldun2, &dwork[igal], n, &r__[nr4pl + nr2 *
 			 r_dim1], ldr, (ftnlen)4);
+#line 928 "IB01PD.f"
 	    }
+#line 931 "IB01PD.f"
 	} else {
 
 /*           Save the elementary reflectors used for computing r1. */
 
+#line 935 "IB01PD.f"
 	    ihous = jwork;
+#line 936 "IB01PD.f"
 	    dlacpy_("Lower", &ldun2, n, &dwork[igal], &ldun2, &dwork[ihous], &
 		    ldun2, (ftnlen)5);
+#line 938 "IB01PD.f"
 	    *(unsigned char *)fact = 'N';
+#line 939 "IB01PD.f"
 	    iu = ihous + ldunn;
+#line 940 "IB01PD.f"
 	    isv = iu + nn;
+#line 941 "IB01PD.f"
 	    jwork = isv + *n;
+#line 942 "IB01PD.f"
 	}
 
+#line 944 "IB01PD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 944 "IB01PD.f"
 	mb02ud_(fact, "Right", "Transpose", jobp, &nrow, n, &c_b63, &toll1, &
 		rank, &dwork[igal], &ldun2, &dwork[iu], n, &dwork[isv], &r__[
 		nr4pl * r_dim1 + 1], ldr, &r__[nr4pl + nr2 * r_dim1], ldr, &
 		dwork[jwork], &i__1, &ierr, (ftnlen)1, (ftnlen)5, (ftnlen)9, (
 		ftnlen)1);
+#line 948 "IB01PD.f"
 	if (nrow > 0) {
+#line 949 "IB01PD.f"
 	    if (shift) {
+#line 950 "IB01PD.f"
 		nr4mn = nr4;
+#line 951 "IB01PD.f"
 		dlacpy_("Full", &lmmnol, l, &r__[nr4 * r_dim1 + 1], ldr, &r__[
 			(nr4 - *l) * r_dim1 + 1], ldr, (ftnlen)4);
+#line 953 "IB01PD.f"
 		dlacpy_("Full", &lmmnol, n, &r__[nr4pl * r_dim1 + 1], ldr, &
 			r__[nr4mn * r_dim1 + 1], ldr, (ftnlen)4);
+#line 955 "IB01PD.f"
 		dlacpy_("Full", &lmmnol, l, &r__[(nr4 - *l) * r_dim1 + 1], 
 			ldr, &r__[(nr4 + *n) * r_dim1 + 1], ldr, (ftnlen)4);
+#line 957 "IB01PD.f"
 	    } else {
+#line 958 "IB01PD.f"
 		dlacpy_("Full", &lmmnol, n, &r__[nr4pl * r_dim1 + 1], ldr, &
 			r__[nr4mn * r_dim1 + 1], ldr, (ftnlen)4);
+#line 960 "IB01PD.f"
 	    }
+#line 961 "IB01PD.f"
 	}
 
+#line 963 "IB01PD.f"
 	if (n4sid) {
+#line 964 "IB01PD.f"
 	    if (ierr != 0) {
+#line 965 "IB01PD.f"
 		*info = 2;
+#line 966 "IB01PD.f"
 		return 0;
+#line 967 "IB01PD.f"
 	    }
 /* Computing MAX */
+#line 968 "IB01PD.f"
 	    i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 968 "IB01PD.f"
 	    maxwrk = max(i__1,i__2);
 
 /*           Compute  pinv(GaL)  in  R(NR4+L,NR2). */
 /*           Workspace: need   2*L*(NOBR-1)*N+3*N; */
 /*                      prefer 2*L*(NOBR-1)*N+2*N+N*NB. */
 
+#line 974 "IB01PD.f"
 	    jwork = iu;
+#line 975 "IB01PD.f"
 	    i__1 = ldun2 - *n;
+#line 975 "IB01PD.f"
 	    dlaset_("Full", n, &i__1, &c_b66, &c_b66, &r__[nr4pl + (nr2 + *n) 
 		    * r_dim1], ldr, (ftnlen)4);
+#line 977 "IB01PD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 977 "IB01PD.f"
 	    dormqr_("Right", "Transpose", n, &ldun2, n, &dwork[ihous], &ldun2,
 		     &dwork[itau1], &r__[nr4pl + nr2 * r_dim1], ldr, &dwork[
 		    jwork], &i__1, &ierr, (ftnlen)5, (ftnlen)9);
 /* Computing MAX */
+#line 981 "IB01PD.f"
 	    i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 981 "IB01PD.f"
 	    maxwrk = max(i__1,i__2);
+#line 982 "IB01PD.f"
 	}
+#line 983 "IB01PD.f"
     }
 
 /*     For METH = 'N', find part of the solution (corresponding to A */
@@ -1214,28 +1577,42 @@ static doublereal c_b173 = -1.;
 /*                prefer d*N+N+N*NB; */
 /*     where  d = 0,  for  MOESP,  and  d = 1,  for  N4SID. */
 
+#line 1012 "IB01PD.f"
     if (moesp) {
+#line 1013 "IB01PD.f"
 	itau = 1;
+#line 1014 "IB01PD.f"
     } else {
+#line 1015 "IB01PD.f"
 	dcopy_(n, &dwork[itau2], &c__1, &dwork[1], &c__1);
+#line 1016 "IB01PD.f"
 	itau = *n + 1;
+#line 1017 "IB01PD.f"
     }
 
+#line 1019 "IB01PD.f"
     jwork = itau + *n;
+#line 1020 "IB01PD.f"
     i__1 = *ldwork - jwork + 1;
+#line 1020 "IB01PD.f"
     dgeqrf_(&lmnobr, n, &r__[nr2 + nr2 * r_dim1], ldr, &dwork[itau], &dwork[
 	    jwork], &i__1, &ierr);
 
 /*     Workspace: need   d*N+N+(N+L); */
 /*                prefer d*N+N+(N+L)*NB. */
 
+#line 1026 "IB01PD.f"
     i__1 = *ldwork - jwork + 1;
+#line 1026 "IB01PD.f"
     dormqr_("Left", "Transpose", &lmnobr, &npl, n, &r__[nr2 + nr2 * r_dim1], 
 	    ldr, &dwork[itau], &r__[nr2 + nr4mn * r_dim1], ldr, &dwork[jwork],
 	     &i__1, &ierr, (ftnlen)4, (ftnlen)9);
 
+#line 1030 "IB01PD.f"
     i__1 = *l - 1;
+#line 1030 "IB01PD.f"
     i__2 = *l - 1;
+#line 1030 "IB01PD.f"
     dlaset_("Lower", &i__1, &i__2, &c_b66, &c_b66, &r__[nr4 + 1 + nr4 * 
 	    r_dim1], ldr, (ftnlen)5);
 
@@ -1245,28 +1622,42 @@ static doublereal c_b173 = -1.;
 /*     triangular factor in  R(1:m*s+n,1:m*s+n). */
 /*     Workspace: need d*N+3*(M*NOBR+N). */
 
+#line 1038 "IB01PD.f"
     jwork = itau;
+#line 1039 "IB01PD.f"
     dtrcon_("1-norm", "Upper", "NonUnit", &mnobrn, &r__[r_offset], ldr, &
 	    rcond3, &dwork[jwork], &iwork[1], info, (ftnlen)6, (ftnlen)5, (
 	    ftnlen)7);
 
+#line 1042 "IB01PD.f"
     toll = *tol;
+#line 1043 "IB01PD.f"
     if (toll <= 0.) {
+#line 1043 "IB01PD.f"
 	toll = mnobrn * mnobrn * eps;
+#line 1043 "IB01PD.f"
     }
+#line 1045 "IB01PD.f"
     if (rcond3 > max(toll,thresh)) {
 
 /*        The triangular factor is considered to be of full rank. */
 /*        Solve for  V(m*s+1:m*s+n,:),  giving  [ A'  C' ]. */
 
+#line 1050 "IB01PD.f"
 	fullr = TRUE_;
+#line 1051 "IB01PD.f"
 	rankm = mnobrn;
+#line 1052 "IB01PD.f"
 	if (n4sid) {
+#line 1052 "IB01PD.f"
 	    dtrsm_("Left", "Upper", "NoTranspose", "NonUnit", n, &npl, &c_b63,
 		     &r__[nr2 + nr2 * r_dim1], ldr, &r__[nr2 + nr4mn * r_dim1]
 		    , ldr, (ftnlen)4, (ftnlen)5, (ftnlen)11, (ftnlen)7);
+#line 1052 "IB01PD.f"
 	}
+#line 1055 "IB01PD.f"
     } else {
+#line 1056 "IB01PD.f"
 	fullr = FALSE_;
 
 /*        Use QR factorization (with pivoting). For METH = 'N', save */
@@ -1277,40 +1668,61 @@ static doublereal c_b173 = -1.;
 /*        Workspace: need   d*N+4*(M*NOBR+N)+1; */
 /*                   prefer d*N+3*(M*NOBR+N)+(M*NOBR+N+1)*NB. */
 
+#line 1066 "IB01PD.f"
 	i__1 = mnobrn;
+#line 1066 "IB01PD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 1067 "IB01PD.f"
 	    iwork[i__] = 0;
+#line 1068 "IB01PD.f"
 /* L20: */
+#line 1068 "IB01PD.f"
 	}
 
+#line 1070 "IB01PD.f"
 	if (n4sid && (*m > 0 && withb)) {
+#line 1070 "IB01PD.f"
 	    dlacpy_("Full", &lnobr, n, &r__[nr2 + r_dim1], ldr, &r__[nr4 + 
 		    r_dim1], ldr, (ftnlen)4);
+#line 1070 "IB01PD.f"
 	}
+#line 1073 "IB01PD.f"
 	jwork = itau + mnobrn;
+#line 1074 "IB01PD.f"
 	i__1 = mnobrn - 1;
+#line 1074 "IB01PD.f"
 	dlaset_("Lower", &i__1, &mnobrn, &c_b66, &c_b66, &r__[r_dim1 + 2], 
 		ldr, (ftnlen)5);
+#line 1076 "IB01PD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 1076 "IB01PD.f"
 	mb03od_("QR", &mnobrn, &mnobrn, &r__[r_offset], ldr, &iwork[1], &toll,
 		 &svlmax, &dwork[itau], &rankm, sval, &dwork[jwork], &i__1, &
 		ierr, (ftnlen)2);
 /* Computing MAX */
+#line 1079 "IB01PD.f"
 	i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 1079 "IB01PD.f"
 	maxwrk = max(i__1,i__2);
 
 /*        Workspace: need   d*N+M*NOBR+N+N+L; */
 /*                   prefer d*N+M*NOBR+N+(N+L)*NB. */
 
+#line 1084 "IB01PD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 1084 "IB01PD.f"
 	dormqr_("Left", "Transpose", &mnobrn, &npl, &mnobrn, &r__[r_offset], 
 		ldr, &dwork[itau], &r__[nr4mn * r_dim1 + 1], ldr, &dwork[
 		jwork], &i__1, &ierr, (ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 1087 "IB01PD.f"
 	i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 1087 "IB01PD.f"
 	maxwrk = max(i__1,i__2);
+#line 1088 "IB01PD.f"
     }
 
+#line 1090 "IB01PD.f"
     if (withco) {
 
 /*        The residual (transposed) of the least squares solution */
@@ -1319,45 +1731,70 @@ static doublereal c_b173 = -1.;
 /*        squared-up for getting the covariance matrices. (Generically, */
 /*        RANKM = m*s+n.) */
 
+#line 1098 "IB01PD.f"
 	rnrm = 1. / (doublereal) (*nsmpl);
+#line 1099 "IB01PD.f"
 	if (moesp) {
+#line 1100 "IB01PD.f"
 	    i__1 = lmmnol - rankm;
+#line 1100 "IB01PD.f"
 	    dsyrk_("Upper", "Transpose", &npl, &i__1, &rnrm, &r__[rankm + 1 + 
 		    nr4mn * r_dim1], ldr, &c_b66, &r__[r_offset], ldr, (
 		    ftnlen)5, (ftnlen)9);
+#line 1102 "IB01PD.f"
 	    dlacpy_("Upper", n, n, &r__[r_offset], ldr, &q[q_offset], ldq, (
 		    ftnlen)5);
+#line 1103 "IB01PD.f"
 	    dlacpy_("Full", n, l, &r__[(*n + 1) * r_dim1 + 1], ldr, &s[
 		    s_offset], lds, (ftnlen)4);
+#line 1104 "IB01PD.f"
 	    dlacpy_("Upper", l, l, &r__[*n + 1 + (*n + 1) * r_dim1], ldr, &ry[
 		    ry_offset], ldry, (ftnlen)5);
+#line 1105 "IB01PD.f"
 	} else {
+#line 1106 "IB01PD.f"
 	    i__1 = lmmnol - rankm;
+#line 1106 "IB01PD.f"
 	    dsyrk_("Upper", "Transpose", &npl, &i__1, &rnrm, &r__[rankm + 1 + 
 		    nr4mn * r_dim1], ldr, &c_b66, &dwork[jwork], &npl, (
 		    ftnlen)5, (ftnlen)9);
+#line 1108 "IB01PD.f"
 	    dlacpy_("Upper", n, n, &dwork[jwork], &npl, &q[q_offset], ldq, (
 		    ftnlen)5);
+#line 1109 "IB01PD.f"
 	    dlacpy_("Full", n, l, &dwork[jwork + *n * npl], &npl, &s[s_offset]
 		    , lds, (ftnlen)4);
+#line 1111 "IB01PD.f"
 	    dlacpy_("Upper", l, l, &dwork[jwork + *n * (npl + 1)], &npl, &ry[
 		    ry_offset], ldry, (ftnlen)5);
+#line 1113 "IB01PD.f"
 	}
+#line 1114 "IB01PD.f"
 	ma02ed_("Upper", n, &q[q_offset], ldq, (ftnlen)5);
+#line 1115 "IB01PD.f"
 	ma02ed_("Upper", l, &ry[ry_offset], ldry, (ftnlen)5);
 
 /*        Check the magnitude of the residual. */
 
+#line 1119 "IB01PD.f"
 	i__1 = lmmnol - rankm;
+#line 1119 "IB01PD.f"
 	rnrm = dlange_("1-norm", &i__1, &npl, &r__[rankm + 1 + nr4mn * r_dim1]
 		, ldr, &dwork[jwork], (ftnlen)6);
+#line 1121 "IB01PD.f"
 	if (rnrm < thresh) {
+#line 1121 "IB01PD.f"
 	    *iwarn = 5;
+#line 1121 "IB01PD.f"
 	}
+#line 1123 "IB01PD.f"
     }
 
+#line 1125 "IB01PD.f"
     if (n4sid) {
+#line 1126 "IB01PD.f"
 	if (! fullr) {
+#line 1127 "IB01PD.f"
 	    *iwarn = 4;
 
 /*           Compute part of the solution of the least squares problem, */
@@ -1367,43 +1804,62 @@ static doublereal c_b173 = -1.;
 /*           Workspace: need   M*NOBR+3*N+L; */
 /*                      prefer larger. */
 
+#line 1136 "IB01PD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 1136 "IB01PD.f"
 	    mb03od_("No QR", n, n, &r__[nr2 + nr2 * r_dim1], ldr, &iwork[1], &
 		    toll1, &svlmax, &dwork[itau], &rankm, sval, &dwork[jwork],
 		     &i__1, &ierr, (ftnlen)5);
+#line 1139 "IB01PD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 1139 "IB01PD.f"
 	    mb02qy_(n, n, &npl, &rankm, &r__[nr2 + nr2 * r_dim1], ldr, &iwork[
 		    1], &r__[nr2 + nr4mn * r_dim1], ldr, &dwork[itau + mnobr],
 		     &dwork[jwork], &i__1, info);
 /* Computing MAX */
+#line 1142 "IB01PD.f"
 	    i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 1142 "IB01PD.f"
 	    maxwrk = max(i__1,i__2);
+#line 1143 "IB01PD.f"
 	    jwork = itau;
+#line 1144 "IB01PD.f"
 	    if (*m > 0 && withb) {
+#line 1144 "IB01PD.f"
 		dlacpy_("Full", &lnobr, n, &r__[nr4 + r_dim1], ldr, &r__[nr2 
 			+ r_dim1], ldr, (ftnlen)4);
+#line 1144 "IB01PD.f"
 	    }
+#line 1147 "IB01PD.f"
 	}
 
+#line 1149 "IB01PD.f"
 	if (withc) {
 
 /*           Obtain  A  and  C,  noting that block-permutations have been */
 /*           implicitly used. */
 
+#line 1154 "IB01PD.f"
 	    ma02ad_("Full", n, n, &r__[nr2 + nr4mn * r_dim1], ldr, &a[
 		    a_offset], lda, (ftnlen)4);
+#line 1155 "IB01PD.f"
 	    ma02ad_("Full", n, l, &r__[nr2 + (nr4mn + *n) * r_dim1], ldr, &
 		    c__[c_offset], ldc, (ftnlen)4);
+#line 1156 "IB01PD.f"
 	} else {
 
 /*           Use the given  A  and  C. */
 
+#line 1160 "IB01PD.f"
 	    ma02ad_("Full", n, n, &a[a_offset], lda, &r__[nr2 + nr4mn * 
 		    r_dim1], ldr, (ftnlen)4);
+#line 1161 "IB01PD.f"
 	    ma02ad_("Full", l, n, &c__[c_offset], ldc, &r__[nr2 + (nr4mn + *n)
 		     * r_dim1], ldr, (ftnlen)4);
+#line 1162 "IB01PD.f"
 	}
 
+#line 1164 "IB01PD.f"
 	if (*m > 0 && withb) {
 
 /*           Obtain  B  and  D. */
@@ -1411,6 +1867,7 @@ static doublereal c_b173 = -1.;
 /*           N(1:m*s,:) - M(1:m*s,m*s+1:m*s+n)*[A'  C'],  in the first */
 /*           m*s  rows of  R(1,NR4MN). */
 
+#line 1171 "IB01PD.f"
 	    dgemm_("NoTranspose", "NoTranspose", &mnobr, &npl, n, &c_b173, &
 		    r__[nr2 * r_dim1 + 1], ldr, &r__[nr2 + nr4mn * r_dim1], 
 		    ldr, &c_b63, &r__[nr4mn * r_dim1 + 1], ldr, (ftnlen)11, (
@@ -1424,19 +1881,25 @@ static doublereal c_b173 = -1.;
 
 /*           Then, solve the least squares problem. */
 
+#line 1183 "IB01PD.f"
 	    dlacpy_("Full", n, n, &a[a_offset], lda, &r__[nr2 + nr4 * r_dim1],
 		     ldr, (ftnlen)4);
+#line 1184 "IB01PD.f"
 	    dlacpy_("Full", l, n, &c__[c_offset], ldc, &r__[nr2 + *n + nr4 * 
 		    r_dim1], ldr, (ftnlen)4);
+#line 1185 "IB01PD.f"
 	    dtrsm_("Right", "Upper", "NoTranspose", "NonUnit", &npl, n, &
 		    c_b63, &r__[nr2 + r_dim1], ldr, &r__[nr2 + nr4 * r_dim1], 
 		    ldr, (ftnlen)5, (ftnlen)5, (ftnlen)11, (ftnlen)7);
+#line 1187 "IB01PD.f"
 	    dlaset_("Full", &npl, &lnobrn, &c_b66, &c_b66, &r__[nr2 + (nr4 + *
 		    n) * r_dim1], ldr, (ftnlen)4);
 
 /*           Workspace: need 2*N+L; prefer N + (N+L)*NB. */
 
+#line 1192 "IB01PD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 1192 "IB01PD.f"
 	    dormqr_("Right", "Transpose", &npl, &lnobr, n, &r__[nr2 + r_dim1],
 		     ldr, &dwork[1], &r__[nr2 + nr4 * r_dim1], ldr, &dwork[
 		    jwork], &i__1, &ierr, (ftnlen)5, (ftnlen)9);
@@ -1446,42 +1909,65 @@ static doublereal c_b173 = -1.;
 /*                             max((N+L)**2,4*M*(N+L)+1); */
 /*                      prefer larger. */
 
+#line 1201 "IB01PD.f"
 	    ma02ad_("Full", &mnobr, &npl, &r__[nr4mn * r_dim1 + 1], ldr, &r__[
 		    nr2 + nr3 * r_dim1], ldr, (ftnlen)4);
 /* Computing 2nd power */
+#line 1203 "IB01PD.f"
 	    i__1 = npl;
+#line 1203 "IB01PD.f"
 	    ix = mnobr * (i__1 * i__1) * *m + 1;
+#line 1204 "IB01PD.f"
 	    jwork = ix + mnobr * npl;
+#line 1205 "IB01PD.f"
 	    i__1 = mnobr * npl;
+#line 1205 "IB01PD.f"
 	    i__2 = *ldwork - jwork + 1;
+#line 1205 "IB01PD.f"
 	    ib01px_(jobpy, nobr, n, m, l, &r__[r_offset], ldr, &o[o_offset], 
 		    ldo, &r__[nr2 + nr4 * r_dim1], ldr, &r__[nr4pl + nr2 * 
 		    r_dim1], ldr, &r__[nr2 + nr3 * r_dim1], ldr, &dwork[1], &
 		    i__1, &dwork[ix], &b[b_offset], ldb, &d__[d_offset], ldd, 
 		    tol, &iwork[1], &dwork[jwork], &i__2, &iwarnl, info, (
 		    ftnlen)1);
+#line 1210 "IB01PD.f"
 	    if (*info != 0) {
+#line 1210 "IB01PD.f"
 		return 0;
+#line 1210 "IB01PD.f"
 	    }
+#line 1212 "IB01PD.f"
 	    *iwarn = max(*iwarn,iwarnl);
 /* Computing MAX */
+#line 1213 "IB01PD.f"
 	    i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 1213 "IB01PD.f"
 	    maxwrk = max(i__1,i__2);
+#line 1214 "IB01PD.f"
 	    rcond4 = dwork[jwork + 1];
 
+#line 1216 "IB01PD.f"
 	}
+#line 1217 "IB01PD.f"
     }
 
+#line 1219 "IB01PD.f"
 L30:
 
 /*     Return optimal workspace in  DWORK(1)  and reciprocal condition */
 /*     numbers in the next locations. */
 
+#line 1224 "IB01PD.f"
     dwork[1] = (doublereal) maxwrk;
+#line 1225 "IB01PD.f"
     dwork[2] = rcond1;
+#line 1226 "IB01PD.f"
     dwork[3] = rcond2;
+#line 1227 "IB01PD.f"
     dwork[4] = rcond3;
+#line 1228 "IB01PD.f"
     dwork[5] = rcond4;
+#line 1229 "IB01PD.f"
     return 0;
 
 /* *** Last line of IB01PD *** */

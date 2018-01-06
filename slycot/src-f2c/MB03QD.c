@@ -1,3 +1,4 @@
+#line 1 "MB03QD.f"
 /* MB03QD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03QD.f"
 /* Table of constant values */
 
 static doublereal c_b11 = 0.;
@@ -236,74 +238,130 @@ static doublereal c_b12 = 1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 208 "MB03QD.f"
     /* Parameter adjustments */
+#line 208 "MB03QD.f"
     a_dim1 = *lda;
+#line 208 "MB03QD.f"
     a_offset = 1 + a_dim1;
+#line 208 "MB03QD.f"
     a -= a_offset;
+#line 208 "MB03QD.f"
     u_dim1 = *ldu;
+#line 208 "MB03QD.f"
     u_offset = 1 + u_dim1;
+#line 208 "MB03QD.f"
     u -= u_offset;
+#line 208 "MB03QD.f"
     --dwork;
+#line 208 "MB03QD.f"
 
+#line 208 "MB03QD.f"
     /* Function Body */
+#line 208 "MB03QD.f"
     *info = 0;
+#line 209 "MB03QD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 210 "MB03QD.f"
     lstdom = lsame_(stdom, "S", (ftnlen)1, (ftnlen)1);
 
 /*     Check input scalar arguments. */
 
+#line 214 "MB03QD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 215 "MB03QD.f"
 	*info = -1;
+#line 216 "MB03QD.f"
     } else if (! (lstdom || lsame_(stdom, "U", (ftnlen)1, (ftnlen)1))) {
+#line 217 "MB03QD.f"
 	*info = -2;
+#line 218 "MB03QD.f"
     } else if (! (lsame_(jobu, "I", (ftnlen)1, (ftnlen)1) || lsame_(jobu, 
 	    "U", (ftnlen)1, (ftnlen)1))) {
+#line 220 "MB03QD.f"
 	*info = -3;
+#line 221 "MB03QD.f"
     } else if (*n < 1) {
+#line 222 "MB03QD.f"
 	*info = -4;
+#line 223 "MB03QD.f"
     } else if (*nlow < 1) {
+#line 224 "MB03QD.f"
 	*info = -5;
+#line 225 "MB03QD.f"
     } else if (*nlow > *nsup || *nsup > *n) {
+#line 226 "MB03QD.f"
 	*info = -6;
+#line 227 "MB03QD.f"
     } else if (discr && *alpha < 0.) {
+#line 228 "MB03QD.f"
 	*info = -7;
+#line 229 "MB03QD.f"
     } else if (*lda < *n) {
+#line 230 "MB03QD.f"
 	*info = -9;
+#line 231 "MB03QD.f"
     } else if (*ldu < *n) {
+#line 232 "MB03QD.f"
 	*info = -11;
+#line 233 "MB03QD.f"
     }
 
+#line 235 "MB03QD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 239 "MB03QD.f"
 	i__1 = -(*info);
+#line 239 "MB03QD.f"
 	xerbla_("MB03QD", &i__1, (ftnlen)6);
+#line 240 "MB03QD.f"
 	return 0;
+#line 241 "MB03QD.f"
     }
 
+#line 243 "MB03QD.f"
     if (*nlow > 1) {
+#line 244 "MB03QD.f"
 	if (a[*nlow + (*nlow - 1) * a_dim1] != 0.) {
+#line 244 "MB03QD.f"
 	    *info = 1;
+#line 244 "MB03QD.f"
 	}
+#line 245 "MB03QD.f"
     }
+#line 246 "MB03QD.f"
     if (*nsup < *n) {
+#line 247 "MB03QD.f"
 	if (a[*nsup + 1 + *nsup * a_dim1] != 0.) {
+#line 247 "MB03QD.f"
 	    *info = 1;
+#line 247 "MB03QD.f"
 	}
+#line 248 "MB03QD.f"
     }
+#line 249 "MB03QD.f"
     if (*info != 0) {
+#line 249 "MB03QD.f"
 	return 0;
+#line 249 "MB03QD.f"
     }
 
 /*     Initialize U with an identity matrix if necessary. */
 
+#line 254 "MB03QD.f"
     if (lsame_(jobu, "I", (ftnlen)1, (ftnlen)1)) {
+#line 254 "MB03QD.f"
 	dlaset_("Full", n, n, &c_b11, &c_b12, &u[u_offset], ldu, (ftnlen)4);
+#line 254 "MB03QD.f"
     }
 
+#line 257 "MB03QD.f"
     *ndim = 0;
+#line 258 "MB03QD.f"
     l = *nsup;
+#line 259 "MB03QD.f"
     nup = *nsup;
 
 /*     NUP is the minimal value such that the submatrix A(i,j) with */
@@ -313,55 +371,100 @@ static doublereal c_b12 = 1.;
 
 /*     WHILE( L >= NLOW ) DO */
 
+#line 268 "MB03QD.f"
 L10:
+#line 268 "MB03QD.f"
     if (l >= *nlow) {
+#line 269 "MB03QD.f"
 	ib = 1;
+#line 270 "MB03QD.f"
 	if (l > *nlow) {
+#line 271 "MB03QD.f"
 	    lm1 = l - 1;
+#line 272 "MB03QD.f"
 	    if (a[l + lm1 * a_dim1] != 0.) {
+#line 273 "MB03QD.f"
 		mb03qy_(n, &lm1, &a[a_offset], lda, &u[u_offset], ldu, &e1, &
 			e2, info);
+#line 274 "MB03QD.f"
 		if (a[l + lm1 * a_dim1] != 0.) {
+#line 274 "MB03QD.f"
 		    ib = 2;
+#line 274 "MB03QD.f"
 		}
+#line 275 "MB03QD.f"
 	    }
+#line 276 "MB03QD.f"
 	}
+#line 277 "MB03QD.f"
 	if (discr) {
+#line 278 "MB03QD.f"
 	    if (ib == 1) {
+#line 279 "MB03QD.f"
 		tlambd = (d__1 = a[l + l * a_dim1], abs(d__1));
+#line 280 "MB03QD.f"
 	    } else {
+#line 281 "MB03QD.f"
 		tlambd = dlapy2_(&e1, &e2);
+#line 282 "MB03QD.f"
 	    }
+#line 283 "MB03QD.f"
 	} else {
+#line 284 "MB03QD.f"
 	    if (ib == 1) {
+#line 285 "MB03QD.f"
 		tlambd = a[l + l * a_dim1];
+#line 286 "MB03QD.f"
 	    } else {
+#line 287 "MB03QD.f"
 		tlambd = e1;
+#line 288 "MB03QD.f"
 	    }
+#line 289 "MB03QD.f"
 	}
+#line 290 "MB03QD.f"
 	if (lstdom && tlambd < *alpha || ! lstdom && tlambd > *alpha) {
+#line 292 "MB03QD.f"
 	    *ndim += ib;
+#line 293 "MB03QD.f"
 	    l -= ib;
+#line 294 "MB03QD.f"
 	} else {
+#line 295 "MB03QD.f"
 	    if (*ndim != 0) {
+#line 296 "MB03QD.f"
 		dtrexc_("V", n, &a[a_offset], lda, &u[u_offset], ldu, &l, &
 			nup, &dwork[1], info, (ftnlen)1);
+#line 298 "MB03QD.f"
 		if (*info != 0) {
+#line 299 "MB03QD.f"
 		    *info = 2;
+#line 300 "MB03QD.f"
 		    return 0;
+#line 301 "MB03QD.f"
 		}
+#line 302 "MB03QD.f"
 		--nup;
+#line 303 "MB03QD.f"
 		--l;
+#line 304 "MB03QD.f"
 	    } else {
+#line 305 "MB03QD.f"
 		nup -= ib;
+#line 306 "MB03QD.f"
 		l -= ib;
+#line 307 "MB03QD.f"
 	    }
+#line 308 "MB03QD.f"
 	}
+#line 309 "MB03QD.f"
 	goto L10;
+#line 310 "MB03QD.f"
     }
 
 /*     END WHILE 10 */
 
+#line 314 "MB03QD.f"
     return 0;
 /* *** Last line of MB03QD *** */
 } /* mb03qd_ */

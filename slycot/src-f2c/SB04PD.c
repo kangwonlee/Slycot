@@ -1,3 +1,4 @@
+#line 1 "SB04PD.f"
 /* SB04PD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB04PD.f"
 /* Table of constant values */
 
 static doublereal c_b22 = 1.;
@@ -382,122 +384,225 @@ static integer c__1 = 1;
 
 /*     Decode and Test input parameters */
 
+#line 341 "SB04PD.f"
     /* Parameter adjustments */
+#line 341 "SB04PD.f"
     a_dim1 = *lda;
+#line 341 "SB04PD.f"
     a_offset = 1 + a_dim1;
+#line 341 "SB04PD.f"
     a -= a_offset;
+#line 341 "SB04PD.f"
     u_dim1 = *ldu;
+#line 341 "SB04PD.f"
     u_offset = 1 + u_dim1;
+#line 341 "SB04PD.f"
     u -= u_offset;
+#line 341 "SB04PD.f"
     b_dim1 = *ldb;
+#line 341 "SB04PD.f"
     b_offset = 1 + b_dim1;
+#line 341 "SB04PD.f"
     b -= b_offset;
+#line 341 "SB04PD.f"
     v_dim1 = *ldv;
+#line 341 "SB04PD.f"
     v_offset = 1 + v_dim1;
+#line 341 "SB04PD.f"
     v -= v_offset;
+#line 341 "SB04PD.f"
     c_dim1 = *ldc;
+#line 341 "SB04PD.f"
     c_offset = 1 + c_dim1;
+#line 341 "SB04PD.f"
     c__ -= c_offset;
+#line 341 "SB04PD.f"
     --dwork;
+#line 341 "SB04PD.f"
 
+#line 341 "SB04PD.f"
     /* Function Body */
+#line 341 "SB04PD.f"
     cont = lsame_(dico, "C", (ftnlen)1, (ftnlen)1);
+#line 342 "SB04PD.f"
     nofaca = lsame_(facta, "N", (ftnlen)1, (ftnlen)1);
+#line 343 "SB04PD.f"
     nofacb = lsame_(factb, "N", (ftnlen)1, (ftnlen)1);
+#line 344 "SB04PD.f"
     schura = lsame_(facta, "S", (ftnlen)1, (ftnlen)1);
+#line 345 "SB04PD.f"
     schurb = lsame_(factb, "S", (ftnlen)1, (ftnlen)1);
+#line 346 "SB04PD.f"
     notrna = lsame_(trana, "N", (ftnlen)1, (ftnlen)1);
+#line 347 "SB04PD.f"
     notrnb = lsame_(tranb, "N", (ftnlen)1, (ftnlen)1);
 
+#line 349 "SB04PD.f"
     *info = 0;
+#line 350 "SB04PD.f"
     if (! cont && ! lsame_(dico, "D", (ftnlen)1, (ftnlen)1)) {
+#line 351 "SB04PD.f"
 	*info = -1;
+#line 352 "SB04PD.f"
     } else if (! nofaca && ! lsame_(facta, "F", (ftnlen)1, (ftnlen)1) && ! 
 	    schura) {
+#line 354 "SB04PD.f"
 	*info = -2;
+#line 355 "SB04PD.f"
     } else if (! nofacb && ! lsame_(factb, "F", (ftnlen)1, (ftnlen)1) && ! 
 	    schurb) {
+#line 357 "SB04PD.f"
 	*info = -3;
+#line 358 "SB04PD.f"
     } else if (! notrna && ! lsame_(trana, "T", (ftnlen)1, (ftnlen)1) && ! 
 	    lsame_(trana, "C", (ftnlen)1, (ftnlen)1)) {
+#line 360 "SB04PD.f"
 	*info = -4;
+#line 361 "SB04PD.f"
     } else if (! notrnb && ! lsame_(tranb, "T", (ftnlen)1, (ftnlen)1) && ! 
 	    lsame_(tranb, "C", (ftnlen)1, (ftnlen)1)) {
+#line 363 "SB04PD.f"
 	*info = -5;
+#line 364 "SB04PD.f"
     } else if (*isgn != 1 && *isgn != -1) {
+#line 365 "SB04PD.f"
 	*info = -6;
+#line 366 "SB04PD.f"
     } else if (*m < 0) {
+#line 367 "SB04PD.f"
 	*info = -7;
+#line 368 "SB04PD.f"
     } else if (*n < 0) {
+#line 369 "SB04PD.f"
 	*info = -8;
+#line 370 "SB04PD.f"
     } else if (*lda < max(1,*m)) {
+#line 371 "SB04PD.f"
 	*info = -10;
+#line 372 "SB04PD.f"
     } else if (*ldu < 1 || ! schura && *ldu < *m) {
+#line 373 "SB04PD.f"
 	*info = -12;
+#line 374 "SB04PD.f"
     } else if (*ldb < max(1,*n)) {
+#line 375 "SB04PD.f"
 	*info = -14;
+#line 376 "SB04PD.f"
     } else if (*ldv < 1 || ! schurb && *ldv < *n) {
+#line 377 "SB04PD.f"
 	*info = -16;
+#line 378 "SB04PD.f"
     } else if (*ldc < max(1,*m)) {
+#line 379 "SB04PD.f"
 	*info = -18;
+#line 380 "SB04PD.f"
     } else {
+#line 381 "SB04PD.f"
 	if (nofaca) {
+#line 382 "SB04PD.f"
 	    ia = (*m << 1) + 1;
+#line 383 "SB04PD.f"
 	    minwrk = *m * 3;
+#line 384 "SB04PD.f"
 	} else {
+#line 385 "SB04PD.f"
 	    ia = 0;
+#line 386 "SB04PD.f"
 	}
+#line 387 "SB04PD.f"
 	if (schura) {
+#line 388 "SB04PD.f"
 	    minwrk = 0;
+#line 389 "SB04PD.f"
 	} else if (! nofaca) {
+#line 390 "SB04PD.f"
 	    minwrk = *m;
+#line 391 "SB04PD.f"
 	}
+#line 392 "SB04PD.f"
 	ib = 0;
+#line 393 "SB04PD.f"
 	if (nofacb) {
+#line 394 "SB04PD.f"
 	    ib = *n << 1;
+#line 395 "SB04PD.f"
 	    if (! nofaca) {
+#line 395 "SB04PD.f"
 		++ib;
+#line 395 "SB04PD.f"
 	    }
 /* Computing MAX */
+#line 397 "SB04PD.f"
 	    i__1 = minwrk, i__2 = ib + *n * 3;
+#line 397 "SB04PD.f"
 	    minwrk = max(i__1,i__2);
+#line 398 "SB04PD.f"
 	} else if (! schurb) {
+#line 399 "SB04PD.f"
 	    minwrk = max(minwrk,*n);
+#line 400 "SB04PD.f"
 	}
+#line 401 "SB04PD.f"
 	if (cont) {
+#line 402 "SB04PD.f"
 	    if (! schura) {
 /* Computing MAX */
+#line 402 "SB04PD.f"
 		i__1 = minwrk, i__2 = ib + *m;
+#line 402 "SB04PD.f"
 		minwrk = max(i__1,i__2);
+#line 402 "SB04PD.f"
 	    }
+#line 404 "SB04PD.f"
 	} else {
 /* Computing MAX */
+#line 405 "SB04PD.f"
 	    i__1 = minwrk, i__2 = ib + (*m << 1);
+#line 405 "SB04PD.f"
 	    minwrk = max(i__1,i__2);
+#line 406 "SB04PD.f"
 	}
 /* Computing MAX */
+#line 407 "SB04PD.f"
 	i__1 = 1, i__2 = ia + minwrk;
+#line 407 "SB04PD.f"
 	minwrk = max(i__1,i__2);
+#line 408 "SB04PD.f"
 	if (*ldwork < minwrk) {
+#line 408 "SB04PD.f"
 	    *info = -21;
+#line 408 "SB04PD.f"
 	}
+#line 410 "SB04PD.f"
     }
 
+#line 412 "SB04PD.f"
     if (*info != 0) {
+#line 413 "SB04PD.f"
 	i__1 = -(*info);
+#line 413 "SB04PD.f"
 	xerbla_("SB04PD", &i__1, (ftnlen)6);
+#line 414 "SB04PD.f"
 	return 0;
+#line 415 "SB04PD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 419 "SB04PD.f"
     if (*m == 0 || *n == 0) {
+#line 420 "SB04PD.f"
 	*scale = 1.;
+#line 421 "SB04PD.f"
 	dwork[1] = 1.;
+#line 422 "SB04PD.f"
 	return 0;
+#line 423 "SB04PD.f"
     }
+#line 424 "SB04PD.f"
     maxwrk = minwrk;
 
+#line 426 "SB04PD.f"
     if (nofaca) {
 
 /*        Compute the Schur factorization of A. */
@@ -509,25 +614,41 @@ static integer c__1 = 1;
 /*        NB refers to the optimal block size for the immediately */
 /*        following subroutine, as returned by ILAENV.) */
 
+#line 437 "SB04PD.f"
 	jwork = (*m << 1) + 2;
+#line 438 "SB04PD.f"
 	ia = jwork;
+#line 439 "SB04PD.f"
 	availw = *ldwork - jwork + 1;
+#line 440 "SB04PD.f"
 	dgees_("Vectors", "Not ordered", (L_fp)select_, m, &a[a_offset], lda, 
 		&sdim, &dwork[2], &dwork[*m + 2], &u[u_offset], ldu, &dwork[
 		jwork], &availw, bwork, &ierr, (ftnlen)7, (ftnlen)11);
+#line 443 "SB04PD.f"
 	if (ierr > 0) {
+#line 444 "SB04PD.f"
 	    *info = ierr;
+#line 445 "SB04PD.f"
 	    return 0;
+#line 446 "SB04PD.f"
 	}
 /* Computing MAX */
+#line 447 "SB04PD.f"
 	i__1 = maxwrk, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 447 "SB04PD.f"
 	maxwrk = max(i__1,i__2);
+#line 448 "SB04PD.f"
     } else {
+#line 449 "SB04PD.f"
 	jwork = 1;
+#line 450 "SB04PD.f"
 	ia = 2;
+#line 451 "SB04PD.f"
 	availw = *ldwork;
+#line 452 "SB04PD.f"
     }
 
+#line 454 "SB04PD.f"
     if (! schura) {
 
 /*        Transform the right-hand side:  C <-- U'*C. */
@@ -536,85 +657,129 @@ static integer c__1 = 1;
 /*                    where  a = 1+2*M, if FACTA =  'N', */
 /*                           a = 0,     if FACTA <> 'N'. */
 
+#line 462 "SB04PD.f"
 	chunka = availw / *m;
+#line 463 "SB04PD.f"
 	blocka = min(chunka,*n) > 1;
+#line 464 "SB04PD.f"
 	blas3a = chunka >= *n && blocka;
 
+#line 466 "SB04PD.f"
 	if (blas3a) {
 
 /*           Enough workspace for a fast BLAS 3 algorithm. */
 
+#line 470 "SB04PD.f"
 	    dlacpy_("Full", m, n, &c__[c_offset], ldc, &dwork[jwork], m, (
 		    ftnlen)4);
+#line 471 "SB04PD.f"
 	    dgemm_("Transpose", "NoTranspose", m, n, m, &c_b22, &u[u_offset], 
 		    ldu, &dwork[jwork], m, &c_b23, &c__[c_offset], ldc, (
 		    ftnlen)9, (ftnlen)11);
+#line 473 "SB04PD.f"
 	} else if (blocka) {
 
 /*           Use as many columns of C as possible. */
 
+#line 477 "SB04PD.f"
 	    i__1 = *n;
+#line 477 "SB04PD.f"
 	    i__2 = chunka;
+#line 477 "SB04PD.f"
 	    for (j = 1; i__2 < 0 ? j >= i__1 : j <= i__1; j += i__2) {
 /* Computing MIN */
+#line 478 "SB04PD.f"
 		i__3 = *n - j + 1;
+#line 478 "SB04PD.f"
 		bl = min(i__3,chunka);
+#line 479 "SB04PD.f"
 		dlacpy_("Full", m, &bl, &c__[j * c_dim1 + 1], ldc, &dwork[
 			jwork], m, (ftnlen)4);
+#line 481 "SB04PD.f"
 		dgemm_("Transpose", "NoTranspose", m, &bl, m, &c_b22, &u[
 			u_offset], ldu, &dwork[jwork], m, &c_b23, &c__[j * 
 			c_dim1 + 1], ldc, (ftnlen)9, (ftnlen)11);
+#line 484 "SB04PD.f"
 /* L10: */
+#line 484 "SB04PD.f"
 	    }
 
+#line 486 "SB04PD.f"
 	} else {
 
 /*           Use a BLAS 2 algorithm. */
 
+#line 490 "SB04PD.f"
 	    i__2 = *n;
+#line 490 "SB04PD.f"
 	    for (j = 1; j <= i__2; ++j) {
+#line 491 "SB04PD.f"
 		dcopy_(m, &c__[j * c_dim1 + 1], &c__1, &dwork[jwork], &c__1);
+#line 492 "SB04PD.f"
 		dgemv_("Transpose", m, m, &c_b22, &u[u_offset], ldu, &dwork[
 			jwork], &c__1, &c_b23, &c__[j * c_dim1 + 1], &c__1, (
 			ftnlen)9);
+#line 494 "SB04PD.f"
 /* L20: */
+#line 494 "SB04PD.f"
 	    }
 
+#line 496 "SB04PD.f"
 	}
 /* Computing MAX */
+#line 497 "SB04PD.f"
 	i__2 = maxwrk, i__1 = jwork + *m * *n - 1;
+#line 497 "SB04PD.f"
 	maxwrk = max(i__2,i__1);
+#line 498 "SB04PD.f"
     }
 
+#line 500 "SB04PD.f"
     if (nofacb) {
 
 /*        Compute the Schur factorization of B. */
 /*        Workspace:  need   1+MAX(a-1,0)+5*N, */
 /*                    prefer larger. */
 
+#line 506 "SB04PD.f"
 	jwork = ia + (*n << 1);
+#line 507 "SB04PD.f"
 	availw = *ldwork - jwork + 1;
+#line 508 "SB04PD.f"
 	dgees_("Vectors", "Not ordered", (L_fp)select_, n, &b[b_offset], ldb, 
 		&sdim, &dwork[ia], &dwork[*n + ia], &v[v_offset], ldv, &dwork[
 		jwork], &availw, bwork, &ierr, (ftnlen)7, (ftnlen)11);
+#line 511 "SB04PD.f"
 	if (ierr > 0) {
+#line 512 "SB04PD.f"
 	    *info = ierr + *m;
+#line 513 "SB04PD.f"
 	    return 0;
+#line 514 "SB04PD.f"
 	}
 /* Computing MAX */
+#line 515 "SB04PD.f"
 	i__2 = maxwrk, i__1 = (integer) dwork[jwork] + jwork - 1;
+#line 515 "SB04PD.f"
 	maxwrk = max(i__2,i__1);
 
+#line 517 "SB04PD.f"
 	if (! schura) {
 
 /*           Recompute the blocking parameters. */
 
+#line 521 "SB04PD.f"
 	    chunka = availw / *m;
+#line 522 "SB04PD.f"
 	    blocka = min(chunka,*n) > 1;
+#line 523 "SB04PD.f"
 	    blas3a = chunka >= *n && blocka;
+#line 524 "SB04PD.f"
 	}
+#line 525 "SB04PD.f"
     }
 
+#line 527 "SB04PD.f"
     if (! schurb) {
 
 /*        Transform the right-hand side:  C <-- C*V. */
@@ -624,176 +789,261 @@ static integer c__1 = 1;
 /*                           b = 1+2*N, if FACTB =  'N', FACTA <> 'N', */
 /*                           b = 0,     if FACTB <> 'N'. */
 
+#line 536 "SB04PD.f"
 	chunkb = availw / *n;
+#line 537 "SB04PD.f"
 	blockb = min(chunkb,*m) > 1;
+#line 538 "SB04PD.f"
 	blas3b = chunkb >= *m && blockb;
 
+#line 540 "SB04PD.f"
 	if (blas3b) {
 
 /*           Enough workspace for a fast BLAS 3 algorithm. */
 
+#line 544 "SB04PD.f"
 	    dlacpy_("Full", m, n, &c__[c_offset], ldc, &dwork[jwork], m, (
 		    ftnlen)4);
+#line 545 "SB04PD.f"
 	    dgemm_("NoTranspose", "NoTranspose", m, n, n, &c_b22, &dwork[
 		    jwork], m, &v[v_offset], ldv, &c_b23, &c__[c_offset], ldc,
 		     (ftnlen)11, (ftnlen)11);
+#line 547 "SB04PD.f"
 	} else if (blockb) {
 
 /*           Use as many rows of C as possible. */
 
+#line 551 "SB04PD.f"
 	    i__2 = *m;
+#line 551 "SB04PD.f"
 	    i__1 = chunkb;
+#line 551 "SB04PD.f"
 	    for (i__ = 1; i__1 < 0 ? i__ >= i__2 : i__ <= i__2; i__ += i__1) {
 /* Computing MIN */
+#line 552 "SB04PD.f"
 		i__3 = *m - i__ + 1;
+#line 552 "SB04PD.f"
 		bl = min(i__3,chunkb);
+#line 553 "SB04PD.f"
 		dlacpy_("Full", &bl, n, &c__[i__ + c_dim1], ldc, &dwork[jwork]
 			, &bl, (ftnlen)4);
+#line 555 "SB04PD.f"
 		dgemm_("NoTranspose", "NoTranspose", &bl, n, n, &c_b22, &
 			dwork[jwork], &bl, &v[v_offset], ldv, &c_b23, &c__[
 			i__ + c_dim1], ldc, (ftnlen)11, (ftnlen)11);
+#line 558 "SB04PD.f"
 /* L30: */
+#line 558 "SB04PD.f"
 	    }
 
+#line 560 "SB04PD.f"
 	} else {
 
 /*           Use a BLAS 2 algorithm. */
 
+#line 564 "SB04PD.f"
 	    i__1 = *m;
+#line 564 "SB04PD.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 565 "SB04PD.f"
 		dcopy_(n, &c__[i__ + c_dim1], ldc, &dwork[jwork], &c__1);
+#line 566 "SB04PD.f"
 		dgemv_("Transpose", n, n, &c_b22, &v[v_offset], ldv, &dwork[
 			jwork], &c__1, &c_b23, &c__[i__ + c_dim1], ldc, (
 			ftnlen)9);
+#line 568 "SB04PD.f"
 /* L40: */
+#line 568 "SB04PD.f"
 	    }
 
+#line 570 "SB04PD.f"
 	}
 /* Computing MAX */
+#line 571 "SB04PD.f"
 	i__1 = maxwrk, i__2 = jwork + *m * *n - 1;
+#line 571 "SB04PD.f"
 	maxwrk = max(i__1,i__2);
+#line 572 "SB04PD.f"
     }
 
 /*     Solve the (transformed) equation. */
 /*     Workspace for DICO = 'D':  a+b+2*M. */
 
+#line 577 "SB04PD.f"
     if (cont) {
+#line 578 "SB04PD.f"
 	dtrsyl_(trana, tranb, isgn, m, n, &a[a_offset], lda, &b[b_offset], 
 		ldb, &c__[c_offset], ldc, scale, &ierr, (ftnlen)1, (ftnlen)1);
+#line 580 "SB04PD.f"
     } else {
+#line 581 "SB04PD.f"
 	sb04py_(trana, tranb, isgn, m, n, &a[a_offset], lda, &b[b_offset], 
 		ldb, &c__[c_offset], ldc, scale, &dwork[jwork], &ierr, (
 		ftnlen)1, (ftnlen)1);
 /* Computing MAX */
+#line 583 "SB04PD.f"
 	i__1 = maxwrk, i__2 = jwork + (*m << 1) - 1;
+#line 583 "SB04PD.f"
 	maxwrk = max(i__1,i__2);
+#line 584 "SB04PD.f"
     }
+#line 585 "SB04PD.f"
     if (ierr > 0) {
+#line 585 "SB04PD.f"
 	*info = *m + *n + 1;
+#line 585 "SB04PD.f"
     }
 
 /*     Transform back the solution, if needed. */
 
+#line 590 "SB04PD.f"
     if (! schura) {
 
 /*        Transform the right-hand side:  C <-- U*C. */
 /*        Workspace:  need   a+b+M; */
 /*                    prefer a+b+M*N. */
 
+#line 596 "SB04PD.f"
 	if (blas3a) {
 
 /*           Enough workspace for a fast BLAS 3 algorithm. */
 
+#line 600 "SB04PD.f"
 	    dlacpy_("Full", m, n, &c__[c_offset], ldc, &dwork[jwork], m, (
 		    ftnlen)4);
+#line 601 "SB04PD.f"
 	    dgemm_("NoTranspose", "NoTranspose", m, n, m, &c_b22, &u[u_offset]
 		    , ldu, &dwork[jwork], m, &c_b23, &c__[c_offset], ldc, (
 		    ftnlen)11, (ftnlen)11);
+#line 603 "SB04PD.f"
 	} else if (blocka) {
 
 /*           Use as many columns of C as possible. */
 
+#line 607 "SB04PD.f"
 	    i__1 = *n;
+#line 607 "SB04PD.f"
 	    i__2 = chunka;
+#line 607 "SB04PD.f"
 	    for (j = 1; i__2 < 0 ? j >= i__1 : j <= i__1; j += i__2) {
 /* Computing MIN */
+#line 608 "SB04PD.f"
 		i__3 = *n - j + 1;
+#line 608 "SB04PD.f"
 		bl = min(i__3,chunka);
+#line 609 "SB04PD.f"
 		dlacpy_("Full", m, &bl, &c__[j * c_dim1 + 1], ldc, &dwork[
 			jwork], m, (ftnlen)4);
+#line 611 "SB04PD.f"
 		dgemm_("NoTranspose", "NoTranspose", m, &bl, m, &c_b22, &u[
 			u_offset], ldu, &dwork[jwork], m, &c_b23, &c__[j * 
 			c_dim1 + 1], ldc, (ftnlen)11, (ftnlen)11);
+#line 614 "SB04PD.f"
 /* L50: */
+#line 614 "SB04PD.f"
 	    }
 
+#line 616 "SB04PD.f"
 	} else {
 
 /*           Use a BLAS 2 algorithm. */
 
+#line 620 "SB04PD.f"
 	    i__2 = *n;
+#line 620 "SB04PD.f"
 	    for (j = 1; j <= i__2; ++j) {
+#line 621 "SB04PD.f"
 		dcopy_(m, &c__[j * c_dim1 + 1], &c__1, &dwork[jwork], &c__1);
+#line 622 "SB04PD.f"
 		dgemv_("NoTranspose", m, m, &c_b22, &u[u_offset], ldu, &dwork[
 			jwork], &c__1, &c_b23, &c__[j * c_dim1 + 1], &c__1, (
 			ftnlen)11);
+#line 624 "SB04PD.f"
 /* L60: */
+#line 624 "SB04PD.f"
 	    }
 
+#line 626 "SB04PD.f"
 	}
+#line 627 "SB04PD.f"
     }
 
+#line 629 "SB04PD.f"
     if (! schurb) {
 
 /*        Transform the right-hand side:  C <-- C*V'. */
 /*        Workspace:  need   a+b+N; */
 /*                    prefer a+b+M*N. */
 
+#line 635 "SB04PD.f"
 	if (blas3b) {
 
 /*           Enough workspace for a fast BLAS 3 algorithm. */
 
+#line 639 "SB04PD.f"
 	    dlacpy_("Full", m, n, &c__[c_offset], ldc, &dwork[jwork], m, (
 		    ftnlen)4);
+#line 640 "SB04PD.f"
 	    dgemm_("NoTranspose", "Transpose", m, n, n, &c_b22, &dwork[jwork],
 		     m, &v[v_offset], ldv, &c_b23, &c__[c_offset], ldc, (
 		    ftnlen)11, (ftnlen)9);
+#line 642 "SB04PD.f"
 	} else if (blockb) {
 
 /*           Use as many rows of C as possible. */
 
+#line 646 "SB04PD.f"
 	    i__2 = *m;
+#line 646 "SB04PD.f"
 	    i__1 = chunkb;
+#line 646 "SB04PD.f"
 	    for (i__ = 1; i__1 < 0 ? i__ >= i__2 : i__ <= i__2; i__ += i__1) {
 /* Computing MIN */
+#line 647 "SB04PD.f"
 		i__3 = *m - i__ + 1;
+#line 647 "SB04PD.f"
 		bl = min(i__3,chunkb);
+#line 648 "SB04PD.f"
 		dlacpy_("Full", &bl, n, &c__[i__ + c_dim1], ldc, &dwork[jwork]
 			, &bl, (ftnlen)4);
+#line 650 "SB04PD.f"
 		dgemm_("NoTranspose", "Transpose", &bl, n, n, &c_b22, &dwork[
 			jwork], &bl, &v[v_offset], ldv, &c_b23, &c__[i__ + 
 			c_dim1], ldc, (ftnlen)11, (ftnlen)9);
+#line 653 "SB04PD.f"
 /* L70: */
+#line 653 "SB04PD.f"
 	    }
 
+#line 655 "SB04PD.f"
 	} else {
 
 /*           Use a BLAS 2 algorithm. */
 
+#line 659 "SB04PD.f"
 	    i__1 = *m;
+#line 659 "SB04PD.f"
 	    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 660 "SB04PD.f"
 		dcopy_(n, &c__[i__ + c_dim1], ldc, &dwork[jwork], &c__1);
+#line 661 "SB04PD.f"
 		dgemv_("NoTranspose", n, n, &c_b22, &v[v_offset], ldv, &dwork[
 			jwork], &c__1, &c_b23, &c__[i__ + c_dim1], ldc, (
 			ftnlen)11);
+#line 663 "SB04PD.f"
 /* L80: */
+#line 663 "SB04PD.f"
 	    }
 
+#line 665 "SB04PD.f"
 	}
+#line 666 "SB04PD.f"
     }
 
+#line 668 "SB04PD.f"
     dwork[1] = (doublereal) maxwrk;
 
+#line 670 "SB04PD.f"
     return 0;
 /* *** Last line of SB04PD *** */
 } /* sb04pd_ */

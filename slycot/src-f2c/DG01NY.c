@@ -1,3 +1,4 @@
+#line 1 "DG01NY.f"
 /* DG01NY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "DG01NY.f"
 /* Subroutine */ int dg01ny_(char *indi, integer *n, doublereal *xr, 
 	doublereal *xi, ftnlen indi_len)
 {
@@ -59,62 +61,110 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 45 "DG01NY.f"
     /* Parameter adjustments */
+#line 45 "DG01NY.f"
     --xi;
+#line 45 "DG01NY.f"
     --xr;
+#line 45 "DG01NY.f"
 
+#line 45 "DG01NY.f"
     /* Function Body */
+#line 45 "DG01NY.f"
     lindi = lsame_(indi, "D", (ftnlen)1, (ftnlen)1);
 
 /*     Initialisation. */
 
+#line 49 "DG01NY.f"
     pi2 = atan(1.) * 8.;
+#line 50 "DG01NY.f"
     if (lindi) {
+#line 50 "DG01NY.f"
 	pi2 = -pi2;
+#line 50 "DG01NY.f"
     }
 
+#line 52 "DG01NY.f"
     whelp = pi2 / (doublereal) (*n << 1);
+#line 53 "DG01NY.f"
     wstpi = sin(whelp);
+#line 54 "DG01NY.f"
     whelp = sin(whelp * .5);
+#line 55 "DG01NY.f"
     wstpr = whelp * -2. * whelp;
+#line 56 "DG01NY.f"
     wi = 0.;
 
+#line 58 "DG01NY.f"
     if (lindi) {
+#line 59 "DG01NY.f"
 	wr = 1.;
+#line 60 "DG01NY.f"
 	xr[*n + 1] = xr[1];
+#line 61 "DG01NY.f"
 	xi[*n + 1] = xi[1];
+#line 62 "DG01NY.f"
     } else {
+#line 63 "DG01NY.f"
 	wr = -1.;
+#line 64 "DG01NY.f"
     }
 
 /*     Recursion. */
 
+#line 68 "DG01NY.f"
     n2 = *n / 2 + 1;
+#line 69 "DG01NY.f"
     i__1 = n2;
+#line 69 "DG01NY.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 70 "DG01NY.f"
 	j = *n + 2 - i__;
+#line 71 "DG01NY.f"
 	ar = xr[i__] + xr[j];
+#line 72 "DG01NY.f"
 	ai = xi[i__] - xi[j];
+#line 73 "DG01NY.f"
 	br = xi[i__] + xi[j];
+#line 74 "DG01NY.f"
 	bi = xr[j] - xr[i__];
+#line 75 "DG01NY.f"
 	if (lindi) {
+#line 76 "DG01NY.f"
 	    ar *= .5;
+#line 77 "DG01NY.f"
 	    ai *= .5;
+#line 78 "DG01NY.f"
 	    br *= .5;
+#line 79 "DG01NY.f"
 	    bi *= .5;
+#line 80 "DG01NY.f"
 	}
+#line 81 "DG01NY.f"
 	helpr = wr * br - wi * bi;
+#line 82 "DG01NY.f"
 	helpi = wr * bi + wi * br;
+#line 83 "DG01NY.f"
 	xr[i__] = ar + helpr;
+#line 84 "DG01NY.f"
 	xi[i__] = ai + helpi;
+#line 85 "DG01NY.f"
 	xr[j] = ar - helpr;
+#line 86 "DG01NY.f"
 	xi[j] = helpi - ai;
+#line 87 "DG01NY.f"
 	whelp = wr;
+#line 88 "DG01NY.f"
 	wr = wr + wr * wstpr - wi * wstpi;
+#line 89 "DG01NY.f"
 	wi = wi + wi * wstpr + whelp * wstpi;
+#line 90 "DG01NY.f"
 /* L10: */
+#line 90 "DG01NY.f"
     }
 
+#line 92 "DG01NY.f"
     return 0;
 /* *** Last line of DG01NY *** */
 } /* dg01ny_ */

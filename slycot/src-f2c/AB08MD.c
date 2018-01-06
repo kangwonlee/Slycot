@@ -1,3 +1,4 @@
+#line 1 "AB08MD.f"
 /* AB08MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB08MD.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -221,96 +223,169 @@ static integer c_n1 = -1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 186 "AB08MD.f"
     /* Parameter adjustments */
+#line 186 "AB08MD.f"
     a_dim1 = *lda;
+#line 186 "AB08MD.f"
     a_offset = 1 + a_dim1;
+#line 186 "AB08MD.f"
     a -= a_offset;
+#line 186 "AB08MD.f"
     b_dim1 = *ldb;
+#line 186 "AB08MD.f"
     b_offset = 1 + b_dim1;
+#line 186 "AB08MD.f"
     b -= b_offset;
+#line 186 "AB08MD.f"
     c_dim1 = *ldc;
+#line 186 "AB08MD.f"
     c_offset = 1 + c_dim1;
+#line 186 "AB08MD.f"
     c__ -= c_offset;
+#line 186 "AB08MD.f"
     d_dim1 = *ldd;
+#line 186 "AB08MD.f"
     d_offset = 1 + d_dim1;
+#line 186 "AB08MD.f"
     d__ -= d_offset;
+#line 186 "AB08MD.f"
     --iwork;
+#line 186 "AB08MD.f"
     --dwork;
+#line 186 "AB08MD.f"
 
+#line 186 "AB08MD.f"
     /* Function Body */
+#line 186 "AB08MD.f"
     np = *n + *p;
+#line 187 "AB08MD.f"
     nm = *n + *m;
+#line 188 "AB08MD.f"
     *info = 0;
+#line 189 "AB08MD.f"
     lequil = lsame_(equil, "S", (ftnlen)1, (ftnlen)1);
+#line 190 "AB08MD.f"
     lquery = *ldwork == -1;
+#line 191 "AB08MD.f"
     wrkopt = np * nm;
 
 /*     Test the input scalar arguments. */
 
+#line 195 "AB08MD.f"
     if (! lequil && ! lsame_(equil, "N", (ftnlen)1, (ftnlen)1)) {
+#line 196 "AB08MD.f"
 	*info = -1;
+#line 197 "AB08MD.f"
     } else if (*n < 0) {
+#line 198 "AB08MD.f"
 	*info = -2;
+#line 199 "AB08MD.f"
     } else if (*m < 0) {
+#line 200 "AB08MD.f"
 	*info = -3;
+#line 201 "AB08MD.f"
     } else if (*p < 0) {
+#line 202 "AB08MD.f"
 	*info = -4;
+#line 203 "AB08MD.f"
     } else if (*lda < max(1,*n)) {
+#line 204 "AB08MD.f"
 	*info = -6;
+#line 205 "AB08MD.f"
     } else if (*ldb < max(1,*n)) {
+#line 206 "AB08MD.f"
 	*info = -8;
+#line 207 "AB08MD.f"
     } else if (*ldc < max(1,*p)) {
+#line 208 "AB08MD.f"
 	*info = -10;
+#line 209 "AB08MD.f"
     } else if (*ldd < max(1,*p)) {
+#line 210 "AB08MD.f"
 	*info = -12;
+#line 211 "AB08MD.f"
     } else {
 /* Computing MAX */
 /* Computing MAX */
+#line 212 "AB08MD.f"
 	i__3 = *m * 3 - 1;
 /* Computing MAX */
+#line 212 "AB08MD.f"
 	i__4 = *p * 3 - 1, i__4 = max(i__4,np);
+#line 212 "AB08MD.f"
 	i__1 = min(*p,*m) + max(i__3,*n), i__1 = max(i__1,1), i__2 = min(*p,*
 		n) + max(i__4,nm);
+#line 212 "AB08MD.f"
 	kw = wrkopt + max(i__1,i__2);
+#line 214 "AB08MD.f"
 	if (lquery) {
+#line 215 "AB08MD.f"
 	    svlmax = 0.;
+#line 216 "AB08MD.f"
 	    ninfz = 0;
+#line 217 "AB08MD.f"
 	    i__1 = max(1,np);
+#line 217 "AB08MD.f"
 	    ab08nx_(n, m, p, p, &c__0, &svlmax, &dwork[1], &i__1, &ninfz, &
 		    iwork[1], &iwork[1], &mu, &nu, &nkrol, tol, &iwork[1], &
 		    dwork[1], &c_n1, info);
 /* Computing MAX */
+#line 220 "AB08MD.f"
 	    i__1 = kw, i__2 = wrkopt + (integer) dwork[1];
+#line 220 "AB08MD.f"
 	    wrkopt = max(i__1,i__2);
+#line 221 "AB08MD.f"
 	} else if (*ldwork < kw) {
+#line 222 "AB08MD.f"
 	    *info = -17;
+#line 223 "AB08MD.f"
 	}
+#line 224 "AB08MD.f"
     }
 
+#line 226 "AB08MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 230 "AB08MD.f"
 	i__1 = -(*info);
+#line 230 "AB08MD.f"
 	xerbla_("AB08MD", &i__1, (ftnlen)6);
+#line 231 "AB08MD.f"
 	return 0;
+#line 232 "AB08MD.f"
     } else if (lquery) {
+#line 233 "AB08MD.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 234 "AB08MD.f"
 	return 0;
+#line 235 "AB08MD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 239 "AB08MD.f"
     if (min(*m,*p) == 0) {
+#line 240 "AB08MD.f"
 	*rank = 0;
+#line 241 "AB08MD.f"
 	dwork[1] = 1.;
+#line 242 "AB08MD.f"
 	return 0;
+#line 243 "AB08MD.f"
     }
 
+#line 245 "AB08MD.f"
     i__1 = (*n << 1) + 1;
+#line 245 "AB08MD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 246 "AB08MD.f"
 	iwork[i__] = 0;
+#line 247 "AB08MD.f"
 /* L10: */
+#line 247 "AB08MD.f"
     }
 
 /*     (Note: Comments in the code beginning "Workspace:" describe the */
@@ -321,33 +396,49 @@ static integer c_n1 = -1;
 /*                                    ( D  C ) */
 /*     Workspace: need   (N+P)*(N+M). */
 
+#line 257 "AB08MD.f"
     dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[1], &np, (ftnlen)4);
+#line 258 "AB08MD.f"
     dlacpy_("Full", p, m, &d__[d_offset], ldd, &dwork[*n + 1], &np, (ftnlen)4)
 	    ;
+#line 259 "AB08MD.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &dwork[np * *m + 1], &np, (
 	    ftnlen)4);
+#line 260 "AB08MD.f"
     dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[np * *m + *n + 1], &np, 
 	    (ftnlen)4);
 
 /*     If required, balance the compound matrix (default MAXRED). */
 /*     Workspace: need   N. */
 
+#line 265 "AB08MD.f"
     kw = wrkopt + 1;
+#line 266 "AB08MD.f"
     if (lequil) {
+#line 267 "AB08MD.f"
 	maxred = 0.;
+#line 268 "AB08MD.f"
 	tb01id_("A", n, m, p, &maxred, &dwork[np * *m + 1], &np, &dwork[1], &
 		np, &dwork[np * *m + *n + 1], &np, &dwork[kw], info, (ftnlen)
 		1);
+#line 270 "AB08MD.f"
 	wrkopt += *n;
+#line 271 "AB08MD.f"
     }
 
 /*     If required, set tolerance. */
 
+#line 275 "AB08MD.f"
     thresh = sqrt((doublereal) (np * nm)) * dlamch_("Precision", (ftnlen)9);
+#line 276 "AB08MD.f"
     toler = *tol;
+#line 277 "AB08MD.f"
     if (toler < thresh) {
+#line 277 "AB08MD.f"
 	toler = thresh;
+#line 277 "AB08MD.f"
     }
+#line 278 "AB08MD.f"
     svlmax = dlange_("Frobenius", &np, &nm, &dwork[1], &np, &dwork[kw], (
 	    ftnlen)9);
 
@@ -359,18 +450,27 @@ static integer c_n1 = -1;
 /*                     prefer larger. */
 /*     Integer workspace: 2*N+MAX(M,P)+1. */
 
+#line 288 "AB08MD.f"
     ro = *p;
+#line 289 "AB08MD.f"
     sigma = 0;
+#line 290 "AB08MD.f"
     ninfz = 0;
+#line 291 "AB08MD.f"
     i__1 = *ldwork - kw + 1;
+#line 291 "AB08MD.f"
     ab08nx_(n, m, p, &ro, &sigma, &svlmax, &dwork[1], &np, &ninfz, &iwork[1], 
 	    &iwork[*n + 1], &mu, &nu, &nkrol, &toler, &iwork[(*n << 1) + 2], &
 	    dwork[kw], &i__1, info);
+#line 294 "AB08MD.f"
     *rank = mu;
 
 /* Computing MAX */
+#line 296 "AB08MD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 296 "AB08MD.f"
     dwork[1] = (doublereal) max(i__1,i__2);
+#line 297 "AB08MD.f"
     return 0;
 /* *** Last line of AB08MD *** */
 } /* ab08md_ */

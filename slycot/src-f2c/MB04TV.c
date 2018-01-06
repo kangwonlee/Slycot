@@ -1,3 +1,4 @@
+#line 1 "MB04TV.f"
 /* MB04TV.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04TV.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -166,29 +168,51 @@ static integer c__1 = 1;
 /*     .. External Subroutines .. */
 /*     .. Executable Statements .. */
 
+#line 143 "MB04TV.f"
     /* Parameter adjustments */
+#line 143 "MB04TV.f"
     a_dim1 = *lda;
+#line 143 "MB04TV.f"
     a_offset = 1 + a_dim1;
+#line 143 "MB04TV.f"
     a -= a_offset;
+#line 143 "MB04TV.f"
     e_dim1 = *lde;
+#line 143 "MB04TV.f"
     e_offset = 1 + e_dim1;
+#line 143 "MB04TV.f"
     e -= e_offset;
+#line 143 "MB04TV.f"
     z_dim1 = *ldz;
+#line 143 "MB04TV.f"
     z_offset = 1 + z_dim1;
+#line 143 "MB04TV.f"
     z__ -= z_offset;
+#line 143 "MB04TV.f"
 
+#line 143 "MB04TV.f"
     /* Function Body */
+#line 143 "MB04TV.f"
     if (*n <= 0 || *nra <= 0 || *nca <= 0) {
+#line 143 "MB04TV.f"
 	return 0;
+#line 143 "MB04TV.f"
     }
+#line 145 "MB04TV.f"
     ifira1 = *ifira - 1;
+#line 146 "MB04TV.f"
     jpvt = *ifica + *nca;
 
+#line 148 "MB04TV.f"
     i__1 = *ifira;
+#line 148 "MB04TV.f"
     for (i__ = ifira1 + *nra; i__ >= i__1; --i__) {
+#line 149 "MB04TV.f"
 	--jpvt;
 
+#line 151 "MB04TV.f"
 	i__2 = *ifica;
+#line 151 "MB04TV.f"
 	for (j = jpvt - 1; j >= i__2; --j) {
 
 /*           Determine the Givens transformation on columns j and jpvt */
@@ -198,23 +222,36 @@ static integer c__1 = 1;
 /*           up to ifira1). */
 /*           Update column transformation matrix Z, if needed. */
 
+#line 160 "MB04TV.f"
 	    drotg_(&a[i__ + jpvt * a_dim1], &a[i__ + j * a_dim1], &sc, &ss);
+#line 161 "MB04TV.f"
 	    i__3 = i__ - 1;
+#line 161 "MB04TV.f"
 	    drot_(&i__3, &a[jpvt * a_dim1 + 1], &c__1, &a[j * a_dim1 + 1], &
 		    c__1, &sc, &ss);
+#line 162 "MB04TV.f"
 	    a[i__ + j * a_dim1] = 0.;
+#line 163 "MB04TV.f"
 	    drot_(&ifira1, &e[jpvt * e_dim1 + 1], &c__1, &e[j * e_dim1 + 1], &
 		    c__1, &sc, &ss);
+#line 164 "MB04TV.f"
 	    if (*updatz) {
+#line 164 "MB04TV.f"
 		drot_(n, &z__[jpvt * z_dim1 + 1], &c__1, &z__[j * z_dim1 + 1],
 			 &c__1, &sc, &ss);
+#line 164 "MB04TV.f"
 	    }
+#line 165 "MB04TV.f"
 /* L20: */
+#line 165 "MB04TV.f"
 	}
 
+#line 167 "MB04TV.f"
 /* L40: */
+#line 167 "MB04TV.f"
     }
 
+#line 169 "MB04TV.f"
     return 0;
 /* *** Last line of MB04TV *** */
 } /* mb04tv_ */

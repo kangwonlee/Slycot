@@ -1,0 +1,10 @@
+extern int ib01bd_(char *meth, char *job, char *jobck, integer *nobr, integer *n, integer *m, integer *l, integer *nsmpl, doublereal *r__, integer *ldr, doublereal *a, integer *lda, doublereal *c__, integer *ldc, doublereal *b, integer *ldb, doublereal *d__, integer *ldd, doublereal *q, integer *ldq, doublereal *ry, integer *ldry, doublereal *s, integer *lds, doublereal *k, integer *ldk, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, logical *bwork, integer *iwarn, integer *info, ftnlen meth_len, ftnlen job_len, ftnlen jobck_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: ib01pd_ 14 35 13 13 13 4 4 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 4 4 124 124 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: ma02ad_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: sb02mt_ 14 28 13 13 13 13 4 4 7 4 7 4 7 4 7 4 7 4 4 4 7 4 4 7 4 4 124 124 124 124 */
+/*:ref: sb02rd_ 14 43 13 13 13 13 13 13 13 13 13 4 7 4 7 4 7 4 7 4 7 4 7 4 7 7 7 7 7 7 4 4 7 4 12 4 124 124 124 124 124 124 124 124 124 */
+/*:ref: sb02nd_ 14 30 13 13 13 13 4 4 4 7 4 7 4 7 4 4 7 4 7 4 7 7 4 4 4 7 4 4 124 124 124 124 */

@@ -1,3 +1,4 @@
+#line 1 "MB03QY.f"
 /* MB03QY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03QY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -144,64 +146,101 @@ static integer c__1 = 1;
 /*     .. External Subroutines .. */
 /*     .. Executable Statements .. */
 
+#line 122 "MB03QY.f"
     /* Parameter adjustments */
+#line 122 "MB03QY.f"
     a_dim1 = *lda;
+#line 122 "MB03QY.f"
     a_offset = 1 + a_dim1;
+#line 122 "MB03QY.f"
     a -= a_offset;
+#line 122 "MB03QY.f"
     u_dim1 = *ldu;
+#line 122 "MB03QY.f"
     u_offset = 1 + u_dim1;
+#line 122 "MB03QY.f"
     u -= u_offset;
+#line 122 "MB03QY.f"
 
+#line 122 "MB03QY.f"
     /* Function Body */
+#line 122 "MB03QY.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 126 "MB03QY.f"
     if (*n < 2) {
+#line 127 "MB03QY.f"
 	*info = -1;
+#line 128 "MB03QY.f"
     } else if (*l < 1 || *l >= *n) {
+#line 129 "MB03QY.f"
 	*info = -2;
+#line 130 "MB03QY.f"
     } else if (*lda < *n) {
+#line 131 "MB03QY.f"
 	*info = -4;
+#line 132 "MB03QY.f"
     } else if (*ldu < *n) {
+#line 133 "MB03QY.f"
 	*info = -6;
+#line 134 "MB03QY.f"
     }
 
+#line 136 "MB03QY.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 140 "MB03QY.f"
 	i__1 = -(*info);
+#line 140 "MB03QY.f"
 	xerbla_("MB03QY", &i__1, (ftnlen)6);
+#line 141 "MB03QY.f"
 	return 0;
+#line 142 "MB03QY.f"
     }
 
 /*     Compute the eigenvalues and the elements of the Givens */
 /*     transformation. */
 
+#line 147 "MB03QY.f"
     l1 = *l + 1;
+#line 148 "MB03QY.f"
     dlanv2_(&a[*l + *l * a_dim1], &a[*l + l1 * a_dim1], &a[l1 + *l * a_dim1], 
 	    &a[l1 + l1 * a_dim1], e1, e2, &ew1, &ew2, &cs, &sn);
+#line 150 "MB03QY.f"
     if (*e2 == 0.) {
+#line 150 "MB03QY.f"
 	*e2 = ew1;
+#line 150 "MB03QY.f"
     }
 
 /*     Apply the transformation to A. */
 
+#line 154 "MB03QY.f"
     if (l1 < *n) {
+#line 154 "MB03QY.f"
 	i__1 = *n - l1;
+#line 154 "MB03QY.f"
 	drot_(&i__1, &a[*l + (l1 + 1) * a_dim1], lda, &a[l1 + (l1 + 1) * 
 		a_dim1], lda, &cs, &sn);
+#line 154 "MB03QY.f"
     }
+#line 156 "MB03QY.f"
     i__1 = *l - 1;
+#line 156 "MB03QY.f"
     drot_(&i__1, &a[*l * a_dim1 + 1], &c__1, &a[l1 * a_dim1 + 1], &c__1, &cs, 
 	    &sn);
 
 /*     Accumulate the transformation in U. */
 
+#line 160 "MB03QY.f"
     drot_(n, &u[*l * u_dim1 + 1], &c__1, &u[l1 * u_dim1 + 1], &c__1, &cs, &sn)
 	    ;
 
+#line 162 "MB03QY.f"
     return 0;
 /* *** Last line of MB03QY *** */
 } /* mb03qy_ */

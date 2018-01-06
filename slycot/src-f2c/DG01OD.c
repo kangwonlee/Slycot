@@ -1,3 +1,4 @@
+#line 1 "DG01OD.f"
 /* DG01OD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "DG01OD.f"
 /* Subroutine */ int dg01od_(char *scr, char *wght, integer *n, doublereal *a,
 	 doublereal *w, integer *info, ftnlen scr_len, ftnlen wght_len)
 {
@@ -144,271 +146,479 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 128 "DG01OD.f"
     /* Parameter adjustments */
+#line 128 "DG01OD.f"
     --w;
+#line 128 "DG01OD.f"
     --a;
+#line 128 "DG01OD.f"
 
+#line 128 "DG01OD.f"
     /* Function Body */
+#line 128 "DG01OD.f"
     *info = 0;
+#line 129 "DG01OD.f"
     lfwd = lsame_(scr, "N", (ftnlen)1, (ftnlen)1) || lsame_(scr, "I", (ftnlen)
 	    1, (ftnlen)1);
+#line 130 "DG01OD.f"
     lscr = lsame_(scr, "I", (ftnlen)1, (ftnlen)1) || lsame_(scr, "O", (ftnlen)
 	    1, (ftnlen)1);
+#line 131 "DG01OD.f"
     lwght = lsame_(wght, "A", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 135 "DG01OD.f"
     if (! (lfwd || lscr)) {
+#line 136 "DG01OD.f"
 	*info = -1;
+#line 137 "DG01OD.f"
     } else if (! lwght && ! lsame_(wght, "N", (ftnlen)1, (ftnlen)1)) {
+#line 138 "DG01OD.f"
 	*info = -2;
+#line 139 "DG01OD.f"
     } else {
+#line 140 "DG01OD.f"
 	m = 0;
+#line 141 "DG01OD.f"
 	j = 0;
+#line 142 "DG01OD.f"
 	if (*n >= 1) {
+#line 143 "DG01OD.f"
 	    j = *n;
 /*           WHILE ( MOD( J, 2 ).EQ.0 ) DO */
+#line 145 "DG01OD.f"
 L10:
+#line 146 "DG01OD.f"
 	    if (j % 2 == 0) {
+#line 147 "DG01OD.f"
 		j /= 2;
+#line 148 "DG01OD.f"
 		++m;
+#line 149 "DG01OD.f"
 		goto L10;
+#line 150 "DG01OD.f"
 	    }
 /*           END WHILE 10 */
+#line 152 "DG01OD.f"
 	    if (j != 1) {
+#line 152 "DG01OD.f"
 		*info = -3;
+#line 152 "DG01OD.f"
 	    }
+#line 153 "DG01OD.f"
 	} else if (*n < 0) {
+#line 154 "DG01OD.f"
 	    *info = -3;
+#line 155 "DG01OD.f"
 	}
+#line 156 "DG01OD.f"
     }
 
+#line 158 "DG01OD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 162 "DG01OD.f"
 	i__1 = -(*info);
+#line 162 "DG01OD.f"
 	xerbla_("DG01OD", &i__1, (ftnlen)6);
+#line 163 "DG01OD.f"
 	return 0;
+#line 164 "DG01OD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 168 "DG01OD.f"
     if (*n <= 1) {
+#line 168 "DG01OD.f"
 	return 0;
+#line 168 "DG01OD.f"
     }
 
+#line 171 "DG01OD.f"
     if (! lwght) {
 
 /*        Compute the long weight vector via subvector scaling. */
 
+#line 175 "DG01OD.f"
 	r1 = 1;
+#line 176 "DG01OD.f"
 	len = 1;
+#line 177 "DG01OD.f"
 	th = atan(1.) * 4. / (doublereal) (*n);
 
+#line 179 "DG01OD.f"
 	i__1 = m - 2;
+#line 179 "DG01OD.f"
 	for (l = 1; l <= i__1; ++l) {
+#line 180 "DG01OD.f"
 	    len <<= 1;
+#line 181 "DG01OD.f"
 	    th *= 2.;
+#line 182 "DG01OD.f"
 	    cf = cos(th);
+#line 183 "DG01OD.f"
 	    sf = sin(th);
+#line 184 "DG01OD.f"
 	    w[r1] = cf;
+#line 185 "DG01OD.f"
 	    w[r1 + 1] = sf;
+#line 186 "DG01OD.f"
 	    r1 += 2;
 
+#line 188 "DG01OD.f"
 	    i__2 = len - 2;
+#line 188 "DG01OD.f"
 	    for (i__ = 1; i__ <= i__2; i__ += 2) {
+#line 189 "DG01OD.f"
 		w[r1] = cf * w[i__] - sf * w[i__ + 1];
+#line 190 "DG01OD.f"
 		w[r1 + 1] = sf * w[i__] + cf * w[i__ + 1];
+#line 191 "DG01OD.f"
 		r1 += 2;
+#line 192 "DG01OD.f"
 /* L20: */
+#line 192 "DG01OD.f"
 	    }
 
+#line 194 "DG01OD.f"
 /* L30: */
+#line 194 "DG01OD.f"
 	}
 
+#line 196 "DG01OD.f"
 	p1 = 3;
+#line 197 "DG01OD.f"
 	q1 = r1 - 2;
 
+#line 199 "DG01OD.f"
 	for (l = m - 2; l >= 1; --l) {
 
+#line 201 "DG01OD.f"
 	    i__1 = q1;
+#line 201 "DG01OD.f"
 	    for (i__ = p1; i__ <= i__1; i__ += 4) {
+#line 202 "DG01OD.f"
 		w[r1] = w[i__];
+#line 203 "DG01OD.f"
 		w[r1 + 1] = w[i__ + 1];
+#line 204 "DG01OD.f"
 		r1 += 2;
+#line 205 "DG01OD.f"
 /* L40: */
+#line 205 "DG01OD.f"
 	    }
 
+#line 207 "DG01OD.f"
 	    p1 = q1 + 4;
+#line 208 "DG01OD.f"
 	    q1 = r1 - 2;
+#line 209 "DG01OD.f"
 /* L50: */
+#line 209 "DG01OD.f"
 	}
 
+#line 211 "DG01OD.f"
 	*(unsigned char *)wght = 'A';
 
+#line 213 "DG01OD.f"
     }
 
+#line 215 "DG01OD.f"
     if (lfwd && ! lscr) {
 
 /*        Inplace shuffling of data. */
 
+#line 219 "DG01OD.f"
 	j = 1;
 
+#line 221 "DG01OD.f"
 	i__1 = *n;
+#line 221 "DG01OD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 222 "DG01OD.f"
 	    if (j > i__) {
+#line 223 "DG01OD.f"
 		t1 = a[i__];
+#line 224 "DG01OD.f"
 		a[i__] = a[j];
+#line 225 "DG01OD.f"
 		a[j] = t1;
+#line 226 "DG01OD.f"
 	    }
+#line 227 "DG01OD.f"
 	    l = *n / 2;
 /*           REPEAT */
+#line 229 "DG01OD.f"
 L60:
+#line 229 "DG01OD.f"
 	    if (j > l) {
+#line 230 "DG01OD.f"
 		j -= l;
+#line 231 "DG01OD.f"
 		l /= 2;
+#line 232 "DG01OD.f"
 		if (l >= 2) {
+#line 232 "DG01OD.f"
 		    goto L60;
+#line 232 "DG01OD.f"
 		}
+#line 233 "DG01OD.f"
 	    }
 /*           UNTIL ( L.LT.2 ) */
+#line 235 "DG01OD.f"
 	    j += l;
+#line 236 "DG01OD.f"
 /* L70: */
+#line 236 "DG01OD.f"
 	}
 
+#line 238 "DG01OD.f"
     }
 
+#line 240 "DG01OD.f"
     if (lfwd) {
 
 /*        Compute Hartley transform with butterfly operators. */
 
+#line 244 "DG01OD.f"
 	i__1 = *n;
+#line 244 "DG01OD.f"
 	for (j = 2; j <= i__1; j += 2) {
+#line 245 "DG01OD.f"
 	    t1 = a[j];
+#line 246 "DG01OD.f"
 	    a[j] = a[j - 1] - t1;
+#line 247 "DG01OD.f"
 	    a[j - 1] += t1;
+#line 248 "DG01OD.f"
 /* L110: */
+#line 248 "DG01OD.f"
 	}
 
+#line 250 "DG01OD.f"
 	len = 1;
+#line 251 "DG01OD.f"
 	wpos = *n - (m << 1) + 1;
 
+#line 253 "DG01OD.f"
 	i__1 = m - 1;
+#line 253 "DG01OD.f"
 	for (l = 1; l <= i__1; ++l) {
+#line 254 "DG01OD.f"
 	    len <<= 1;
+#line 255 "DG01OD.f"
 	    p2 = 1;
+#line 256 "DG01OD.f"
 	    q2 = len + 1;
+#line 257 "DG01OD.f"
 	    r2 = len / 2 + 1;
+#line 258 "DG01OD.f"
 	    s2 = r2 + q2 - 1;
 
+#line 260 "DG01OD.f"
 	    i__2 = *n / (len << 1) - 1;
+#line 260 "DG01OD.f"
 	    for (i__ = 0; i__ <= i__2; ++i__) {
+#line 261 "DG01OD.f"
 		t1 = a[q2];
+#line 262 "DG01OD.f"
 		a[q2] = a[p2] - t1;
+#line 263 "DG01OD.f"
 		a[p2] += t1;
+#line 264 "DG01OD.f"
 		t1 = a[s2];
+#line 265 "DG01OD.f"
 		a[s2] = a[r2] - t1;
+#line 266 "DG01OD.f"
 		a[r2] += t1;
 
+#line 268 "DG01OD.f"
 		p1 = p2 + 1;
+#line 269 "DG01OD.f"
 		q1 = p1 + len;
+#line 270 "DG01OD.f"
 		r1 = q1 - 2;
+#line 271 "DG01OD.f"
 		s1 = r1 + len;
 
+#line 273 "DG01OD.f"
 		i__3 = wpos + len - 3;
+#line 273 "DG01OD.f"
 		for (j = wpos; j <= i__3; j += 2) {
+#line 274 "DG01OD.f"
 		    cf = w[j];
+#line 275 "DG01OD.f"
 		    sf = w[j + 1];
+#line 276 "DG01OD.f"
 		    t1 = cf * a[q1] + sf * a[s1];
+#line 277 "DG01OD.f"
 		    t2 = -cf * a[s1] + sf * a[q1];
+#line 278 "DG01OD.f"
 		    a[q1] = a[p1] - t1;
+#line 279 "DG01OD.f"
 		    a[p1] += t1;
+#line 280 "DG01OD.f"
 		    a[s1] = a[r1] - t2;
+#line 281 "DG01OD.f"
 		    a[r1] += t2;
+#line 282 "DG01OD.f"
 		    ++p1;
+#line 283 "DG01OD.f"
 		    ++q1;
+#line 284 "DG01OD.f"
 		    --r1;
+#line 285 "DG01OD.f"
 		    --s1;
+#line 286 "DG01OD.f"
 /* L120: */
+#line 286 "DG01OD.f"
 		}
 
+#line 288 "DG01OD.f"
 		p2 += len << 1;
+#line 289 "DG01OD.f"
 		q2 += len << 1;
+#line 290 "DG01OD.f"
 		r2 += len << 1;
+#line 291 "DG01OD.f"
 		s2 += len << 1;
+#line 292 "DG01OD.f"
 /* L130: */
+#line 292 "DG01OD.f"
 	    }
 
+#line 294 "DG01OD.f"
 	    wpos = wpos - (len << 1) + 2;
+#line 295 "DG01OD.f"
 /* L140: */
+#line 295 "DG01OD.f"
 	}
 
+#line 297 "DG01OD.f"
     } else {
 
 /*        Compute Hartley transform with transposed butterfly operators. */
 
+#line 301 "DG01OD.f"
 	wpos = 1;
+#line 302 "DG01OD.f"
 	len = *n;
 
+#line 304 "DG01OD.f"
 	for (l = m - 1; l >= 1; --l) {
+#line 305 "DG01OD.f"
 	    len /= 2;
+#line 306 "DG01OD.f"
 	    p2 = 1;
+#line 307 "DG01OD.f"
 	    q2 = len + 1;
+#line 308 "DG01OD.f"
 	    r2 = len / 2 + 1;
+#line 309 "DG01OD.f"
 	    s2 = r2 + q2 - 1;
 
+#line 311 "DG01OD.f"
 	    i__1 = *n / (len << 1) - 1;
+#line 311 "DG01OD.f"
 	    for (i__ = 0; i__ <= i__1; ++i__) {
+#line 312 "DG01OD.f"
 		t1 = a[q2];
+#line 313 "DG01OD.f"
 		a[q2] = a[p2] - t1;
+#line 314 "DG01OD.f"
 		a[p2] += t1;
+#line 315 "DG01OD.f"
 		t1 = a[s2];
+#line 316 "DG01OD.f"
 		a[s2] = a[r2] - t1;
+#line 317 "DG01OD.f"
 		a[r2] += t1;
 
+#line 319 "DG01OD.f"
 		p1 = p2 + 1;
+#line 320 "DG01OD.f"
 		q1 = p1 + len;
+#line 321 "DG01OD.f"
 		r1 = q1 - 2;
+#line 322 "DG01OD.f"
 		s1 = r1 + len;
 
+#line 324 "DG01OD.f"
 		i__2 = wpos + len - 3;
+#line 324 "DG01OD.f"
 		for (j = wpos; j <= i__2; j += 2) {
+#line 325 "DG01OD.f"
 		    cf = w[j];
+#line 326 "DG01OD.f"
 		    sf = w[j + 1];
+#line 327 "DG01OD.f"
 		    t1 = a[p1] - a[q1];
+#line 328 "DG01OD.f"
 		    t2 = a[r1] - a[s1];
+#line 329 "DG01OD.f"
 		    a[p1] += a[q1];
+#line 330 "DG01OD.f"
 		    a[r1] += a[s1];
+#line 331 "DG01OD.f"
 		    a[q1] = cf * t1 + sf * t2;
+#line 332 "DG01OD.f"
 		    a[s1] = -cf * t2 + sf * t1;
+#line 333 "DG01OD.f"
 		    ++p1;
+#line 334 "DG01OD.f"
 		    ++q1;
+#line 335 "DG01OD.f"
 		    --r1;
+#line 336 "DG01OD.f"
 		    --s1;
+#line 337 "DG01OD.f"
 /* L210: */
+#line 337 "DG01OD.f"
 		}
 
+#line 339 "DG01OD.f"
 		p2 += len << 1;
+#line 340 "DG01OD.f"
 		q2 += len << 1;
+#line 341 "DG01OD.f"
 		r2 += len << 1;
+#line 342 "DG01OD.f"
 		s2 += len << 1;
+#line 343 "DG01OD.f"
 /* L220: */
+#line 343 "DG01OD.f"
 	    }
 
+#line 345 "DG01OD.f"
 	    wpos = wpos + len - 2;
+#line 346 "DG01OD.f"
 /* L230: */
+#line 346 "DG01OD.f"
 	}
 
+#line 348 "DG01OD.f"
 	i__1 = *n;
+#line 348 "DG01OD.f"
 	for (j = 2; j <= i__1; j += 2) {
+#line 349 "DG01OD.f"
 	    t1 = a[j];
+#line 350 "DG01OD.f"
 	    a[j] = a[j - 1] - t1;
+#line 351 "DG01OD.f"
 	    a[j - 1] += t1;
+#line 352 "DG01OD.f"
 /* L240: */
+#line 352 "DG01OD.f"
 	}
 
+#line 354 "DG01OD.f"
     }
+#line 355 "DG01OD.f"
     return 0;
 /* *** Last line of DG01OD *** */
 } /* dg01od_ */

@@ -1,3 +1,4 @@
+#line 1 "SB02OU.f"
 /* SB02OU.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB02OU.f"
 logical sb02ou_(doublereal *alphar, doublereal *alphai, doublereal *beta)
 {
     /* System generated locals */
@@ -90,8 +92,10 @@ logical sb02ou_(doublereal *alphar, doublereal *alphai, doublereal *beta)
 /*     .. Scalar Arguments .. */
 /*     .. Executable Statements .. */
 
+#line 78 "SB02OU.f"
     ret_val = *alphar < 0. && *beta < 0. || *alphar > 0. && *beta > 0.;
 
+#line 81 "SB02OU.f"
     return ret_val;
 /* *** Last line of SB02OU *** */
 } /* sb02ou_ */

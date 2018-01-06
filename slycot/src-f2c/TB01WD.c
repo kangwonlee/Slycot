@@ -1,3 +1,4 @@
+#line 1 "TB01WD.f"
 /* TB01WD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TB01WD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -200,59 +202,103 @@ static doublereal c_b11 = 0.;
 
 /*     .. Executable Statements .. */
 
+#line 168 "TB01WD.f"
     /* Parameter adjustments */
+#line 168 "TB01WD.f"
     a_dim1 = *lda;
+#line 168 "TB01WD.f"
     a_offset = 1 + a_dim1;
+#line 168 "TB01WD.f"
     a -= a_offset;
+#line 168 "TB01WD.f"
     b_dim1 = *ldb;
+#line 168 "TB01WD.f"
     b_offset = 1 + b_dim1;
+#line 168 "TB01WD.f"
     b -= b_offset;
+#line 168 "TB01WD.f"
     c_dim1 = *ldc;
+#line 168 "TB01WD.f"
     c_offset = 1 + c_dim1;
+#line 168 "TB01WD.f"
     c__ -= c_offset;
+#line 168 "TB01WD.f"
     u_dim1 = *ldu;
+#line 168 "TB01WD.f"
     u_offset = 1 + u_dim1;
+#line 168 "TB01WD.f"
     u -= u_offset;
+#line 168 "TB01WD.f"
     --wr;
+#line 168 "TB01WD.f"
     --wi;
+#line 168 "TB01WD.f"
     --dwork;
+#line 168 "TB01WD.f"
 
+#line 168 "TB01WD.f"
     /* Function Body */
+#line 168 "TB01WD.f"
     *info = 0;
 
 /*     Check input parameters. */
 
+#line 172 "TB01WD.f"
     if (*n < 0) {
+#line 173 "TB01WD.f"
 	*info = -1;
+#line 174 "TB01WD.f"
     } else if (*m < 0) {
+#line 175 "TB01WD.f"
 	*info = -2;
+#line 176 "TB01WD.f"
     } else if (*p < 0) {
+#line 177 "TB01WD.f"
 	*info = -3;
+#line 178 "TB01WD.f"
     } else if (*lda < max(1,*n)) {
+#line 179 "TB01WD.f"
 	*info = -5;
+#line 180 "TB01WD.f"
     } else if (*ldb < max(1,*n)) {
+#line 181 "TB01WD.f"
 	*info = -7;
+#line 182 "TB01WD.f"
     } else if (*ldc < max(1,*p)) {
+#line 183 "TB01WD.f"
 	*info = -9;
+#line 184 "TB01WD.f"
     } else if (*ldu < max(1,*n)) {
+#line 185 "TB01WD.f"
 	*info = -11;
+#line 186 "TB01WD.f"
     } else if (*ldwork < *n * 3) {
+#line 187 "TB01WD.f"
 	*info = -15;
+#line 188 "TB01WD.f"
     }
 
+#line 190 "TB01WD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 194 "TB01WD.f"
 	i__1 = -(*info);
+#line 194 "TB01WD.f"
 	xerbla_("TB01WD", &i__1, (ftnlen)6);
+#line 195 "TB01WD.f"
 	return 0;
+#line 196 "TB01WD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 200 "TB01WD.f"
     if (*n == 0) {
+#line 200 "TB01WD.f"
 	return 0;
+#line 200 "TB01WD.f"
     }
 
 /*     Reduce A to real Schur form using an orthogonal similarity */
@@ -262,66 +308,100 @@ static doublereal c_b11 = 0.;
 /*     Workspace:  need   3*N; */
 /*                 prefer larger. */
 
+#line 210 "TB01WD.f"
     dgees_("Vectors", "Not ordered", (L_fp)select_, n, &a[a_offset], lda, &
 	    sdim, &wr[1], &wi[1], &u[u_offset], ldu, &dwork[1], ldwork, bwork,
 	     info, (ftnlen)7, (ftnlen)11);
+#line 212 "TB01WD.f"
     wrkopt = dwork[1];
+#line 213 "TB01WD.f"
     if (*info != 0) {
+#line 213 "TB01WD.f"
 	return 0;
+#line 213 "TB01WD.f"
     }
 
 /*     Apply the transformation: B <-- U'*B. */
 
+#line 218 "TB01WD.f"
     if (*ldwork < *n * *m) {
 
 /*        Not enough working space for using DGEMM. */
 
+#line 222 "TB01WD.f"
 	i__1 = *m;
+#line 222 "TB01WD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 223 "TB01WD.f"
 	    dcopy_(n, &b[i__ * b_dim1 + 1], &c__1, &dwork[1], &c__1);
+#line 224 "TB01WD.f"
 	    dgemv_("Transpose", n, n, &c_b9, &u[u_offset], ldu, &dwork[1], &
 		    c__1, &c_b11, &b[i__ * b_dim1 + 1], &c__1, (ftnlen)9);
+#line 226 "TB01WD.f"
 /* L10: */
+#line 226 "TB01WD.f"
 	}
 
+#line 228 "TB01WD.f"
     } else {
+#line 229 "TB01WD.f"
 	dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[1], n, (ftnlen)4);
+#line 230 "TB01WD.f"
 	dgemm_("Transpose", "No transpose", n, m, n, &c_b9, &u[u_offset], ldu,
 		 &dwork[1], n, &c_b11, &b[b_offset], ldb, (ftnlen)9, (ftnlen)
 		12);
 /* Computing MAX */
+#line 232 "TB01WD.f"
 	d__1 = wrkopt, d__2 = (doublereal) (*n * *m);
+#line 232 "TB01WD.f"
 	wrkopt = max(d__1,d__2);
+#line 233 "TB01WD.f"
     }
 
 /*     Apply the transformation: C <-- C*U. */
 
+#line 237 "TB01WD.f"
     if (*ldwork < *n * *p) {
 
 /*        Not enough working space for using DGEMM. */
 
+#line 241 "TB01WD.f"
 	i__1 = *p;
+#line 241 "TB01WD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 242 "TB01WD.f"
 	    dcopy_(n, &c__[i__ + c_dim1], ldc, &dwork[1], &c__1);
+#line 243 "TB01WD.f"
 	    dgemv_("Transpose", n, n, &c_b9, &u[u_offset], ldu, &dwork[1], &
 		    c__1, &c_b11, &c__[i__ + c_dim1], ldc, (ftnlen)9);
+#line 245 "TB01WD.f"
 /* L20: */
+#line 245 "TB01WD.f"
 	}
 
+#line 247 "TB01WD.f"
     } else {
+#line 248 "TB01WD.f"
 	ldwp = max(1,*p);
+#line 249 "TB01WD.f"
 	dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[1], &ldwp, (ftnlen)
 		4);
+#line 250 "TB01WD.f"
 	dgemm_("No transpose", "No transpose", p, n, n, &c_b9, &dwork[1], &
 		ldwp, &u[u_offset], ldu, &c_b11, &c__[c_offset], ldc, (ftnlen)
 		12, (ftnlen)12);
 /* Computing MAX */
+#line 252 "TB01WD.f"
 	d__1 = wrkopt, d__2 = (doublereal) (*n * *p);
+#line 252 "TB01WD.f"
 	wrkopt = max(d__1,d__2);
+#line 253 "TB01WD.f"
     }
 
+#line 255 "TB01WD.f"
     dwork[1] = wrkopt;
 
+#line 257 "TB01WD.f"
     return 0;
 /* *** Last line of TB01WD *** */
 } /* tb01wd_ */

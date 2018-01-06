@@ -1,0 +1,8 @@
+extern int nf01bq_(char *cond, integer *n, integer *ipar, integer *lipar, doublereal *r__, integer *ldr, integer *ipvt, doublereal *diag, doublereal *qtb, integer *ranks, doublereal *x, doublereal *tol, doublereal *dwork, integer *ldwork, integer *info, ftnlen cond_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: mb02yd_ 14 14 13 4 7 4 4 7 7 4 7 7 7 4 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: mb04ow_ 14 15 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 */
+/*:ref: nf01br_ 14 20 13 13 13 4 4 4 7 4 7 7 4 7 4 7 7 4 4 124 124 124 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */

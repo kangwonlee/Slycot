@@ -1,3 +1,4 @@
+#line 1 "SB16BD.f"
 /* SB16BD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB16BD.f"
 /* Table of constant values */
 
 static doublereal c_b22 = 1.;
@@ -450,123 +452,219 @@ static doublereal c_b45 = 0.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 401 "SB16BD.f"
     /* Parameter adjustments */
+#line 401 "SB16BD.f"
     a_dim1 = *lda;
+#line 401 "SB16BD.f"
     a_offset = 1 + a_dim1;
+#line 401 "SB16BD.f"
     a -= a_offset;
+#line 401 "SB16BD.f"
     b_dim1 = *ldb;
+#line 401 "SB16BD.f"
     b_offset = 1 + b_dim1;
+#line 401 "SB16BD.f"
     b -= b_offset;
+#line 401 "SB16BD.f"
     c_dim1 = *ldc;
+#line 401 "SB16BD.f"
     c_offset = 1 + c_dim1;
+#line 401 "SB16BD.f"
     c__ -= c_offset;
+#line 401 "SB16BD.f"
     d_dim1 = *ldd;
+#line 401 "SB16BD.f"
     d_offset = 1 + d_dim1;
+#line 401 "SB16BD.f"
     d__ -= d_offset;
+#line 401 "SB16BD.f"
     f_dim1 = *ldf;
+#line 401 "SB16BD.f"
     f_offset = 1 + f_dim1;
+#line 401 "SB16BD.f"
     f -= f_offset;
+#line 401 "SB16BD.f"
     g_dim1 = *ldg;
+#line 401 "SB16BD.f"
     g_offset = 1 + g_dim1;
+#line 401 "SB16BD.f"
     g -= g_offset;
+#line 401 "SB16BD.f"
     dc_dim1 = *lddc;
+#line 401 "SB16BD.f"
     dc_offset = 1 + dc_dim1;
+#line 401 "SB16BD.f"
     dc -= dc_offset;
+#line 401 "SB16BD.f"
     --hsv;
+#line 401 "SB16BD.f"
     --iwork;
+#line 401 "SB16BD.f"
     --dwork;
+#line 401 "SB16BD.f"
 
+#line 401 "SB16BD.f"
     /* Function Body */
+#line 401 "SB16BD.f"
     *info = 0;
+#line 402 "SB16BD.f"
     *iwarn = 0;
+#line 403 "SB16BD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 404 "SB16BD.f"
     withd = lsame_(jobd, "D", (ftnlen)1, (ftnlen)1);
+#line 405 "SB16BD.f"
     bta = lsame_(jobmr, "B", (ftnlen)1, (ftnlen)1) || lsame_(jobmr, "F", (
 	    ftnlen)1, (ftnlen)1);
+#line 406 "SB16BD.f"
     spa = lsame_(jobmr, "S", (ftnlen)1, (ftnlen)1) || lsame_(jobmr, "P", (
 	    ftnlen)1, (ftnlen)1);
+#line 407 "SB16BD.f"
     bal = lsame_(jobmr, "B", (ftnlen)1, (ftnlen)1) || lsame_(jobmr, "S", (
 	    ftnlen)1, (ftnlen)1);
+#line 408 "SB16BD.f"
     left = lsame_(jobcf, "L", (ftnlen)1, (ftnlen)1);
+#line 409 "SB16BD.f"
     lequil = lsame_(equil, "S", (ftnlen)1, (ftnlen)1);
+#line 410 "SB16BD.f"
     fixord = lsame_(ordsel, "F", (ftnlen)1, (ftnlen)1);
+#line 411 "SB16BD.f"
     maxmp = max(*m,*p);
 
 /* Computing MAX */
 /* Computing MAX */
+#line 413 "SB16BD.f"
     i__3 = *n, i__4 = *m + *p;
+#line 413 "SB16BD.f"
     i__1 = 1, i__2 = *n * ((*n << 1) + max(i__3,i__4) + 5) + *n * (*n + 1) / 
 	    2;
+#line 413 "SB16BD.f"
     lwr = max(i__1,i__2);
 /* Computing MAX */
+#line 414 "SB16BD.f"
     i__1 = lwr, i__2 = *m << 2;
+#line 414 "SB16BD.f"
     lw1 = (*n + *m) * (*m + *p) + max(i__1,i__2);
 /* Computing MAX */
+#line 415 "SB16BD.f"
     i__1 = lwr, i__2 = *p << 2;
+#line 415 "SB16BD.f"
     lw2 = (*n + *p) * (*m + *p) + max(i__1,i__2);
 
 /*     Test the input scalar arguments. */
 
+#line 419 "SB16BD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 420 "SB16BD.f"
 	*info = -1;
+#line 421 "SB16BD.f"
     } else if (! (withd || lsame_(jobd, "Z", (ftnlen)1, (ftnlen)1))) {
+#line 422 "SB16BD.f"
 	*info = -2;
+#line 423 "SB16BD.f"
     } else if (! (bta || spa)) {
+#line 424 "SB16BD.f"
 	*info = -3;
+#line 425 "SB16BD.f"
     } else if (! (left || lsame_(jobcf, "R", (ftnlen)1, (ftnlen)1))) {
+#line 426 "SB16BD.f"
 	*info = -4;
+#line 427 "SB16BD.f"
     } else if (! (lequil || lsame_(equil, "N", (ftnlen)1, (ftnlen)1))) {
+#line 428 "SB16BD.f"
 	*info = -5;
+#line 429 "SB16BD.f"
     } else if (! (fixord || lsame_(ordsel, "A", (ftnlen)1, (ftnlen)1))) {
+#line 430 "SB16BD.f"
 	*info = -6;
+#line 431 "SB16BD.f"
     } else if (*n < 0) {
+#line 432 "SB16BD.f"
 	*info = -7;
+#line 433 "SB16BD.f"
     } else if (*m < 0) {
+#line 434 "SB16BD.f"
 	*info = -8;
+#line 435 "SB16BD.f"
     } else if (*p < 0) {
+#line 436 "SB16BD.f"
 	*info = -9;
+#line 437 "SB16BD.f"
     } else if (fixord && (*ncr < 0 || *ncr > *n)) {
+#line 438 "SB16BD.f"
 	*info = -10;
+#line 439 "SB16BD.f"
     } else if (*lda < max(1,*n)) {
+#line 440 "SB16BD.f"
 	*info = -12;
+#line 441 "SB16BD.f"
     } else if (*ldb < max(1,*n)) {
+#line 442 "SB16BD.f"
 	*info = -14;
+#line 443 "SB16BD.f"
     } else if (*ldc < max(1,*p)) {
+#line 444 "SB16BD.f"
 	*info = -16;
+#line 445 "SB16BD.f"
     } else if (*ldd < 1 || withd && *ldd < *p) {
+#line 446 "SB16BD.f"
 	*info = -18;
+#line 447 "SB16BD.f"
     } else if (*ldf < max(1,*m)) {
+#line 448 "SB16BD.f"
 	*info = -20;
+#line 449 "SB16BD.f"
     } else if (*ldg < max(1,*n)) {
+#line 450 "SB16BD.f"
 	*info = -22;
+#line 451 "SB16BD.f"
     } else if (*lddc < max(1,*m)) {
+#line 452 "SB16BD.f"
 	*info = -24;
+#line 453 "SB16BD.f"
     } else if (! fixord && *tol2 > 0. && *tol2 > *tol1) {
+#line 454 "SB16BD.f"
 	*info = -27;
+#line 455 "SB16BD.f"
     } else if ((! fixord || *ncr < *n) && (left && *ldwork < lw1) || ! left &&
 	     *ldwork < lw2 || fixord && *ncr == *n && *ldwork < *p * *n) {
+#line 459 "SB16BD.f"
 	*info = -30;
+#line 460 "SB16BD.f"
     }
 
+#line 462 "SB16BD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 466 "SB16BD.f"
 	i__1 = -(*info);
+#line 466 "SB16BD.f"
 	xerbla_("SB16BD", &i__1, (ftnlen)6);
+#line 467 "SB16BD.f"
 	return 0;
+#line 468 "SB16BD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 472 "SB16BD.f"
     i__1 = min(*n,*m);
+#line 472 "SB16BD.f"
     if (min(i__1,*p) == 0 || fixord && bta && *ncr == 0) {
+#line 474 "SB16BD.f"
 	*ncr = 0;
+#line 475 "SB16BD.f"
 	dwork[1] = 1.;
+#line 476 "SB16BD.f"
 	return 0;
+#line 477 "SB16BD.f"
     }
 
+#line 479 "SB16BD.f"
     if (*ncr == *n) {
 
 /*        Form the controller state matrix, */
@@ -574,31 +672,46 @@ static doublereal c_b45 = 0.;
 /*        Real workspace:    need  P*N. */
 /*        Integer workspace: need  0. */
 
+#line 486 "SB16BD.f"
 	dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[1], p, (ftnlen)4);
+#line 487 "SB16BD.f"
 	if (withd) {
+#line 487 "SB16BD.f"
 	    dgemm_("NoTranspose", "NoTranspose", p, n, m, &c_b22, &d__[
 		    d_offset], ldd, &f[f_offset], ldf, &c_b22, &dwork[1], p, (
 		    ftnlen)11, (ftnlen)11);
+#line 487 "SB16BD.f"
 	}
+#line 490 "SB16BD.f"
 	dgemm_("NoTranspose", "NoTranspose", n, n, p, &c_b22, &g[g_offset], 
 		ldg, &dwork[1], p, &c_b22, &a[a_offset], lda, (ftnlen)11, (
 		ftnlen)11);
+#line 492 "SB16BD.f"
 	dgemm_("NoTranspose", "NoTranspose", n, n, m, &c_b22, &b[b_offset], 
 		ldb, &f[f_offset], ldf, &c_b22, &a[a_offset], lda, (ftnlen)11,
 		 (ftnlen)11);
 
+#line 495 "SB16BD.f"
 	dwork[1] = (doublereal) (*p * *n);
+#line 496 "SB16BD.f"
 	return 0;
+#line 497 "SB16BD.f"
     }
 
+#line 499 "SB16BD.f"
     if (bal) {
+#line 500 "SB16BD.f"
 	*(unsigned char *)job = 'B';
+#line 501 "SB16BD.f"
     } else {
+#line 502 "SB16BD.f"
 	*(unsigned char *)job = 'N';
+#line 503 "SB16BD.f"
     }
 
 /*     Reduce the coprime factors. */
 
+#line 507 "SB16BD.f"
     if (left) {
 
 /*        Form Ge(d) = [ N_left(d) M_left(d) ] as */
@@ -610,23 +723,35 @@ static doublereal c_b45 = 0.;
 /*        Real workspace:    need  (N+M)*(M+P). */
 /*        Integer workspace: need  0. */
 
+#line 518 "SB16BD.f"
 	dgemm_("NoTranspose", "NoTranspose", n, n, p, &c_b22, &g[g_offset], 
 		ldg, &c__[c_offset], ldc, &c_b22, &a[a_offset], lda, (ftnlen)
 		11, (ftnlen)11);
+#line 520 "SB16BD.f"
 	kbe = 1;
+#line 521 "SB16BD.f"
 	kde = kbe + *n * (*p + *m);
+#line 522 "SB16BD.f"
 	ldbe = max(1,*n);
+#line 523 "SB16BD.f"
 	ldde = *m;
+#line 524 "SB16BD.f"
 	dlacpy_("Full", n, p, &g[g_offset], ldg, &dwork[kbe], &ldbe, (ftnlen)
 		4);
+#line 525 "SB16BD.f"
 	dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[kbe + *n * *p], &ldbe,
 		 (ftnlen)4);
+#line 526 "SB16BD.f"
 	if (withd) {
+#line 526 "SB16BD.f"
 	    dgemm_("NoTranspose", "NoTranspose", n, m, p, &c_b22, &g[g_offset]
 		    , ldg, &d__[d_offset], ldd, &c_b22, &dwork[kbe + *n * *p],
 		     &ldbe, (ftnlen)11, (ftnlen)11);
+#line 526 "SB16BD.f"
 	}
+#line 529 "SB16BD.f"
 	dlaset_("Full", m, p, &c_b45, &c_b45, &dwork[kde], &ldde, (ftnlen)4);
+#line 530 "SB16BD.f"
 	dlaset_("Full", m, m, &c_b45, &c_b22, &dwork[kde + *m * *p], &ldde, (
 		ftnlen)4);
 
@@ -640,26 +765,40 @@ static doublereal c_b45 = 0.;
 /*                                 N,         if JOBMR = 'F', and */
 /*                                 MAX(1,2*N) if JOBMR = 'S' or 'P'. */
 
+#line 542 "SB16BD.f"
 	kw = kde + *m * (*p + *m);
+#line 543 "SB16BD.f"
 	if (bta) {
+#line 544 "SB16BD.f"
 	    i__1 = *m + *p;
+#line 544 "SB16BD.f"
 	    i__2 = *ldwork - kw + 1;
+#line 544 "SB16BD.f"
 	    ab09ad_(dico, job, equil, ordsel, n, &i__1, m, ncr, &a[a_offset], 
 		    lda, &dwork[kbe], &ldbe, &f[f_offset], ldf, &hsv[1], tol1,
 		     &iwork[1], &dwork[kw], &i__2, iwarn, info, (ftnlen)1, (
 		    ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 547 "SB16BD.f"
 	} else {
+#line 548 "SB16BD.f"
 	    i__1 = *m + *p;
+#line 548 "SB16BD.f"
 	    i__2 = *ldwork - kw + 1;
+#line 548 "SB16BD.f"
 	    ab09bd_(dico, job, equil, ordsel, n, &i__1, m, ncr, &a[a_offset], 
 		    lda, &dwork[kbe], &ldbe, &f[f_offset], ldf, &dwork[kde], &
 		    ldde, &hsv[1], tol1, tol2, &iwork[1], &dwork[kw], &i__2, 
 		    iwarn, info, (ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 552 "SB16BD.f"
 	}
+#line 553 "SB16BD.f"
 	if (*info != 0) {
+#line 553 "SB16BD.f"
 	    return 0;
+#line 553 "SB16BD.f"
 	}
 
+#line 556 "SB16BD.f"
 	wrkopt = (integer) dwork[kw] + kw - 1;
 
 /*        Compute the reduced order controller, */
@@ -669,17 +808,21 @@ static doublereal c_b45 = 0.;
 /*        Real workspace:    need  (N+M)*(M+P) + MAX(1,4*M). */
 /*        Integer workspace: need  M. */
 
+#line 565 "SB16BD.f"
 	sb08gd_(ncr, p, m, &a[a_offset], lda, &dwork[kbe], &ldbe, &f[f_offset]
 		, ldf, &dwork[kde], &ldde, &dwork[kbe + *n * *p], &ldbe, &
 		dwork[kde + *m * *p], &ldde, &iwork[1], &dwork[kw], info);
 
 /*        Copy the reduced system matrices Bc and Dc. */
 
+#line 571 "SB16BD.f"
 	dlacpy_("Full", ncr, p, &dwork[kbe], &ldbe, &g[g_offset], ldg, (
 		ftnlen)4);
+#line 572 "SB16BD.f"
 	dlacpy_("Full", m, p, &dwork[kde], &ldde, &dc[dc_offset], lddc, (
 		ftnlen)4);
 
+#line 574 "SB16BD.f"
     } else {
 
 /*        Form Ge(d) = [ N_right(d) ] */
@@ -693,23 +836,35 @@ static doublereal c_b45 = 0.;
 /*        Real workspace:    need  (N+P)*(M+P). */
 /*        Integer workspace: need  0. */
 
+#line 587 "SB16BD.f"
 	dgemm_("NoTranspose", "NoTranspose", n, n, m, &c_b22, &b[b_offset], 
 		ldb, &f[f_offset], ldf, &c_b22, &a[a_offset], lda, (ftnlen)11,
 		 (ftnlen)11);
+#line 589 "SB16BD.f"
 	kce = 1;
+#line 590 "SB16BD.f"
 	kde = kce + *n * (*p + *m);
+#line 591 "SB16BD.f"
 	ldce = *m + *p;
+#line 592 "SB16BD.f"
 	ldde = ldce;
+#line 593 "SB16BD.f"
 	dlacpy_("Full", m, n, &f[f_offset], ldf, &dwork[kce], &ldce, (ftnlen)
 		4);
+#line 594 "SB16BD.f"
 	dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[kce + *m], &ldce, (
 		ftnlen)4);
+#line 595 "SB16BD.f"
 	if (withd) {
+#line 595 "SB16BD.f"
 	    dgemm_("NoTranspose", "NoTranspose", p, n, m, &c_b22, &d__[
 		    d_offset], ldd, &f[f_offset], ldf, &c_b22, &dwork[kce + *
 		    m], &ldce, (ftnlen)11, (ftnlen)11);
+#line 595 "SB16BD.f"
 	}
+#line 598 "SB16BD.f"
 	dlaset_("Full", m, p, &c_b45, &c_b45, &dwork[kde], &ldde, (ftnlen)4);
+#line 599 "SB16BD.f"
 	dlaset_("Full", p, p, &c_b45, &c_b22, &dwork[kde + *m], &ldde, (
 		ftnlen)4);
 
@@ -724,29 +879,46 @@ static doublereal c_b45 = 0.;
 /*                                 N,         if JOBMR = 'F', and */
 /*                                 MAX(1,2*N) if JOBMR = 'S' or 'P'. */
 
+#line 612 "SB16BD.f"
 	kw = kde + *p * (*p + *m);
+#line 613 "SB16BD.f"
 	if (bta) {
+#line 614 "SB16BD.f"
 	    i__1 = *m + *p;
+#line 614 "SB16BD.f"
 	    i__2 = *ldwork - kw + 1;
+#line 614 "SB16BD.f"
 	    ab09ad_(dico, job, equil, ordsel, n, p, &i__1, ncr, &a[a_offset], 
 		    lda, &g[g_offset], ldg, &dwork[kce], &ldce, &hsv[1], tol1,
 		     &iwork[1], &dwork[kw], &i__2, iwarn, info, (ftnlen)1, (
 		    ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 617 "SB16BD.f"
 	} else {
+#line 618 "SB16BD.f"
 	    i__1 = *m + *p;
+#line 618 "SB16BD.f"
 	    i__2 = *ldwork - kw + 1;
+#line 618 "SB16BD.f"
 	    ab09bd_(dico, job, equil, ordsel, n, p, &i__1, ncr, &a[a_offset], 
 		    lda, &g[g_offset], ldg, &dwork[kce], &ldce, &dwork[kde], &
 		    ldde, &hsv[1], tol1, tol2, &iwork[1], &dwork[kw], &i__2, 
 		    iwarn, info, (ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 622 "SB16BD.f"
 	}
+#line 623 "SB16BD.f"
 	if (*info != 0) {
+#line 624 "SB16BD.f"
 	    if (*info != 3) {
+#line 624 "SB16BD.f"
 		*info += 3;
+#line 624 "SB16BD.f"
 	    }
+#line 625 "SB16BD.f"
 	    return 0;
+#line 626 "SB16BD.f"
 	}
 
+#line 628 "SB16BD.f"
 	wrkopt = (integer) dwork[kw] + kw - 1;
 
 /*        Compute the reduced order controller, */
@@ -756,21 +928,27 @@ static doublereal c_b45 = 0.;
 /*        Real workspace:    need  (N+P)*(M+P) + MAX(1,4*P). */
 /*        Integer workspace: need  P. */
 
+#line 637 "SB16BD.f"
 	sb08hd_(ncr, p, m, &a[a_offset], lda, &g[g_offset], ldg, &dwork[kce], 
 		&ldce, &dwork[kde], &ldde, &dwork[kce + *m], &ldce, &dwork[
 		kde + *m], &ldde, &iwork[1], &dwork[kw], info);
 
 /*        Copy the reduced system matrices Cc and Dc. */
 
+#line 643 "SB16BD.f"
 	dlacpy_("Full", m, ncr, &dwork[kce], &ldce, &f[f_offset], ldf, (
 		ftnlen)4);
+#line 644 "SB16BD.f"
 	dlacpy_("Full", m, p, &dwork[kde], &ldde, &dc[dc_offset], lddc, (
 		ftnlen)4);
 
+#line 646 "SB16BD.f"
     }
 
+#line 648 "SB16BD.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 650 "SB16BD.f"
     return 0;
 /* *** Last line of SB16BD *** */
 } /* sb16bd_ */

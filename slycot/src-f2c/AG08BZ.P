@@ -1,0 +1,16 @@
+extern int ag08bz_(char *equil, integer *l, integer *n, integer *m, integer *p, doublecomplex *a, integer *lda, doublecomplex *e, integer *lde, doublecomplex *b, integer *ldb, doublecomplex *c__, integer *ldc, doublecomplex *d__, integer *ldd, integer *nfz, integer *nrank, integer *niz, integer *dinfz, integer *nkror, integer *ninfe, integer *nkrol, integer *infz, integer *kronr, integer *infe, integer *kronl, doublereal *tol, integer *iwork, doublereal *dwork, doublecomplex *zwork, integer *lzwork, integer *info, ftnlen equil_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: tg01fz_ 14 30 13 13 13 4 4 4 4 9 4 9 4 9 4 9 4 9 4 9 4 4 4 7 4 7 9 4 4 124 124 124 */
+/*:ref: ag8byz_ 14 22 12 4 4 4 7 9 4 9 4 4 4 4 4 4 4 4 7 4 7 9 4 4 */
+/*:ref: ilaenv_ 4 9 4 13 13 4 4 4 4 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: tg01az_ 14 19 13 4 4 4 4 7 9 4 9 4 9 4 9 4 7 7 7 4 124 */
+/*:ref: zlange_ 7 7 13 4 4 9 4 7 124 */
+/*:ref: zlacpy_ 14 8 13 4 4 9 4 9 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: tb01xz_ 14 16 13 4 4 4 4 4 9 4 9 4 9 4 9 4 4 124 */
+/*:ref: ma02bz_ 14 6 13 4 4 9 4 124 */
+/*:ref: ma02cz_ 14 5 4 4 4 9 4 */
+/*:ref: ztzrzf_ 14 8 4 4 9 4 9 9 4 4 */
+/*:ref: zunmrz_ 14 16 13 13 4 4 4 4 9 4 9 9 4 9 4 4 124 124 */
+/*:ref: zlaset_ 14 8 13 4 4 9 9 9 4 124 */

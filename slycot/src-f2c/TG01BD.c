@@ -1,3 +1,4 @@
+#line 1 "TG01BD.f"
 /* TG01BD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TG01BD.f"
 /* Table of constant values */
 
 static doublereal c_b12 = 0.;
@@ -292,108 +294,201 @@ static integer c__1 = 1;
 
 /*     Test the input scalar parameters. */
 
+#line 261 "TG01BD.f"
     /* Parameter adjustments */
+#line 261 "TG01BD.f"
     a_dim1 = *lda;
+#line 261 "TG01BD.f"
     a_offset = 1 + a_dim1;
+#line 261 "TG01BD.f"
     a -= a_offset;
+#line 261 "TG01BD.f"
     e_dim1 = *lde;
+#line 261 "TG01BD.f"
     e_offset = 1 + e_dim1;
+#line 261 "TG01BD.f"
     e -= e_offset;
+#line 261 "TG01BD.f"
     b_dim1 = *ldb;
+#line 261 "TG01BD.f"
     b_offset = 1 + b_dim1;
+#line 261 "TG01BD.f"
     b -= b_offset;
+#line 261 "TG01BD.f"
     c_dim1 = *ldc;
+#line 261 "TG01BD.f"
     c_offset = 1 + c_dim1;
+#line 261 "TG01BD.f"
     c__ -= c_offset;
+#line 261 "TG01BD.f"
     q_dim1 = *ldq;
+#line 261 "TG01BD.f"
     q_offset = 1 + q_dim1;
+#line 261 "TG01BD.f"
     q -= q_offset;
+#line 261 "TG01BD.f"
     z_dim1 = *ldz;
+#line 261 "TG01BD.f"
     z_offset = 1 + z_dim1;
+#line 261 "TG01BD.f"
     z__ -= z_offset;
+#line 261 "TG01BD.f"
     --dwork;
+#line 261 "TG01BD.f"
 
+#line 261 "TG01BD.f"
     /* Function Body */
+#line 261 "TG01BD.f"
     upper = lsame_(jobe, "U", (ftnlen)1, (ftnlen)1);
+#line 262 "TG01BD.f"
     inq = lsame_(compq, "I", (ftnlen)1, (ftnlen)1);
+#line 263 "TG01BD.f"
     ilq = lsame_(compq, "V", (ftnlen)1, (ftnlen)1) || inq;
+#line 264 "TG01BD.f"
     inz = lsame_(compz, "I", (ftnlen)1, (ftnlen)1);
+#line 265 "TG01BD.f"
     ilz = lsame_(compz, "V", (ftnlen)1, (ftnlen)1) || inz;
+#line 266 "TG01BD.f"
     withb = *m > 0;
+#line 267 "TG01BD.f"
     withc = *p > 0;
 
+#line 269 "TG01BD.f"
     *info = 0;
+#line 270 "TG01BD.f"
     if (! (upper || lsame_(jobe, "G", (ftnlen)1, (ftnlen)1))) {
+#line 271 "TG01BD.f"
 	*info = -1;
+#line 272 "TG01BD.f"
     } else if (! (ilq || lsame_(compq, "N", (ftnlen)1, (ftnlen)1))) {
+#line 273 "TG01BD.f"
 	*info = -2;
+#line 274 "TG01BD.f"
     } else if (! (ilz || lsame_(compz, "N", (ftnlen)1, (ftnlen)1))) {
+#line 275 "TG01BD.f"
 	*info = -3;
+#line 276 "TG01BD.f"
     } else if (*n < 0) {
+#line 277 "TG01BD.f"
 	*info = -4;
+#line 278 "TG01BD.f"
     } else if (*m < 0) {
+#line 279 "TG01BD.f"
 	*info = -5;
+#line 280 "TG01BD.f"
     } else if (*p < 0) {
+#line 281 "TG01BD.f"
 	*info = -6;
+#line 282 "TG01BD.f"
     } else if (*ilo < 1) {
+#line 283 "TG01BD.f"
 	*info = -7;
+#line 284 "TG01BD.f"
     } else if (*ihi > *n || *ihi < *ilo - 1) {
+#line 285 "TG01BD.f"
 	*info = -8;
+#line 286 "TG01BD.f"
     } else if (*lda < max(1,*n)) {
+#line 287 "TG01BD.f"
 	*info = -10;
+#line 288 "TG01BD.f"
     } else if (*lde < max(1,*n)) {
+#line 289 "TG01BD.f"
 	*info = -12;
+#line 290 "TG01BD.f"
     } else if (withb && *ldb < *n || *ldb < 1) {
+#line 291 "TG01BD.f"
 	*info = -14;
+#line 292 "TG01BD.f"
     } else if (*ldc < max(1,*p)) {
+#line 293 "TG01BD.f"
 	*info = -16;
+#line 294 "TG01BD.f"
     } else if (ilq && *ldq < *n || *ldq < 1) {
+#line 295 "TG01BD.f"
 	*info = -18;
+#line 296 "TG01BD.f"
     } else if (ilz && *ldz < *n || *ldz < 1) {
+#line 297 "TG01BD.f"
 	*info = -20;
+#line 298 "TG01BD.f"
     } else {
+#line 299 "TG01BD.f"
 	jrow = *ihi + 1 - *ilo;
+#line 300 "TG01BD.f"
 	jcol = *n + 1 - *ilo;
+#line 301 "TG01BD.f"
 	if (upper) {
+#line 302 "TG01BD.f"
 	    minwrk = 1;
+#line 303 "TG01BD.f"
 	    maxwrk = 1;
+#line 304 "TG01BD.f"
 	} else {
+#line 305 "TG01BD.f"
 	    if (ilq) {
+#line 306 "TG01BD.f"
 		minwrk = *n;
+#line 307 "TG01BD.f"
 	    } else {
+#line 308 "TG01BD.f"
 		minwrk = jcol;
+#line 309 "TG01BD.f"
 	    }
 /* Computing MAX */
+#line 310 "TG01BD.f"
 	    i__1 = 1, i__2 = jrow + max(minwrk,*m);
+#line 310 "TG01BD.f"
 	    minwrk = max(i__1,i__2);
+#line 311 "TG01BD.f"
 	}
+#line 312 "TG01BD.f"
 	if (*ldwork < minwrk) {
+#line 312 "TG01BD.f"
 	    *info = -22;
+#line 312 "TG01BD.f"
 	}
+#line 314 "TG01BD.f"
     }
 
+#line 316 "TG01BD.f"
     if (*info != 0) {
+#line 317 "TG01BD.f"
 	i__1 = -(*info);
+#line 317 "TG01BD.f"
 	xerbla_("TG01BD", &i__1, (ftnlen)6);
+#line 318 "TG01BD.f"
 	return 0;
+#line 319 "TG01BD.f"
     }
 
 /*     Initialize Q and Z if desired. */
 
+#line 323 "TG01BD.f"
     if (inq) {
+#line 323 "TG01BD.f"
 	dlaset_("Full", n, n, &c_b12, &c_b13, &q[q_offset], ldq, (ftnlen)4);
+#line 323 "TG01BD.f"
     }
+#line 325 "TG01BD.f"
     if (inz) {
+#line 325 "TG01BD.f"
 	dlaset_("Full", n, n, &c_b12, &c_b13, &z__[z_offset], ldz, (ftnlen)4);
+#line 325 "TG01BD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 330 "TG01BD.f"
     if (*n <= 1) {
+#line 331 "TG01BD.f"
 	dwork[1] = 1.;
+#line 332 "TG01BD.f"
 	return 0;
+#line 333 "TG01BD.f"
     }
 
+#line 335 "TG01BD.f"
     if (! upper) {
 
 /*        Reduce E to triangular form (QR decomposition of E). */
@@ -407,120 +502,183 @@ static integer c__1 = 1;
 /*        Workspace: need   IHI+1-ILO+N+1-ILO; */
 /*                   prefer IHI+1-ILO+(N+1-ILO)*NB. */
 
+#line 348 "TG01BD.f"
 	itau = 1;
+#line 349 "TG01BD.f"
 	iwrk = itau + jrow;
+#line 350 "TG01BD.f"
 	i__1 = *ldwork - iwrk + 1;
+#line 350 "TG01BD.f"
 	dgeqrf_(&jrow, &jcol, &e[*ilo + *ilo * e_dim1], lde, &dwork[itau], &
 		dwork[iwrk], &i__1, &ierr);
 /* Computing MAX */
+#line 352 "TG01BD.f"
 	i__1 = (integer) dwork[iwrk] + iwrk - 1;
+#line 352 "TG01BD.f"
 	maxwrk = max(i__1,minwrk);
 
 /*        Apply the orthogonal transformation to matrices A, B, and Q. */
 /*        Workspace: need   IHI+1-ILO+N+1-ILO; */
 /*                   prefer IHI+1-ILO+(N+1-ILO)*NB. */
 
+#line 358 "TG01BD.f"
 	i__1 = *ldwork - iwrk + 1;
+#line 358 "TG01BD.f"
 	dormqr_("Left", "Transpose", &jrow, &jcol, &jrow, &e[*ilo + *ilo * 
 		e_dim1], lde, &dwork[itau], &a[*ilo + *ilo * a_dim1], lda, &
 		dwork[iwrk], &i__1, &ierr, (ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 361 "TG01BD.f"
 	i__1 = (integer) dwork[iwrk] + iwrk - 1;
+#line 361 "TG01BD.f"
 	maxwrk = max(i__1,maxwrk);
 
+#line 363 "TG01BD.f"
 	if (withb) {
 
 /*           Workspace: need   IHI+1-ILO+M; */
 /*                      prefer IHI+1-ILO+M*NB. */
 
+#line 368 "TG01BD.f"
 	    i__1 = *ldwork - iwrk + 1;
+#line 368 "TG01BD.f"
 	    dormqr_("Left", "Transpose", &jrow, m, &jrow, &e[*ilo + *ilo * 
 		    e_dim1], lde, &dwork[itau], &b[*ilo + b_dim1], ldb, &
 		    dwork[iwrk], &i__1, &ierr, (ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 371 "TG01BD.f"
 	    i__1 = (integer) dwork[iwrk] + iwrk - 1;
+#line 371 "TG01BD.f"
 	    maxwrk = max(i__1,maxwrk);
+#line 372 "TG01BD.f"
 	}
 
+#line 374 "TG01BD.f"
 	if (ilq) {
 
 /*           Workspace: need   IHI+1-ILO+N; */
 /*                      prefer IHI+1-ILO+N*NB. */
 
+#line 379 "TG01BD.f"
 	    i__1 = *ldwork - iwrk + 1;
+#line 379 "TG01BD.f"
 	    dormqr_("Right", "No Transpose", n, &jrow, &jrow, &e[*ilo + *ilo *
 		     e_dim1], lde, &dwork[itau], &q[*ilo * q_dim1 + 1], ldq, &
 		    dwork[iwrk], &i__1, &ierr, (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 382 "TG01BD.f"
 	    i__1 = (integer) dwork[iwrk] + iwrk - 1;
+#line 382 "TG01BD.f"
 	    maxwrk = max(i__1,maxwrk);
+#line 383 "TG01BD.f"
 	}
+#line 384 "TG01BD.f"
     }
 
 /*     Zero out lower triangle of E. */
 
+#line 388 "TG01BD.f"
     if (jrow > 1) {
+#line 388 "TG01BD.f"
 	i__1 = jrow - 1;
+#line 388 "TG01BD.f"
 	i__2 = jrow - 1;
+#line 388 "TG01BD.f"
 	dlaset_("Lower", &i__1, &i__2, &c_b12, &c_b12, &e[*ilo + 1 + *ilo * 
 		e_dim1], lde, (ftnlen)5);
+#line 388 "TG01BD.f"
     }
 
 /*     Reduce A and E and apply the transformations to B, C, Q and Z. */
 
+#line 394 "TG01BD.f"
     i__1 = *ihi - 2;
+#line 394 "TG01BD.f"
     for (jcol = *ilo; jcol <= i__1; ++jcol) {
 
+#line 396 "TG01BD.f"
 	i__2 = jcol + 2;
+#line 396 "TG01BD.f"
 	for (jrow = *ihi; jrow >= i__2; --jrow) {
 
 /*           Step 1: rotate rows JROW-1, JROW to kill A(JROW,JCOL). */
 
+#line 400 "TG01BD.f"
 	    temp = a[jrow - 1 + jcol * a_dim1];
+#line 401 "TG01BD.f"
 	    dlartg_(&temp, &a[jrow + jcol * a_dim1], &cs, &s, &a[jrow - 1 + 
 		    jcol * a_dim1]);
+#line 403 "TG01BD.f"
 	    a[jrow + jcol * a_dim1] = 0.;
+#line 404 "TG01BD.f"
 	    i__3 = *n - jcol;
+#line 404 "TG01BD.f"
 	    drot_(&i__3, &a[jrow - 1 + (jcol + 1) * a_dim1], lda, &a[jrow + (
 		    jcol + 1) * a_dim1], lda, &cs, &s);
+#line 406 "TG01BD.f"
 	    i__3 = *n + 2 - jrow;
+#line 406 "TG01BD.f"
 	    drot_(&i__3, &e[jrow - 1 + (jrow - 1) * e_dim1], lde, &e[jrow + (
 		    jrow - 1) * e_dim1], lde, &cs, &s);
+#line 408 "TG01BD.f"
 	    if (withb) {
+#line 408 "TG01BD.f"
 		drot_(m, &b[jrow - 1 + b_dim1], ldb, &b[jrow + b_dim1], ldb, &
 			cs, &s);
+#line 408 "TG01BD.f"
 	    }
+#line 411 "TG01BD.f"
 	    if (ilq) {
+#line 411 "TG01BD.f"
 		drot_(n, &q[(jrow - 1) * q_dim1 + 1], &c__1, &q[jrow * q_dim1 
 			+ 1], &c__1, &cs, &s);
+#line 411 "TG01BD.f"
 	    }
 
 /*           Step 2: rotate columns JROW, JROW-1 to kill E(JROW,JROW-1). */
 
+#line 416 "TG01BD.f"
 	    temp = e[jrow + jrow * e_dim1];
+#line 417 "TG01BD.f"
 	    dlartg_(&temp, &e[jrow + (jrow - 1) * e_dim1], &cs, &s, &e[jrow + 
 		    jrow * e_dim1]);
+#line 419 "TG01BD.f"
 	    e[jrow + (jrow - 1) * e_dim1] = 0.;
+#line 420 "TG01BD.f"
 	    drot_(ihi, &a[jrow * a_dim1 + 1], &c__1, &a[(jrow - 1) * a_dim1 + 
 		    1], &c__1, &cs, &s);
+#line 421 "TG01BD.f"
 	    i__3 = jrow - 1;
+#line 421 "TG01BD.f"
 	    drot_(&i__3, &e[jrow * e_dim1 + 1], &c__1, &e[(jrow - 1) * e_dim1 
 		    + 1], &c__1, &cs, &s);
+#line 423 "TG01BD.f"
 	    if (withc) {
+#line 423 "TG01BD.f"
 		drot_(p, &c__[jrow * c_dim1 + 1], &c__1, &c__[(jrow - 1) * 
 			c_dim1 + 1], &c__1, &cs, &s);
+#line 423 "TG01BD.f"
 	    }
+#line 425 "TG01BD.f"
 	    if (ilz) {
+#line 425 "TG01BD.f"
 		drot_(n, &z__[jrow * z_dim1 + 1], &c__1, &z__[(jrow - 1) * 
 			z_dim1 + 1], &c__1, &cs, &s);
+#line 425 "TG01BD.f"
 	    }
+#line 427 "TG01BD.f"
 /* L10: */
+#line 427 "TG01BD.f"
 	}
 
+#line 429 "TG01BD.f"
 /* L20: */
+#line 429 "TG01BD.f"
     }
 
+#line 431 "TG01BD.f"
     dwork[1] = (doublereal) maxwrk;
+#line 432 "TG01BD.f"
     return 0;
 /* *** Last line of TG01BD *** */
 } /* tg01bd_ */

@@ -1,3 +1,4 @@
+#line 1 "SB04MD.f"
 /* SB04MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB04MD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -217,66 +219,114 @@ static doublereal c_b12 = 0.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 173 "SB04MD.f"
     /* Parameter adjustments */
+#line 173 "SB04MD.f"
     a_dim1 = *lda;
+#line 173 "SB04MD.f"
     a_offset = 1 + a_dim1;
+#line 173 "SB04MD.f"
     a -= a_offset;
+#line 173 "SB04MD.f"
     b_dim1 = *ldb;
+#line 173 "SB04MD.f"
     b_offset = 1 + b_dim1;
+#line 173 "SB04MD.f"
     b -= b_offset;
+#line 173 "SB04MD.f"
     c_dim1 = *ldc;
+#line 173 "SB04MD.f"
     c_offset = 1 + c_dim1;
+#line 173 "SB04MD.f"
     c__ -= c_offset;
+#line 173 "SB04MD.f"
     z_dim1 = *ldz;
+#line 173 "SB04MD.f"
     z_offset = 1 + z_dim1;
+#line 173 "SB04MD.f"
     z__ -= z_offset;
+#line 173 "SB04MD.f"
     --iwork;
+#line 173 "SB04MD.f"
     --dwork;
+#line 173 "SB04MD.f"
 
+#line 173 "SB04MD.f"
     /* Function Body */
+#line 173 "SB04MD.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 177 "SB04MD.f"
     if (*n < 0) {
+#line 178 "SB04MD.f"
 	*info = -1;
+#line 179 "SB04MD.f"
     } else if (*m < 0) {
+#line 180 "SB04MD.f"
 	*info = -2;
+#line 181 "SB04MD.f"
     } else if (*lda < max(1,*n)) {
+#line 182 "SB04MD.f"
 	*info = -4;
+#line 183 "SB04MD.f"
     } else if (*ldb < max(1,*m)) {
+#line 184 "SB04MD.f"
 	*info = -6;
+#line 185 "SB04MD.f"
     } else if (*ldc < max(1,*n)) {
+#line 186 "SB04MD.f"
 	*info = -8;
+#line 187 "SB04MD.f"
     } else if (*ldz < max(1,*m)) {
+#line 188 "SB04MD.f"
 	*info = -10;
+#line 189 "SB04MD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 189 "SB04MD.f"
 	i__1 = 1, i__2 = (*n << 1) * *n + (*n << 3), i__1 = max(i__1,i__2), 
 		i__2 = *m * 5, i__1 = max(i__1,i__2), i__2 = *n + *m;
+#line 189 "SB04MD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 190 "SB04MD.f"
 	    *info = -13;
+#line 191 "SB04MD.f"
 	}
+#line 191 "SB04MD.f"
     }
 
+#line 193 "SB04MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 197 "SB04MD.f"
 	i__1 = -(*info);
+#line 197 "SB04MD.f"
 	xerbla_("SB04MD", &i__1, (ftnlen)6);
+#line 198 "SB04MD.f"
 	return 0;
+#line 199 "SB04MD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 203 "SB04MD.f"
     if (*n == 0 || *m == 0) {
+#line 204 "SB04MD.f"
 	dwork[1] = 1.;
+#line 205 "SB04MD.f"
 	return 0;
+#line 206 "SB04MD.f"
     }
 
+#line 208 "SB04MD.f"
     ilo = 1;
+#line 209 "SB04MD.f"
     ihi = *n;
+#line 210 "SB04MD.f"
     wrkopt = 1;
 
 /*     Step 1 : Reduce A to upper Hessenberg and B' to quasi-upper */
@@ -289,39 +339,60 @@ static doublereal c_b12 = 0.;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 222 "SB04MD.f"
     i__1 = *m;
+#line 222 "SB04MD.f"
     for (i__ = 2; i__ <= i__1; ++i__) {
+#line 223 "SB04MD.f"
 	i__2 = i__ - 1;
+#line 223 "SB04MD.f"
 	dswap_(&i__2, &b[i__ * b_dim1 + 1], &c__1, &b[i__ + b_dim1], ldb);
+#line 224 "SB04MD.f"
 /* L20: */
+#line 224 "SB04MD.f"
     }
 
 /*     Workspace:  need   5*M; */
 /*                 prefer larger. */
 
+#line 229 "SB04MD.f"
     ieig = *m + 1;
+#line 230 "SB04MD.f"
     jwork = ieig + *m;
+#line 231 "SB04MD.f"
     i__1 = *ldwork - jwork + 1;
+#line 231 "SB04MD.f"
     dgees_("Vectors", "Not ordered", &select, m, &b[b_offset], ldb, &sdim, &
 	    dwork[1], &dwork[ieig], &z__[z_offset], ldz, &dwork[jwork], &i__1,
 	     bwork, info, (ftnlen)7, (ftnlen)11);
+#line 234 "SB04MD.f"
     if (*info != 0) {
+#line 234 "SB04MD.f"
 	return 0;
+#line 234 "SB04MD.f"
     }
 /* Computing MAX */
+#line 236 "SB04MD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 236 "SB04MD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Workspace:  need   2*N; */
 /*                 prefer N + N*NB. */
 
+#line 241 "SB04MD.f"
     itau = 2;
+#line 242 "SB04MD.f"
     jwork = itau + *n - 1;
+#line 243 "SB04MD.f"
     i__1 = *ldwork - jwork + 1;
+#line 243 "SB04MD.f"
     dgehrd_(n, &ilo, &ihi, &a[a_offset], lda, &dwork[itau], &dwork[jwork], &
 	    i__1, &ifail);
 /* Computing MAX */
+#line 245 "SB04MD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 245 "SB04MD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Step 2 : Form  F = ( U' * C ) * Z.  Use BLAS 3, if enough space. */
@@ -329,89 +400,138 @@ static doublereal c_b12 = 0.;
 /*     Workspace:  need   N + M; */
 /*                 prefer N + M*NB. */
 
+#line 252 "SB04MD.f"
     i__1 = *ldwork - jwork + 1;
+#line 252 "SB04MD.f"
     dormhr_("Left", "Transpose", n, m, &ilo, &ihi, &a[a_offset], lda, &dwork[
 	    itau], &c__[c_offset], ldc, &dwork[jwork], &i__1, &ifail, (ftnlen)
 	    4, (ftnlen)9);
 /* Computing MAX */
+#line 255 "SB04MD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 255 "SB04MD.f"
     wrkopt = max(i__1,i__2);
 
+#line 257 "SB04MD.f"
     if (*ldwork >= jwork - 1 + *n * *m) {
+#line 258 "SB04MD.f"
 	dgemm_("No transpose", "No transpose", n, m, m, &c_b11, &c__[c_offset]
 		, ldc, &z__[z_offset], ldz, &c_b12, &dwork[jwork], n, (ftnlen)
 		12, (ftnlen)12);
+#line 260 "SB04MD.f"
 	dlacpy_("Full", n, m, &dwork[jwork], n, &c__[c_offset], ldc, (ftnlen)
 		4);
 /* Computing MAX */
+#line 261 "SB04MD.f"
 	i__1 = wrkopt, i__2 = jwork - 1 + *n * *m;
+#line 261 "SB04MD.f"
 	wrkopt = max(i__1,i__2);
+#line 262 "SB04MD.f"
     } else {
 
+#line 264 "SB04MD.f"
 	i__1 = *n;
+#line 264 "SB04MD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 265 "SB04MD.f"
 	    dgemv_("Transpose", m, m, &c_b11, &z__[z_offset], ldz, &c__[i__ + 
 		    c_dim1], ldc, &c_b12, &dwork[jwork], &c__1, (ftnlen)9);
+#line 267 "SB04MD.f"
 	    dcopy_(m, &dwork[jwork], &c__1, &c__[i__ + c_dim1], ldc);
+#line 268 "SB04MD.f"
 /* L40: */
+#line 268 "SB04MD.f"
 	}
 
+#line 270 "SB04MD.f"
     }
 
+#line 272 "SB04MD.f"
     ind = *m;
+#line 273 "SB04MD.f"
 L60:
+#line 274 "SB04MD.f"
     if (ind > 1) {
 
 /*        Step 3 : Solve  H * Y + Y * S' = F  for  Y. */
 
+#line 278 "SB04MD.f"
 	if (b[ind + (ind - 1) * b_dim1] == 0.) {
 
 /*           Solve a special linear algebraic system of order N. */
 /*           Workspace:  N*(N+1)/2 + 3*N. */
 
+#line 283 "SB04MD.f"
 	    sb04my_(m, n, &ind, &a[a_offset], lda, &b[b_offset], ldb, &c__[
 		    c_offset], ldc, &dwork[jwork], &iwork[1], info);
 
+#line 286 "SB04MD.f"
 	    if (*info != 0) {
+#line 287 "SB04MD.f"
 		*info += *m;
+#line 288 "SB04MD.f"
 		return 0;
+#line 289 "SB04MD.f"
 	    }
 /* Computing MAX */
+#line 290 "SB04MD.f"
 	    i__1 = wrkopt, i__2 = jwork + *n * (*n + 1) / 2 + (*n << 1) - 1;
+#line 290 "SB04MD.f"
 	    wrkopt = max(i__1,i__2);
+#line 291 "SB04MD.f"
 	    --ind;
+#line 292 "SB04MD.f"
 	} else {
 
 /*           Solve a special linear algebraic system of order 2*N. */
 /*           Workspace:  2*N*N + 8*N; */
 
+#line 297 "SB04MD.f"
 	    sb04mu_(m, n, &ind, &a[a_offset], lda, &b[b_offset], ldb, &c__[
 		    c_offset], ldc, &dwork[jwork], &iwork[1], info);
 
+#line 300 "SB04MD.f"
 	    if (*info != 0) {
+#line 301 "SB04MD.f"
 		*info += *m;
+#line 302 "SB04MD.f"
 		return 0;
+#line 303 "SB04MD.f"
 	    }
 /* Computing MAX */
+#line 304 "SB04MD.f"
 	    i__1 = wrkopt, i__2 = jwork + (*n << 1) * *n + *n * 7 - 1;
+#line 304 "SB04MD.f"
 	    wrkopt = max(i__1,i__2);
+#line 305 "SB04MD.f"
 	    ind += -2;
+#line 306 "SB04MD.f"
 	}
+#line 307 "SB04MD.f"
 	goto L60;
+#line 308 "SB04MD.f"
     } else if (ind == 1) {
 
 /*        Solve a special linear algebraic system of order N. */
 /*        Workspace:  N*(N+1)/2 + 3*N; */
 
+#line 313 "SB04MD.f"
 	sb04my_(m, n, &ind, &a[a_offset], lda, &b[b_offset], ldb, &c__[
 		c_offset], ldc, &dwork[jwork], &iwork[1], info);
+#line 315 "SB04MD.f"
 	if (*info != 0) {
+#line 316 "SB04MD.f"
 	    *info += *m;
+#line 317 "SB04MD.f"
 	    return 0;
+#line 318 "SB04MD.f"
 	}
 /* Computing MAX */
+#line 319 "SB04MD.f"
 	i__1 = wrkopt, i__2 = jwork + *n * (*n + 1) / 2 + (*n << 1) - 1;
+#line 319 "SB04MD.f"
 	wrkopt = max(i__1,i__2);
+#line 320 "SB04MD.f"
     }
 
 /*     Step 4 : Form  C = ( U * Y ) * Z'.  Use BLAS 3, if enough space. */
@@ -419,32 +539,48 @@ L60:
 /*     Workspace:  need   N + M; */
 /*                 prefer N + M*NB. */
 
+#line 327 "SB04MD.f"
     i__1 = *ldwork - jwork + 1;
+#line 327 "SB04MD.f"
     dormhr_("Left", "No transpose", n, m, &ilo, &ihi, &a[a_offset], lda, &
 	    dwork[itau], &c__[c_offset], ldc, &dwork[jwork], &i__1, &ifail, (
 	    ftnlen)4, (ftnlen)12);
 /* Computing MAX */
+#line 330 "SB04MD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 330 "SB04MD.f"
     wrkopt = max(i__1,i__2);
 
+#line 332 "SB04MD.f"
     if (*ldwork >= jwork - 1 + *n * *m) {
+#line 333 "SB04MD.f"
 	dgemm_("No transpose", "Transpose", n, m, m, &c_b11, &c__[c_offset], 
 		ldc, &z__[z_offset], ldz, &c_b12, &dwork[jwork], n, (ftnlen)
 		12, (ftnlen)9);
+#line 335 "SB04MD.f"
 	dlacpy_("Full", n, m, &dwork[jwork], n, &c__[c_offset], ldc, (ftnlen)
 		4);
+#line 336 "SB04MD.f"
     } else {
 
+#line 338 "SB04MD.f"
 	i__1 = *n;
+#line 338 "SB04MD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 339 "SB04MD.f"
 	    dgemv_("No transpose", m, m, &c_b11, &z__[z_offset], ldz, &c__[
 		    i__ + c_dim1], ldc, &c_b12, &dwork[jwork], &c__1, (ftnlen)
 		    12);
+#line 341 "SB04MD.f"
 	    dcopy_(m, &dwork[jwork], &c__1, &c__[i__ + c_dim1], ldc);
+#line 342 "SB04MD.f"
 /* L80: */
+#line 342 "SB04MD.f"
 	}
+#line 343 "SB04MD.f"
     }
 
+#line 345 "SB04MD.f"
     return 0;
 /* *** Last line of SB04MD *** */
 } /* sb04md_ */

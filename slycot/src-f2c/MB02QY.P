@@ -1,0 +1,12 @@
+extern int mb02qy_(integer *m, integer *n, integer *nrhs, integer *rank, doublereal *a, integer *lda, integer *jpvt, doublereal *b, integer *ldb, doublereal *tau, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlabad_ 14 2 7 7 */
+/*:ref: dlantr_ 7 11 13 13 13 4 4 7 4 7 124 124 124 */
+/*:ref: dlascl_ 14 11 13 4 4 7 7 4 4 7 4 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dtzrzf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dtrsm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: dormrz_ 14 16 13 13 4 4 4 4 7 4 7 7 4 7 4 4 124 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */

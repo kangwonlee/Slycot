@@ -1,3 +1,4 @@
+#line 1 "MB04DI.f"
 /* MB04DI.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04DI.f"
 /* Table of constant values */
 
 static doublereal c_b14 = -1.;
@@ -162,100 +164,172 @@ static doublereal c_b14 = -1.;
 
 /*     Check the scalar input parameters. */
 
+#line 139 "MB04DI.f"
     /* Parameter adjustments */
+#line 139 "MB04DI.f"
     --scale;
+#line 139 "MB04DI.f"
     v1_dim1 = *ldv1;
+#line 139 "MB04DI.f"
     v1_offset = 1 + v1_dim1;
+#line 139 "MB04DI.f"
     v1 -= v1_offset;
+#line 139 "MB04DI.f"
     v2_dim1 = *ldv2;
+#line 139 "MB04DI.f"
     v2_offset = 1 + v2_dim1;
+#line 139 "MB04DI.f"
     v2 -= v2_offset;
+#line 139 "MB04DI.f"
 
+#line 139 "MB04DI.f"
     /* Function Body */
+#line 139 "MB04DI.f"
     *info = 0;
+#line 140 "MB04DI.f"
     lperm = lsame_(job, "P", (ftnlen)1, (ftnlen)1) || lsame_(job, "B", (
 	    ftnlen)1, (ftnlen)1);
+#line 141 "MB04DI.f"
     lscal = lsame_(job, "S", (ftnlen)1, (ftnlen)1) || lsame_(job, "B", (
 	    ftnlen)1, (ftnlen)1);
+#line 142 "MB04DI.f"
     lsgn = lsame_(sgn, "N", (ftnlen)1, (ftnlen)1);
+#line 143 "MB04DI.f"
     if (! lperm && ! lscal && ! lsame_(job, "N", (ftnlen)1, (ftnlen)1)) {
+#line 145 "MB04DI.f"
 	*info = -1;
+#line 146 "MB04DI.f"
     } else if (! lsgn && ! lsame_(sgn, "P", (ftnlen)1, (ftnlen)1)) {
+#line 147 "MB04DI.f"
 	*info = -2;
+#line 148 "MB04DI.f"
     } else if (*n < 0) {
+#line 149 "MB04DI.f"
 	*info = -3;
+#line 150 "MB04DI.f"
     } else if (*ilo < 1 || *ilo > *n + 1) {
+#line 151 "MB04DI.f"
 	*info = -4;
+#line 152 "MB04DI.f"
     } else if (*m < 0) {
+#line 153 "MB04DI.f"
 	*info = -6;
+#line 154 "MB04DI.f"
     } else if (*ldv1 < max(1,*n)) {
+#line 155 "MB04DI.f"
 	*info = -8;
+#line 156 "MB04DI.f"
     } else if (*ldv2 < max(1,*n)) {
+#line 157 "MB04DI.f"
 	*info = -10;
+#line 158 "MB04DI.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 162 "MB04DI.f"
     if (*info != 0) {
+#line 163 "MB04DI.f"
 	i__1 = -(*info);
+#line 163 "MB04DI.f"
 	xerbla_("MB04DI", &i__1, (ftnlen)6);
+#line 164 "MB04DI.f"
 	return 0;
+#line 165 "MB04DI.f"
     }
 
 /*     Quick return if possible. */
 
+#line 169 "MB04DI.f"
     if (*n == 0 || *m == 0 || lsame_(job, "N", (ftnlen)1, (ftnlen)1)) {
+#line 169 "MB04DI.f"
 	return 0;
+#line 169 "MB04DI.f"
     }
 
 /*     Inverse scaling. */
 
+#line 174 "MB04DI.f"
     if (lscal) {
+#line 175 "MB04DI.f"
 	i__1 = *n;
+#line 175 "MB04DI.f"
 	for (i__ = *ilo; i__ <= i__1; ++i__) {
+#line 176 "MB04DI.f"
 	    drscl_(m, &scale[i__], &v1[i__ + v1_dim1], ldv1);
+#line 177 "MB04DI.f"
 /* L20: */
+#line 177 "MB04DI.f"
 	}
+#line 178 "MB04DI.f"
 	i__1 = *n;
+#line 178 "MB04DI.f"
 	for (i__ = *ilo; i__ <= i__1; ++i__) {
+#line 179 "MB04DI.f"
 	    drscl_(m, &scale[i__], &v2[i__ + v2_dim1], ldv2);
+#line 180 "MB04DI.f"
 /* L30: */
+#line 180 "MB04DI.f"
 	}
+#line 181 "MB04DI.f"
     }
 
 /*     Inverse permutation. */
 
+#line 185 "MB04DI.f"
     if (lperm) {
+#line 186 "MB04DI.f"
 	for (i__ = *ilo - 1; i__ >= 1; --i__) {
+#line 187 "MB04DI.f"
 	    k = (integer) scale[i__];
+#line 188 "MB04DI.f"
 	    sysw = k > *n;
+#line 189 "MB04DI.f"
 	    if (sysw) {
+#line 189 "MB04DI.f"
 		k -= *n;
+#line 189 "MB04DI.f"
 	    }
 
+#line 192 "MB04DI.f"
 	    if (k != i__) {
 
 /*              Exchange rows k <-> i. */
 
+#line 196 "MB04DI.f"
 		dswap_(m, &v1[i__ + v1_dim1], ldv1, &v1[k + v1_dim1], ldv1);
+#line 197 "MB04DI.f"
 		dswap_(m, &v2[i__ + v2_dim1], ldv2, &v2[k + v2_dim1], ldv2);
+#line 198 "MB04DI.f"
 	    }
 
+#line 200 "MB04DI.f"
 	    if (sysw) {
 
 /*              Exchange V1(k,:) <-> V2(k,:). */
 
+#line 204 "MB04DI.f"
 		dswap_(m, &v1[k + v1_dim1], ldv1, &v2[k + v2_dim1], ldv2);
+#line 205 "MB04DI.f"
 		if (lsgn) {
+#line 206 "MB04DI.f"
 		    dscal_(m, &c_b14, &v2[k + v2_dim1], ldv2);
+#line 207 "MB04DI.f"
 		} else {
+#line 208 "MB04DI.f"
 		    dscal_(m, &c_b14, &v1[k + v1_dim1], ldv1);
+#line 209 "MB04DI.f"
 		}
+#line 210 "MB04DI.f"
 	    }
+#line 211 "MB04DI.f"
 /* L40: */
+#line 211 "MB04DI.f"
 	}
+#line 212 "MB04DI.f"
     }
 
+#line 214 "MB04DI.f"
     return 0;
 /* *** Last line of MB04DI *** */
 } /* mb04di_ */

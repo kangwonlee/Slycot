@@ -1,3 +1,4 @@
+#line 1 "SB10VD.f"
 /* SB10VD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB10VD.f"
 /* Table of constant values */
 
 static doublereal c_b6 = -1.;
@@ -269,122 +271,215 @@ static doublereal c_b11 = 0.;
 
 /*     Decode and Test input parameters. */
 
+#line 234 "SB10VD.f"
     /* Parameter adjustments */
+#line 234 "SB10VD.f"
     a_dim1 = *lda;
+#line 234 "SB10VD.f"
     a_offset = 1 + a_dim1;
+#line 234 "SB10VD.f"
     a -= a_offset;
+#line 234 "SB10VD.f"
     b_dim1 = *ldb;
+#line 234 "SB10VD.f"
     b_offset = 1 + b_dim1;
+#line 234 "SB10VD.f"
     b -= b_offset;
+#line 234 "SB10VD.f"
     c_dim1 = *ldc;
+#line 234 "SB10VD.f"
     c_offset = 1 + c_dim1;
+#line 234 "SB10VD.f"
     c__ -= c_offset;
+#line 234 "SB10VD.f"
     f_dim1 = *ldf;
+#line 234 "SB10VD.f"
     f_offset = 1 + f_dim1;
+#line 234 "SB10VD.f"
     f -= f_offset;
+#line 234 "SB10VD.f"
     h_dim1 = *ldh;
+#line 234 "SB10VD.f"
     h_offset = 1 + h_dim1;
+#line 234 "SB10VD.f"
     h__ -= h_offset;
+#line 234 "SB10VD.f"
     x_dim1 = *ldx;
+#line 234 "SB10VD.f"
     x_offset = 1 + x_dim1;
+#line 234 "SB10VD.f"
     x -= x_offset;
+#line 234 "SB10VD.f"
     y_dim1 = *ldy;
+#line 234 "SB10VD.f"
     y_offset = 1 + y_dim1;
+#line 234 "SB10VD.f"
     y -= y_offset;
+#line 234 "SB10VD.f"
     --xycond;
+#line 234 "SB10VD.f"
     --iwork;
+#line 234 "SB10VD.f"
     --dwork;
+#line 234 "SB10VD.f"
     --bwork;
+#line 234 "SB10VD.f"
 
+#line 234 "SB10VD.f"
     /* Function Body */
+#line 234 "SB10VD.f"
     m1 = *m - *ncon;
+#line 235 "SB10VD.f"
     m2 = *ncon;
+#line 236 "SB10VD.f"
     np1 = *np - *nmeas;
+#line 237 "SB10VD.f"
     np2 = *nmeas;
 
+#line 239 "SB10VD.f"
     *info = 0;
+#line 240 "SB10VD.f"
     if (*n < 0) {
+#line 241 "SB10VD.f"
 	*info = -1;
+#line 242 "SB10VD.f"
     } else if (*m < 0) {
+#line 243 "SB10VD.f"
 	*info = -2;
+#line 244 "SB10VD.f"
     } else if (*np < 0) {
+#line 245 "SB10VD.f"
 	*info = -3;
+#line 246 "SB10VD.f"
     } else if (*ncon < 0 || m1 < 0 || m2 > np1) {
+#line 247 "SB10VD.f"
 	*info = -4;
+#line 248 "SB10VD.f"
     } else if (*nmeas < 0 || np1 < 0 || np2 > m1) {
+#line 249 "SB10VD.f"
 	*info = -5;
+#line 250 "SB10VD.f"
     } else if (*lda < max(1,*n)) {
+#line 251 "SB10VD.f"
 	*info = -7;
+#line 252 "SB10VD.f"
     } else if (*ldb < max(1,*n)) {
+#line 253 "SB10VD.f"
 	*info = -9;
+#line 254 "SB10VD.f"
     } else if (*ldc < max(1,*np)) {
+#line 255 "SB10VD.f"
 	*info = -11;
+#line 256 "SB10VD.f"
     } else if (*ldf < max(1,*ncon)) {
+#line 257 "SB10VD.f"
 	*info = -13;
+#line 258 "SB10VD.f"
     } else if (*ldh < max(1,*n)) {
+#line 259 "SB10VD.f"
 	*info = -15;
+#line 260 "SB10VD.f"
     } else if (*ldx < max(1,*n)) {
+#line 261 "SB10VD.f"
 	*info = -17;
+#line 262 "SB10VD.f"
     } else if (*ldy < max(1,*n)) {
+#line 263 "SB10VD.f"
 	*info = -19;
+#line 264 "SB10VD.f"
     } else {
 
 /*        Compute workspace. */
 
+#line 268 "SB10VD.f"
 	minwrk = *n * 13 * *n + *n * 12 + 5;
+#line 269 "SB10VD.f"
 	if (*ldwork < minwrk) {
+#line 269 "SB10VD.f"
 	    *info = -23;
+#line 269 "SB10VD.f"
 	}
+#line 271 "SB10VD.f"
     }
+#line 272 "SB10VD.f"
     if (*info != 0) {
+#line 273 "SB10VD.f"
 	i__1 = -(*info);
+#line 273 "SB10VD.f"
 	xerbla_("SB10VD", &i__1, (ftnlen)6);
+#line 274 "SB10VD.f"
 	return 0;
+#line 275 "SB10VD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 279 "SB10VD.f"
     if (*n == 0 || *m == 0 || *np == 0 || m1 == 0 || m2 == 0 || np1 == 0 || 
 	    np2 == 0) {
+#line 281 "SB10VD.f"
 	dwork[1] = 1.;
+#line 282 "SB10VD.f"
 	xycond[1] = 1.;
+#line 283 "SB10VD.f"
 	xycond[2] = 1.;
+#line 284 "SB10VD.f"
 	return 0;
+#line 285 "SB10VD.f"
     }
 
+#line 287 "SB10VD.f"
     nd1 = np1 - m2;
+#line 288 "SB10VD.f"
     nd2 = m1 - np2;
+#line 289 "SB10VD.f"
     n2 = *n << 1;
 
 /*     Workspace usage. */
 
+#line 293 "SB10VD.f"
     iwq = *n * *n + 1;
+#line 294 "SB10VD.f"
     iwg = iwq + *n * *n;
+#line 295 "SB10VD.f"
     iwt = iwg + *n * *n;
+#line 296 "SB10VD.f"
     iwv = iwt + *n * *n;
+#line 297 "SB10VD.f"
     iwr = iwv + *n * *n;
+#line 298 "SB10VD.f"
     iwi = iwr + n2;
+#line 299 "SB10VD.f"
     iws = iwi + n2;
+#line 300 "SB10VD.f"
     iwrk = iws + (*n << 2) * *n;
 
 /*     Compute Ax = A - B2*D12'*C1 . */
 
+#line 304 "SB10VD.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &dwork[1], n, (ftnlen)4);
+#line 305 "SB10VD.f"
     dgemm_("N", "N", n, n, &m2, &c_b6, &b[(m1 + 1) * b_dim1 + 1], ldb, &c__[
 	    nd1 + 1 + c_dim1], ldc, &c_b7, &dwork[1], n, (ftnlen)1, (ftnlen)1)
 	    ;
 
 /*     Compute Cx = C1'*C1 - C1'*D12*D12'*C1 . */
 
+#line 310 "SB10VD.f"
     if (nd1 > 0) {
+#line 311 "SB10VD.f"
 	dsyrk_("L", "T", n, &nd1, &c_b7, &c__[c_offset], ldc, &c_b11, &dwork[
 		iwq], n, (ftnlen)1, (ftnlen)1);
+#line 313 "SB10VD.f"
     } else {
+#line 314 "SB10VD.f"
 	dlaset_("L", n, n, &c_b11, &c_b11, &dwork[iwq], n, (ftnlen)1);
+#line 315 "SB10VD.f"
     }
 
 /*     Compute Dx = B2*B2' . */
 
+#line 319 "SB10VD.f"
     dsyrk_("L", "N", n, &m2, &c_b7, &b[(m1 + 1) * b_dim1 + 1], ldb, &c_b11, &
 	    dwork[iwg], n, (ftnlen)1, (ftnlen)1);
 
@@ -392,46 +487,63 @@ static doublereal c_b11 = 0.;
 /*     Workspace:  need   13*N*N + 12*N + 5; */
 /*                 prefer larger. */
 
+#line 326 "SB10VD.f"
     i__1 = *ldwork - iwrk + 1;
-    sb02rd_("All", "Continuous", "NotUsed", "NoTranspose", "Lower", "General"
+#line 326 "SB10VD.f"
+    sb02rd_("All", "Continuous", "NotUsed", "NoTranspose", "Lower", "General"\
 	    "Scaling", "Stable", "NotFactored", "Original", n, &dwork[1], n, &
 	    dwork[iwt], n, &dwork[iwv], n, &dwork[iwg], n, &dwork[iwq], n, &x[
 	    x_offset], ldx, &sep, &xycond[1], &ferr, &dwork[iwr], &dwork[iwi],
 	     &dwork[iws], &n2, &iwork[1], &dwork[iwrk], &i__1, &bwork[1], &
 	    info2, (ftnlen)3, (ftnlen)10, (ftnlen)7, (ftnlen)11, (ftnlen)5, (
 	    ftnlen)14, (ftnlen)6, (ftnlen)11, (ftnlen)8);
+#line 333 "SB10VD.f"
     if (info2 > 0) {
+#line 334 "SB10VD.f"
 	*info = 1;
+#line 335 "SB10VD.f"
 	return 0;
+#line 336 "SB10VD.f"
     }
 
+#line 338 "SB10VD.f"
     lwamax = (integer) dwork[iwrk] + iwrk - 1;
 
 /*     Compute F = -D12'*C1 - B2'*X . */
 
+#line 342 "SB10VD.f"
     dlacpy_("Full", &m2, n, &c__[nd1 + 1 + c_dim1], ldc, &f[f_offset], ldf, (
 	    ftnlen)4);
+#line 343 "SB10VD.f"
     dgemm_("T", "N", &m2, n, n, &c_b6, &b[(m1 + 1) * b_dim1 + 1], ldb, &x[
 	    x_offset], ldx, &c_b6, &f[f_offset], ldf, (ftnlen)1, (ftnlen)1);
 
 /*     Compute Ay = A - B1*D21'*C2 . */
 
+#line 348 "SB10VD.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &dwork[1], n, (ftnlen)4);
+#line 349 "SB10VD.f"
     dgemm_("N", "N", n, n, &np2, &c_b6, &b[(nd2 + 1) * b_dim1 + 1], ldb, &c__[
 	    np1 + 1 + c_dim1], ldc, &c_b7, &dwork[1], n, (ftnlen)1, (ftnlen)1)
 	    ;
 
 /*     Compute Cy = B1*B1' - B1*D21'*D21*B1' . */
 
+#line 354 "SB10VD.f"
     if (nd2 > 0) {
+#line 355 "SB10VD.f"
 	dsyrk_("U", "N", n, &nd2, &c_b7, &b[b_offset], ldb, &c_b11, &dwork[
 		iwq], n, (ftnlen)1, (ftnlen)1);
+#line 357 "SB10VD.f"
     } else {
+#line 358 "SB10VD.f"
 	dlaset_("U", n, n, &c_b11, &c_b11, &dwork[iwq], n, (ftnlen)1);
+#line 359 "SB10VD.f"
     }
 
 /*     Compute Dy = C2'*C2 . */
 
+#line 363 "SB10VD.f"
     dsyrk_("U", "T", n, &np2, &c_b7, &c__[np1 + 1 + c_dim1], ldc, &c_b11, &
 	    dwork[iwg], n, (ftnlen)1, (ftnlen)1);
 
@@ -439,31 +551,43 @@ static doublereal c_b11 = 0.;
 /*     Workspace:  need   13*N*N + 12*N + 5; */
 /*                 prefer larger. */
 
+#line 370 "SB10VD.f"
     i__1 = *ldwork - iwrk + 1;
-    sb02rd_("All", "Continuous", "NotUsed", "Transpose", "Upper", "GeneralSc"
+#line 370 "SB10VD.f"
+    sb02rd_("All", "Continuous", "NotUsed", "Transpose", "Upper", "GeneralSc"\
 	    "aling", "Stable", "NotFactored", "Original", n, &dwork[1], n, &
 	    dwork[iwt], n, &dwork[iwv], n, &dwork[iwg], n, &dwork[iwq], n, &y[
 	    y_offset], ldy, &sep, &xycond[2], &ferr, &dwork[iwr], &dwork[iwi],
 	     &dwork[iws], &n2, &iwork[1], &dwork[iwrk], &i__1, &bwork[1], &
 	    info2, (ftnlen)3, (ftnlen)10, (ftnlen)7, (ftnlen)9, (ftnlen)5, (
 	    ftnlen)14, (ftnlen)6, (ftnlen)11, (ftnlen)8);
+#line 377 "SB10VD.f"
     if (info2 > 0) {
+#line 378 "SB10VD.f"
 	*info = 2;
+#line 379 "SB10VD.f"
 	return 0;
+#line 380 "SB10VD.f"
     }
 
 /* Computing MAX */
+#line 382 "SB10VD.f"
     i__1 = (integer) dwork[iwrk] + iwrk - 1;
+#line 382 "SB10VD.f"
     lwamax = max(i__1,lwamax);
 
 /*     Compute H = -B1*D21' - Y*C2' . */
 
+#line 386 "SB10VD.f"
     dlacpy_("Full", n, &np2, &b[(nd2 + 1) * b_dim1 + 1], ldb, &h__[h_offset], 
 	    ldh, (ftnlen)4);
+#line 387 "SB10VD.f"
     dgemm_("N", "T", n, &np2, n, &c_b6, &y[y_offset], ldy, &c__[np1 + 1 + 
 	    c_dim1], ldc, &c_b6, &h__[h_offset], ldh, (ftnlen)1, (ftnlen)1);
 
+#line 390 "SB10VD.f"
     dwork[1] = (doublereal) lwamax;
+#line 391 "SB10VD.f"
     return 0;
 /* *** Last line of SB10VD *** */
 } /* sb10vd_ */

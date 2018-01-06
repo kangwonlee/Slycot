@@ -1,3 +1,4 @@
+#line 1 "NF01BX.f"
 /* NF01BX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "NF01BX.f"
 /* Table of constant values */
 
 static doublereal c_b4 = 1.;
@@ -149,64 +151,109 @@ static integer c__1 = 1;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 126 "NF01BX.f"
     /* Parameter adjustments */
+#line 126 "NF01BX.f"
     --ipar;
+#line 126 "NF01BX.f"
     --dpar;
+#line 126 "NF01BX.f"
     j_dim1 = *ldj;
+#line 126 "NF01BX.f"
     j_offset = 1 + j_dim1;
+#line 126 "NF01BX.f"
     j -= j_offset;
+#line 126 "NF01BX.f"
     --x;
+#line 126 "NF01BX.f"
     --dwork;
+#line 126 "NF01BX.f"
 
+#line 126 "NF01BX.f"
     /* Function Body */
+#line 126 "NF01BX.f"
     *info = 0;
+#line 127 "NF01BX.f"
     if (*n < 0) {
+#line 128 "NF01BX.f"
 	*info = -1;
+#line 129 "NF01BX.f"
     } else if (*lipar < 1) {
+#line 130 "NF01BX.f"
 	*info = -3;
+#line 131 "NF01BX.f"
     } else if (*ldpar < 1) {
+#line 132 "NF01BX.f"
 	*info = -5;
+#line 133 "NF01BX.f"
     } else if (*incx == 0) {
+#line 134 "NF01BX.f"
 	*info = -9;
+#line 135 "NF01BX.f"
     } else {
+#line 136 "NF01BX.f"
 	m = ipar[1];
+#line 137 "NF01BX.f"
 	if (m < 0) {
+#line 138 "NF01BX.f"
 	    *info = -2;
+#line 139 "NF01BX.f"
 	} else if (*ldj < max(1,m)) {
+#line 140 "NF01BX.f"
 	    *info = -7;
+#line 141 "NF01BX.f"
 	} else if (*ldwork < m) {
+#line 142 "NF01BX.f"
 	    *info = -11;
+#line 143 "NF01BX.f"
 	}
+#line 144 "NF01BX.f"
     }
 
+#line 146 "NF01BX.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 150 "NF01BX.f"
 	i__1 = -(*info);
+#line 150 "NF01BX.f"
 	xerbla_("NF01BX", &i__1, (ftnlen)6);
+#line 151 "NF01BX.f"
 	return 0;
+#line 152 "NF01BX.f"
     }
 
 /*     Quick return if possible. */
 
+#line 156 "NF01BX.f"
     if (*n == 0) {
+#line 156 "NF01BX.f"
 	return 0;
+#line 156 "NF01BX.f"
     }
 
+#line 159 "NF01BX.f"
     c__ = dpar[1];
+#line 160 "NF01BX.f"
     if (m == 0) {
 
 /*        Special case, void J: x <-- c*x. */
 
+#line 164 "NF01BX.f"
 	dscal_(n, &c__, &x[1], incx);
+#line 165 "NF01BX.f"
 	return 0;
+#line 166 "NF01BX.f"
     }
 
+#line 168 "NF01BX.f"
     dgemv_("NoTranspose", &m, n, &c_b4, &j[j_offset], ldj, &x[1], incx, &c_b5,
 	     &dwork[1], &c__1, (ftnlen)11);
+#line 170 "NF01BX.f"
     dgemv_("Transpose", &m, n, &c_b4, &j[j_offset], ldj, &dwork[1], &c__1, &
 	    c__, &x[1], incx, (ftnlen)9);
+#line 171 "NF01BX.f"
     return 0;
 
 /* *** Last line of NF01BX *** */

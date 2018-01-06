@@ -1,3 +1,4 @@
+#line 1 "MA02CZ.f"
 /* MA02CZ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MA02CZ.f"
 /* Subroutine */ int ma02cz_(integer *n, integer *kl, integer *ku, 
 	doublecomplex *a, integer *lda)
 {
@@ -100,57 +102,93 @@
 
 /*     Quick return if possible. */
 
+#line 84 "MA02CZ.f"
     /* Parameter adjustments */
+#line 84 "MA02CZ.f"
     a_dim1 = *lda;
+#line 84 "MA02CZ.f"
     a_offset = 1 + a_dim1;
+#line 84 "MA02CZ.f"
     a -= a_offset;
+#line 84 "MA02CZ.f"
 
+#line 84 "MA02CZ.f"
     /* Function Body */
+#line 84 "MA02CZ.f"
     if (*n <= 1) {
+#line 84 "MA02CZ.f"
 	return 0;
+#line 84 "MA02CZ.f"
     }
 
+#line 87 "MA02CZ.f"
     lda1 = *lda + 1;
 
 /*     Pertranspose the KL subdiagonals. */
 
 /* Computing MIN */
+#line 91 "MA02CZ.f"
     i__2 = *kl, i__3 = *n - 2;
+#line 91 "MA02CZ.f"
     i__1 = min(i__2,i__3);
+#line 91 "MA02CZ.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 92 "MA02CZ.f"
 	i1 = (*n - i__) / 2;
+#line 93 "MA02CZ.f"
 	if (i1 > 0) {
+#line 93 "MA02CZ.f"
 	    i__2 = -lda1;
+#line 93 "MA02CZ.f"
 	    zswap_(&i1, &a[i__ + 1 + a_dim1], &lda1, &a[*n - i1 + 1 + (*n - 
 		    i1 + 1 - i__) * a_dim1], &i__2);
+#line 93 "MA02CZ.f"
 	}
+#line 95 "MA02CZ.f"
 /* L10: */
+#line 95 "MA02CZ.f"
     }
 
 /*     Pertranspose the KU superdiagonals. */
 
 /* Computing MIN */
+#line 99 "MA02CZ.f"
     i__2 = *ku, i__3 = *n - 2;
+#line 99 "MA02CZ.f"
     i__1 = min(i__2,i__3);
+#line 99 "MA02CZ.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 100 "MA02CZ.f"
 	i1 = (*n - i__) / 2;
+#line 101 "MA02CZ.f"
 	if (i1 > 0) {
+#line 101 "MA02CZ.f"
 	    i__2 = -lda1;
+#line 101 "MA02CZ.f"
 	    zswap_(&i1, &a[(i__ + 1) * a_dim1 + 1], &lda1, &a[*n - i1 + 1 - 
 		    i__ + (*n - i1 + 1) * a_dim1], &i__2);
+#line 101 "MA02CZ.f"
 	}
+#line 103 "MA02CZ.f"
 /* L20: */
+#line 103 "MA02CZ.f"
     }
 
 /*     Pertranspose the diagonal. */
 
+#line 107 "MA02CZ.f"
     i1 = *n / 2;
+#line 108 "MA02CZ.f"
     if (i1 > 0) {
+#line 108 "MA02CZ.f"
 	i__1 = -lda1;
+#line 108 "MA02CZ.f"
 	zswap_(&i1, &a[a_dim1 + 1], &lda1, &a[*n - i1 + 1 + (*n - i1 + 1) * 
 		a_dim1], &i__1);
+#line 108 "MA02CZ.f"
     }
 
+#line 111 "MA02CZ.f"
     return 0;
 /* *** Last line of MA02CZ *** */
 } /* ma02cz_ */

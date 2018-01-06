@@ -1,3 +1,4 @@
+#line 1 "MD03BD.f"
 /* MD03BD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MD03BD.f"
 /* Table of constant values */
 
 static integer c__2 = 2;
@@ -804,76 +806,138 @@ static integer c__1 = 1;
 
 /*     Check the scalar input parameters. */
 
+#line 768 "MD03BD.f"
     /* Parameter adjustments */
+#line 768 "MD03BD.f"
     --dwork;
+#line 768 "MD03BD.f"
     --iwork;
+#line 768 "MD03BD.f"
     --diag;
+#line 768 "MD03BD.f"
     --x;
+#line 768 "MD03BD.f"
     --dpar2;
+#line 768 "MD03BD.f"
     --dpar1;
+#line 768 "MD03BD.f"
     --ipar;
+#line 768 "MD03BD.f"
 
+#line 768 "MD03BD.f"
     /* Function Body */
+#line 768 "MD03BD.f"
     init = lsame_(xinit, "R", (ftnlen)1, (ftnlen)1);
+#line 769 "MD03BD.f"
     iscal = lsame_(scale, "I", (ftnlen)1, (ftnlen)1);
+#line 770 "MD03BD.f"
     sscal = lsame_(scale, "S", (ftnlen)1, (ftnlen)1);
+#line 771 "MD03BD.f"
     *info = 0;
+#line 772 "MD03BD.f"
     *iwarn = 0;
+#line 773 "MD03BD.f"
     if (! (init || lsame_(xinit, "G", (ftnlen)1, (ftnlen)1))) {
+#line 774 "MD03BD.f"
 	*info = -1;
+#line 775 "MD03BD.f"
     } else if (! (iscal || sscal)) {
+#line 776 "MD03BD.f"
 	*info = -2;
+#line 777 "MD03BD.f"
     } else if (! (lsame_(cond, "E", (ftnlen)1, (ftnlen)1) || lsame_(cond, 
 	    "N", (ftnlen)1, (ftnlen)1))) {
+#line 778 "MD03BD.f"
 	*info = -3;
+#line 779 "MD03BD.f"
     } else if (*m < 0) {
+#line 780 "MD03BD.f"
 	*info = -7;
+#line 781 "MD03BD.f"
     } else if (*n < 0 || *n > *m) {
+#line 782 "MD03BD.f"
 	*info = -8;
+#line 783 "MD03BD.f"
     } else if (*itmax < 0) {
+#line 784 "MD03BD.f"
 	*info = -9;
+#line 785 "MD03BD.f"
     } else if (*factor <= 0.) {
+#line 786 "MD03BD.f"
 	*info = -10;
+#line 787 "MD03BD.f"
     } else if (*lipar < 5) {
+#line 788 "MD03BD.f"
 	*info = -13;
+#line 789 "MD03BD.f"
     } else if (*ldpar1 < 0) {
+#line 790 "MD03BD.f"
 	*info = -15;
+#line 791 "MD03BD.f"
     } else if (*ldpar2 < 0) {
+#line 792 "MD03BD.f"
 	*info = -17;
+#line 793 "MD03BD.f"
     } else if (*ldwork < 4) {
+#line 794 "MD03BD.f"
 	*info = -28;
+#line 795 "MD03BD.f"
     } else if (sscal) {
+#line 796 "MD03BD.f"
 	badscl = FALSE_;
 
+#line 798 "MD03BD.f"
 	i__1 = *n;
+#line 798 "MD03BD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 799 "MD03BD.f"
 	    badscl = badscl || diag[j] <= 0.;
+#line 800 "MD03BD.f"
 /* L10: */
+#line 800 "MD03BD.f"
 	}
 
+#line 802 "MD03BD.f"
 	if (badscl) {
+#line 802 "MD03BD.f"
 	    *info = -19;
+#line 802 "MD03BD.f"
 	}
+#line 804 "MD03BD.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 808 "MD03BD.f"
     if (*info != 0) {
+#line 809 "MD03BD.f"
 	i__1 = -(*info);
+#line 809 "MD03BD.f"
 	xerbla_("MD03BD", &i__1, (ftnlen)6);
+#line 810 "MD03BD.f"
 	return 0;
+#line 811 "MD03BD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 815 "MD03BD.f"
     *nfev = 0;
+#line 816 "MD03BD.f"
     *njev = 0;
+#line 817 "MD03BD.f"
     if (*n == 0) {
+#line 818 "MD03BD.f"
 	dwork[1] = 4.;
+#line 819 "MD03BD.f"
 	dwork[2] = 0.;
+#line 820 "MD03BD.f"
 	dwork[3] = 0.;
+#line 821 "MD03BD.f"
 	dwork[4] = 0.;
+#line 822 "MD03BD.f"
 	return 0;
+#line 823 "MD03BD.f"
     }
 
 /*     Call FCN to get the size of the array J, for storing the Jacobian */
@@ -884,102 +948,173 @@ static integer c__1 = 1;
 /*     explicitly desired for initialization of the random number */
 /*     generator. */
 
+#line 833 "MD03BD.f"
     iflag = 3;
+#line 834 "MD03BD.f"
     iw1 = ipar[1];
+#line 835 "MD03BD.f"
     iw2 = ipar[2];
+#line 836 "MD03BD.f"
     iw3 = ipar[3];
+#line 837 "MD03BD.f"
     jw1 = ipar[4];
+#line 838 "MD03BD.f"
     jw2 = ipar[5];
 
+#line 840 "MD03BD.f"
     (*fcn)(&iflag, m, n, &ipar[1], lipar, &dpar1[1], ldpar1, &dpar2[1], 
 	    ldpar2, &x[1], &nfevl, &dwork[1], &dwork[1], &ldjsav, &dwork[1], 
 	    ldwork, &infol);
+#line 842 "MD03BD.f"
     sizej = ipar[1];
+#line 843 "MD03BD.f"
     lfcn1 = ipar[2];
+#line 844 "MD03BD.f"
     lfcn2 = ipar[3];
+#line 845 "MD03BD.f"
     lqrf = ipar[4];
+#line 846 "MD03BD.f"
     llmp = ipar[5];
+#line 847 "MD03BD.f"
     if (ldjsav > 0) {
+#line 848 "MD03BD.f"
 	nc = sizej / ldjsav;
+#line 849 "MD03BD.f"
     } else {
+#line 850 "MD03BD.f"
 	nc = sizej;
+#line 851 "MD03BD.f"
     }
 
+#line 853 "MD03BD.f"
     ipar[1] = iw1;
+#line 854 "MD03BD.f"
     ipar[2] = iw2;
+#line 855 "MD03BD.f"
     ipar[3] = iw3;
+#line 856 "MD03BD.f"
     ipar[4] = jw1;
+#line 857 "MD03BD.f"
     ipar[5] = jw2;
 
 /*     Check the workspace length. */
 
+#line 861 "MD03BD.f"
     e = 1;
+#line 862 "MD03BD.f"
     jac = e + *m;
+#line 863 "MD03BD.f"
     jw1 = jac + sizej;
+#line 864 "MD03BD.f"
     jw2 = jw1 + *n;
+#line 865 "MD03BD.f"
     iw1 = jac + *n * nc;
+#line 866 "MD03BD.f"
     iw2 = iw1 + *n;
+#line 867 "MD03BD.f"
     iw3 = iw2 + *n;
+#line 868 "MD03BD.f"
     jwork = iw2 + *m;
 
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
+#line 870 "MD03BD.f"
     i__5 = max(lfcn1,lfcn2), i__6 = *n + lqrf;
 /* Computing MAX */
+#line 870 "MD03BD.f"
     i__7 = *m + lfcn1, i__8 = *n + llmp;
+#line 870 "MD03BD.f"
     i__3 = sizej + max(i__5,i__6), i__4 = *n * nc + *n + max(i__7,i__8);
+#line 870 "MD03BD.f"
     i__1 = 4, i__2 = *m + max(i__3,i__4);
+#line 870 "MD03BD.f"
     l = max(i__1,i__2);
+#line 872 "MD03BD.f"
     if (*ldwork < l) {
+#line 873 "MD03BD.f"
 	*info = -28;
+#line 874 "MD03BD.f"
 	i__1 = -(*info);
+#line 874 "MD03BD.f"
 	xerbla_("MD03BD", &i__1, (ftnlen)6);
+#line 875 "MD03BD.f"
 	return 0;
+#line 876 "MD03BD.f"
     }
 
 /*     Set default tolerances. EPSMCH is the machine precision. */
 
+#line 880 "MD03BD.f"
     epsmch = dlamch_("Epsilon", (ftnlen)7);
+#line 881 "MD03BD.f"
     ftdef = *ftol;
+#line 882 "MD03BD.f"
     xtdef = *xtol;
+#line 883 "MD03BD.f"
     gtdef = *gtol;
+#line 884 "MD03BD.f"
     toldef = *tol;
 /* Computing MIN */
+#line 885 "MD03BD.f"
     d__1 = min(ftdef,xtdef), d__1 = min(d__1,gtdef);
+#line 885 "MD03BD.f"
     if (min(d__1,toldef) <= 0.) {
+#line 886 "MD03BD.f"
 	if (ftdef < 0.) {
+#line 886 "MD03BD.f"
 	    ftdef = sqrt(epsmch);
+#line 886 "MD03BD.f"
 	}
+#line 888 "MD03BD.f"
 	if (xtdef < 0.) {
+#line 888 "MD03BD.f"
 	    xtdef = sqrt(epsmch);
+#line 888 "MD03BD.f"
 	}
+#line 890 "MD03BD.f"
 	if (gtdef < 0.) {
+#line 890 "MD03BD.f"
 	    gtdef = epsmch;
+#line 890 "MD03BD.f"
 	}
+#line 892 "MD03BD.f"
 	if (toldef <= 0.) {
+#line 892 "MD03BD.f"
 	    toldef = (doublereal) (*n) * epsmch;
+#line 892 "MD03BD.f"
 	}
+#line 894 "MD03BD.f"
     }
+#line 895 "MD03BD.f"
     wrkopt = 1;
 
 /*     Initialization. */
 
+#line 899 "MD03BD.f"
     if (init) {
 
 /*        SEED is the initial state of the random number generator. */
 /*        SEED(4) must be odd. */
 
+#line 904 "MD03BD.f"
 	seed[0] = (integer) dwork[1] % 4096;
+#line 905 "MD03BD.f"
 	seed[1] = (integer) dwork[2] % 4096;
+#line 906 "MD03BD.f"
 	seed[2] = (integer) dwork[3] % 4096;
+#line 907 "MD03BD.f"
 	seed[3] = (((integer) dwork[4] << 1) + 1) % 4096;
+#line 908 "MD03BD.f"
 	dlarnv_(&c__2, seed, n, &x[1]);
+#line 909 "MD03BD.f"
     }
 
 /*     Initialize Levenberg-Marquardt parameter and iteration counter. */
 
+#line 913 "MD03BD.f"
     par = 0.;
+#line 914 "MD03BD.f"
     iter = 1;
 
 /*     Evaluate the function at the starting point */
@@ -987,147 +1122,237 @@ static integer c__1 = 1;
 /*     Workspace: need:    M + SIZEJ + LFCN1; */
 /*                prefer:  larger. */
 
+#line 921 "MD03BD.f"
     iflag = 1;
+#line 922 "MD03BD.f"
     i__1 = *ldwork - jw1 + 1;
+#line 922 "MD03BD.f"
     (*fcn)(&iflag, m, n, &ipar[1], lipar, &dpar1[1], ldpar1, &dpar2[1], 
 	    ldpar2, &x[1], &nfevl, &dwork[e], &dwork[jac], &ldj, &dwork[jw1], 
 	    &i__1, &infol);
 
+#line 926 "MD03BD.f"
     if (infol != 0) {
+#line 927 "MD03BD.f"
 	*info = 1;
+#line 928 "MD03BD.f"
 	return 0;
+#line 929 "MD03BD.f"
     }
 /* Computing MAX */
+#line 930 "MD03BD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jw1] + jw1 - 1;
+#line 930 "MD03BD.f"
     wrkopt = max(i__1,i__2);
+#line 931 "MD03BD.f"
     *nfev = 1;
+#line 932 "MD03BD.f"
     fnorm = dnrm2_(m, &dwork[e], &c__1);
+#line 933 "MD03BD.f"
     if (iflag < 0 || fnorm == 0.) {
+#line 933 "MD03BD.f"
 	goto L90;
+#line 933 "MD03BD.f"
     }
 
 /*     Beginning of the outer loop. */
 
+#line 938 "MD03BD.f"
 L20:
 
 /*        Calculate the Jacobian matrix. */
 /*        Workspace: need:    M + SIZEJ + LFCN2; */
 /*                   prefer:  larger. */
 
+#line 944 "MD03BD.f"
     ldj = ldjsav;
+#line 945 "MD03BD.f"
     iflag = 2;
+#line 946 "MD03BD.f"
     i__1 = *ldwork - jw1 + 1;
+#line 946 "MD03BD.f"
     (*fcn)(&iflag, m, n, &ipar[1], lipar, &dpar1[1], ldpar1, &dpar2[1], 
 	    ldpar2, &x[1], &nfevl, &dwork[e], &dwork[jac], &ldj, &dwork[jw1], 
 	    &i__1, &infol);
 
+#line 950 "MD03BD.f"
     if (infol != 0) {
+#line 951 "MD03BD.f"
 	*info = 2;
+#line 952 "MD03BD.f"
 	return 0;
+#line 953 "MD03BD.f"
     }
+#line 954 "MD03BD.f"
     if (iter == 1) {
 /* Computing MAX */
+#line 954 "MD03BD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jw1] + jw1 - 1;
+#line 954 "MD03BD.f"
 	wrkopt = max(i__1,i__2);
+#line 954 "MD03BD.f"
     }
+#line 956 "MD03BD.f"
     if (nfevl > 0) {
+#line 956 "MD03BD.f"
 	*nfev += nfevl;
+#line 956 "MD03BD.f"
     }
+#line 958 "MD03BD.f"
     ++(*njev);
+#line 959 "MD03BD.f"
     if (iflag < 0) {
+#line 959 "MD03BD.f"
 	goto L90;
+#line 959 "MD03BD.f"
     }
 
 /*        If requested, call FCN to enable printing of iterates. */
 
+#line 964 "MD03BD.f"
     if (*nprint > 0) {
+#line 965 "MD03BD.f"
 	iflag = 0;
+#line 966 "MD03BD.f"
 	if ((iter - 1) % *nprint == 0) {
+#line 967 "MD03BD.f"
 	    i__1 = *ldwork - jw1 + 1;
+#line 967 "MD03BD.f"
 	    (*fcn)(&iflag, m, n, &ipar[1], lipar, &dpar1[1], ldpar1, &dpar2[1]
 		    , ldpar2, &x[1], nfev, &dwork[e], &dwork[jac], &ldj, &
 		    dwork[jw1], &i__1, &infol);
 
+#line 971 "MD03BD.f"
 	    if (iflag < 0) {
+#line 971 "MD03BD.f"
 		goto L90;
+#line 971 "MD03BD.f"
 	    }
+#line 973 "MD03BD.f"
 	}
+#line 974 "MD03BD.f"
     }
 
 /*        Compute the QR factorization of the Jacobian. */
 /*        Workspace: need:    M + SIZEJ + N + LQRF; */
 /*                   prefer:  larger. */
 
+#line 980 "MD03BD.f"
     i__1 = *ldwork - jw2 + 1;
+#line 980 "MD03BD.f"
     (*qrfact)(n, &ipar[1], lipar, &fnorm, &dwork[jac], &ldj, &dwork[e], &
 	    dwork[jw1], &gnorm, &iwork[1], &dwork[jw2], &i__1, &infol);
+#line 983 "MD03BD.f"
     if (infol != 0) {
+#line 984 "MD03BD.f"
 	*info = 3;
+#line 985 "MD03BD.f"
 	return 0;
+#line 986 "MD03BD.f"
     }
 
 /*        On the first iteration and if SCALE = 'I', scale according */
 /*        to the norms of the columns of the initial Jacobian. */
 
+#line 991 "MD03BD.f"
     if (iter == 1) {
 /* Computing MAX */
+#line 992 "MD03BD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jw2] + jw2 - 1;
+#line 992 "MD03BD.f"
 	wrkopt = max(i__1,i__2);
+#line 993 "MD03BD.f"
 	if (iscal) {
 
+#line 995 "MD03BD.f"
 	    i__1 = *n;
+#line 995 "MD03BD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 996 "MD03BD.f"
 		diag[j] = dwork[jw1 + j - 1];
+#line 997 "MD03BD.f"
 		if (diag[j] == 0.) {
+#line 997 "MD03BD.f"
 		    diag[j] = 1.;
+#line 997 "MD03BD.f"
 		}
+#line 999 "MD03BD.f"
 /* L30: */
+#line 999 "MD03BD.f"
 	    }
 
+#line 1001 "MD03BD.f"
 	}
 
 /*           On the first iteration, calculate the norm of the scaled */
 /*           x and initialize the step bound DELTA. */
 
+#line 1006 "MD03BD.f"
 	i__1 = *n;
+#line 1006 "MD03BD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 1007 "MD03BD.f"
 	    dwork[iw1 + j - 1] = diag[j] * x[j];
+#line 1008 "MD03BD.f"
 /* L40: */
+#line 1008 "MD03BD.f"
 	}
 
+#line 1010 "MD03BD.f"
 	xnorm = dnrm2_(n, &dwork[iw1], &c__1);
+#line 1011 "MD03BD.f"
 	delta = *factor * xnorm;
+#line 1012 "MD03BD.f"
 	if (delta == 0.) {
+#line 1012 "MD03BD.f"
 	    delta = *factor;
+#line 1012 "MD03BD.f"
 	}
+#line 1014 "MD03BD.f"
     } else {
 
 /*           Rescale if necessary. */
 
+#line 1018 "MD03BD.f"
 	if (iscal) {
 
+#line 1020 "MD03BD.f"
 	    i__1 = *n;
+#line 1020 "MD03BD.f"
 	    for (j = 1; j <= i__1; ++j) {
 /* Computing MAX */
+#line 1021 "MD03BD.f"
 		d__1 = diag[j], d__2 = dwork[jw1 + j - 1];
+#line 1021 "MD03BD.f"
 		diag[j] = max(d__1,d__2);
+#line 1022 "MD03BD.f"
 /* L50: */
+#line 1022 "MD03BD.f"
 	    }
 
+#line 1024 "MD03BD.f"
 	}
+#line 1025 "MD03BD.f"
     }
 
 /*        Test for convergence of the gradient norm. */
 
+#line 1029 "MD03BD.f"
     if (gnorm <= gtdef) {
+#line 1029 "MD03BD.f"
 	*iwarn = 4;
+#line 1029 "MD03BD.f"
     }
+#line 1031 "MD03BD.f"
     if (*iwarn != 0) {
+#line 1031 "MD03BD.f"
 	goto L90;
+#line 1031 "MD03BD.f"
     }
 
 /*        Beginning of the inner loop. */
 
+#line 1036 "MD03BD.f"
 L60:
 
 /*           Determine the Levenberg-Marquardt parameter and the */
@@ -1135,205 +1360,338 @@ L60:
 /*           Workspace:  need:    M + N*NC + 2*N + LLMP; */
 /*                       prefer:  larger. */
 
+#line 1043 "MD03BD.f"
     i__1 = *ldwork - iw3 + 1;
+#line 1043 "MD03BD.f"
     (*lmparm)(cond, n, &ipar[1], lipar, &dwork[jac], &ldj, &iwork[1], &diag[1]
 	    , &dwork[e], &delta, &par, &iwork[*n + 1], &dwork[iw1], &dwork[
 	    iw2], &toldef, &dwork[iw3], &i__1, &infol, (ftnlen)1);
+#line 1047 "MD03BD.f"
     if (infol != 0) {
+#line 1048 "MD03BD.f"
 	*info = 4;
+#line 1049 "MD03BD.f"
 	return 0;
+#line 1050 "MD03BD.f"
     }
+#line 1051 "MD03BD.f"
     if (iter == 1) {
 /* Computing MAX */
+#line 1051 "MD03BD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[iw3] + iw3 - 1;
+#line 1051 "MD03BD.f"
 	wrkopt = max(i__1,i__2);
+#line 1051 "MD03BD.f"
     }
 
+#line 1054 "MD03BD.f"
     temp1 = dnrm2_(n, &dwork[iw2], &c__1) / fnorm;
 
 /*           Store the direction p and x - p. */
 
+#line 1058 "MD03BD.f"
     i__1 = *n - 1;
+#line 1058 "MD03BD.f"
     for (j = 0; j <= i__1; ++j) {
+#line 1059 "MD03BD.f"
 	dwork[iw2 + j] = diag[j + 1] * dwork[iw1 + j];
+#line 1060 "MD03BD.f"
 	dwork[iw1 + j] = x[j + 1] - dwork[iw1 + j];
+#line 1061 "MD03BD.f"
 /* L70: */
+#line 1061 "MD03BD.f"
     }
 
 /*           Compute the norm of scaled p and the scaled predicted */
 /*           reduction and the scaled directional derivative. */
 
+#line 1066 "MD03BD.f"
     pnorm = dnrm2_(n, &dwork[iw2], &c__1);
+#line 1067 "MD03BD.f"
     temp2 = sqrt(par) * pnorm / fnorm;
 /* Computing 2nd power */
+#line 1068 "MD03BD.f"
     d__1 = temp1;
 /* Computing 2nd power */
+#line 1068 "MD03BD.f"
     d__2 = temp2;
+#line 1068 "MD03BD.f"
     prered = d__1 * d__1 + d__2 * d__2 / .5;
 /* Computing 2nd power */
+#line 1069 "MD03BD.f"
     d__1 = temp1;
 /* Computing 2nd power */
+#line 1069 "MD03BD.f"
     d__2 = temp2;
+#line 1069 "MD03BD.f"
     dirder = -(d__1 * d__1 + d__2 * d__2);
 
 /*           On the first iteration, adjust the initial step bound. */
 
+#line 1073 "MD03BD.f"
     if (iter == 1) {
+#line 1073 "MD03BD.f"
 	delta = min(delta,pnorm);
+#line 1073 "MD03BD.f"
     }
 
 /*           Evaluate the function at x - p and calculate its norm. */
 /*           Workspace:  need:    2*M + N*NC + N + LFCN1; */
 /*                       prefer:  larger. */
 
+#line 1080 "MD03BD.f"
     iflag = 1;
+#line 1081 "MD03BD.f"
     i__1 = *ldwork - jwork + 1;
+#line 1081 "MD03BD.f"
     (*fcn)(&iflag, m, n, &ipar[1], lipar, &dpar1[1], ldpar1, &dpar2[1], 
 	    ldpar2, &dwork[iw1], &nfevl, &dwork[iw2], &dwork[jac], &ldj, &
 	    dwork[jwork], &i__1, &infol);
+#line 1084 "MD03BD.f"
     if (infol != 0) {
+#line 1085 "MD03BD.f"
 	*info = 1;
+#line 1086 "MD03BD.f"
 	return 0;
+#line 1087 "MD03BD.f"
     }
 
+#line 1089 "MD03BD.f"
     ++(*nfev);
+#line 1090 "MD03BD.f"
     if (iflag < 0) {
+#line 1090 "MD03BD.f"
 	goto L90;
+#line 1090 "MD03BD.f"
     }
+#line 1092 "MD03BD.f"
     fnorm1 = dnrm2_(m, &dwork[iw2], &c__1);
 
 /*           Compute the scaled actual reduction. */
 
+#line 1096 "MD03BD.f"
     actred = -1.;
+#line 1097 "MD03BD.f"
     if (fnorm1 * .1 < fnorm) {
 /* Computing 2nd power */
+#line 1097 "MD03BD.f"
 	d__1 = fnorm1 / fnorm;
+#line 1097 "MD03BD.f"
 	actred = 1. - d__1 * d__1;
+#line 1097 "MD03BD.f"
     }
 
 /*           Compute the ratio of the actual to the predicted reduction. */
 
+#line 1102 "MD03BD.f"
     ratio = 0.;
+#line 1103 "MD03BD.f"
     if (prered != 0.) {
+#line 1103 "MD03BD.f"
 	ratio = actred / prered;
+#line 1103 "MD03BD.f"
     }
 
 /*           Update the step bound. */
 
+#line 1108 "MD03BD.f"
     if (ratio <= .25) {
+#line 1109 "MD03BD.f"
 	if (actred >= 0.) {
+#line 1110 "MD03BD.f"
 	    temp = .5;
+#line 1111 "MD03BD.f"
 	} else {
+#line 1112 "MD03BD.f"
 	    temp = dirder * .5 / (dirder + actred * .5);
+#line 1113 "MD03BD.f"
 	}
+#line 1114 "MD03BD.f"
 	if (fnorm1 * .1 >= fnorm || temp < .1) {
+#line 1114 "MD03BD.f"
 	    temp = .1;
+#line 1114 "MD03BD.f"
 	}
 /* Computing MIN */
+#line 1116 "MD03BD.f"
 	d__1 = delta, d__2 = pnorm / .1;
+#line 1116 "MD03BD.f"
 	delta = temp * min(d__1,d__2);
+#line 1117 "MD03BD.f"
 	par /= temp;
+#line 1118 "MD03BD.f"
     } else {
+#line 1119 "MD03BD.f"
 	if (par == 0. || ratio >= .75) {
+#line 1120 "MD03BD.f"
 	    delta = pnorm / .5;
+#line 1121 "MD03BD.f"
 	    par *= .5;
+#line 1122 "MD03BD.f"
 	}
+#line 1123 "MD03BD.f"
     }
 
 /*           Test for successful iteration. */
 
+#line 1127 "MD03BD.f"
     if (ratio >= 1e-4) {
 
 /*              Successful iteration. Update x, e, and their norms. */
 
+#line 1131 "MD03BD.f"
 	i__1 = *n;
+#line 1131 "MD03BD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 1132 "MD03BD.f"
 	    x[j] = dwork[iw1 + j - 1];
+#line 1133 "MD03BD.f"
 	    dwork[iw1 + j - 1] = diag[j] * x[j];
+#line 1134 "MD03BD.f"
 /* L80: */
+#line 1134 "MD03BD.f"
 	}
 
+#line 1136 "MD03BD.f"
 	dcopy_(m, &dwork[iw2], &c__1, &dwork[e], &c__1);
+#line 1137 "MD03BD.f"
 	xnorm = dnrm2_(n, &dwork[iw1], &c__1);
+#line 1138 "MD03BD.f"
 	fnorm = fnorm1;
+#line 1139 "MD03BD.f"
 	++iter;
+#line 1140 "MD03BD.f"
     }
 
 /*           Tests for convergence. */
 
+#line 1144 "MD03BD.f"
     if (abs(actred) <= ftdef && prered <= ftdef && ratio * .5 <= 1.) {
+#line 1144 "MD03BD.f"
 	*iwarn = 1;
+#line 1144 "MD03BD.f"
     }
+#line 1147 "MD03BD.f"
     if (delta <= xtdef * xnorm) {
+#line 1147 "MD03BD.f"
 	*iwarn = 2;
+#line 1147 "MD03BD.f"
     }
+#line 1149 "MD03BD.f"
     if (abs(actred) <= ftdef && prered <= ftdef && ratio * .5 <= 1. && *iwarn 
 	    == 2) {
+#line 1149 "MD03BD.f"
 	*iwarn = 3;
+#line 1149 "MD03BD.f"
     }
+#line 1152 "MD03BD.f"
     if (*iwarn != 0) {
+#line 1152 "MD03BD.f"
 	goto L90;
+#line 1152 "MD03BD.f"
     }
 
 /*           Tests for termination and stringent tolerances. */
 
+#line 1157 "MD03BD.f"
     if (iter >= *itmax) {
+#line 1157 "MD03BD.f"
 	*iwarn = 5;
+#line 1157 "MD03BD.f"
     }
+#line 1159 "MD03BD.f"
     if (abs(actred) <= epsmch && prered <= epsmch && ratio * .5 <= 1.) {
+#line 1159 "MD03BD.f"
 	*iwarn = 6;
+#line 1159 "MD03BD.f"
     }
+#line 1162 "MD03BD.f"
     if (delta <= epsmch * xnorm) {
+#line 1162 "MD03BD.f"
 	*iwarn = 7;
+#line 1162 "MD03BD.f"
     }
+#line 1164 "MD03BD.f"
     if (gnorm <= epsmch) {
+#line 1164 "MD03BD.f"
 	*iwarn = 8;
+#line 1164 "MD03BD.f"
     }
+#line 1166 "MD03BD.f"
     if (*iwarn != 0) {
+#line 1166 "MD03BD.f"
 	goto L90;
+#line 1166 "MD03BD.f"
     }
 
 /*           End of the inner loop. Repeat if unsuccessful iteration. */
 
+#line 1171 "MD03BD.f"
     if (ratio < 1e-4) {
+#line 1171 "MD03BD.f"
 	goto L60;
+#line 1171 "MD03BD.f"
     }
 
 /*        End of the outer loop. */
 
+#line 1175 "MD03BD.f"
     goto L20;
 
+#line 1177 "MD03BD.f"
 L90:
 
 /*     Termination, either normal or user imposed. */
 /*     Note that DWORK(JAC) normally contains the results returned by */
 /*     QRFACT and LMPARM (the compressed R and S factors). */
 
+#line 1183 "MD03BD.f"
     if (iflag < 0) {
+#line 1183 "MD03BD.f"
 	*iwarn = iflag;
+#line 1183 "MD03BD.f"
     }
+#line 1185 "MD03BD.f"
     if (*nprint > 0) {
+#line 1186 "MD03BD.f"
 	iflag = 0;
+#line 1187 "MD03BD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 1187 "MD03BD.f"
 	(*fcn)(&iflag, m, n, &ipar[1], lipar, &dpar1[1], ldpar1, &dpar2[1], 
 		ldpar2, &x[1], nfev, &dwork[e], &dwork[jac], &ldj, &dwork[
 		jwork], &i__1, &infol);
+#line 1190 "MD03BD.f"
 	if (iflag < 0) {
+#line 1190 "MD03BD.f"
 	    *iwarn = iflag;
+#line 1190 "MD03BD.f"
 	}
+#line 1192 "MD03BD.f"
     }
 
+#line 1194 "MD03BD.f"
     if (*iwarn >= 0) {
+#line 1195 "MD03BD.f"
 	for (j = *m + *n * nc; j >= 1; --j) {
+#line 1196 "MD03BD.f"
 	    dwork[j + 4] = dwork[j];
+#line 1197 "MD03BD.f"
 /* L100: */
+#line 1197 "MD03BD.f"
 	}
+#line 1198 "MD03BD.f"
     }
+#line 1199 "MD03BD.f"
     dwork[1] = (doublereal) wrkopt;
+#line 1200 "MD03BD.f"
     dwork[2] = fnorm;
+#line 1201 "MD03BD.f"
     dwork[3] = (doublereal) iter;
+#line 1202 "MD03BD.f"
     dwork[4] = par;
 
+#line 1204 "MD03BD.f"
     return 0;
 /* *** Last line of MD03BD *** */
 } /* md03bd_ */

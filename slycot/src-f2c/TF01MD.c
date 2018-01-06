@@ -1,3 +1,4 @@
+#line 1 "TF01MD.f"
 /* TF01MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TF01MD.f"
 /* Table of constant values */
 
 static doublereal c_b4 = 0.;
@@ -194,101 +196,171 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 165 "TF01MD.f"
     /* Parameter adjustments */
+#line 165 "TF01MD.f"
     a_dim1 = *lda;
+#line 165 "TF01MD.f"
     a_offset = 1 + a_dim1;
+#line 165 "TF01MD.f"
     a -= a_offset;
+#line 165 "TF01MD.f"
     b_dim1 = *ldb;
+#line 165 "TF01MD.f"
     b_offset = 1 + b_dim1;
+#line 165 "TF01MD.f"
     b -= b_offset;
+#line 165 "TF01MD.f"
     c_dim1 = *ldc;
+#line 165 "TF01MD.f"
     c_offset = 1 + c_dim1;
+#line 165 "TF01MD.f"
     c__ -= c_offset;
+#line 165 "TF01MD.f"
     d_dim1 = *ldd;
+#line 165 "TF01MD.f"
     d_offset = 1 + d_dim1;
+#line 165 "TF01MD.f"
     d__ -= d_offset;
+#line 165 "TF01MD.f"
     u_dim1 = *ldu;
+#line 165 "TF01MD.f"
     u_offset = 1 + u_dim1;
+#line 165 "TF01MD.f"
     u -= u_offset;
+#line 165 "TF01MD.f"
     --x;
+#line 165 "TF01MD.f"
     y_dim1 = *ldy;
+#line 165 "TF01MD.f"
     y_offset = 1 + y_dim1;
+#line 165 "TF01MD.f"
     y -= y_offset;
+#line 165 "TF01MD.f"
     --dwork;
+#line 165 "TF01MD.f"
 
+#line 165 "TF01MD.f"
     /* Function Body */
+#line 165 "TF01MD.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 169 "TF01MD.f"
     if (*n < 0) {
+#line 170 "TF01MD.f"
 	*info = -1;
+#line 171 "TF01MD.f"
     } else if (*m < 0) {
+#line 172 "TF01MD.f"
 	*info = -2;
+#line 173 "TF01MD.f"
     } else if (*p < 0) {
+#line 174 "TF01MD.f"
 	*info = -3;
+#line 175 "TF01MD.f"
     } else if (*ny < 0) {
+#line 176 "TF01MD.f"
 	*info = -4;
+#line 177 "TF01MD.f"
     } else if (*lda < max(1,*n)) {
+#line 178 "TF01MD.f"
 	*info = -6;
+#line 179 "TF01MD.f"
     } else if (*ldb < max(1,*n)) {
+#line 180 "TF01MD.f"
 	*info = -8;
+#line 181 "TF01MD.f"
     } else if (*ldc < max(1,*p)) {
+#line 182 "TF01MD.f"
 	*info = -10;
+#line 183 "TF01MD.f"
     } else if (*ldd < max(1,*p)) {
+#line 184 "TF01MD.f"
 	*info = -12;
+#line 185 "TF01MD.f"
     } else if (*ldu < max(1,*m)) {
+#line 186 "TF01MD.f"
 	*info = -14;
+#line 187 "TF01MD.f"
     } else if (*ldy < max(1,*p)) {
+#line 188 "TF01MD.f"
 	*info = -17;
+#line 189 "TF01MD.f"
     }
 
+#line 191 "TF01MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 195 "TF01MD.f"
 	i__1 = -(*info);
+#line 195 "TF01MD.f"
 	xerbla_("TF01MD", &i__1, (ftnlen)6);
+#line 196 "TF01MD.f"
 	return 0;
+#line 197 "TF01MD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 201 "TF01MD.f"
     if (min(*p,*ny) == 0) {
+#line 202 "TF01MD.f"
 	return 0;
+#line 203 "TF01MD.f"
     } else if (*n == 0) {
 
 /*        Non-dynamic system: compute the output vectors. */
 
+#line 207 "TF01MD.f"
 	if (*m == 0) {
+#line 208 "TF01MD.f"
 	    dlaset_("Full", p, ny, &c_b4, &c_b4, &y[y_offset], ldy, (ftnlen)4)
 		    ;
+#line 209 "TF01MD.f"
 	} else {
+#line 210 "TF01MD.f"
 	    dgemm_("No transpose", "No transpose", p, ny, m, &c_b8, &d__[
 		    d_offset], ldd, &u[u_offset], ldu, &c_b4, &y[y_offset], 
 		    ldy, (ftnlen)12, (ftnlen)12);
+#line 212 "TF01MD.f"
 	}
+#line 213 "TF01MD.f"
 	return 0;
+#line 214 "TF01MD.f"
     }
 
+#line 216 "TF01MD.f"
     i__1 = *ny;
+#line 216 "TF01MD.f"
     for (ik = 1; ik <= i__1; ++ik) {
+#line 217 "TF01MD.f"
 	dgemv_("No transpose", p, n, &c_b8, &c__[c_offset], ldc, &x[1], &c__1,
 		 &c_b4, &y[ik * y_dim1 + 1], &c__1, (ftnlen)12);
 
+#line 220 "TF01MD.f"
 	dgemv_("No transpose", n, n, &c_b8, &a[a_offset], lda, &x[1], &c__1, &
 		c_b4, &dwork[1], &c__1, (ftnlen)12);
+#line 222 "TF01MD.f"
 	dgemv_("No transpose", n, m, &c_b8, &b[b_offset], ldb, &u[ik * u_dim1 
 		+ 1], &c__1, &c_b8, &dwork[1], &c__1, (ftnlen)12);
 
+#line 225 "TF01MD.f"
 	dcopy_(n, &dwork[1], &c__1, &x[1], &c__1);
+#line 226 "TF01MD.f"
 /* L10: */
+#line 226 "TF01MD.f"
     }
 
+#line 228 "TF01MD.f"
     dgemm_("No transpose", "No transpose", p, ny, m, &c_b8, &d__[d_offset], 
 	    ldd, &u[u_offset], ldu, &c_b8, &y[y_offset], ldy, (ftnlen)12, (
 	    ftnlen)12);
 
+#line 231 "TF01MD.f"
     return 0;
 /* *** Last line of TF01MD *** */
 } /* tf01md_ */

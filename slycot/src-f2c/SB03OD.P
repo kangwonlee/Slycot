@@ -1,0 +1,15 @@
+extern int sb03od_(char *dico, char *fact, char *trans, integer *n, integer *m, doublereal *a, integer *lda, doublereal *q, integer *ldq, doublereal *b, integer *ldb, doublereal *scale, doublereal *wr, doublereal *wi, doublereal *dwork, integer *ldwork, integer *info, ftnlen dico_len, ftnlen fact_len, ftnlen trans_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: select_ 12 :*/
+/*:ref: dgees_ 14 17 13 13 212 4 7 4 4 7 7 7 4 7 4 12 4 124 124 */
+/*:ref: dlapy2_ 7 2 7 7 */
+/*:ref: dgerqf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dtrmm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: dgeqrf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: sb03ou_ 14 15 12 12 4 4 7 4 7 4 7 7 4 7 7 4 4 */

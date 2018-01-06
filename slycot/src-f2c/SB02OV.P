@@ -1,0 +1,2 @@
+extern logical sb02ov_(doublereal *alphar, doublereal *alphai, doublereal *beta);
+/*:ref: dlapy2_ 7 2 7 7 */

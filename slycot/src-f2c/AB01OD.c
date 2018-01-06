@@ -1,3 +1,4 @@
+#line 1 "AB01OD.f"
 /* AB01OD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB01OD.f"
 /* Table of constant values */
 
 static doublereal c_b11 = 0.;
@@ -343,98 +345,174 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 306 "AB01OD.f"
     /* Parameter adjustments */
+#line 306 "AB01OD.f"
     a_dim1 = *lda;
+#line 306 "AB01OD.f"
     a_offset = 1 + a_dim1;
+#line 306 "AB01OD.f"
     a -= a_offset;
+#line 306 "AB01OD.f"
     b_dim1 = *ldb;
+#line 306 "AB01OD.f"
     b_offset = 1 + b_dim1;
+#line 306 "AB01OD.f"
     b -= b_offset;
+#line 306 "AB01OD.f"
     u_dim1 = *ldu;
+#line 306 "AB01OD.f"
     u_offset = 1 + u_dim1;
+#line 306 "AB01OD.f"
     u -= u_offset;
+#line 306 "AB01OD.f"
     v_dim1 = *ldv;
+#line 306 "AB01OD.f"
     v_offset = 1 + v_dim1;
+#line 306 "AB01OD.f"
     v -= v_offset;
+#line 306 "AB01OD.f"
     --kstair;
+#line 306 "AB01OD.f"
     --iwork;
+#line 306 "AB01OD.f"
     --dwork;
+#line 306 "AB01OD.f"
 
+#line 306 "AB01OD.f"
     /* Function Body */
+#line 306 "AB01OD.f"
     *info = 0;
+#line 307 "AB01OD.f"
     ljobui = lsame_(jobu, "I", (ftnlen)1, (ftnlen)1);
 
+#line 309 "AB01OD.f"
     lstagb = lsame_(stages, "B", (ftnlen)1, (ftnlen)1);
+#line 310 "AB01OD.f"
     lstgab = lsame_(stages, "A", (ftnlen)1, (ftnlen)1) || lstagb;
 
+#line 312 "AB01OD.f"
     if (lstgab) {
+#line 313 "AB01OD.f"
 	ljobvi = lsame_(jobv, "I", (ftnlen)1, (ftnlen)1);
+#line 314 "AB01OD.f"
     }
 
 /*     Test the input scalar arguments. */
 
+#line 318 "AB01OD.f"
     if (! lstgab && ! lsame_(stages, "F", (ftnlen)1, (ftnlen)1)) {
+#line 319 "AB01OD.f"
 	*info = -1;
+#line 320 "AB01OD.f"
     } else if (! ljobui && ! lsame_(jobu, "N", (ftnlen)1, (ftnlen)1)) {
+#line 321 "AB01OD.f"
 	*info = -2;
+#line 322 "AB01OD.f"
     } else if (*n < 0) {
+#line 323 "AB01OD.f"
 	*info = -4;
+#line 324 "AB01OD.f"
     } else if (*m < 0) {
+#line 325 "AB01OD.f"
 	*info = -5;
+#line 326 "AB01OD.f"
     } else if (*lda < max(1,*n)) {
+#line 327 "AB01OD.f"
 	*info = -7;
+#line 328 "AB01OD.f"
     } else if (*ldb < max(1,*n)) {
+#line 329 "AB01OD.f"
 	*info = -9;
+#line 330 "AB01OD.f"
     } else if (*ldu < 1 || ljobui && *ldu < *n) {
+#line 331 "AB01OD.f"
 	*info = -11;
+#line 332 "AB01OD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 332 "AB01OD.f"
 	i__3 = *n, i__4 = *m * 3;
+#line 332 "AB01OD.f"
 	i__1 = 1, i__2 = *n + max(i__3,i__4);
 /* Computing MAX */
+#line 332 "AB01OD.f"
 	i__5 = 1, i__6 = *m + max(*n,*m);
+#line 332 "AB01OD.f"
 	if (! lstagb && *ldwork < max(i__1,i__2) || lstagb && *ldwork < max(
 		i__5,i__6)) {
+#line 335 "AB01OD.f"
 	    *info = -20;
+#line 336 "AB01OD.f"
 	} else if (lstagb && *ncont > *n) {
+#line 337 "AB01OD.f"
 	    *info = -14;
+#line 338 "AB01OD.f"
 	} else if (lstagb && *indcon > *n) {
+#line 339 "AB01OD.f"
 	    *info = -15;
+#line 340 "AB01OD.f"
 	} else if (lstgab) {
+#line 341 "AB01OD.f"
 	    if (! ljobvi && ! lsame_(jobv, "N", (ftnlen)1, (ftnlen)1)) {
+#line 342 "AB01OD.f"
 		*info = -3;
+#line 343 "AB01OD.f"
 	    } else if (*ldv < 1 || ljobvi && *ldv < *m) {
+#line 344 "AB01OD.f"
 		*info = -13;
+#line 345 "AB01OD.f"
 	    }
+#line 346 "AB01OD.f"
 	}
+#line 346 "AB01OD.f"
     }
 
+#line 348 "AB01OD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 352 "AB01OD.f"
 	i__1 = -(*info);
+#line 352 "AB01OD.f"
 	xerbla_("AB01OD", &i__1, (ftnlen)6);
+#line 353 "AB01OD.f"
 	return 0;
+#line 354 "AB01OD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 358 "AB01OD.f"
     if (min(*n,*m) == 0) {
+#line 359 "AB01OD.f"
 	*ncont = 0;
+#line 360 "AB01OD.f"
 	*indcon = 0;
+#line 361 "AB01OD.f"
 	if (*n > 0 && ljobui) {
+#line 361 "AB01OD.f"
 	    dlaset_("F", n, n, &c_b11, &c_b12, &u[u_offset], ldu, (ftnlen)1);
+#line 361 "AB01OD.f"
 	}
+#line 363 "AB01OD.f"
 	if (lstgab) {
+#line 364 "AB01OD.f"
 	    if (*m > 0 && ljobvi) {
+#line 364 "AB01OD.f"
 		dlaset_("F", m, m, &c_b11, &c_b12, &v[v_offset], ldv, (ftnlen)
 			1);
+#line 364 "AB01OD.f"
 	    }
+#line 366 "AB01OD.f"
 	}
+#line 367 "AB01OD.f"
 	dwork[1] = 1.;
+#line 368 "AB01OD.f"
 	return 0;
+#line 369 "AB01OD.f"
     }
 
 /*     (Note: Comments in the code beginning "Workspace:" describe the */
@@ -443,9 +521,12 @@ static integer c__1 = 1;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 377 "AB01OD.f"
     itau = 1;
+#line 378 "AB01OD.f"
     wrkopt = 1;
 
+#line 380 "AB01OD.f"
     if (! lstagb) {
 
 /*        Perform the forward stage computations of the staircase */
@@ -454,39 +535,61 @@ static integer c__1 = 1;
 
 /*        Workspace: N + MAX(N,3*M). */
 
+#line 388 "AB01OD.f"
 	jwork = *n + 1;
+#line 389 "AB01OD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 389 "AB01OD.f"
 	ab01nd_(jobu, n, m, &a[a_offset], lda, &b[b_offset], ldb, ncont, 
 		indcon, &kstair[1], &u[u_offset], ldu, &dwork[itau], tol, &
 		iwork[1], &dwork[jwork], &i__1, info, (ftnlen)1);
 
+#line 393 "AB01OD.f"
 	wrkopt = (integer) dwork[jwork] + jwork - 1;
+#line 394 "AB01OD.f"
     }
 
 /*     Exit if no further reduction to triangularize B1 and subdiagonal */
 /*     blocks of A is required, or if the order of the controllable part */
 /*     is 0. */
 
+#line 400 "AB01OD.f"
     if (! lstgab) {
+#line 401 "AB01OD.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 402 "AB01OD.f"
 	return 0;
+#line 403 "AB01OD.f"
     } else if (*ncont == 0 || *indcon == 0) {
+#line 404 "AB01OD.f"
 	if (ljobvi) {
+#line 404 "AB01OD.f"
 	    dlaset_("F", m, m, &c_b11, &c_b12, &v[v_offset], ldv, (ftnlen)1);
+#line 404 "AB01OD.f"
 	}
+#line 406 "AB01OD.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 407 "AB01OD.f"
 	return 0;
+#line 408 "AB01OD.f"
     }
 
 /*     Now perform the backward steps except the last one. */
 
+#line 412 "AB01OD.f"
     mcrt = kstair[*indcon];
+#line 413 "AB01OD.f"
     i0 = *ncont - mcrt + 1;
+#line 414 "AB01OD.f"
     jwork = *m + 1;
 
+#line 416 "AB01OD.f"
     for (ibstep = *indcon; ibstep >= 2; --ibstep) {
+#line 417 "AB01OD.f"
 	ncrt = kstair[ibstep - 1];
+#line 418 "AB01OD.f"
 	j0 = i0 - ncrt;
+#line 419 "AB01OD.f"
 	mm = min(ncrt,mcrt);
 
 /*        Compute the RQ factorization of the current subdiagonal block */
@@ -496,93 +599,133 @@ static integer c__1 = 1;
 /*        Workspace: need   M + MCRT; */
 /*                   prefer M + MCRT*NB. */
 
+#line 428 "AB01OD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 428 "AB01OD.f"
 	dgerqf_(&mcrt, &ncrt, &a[i0 + j0 * a_dim1], lda, &dwork[itau], &dwork[
 		jwork], &i__1, info);
 /* Computing MAX */
+#line 430 "AB01OD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 430 "AB01OD.f"
 	wrkopt = max(i__1,i__2);
 
 /*        Set JINI to the first column number in A where the current */
 /*        transformation Q is to be applied, taking the block Hessenberg */
 /*        form into account. */
 
+#line 436 "AB01OD.f"
 	if (ibstep > 2) {
+#line 437 "AB01OD.f"
 	    jini = j0 - kstair[ibstep - 2];
+#line 438 "AB01OD.f"
 	} else {
+#line 439 "AB01OD.f"
 	    jini = 1;
 
 /*           Premultiply the first block row (B1) of B by Q. */
 /*           Workspace: need   2*M; */
 /*                      prefer M + M*NB. */
 
+#line 445 "AB01OD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 445 "AB01OD.f"
 	    dormrq_("Left", "No transpose", &ncrt, m, &mm, &a[i0 + j0 * 
 		    a_dim1], lda, &dwork[itau], &b[b_offset], ldb, &dwork[
 		    jwork], &i__1, info, (ftnlen)4, (ftnlen)12);
 /* Computing MAX */
+#line 448 "AB01OD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 448 "AB01OD.f"
 	    wrkopt = max(i__1,i__2);
+#line 449 "AB01OD.f"
 	}
 
 /*        Premultiply the appropriate block row of A by Q. */
 /*        Workspace: need   M + N; */
 /*                   prefer M + N*NB. */
 
+#line 455 "AB01OD.f"
 	i__1 = *n - jini + 1;
+#line 455 "AB01OD.f"
 	i__2 = *ldwork - jwork + 1;
+#line 455 "AB01OD.f"
 	dormrq_("Left", "No transpose", &ncrt, &i__1, &mm, &a[i0 + j0 * 
 		a_dim1], lda, &dwork[itau], &a[j0 + jini * a_dim1], lda, &
 		dwork[jwork], &i__2, info, (ftnlen)4, (ftnlen)12);
 /* Computing MAX */
+#line 458 "AB01OD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 458 "AB01OD.f"
 	wrkopt = max(i__1,i__2);
 
 /*        Postmultiply the appropriate block column of A by Q'. */
 /*        Workspace: need   M +  I0-1; */
 /*                   prefer M + (I0-1)*NB. */
 
+#line 464 "AB01OD.f"
 	i__1 = i0 - 1;
+#line 464 "AB01OD.f"
 	i__2 = *ldwork - jwork + 1;
+#line 464 "AB01OD.f"
 	dormrq_("Right", "Transpose", &i__1, &ncrt, &mm, &a[i0 + j0 * a_dim1],
 		 lda, &dwork[itau], &a[j0 * a_dim1 + 1], lda, &dwork[jwork], &
 		i__2, info, (ftnlen)5, (ftnlen)9);
 /* Computing MAX */
+#line 467 "AB01OD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 467 "AB01OD.f"
 	wrkopt = max(i__1,i__2);
 
+#line 469 "AB01OD.f"
 	if (ljobui) {
 
 /*           Update U, postmultiplying it by Q'. */
 /*           Workspace: need   M + N; */
 /*                      prefer M + N*NB. */
 
+#line 475 "AB01OD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 475 "AB01OD.f"
 	    dormrq_("Right", "Transpose", n, &ncrt, &mm, &a[i0 + j0 * a_dim1],
 		     lda, &dwork[itau], &u[j0 * u_dim1 + 1], ldu, &dwork[
 		    jwork], &i__1, info, (ftnlen)5, (ftnlen)9);
 /* Computing MAX */
+#line 478 "AB01OD.f"
 	    i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 478 "AB01OD.f"
 	    wrkopt = max(i__1,i__2);
+#line 479 "AB01OD.f"
 	}
 
 /*        Zero the subdiagonal elements of the current subdiagonal block */
 /*        of A. */
 
+#line 484 "AB01OD.f"
 	i__1 = ncrt - mcrt;
+#line 484 "AB01OD.f"
 	dlaset_("F", &mcrt, &i__1, &c_b11, &c_b11, &a[i0 + j0 * a_dim1], lda, 
 		(ftnlen)1);
+#line 485 "AB01OD.f"
 	if (i0 < *n) {
+#line 485 "AB01OD.f"
 	    i__1 = mcrt - 1;
+#line 485 "AB01OD.f"
 	    i__2 = mcrt - 1;
+#line 485 "AB01OD.f"
 	    dlaset_("L", &i__1, &i__2, &c_b11, &c_b11, &a[i0 + 1 + (i0 - mcrt)
 		     * a_dim1], lda, (ftnlen)1);
+#line 485 "AB01OD.f"
 	}
 
+#line 489 "AB01OD.f"
 	mcrt = ncrt;
+#line 490 "AB01OD.f"
 	i0 = j0;
 
+#line 492 "AB01OD.f"
 /* L10: */
+#line 492 "AB01OD.f"
     }
 
 /*     Now perform the last backward step on B, V = Qb'. */
@@ -591,58 +734,90 @@ static integer c__1 = 1;
 /*     Workspace: need   M + MCRT; */
 /*                prefer M + MCRT*NB. */
 
+#line 500 "AB01OD.f"
     i__1 = *ldwork - jwork + 1;
+#line 500 "AB01OD.f"
     dgerqf_(&mcrt, m, &b[b_offset], ldb, &dwork[itau], &dwork[jwork], &i__1, 
 	    info);
 /* Computing MAX */
+#line 502 "AB01OD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 502 "AB01OD.f"
     wrkopt = max(i__1,i__2);
 
+#line 504 "AB01OD.f"
     if (ljobvi) {
 
 /*        Accumulate the input-space transformations V. */
 /*        Workspace: need 2*M;  prefer M + M*NB. */
 
+#line 509 "AB01OD.f"
 	i__1 = *m - mcrt;
+#line 509 "AB01OD.f"
 	dlacpy_("F", &mcrt, &i__1, &b[b_offset], ldb, &v[*m - mcrt + 1 + 
 		v_dim1], ldv, (ftnlen)1);
+#line 510 "AB01OD.f"
 	if (mcrt > 1) {
+#line 510 "AB01OD.f"
 	    i__1 = mcrt - 1;
+#line 510 "AB01OD.f"
 	    i__2 = mcrt - 1;
+#line 510 "AB01OD.f"
 	    dlacpy_("L", &i__1, &i__2, &b[(*m - mcrt + 1) * b_dim1 + 2], ldb, 
 		    &v[*m - mcrt + 2 + (*m - mcrt + 1) * v_dim1], ldv, (
 		    ftnlen)1);
+#line 510 "AB01OD.f"
 	}
+#line 513 "AB01OD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 513 "AB01OD.f"
 	dorgrq_(m, m, &mcrt, &v[v_offset], ldv, &dwork[itau], &dwork[jwork], &
 		i__1, info);
 
+#line 516 "AB01OD.f"
 	i__1 = *m;
+#line 516 "AB01OD.f"
 	for (i__ = 2; i__ <= i__1; ++i__) {
+#line 517 "AB01OD.f"
 	    i__2 = i__ - 1;
+#line 517 "AB01OD.f"
 	    dswap_(&i__2, &v[i__ + v_dim1], ldv, &v[i__ * v_dim1 + 1], &c__1);
+#line 518 "AB01OD.f"
 /* L20: */
+#line 518 "AB01OD.f"
 	}
 
 /* Computing MAX */
+#line 520 "AB01OD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 520 "AB01OD.f"
 	wrkopt = max(i__1,i__2);
+#line 521 "AB01OD.f"
     }
 
 /*     Zero the subdiagonal elements of the submatrix B1. */
 
+#line 525 "AB01OD.f"
     i__1 = *m - mcrt;
+#line 525 "AB01OD.f"
     dlaset_("F", &mcrt, &i__1, &c_b11, &c_b11, &b[b_offset], ldb, (ftnlen)1);
+#line 526 "AB01OD.f"
     if (mcrt > 1) {
+#line 526 "AB01OD.f"
 	i__1 = mcrt - 1;
+#line 526 "AB01OD.f"
 	i__2 = mcrt - 1;
+#line 526 "AB01OD.f"
 	dlaset_("L", &i__1, &i__2, &c_b11, &c_b11, &b[(*m - mcrt + 1) * 
 		b_dim1 + 2], ldb, (ftnlen)1);
+#line 526 "AB01OD.f"
     }
 
 /*     Set optimal workspace dimension. */
 
+#line 532 "AB01OD.f"
     dwork[1] = (doublereal) wrkopt;
+#line 533 "AB01OD.f"
     return 0;
 /* *** Last line of AB01OD *** */
 } /* ab01od_ */

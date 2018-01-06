@@ -1,3 +1,4 @@
+#line 1 "SB04RY.f"
 /* SB04RY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB04RY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -179,158 +181,263 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 152 "SB04RY.f"
     /* Parameter adjustments */
+#line 152 "SB04RY.f"
     a_dim1 = *lda;
+#line 152 "SB04RY.f"
     a_offset = 1 + a_dim1;
+#line 152 "SB04RY.f"
     a -= a_offset;
+#line 152 "SB04RY.f"
     --d__;
+#line 152 "SB04RY.f"
     --iwork;
+#line 152 "SB04RY.f"
     dwork_dim1 = *lddwor;
+#line 152 "SB04RY.f"
     dwork_offset = 1 + dwork_dim1;
+#line 152 "SB04RY.f"
     dwork -= dwork_offset;
+#line 152 "SB04RY.f"
 
+#line 152 "SB04RY.f"
     /* Function Body */
+#line 152 "SB04RY.f"
     *info = 0;
 
 /*     For speed, no tests on the input scalar arguments are made. */
 /*     Quick return if possible. */
 
+#line 157 "SB04RY.f"
     if (*m == 0) {
+#line 157 "SB04RY.f"
 	return 0;
+#line 157 "SB04RY.f"
     }
 
+#line 160 "SB04RY.f"
     if (lsame_(ul, "U", (ftnlen)1, (ftnlen)1)) {
 
+#line 162 "SB04RY.f"
 	i__1 = *m;
+#line 162 "SB04RY.f"
 	for (j = 1; j <= i__1; ++j) {
 /* Computing MIN */
+#line 163 "SB04RY.f"
 	    i__3 = j + 1;
+#line 163 "SB04RY.f"
 	    i__2 = min(i__3,*m);
+#line 163 "SB04RY.f"
 	    dcopy_(&i__2, &a[j * a_dim1 + 1], &c__1, &dwork[j * dwork_dim1 + 
 		    1], &c__1);
 /* Computing MIN */
+#line 164 "SB04RY.f"
 	    i__3 = j + 1;
+#line 164 "SB04RY.f"
 	    i__2 = min(i__3,*m);
+#line 164 "SB04RY.f"
 	    dscal_(&i__2, lambda, &dwork[j * dwork_dim1 + 1], &c__1);
+#line 165 "SB04RY.f"
 	    dwork[j + j * dwork_dim1] += 1.;
+#line 166 "SB04RY.f"
 /* L20: */
+#line 166 "SB04RY.f"
 	}
 
+#line 168 "SB04RY.f"
 	if (lsame_(rc, "R", (ftnlen)1, (ftnlen)1)) {
+#line 169 "SB04RY.f"
 	    *(unsigned char *)trans = 'N';
 
 /*           A is an upper Hessenberg matrix, row transformations. */
 
+#line 173 "SB04RY.f"
 	    i__1 = *m - 1;
+#line 173 "SB04RY.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 174 "SB04RY.f"
 		mj = *m - j;
+#line 175 "SB04RY.f"
 		if (dwork[j + 1 + j * dwork_dim1] != 0.) {
+#line 176 "SB04RY.f"
 		    dlartg_(&dwork[j + j * dwork_dim1], &dwork[j + 1 + j * 
 			    dwork_dim1], &c__, &s, &r__);
+#line 177 "SB04RY.f"
 		    dwork[j + j * dwork_dim1] = r__;
+#line 178 "SB04RY.f"
 		    dwork[j + 1 + j * dwork_dim1] = 0.;
+#line 179 "SB04RY.f"
 		    drot_(&mj, &dwork[j + (j + 1) * dwork_dim1], lddwor, &
 			    dwork[j + 1 + (j + 1) * dwork_dim1], lddwor, &c__,
 			     &s);
+#line 181 "SB04RY.f"
 		    drot_(&c__1, &d__[j], &c__1, &d__[j + 1], &c__1, &c__, &s)
 			    ;
+#line 182 "SB04RY.f"
 		}
+#line 183 "SB04RY.f"
 /* L40: */
+#line 183 "SB04RY.f"
 	    }
 
+#line 185 "SB04RY.f"
 	} else {
+#line 186 "SB04RY.f"
 	    *(unsigned char *)trans = 'T';
 
 /*           A is an upper Hessenberg matrix, column transformations. */
 
+#line 190 "SB04RY.f"
 	    i__1 = *m - 1;
+#line 190 "SB04RY.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 191 "SB04RY.f"
 		mj = *m - j;
+#line 192 "SB04RY.f"
 		if (dwork[mj + 1 + mj * dwork_dim1] != 0.) {
+#line 193 "SB04RY.f"
 		    dlartg_(&dwork[mj + 1 + (mj + 1) * dwork_dim1], &dwork[mj 
 			    + 1 + mj * dwork_dim1], &c__, &s, &r__);
+#line 195 "SB04RY.f"
 		    dwork[mj + 1 + (mj + 1) * dwork_dim1] = r__;
+#line 196 "SB04RY.f"
 		    dwork[mj + 1 + mj * dwork_dim1] = 0.;
+#line 197 "SB04RY.f"
 		    drot_(&mj, &dwork[(mj + 1) * dwork_dim1 + 1], &c__1, &
 			    dwork[mj * dwork_dim1 + 1], &c__1, &c__, &s);
+#line 199 "SB04RY.f"
 		    drot_(&c__1, &d__[mj + 1], &c__1, &d__[mj], &c__1, &c__, &
 			    s);
+#line 200 "SB04RY.f"
 		}
+#line 201 "SB04RY.f"
 /* L60: */
+#line 201 "SB04RY.f"
 	    }
 
+#line 203 "SB04RY.f"
 	}
+#line 204 "SB04RY.f"
     } else {
 
+#line 206 "SB04RY.f"
 	i__1 = *m;
+#line 206 "SB04RY.f"
 	for (j = 1; j <= i__1; ++j) {
 /* Computing MAX */
+#line 207 "SB04RY.f"
 	    i__2 = j - 1;
+#line 207 "SB04RY.f"
 	    j1 = max(i__2,1);
+#line 208 "SB04RY.f"
 	    i__2 = *m - j1 + 1;
+#line 208 "SB04RY.f"
 	    dcopy_(&i__2, &a[j1 + j * a_dim1], &c__1, &dwork[j1 + j * 
 		    dwork_dim1], &c__1);
+#line 209 "SB04RY.f"
 	    i__2 = *m - j1 + 1;
+#line 209 "SB04RY.f"
 	    dscal_(&i__2, lambda, &dwork[j1 + j * dwork_dim1], &c__1);
+#line 210 "SB04RY.f"
 	    dwork[j + j * dwork_dim1] += 1.;
+#line 211 "SB04RY.f"
 /* L80: */
+#line 211 "SB04RY.f"
 	}
 
+#line 213 "SB04RY.f"
 	if (lsame_(rc, "R", (ftnlen)1, (ftnlen)1)) {
+#line 214 "SB04RY.f"
 	    *(unsigned char *)trans = 'N';
 
 /*           A is a lower Hessenberg matrix, row transformations. */
 
+#line 218 "SB04RY.f"
 	    i__1 = *m - 1;
+#line 218 "SB04RY.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 219 "SB04RY.f"
 		mj = *m - j;
+#line 220 "SB04RY.f"
 		if (dwork[mj + (mj + 1) * dwork_dim1] != 0.) {
+#line 221 "SB04RY.f"
 		    dlartg_(&dwork[mj + 1 + (mj + 1) * dwork_dim1], &dwork[mj 
 			    + (mj + 1) * dwork_dim1], &c__, &s, &r__);
+#line 223 "SB04RY.f"
 		    dwork[mj + 1 + (mj + 1) * dwork_dim1] = r__;
+#line 224 "SB04RY.f"
 		    dwork[mj + (mj + 1) * dwork_dim1] = 0.;
+#line 225 "SB04RY.f"
 		    drot_(&mj, &dwork[mj + 1 + dwork_dim1], lddwor, &dwork[mj 
 			    + dwork_dim1], lddwor, &c__, &s);
+#line 227 "SB04RY.f"
 		    drot_(&c__1, &d__[mj + 1], &c__1, &d__[mj], &c__1, &c__, &
 			    s);
+#line 228 "SB04RY.f"
 		}
+#line 229 "SB04RY.f"
 /* L100: */
+#line 229 "SB04RY.f"
 	    }
 
+#line 231 "SB04RY.f"
 	} else {
+#line 232 "SB04RY.f"
 	    *(unsigned char *)trans = 'T';
 
 /*           A is a lower Hessenberg matrix, column transformations. */
 
+#line 236 "SB04RY.f"
 	    i__1 = *m - 1;
+#line 236 "SB04RY.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 237 "SB04RY.f"
 		mj = *m - j;
+#line 238 "SB04RY.f"
 		if (dwork[j + (j + 1) * dwork_dim1] != 0.) {
+#line 239 "SB04RY.f"
 		    dlartg_(&dwork[j + j * dwork_dim1], &dwork[j + (j + 1) * 
 			    dwork_dim1], &c__, &s, &r__);
+#line 240 "SB04RY.f"
 		    dwork[j + j * dwork_dim1] = r__;
+#line 241 "SB04RY.f"
 		    dwork[j + (j + 1) * dwork_dim1] = 0.;
+#line 242 "SB04RY.f"
 		    drot_(&mj, &dwork[j + 1 + j * dwork_dim1], &c__1, &dwork[
 			    j + 1 + (j + 1) * dwork_dim1], &c__1, &c__, &s);
+#line 244 "SB04RY.f"
 		    drot_(&c__1, &d__[j], &c__1, &d__[j + 1], &c__1, &c__, &s)
 			    ;
+#line 245 "SB04RY.f"
 		}
+#line 246 "SB04RY.f"
 /* L120: */
+#line 246 "SB04RY.f"
 	    }
 
+#line 248 "SB04RY.f"
 	}
+#line 249 "SB04RY.f"
     }
 
+#line 251 "SB04RY.f"
     dtrcon_("1-norm", ul, "Non-unit", m, &dwork[dwork_offset], lddwor, &rcond,
 	     &dwork[(*m + 1) * dwork_dim1 + 1], &iwork[1], info, (ftnlen)6, (
 	    ftnlen)1, (ftnlen)8);
+#line 253 "SB04RY.f"
     if (rcond <= *tol) {
+#line 254 "SB04RY.f"
 	*info = 1;
+#line 255 "SB04RY.f"
     } else {
+#line 256 "SB04RY.f"
 	dtrsv_(ul, trans, "Non-unit", m, &dwork[dwork_offset], lddwor, &d__[1]
 		, &c__1, (ftnlen)1, (ftnlen)1, (ftnlen)8);
+#line 257 "SB04RY.f"
     }
 
+#line 259 "SB04RY.f"
     return 0;
 /* *** Last line of SB04RY *** */
 } /* sb04ry_ */

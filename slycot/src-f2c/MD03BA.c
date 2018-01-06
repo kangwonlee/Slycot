@@ -1,3 +1,4 @@
+#line 1 "MD03BA.f"
 /* MD03BA.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MD03BA.f"
 /* Subroutine */ int md03ba_(integer *n, integer *ipar, integer *lipar, 
 	doublereal *fnorm, doublereal *j, integer *ldj, doublereal *e, 
 	doublereal *jnorms, doublereal *gnorm, integer *ipvt, doublereal *
@@ -159,17 +161,28 @@
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 146 "MD03BA.f"
     /* Parameter adjustments */
+#line 146 "MD03BA.f"
     --dwork;
+#line 146 "MD03BA.f"
     --ipvt;
+#line 146 "MD03BA.f"
     --jnorms;
+#line 146 "MD03BA.f"
     --e;
+#line 146 "MD03BA.f"
     --j;
+#line 146 "MD03BA.f"
     --ipar;
+#line 146 "MD03BA.f"
 
+#line 146 "MD03BA.f"
     /* Function Body */
+#line 146 "MD03BA.f"
     md03bx_(&ipar[1], n, fnorm, &j[1], ldj, &e[1], &jnorms[1], gnorm, &ipvt[1]
 	    , &dwork[1], ldwork, info);
+#line 148 "MD03BA.f"
     return 0;
 
 /* *** Last line of MD03BA *** */

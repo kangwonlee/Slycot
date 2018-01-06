@@ -1,3 +1,4 @@
+#line 1 "TD03AD.f"
 /* TD03AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TD03AD.f"
 /* Table of constant values */
 
 static doublereal c_b12 = 0.;
@@ -395,312 +397,512 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 355 "TD03AD.f"
     /* Parameter adjustments */
+#line 355 "TD03AD.f"
     --indexd;
+#line 355 "TD03AD.f"
     dcoeff_dim1 = *lddcoe;
+#line 355 "TD03AD.f"
     dcoeff_offset = 1 + dcoeff_dim1;
+#line 355 "TD03AD.f"
     dcoeff -= dcoeff_offset;
+#line 355 "TD03AD.f"
     ucoeff_dim1 = *lduco1;
+#line 355 "TD03AD.f"
     ucoeff_dim2 = *lduco2;
+#line 355 "TD03AD.f"
     ucoeff_offset = 1 + ucoeff_dim1 * (1 + ucoeff_dim2);
+#line 355 "TD03AD.f"
     ucoeff -= ucoeff_offset;
+#line 355 "TD03AD.f"
     a_dim1 = *lda;
+#line 355 "TD03AD.f"
     a_offset = 1 + a_dim1;
+#line 355 "TD03AD.f"
     a -= a_offset;
+#line 355 "TD03AD.f"
     b_dim1 = *ldb;
+#line 355 "TD03AD.f"
     b_offset = 1 + b_dim1;
+#line 355 "TD03AD.f"
     b -= b_offset;
+#line 355 "TD03AD.f"
     c_dim1 = *ldc;
+#line 355 "TD03AD.f"
     c_offset = 1 + c_dim1;
+#line 355 "TD03AD.f"
     c__ -= c_offset;
+#line 355 "TD03AD.f"
     d_dim1 = *ldd;
+#line 355 "TD03AD.f"
     d_offset = 1 + d_dim1;
+#line 355 "TD03AD.f"
     d__ -= d_offset;
+#line 355 "TD03AD.f"
     --indexp;
+#line 355 "TD03AD.f"
     pcoeff_dim1 = *ldpco1;
+#line 355 "TD03AD.f"
     pcoeff_dim2 = *ldpco2;
+#line 355 "TD03AD.f"
     pcoeff_offset = 1 + pcoeff_dim1 * (1 + pcoeff_dim2);
+#line 355 "TD03AD.f"
     pcoeff -= pcoeff_offset;
+#line 355 "TD03AD.f"
     qcoeff_dim1 = *ldqco1;
+#line 355 "TD03AD.f"
     qcoeff_dim2 = *ldqco2;
+#line 355 "TD03AD.f"
     qcoeff_offset = 1 + qcoeff_dim1 * (1 + qcoeff_dim2);
+#line 355 "TD03AD.f"
     qcoeff -= qcoeff_offset;
+#line 355 "TD03AD.f"
     vcoeff_dim1 = *ldvco1;
+#line 355 "TD03AD.f"
     vcoeff_dim2 = *ldvco2;
+#line 355 "TD03AD.f"
     vcoeff_offset = 1 + vcoeff_dim1 * (1 + vcoeff_dim2);
+#line 355 "TD03AD.f"
     vcoeff -= vcoeff_offset;
+#line 355 "TD03AD.f"
     --iwork;
+#line 355 "TD03AD.f"
     --dwork;
+#line 355 "TD03AD.f"
 
+#line 355 "TD03AD.f"
     /* Function Body */
+#line 355 "TD03AD.f"
     *info = 0;
+#line 356 "TD03AD.f"
     lrowco = lsame_(rowcol, "R", (ftnlen)1, (ftnlen)1);
+#line 357 "TD03AD.f"
     lleri = lsame_(leri, "L", (ftnlen)1, (ftnlen)1);
+#line 358 "TD03AD.f"
     lequil = lsame_(equil, "S", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 362 "TD03AD.f"
     maxmp = max(*m,*p);
+#line 363 "TD03AD.f"
     mplim = max(1,maxmp);
+#line 364 "TD03AD.f"
     if (lrowco) {
 
 /*        Initialization for T(s) given as rows over common denominators. */
 
+#line 368 "TD03AD.f"
 	pwork = *p;
+#line 369 "TD03AD.f"
 	mwork = *m;
+#line 370 "TD03AD.f"
     } else {
 
 /*        Initialization for T(s) given as columns over common */
 /*        denominators. */
 
+#line 375 "TD03AD.f"
 	pwork = *m;
+#line 376 "TD03AD.f"
 	mwork = *p;
+#line 377 "TD03AD.f"
     }
 
+#line 379 "TD03AD.f"
     if (! lrowco && ! lsame_(rowcol, "C", (ftnlen)1, (ftnlen)1)) {
+#line 380 "TD03AD.f"
 	*info = -1;
+#line 381 "TD03AD.f"
     } else if (! lleri && ! lsame_(leri, "R", (ftnlen)1, (ftnlen)1)) {
+#line 382 "TD03AD.f"
 	*info = -2;
+#line 383 "TD03AD.f"
     } else if (! lequil && ! lsame_(equil, "N", (ftnlen)1, (ftnlen)1)) {
+#line 384 "TD03AD.f"
 	*info = -3;
+#line 385 "TD03AD.f"
     } else if (*m < 0) {
+#line 386 "TD03AD.f"
 	*info = -4;
+#line 387 "TD03AD.f"
     } else if (*p < 0) {
+#line 388 "TD03AD.f"
 	*info = -5;
+#line 389 "TD03AD.f"
     } else if (*lddcoe < max(1,pwork)) {
+#line 390 "TD03AD.f"
 	*info = -8;
+#line 391 "TD03AD.f"
     } else if (*lduco1 < max(1,pwork) || ! lrowco && *lduco1 < mplim) {
+#line 393 "TD03AD.f"
 	*info = -10;
+#line 394 "TD03AD.f"
     } else if (*lduco2 < max(1,mwork) || ! lrowco && *lduco2 < mplim) {
+#line 396 "TD03AD.f"
 	*info = -11;
+#line 397 "TD03AD.f"
     }
 
+#line 399 "TD03AD.f"
     n = 0;
+#line 400 "TD03AD.f"
     if (*info == 0) {
 
 /*        Calculate N, the order of the resulting state-space */
 /*        representation, and the index kdcoef. */
 
+#line 405 "TD03AD.f"
 	kdcoef = 0;
 
+#line 407 "TD03AD.f"
 	i__1 = pwork;
+#line 407 "TD03AD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
 /* Computing MAX */
+#line 408 "TD03AD.f"
 	    i__2 = kdcoef, i__3 = indexd[i__];
+#line 408 "TD03AD.f"
 	    kdcoef = max(i__2,i__3);
+#line 409 "TD03AD.f"
 	    n += indexd[i__];
+#line 410 "TD03AD.f"
 /* L10: */
+#line 410 "TD03AD.f"
 	}
 
+#line 412 "TD03AD.f"
 	++kdcoef;
 
+#line 414 "TD03AD.f"
 	if (*lda < max(1,n)) {
+#line 415 "TD03AD.f"
 	    *info = -14;
+#line 416 "TD03AD.f"
 	} else if (*ldb < max(1,n)) {
+#line 417 "TD03AD.f"
 	    *info = -16;
+#line 418 "TD03AD.f"
 	} else if (*ldc < mplim) {
+#line 419 "TD03AD.f"
 	    *info = -18;
+#line 420 "TD03AD.f"
 	} else if (*ldd < mplim) {
+#line 421 "TD03AD.f"
 	    *info = -20;
+#line 422 "TD03AD.f"
 	} else if (*ldpco1 < pwork) {
+#line 423 "TD03AD.f"
 	    *info = -23;
+#line 424 "TD03AD.f"
 	} else if (*ldpco2 < pwork) {
+#line 425 "TD03AD.f"
 	    *info = -24;
+#line 426 "TD03AD.f"
 	} else if (*ldqco1 < max(1,pwork) || ! lleri && *ldqco1 < mplim) {
+#line 428 "TD03AD.f"
 	    *info = -26;
+#line 429 "TD03AD.f"
 	} else if (*ldqco2 < max(1,mwork) || ! lleri && *ldqco2 < mplim) {
+#line 431 "TD03AD.f"
 	    *info = -27;
+#line 432 "TD03AD.f"
 	} else if (*ldvco1 < max(1,pwork)) {
+#line 433 "TD03AD.f"
 	    *info = -29;
+#line 434 "TD03AD.f"
 	} else if (*ldvco2 < max(1,n)) {
+#line 435 "TD03AD.f"
 	    *info = -30;
 
+#line 437 "TD03AD.f"
 	} else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 437 "TD03AD.f"
 	    i__3 = n, i__4 = maxmp * 3;
+#line 437 "TD03AD.f"
 	    i__1 = 1, i__2 = n + max(i__3,i__4), i__1 = max(i__1,i__2), i__2 =
 		     pwork * (pwork + 2);
+#line 437 "TD03AD.f"
 	    if (*ldwork < max(i__1,i__2)) {
+#line 439 "TD03AD.f"
 		*info = -34;
+#line 440 "TD03AD.f"
 	    }
+#line 440 "TD03AD.f"
 	}
+#line 441 "TD03AD.f"
     }
 
+#line 443 "TD03AD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 447 "TD03AD.f"
 	i__1 = -(*info);
+#line 447 "TD03AD.f"
 	xerbla_("TD03AD", &i__1, (ftnlen)6);
+#line 448 "TD03AD.f"
 	return 0;
+#line 449 "TD03AD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 453 "TD03AD.f"
     i__1 = max(n,*m);
+#line 453 "TD03AD.f"
     if (max(i__1,*p) == 0) {
+#line 454 "TD03AD.f"
 	*nr = 0;
+#line 455 "TD03AD.f"
 	dwork[1] = 1.;
+#line 456 "TD03AD.f"
 	return 0;
+#line 457 "TD03AD.f"
     }
 
 /*     IDUAL = 1 iff precisely ROWCOL = 'C' or (exclusively) LERI = 'R', */
 /*     i.e. iff AB07MD call is required before TB03AD. */
 
+#line 462 "TD03AD.f"
     idual = 0;
+#line 463 "TD03AD.f"
     if (! lrowco) {
+#line 463 "TD03AD.f"
 	idual = 1;
+#line 463 "TD03AD.f"
     }
+#line 464 "TD03AD.f"
     if (! lleri) {
+#line 464 "TD03AD.f"
 	++idual;
+#line 464 "TD03AD.f"
     }
 
+#line 466 "TD03AD.f"
     if (! lrowco) {
 
 /*        Initialize the remainder of the leading */
 /*        MPLIM-by-MPLIM-by-KDCOEF part of U(s) to zero. */
 
+#line 471 "TD03AD.f"
 	if (*p < *m) {
 
+#line 473 "TD03AD.f"
 	    i__1 = kdcoef;
+#line 473 "TD03AD.f"
 	    for (k = 1; k <= i__1; ++k) {
+#line 474 "TD03AD.f"
 		i__2 = *m - *p;
+#line 474 "TD03AD.f"
 		dlacpy_("Full", &i__2, &mplim, &c_b12, &c_b12, &ucoeff[*p + 1 
 			+ (k * ucoeff_dim2 + 1) * ucoeff_dim1], lduco1, (
 			ftnlen)4);
+#line 476 "TD03AD.f"
 /* L20: */
+#line 476 "TD03AD.f"
 	    }
 
+#line 478 "TD03AD.f"
 	} else if (*p > *m) {
 
+#line 480 "TD03AD.f"
 	    i__1 = kdcoef;
+#line 480 "TD03AD.f"
 	    for (k = 1; k <= i__1; ++k) {
+#line 481 "TD03AD.f"
 		i__2 = *p - *m;
+#line 481 "TD03AD.f"
 		dlacpy_("Full", &mplim, &i__2, &c_b12, &c_b12, &ucoeff[(*m + 
 			1 + k * ucoeff_dim2) * ucoeff_dim1 + 1], lduco1, (
 			ftnlen)4);
+#line 483 "TD03AD.f"
 /* L30: */
+#line 483 "TD03AD.f"
 	    }
 
+#line 485 "TD03AD.f"
 	}
 
+#line 487 "TD03AD.f"
 	if (mplim != 1) {
 
 /*           Non-scalar T(s) factorized by columns: transpose it */
 /*           (i.e. U(s)). */
 
+#line 492 "TD03AD.f"
 	    jstop = mplim - 1;
 
+#line 494 "TD03AD.f"
 	    i__1 = kdcoef;
+#line 494 "TD03AD.f"
 	    for (k = 1; k <= i__1; ++k) {
 
+#line 496 "TD03AD.f"
 		i__2 = jstop;
+#line 496 "TD03AD.f"
 		for (j = 1; j <= i__2; ++j) {
+#line 497 "TD03AD.f"
 		    i__3 = mplim - j;
+#line 497 "TD03AD.f"
 		    dswap_(&i__3, &ucoeff[j + 1 + (j + k * ucoeff_dim2) * 
 			    ucoeff_dim1], &c__1, &ucoeff[j + (j + 1 + k * 
 			    ucoeff_dim2) * ucoeff_dim1], lduco1);
+#line 499 "TD03AD.f"
 /* L40: */
+#line 499 "TD03AD.f"
 		}
 
+#line 501 "TD03AD.f"
 /* L50: */
+#line 501 "TD03AD.f"
 	    }
 
+#line 503 "TD03AD.f"
 	}
+#line 504 "TD03AD.f"
     }
 
 /*     Construct non-minimal state-space representation (by Wolovich's */
 /*     Structure Theorem) which has transfer matrix T(s) or T'(s) as */
 /*     appropriate, */
 
+#line 510 "TD03AD.f"
     td03ay_(&mwork, &pwork, &indexd[1], &dcoeff[dcoeff_offset], lddcoe, &
 	    ucoeff[ucoeff_offset], lduco1, lduco2, &n, &a[a_offset], lda, &b[
 	    b_offset], ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, info);
+#line 512 "TD03AD.f"
     if (*info > 0) {
+#line 512 "TD03AD.f"
 	return 0;
+#line 512 "TD03AD.f"
     }
 
+#line 515 "TD03AD.f"
     if (idual == 1) {
 
 /*        and then obtain (MWORK x PWORK) dual of this system if */
 /*        appropriate. */
 
+#line 520 "TD03AD.f"
 	ab07md_("D", &n, &mwork, &pwork, &a[a_offset], lda, &b[b_offset], ldb,
 		 &c__[c_offset], ldc, &d__[d_offset], ldd, info, (ftnlen)1);
+#line 522 "TD03AD.f"
 	itemp = pwork;
+#line 523 "TD03AD.f"
 	pwork = mwork;
+#line 524 "TD03AD.f"
 	mwork = itemp;
+#line 525 "TD03AD.f"
     }
 
 /*     Find left polynomial matrix representation (and minimal */
 /*     state-space representation en route) for the relevant state-space */
 /*     representation ... */
 
+#line 531 "TD03AD.f"
     tb03ad_("Left", equil, &n, &mwork, &pwork, &a[a_offset], lda, &b[b_offset]
 	    , ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, nr, &indexp[1], &
 	    pcoeff[pcoeff_offset], ldpco1, ldpco2, &qcoeff[qcoeff_offset], 
 	    ldqco1, ldqco2, &vcoeff[vcoeff_offset], ldvco1, ldvco2, tol, &
 	    iwork[1], &dwork[1], ldwork, info, (ftnlen)4, (ftnlen)1);
 
+#line 536 "TD03AD.f"
     if (*info > 0) {
+#line 537 "TD03AD.f"
 	*info = pwork + *info;
+#line 538 "TD03AD.f"
 	return 0;
+#line 539 "TD03AD.f"
     }
 
+#line 541 "TD03AD.f"
     if (! lleri) {
 
 /*        and, if a right polynomial matrix representation is required, */
 /*        transpose and reorder (to get a block upper Hessenberg */
 /*        matrix A). */
 
+#line 547 "TD03AD.f"
 	k = iwork[1] - 1;
+#line 548 "TD03AD.f"
 	if (n >= 2) {
+#line 548 "TD03AD.f"
 	    k += iwork[2];
+#line 548 "TD03AD.f"
 	}
+#line 550 "TD03AD.f"
 	i__1 = *nr - 1;
+#line 550 "TD03AD.f"
 	tb01xd_("D", nr, &mwork, &pwork, &k, &i__1, &a[a_offset], lda, &b[
 		b_offset], ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, 
 		info, (ftnlen)1);
 
+#line 553 "TD03AD.f"
 	kpcoef = 0;
 
+#line 555 "TD03AD.f"
 	i__1 = pwork;
+#line 555 "TD03AD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
 /* Computing MAX */
+#line 556 "TD03AD.f"
 	    i__2 = kpcoef, i__3 = indexp[i__];
+#line 556 "TD03AD.f"
 	    kpcoef = max(i__2,i__3);
+#line 557 "TD03AD.f"
 /* L60: */
+#line 557 "TD03AD.f"
 	}
 
+#line 559 "TD03AD.f"
 	++kpcoef;
+#line 560 "TD03AD.f"
 	tc01od_("L", &mwork, &pwork, &kpcoef, &pcoeff[pcoeff_offset], ldpco1, 
 		ldpco2, &qcoeff[qcoeff_offset], ldqco1, ldqco2, info, (ftnlen)
 		1);
+#line 562 "TD03AD.f"
     }
 
+#line 564 "TD03AD.f"
     if (! lrowco && mplim != 1) {
 
 /*        If non-scalar T(s) originally given by columns, */
 /*        retranspose U(s). */
 
+#line 569 "TD03AD.f"
 	i__1 = kdcoef;
+#line 569 "TD03AD.f"
 	for (k = 1; k <= i__1; ++k) {
 
+#line 571 "TD03AD.f"
 	    i__2 = jstop;
+#line 571 "TD03AD.f"
 	    for (j = 1; j <= i__2; ++j) {
+#line 572 "TD03AD.f"
 		i__3 = mplim - j;
+#line 572 "TD03AD.f"
 		dswap_(&i__3, &ucoeff[j + 1 + (j + k * ucoeff_dim2) * 
 			ucoeff_dim1], &c__1, &ucoeff[j + (j + 1 + k * 
 			ucoeff_dim2) * ucoeff_dim1], lduco1);
+#line 574 "TD03AD.f"
 /* L70: */
+#line 574 "TD03AD.f"
 	    }
 
+#line 576 "TD03AD.f"
 /* L80: */
+#line 576 "TD03AD.f"
 	}
 
+#line 578 "TD03AD.f"
     }
+#line 579 "TD03AD.f"
     return 0;
 /* *** Last line of TD03AD *** */
 } /* td03ad_ */

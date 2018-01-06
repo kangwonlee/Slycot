@@ -1,3 +1,4 @@
+#line 1 "NF01BD.f"
 /* NF01BD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "NF01BD.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -263,93 +265,169 @@ static doublereal c_b19 = 0.;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 218 "NF01BD.f"
     /* Parameter adjustments */
+#line 218 "NF01BD.f"
     --ipar;
+#line 218 "NF01BD.f"
     --x;
+#line 218 "NF01BD.f"
     u_dim1 = *ldu;
+#line 218 "NF01BD.f"
     u_offset = 1 + u_dim1;
+#line 218 "NF01BD.f"
     u -= u_offset;
+#line 218 "NF01BD.f"
     --e;
+#line 218 "NF01BD.f"
     j_dim1 = *ldj;
+#line 218 "NF01BD.f"
     j_offset = 1 + j_dim1;
+#line 218 "NF01BD.f"
     j -= j_offset;
+#line 218 "NF01BD.f"
     --jte;
+#line 218 "NF01BD.f"
     --dwork;
+#line 218 "NF01BD.f"
 
+#line 218 "NF01BD.f"
     /* Function Body */
+#line 218 "NF01BD.f"
     n = ipar[1];
+#line 219 "NF01BD.f"
     nn = ipar[2];
+#line 220 "NF01BD.f"
     bsn = nn * (*l + 2) + 1;
+#line 221 "NF01BD.f"
     nsml = *nsmp * *l;
+#line 222 "NF01BD.f"
     nths = bsn * *l;
+#line 223 "NF01BD.f"
     lths = n * (*m + *l + 1) + *l * *m;
+#line 224 "NF01BD.f"
     lpar = nths + lths;
+#line 225 "NF01BD.f"
     wjte = lsame_(cjte, "C", (ftnlen)1, (ftnlen)1);
 
 /*     Check the scalar input parameters. */
 
+#line 229 "NF01BD.f"
     *info = 0;
+#line 230 "NF01BD.f"
     if (! (wjte || lsame_(cjte, "N", (ftnlen)1, (ftnlen)1))) {
+#line 231 "NF01BD.f"
 	*info = -1;
+#line 232 "NF01BD.f"
     } else if (*nsmp < 0) {
+#line 233 "NF01BD.f"
 	*info = -2;
+#line 234 "NF01BD.f"
     } else if (*m < 0) {
+#line 235 "NF01BD.f"
 	*info = -3;
+#line 236 "NF01BD.f"
     } else if (*l < 0) {
+#line 237 "NF01BD.f"
 	*info = -4;
+#line 238 "NF01BD.f"
     } else if (nn < 0) {
+#line 239 "NF01BD.f"
 	*info = -5;
+#line 240 "NF01BD.f"
     } else if (*lipar < 2) {
+#line 241 "NF01BD.f"
 	*info = -6;
+#line 242 "NF01BD.f"
     } else if (ipar[1] < 0) {
+#line 243 "NF01BD.f"
 	if (*info != 0) {
+#line 244 "NF01BD.f"
 	    i__1 = -(*info);
+#line 244 "NF01BD.f"
 	    xerbla_("NF01BD", &i__1, (ftnlen)6);
+#line 245 "NF01BD.f"
 	} else {
+#line 246 "NF01BD.f"
 	    ipar[1] = nsml * (abs(n) * (*m + *l + 1) + *l * *m + bsn);
+#line 247 "NF01BD.f"
 	    *ldj = max(1,nsml);
+#line 248 "NF01BD.f"
 	}
+#line 249 "NF01BD.f"
 	return 0;
+#line 250 "NF01BD.f"
     } else if (*lx < lpar) {
+#line 251 "NF01BD.f"
 	*info = -8;
+#line 252 "NF01BD.f"
     } else if (*ldu < max(1,*nsmp)) {
+#line 253 "NF01BD.f"
 	*info = -10;
+#line 254 "NF01BD.f"
     } else if (*ldj < max(1,nsml)) {
+#line 255 "NF01BD.f"
 	*info = -13;
+#line 256 "NF01BD.f"
     } else {
+#line 257 "NF01BD.f"
 	ldac = n + *l;
+#line 258 "NF01BD.f"
 	if (*m > 0) {
 /* Computing MAX */
+#line 259 "NF01BD.f"
 	    i__1 = n * ldac, i__2 = n + *m + *l;
+#line 259 "NF01BD.f"
 	    jw = max(i__1,i__2);
+#line 260 "NF01BD.f"
 	} else {
 /* Computing MAX */
+#line 261 "NF01BD.f"
 	    i__1 = n * ldac;
+#line 261 "NF01BD.f"
 	    jw = max(i__1,*l);
+#line 262 "NF01BD.f"
 	}
 /* Computing MAX */
+#line 263 "NF01BD.f"
 	i__1 = nn << 1, i__2 = ldac * (n + *m) + (n << 1) + jw;
+#line 263 "NF01BD.f"
 	if (*ldwork < (nsml << 1) + max(i__1,i__2)) {
+#line 263 "NF01BD.f"
 	    *info = -16;
+#line 263 "NF01BD.f"
 	}
+#line 265 "NF01BD.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 269 "NF01BD.f"
     if (*info != 0) {
+#line 270 "NF01BD.f"
 	i__1 = -(*info);
+#line 270 "NF01BD.f"
 	xerbla_("NF01BD", &i__1, (ftnlen)6);
+#line 271 "NF01BD.f"
 	return 0;
+#line 272 "NF01BD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 276 "NF01BD.f"
     if (min(*nsmp,*l) == 0) {
+#line 277 "NF01BD.f"
 	if (wjte && lpar >= 1) {
+#line 278 "NF01BD.f"
 	    jte[1] = 0.;
+#line 279 "NF01BD.f"
 	    dcopy_(&lpar, &jte[1], &c__0, &jte[1], &c__1);
+#line 280 "NF01BD.f"
 	}
+#line 281 "NF01BD.f"
 	return 0;
+#line 282 "NF01BD.f"
     }
 
 /*     Compute the output of the linear part. */
@@ -357,14 +435,22 @@ static doublereal c_b19 = 0.;
 /*     (2*NSMP*L locations are reserved for computing two times the */
 /*     output of the linear part.) */
 
+#line 289 "NF01BD.f"
     iy = 1;
+#line 290 "NF01BD.f"
     z__ = iy + nsml;
+#line 291 "NF01BD.f"
     ac = z__ + nsml;
+#line 292 "NF01BD.f"
     bd = ac + ldac * n;
+#line 293 "NF01BD.f"
     ix = bd + ldac * *m;
+#line 294 "NF01BD.f"
     jw = ix + n;
 
+#line 296 "NF01BD.f"
     i__1 = *ldwork - jw + 1;
+#line 296 "NF01BD.f"
     tb01vy_("Apply", &n, m, l, &x[nths + 1], &lths, &dwork[ac], &ldac, &dwork[
 	    bd], &ldac, &dwork[ac + n], &ldac, &dwork[bd + n], &ldac, &dwork[
 	    ix], &dwork[jw], &i__1, info, (ftnlen)5);
@@ -374,48 +460,71 @@ static doublereal c_b19 = 0.;
 /*                       2*NSMP*L + (N + L)*N + 2*N + L,       if M = 0; */
 /*                prefer larger. */
 
+#line 305 "NF01BD.f"
     i__1 = *ldwork - jw + 1;
+#line 305 "NF01BD.f"
     tf01mx_(&n, m, l, nsmp, &dwork[ac], &ldac, &u[u_offset], ldu, &dwork[ix], 
 	    &dwork[z__], nsmp, &dwork[jw], &i__1, info);
 
 /*     Fill the blocks dy(i)/dwb(i) and the corresponding parts of JTE, */
 /*     if needed. */
 
+#line 311 "NF01BD.f"
     jw = ac;
+#line 312 "NF01BD.f"
     if (wjte) {
 
+#line 314 "NF01BD.f"
 	i__1 = *l - 1;
+#line 314 "NF01BD.f"
 	for (i__ = 0; i__ <= i__1; ++i__) {
+#line 315 "NF01BD.f"
 	    i__2 = *lipar - 1;
+#line 315 "NF01BD.f"
 	    i__3 = *ldwork - jw + 1;
+#line 315 "NF01BD.f"
 	    nf01by_(cjte, nsmp, l, &c__1, &ipar[2], &i__2, &x[i__ * bsn + 1], 
 		    &bsn, &dwork[z__], nsmp, &e[i__ * *nsmp + 1], &j[i__ * *
 		    nsmp + 1 + j_dim1], ldj, &jte[i__ * bsn + 1], &dwork[jw], 
 		    &i__3, info, (ftnlen)1);
+#line 319 "NF01BD.f"
 /* L10: */
+#line 319 "NF01BD.f"
 	}
 
+#line 321 "NF01BD.f"
     } else {
 
+#line 323 "NF01BD.f"
 	i__1 = *l - 1;
+#line 323 "NF01BD.f"
 	for (i__ = 0; i__ <= i__1; ++i__) {
+#line 324 "NF01BD.f"
 	    i__2 = *lipar - 1;
+#line 324 "NF01BD.f"
 	    i__3 = *ldwork - jw + 1;
+#line 324 "NF01BD.f"
 	    nf01by_(cjte, nsmp, l, &c__1, &ipar[2], &i__2, &x[i__ * bsn + 1], 
 		    &bsn, &dwork[z__], nsmp, &dwork[1], &j[i__ * *nsmp + 1 + 
 		    j_dim1], ldj, &dwork[1], &dwork[jw], &i__3, info, (ftnlen)
 		    1);
+#line 327 "NF01BD.f"
 /* L20: */
+#line 327 "NF01BD.f"
 	}
 
+#line 329 "NF01BD.f"
     }
 
 /*     Compute the output of the system with unchanged parameters. */
 /*     Workspace: need   2*NSMP*L + 2*NN; */
 /*                prefer larger. */
 
+#line 335 "NF01BD.f"
     i__1 = *lipar - 1;
+#line 335 "NF01BD.f"
     i__2 = *ldwork - jw + 1;
+#line 335 "NF01BD.f"
     nf01ay_(nsmp, l, l, &ipar[2], &i__1, &x[1], &nths, &dwork[z__], nsmp, &
 	    dwork[iy], nsmp, &dwork[jw], &i__2, info);
 
@@ -427,44 +536,71 @@ static doublereal c_b19 = 0.;
 /*                                       MAX( N*(N + L), L ) ), if M = 0; */
 /*                prefer larger. */
 
+#line 347 "NF01BD.f"
     jw = z__;
 /* Computing MAX */
+#line 348 "NF01BD.f"
     d__1 = 0., d__2 = dlamch_("Epsilon", (ftnlen)7);
+#line 348 "NF01BD.f"
     eps = sqrt((max(d__1,d__2)));
 
+#line 350 "NF01BD.f"
     i__1 = lpar;
+#line 350 "NF01BD.f"
     for (k = nths + 1; k <= i__1; ++k) {
+#line 351 "NF01BD.f"
 	kcol = k - nths + bsn;
+#line 352 "NF01BD.f"
 	parsav = x[k];
+#line 353 "NF01BD.f"
 	if (parsav == 0.) {
+#line 354 "NF01BD.f"
 	    h__ = eps;
+#line 355 "NF01BD.f"
 	} else {
+#line 356 "NF01BD.f"
 	    h__ = eps * abs(parsav);
+#line 357 "NF01BD.f"
 	}
+#line 358 "NF01BD.f"
 	x[k] += h__;
+#line 359 "NF01BD.f"
 	i__2 = *ldwork - jw + 1;
+#line 359 "NF01BD.f"
 	nf01ad_(nsmp, m, l, &ipar[1], lipar, &x[1], &lpar, &u[u_offset], ldu, 
 		&j[kcol * j_dim1 + 1], nsmp, &dwork[jw], &i__2, info);
+#line 362 "NF01BD.f"
 	x[k] = parsav;
 
+#line 364 "NF01BD.f"
 	i__2 = nsml;
+#line 364 "NF01BD.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 365 "NF01BD.f"
 	    j[i__ + kcol * j_dim1] = (j[i__ + kcol * j_dim1] - dwork[i__]) / 
 		    h__;
+#line 366 "NF01BD.f"
 /* L30: */
+#line 366 "NF01BD.f"
 	}
 
+#line 368 "NF01BD.f"
 /* L40: */
+#line 368 "NF01BD.f"
     }
 
+#line 370 "NF01BD.f"
     if (wjte) {
 
 /*        Compute the last part of J'e in JTE. */
 
+#line 374 "NF01BD.f"
 	dgemv_("Transpose", &nsml, &lths, &c_b17, &j[(bsn + 1) * j_dim1 + 1], 
 		ldj, &e[1], &c__1, &c_b19, &jte[nths + 1], &c__1, (ftnlen)9);
+#line 376 "NF01BD.f"
     }
 
+#line 378 "NF01BD.f"
     return 0;
 
 /* *** Last line of NF01BD *** */

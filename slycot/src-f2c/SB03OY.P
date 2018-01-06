@@ -1,0 +1,7 @@
+extern int sb03oy_(logical *discr, logical *ltrans, integer *isgn, doublereal *s, integer *lds, doublereal *r__, integer *ldr, doublereal *a, integer *lda, doublereal *scale, integer *info);
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlabad_ 14 2 7 7 */
+/*:ref: dlanv2_ 14 10 7 7 7 7 7 7 7 7 7 7 */
+/*:ref: dlapy2_ 7 2 7 7 */
+/*:ref: sb03ov_ 14 4 7 7 7 7 */
+/*:ref: dlapy3_ 7 3 7 7 7 */

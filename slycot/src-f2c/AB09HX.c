@@ -1,3 +1,4 @@
+#line 1 "AB09HX.f"
 /* AB09HX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB09HX.f"
 /* Table of constant values */
 
 static doublereal c_b14 = 1.;
@@ -418,125 +420,216 @@ static doublereal c_b49 = 0.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 353 "AB09HX.f"
     /* Parameter adjustments */
+#line 353 "AB09HX.f"
     a_dim1 = *lda;
+#line 353 "AB09HX.f"
     a_offset = 1 + a_dim1;
+#line 353 "AB09HX.f"
     a -= a_offset;
+#line 353 "AB09HX.f"
     b_dim1 = *ldb;
+#line 353 "AB09HX.f"
     b_offset = 1 + b_dim1;
+#line 353 "AB09HX.f"
     b -= b_offset;
+#line 353 "AB09HX.f"
     c_dim1 = *ldc;
+#line 353 "AB09HX.f"
     c_offset = 1 + c_dim1;
+#line 353 "AB09HX.f"
     c__ -= c_offset;
+#line 353 "AB09HX.f"
     d_dim1 = *ldd;
+#line 353 "AB09HX.f"
     d_offset = 1 + d_dim1;
+#line 353 "AB09HX.f"
     d__ -= d_offset;
+#line 353 "AB09HX.f"
     --hsv;
+#line 353 "AB09HX.f"
     t_dim1 = *ldt;
+#line 353 "AB09HX.f"
     t_offset = 1 + t_dim1;
+#line 353 "AB09HX.f"
     t -= t_offset;
+#line 353 "AB09HX.f"
     ti_dim1 = *ldti;
+#line 353 "AB09HX.f"
     ti_offset = 1 + ti_dim1;
+#line 353 "AB09HX.f"
     ti -= ti_offset;
+#line 353 "AB09HX.f"
     --iwork;
+#line 353 "AB09HX.f"
     --dwork;
+#line 353 "AB09HX.f"
     --bwork;
+#line 353 "AB09HX.f"
 
+#line 353 "AB09HX.f"
     /* Function Body */
+#line 353 "AB09HX.f"
     *info = 0;
+#line 354 "AB09HX.f"
     *iwarn = 0;
+#line 355 "AB09HX.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 356 "AB09HX.f"
     bta = lsame_(job, "B", (ftnlen)1, (ftnlen)1) || lsame_(job, "F", (ftnlen)
 	    1, (ftnlen)1);
+#line 357 "AB09HX.f"
     spa = lsame_(job, "S", (ftnlen)1, (ftnlen)1) || lsame_(job, "P", (ftnlen)
 	    1, (ftnlen)1);
+#line 358 "AB09HX.f"
     bal = lsame_(job, "B", (ftnlen)1, (ftnlen)1) || lsame_(job, "S", (ftnlen)
 	    1, (ftnlen)1);
+#line 359 "AB09HX.f"
     fixord = lsame_(ordsel, "F", (ftnlen)1, (ftnlen)1);
 /* Computing MAX */
 /* Computing MAX */
+#line 360 "AB09HX.f"
     i__3 = max(*n,*m);
 /* Computing MAX */
+#line 360 "AB09HX.f"
     i__4 = *p * (*m + 2), i__5 = *n * 10 * (*n + 1);
+#line 360 "AB09HX.f"
     i__1 = 2, i__2 = *n * (max(i__3,*p) + 5), i__1 = max(i__1,i__2), i__2 = (*
 	    n << 1) * *p + max(i__4,i__5);
+#line 360 "AB09HX.f"
     lw = max(i__1,i__2);
 
 /*     Test the input scalar arguments. */
 
+#line 365 "AB09HX.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 366 "AB09HX.f"
 	*info = -1;
+#line 367 "AB09HX.f"
     } else if (! (bta || spa)) {
+#line 368 "AB09HX.f"
 	*info = -2;
+#line 369 "AB09HX.f"
     } else if (! (fixord || lsame_(ordsel, "A", (ftnlen)1, (ftnlen)1))) {
+#line 370 "AB09HX.f"
 	*info = -3;
+#line 371 "AB09HX.f"
     } else if (*n < 0) {
+#line 372 "AB09HX.f"
 	*info = -4;
+#line 373 "AB09HX.f"
     } else if (*m < 0) {
+#line 374 "AB09HX.f"
 	*info = -5;
+#line 375 "AB09HX.f"
     } else if (*p < 0 || *p > *m) {
+#line 376 "AB09HX.f"
 	*info = -6;
+#line 377 "AB09HX.f"
     } else if (fixord && (*nr < 0 || *nr > *n)) {
+#line 378 "AB09HX.f"
 	*info = -7;
+#line 379 "AB09HX.f"
     } else if (*lda < max(1,*n)) {
+#line 380 "AB09HX.f"
 	*info = -9;
+#line 381 "AB09HX.f"
     } else if (*ldb < max(1,*n)) {
+#line 382 "AB09HX.f"
 	*info = -11;
+#line 383 "AB09HX.f"
     } else if (*ldc < max(1,*p)) {
+#line 384 "AB09HX.f"
 	*info = -13;
+#line 385 "AB09HX.f"
     } else if (*ldd < max(1,*p)) {
+#line 386 "AB09HX.f"
 	*info = -15;
+#line 387 "AB09HX.f"
     } else if (*ldt < max(1,*n)) {
+#line 388 "AB09HX.f"
 	*info = -18;
+#line 389 "AB09HX.f"
     } else if (*ldti < max(1,*n)) {
+#line 390 "AB09HX.f"
 	*info = -20;
+#line 391 "AB09HX.f"
     } else if (*tol2 > 0. && ! fixord && *tol2 > *tol1) {
+#line 392 "AB09HX.f"
 	*info = -22;
+#line 393 "AB09HX.f"
     } else if (*ldwork < lw) {
+#line 394 "AB09HX.f"
 	*info = -25;
+#line 395 "AB09HX.f"
     }
 
+#line 397 "AB09HX.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 401 "AB09HX.f"
 	i__1 = -(*info);
+#line 401 "AB09HX.f"
 	xerbla_("AB09HX", &i__1, (ftnlen)6);
+#line 402 "AB09HX.f"
 	return 0;
+#line 403 "AB09HX.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 407 "AB09HX.f"
     i__1 = min(*n,*m);
+#line 407 "AB09HX.f"
     if (min(i__1,*p) == 0) {
+#line 408 "AB09HX.f"
 	*nr = 0;
+#line 409 "AB09HX.f"
 	iwork[1] = 0;
+#line 410 "AB09HX.f"
 	dwork[1] = 2.;
+#line 411 "AB09HX.f"
 	dwork[2] = 1.;
+#line 412 "AB09HX.f"
 	return 0;
+#line 413 "AB09HX.f"
     }
 
 /*     For discrete-time case, apply the discrete-to-continuous bilinear */
 /*     transformation. */
 
+#line 418 "AB09HX.f"
     if (discr) {
 
 /*        Real workspace:    need  N, prefer larger; */
 /*        Integer workspace: need  N. */
 
+#line 423 "AB09HX.f"
 	ab04md_("Discrete", n, m, p, &c_b14, &c_b14, &a[a_offset], lda, &b[
 		b_offset], ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, &
 		iwork[1], &dwork[1], ldwork, &ierr, (ftnlen)8);
+#line 425 "AB09HX.f"
 	if (ierr != 0) {
+#line 426 "AB09HX.f"
 	    *info = 1;
+#line 427 "AB09HX.f"
 	    return 0;
+#line 428 "AB09HX.f"
 	}
 /* Computing MAX */
+#line 429 "AB09HX.f"
 	i__1 = *n, i__2 = (integer) dwork[1];
+#line 429 "AB09HX.f"
 	wrkopt = max(i__1,i__2);
+#line 430 "AB09HX.f"
     } else {
+#line 431 "AB09HX.f"
 	wrkopt = 0;
+#line 432 "AB09HX.f"
     }
 
 /*     Compute in TI and T the Cholesky factors Su and Ru of the */
@@ -546,31 +639,47 @@ static doublereal c_b49 = 0.;
 /*                        prefer larger. */
 /*     Integer workspace: need  2*N. */
 
+#line 441 "AB09HX.f"
     ab09hy_(n, m, p, &a[a_offset], lda, &b[b_offset], ldb, &c__[c_offset], 
 	    ldc, &d__[d_offset], ldd, &scalec, &scaleo, &ti[ti_offset], ldti, 
 	    &t[t_offset], ldt, &iwork[1], &dwork[1], ldwork, &bwork[1], info);
+#line 444 "AB09HX.f"
     if (*info != 0) {
+#line 444 "AB09HX.f"
 	return 0;
+#line 444 "AB09HX.f"
     }
 /* Computing MAX */
+#line 446 "AB09HX.f"
     i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 446 "AB09HX.f"
     wrkopt = max(i__1,i__2);
+#line 447 "AB09HX.f"
     ricond = dwork[2];
 
 /*     Save Su in V. */
 
+#line 451 "AB09HX.f"
     ku = 1;
+#line 452 "AB09HX.f"
     kv = ku + *n * *n;
+#line 453 "AB09HX.f"
     kw = kv + *n * *n;
+#line 454 "AB09HX.f"
     dlacpy_("Upper", n, n, &ti[ti_offset], ldti, &dwork[kv], n, (ftnlen)5);
 /*                               | x x | */
 /*     Compute Ru*Su in the form | 0 x | in TI. */
 
+#line 458 "AB09HX.f"
     i__1 = *n;
+#line 458 "AB09HX.f"
     for (j = 1; j <= i__1; ++j) {
+#line 459 "AB09HX.f"
 	dtrmv_("Upper", "NoTranspose", "NonUnit", &j, &t[t_offset], ldt, &ti[
 		j * ti_dim1 + 1], &c__1, (ftnlen)5, (ftnlen)11, (ftnlen)7);
+#line 461 "AB09HX.f"
 /* L10: */
+#line 461 "AB09HX.f"
     }
 
 /*     Compute the singular value decomposition Ru*Su = V*S*UT */
@@ -579,20 +688,30 @@ static doublereal c_b49 = 0.;
 /*     Workspace:  need   2*N*N + 5*N; */
 /*                 prefer larger. */
 
+#line 469 "AB09HX.f"
     i__1 = *ldwork - kw + 1;
+#line 469 "AB09HX.f"
     mb03ud_("Vectors", "Vectors", n, &ti[ti_offset], ldti, &dwork[ku], n, &
 	    hsv[1], &dwork[kw], &i__1, &ierr, (ftnlen)7, (ftnlen)7);
+#line 471 "AB09HX.f"
     if (ierr != 0) {
+#line 472 "AB09HX.f"
 	*info = 7;
+#line 473 "AB09HX.f"
 	return 0;
+#line 474 "AB09HX.f"
     }
 /* Computing MAX */
+#line 475 "AB09HX.f"
     i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 475 "AB09HX.f"
     wrkopt = max(i__1,i__2);
 
 /*     Scale the singular values. */
 
+#line 479 "AB09HX.f"
     d__1 = 1. / scalec / scaleo;
+#line 479 "AB09HX.f"
     dscal_(n, &d__1, &hsv[1], &c__1);
 
 /*     Partition S, U and V conformally as: */
@@ -602,92 +721,153 @@ static doublereal c_b49 = 0.;
 
 /*     Compute the order NR of reduced system, as the order of S1. */
 
+#line 488 "AB09HX.f"
     toldef = (doublereal) (*n) * dlamch_("Epsilon", (ftnlen)7);
+#line 489 "AB09HX.f"
     atol = toldef;
+#line 490 "AB09HX.f"
     if (fixord) {
+#line 491 "AB09HX.f"
 	if (*nr > 0) {
+#line 492 "AB09HX.f"
 	    if (hsv[*nr] <= atol) {
+#line 493 "AB09HX.f"
 		*nr = 0;
+#line 494 "AB09HX.f"
 		*iwarn = 1;
+#line 495 "AB09HX.f"
 		fixord = FALSE_;
+#line 496 "AB09HX.f"
 	    }
+#line 497 "AB09HX.f"
 	}
+#line 498 "AB09HX.f"
     } else {
+#line 499 "AB09HX.f"
 	atol = max(*tol1,atol);
+#line 500 "AB09HX.f"
 	*nr = 0;
+#line 501 "AB09HX.f"
     }
+#line 502 "AB09HX.f"
     if (! fixord) {
+#line 503 "AB09HX.f"
 	i__1 = *n;
+#line 503 "AB09HX.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 504 "AB09HX.f"
 	    if (hsv[j] <= atol) {
+#line 504 "AB09HX.f"
 		goto L30;
+#line 504 "AB09HX.f"
 	    }
+#line 505 "AB09HX.f"
 	    ++(*nr);
+#line 506 "AB09HX.f"
 /* L20: */
+#line 506 "AB09HX.f"
 	}
+#line 507 "AB09HX.f"
 L30:
+#line 508 "AB09HX.f"
 	;
+#line 508 "AB09HX.f"
     }
 
 /*     Compute the order of minimal realization as the order of [S1 S2]. */
 
+#line 512 "AB09HX.f"
     nr1 = *nr + 1;
+#line 513 "AB09HX.f"
     nminr = *nr;
+#line 514 "AB09HX.f"
     if (*nr < *n) {
+#line 515 "AB09HX.f"
 	if (spa) {
+#line 515 "AB09HX.f"
 	    atol = max(*tol2,toldef);
+#line 515 "AB09HX.f"
 	}
+#line 516 "AB09HX.f"
 	i__1 = *n;
+#line 516 "AB09HX.f"
 	for (j = nr1; j <= i__1; ++j) {
+#line 517 "AB09HX.f"
 	    if (hsv[j] <= atol) {
+#line 517 "AB09HX.f"
 		goto L50;
+#line 517 "AB09HX.f"
 	    }
+#line 518 "AB09HX.f"
 	    ++nminr;
+#line 519 "AB09HX.f"
 /* L40: */
+#line 519 "AB09HX.f"
 	}
+#line 520 "AB09HX.f"
 L50:
+#line 521 "AB09HX.f"
 	;
+#line 521 "AB09HX.f"
     }
 
 /*     Finish if the order is zero. */
 
+#line 525 "AB09HX.f"
     if (*nr == 0) {
+#line 526 "AB09HX.f"
 	if (spa) {
+#line 527 "AB09HX.f"
 	    ab09dd_("Continuous", n, m, p, nr, &a[a_offset], lda, &b[b_offset]
 		    , ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, &rcond, &
 		    iwork[1], &dwork[1], &ierr, (ftnlen)10);
+#line 529 "AB09HX.f"
 	    iwork[1] = nminr;
+#line 530 "AB09HX.f"
 	} else {
+#line 531 "AB09HX.f"
 	    iwork[1] = 0;
+#line 532 "AB09HX.f"
 	}
+#line 533 "AB09HX.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 534 "AB09HX.f"
 	dwork[2] = ricond;
+#line 535 "AB09HX.f"
 	return 0;
+#line 536 "AB09HX.f"
     }
 
 /*     Compute NS, the order of S2. */
 /*     Note: For BTA, NS is always zero, because NMINR = NR. */
 
+#line 541 "AB09HX.f"
     ns = nminr - *nr;
 
 /*     Compute the truncation matrices. */
 
 /*     Compute TI' = | TI1' TI2' | = Ru'*| V1 V2 | in U. */
 
+#line 547 "AB09HX.f"
     dtrmm_("Left", "Upper", "Transpose", "NonUnit", n, &nminr, &c_b14, &t[
 	    t_offset], ldt, &dwork[ku], n, (ftnlen)4, (ftnlen)5, (ftnlen)9, (
 	    ftnlen)7);
 
 /*     Compute  T = | T1 T2 | = Su*| U1 U2 | . */
 
+#line 552 "AB09HX.f"
     ma02ad_("Full", &nminr, n, &ti[ti_offset], ldti, &t[t_offset], ldt, (
 	    ftnlen)4);
+#line 553 "AB09HX.f"
     dtrmm_("Left", "Upper", "NoTranspose", "NonUnit", n, &nminr, &c_b14, &
 	    dwork[kv], n, &t[t_offset], ldt, (ftnlen)4, (ftnlen)5, (ftnlen)11,
 	     (ftnlen)7);
+#line 555 "AB09HX.f"
     ktau = kv;
 
+#line 557 "AB09HX.f"
     if (bal) {
+#line 558 "AB09HX.f"
 	ij = ku;
 
 /*        Square-Root B&T/SPA method. */
@@ -696,14 +876,23 @@ L50:
 /*                    -1/2            -1/2 */
 /*               T1*S1     and TI1'*S1    . */
 
+#line 566 "AB09HX.f"
 	i__1 = *nr;
+#line 566 "AB09HX.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 567 "AB09HX.f"
 	    temp = 1. / sqrt(hsv[j]);
+#line 568 "AB09HX.f"
 	    dscal_(n, &temp, &t[j * t_dim1 + 1], &c__1);
+#line 569 "AB09HX.f"
 	    dscal_(n, &temp, &dwork[ij], &c__1);
+#line 570 "AB09HX.f"
 	    ij += *n;
+#line 571 "AB09HX.f"
 /* L70: */
+#line 571 "AB09HX.f"
 	}
+#line 572 "AB09HX.f"
     } else {
 
 /*        Balancing-Free B&T/SPA method. */
@@ -715,22 +904,34 @@ L50:
 /*                    prefer N*MAX(N,M,P) + NR*(NB+1) */
 /*                           (NB determined by ILAENV for DGEQRF). */
 
+#line 583 "AB09HX.f"
 	kw = ktau + *nr;
+#line 584 "AB09HX.f"
 	ldw = *ldwork - kw + 1;
+#line 585 "AB09HX.f"
 	dgeqrf_(n, nr, &t[t_offset], ldt, &dwork[ktau], &dwork[kw], &ldw, &
 		ierr);
+#line 586 "AB09HX.f"
 	dorgqr_(n, nr, nr, &t[t_offset], ldt, &dwork[ktau], &dwork[kw], &ldw, 
 		&ierr);
+#line 588 "AB09HX.f"
 	dgeqrf_(n, nr, &dwork[ku], n, &dwork[ktau], &dwork[kw], &ldw, &ierr);
 /* Computing MAX */
+#line 590 "AB09HX.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 590 "AB09HX.f"
 	wrkopt = max(i__1,i__2);
+#line 591 "AB09HX.f"
 	dorgqr_(n, nr, nr, &dwork[ku], n, &dwork[ktau], &dwork[kw], &ldw, &
 		ierr);
 /* Computing MAX */
+#line 593 "AB09HX.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 593 "AB09HX.f"
 	wrkopt = max(i__1,i__2);
+#line 594 "AB09HX.f"
     }
+#line 595 "AB09HX.f"
     if (ns > 0) {
 
 /*        Compute orthogonal bases for the images of matrices T2 and */
@@ -739,78 +940,114 @@ L50:
 /*        Workspace:  need   N*MAX(N,M,P) + 2*NS; */
 /*                    prefer N*MAX(N,M,P) + NS*(NB+1) */
 /*                           (NB determined by ILAENV for DGEQRF). */
+#line 603 "AB09HX.f"
 	kw = ktau + ns;
+#line 604 "AB09HX.f"
 	ldw = *ldwork - kw + 1;
+#line 605 "AB09HX.f"
 	dgeqrf_(n, &ns, &t[nr1 * t_dim1 + 1], ldt, &dwork[ktau], &dwork[kw], &
 		ldw, &ierr);
+#line 607 "AB09HX.f"
 	dorgqr_(n, &ns, &ns, &t[nr1 * t_dim1 + 1], ldt, &dwork[ktau], &dwork[
 		kw], &ldw, &ierr);
+#line 609 "AB09HX.f"
 	dgeqrf_(n, &ns, &dwork[ku + *n * *nr], n, &dwork[ktau], &dwork[kw], &
 		ldw, &ierr);
 /* Computing MAX */
+#line 611 "AB09HX.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 611 "AB09HX.f"
 	wrkopt = max(i__1,i__2);
+#line 612 "AB09HX.f"
 	dorgqr_(n, &ns, &ns, &dwork[ku + *n * *nr], n, &dwork[ktau], &dwork[
 		kw], &ldw, &ierr);
 /* Computing MAX */
+#line 614 "AB09HX.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 614 "AB09HX.f"
 	wrkopt = max(i__1,i__2);
+#line 615 "AB09HX.f"
     }
 
 /*     Transpose TI' in TI. */
 
+#line 619 "AB09HX.f"
     ma02ad_("Full", n, &nminr, &dwork[ku], n, &ti[ti_offset], ldti, (ftnlen)4)
 	    ;
 
+#line 621 "AB09HX.f"
     if (! bal) {
 /*                        -1 */
 /*        Compute (TI1*T1)  *TI1 in TI. */
 
+#line 625 "AB09HX.f"
 	dgemm_("NoTranspose", "NoTranspose", nr, nr, n, &c_b14, &ti[ti_offset]
 		, ldti, &t[t_offset], ldt, &c_b49, &dwork[ku], n, (ftnlen)11, 
 		(ftnlen)11);
+#line 627 "AB09HX.f"
 	dgetrf_(nr, nr, &dwork[ku], n, &iwork[1], &ierr);
+#line 628 "AB09HX.f"
 	dgetrs_("NoTranspose", nr, n, &dwork[ku], n, &iwork[1], &ti[ti_offset]
 		, ldti, &ierr, (ftnlen)11);
 
+#line 631 "AB09HX.f"
 	if (ns > 0) {
 /*                           -1 */
 /*           Compute (TI2*T2)  *TI2 in TI2. */
 
+#line 635 "AB09HX.f"
 	    dgemm_("NoTranspose", "NoTranspose", &ns, &ns, n, &c_b14, &ti[nr1 
 		    + ti_dim1], ldti, &t[nr1 * t_dim1 + 1], ldt, &c_b49, &
 		    dwork[ku], n, (ftnlen)11, (ftnlen)11);
+#line 638 "AB09HX.f"
 	    dgetrf_(&ns, &ns, &dwork[ku], n, &iwork[1], &ierr);
+#line 639 "AB09HX.f"
 	    dgetrs_("NoTranspose", &ns, n, &dwork[ku], n, &iwork[1], &ti[nr1 
 		    + ti_dim1], ldti, &ierr, (ftnlen)11);
+#line 641 "AB09HX.f"
 	}
+#line 642 "AB09HX.f"
     }
 
 /*     Compute TI*A*T (A is in RSF). */
 
+#line 646 "AB09HX.f"
     ij = ku;
+#line 647 "AB09HX.f"
     i__1 = *n;
+#line 647 "AB09HX.f"
     for (j = 1; j <= i__1; ++j) {
 /* Computing MIN */
+#line 648 "AB09HX.f"
 	i__2 = j + 1;
+#line 648 "AB09HX.f"
 	k = min(i__2,*n);
+#line 649 "AB09HX.f"
 	dgemv_("NoTranspose", &nminr, &k, &c_b14, &ti[ti_offset], ldti, &a[j *
 		 a_dim1 + 1], &c__1, &c_b49, &dwork[ij], &c__1, (ftnlen)11);
+#line 651 "AB09HX.f"
 	ij += *n;
+#line 652 "AB09HX.f"
 /* L80: */
+#line 652 "AB09HX.f"
     }
+#line 653 "AB09HX.f"
     dgemm_("NoTranspose", "NoTranspose", &nminr, &nminr, n, &c_b14, &dwork[ku]
 	    , n, &t[t_offset], ldt, &c_b49, &a[a_offset], lda, (ftnlen)11, (
 	    ftnlen)11);
 
 /*     Compute TI*B and C*T. */
 
+#line 658 "AB09HX.f"
     dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[ku], n, (ftnlen)4);
+#line 659 "AB09HX.f"
     dgemm_("NoTranspose", "NoTranspose", &nminr, m, n, &c_b14, &ti[ti_offset],
 	     ldti, &dwork[ku], n, &c_b49, &b[b_offset], ldb, (ftnlen)11, (
 	    ftnlen)11);
 
+#line 662 "AB09HX.f"
     dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[ku], p, (ftnlen)4);
+#line 663 "AB09HX.f"
     dgemm_("NoTranspose", "NoTranspose", p, &nminr, n, &c_b14, &dwork[ku], p, 
 	    &t[t_offset], ldt, &c_b49, &c__[c_offset], ldc, (ftnlen)11, (
 	    ftnlen)11);
@@ -821,6 +1058,7 @@ L50:
 /*     Workspace:  need real    4*(NMINR-NR); */
 /*                 need integer 2*(NMINR-NR). */
 
+#line 672 "AB09HX.f"
     ab09dd_("Continuous", &nminr, m, p, nr, &a[a_offset], lda, &b[b_offset], 
 	    ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, &rcond, &iwork[1], 
 	    &dwork[1], &ierr, (ftnlen)10);
@@ -828,19 +1066,28 @@ L50:
 /*     For discrete-time case, apply the continuous-to-discrete */
 /*     bilinear transformation. */
 
+#line 678 "AB09HX.f"
     if (discr) {
+#line 679 "AB09HX.f"
 	ab04md_("Continuous", nr, m, p, &c_b14, &c_b14, &a[a_offset], lda, &b[
 		b_offset], ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, &
 		iwork[1], &dwork[1], ldwork, &ierr, (ftnlen)10);
 
 /* Computing MAX */
+#line 682 "AB09HX.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[1];
+#line 682 "AB09HX.f"
 	wrkopt = max(i__1,i__2);
+#line 683 "AB09HX.f"
     }
+#line 684 "AB09HX.f"
     iwork[1] = nminr;
+#line 685 "AB09HX.f"
     dwork[1] = (doublereal) wrkopt;
+#line 686 "AB09HX.f"
     dwork[2] = ricond;
 
+#line 688 "AB09HX.f"
     return 0;
 /* *** Last line of AB09HX *** */
 } /* ab09hx_ */

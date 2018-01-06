@@ -1,0 +1,2 @@
+extern int mc01sy_(doublereal *m, integer *e, integer *b, doublereal *a, logical *ovflow);
+/*:ref: dlamch_ 7 2 13 124 */

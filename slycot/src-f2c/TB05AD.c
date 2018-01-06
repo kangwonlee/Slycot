@@ -1,3 +1,4 @@
+#line 1 "TB05AD.f"
 /* TB05AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TB05AD.f"
 /* Table of constant values */
 
 static doublecomplex c_b1 = {0.,0.};
@@ -311,97 +313,171 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 267 "TB05AD.f"
     /* Parameter adjustments */
+#line 267 "TB05AD.f"
     a_dim1 = *lda;
+#line 267 "TB05AD.f"
     a_offset = 1 + a_dim1;
+#line 267 "TB05AD.f"
     a -= a_offset;
+#line 267 "TB05AD.f"
     b_dim1 = *ldb;
+#line 267 "TB05AD.f"
     b_offset = 1 + b_dim1;
+#line 267 "TB05AD.f"
     b -= b_offset;
+#line 267 "TB05AD.f"
     c_dim1 = *ldc;
+#line 267 "TB05AD.f"
     c_offset = 1 + c_dim1;
+#line 267 "TB05AD.f"
     c__ -= c_offset;
+#line 267 "TB05AD.f"
     g_dim1 = *ldg;
+#line 267 "TB05AD.f"
     g_offset = 1 + g_dim1;
+#line 267 "TB05AD.f"
     g -= g_offset;
+#line 267 "TB05AD.f"
     --evre;
+#line 267 "TB05AD.f"
     --evim;
+#line 267 "TB05AD.f"
     hinvb_dim1 = *ldhinv;
+#line 267 "TB05AD.f"
     hinvb_offset = 1 + hinvb_dim1;
+#line 267 "TB05AD.f"
     hinvb -= hinvb_offset;
+#line 267 "TB05AD.f"
     --iwork;
+#line 267 "TB05AD.f"
     --dwork;
+#line 267 "TB05AD.f"
     --zwork;
+#line 267 "TB05AD.f"
 
+#line 267 "TB05AD.f"
     /* Function Body */
+#line 267 "TB05AD.f"
     *info = 0;
+#line 268 "TB05AD.f"
     lbalec = lsame_(baleig, "C", (ftnlen)1, (ftnlen)1);
+#line 269 "TB05AD.f"
     lbaleb = lsame_(baleig, "B", (ftnlen)1, (ftnlen)1) || lsame_(baleig, 
 	    "E", (ftnlen)1, (ftnlen)1);
+#line 270 "TB05AD.f"
     lbalea = lsame_(baleig, "A", (ftnlen)1, (ftnlen)1);
+#line 271 "TB05AD.f"
     lbalba = lbaleb || lbalea;
+#line 272 "TB05AD.f"
     linita = lsame_(inita, "G", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 276 "TB05AD.f"
     if (! lbalec && ! lbalba && ! lsame_(baleig, "N", (ftnlen)1, (ftnlen)1)) {
+#line 278 "TB05AD.f"
 	*info = -1;
+#line 279 "TB05AD.f"
     } else if (! linita && ! lsame_(inita, "H", (ftnlen)1, (ftnlen)1)) {
+#line 280 "TB05AD.f"
 	*info = -2;
+#line 281 "TB05AD.f"
     } else if (*n < 0) {
+#line 282 "TB05AD.f"
 	*info = -3;
+#line 283 "TB05AD.f"
     } else if (*m < 0) {
+#line 284 "TB05AD.f"
 	*info = -4;
+#line 285 "TB05AD.f"
     } else if (*p < 0) {
+#line 286 "TB05AD.f"
 	*info = -5;
+#line 287 "TB05AD.f"
     } else if (*lda < max(1,*n)) {
+#line 288 "TB05AD.f"
 	*info = -8;
+#line 289 "TB05AD.f"
     } else if (*ldb < max(1,*n)) {
+#line 290 "TB05AD.f"
 	*info = -10;
+#line 291 "TB05AD.f"
     } else if (*ldc < max(1,*p)) {
+#line 292 "TB05AD.f"
 	*info = -12;
+#line 293 "TB05AD.f"
     } else if (*ldg < max(1,*p)) {
+#line 294 "TB05AD.f"
 	*info = -15;
+#line 295 "TB05AD.f"
     } else if (*ldhinv < max(1,*n)) {
+#line 296 "TB05AD.f"
 	*info = -19;
+#line 297 "TB05AD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 297 "TB05AD.f"
 	i__1 = max(*n,*m);
 /* Computing MAX */
+#line 297 "TB05AD.f"
 	i__2 = *n, i__3 = *m - 1, i__2 = max(i__2,i__3), i__3 = *p - 1;
+#line 297 "TB05AD.f"
 	if (linita && ! lbalec && ! lbalea && *ldwork < *n - 1 + max(i__1,*p) 
 		|| linita && (lbalec || lbalea) && *ldwork < *n + max(i__2,
 		i__3) || ! linita && (lbalec || lbalea) && *ldwork < *n << 1 
 		|| *ldwork < 1) {
+#line 303 "TB05AD.f"
 	    *info = -22;
+#line 304 "TB05AD.f"
 	} else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 304 "TB05AD.f"
 	    i__1 = 1, i__2 = *n * *n;
+#line 304 "TB05AD.f"
 	    if ((lbalec || lbalea) && *lzwork < *n * (*n + 2) || *lzwork < 
 		    max(i__1,i__2)) {
+#line 306 "TB05AD.f"
 		*info = -24;
+#line 307 "TB05AD.f"
 	    }
+#line 307 "TB05AD.f"
 	}
+#line 307 "TB05AD.f"
     }
 
+#line 309 "TB05AD.f"
     if (*info != 0) {
 
 /*        Error return */
 
+#line 313 "TB05AD.f"
 	i__1 = -(*info);
+#line 313 "TB05AD.f"
 	xerbla_("TB05AD", &i__1, (ftnlen)6);
+#line 314 "TB05AD.f"
 	return 0;
+#line 315 "TB05AD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 319 "TB05AD.f"
     if (*n == 0) {
+#line 320 "TB05AD.f"
 	if (min(*m,*p) > 0) {
+#line 320 "TB05AD.f"
 	    zlaset_("Full", p, m, &c_b1, &c_b1, &g[g_offset], ldg, (ftnlen)4);
+#line 320 "TB05AD.f"
 	}
+#line 322 "TB05AD.f"
 	*rcond = 1.;
+#line 323 "TB05AD.f"
 	dwork[1] = 1.;
+#line 324 "TB05AD.f"
 	return 0;
+#line 325 "TB05AD.f"
     }
 
 /*     (Note: Comments in the code beginning "Workspace:" describe the */
@@ -410,301 +486,482 @@ static integer c__1 = 1;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 333 "TB05AD.f"
     wrkopt = 1;
 
+#line 335 "TB05AD.f"
     if (linita) {
+#line 336 "TB05AD.f"
 	*(unsigned char *)balanc = 'N';
+#line 337 "TB05AD.f"
 	if (lbalba) {
+#line 337 "TB05AD.f"
 	    *(unsigned char *)balanc = 'B';
+#line 337 "TB05AD.f"
 	}
 
 /*        Workspace: need N. */
 
+#line 341 "TB05AD.f"
 	dgebal_(balanc, n, &a[a_offset], lda, &low, &igh, &dwork[1], info, (
 		ftnlen)1);
+#line 342 "TB05AD.f"
 	if (lbalba) {
 
 /*           Adjust B and C matrices based on information in the */
 /*           vector DWORK which describes the balancing of A and is */
 /*           defined in the subroutine DGEBAL. */
 
+#line 348 "TB05AD.f"
 	    i__1 = *n;
+#line 348 "TB05AD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 349 "TB05AD.f"
 		jj = j;
+#line 350 "TB05AD.f"
 		if (jj < low || jj > igh) {
+#line 351 "TB05AD.f"
 		    if (jj < low) {
+#line 351 "TB05AD.f"
 			jj = low - jj;
+#line 351 "TB05AD.f"
 		    }
+#line 352 "TB05AD.f"
 		    jp = (integer) dwork[jj];
+#line 353 "TB05AD.f"
 		    if (jp != jj) {
 
 /*                    Permute rows of B. */
 
+#line 357 "TB05AD.f"
 			if (*m > 0) {
+#line 357 "TB05AD.f"
 			    dswap_(m, &b[jj + b_dim1], ldb, &b[jp + b_dim1], 
 				    ldb);
+#line 357 "TB05AD.f"
 			}
 
 /*                    Permute columns of C. */
 
+#line 362 "TB05AD.f"
 			if (*p > 0) {
+#line 362 "TB05AD.f"
 			    dswap_(p, &c__[jj * c_dim1 + 1], &c__1, &c__[jp * 
 				    c_dim1 + 1], &c__1);
+#line 362 "TB05AD.f"
 			}
+#line 364 "TB05AD.f"
 		    }
+#line 365 "TB05AD.f"
 		}
+#line 366 "TB05AD.f"
 /* L10: */
+#line 366 "TB05AD.f"
 	    }
 
+#line 368 "TB05AD.f"
 	    if (igh != low) {
 
+#line 370 "TB05AD.f"
 		i__1 = igh;
+#line 370 "TB05AD.f"
 		for (j = low; j <= i__1; ++j) {
+#line 371 "TB05AD.f"
 		    t = dwork[j];
 
 /*                 Scale rows of permuted B. */
 
+#line 375 "TB05AD.f"
 		    if (*m > 0) {
+#line 375 "TB05AD.f"
 			d__1 = 1. / t;
+#line 375 "TB05AD.f"
 			dscal_(m, &d__1, &b[j + b_dim1], ldb);
+#line 375 "TB05AD.f"
 		    }
 
 /*                 Scale columns of permuted C. */
 
+#line 380 "TB05AD.f"
 		    if (*p > 0) {
+#line 380 "TB05AD.f"
 			dscal_(p, &t, &c__[j * c_dim1 + 1], &c__1);
+#line 380 "TB05AD.f"
 		    }
+#line 382 "TB05AD.f"
 /* L20: */
+#line 382 "TB05AD.f"
 		}
 
+#line 384 "TB05AD.f"
 	    }
+#line 385 "TB05AD.f"
 	}
 
 /*        Reduce A to Hessenberg form by orthogonal similarities and */
 /*        accumulate the orthogonal transformations into B and C. */
 /*        Workspace: need 2*N - 1;  prefer N - 1 + N*NB. */
 
+#line 391 "TB05AD.f"
 	itau = 1;
+#line 392 "TB05AD.f"
 	jwork = itau + *n - 1;
+#line 393 "TB05AD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 393 "TB05AD.f"
 	dgehrd_(n, &low, &igh, &a[a_offset], lda, &dwork[itau], &dwork[jwork],
 		 &i__1, info);
 /* Computing MAX */
+#line 395 "TB05AD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 395 "TB05AD.f"
 	wrkopt = max(i__1,i__2);
 
 /*        Workspace: need N - 1 + M;  prefer N - 1 + M*NB. */
 
+#line 399 "TB05AD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 399 "TB05AD.f"
 	dormhr_("Left", "Transpose", n, m, &low, &igh, &a[a_offset], lda, &
 		dwork[itau], &b[b_offset], ldb, &dwork[jwork], &i__1, info, (
 		ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 402 "TB05AD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 402 "TB05AD.f"
 	wrkopt = max(i__1,i__2);
 
 /*        Workspace: need N - 1 + P;  prefer N - 1 + P*NB. */
 
+#line 406 "TB05AD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 406 "TB05AD.f"
 	dormhr_("Right", "No transpose", p, n, &low, &igh, &a[a_offset], lda, 
 		&dwork[itau], &c__[c_offset], ldc, &dwork[jwork], &i__1, info,
 		 (ftnlen)5, (ftnlen)12);
 /* Computing MAX */
+#line 409 "TB05AD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 409 "TB05AD.f"
 	wrkopt = max(i__1,i__2);
+#line 410 "TB05AD.f"
 	if (lbalba) {
 
 /*           Temporarily store Hessenberg form of A in array ZWORK. */
 
+#line 414 "TB05AD.f"
 	    ij = 0;
+#line 415 "TB05AD.f"
 	    i__1 = *n;
+#line 415 "TB05AD.f"
 	    for (j = 1; j <= i__1; ++j) {
 
+#line 417 "TB05AD.f"
 		i__2 = *n;
+#line 417 "TB05AD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 418 "TB05AD.f"
 		    ++ij;
+#line 419 "TB05AD.f"
 		    i__3 = ij;
+#line 419 "TB05AD.f"
 		    i__4 = i__ + j * a_dim1;
+#line 419 "TB05AD.f"
 		    z__1.r = a[i__4], z__1.i = 0.;
+#line 419 "TB05AD.f"
 		    zwork[i__3].r = z__1.r, zwork[i__3].i = z__1.i;
+#line 420 "TB05AD.f"
 /* L30: */
+#line 420 "TB05AD.f"
 		}
 
+#line 422 "TB05AD.f"
 /* L40: */
+#line 422 "TB05AD.f"
 	    }
 
 /*           Compute the eigenvalues of A if that option is requested. */
 /*           Workspace: need N. */
 
+#line 427 "TB05AD.f"
 	    dhseqr_("Eigenvalues", "No Schur", n, &low, &igh, &a[a_offset], 
 		    lda, &evre[1], &evim[1], &dwork[1], &c__1, &dwork[1], 
 		    ldwork, info, (ftnlen)11, (ftnlen)8);
 
 /*           Restore upper Hessenberg form of A. */
 
+#line 432 "TB05AD.f"
 	    ij = 0;
+#line 433 "TB05AD.f"
 	    i__1 = *n;
+#line 433 "TB05AD.f"
 	    for (j = 1; j <= i__1; ++j) {
 
+#line 435 "TB05AD.f"
 		i__2 = *n;
+#line 435 "TB05AD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 436 "TB05AD.f"
 		    ++ij;
+#line 437 "TB05AD.f"
 		    i__3 = ij;
+#line 437 "TB05AD.f"
 		    a[i__ + j * a_dim1] = zwork[i__3].r;
+#line 438 "TB05AD.f"
 /* L50: */
+#line 438 "TB05AD.f"
 		}
 
+#line 440 "TB05AD.f"
 /* L60: */
+#line 440 "TB05AD.f"
 	    }
 
+#line 442 "TB05AD.f"
 	    if (*info > 0) {
 
 /*              DHSEQR could not evaluate the eigenvalues of A. */
 
+#line 446 "TB05AD.f"
 		*info = 1;
+#line 447 "TB05AD.f"
 	    }
+#line 448 "TB05AD.f"
 	}
+#line 449 "TB05AD.f"
     }
 
 /*     Update  H := (FREQ * I) - A   with appropriate value of FREQ. */
 
+#line 453 "TB05AD.f"
     ij = 0;
+#line 454 "TB05AD.f"
     jj = 1;
+#line 455 "TB05AD.f"
     i__1 = *n;
+#line 455 "TB05AD.f"
     for (j = 1; j <= i__1; ++j) {
 
+#line 457 "TB05AD.f"
 	i__2 = *n;
+#line 457 "TB05AD.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 458 "TB05AD.f"
 	    ++ij;
+#line 459 "TB05AD.f"
 	    i__3 = ij;
+#line 459 "TB05AD.f"
 	    i__4 = i__ + j * a_dim1;
+#line 459 "TB05AD.f"
 	    z__2.r = a[i__4], z__2.i = 0.;
+#line 459 "TB05AD.f"
 	    z__1.r = -z__2.r, z__1.i = -z__2.i;
+#line 459 "TB05AD.f"
 	    zwork[i__3].r = z__1.r, zwork[i__3].i = z__1.i;
+#line 460 "TB05AD.f"
 /* L70: */
+#line 460 "TB05AD.f"
 	}
 
+#line 462 "TB05AD.f"
 	i__2 = jj;
+#line 462 "TB05AD.f"
 	i__3 = jj;
+#line 462 "TB05AD.f"
 	z__1.r = freq->r + zwork[i__3].r, z__1.i = freq->i + zwork[i__3].i;
+#line 462 "TB05AD.f"
 	zwork[i__2].r = z__1.r, zwork[i__2].i = z__1.i;
+#line 463 "TB05AD.f"
 	jj = jj + *n + 1;
+#line 464 "TB05AD.f"
 /* L80: */
+#line 464 "TB05AD.f"
     }
 
+#line 466 "TB05AD.f"
     if (lbalec || lbalea) {
 
 /*        Efficiently compute the 1-norm of the matrix for condition */
 /*        estimation. */
 
+#line 471 "TB05AD.f"
 	hnorm = 0.;
+#line 472 "TB05AD.f"
 	jj = 1;
 
+#line 474 "TB05AD.f"
 	i__1 = *n;
+#line 474 "TB05AD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 475 "TB05AD.f"
 	    i__2 = j - 1;
+#line 475 "TB05AD.f"
 	    t = z_abs(&zwork[jj]) + dasum_(&i__2, &a[j * a_dim1 + 1], &c__1);
+#line 476 "TB05AD.f"
 	    if (j < *n) {
+#line 476 "TB05AD.f"
 		t += (d__1 = a[j + 1 + j * a_dim1], abs(d__1));
+#line 476 "TB05AD.f"
 	    }
+#line 477 "TB05AD.f"
 	    hnorm = max(hnorm,t);
+#line 478 "TB05AD.f"
 	    jj = jj + *n + 1;
+#line 479 "TB05AD.f"
 /* L90: */
+#line 479 "TB05AD.f"
 	}
 
+#line 481 "TB05AD.f"
     }
 
 /*     Factor the complex Hessenberg matrix. */
 
+#line 485 "TB05AD.f"
     mb02sz_(n, &zwork[1], n, &iwork[1], info);
+#line 486 "TB05AD.f"
     if (*info != 0) {
+#line 486 "TB05AD.f"
 	*info = 2;
+#line 486 "TB05AD.f"
     }
 
+#line 488 "TB05AD.f"
     if (lbalec || lbalea) {
 
 /*        Estimate the condition of the matrix. */
 
 /*        Workspace: need 2*N. */
 
+#line 494 "TB05AD.f"
 	mb02tz_("1-norm", n, &hnorm, &zwork[1], n, &iwork[1], rcond, &dwork[1]
 		, &zwork[*n * *n + 1], info, (ftnlen)6);
 /* Computing MAX */
+#line 496 "TB05AD.f"
 	i__1 = wrkopt, i__2 = *n << 1;
+#line 496 "TB05AD.f"
 	wrkopt = max(i__1,i__2);
+#line 497 "TB05AD.f"
 	if (*rcond < dlamch_("Epsilon", (ftnlen)7)) {
+#line 497 "TB05AD.f"
 	    *info = 2;
+#line 497 "TB05AD.f"
 	}
+#line 498 "TB05AD.f"
     }
 
+#line 500 "TB05AD.f"
     if (*info != 0) {
 
 /*        Error return: Linear system is numerically or exactly singular. */
 
+#line 504 "TB05AD.f"
 	return 0;
+#line 505 "TB05AD.f"
     }
 
 /*     Compute  (H-INVERSE)*B. */
 
+#line 509 "TB05AD.f"
     i__1 = *m;
+#line 509 "TB05AD.f"
     for (j = 1; j <= i__1; ++j) {
 
+#line 511 "TB05AD.f"
 	i__2 = *n;
+#line 511 "TB05AD.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 512 "TB05AD.f"
 	    i__3 = i__ + j * hinvb_dim1;
+#line 512 "TB05AD.f"
 	    i__4 = i__ + j * b_dim1;
+#line 512 "TB05AD.f"
 	    z__1.r = b[i__4], z__1.i = 0.;
+#line 512 "TB05AD.f"
 	    hinvb[i__3].r = z__1.r, hinvb[i__3].i = z__1.i;
+#line 513 "TB05AD.f"
 /* L100: */
+#line 513 "TB05AD.f"
 	}
 
+#line 515 "TB05AD.f"
 /* L110: */
+#line 515 "TB05AD.f"
     }
 
+#line 517 "TB05AD.f"
     mb02rz_("No transpose", n, m, &zwork[1], n, &iwork[1], &hinvb[
 	    hinvb_offset], ldhinv, info, (ftnlen)12);
 
 /*     Compute  C*(H-INVERSE)*B. */
 
+#line 522 "TB05AD.f"
     i__1 = *m;
+#line 522 "TB05AD.f"
     for (j = 1; j <= i__1; ++j) {
 
+#line 524 "TB05AD.f"
 	i__2 = *p;
+#line 524 "TB05AD.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 525 "TB05AD.f"
 	    i__3 = i__ + j * g_dim1;
+#line 525 "TB05AD.f"
 	    g[i__3].r = 0., g[i__3].i = 0.;
+#line 526 "TB05AD.f"
 /* L120: */
+#line 526 "TB05AD.f"
 	}
 
+#line 528 "TB05AD.f"
 	i__2 = *n;
+#line 528 "TB05AD.f"
 	for (k = 1; k <= i__2; ++k) {
 
+#line 530 "TB05AD.f"
 	    i__3 = *p;
+#line 530 "TB05AD.f"
 	    for (i__ = 1; i__ <= i__3; ++i__) {
+#line 531 "TB05AD.f"
 		i__4 = i__ + j * g_dim1;
+#line 531 "TB05AD.f"
 		i__5 = i__ + j * g_dim1;
+#line 531 "TB05AD.f"
 		i__6 = i__ + k * c_dim1;
+#line 531 "TB05AD.f"
 		z__3.r = c__[i__6], z__3.i = 0.;
+#line 531 "TB05AD.f"
 		i__7 = k + j * hinvb_dim1;
+#line 531 "TB05AD.f"
 		z__2.r = z__3.r * hinvb[i__7].r - z__3.i * hinvb[i__7].i, 
 			z__2.i = z__3.r * hinvb[i__7].i + z__3.i * hinvb[i__7]
 			.r;
+#line 531 "TB05AD.f"
 		z__1.r = g[i__5].r + z__2.r, z__1.i = g[i__5].i + z__2.i;
+#line 531 "TB05AD.f"
 		g[i__4].r = z__1.r, g[i__4].i = z__1.i;
+#line 532 "TB05AD.f"
 /* L130: */
+#line 532 "TB05AD.f"
 	    }
 
+#line 534 "TB05AD.f"
 /* L140: */
+#line 534 "TB05AD.f"
 	}
 
+#line 536 "TB05AD.f"
 /* L150: */
+#line 536 "TB05AD.f"
     }
 
 /*     G now contains the desired frequency response matrix. */
 /*     Set the optimal workspace. */
 
+#line 541 "TB05AD.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 543 "TB05AD.f"
     return 0;
 /* *** Last line of TB05AD *** */
 } /* tb05ad_ */

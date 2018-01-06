@@ -1,3 +1,4 @@
+#line 1 "SB02OV.f"
 /* SB02OV.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB02OV.f"
 logical sb02ov_(doublereal *alphar, doublereal *alphai, doublereal *beta)
 {
     /* System generated locals */
@@ -96,8 +98,10 @@ logical sb02ov_(doublereal *alphar, doublereal *alphai, doublereal *beta)
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 84 "SB02OV.f"
     ret_val = dlapy2_(alphar, alphai) >= abs(*beta);
 
+#line 86 "SB02OV.f"
     return ret_val;
 /* *** Last line of SB02OV *** */
 } /* sb02ov_ */

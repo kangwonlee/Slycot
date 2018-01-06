@@ -1,3 +1,4 @@
+#line 1 "MB04DY.f"
 /* MB04DY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04DY.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -265,146 +267,245 @@ static integer c__1 = 1;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 224 "MB04DY.f"
     /* Parameter adjustments */
+#line 224 "MB04DY.f"
     a_dim1 = *lda;
+#line 224 "MB04DY.f"
     a_offset = 1 + a_dim1;
+#line 224 "MB04DY.f"
     a -= a_offset;
+#line 224 "MB04DY.f"
     qg_dim1 = *ldqg;
+#line 224 "MB04DY.f"
     qg_offset = 1 + qg_dim1;
+#line 224 "MB04DY.f"
     qg -= qg_offset;
+#line 224 "MB04DY.f"
     --d__;
+#line 224 "MB04DY.f"
     --dwork;
+#line 224 "MB04DY.f"
 
+#line 224 "MB04DY.f"
     /* Function Body */
+#line 224 "MB04DY.f"
     *info = 0;
+#line 225 "MB04DY.f"
     symp = lsame_(jobscl, "S", (ftnlen)1, (ftnlen)1);
+#line 226 "MB04DY.f"
     norm = lsame_(jobscl, "1", (ftnlen)1, (ftnlen)1) || lsame_(jobscl, "O", (
 	    ftnlen)1, (ftnlen)1);
+#line 227 "MB04DY.f"
     none = lsame_(jobscl, "N", (ftnlen)1, (ftnlen)1);
 
+#line 229 "MB04DY.f"
     if (! symp && ! norm && ! none) {
+#line 230 "MB04DY.f"
 	*info = -1;
+#line 231 "MB04DY.f"
     } else if (*n < 0) {
+#line 232 "MB04DY.f"
 	*info = -2;
+#line 233 "MB04DY.f"
     } else if (*lda < 1 || ! none && *lda < *n) {
+#line 234 "MB04DY.f"
 	*info = -4;
+#line 235 "MB04DY.f"
     } else if (*ldqg < 1 || ! none && *ldqg < *n) {
+#line 236 "MB04DY.f"
 	*info = -6;
+#line 237 "MB04DY.f"
     }
 
+#line 239 "MB04DY.f"
     if (*info != 0) {
+#line 240 "MB04DY.f"
 	i__1 = -(*info);
+#line 240 "MB04DY.f"
 	xerbla_("MB04DY", &i__1, (ftnlen)6);
+#line 241 "MB04DY.f"
 	return 0;
+#line 242 "MB04DY.f"
     }
 
 /*     Quick return if possible. */
 
+#line 246 "MB04DY.f"
     if (*n == 0 || none) {
+#line 246 "MB04DY.f"
 	return 0;
+#line 246 "MB04DY.f"
     }
 
 /*     Set some machine dependant constants. */
 
+#line 251 "MB04DY.f"
     base = dlamch_("Base", (ftnlen)4);
+#line 252 "MB04DY.f"
     eps = dlamch_("Precision", (ftnlen)9);
+#line 253 "MB04DY.f"
     ufl = dlamch_("Safe minimum", (ftnlen)12);
+#line 254 "MB04DY.f"
     ofl = 1. / ufl;
+#line 255 "MB04DY.f"
     dlabad_(&ufl, &ofl);
+#line 256 "MB04DY.f"
     sfmax = eps / base / ufl;
+#line 257 "MB04DY.f"
     sfmin = 1. / sfmax;
 
+#line 259 "MB04DY.f"
     if (norm) {
 
 /*        Compute norms. */
 
+#line 263 "MB04DY.f"
 	anrm = dlange_("1-norm", n, n, &a[a_offset], lda, &dwork[1], (ftnlen)
 		6);
+#line 264 "MB04DY.f"
 	gnrm = dlansy_("1-norm", "Upper", n, &qg[(qg_dim1 << 1) + 1], ldqg, &
 		dwork[1], (ftnlen)6, (ftnlen)5);
+#line 265 "MB04DY.f"
 	qnrm = dlansy_("1-norm", "Lower", n, &qg[qg_offset], ldqg, &dwork[1], 
 		(ftnlen)6, (ftnlen)5);
 /* Computing MAX */
+#line 266 "MB04DY.f"
 	d__1 = max(1.,anrm), d__1 = max(d__1,gnrm);
+#line 266 "MB04DY.f"
 	y = max(d__1,qnrm);
+#line 267 "MB04DY.f"
 	tau = 1.;
 
 /*        WHILE ( TAU < Y ) DO */
+#line 270 "MB04DY.f"
 L10:
+#line 271 "MB04DY.f"
 	if (tau < y && tau < sqrt(sfmax)) {
+#line 272 "MB04DY.f"
 	    tau *= base;
+#line 273 "MB04DY.f"
 	    goto L10;
+#line 274 "MB04DY.f"
 	}
 /*        END WHILE 10 */
+#line 276 "MB04DY.f"
 	if (tau > 1.) {
+#line 277 "MB04DY.f"
 	    if ((d__1 = tau / base - y, abs(d__1)) < (d__2 = tau - y, abs(
 		    d__2))) {
+#line 277 "MB04DY.f"
 		tau /= base;
+#line 277 "MB04DY.f"
 	    }
+#line 279 "MB04DY.f"
 	    dlascl_("General", &c__0, &c__0, &tau, &c_b19, n, n, &a[a_offset],
 		     lda, &ierr, (ftnlen)7);
+#line 280 "MB04DY.f"
 	    dlascl_("Upper", &c__0, &c__0, &tau, &c_b19, n, n, &qg[(qg_dim1 <<
 		     1) + 1], ldqg, &ierr, (ftnlen)5);
+#line 282 "MB04DY.f"
 	    dlascl_("Upper", &c__0, &c__0, &tau, &c_b19, n, n, &qg[(qg_dim1 <<
 		     1) + 1], ldqg, &ierr, (ftnlen)5);
+#line 284 "MB04DY.f"
 	}
 
+#line 286 "MB04DY.f"
 	d__[1] = tau;
 
+#line 288 "MB04DY.f"
     } else {
+#line 289 "MB04DY.f"
 	dgebal_("Scale", n, &a[a_offset], lda, &ilo, &ihi, &d__[1], &ierr, (
 		ftnlen)5);
 
+#line 291 "MB04DY.f"
 	i__1 = *n;
+#line 291 "MB04DY.f"
 	for (j = 1; j <= i__1; ++j) {
 
+#line 293 "MB04DY.f"
 	    i__2 = *n;
+#line 293 "MB04DY.f"
 	    for (i__ = j; i__ <= i__2; ++i__) {
+#line 294 "MB04DY.f"
 		qg[i__ + j * qg_dim1] = qg[i__ + j * qg_dim1] * d__[j] * d__[
 			i__];
+#line 295 "MB04DY.f"
 /* L20: */
+#line 295 "MB04DY.f"
 	    }
 
+#line 297 "MB04DY.f"
 /* L30: */
+#line 297 "MB04DY.f"
 	}
 
+#line 299 "MB04DY.f"
 	i__1 = *n + 1;
+#line 299 "MB04DY.f"
 	for (j = 2; j <= i__1; ++j) {
 
+#line 301 "MB04DY.f"
 	    i__2 = j - 1;
+#line 301 "MB04DY.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 302 "MB04DY.f"
 		qg[i__ + j * qg_dim1] = qg[i__ + j * qg_dim1] / d__[j - 1] / 
 			d__[i__];
+#line 303 "MB04DY.f"
 /* L40: */
+#line 303 "MB04DY.f"
 	    }
 
+#line 305 "MB04DY.f"
 /* L50: */
+#line 305 "MB04DY.f"
 	}
 
+#line 307 "MB04DY.f"
 	gnrm = dlansy_("1-norm", "Upper", n, &qg[(qg_dim1 << 1) + 1], ldqg, &
 		dwork[1], (ftnlen)6, (ftnlen)5);
+#line 308 "MB04DY.f"
 	qnrm = dlansy_("1-norm", "Lower", n, &qg[qg_offset], ldqg, &dwork[1], 
 		(ftnlen)6, (ftnlen)5);
+#line 309 "MB04DY.f"
 	if (gnrm == 0.) {
+#line 310 "MB04DY.f"
 	    if (qnrm == 0.) {
+#line 311 "MB04DY.f"
 		rho = 1.;
+#line 312 "MB04DY.f"
 	    } else {
+#line 313 "MB04DY.f"
 		rho = sfmax;
+#line 314 "MB04DY.f"
 	    }
+#line 315 "MB04DY.f"
 	} else if (qnrm == 0.) {
+#line 316 "MB04DY.f"
 	    rho = sfmin;
+#line 317 "MB04DY.f"
 	} else {
+#line 318 "MB04DY.f"
 	    rho = sqrt(qnrm) / sqrt(gnrm);
+#line 319 "MB04DY.f"
 	}
 
+#line 321 "MB04DY.f"
 	dlascl_("Lower", &c__0, &c__0, &rho, &c_b19, n, n, &qg[qg_offset], 
 		ldqg, &ierr, (ftnlen)5);
+#line 322 "MB04DY.f"
 	dlascl_("Upper", &c__0, &c__0, &c_b19, &rho, n, n, &qg[(qg_dim1 << 1) 
 		+ 1], ldqg, &ierr, (ftnlen)5);
+#line 324 "MB04DY.f"
 	d__1 = sqrt(rho);
+#line 324 "MB04DY.f"
 	drscl_(n, &d__1, &d__[1], &c__1);
+#line 325 "MB04DY.f"
     }
 
+#line 327 "MB04DY.f"
     return 0;
 /*     *** Last line of MB04DY *** */
 } /* mb04dy_ */

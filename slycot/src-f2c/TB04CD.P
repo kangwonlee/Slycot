@@ -1,0 +1,13 @@
+extern int tb04cd_(char *jobd, char *equil, integer *n, integer *m, integer *p, integer *npz, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *nz, integer *ldnz, integer *np, integer *ldnp, doublereal *zerosr, doublereal *zerosi, doublereal *polesr, doublereal *polesi, doublereal *gains, integer *ldgain, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info, ftnlen jobd_len, ftnlen equil_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: tb01id_ 14 14 13 4 4 4 7 7 4 7 4 7 4 7 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: tb01zd_ 14 17 13 4 4 7 4 7 7 4 4 7 4 7 7 7 4 4 124 */
+/*:ref: ma02ad_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dhseqr_ 14 16 13 13 4 4 4 7 4 7 7 7 4 7 4 4 124 124 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: tb04bx_ 14 13 4 4 7 4 7 7 7 7 7 7 7 7 4 */

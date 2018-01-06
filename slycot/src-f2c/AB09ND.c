@@ -1,3 +1,4 @@
+#line 1 "AB09ND.f"
 /* AB09ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB09ND.f"
 /* Subroutine */ int ab09nd_(char *dico, char *job, char *equil, char *ordsel,
 	 integer *n, integer *m, integer *p, integer *nr, doublereal *alpha, 
 	doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *
@@ -366,93 +368,163 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 336 "AB09ND.f"
     /* Parameter adjustments */
+#line 336 "AB09ND.f"
     a_dim1 = *lda;
+#line 336 "AB09ND.f"
     a_offset = 1 + a_dim1;
+#line 336 "AB09ND.f"
     a -= a_offset;
+#line 336 "AB09ND.f"
     b_dim1 = *ldb;
+#line 336 "AB09ND.f"
     b_offset = 1 + b_dim1;
+#line 336 "AB09ND.f"
     b -= b_offset;
+#line 336 "AB09ND.f"
     c_dim1 = *ldc;
+#line 336 "AB09ND.f"
     c_offset = 1 + c_dim1;
+#line 336 "AB09ND.f"
     c__ -= c_offset;
+#line 336 "AB09ND.f"
     d_dim1 = *ldd;
+#line 336 "AB09ND.f"
     d_offset = 1 + d_dim1;
+#line 336 "AB09ND.f"
     d__ -= d_offset;
+#line 336 "AB09ND.f"
     --hsv;
+#line 336 "AB09ND.f"
     --iwork;
+#line 336 "AB09ND.f"
     --dwork;
+#line 336 "AB09ND.f"
 
+#line 336 "AB09ND.f"
     /* Function Body */
+#line 336 "AB09ND.f"
     *info = 0;
+#line 337 "AB09ND.f"
     *iwarn = 0;
+#line 338 "AB09ND.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 339 "AB09ND.f"
     fixord = lsame_(ordsel, "F", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 343 "AB09ND.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 344 "AB09ND.f"
 	*info = -1;
+#line 345 "AB09ND.f"
     } else if (! (lsame_(job, "B", (ftnlen)1, (ftnlen)1) || lsame_(job, "N", (
 	    ftnlen)1, (ftnlen)1))) {
+#line 346 "AB09ND.f"
 	*info = -2;
+#line 347 "AB09ND.f"
     } else if (! (lsame_(equil, "S", (ftnlen)1, (ftnlen)1) || lsame_(equil, 
 	    "N", (ftnlen)1, (ftnlen)1))) {
+#line 349 "AB09ND.f"
 	*info = -3;
+#line 350 "AB09ND.f"
     } else if (! (fixord || lsame_(ordsel, "A", (ftnlen)1, (ftnlen)1))) {
+#line 351 "AB09ND.f"
 	*info = -4;
+#line 352 "AB09ND.f"
     } else if (*n < 0) {
+#line 353 "AB09ND.f"
 	*info = -5;
+#line 354 "AB09ND.f"
     } else if (*m < 0) {
+#line 355 "AB09ND.f"
 	*info = -6;
+#line 356 "AB09ND.f"
     } else if (*p < 0) {
+#line 357 "AB09ND.f"
 	*info = -7;
+#line 358 "AB09ND.f"
     } else if (fixord && (*nr < 0 || *nr > *n)) {
+#line 359 "AB09ND.f"
 	*info = -8;
+#line 360 "AB09ND.f"
     } else if (discr && (*alpha < 0. || *alpha > 1.) || ! discr && *alpha > 
 	    0.) {
+#line 362 "AB09ND.f"
 	*info = -9;
+#line 363 "AB09ND.f"
     } else if (*lda < max(1,*n)) {
+#line 364 "AB09ND.f"
 	*info = -11;
+#line 365 "AB09ND.f"
     } else if (*ldb < max(1,*n)) {
+#line 366 "AB09ND.f"
 	*info = -13;
+#line 367 "AB09ND.f"
     } else if (*ldc < max(1,*p)) {
+#line 368 "AB09ND.f"
 	*info = -15;
+#line 369 "AB09ND.f"
     } else if (*ldd < max(1,*p)) {
+#line 370 "AB09ND.f"
 	*info = -17;
+#line 371 "AB09ND.f"
     } else if (*tol2 > 0. && *tol2 > *tol1) {
+#line 372 "AB09ND.f"
 	*info = -21;
+#line 373 "AB09ND.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 373 "AB09ND.f"
 	i__3 = max(*n,*m);
+#line 373 "AB09ND.f"
 	i__1 = 1, i__2 = *n * ((*n << 1) + max(i__3,*p) + 5) + *n * (*n + 1) /
 		 2;
+#line 373 "AB09ND.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 375 "AB09ND.f"
 	    *info = -24;
+#line 376 "AB09ND.f"
 	}
+#line 376 "AB09ND.f"
     }
 
+#line 378 "AB09ND.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 382 "AB09ND.f"
 	i__1 = -(*info);
+#line 382 "AB09ND.f"
 	xerbla_("AB09ND", &i__1, (ftnlen)6);
+#line 383 "AB09ND.f"
 	return 0;
+#line 384 "AB09ND.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 388 "AB09ND.f"
     i__1 = min(*n,*m);
+#line 388 "AB09ND.f"
     if (min(i__1,*p) == 0) {
+#line 389 "AB09ND.f"
 	*nr = 0;
+#line 390 "AB09ND.f"
 	iwork[1] = 0;
+#line 391 "AB09ND.f"
 	dwork[1] = 1.;
+#line 392 "AB09ND.f"
 	return 0;
+#line 393 "AB09ND.f"
     }
 
+#line 395 "AB09ND.f"
     if (lsame_(equil, "S", (ftnlen)1, (ftnlen)1)) {
 
 /*        Scale simultaneously the matrices A, B and C: */
@@ -460,31 +532,50 @@
 /*        diagonal matrix. */
 /*        Workspace: N. */
 
+#line 402 "AB09ND.f"
 	maxred = 100.;
+#line 403 "AB09ND.f"
 	tb01id_("All", n, m, p, &maxred, &a[a_offset], lda, &b[b_offset], ldb,
 		 &c__[c_offset], ldc, &dwork[1], info, (ftnlen)3);
+#line 405 "AB09ND.f"
     }
 
 /*     Correct the value of ALPHA to ensure stability. */
 
+#line 409 "AB09ND.f"
     alpwrk = *alpha;
+#line 410 "AB09ND.f"
     if (discr) {
+#line 411 "AB09ND.f"
 	if (*alpha == 1.) {
+#line 411 "AB09ND.f"
 	    alpwrk = 1. - sqrt(dlamch_("E", (ftnlen)1));
+#line 411 "AB09ND.f"
 	}
+#line 412 "AB09ND.f"
     } else {
+#line 413 "AB09ND.f"
 	if (*alpha == 0.) {
+#line 413 "AB09ND.f"
 	    alpwrk = -sqrt(dlamch_("E", (ftnlen)1));
+#line 413 "AB09ND.f"
 	}
+#line 414 "AB09ND.f"
     }
 
 /*     Allocate working storage. */
 
+#line 418 "AB09ND.f"
     nn = *n * *n;
+#line 419 "AB09ND.f"
     ku = 1;
+#line 420 "AB09ND.f"
     kwr = ku + nn;
+#line 421 "AB09ND.f"
     kwi = kwr + *n;
+#line 422 "AB09ND.f"
     kw = kwi + *n;
+#line 423 "AB09ND.f"
     lwr = *ldwork - kw + 1;
 
 /*     Reduce A to a block-diagonal real Schur form, with the */
@@ -496,75 +587,117 @@
 /*     Additional workspace:  need   3*N; */
 /*                            prefer larger. */
 
+#line 434 "AB09ND.f"
     tb01kd_(dico, "Unstable", "General", n, m, p, &alpwrk, &a[a_offset], lda, 
 	    &b[b_offset], ldb, &c__[c_offset], ldc, &nu, &dwork[ku], n, &
 	    dwork[kwr], &dwork[kwi], &dwork[kw], &lwr, &ierr, (ftnlen)1, (
 	    ftnlen)8, (ftnlen)7);
 
+#line 438 "AB09ND.f"
     if (ierr != 0) {
+#line 439 "AB09ND.f"
 	if (ierr != 3) {
+#line 440 "AB09ND.f"
 	    *info = 1;
+#line 441 "AB09ND.f"
 	} else {
+#line 442 "AB09ND.f"
 	    *info = 2;
+#line 443 "AB09ND.f"
 	}
+#line 444 "AB09ND.f"
 	return 0;
+#line 445 "AB09ND.f"
     }
 
+#line 447 "AB09ND.f"
     wrkopt = (integer) (dwork[kw] + (doublereal) (kw - 1));
 
+#line 449 "AB09ND.f"
     iwarnl = 0;
+#line 450 "AB09ND.f"
     *ns = *n - nu;
+#line 451 "AB09ND.f"
     if (fixord) {
 /* Computing MAX */
+#line 452 "AB09ND.f"
 	i__1 = 0, i__2 = *nr - nu;
+#line 452 "AB09ND.f"
 	nra = max(i__1,i__2);
+#line 453 "AB09ND.f"
 	if (*nr < nu) {
+#line 453 "AB09ND.f"
 	    iwarnl = 2;
+#line 453 "AB09ND.f"
 	}
+#line 455 "AB09ND.f"
     } else {
+#line 456 "AB09ND.f"
 	nra = 0;
+#line 457 "AB09ND.f"
     }
 
 /*     Finish if only unstable part is present. */
 
+#line 461 "AB09ND.f"
     if (*ns == 0) {
+#line 462 "AB09ND.f"
 	*nr = nu;
+#line 463 "AB09ND.f"
 	iwork[1] = 0;
+#line 464 "AB09ND.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 465 "AB09ND.f"
 	return 0;
+#line 466 "AB09ND.f"
     }
 
+#line 468 "AB09ND.f"
     nu1 = nu + 1;
 
 /*     Allocate working storage. */
 
+#line 472 "AB09ND.f"
     kt = 1;
+#line 473 "AB09ND.f"
     kti = kt + nn;
+#line 474 "AB09ND.f"
     kw = kti + nn;
 
 /*     Compute a SPA of the stable part. */
 /*     Workspace: need   N*(2*N+MAX(N,M,P)+5) + N*(N+1)/2; */
 /*                prefer larger. */
 
+#line 480 "AB09ND.f"
     i__1 = *ldwork - kw + 1;
+#line 480 "AB09ND.f"
     ab09bx_(dico, job, ordsel, ns, m, p, &nra, &a[nu1 + nu1 * a_dim1], lda, &
 	    b[nu1 + b_dim1], ldb, &c__[nu1 * c_dim1 + 1], ldc, &d__[d_offset],
 	     ldd, &hsv[1], &dwork[kt], n, &dwork[kti], n, tol1, tol2, &iwork[
 	    1], &dwork[kw], &i__1, iwarn, &ierr, (ftnlen)1, (ftnlen)1, (
 	    ftnlen)1);
+#line 484 "AB09ND.f"
     *iwarn = max(*iwarn,iwarnl);
 
+#line 486 "AB09ND.f"
     if (ierr != 0) {
+#line 487 "AB09ND.f"
 	*info = ierr + 1;
+#line 488 "AB09ND.f"
 	return 0;
+#line 489 "AB09ND.f"
     }
 
+#line 491 "AB09ND.f"
     *nr = nra + nu;
 
 /* Computing MAX */
+#line 493 "AB09ND.f"
     i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 493 "AB09ND.f"
     dwork[1] = (doublereal) max(i__1,i__2);
 
+#line 495 "AB09ND.f"
     return 0;
 /* *** Last line of AB09ND *** */
 } /* ab09nd_ */

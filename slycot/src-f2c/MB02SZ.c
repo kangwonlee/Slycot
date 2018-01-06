@@ -1,3 +1,4 @@
+#line 1 "MB02SZ.f"
 /* MB02SZ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02SZ.f"
 /* Subroutine */ int mb02sz_(integer *n, doublecomplex *h__, integer *ldh, 
 	integer *ipiv, integer *info)
 {
@@ -134,80 +136,133 @@
 
 /*     Check the scalar input parameters. */
 
+#line 116 "MB02SZ.f"
     /* Parameter adjustments */
+#line 116 "MB02SZ.f"
     h_dim1 = *ldh;
+#line 116 "MB02SZ.f"
     h_offset = 1 + h_dim1;
+#line 116 "MB02SZ.f"
     h__ -= h_offset;
+#line 116 "MB02SZ.f"
     --ipiv;
+#line 116 "MB02SZ.f"
 
+#line 116 "MB02SZ.f"
     /* Function Body */
+#line 116 "MB02SZ.f"
     *info = 0;
+#line 117 "MB02SZ.f"
     if (*n < 0) {
+#line 118 "MB02SZ.f"
 	*info = -1;
+#line 119 "MB02SZ.f"
     } else if (*ldh < max(1,*n)) {
+#line 120 "MB02SZ.f"
 	*info = -3;
+#line 121 "MB02SZ.f"
     }
+#line 122 "MB02SZ.f"
     if (*info != 0) {
+#line 123 "MB02SZ.f"
 	i__1 = -(*info);
+#line 123 "MB02SZ.f"
 	xerbla_("MB02SZ", &i__1, (ftnlen)6);
+#line 124 "MB02SZ.f"
 	return 0;
+#line 125 "MB02SZ.f"
     }
 
 /*     Quick return if possible. */
 
+#line 129 "MB02SZ.f"
     if (*n == 0) {
+#line 129 "MB02SZ.f"
 	return 0;
+#line 129 "MB02SZ.f"
     }
 
+#line 132 "MB02SZ.f"
     i__1 = *n;
+#line 132 "MB02SZ.f"
     for (j = 1; j <= i__1; ++j) {
 
 /*        Find pivot and test for singularity. */
 
+#line 136 "MB02SZ.f"
 	jp = j;
+#line 137 "MB02SZ.f"
 	if (j < *n) {
+#line 138 "MB02SZ.f"
 	    if (dcabs1_(&h__[j + 1 + j * h_dim1]) > dcabs1_(&h__[j + j * 
 		    h_dim1])) {
+#line 138 "MB02SZ.f"
 		jp = j + 1;
+#line 138 "MB02SZ.f"
 	    }
+#line 140 "MB02SZ.f"
 	}
+#line 141 "MB02SZ.f"
 	ipiv[j] = jp;
+#line 142 "MB02SZ.f"
 	i__2 = jp + j * h_dim1;
+#line 142 "MB02SZ.f"
 	if (h__[i__2].r != 0. || h__[i__2].i != 0.) {
 
 /*           Apply the interchange to columns J:N. */
 
+#line 146 "MB02SZ.f"
 	    if (jp != j) {
+#line 146 "MB02SZ.f"
 		i__2 = *n - j + 1;
+#line 146 "MB02SZ.f"
 		zswap_(&i__2, &h__[j + j * h_dim1], ldh, &h__[jp + j * h_dim1]
 			, ldh);
+#line 146 "MB02SZ.f"
 	    }
 
 /*           Compute element J+1 of J-th column. */
 
+#line 151 "MB02SZ.f"
 	    if (j < *n) {
+#line 151 "MB02SZ.f"
 		i__2 = j + 1 + j * h_dim1;
+#line 151 "MB02SZ.f"
 		z_div(&z__1, &h__[j + 1 + j * h_dim1], &h__[j + j * h_dim1]);
+#line 151 "MB02SZ.f"
 		h__[i__2].r = z__1.r, h__[i__2].i = z__1.i;
+#line 151 "MB02SZ.f"
 	    }
 
+#line 154 "MB02SZ.f"
 	} else if (*info == 0) {
 
+#line 156 "MB02SZ.f"
 	    *info = j;
+#line 157 "MB02SZ.f"
 	}
 
+#line 159 "MB02SZ.f"
 	if (j < *n) {
 
 /*           Update trailing submatrix. */
 
+#line 163 "MB02SZ.f"
 	    i__2 = *n - j;
+#line 163 "MB02SZ.f"
 	    i__3 = j + 1 + j * h_dim1;
+#line 163 "MB02SZ.f"
 	    z__1.r = -h__[i__3].r, z__1.i = -h__[i__3].i;
+#line 163 "MB02SZ.f"
 	    zaxpy_(&i__2, &z__1, &h__[j + (j + 1) * h_dim1], ldh, &h__[j + 1 
 		    + (j + 1) * h_dim1], ldh);
+#line 165 "MB02SZ.f"
 	}
+#line 166 "MB02SZ.f"
 /* L10: */
+#line 166 "MB02SZ.f"
     }
+#line 167 "MB02SZ.f"
     return 0;
 /* *** Last line of MB02SZ *** */
 } /* mb02sz_ */

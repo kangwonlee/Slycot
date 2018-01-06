@@ -1,3 +1,4 @@
+#line 1 "MB01RX.f"
 /* MB01RX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01RX.f"
 /* Table of constant values */
 
 static doublereal c_b10 = 0.;
@@ -224,164 +226,281 @@ static integer c__1 = 1;
 
 /*     Test the input scalar arguments. */
 
+#line 196 "MB01RX.f"
     /* Parameter adjustments */
+#line 196 "MB01RX.f"
     r_dim1 = *ldr;
+#line 196 "MB01RX.f"
     r_offset = 1 + r_dim1;
+#line 196 "MB01RX.f"
     r__ -= r_offset;
+#line 196 "MB01RX.f"
     a_dim1 = *lda;
+#line 196 "MB01RX.f"
     a_offset = 1 + a_dim1;
+#line 196 "MB01RX.f"
     a -= a_offset;
+#line 196 "MB01RX.f"
     b_dim1 = *ldb;
+#line 196 "MB01RX.f"
     b_offset = 1 + b_dim1;
+#line 196 "MB01RX.f"
     b -= b_offset;
+#line 196 "MB01RX.f"
 
+#line 196 "MB01RX.f"
     /* Function Body */
+#line 196 "MB01RX.f"
     *info = 0;
+#line 197 "MB01RX.f"
     lside = lsame_(side, "L", (ftnlen)1, (ftnlen)1);
+#line 198 "MB01RX.f"
     luplo = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 199 "MB01RX.f"
     ltrans = lsame_(trans, "T", (ftnlen)1, (ftnlen)1) || lsame_(trans, "C", (
 	    ftnlen)1, (ftnlen)1);
 
+#line 201 "MB01RX.f"
     if (! lside && ! lsame_(side, "R", (ftnlen)1, (ftnlen)1)) {
+#line 202 "MB01RX.f"
 	*info = -1;
+#line 203 "MB01RX.f"
     } else if (! luplo && ! lsame_(uplo, "L", (ftnlen)1, (ftnlen)1)) {
+#line 204 "MB01RX.f"
 	*info = -2;
+#line 205 "MB01RX.f"
     } else if (! ltrans && ! lsame_(trans, "N", (ftnlen)1, (ftnlen)1)) {
+#line 206 "MB01RX.f"
 	*info = -3;
+#line 207 "MB01RX.f"
     } else if (*m < 0) {
+#line 208 "MB01RX.f"
 	*info = -4;
+#line 209 "MB01RX.f"
     } else if (*n < 0) {
+#line 210 "MB01RX.f"
 	*info = -5;
+#line 211 "MB01RX.f"
     } else if (*ldr < max(1,*m)) {
+#line 212 "MB01RX.f"
 	*info = -9;
+#line 213 "MB01RX.f"
     } else if (*lda < 1 || (lside && ! ltrans || ! lside && ltrans) && *lda < 
 	    *m || (lside && ltrans || ! lside && ! ltrans) && *lda < *n) {
+#line 218 "MB01RX.f"
 	*info = -11;
+#line 219 "MB01RX.f"
     } else if (*ldb < 1 || lside && *ldb < *n || ! lside && *ldb < *m) {
+#line 222 "MB01RX.f"
 	*info = -13;
+#line 223 "MB01RX.f"
     }
 
+#line 225 "MB01RX.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 229 "MB01RX.f"
 	i__1 = -(*info);
+#line 229 "MB01RX.f"
 	xerbla_("MB01RX", &i__1, (ftnlen)6);
+#line 230 "MB01RX.f"
 	return 0;
+#line 231 "MB01RX.f"
     }
 
 /*     Quick return if possible. */
 
+#line 235 "MB01RX.f"
     if (*m == 0) {
+#line 235 "MB01RX.f"
 	return 0;
+#line 235 "MB01RX.f"
     }
 
+#line 238 "MB01RX.f"
     if (*beta == 0. || *n == 0) {
+#line 239 "MB01RX.f"
 	if (*alpha == 0.) {
 
 /*           Special case alpha = 0. */
 
+#line 243 "MB01RX.f"
 	    dlaset_(uplo, m, m, &c_b10, &c_b10, &r__[r_offset], ldr, (ftnlen)
 		    1);
+#line 244 "MB01RX.f"
 	} else {
 
 /*           Special case beta = 0 or N = 0. */
 
+#line 248 "MB01RX.f"
 	    if (*alpha != 1.) {
+#line 248 "MB01RX.f"
 		dlascl_(uplo, &c__0, &c__0, &c_b14, alpha, m, m, &r__[
 			r_offset], ldr, info, (ftnlen)1);
+#line 248 "MB01RX.f"
 	    }
+#line 250 "MB01RX.f"
 	}
+#line 251 "MB01RX.f"
 	return 0;
+#line 252 "MB01RX.f"
     }
 
 /*     General case: beta <> 0. */
 /*     Compute the required triangle of (1) or (2) using BLAS 2 */
 /*     operations. */
 
+#line 258 "MB01RX.f"
     if (lside) {
+#line 259 "MB01RX.f"
 	if (luplo) {
+#line 260 "MB01RX.f"
 	    if (ltrans) {
+#line 261 "MB01RX.f"
 		i__1 = *m;
+#line 261 "MB01RX.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 262 "MB01RX.f"
 		    dgemv_(trans, n, &j, beta, &a[a_offset], lda, &b[j * 
 			    b_dim1 + 1], &c__1, alpha, &r__[j * r_dim1 + 1], &
 			    c__1, (ftnlen)1);
+#line 264 "MB01RX.f"
 /* L10: */
+#line 264 "MB01RX.f"
 		}
+#line 265 "MB01RX.f"
 	    } else {
+#line 266 "MB01RX.f"
 		i__1 = *m;
+#line 266 "MB01RX.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 267 "MB01RX.f"
 		    dgemv_(trans, &j, n, beta, &a[a_offset], lda, &b[j * 
 			    b_dim1 + 1], &c__1, alpha, &r__[j * r_dim1 + 1], &
 			    c__1, (ftnlen)1);
+#line 269 "MB01RX.f"
 /* L20: */
+#line 269 "MB01RX.f"
 		}
+#line 270 "MB01RX.f"
 	    }
+#line 271 "MB01RX.f"
 	} else {
+#line 272 "MB01RX.f"
 	    if (ltrans) {
+#line 273 "MB01RX.f"
 		i__1 = *m;
+#line 273 "MB01RX.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 274 "MB01RX.f"
 		    i__2 = *m - j + 1;
+#line 274 "MB01RX.f"
 		    dgemv_(trans, n, &i__2, beta, &a[j * a_dim1 + 1], lda, &b[
 			    j * b_dim1 + 1], &c__1, alpha, &r__[j + j * 
 			    r_dim1], &c__1, (ftnlen)1);
+#line 276 "MB01RX.f"
 /* L30: */
+#line 276 "MB01RX.f"
 		}
+#line 277 "MB01RX.f"
 	    } else {
+#line 278 "MB01RX.f"
 		i__1 = *m;
+#line 278 "MB01RX.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 279 "MB01RX.f"
 		    i__2 = *m - j + 1;
+#line 279 "MB01RX.f"
 		    dgemv_(trans, &i__2, n, beta, &a[j + a_dim1], lda, &b[j * 
 			    b_dim1 + 1], &c__1, alpha, &r__[j + j * r_dim1], &
 			    c__1, (ftnlen)1);
+#line 281 "MB01RX.f"
 /* L40: */
+#line 281 "MB01RX.f"
 		}
+#line 282 "MB01RX.f"
 	    }
+#line 283 "MB01RX.f"
 	}
 
+#line 285 "MB01RX.f"
     } else {
+#line 286 "MB01RX.f"
 	if (luplo) {
+#line 287 "MB01RX.f"
 	    if (ltrans) {
+#line 288 "MB01RX.f"
 		i__1 = *m;
+#line 288 "MB01RX.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 289 "MB01RX.f"
 		    dgemv_("NoTranspose", &j, n, beta, &b[b_offset], ldb, &a[
 			    j + a_dim1], lda, alpha, &r__[j * r_dim1 + 1], &
 			    c__1, (ftnlen)11);
+#line 291 "MB01RX.f"
 /* L50: */
+#line 291 "MB01RX.f"
 		}
+#line 292 "MB01RX.f"
 	    } else {
+#line 293 "MB01RX.f"
 		i__1 = *m;
+#line 293 "MB01RX.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 294 "MB01RX.f"
 		    dgemv_("NoTranspose", &j, n, beta, &b[b_offset], ldb, &a[
 			    j * a_dim1 + 1], &c__1, alpha, &r__[j * r_dim1 + 
 			    1], &c__1, (ftnlen)11);
+#line 296 "MB01RX.f"
 /* L60: */
+#line 296 "MB01RX.f"
 		}
+#line 297 "MB01RX.f"
 	    }
+#line 298 "MB01RX.f"
 	} else {
+#line 299 "MB01RX.f"
 	    if (ltrans) {
+#line 300 "MB01RX.f"
 		i__1 = *m;
+#line 300 "MB01RX.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 301 "MB01RX.f"
 		    i__2 = *m - j + 1;
+#line 301 "MB01RX.f"
 		    dgemv_("NoTranspose", &i__2, n, beta, &b[j + b_dim1], ldb,
 			     &a[j + a_dim1], lda, alpha, &r__[j + j * r_dim1],
 			     &c__1, (ftnlen)11);
+#line 303 "MB01RX.f"
 /* L70: */
+#line 303 "MB01RX.f"
 		}
+#line 304 "MB01RX.f"
 	    } else {
+#line 305 "MB01RX.f"
 		i__1 = *m;
+#line 305 "MB01RX.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 306 "MB01RX.f"
 		    i__2 = *m - j + 1;
+#line 306 "MB01RX.f"
 		    dgemv_("NoTranspose", &i__2, n, beta, &b[j + b_dim1], ldb,
 			     &a[j * a_dim1 + 1], &c__1, alpha, &r__[j + j * 
 			    r_dim1], &c__1, (ftnlen)11);
+#line 308 "MB01RX.f"
 /* L80: */
+#line 308 "MB01RX.f"
 		}
+#line 309 "MB01RX.f"
 	    }
+#line 310 "MB01RX.f"
 	}
+#line 311 "MB01RX.f"
     }
 
+#line 313 "MB01RX.f"
     return 0;
 /* *** Last line of MB01RX *** */
 } /* mb01rx_ */

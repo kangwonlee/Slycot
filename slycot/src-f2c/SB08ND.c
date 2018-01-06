@@ -1,3 +1,4 @@
+#line 1 "SB08ND.f"
 /* SB08ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB08ND.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -257,70 +259,120 @@ static doublereal c_b24 = -1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 219 "SB08ND.f"
     /* Parameter adjustments */
+#line 219 "SB08ND.f"
     --dwork;
+#line 219 "SB08ND.f"
     --e;
+#line 219 "SB08ND.f"
     --a;
+#line 219 "SB08ND.f"
 
+#line 219 "SB08ND.f"
     /* Function Body */
+#line 219 "SB08ND.f"
     *info = 0;
+#line 220 "SB08ND.f"
     lacona = lsame_(acona, "A", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 224 "SB08ND.f"
     if (! lacona && ! lsame_(acona, "B", (ftnlen)1, (ftnlen)1)) {
+#line 225 "SB08ND.f"
 	*info = -1;
+#line 226 "SB08ND.f"
     } else if (*da < 0) {
+#line 227 "SB08ND.f"
 	*info = -2;
+#line 228 "SB08ND.f"
     } else if (*ldwork < *da * 5 + 5) {
+#line 229 "SB08ND.f"
 	*info = -7;
+#line 230 "SB08ND.f"
     }
 
+#line 232 "SB08ND.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 236 "SB08ND.f"
 	i__1 = -(*info);
+#line 236 "SB08ND.f"
 	xerbla_("SB08ND", &i__1, (ftnlen)6);
+#line 237 "SB08ND.f"
 	return 0;
+#line 238 "SB08ND.f"
     }
 
+#line 240 "SB08ND.f"
     nc = *da + 1;
+#line 241 "SB08ND.f"
     if (! lacona) {
+#line 242 "SB08ND.f"
 	if (a[1] <= 0.) {
+#line 243 "SB08ND.f"
 	    *info = 2;
+#line 244 "SB08ND.f"
 	    return 0;
+#line 245 "SB08ND.f"
 	}
+#line 246 "SB08ND.f"
 	dcopy_(&nc, &a[1], &c__1, &e[1], &c__1);
+#line 247 "SB08ND.f"
     } else {
+#line 248 "SB08ND.f"
 	sb08ny_(da, &a[1], &e[1], &w);
+#line 249 "SB08ND.f"
     }
 
 /*     Initialization. */
 
+#line 253 "SB08ND.f"
     lalpha = 1;
+#line 254 "SB08ND.f"
     lro = lalpha + nc;
+#line 255 "SB08ND.f"
     leta = lro + nc;
+#line 256 "SB08ND.f"
     lambda = leta + nc;
+#line 257 "SB08ND.f"
     lq = lambda + nc;
 
+#line 259 "SB08ND.f"
     a0 = e[1];
+#line 260 "SB08ND.f"
     sa0 = sqrt(a0);
+#line 261 "SB08ND.f"
     s = 0.;
 
+#line 263 "SB08ND.f"
     i__1 = nc;
+#line 263 "SB08ND.f"
     for (j = 1; j <= i__1; ++j) {
+#line 264 "SB08ND.f"
 	w = e[j];
+#line 265 "SB08ND.f"
 	a[j] = w;
+#line 266 "SB08ND.f"
 	w /= sa0;
+#line 267 "SB08ND.f"
 	e[j] = w;
+#line 268 "SB08ND.f"
 	dwork[lq - 1 + j] = w;
 /* Computing 2nd power */
+#line 269 "SB08ND.f"
 	d__1 = w;
+#line 269 "SB08ND.f"
 	s += d__1 * d__1;
+#line 270 "SB08ND.f"
 /* L20: */
+#line 270 "SB08ND.f"
     }
 
+#line 272 "SB08ND.f"
     res0 = s - a0;
 
 /*     The contents of the arrays is, cf [1], Section 7.6, */
@@ -334,63 +386,103 @@ static doublereal c_b24 = -1.;
 
 /*     DWORK(LQ,...,LQ+DA) : the last computed polynomial q . */
 /*                                                         i */
+#line 285 "SB08ND.f"
     i__ = 0;
+#line 286 "SB08ND.f"
     conv = FALSE_;
+#line 287 "SB08ND.f"
     hurwtz = TRUE_;
 
 /*     WHILE ( I < 30 and CONV = FALSE and HURWTZ = TRUE ) DO */
+#line 290 "SB08ND.f"
 L40:
+#line 290 "SB08ND.f"
     if (i__ < 30 && ! conv && hurwtz) {
+#line 291 "SB08ND.f"
 	++i__;
+#line 292 "SB08ND.f"
 	dcopy_(&nc, &a[1], &c__1, &dwork[leta], &c__1);
+#line 293 "SB08ND.f"
 	dscal_(&nc, &c_b11, &dwork[leta], &c__1);
+#line 294 "SB08ND.f"
 	dcopy_(&nc, &dwork[lq], &c__1, &dwork[lalpha], &c__1);
 
 /*        Computation of lambda(k) and eta(k). */
 
+#line 298 "SB08ND.f"
 	k = 1;
 
 /*        WHILE ( K <= DA and HURWTZ = TRUE ) DO */
+#line 301 "SB08ND.f"
 L60:
+#line 301 "SB08ND.f"
 	if (k <= *da && hurwtz) {
+#line 302 "SB08ND.f"
 	    nck = nc - k;
+#line 303 "SB08ND.f"
 	    i__1 = nck + 1;
+#line 303 "SB08ND.f"
 	    dcopy_(&i__1, &dwork[lalpha], &c_n1, &dwork[lro], &c__1);
+#line 304 "SB08ND.f"
 	    w = dwork[lalpha + nck] / dwork[lro + nck];
+#line 305 "SB08ND.f"
 	    if (abs(w) >= 1.) {
+#line 305 "SB08ND.f"
 		hurwtz = FALSE_;
+#line 305 "SB08ND.f"
 	    }
+#line 306 "SB08ND.f"
 	    if (hurwtz) {
+#line 307 "SB08ND.f"
 		dwork[lambda + k - 1] = w;
+#line 308 "SB08ND.f"
 		d__1 = -w;
+#line 308 "SB08ND.f"
 		daxpy_(&nck, &d__1, &dwork[lro], &c__1, &dwork[lalpha], &c__1)
 			;
+#line 309 "SB08ND.f"
 		w = dwork[leta + nck] / dwork[lalpha];
+#line 310 "SB08ND.f"
 		dwork[leta + nck] = w;
+#line 311 "SB08ND.f"
 		i__1 = nck - 1;
+#line 311 "SB08ND.f"
 		d__1 = -w;
+#line 311 "SB08ND.f"
 		daxpy_(&i__1, &d__1, &dwork[lalpha + 1], &c_n1, &dwork[leta + 
 			1], &c__1);
+#line 313 "SB08ND.f"
 		++k;
+#line 314 "SB08ND.f"
 	    }
+#line 315 "SB08ND.f"
 	    goto L60;
+#line 316 "SB08ND.f"
 	}
 /*        END WHILE 60 */
 
 /*        HURWTZ = The polynomial q    is a Hurwitz polynomial. */
 /*                                 i-1 */
+#line 321 "SB08ND.f"
 	if (hurwtz) {
+#line 322 "SB08ND.f"
 	    dcopy_(&nc, &dwork[lq], &c__1, &e[1], &c__1);
 
 /*           Accuracy test. */
 
+#line 326 "SB08ND.f"
 	    sb08ny_(da, &e[1], &dwork[lq], &tolq);
+#line 327 "SB08ND.f"
 	    daxpy_(&nc, &c_b24, &a[1], &c__1, &dwork[lq], &c__1);
+#line 328 "SB08ND.f"
 	    *res = (d__1 = dwork[idamax_(&nc, &dwork[lq], &c__1) + lq - 1], 
 		    abs(d__1));
+#line 329 "SB08ND.f"
 	    conv = *res < tolq || res0 < 0.;
 
+#line 331 "SB08ND.f"
 	    if (! conv) {
+#line 332 "SB08ND.f"
 		dwork[leta] = dwork[leta] * .5 / dwork[lalpha];
 
 /*              Computation of x  and q . */
@@ -398,54 +490,89 @@ L60:
 /*              DWORK(LETA,...,LETA+DA)   : eta(k,0),...,eta(k,n) */
 /*                   (LRO,...,LRO+DA-K+1) : eta(k,n-k+1),...,eta(k,0) */
 
+#line 339 "SB08ND.f"
 		for (k = *da; k >= 1; --k) {
+#line 340 "SB08ND.f"
 		    nck = nc - k + 1;
+#line 341 "SB08ND.f"
 		    dcopy_(&nck, &dwork[leta], &c_n1, &dwork[lro], &c__1);
+#line 342 "SB08ND.f"
 		    w = dwork[lambda + k - 1];
+#line 343 "SB08ND.f"
 		    d__1 = -w;
+#line 343 "SB08ND.f"
 		    daxpy_(&nck, &d__1, &dwork[lro], &c__1, &dwork[leta], &
 			    c__1);
+#line 344 "SB08ND.f"
 /* L80: */
+#line 344 "SB08ND.f"
 		}
 
+#line 346 "SB08ND.f"
 		s = 0.;
 
+#line 348 "SB08ND.f"
 		i__1 = *da;
+#line 348 "SB08ND.f"
 		for (j = 0; j <= i__1; ++j) {
+#line 349 "SB08ND.f"
 		    w = (dwork[leta + j] + e[j + 1]) * .5;
+#line 350 "SB08ND.f"
 		    dwork[lq + j] = w;
 /* Computing 2nd power */
+#line 351 "SB08ND.f"
 		    d__1 = w;
+#line 351 "SB08ND.f"
 		    s += d__1 * d__1;
+#line 352 "SB08ND.f"
 /* L100: */
+#line 352 "SB08ND.f"
 		}
 
+#line 354 "SB08ND.f"
 		res0 = s - a0;
 
 /*              Test on the monotonicity of q . */
 /*                                           0 */
+#line 358 "SB08ND.f"
 		conv = dwork[lq] > e[1];
+#line 359 "SB08ND.f"
 		goto L40;
+#line 360 "SB08ND.f"
 	    }
+#line 361 "SB08ND.f"
 	}
+#line 362 "SB08ND.f"
     }
 /*     END WHILE 40 */
 
 /*     Reverse the order of the coefficients in the array E. */
 
+#line 367 "SB08ND.f"
     dswap_(&nc, &e[1], &c__1, &dwork[1], &c_n1);
+#line 368 "SB08ND.f"
     dswap_(&nc, &dwork[1], &c__1, &e[1], &c__1);
 
+#line 370 "SB08ND.f"
     if (! conv) {
+#line 371 "SB08ND.f"
 	if (hurwtz) {
+#line 372 "SB08ND.f"
 	    *info = 3;
+#line 373 "SB08ND.f"
 	} else if (i__ == 1) {
+#line 374 "SB08ND.f"
 	    *info = 2;
+#line 375 "SB08ND.f"
 	} else {
+#line 376 "SB08ND.f"
 	    *info = 4;
+#line 377 "SB08ND.f"
 	}
+#line 378 "SB08ND.f"
     }
 
+#line 380 "SB08ND.f"
     return 0;
 /* *** Last line of SB08ND *** */
 } /* sb08nd_ */

@@ -1,3 +1,4 @@
+#line 1 "NF01BW.f"
 /* NF01BW.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "NF01BW.f"
 /* Table of constant values */
 
 static doublereal c_b4 = 1.;
@@ -170,117 +172,198 @@ static integer c__0 = 0;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 146 "NF01BW.f"
     /* Parameter adjustments */
+#line 146 "NF01BW.f"
     --ipar;
+#line 146 "NF01BW.f"
     --dpar;
+#line 146 "NF01BW.f"
     j_dim1 = *ldj;
+#line 146 "NF01BW.f"
     j_offset = 1 + j_dim1;
+#line 146 "NF01BW.f"
     j -= j_offset;
+#line 146 "NF01BW.f"
     --x;
+#line 146 "NF01BW.f"
     --dwork;
+#line 146 "NF01BW.f"
 
+#line 146 "NF01BW.f"
     /* Function Body */
+#line 146 "NF01BW.f"
     *info = 0;
 
+#line 148 "NF01BW.f"
     if (*n < 0) {
+#line 149 "NF01BW.f"
 	*info = -1;
+#line 150 "NF01BW.f"
     } else if (*lipar < 4) {
+#line 151 "NF01BW.f"
 	*info = -3;
+#line 152 "NF01BW.f"
     } else if (*ldpar < 1) {
+#line 153 "NF01BW.f"
 	*info = -5;
+#line 154 "NF01BW.f"
     } else if (*incx < 1) {
+#line 155 "NF01BW.f"
 	*info = -9;
+#line 156 "NF01BW.f"
     } else {
+#line 157 "NF01BW.f"
 	st = ipar[1];
+#line 158 "NF01BW.f"
 	bn = ipar[2];
+#line 159 "NF01BW.f"
 	bsm = ipar[3];
+#line 160 "NF01BW.f"
 	bsn = ipar[4];
+#line 161 "NF01BW.f"
 	nths = bn * bsn;
+#line 162 "NF01BW.f"
 	if (bn > 1) {
+#line 163 "NF01BW.f"
 	    m = bn * bsm;
+#line 164 "NF01BW.f"
 	} else {
+#line 165 "NF01BW.f"
 	    m = bsm;
+#line 166 "NF01BW.f"
 	}
 /* Computing MIN */
+#line 167 "NF01BW.f"
 	i__1 = min(st,bn), i__1 = min(i__1,bsm);
+#line 167 "NF01BW.f"
 	if (min(i__1,bsn) < 0) {
+#line 168 "NF01BW.f"
 	    *info = -2;
+#line 169 "NF01BW.f"
 	} else if (*n != nths + st) {
+#line 170 "NF01BW.f"
 	    *info = -1;
+#line 171 "NF01BW.f"
 	} else if (*ldj < max(1,m)) {
+#line 172 "NF01BW.f"
 	    *info = -7;
+#line 173 "NF01BW.f"
 	} else if (*ldwork < m) {
+#line 174 "NF01BW.f"
 	    *info = -11;
+#line 175 "NF01BW.f"
 	}
+#line 176 "NF01BW.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 180 "NF01BW.f"
     if (*info != 0) {
+#line 181 "NF01BW.f"
 	i__1 = -(*info);
+#line 181 "NF01BW.f"
 	xerbla_("NF01BW", &i__1, (ftnlen)6);
+#line 182 "NF01BW.f"
 	return 0;
+#line 183 "NF01BW.f"
     }
 
 /*     Quick return if possible. */
 
+#line 187 "NF01BW.f"
     if (*n == 0) {
+#line 187 "NF01BW.f"
 	return 0;
+#line 187 "NF01BW.f"
     }
 
+#line 190 "NF01BW.f"
     c__ = dpar[1];
 
+#line 192 "NF01BW.f"
     if (m == 0) {
 
 /*        Special case, void Jacobian: x <-- c*x. */
 
+#line 196 "NF01BW.f"
 	dscal_(n, &c__, &x[1], incx);
+#line 197 "NF01BW.f"
 	return 0;
+#line 198 "NF01BW.f"
     }
 
+#line 200 "NF01BW.f"
     if (bn <= 1 || bsn == 0) {
 
 /*        Special case, l <= 1 or BSN = 0: the Jacobian is represented */
 /*        as a full matrix. Adapted code from NF01BX is included in-line. */
 
+#line 205 "NF01BW.f"
 	dgemv_("NoTranspose", &m, n, &c_b4, &j[j_offset], ldj, &x[1], incx, &
 		c_b5, &dwork[1], &c__1, (ftnlen)11);
+#line 207 "NF01BW.f"
 	dgemv_("Transpose", &m, n, &c_b4, &j[j_offset], ldj, &dwork[1], &c__1,
 		 &c__, &x[1], incx, (ftnlen)9);
+#line 209 "NF01BW.f"
 	return 0;
+#line 210 "NF01BW.f"
     }
 
 /*     General case: l > 1, BSN > 0, BSM > 0. */
 
+#line 214 "NF01BW.f"
     jl = bsn + 1;
+#line 215 "NF01BW.f"
     ix = bsn * *incx;
+#line 216 "NF01BW.f"
     xl = bn * ix + 1;
 
+#line 218 "NF01BW.f"
     if (st > 0) {
+#line 219 "NF01BW.f"
 	dgemv_("NoTranspose", &m, &st, &c_b4, &j[jl * j_dim1 + 1], ldj, &x[xl]
 		, incx, &c_b5, &dwork[1], &c__1, (ftnlen)11);
+#line 221 "NF01BW.f"
     } else {
+#line 222 "NF01BW.f"
 	dwork[1] = 0.;
+#line 223 "NF01BW.f"
 	dcopy_(&m, &dwork[1], &c__0, &dwork[1], &c__1);
+#line 224 "NF01BW.f"
     }
+#line 225 "NF01BW.f"
     ibsn = 1;
 
+#line 227 "NF01BW.f"
     i__1 = m;
+#line 227 "NF01BW.f"
     i__2 = bsm;
+#line 227 "NF01BW.f"
     for (ibsm = 1; i__2 < 0 ? ibsm >= i__1 : ibsm <= i__1; ibsm += i__2) {
+#line 228 "NF01BW.f"
 	dgemv_("NoTranspose", &bsm, &bsn, &c_b4, &j[ibsm + j_dim1], ldj, &x[
 		ibsn], incx, &c_b4, &dwork[ibsm], &c__1, (ftnlen)11);
+#line 230 "NF01BW.f"
 	dgemv_("Transpose", &bsm, &bsn, &c_b4, &j[ibsm + j_dim1], ldj, &dwork[
 		ibsm], &c__1, &c__, &x[ibsn], incx, (ftnlen)9);
+#line 232 "NF01BW.f"
 	ibsn += ix;
+#line 233 "NF01BW.f"
 /* L10: */
+#line 233 "NF01BW.f"
     }
 
+#line 235 "NF01BW.f"
     if (st > 0) {
+#line 235 "NF01BW.f"
 	dgemv_("Transpose", &m, &st, &c_b4, &j[jl * j_dim1 + 1], ldj, &dwork[
 		1], &c__1, &c__, &x[xl], incx, (ftnlen)9);
+#line 235 "NF01BW.f"
     }
 
+#line 239 "NF01BW.f"
     return 0;
 
 /* *** Last line of NF01BW *** */

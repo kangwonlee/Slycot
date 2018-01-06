@@ -1,0 +1,11 @@
+extern int nf01bs_(integer *n, integer *ipar, integer *lipar, doublereal *fnorm, doublereal *j, integer *ldj, doublereal *e, doublereal *jnorms, doublereal *gnorm, integer *ipvt, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: md03bx_ 14 12 4 4 7 7 4 7 7 7 4 7 4 4 */
+/*:ref: dgeqp3_ 14 9 4 4 7 4 4 7 7 4 4 */
+/*:ref: dormqr_ 14 15 13 13 4 4 4 7 4 7 7 4 7 4 4 124 124 */
+/*:ref: dnrm2_ 7 3 4 7 4 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dlapmt_ 14 6 12 4 4 7 4 4 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: ddot_ 7 5 4 7 4 7 4 */

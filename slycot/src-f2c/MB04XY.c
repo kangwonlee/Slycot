@@ -1,3 +1,4 @@
+#line 1 "MB04XY.f"
 /* MB04XY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04XY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -182,141 +184,243 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 165 "MB04XY.f"
     /* Parameter adjustments */
+#line 165 "MB04XY.f"
     x_dim1 = *ldx;
+#line 165 "MB04XY.f"
     x_offset = 1 + x_dim1;
+#line 165 "MB04XY.f"
     x -= x_offset;
+#line 165 "MB04XY.f"
     --taup;
+#line 165 "MB04XY.f"
     --tauq;
+#line 165 "MB04XY.f"
     u_dim1 = *ldu;
+#line 165 "MB04XY.f"
     u_offset = 1 + u_dim1;
+#line 165 "MB04XY.f"
     u -= u_offset;
+#line 165 "MB04XY.f"
     v_dim1 = *ldv;
+#line 165 "MB04XY.f"
     v_offset = 1 + v_dim1;
+#line 165 "MB04XY.f"
     v -= v_offset;
+#line 165 "MB04XY.f"
     --inul;
+#line 165 "MB04XY.f"
 
+#line 165 "MB04XY.f"
     /* Function Body */
+#line 165 "MB04XY.f"
     *info = 0;
+#line 166 "MB04XY.f"
     ljobua = lsame_(jobu, "A", (ftnlen)1, (ftnlen)1);
+#line 167 "MB04XY.f"
     ljobus = lsame_(jobu, "S", (ftnlen)1, (ftnlen)1);
+#line 168 "MB04XY.f"
     ljobva = lsame_(jobv, "A", (ftnlen)1, (ftnlen)1);
+#line 169 "MB04XY.f"
     ljobvs = lsame_(jobv, "S", (ftnlen)1, (ftnlen)1);
+#line 170 "MB04XY.f"
     wantu = ljobua || ljobus;
+#line 171 "MB04XY.f"
     wantv = ljobva || ljobvs;
 
 /*     Test the input scalar arguments. */
 
+#line 175 "MB04XY.f"
     if (! wantu && ! lsame_(jobu, "N", (ftnlen)1, (ftnlen)1)) {
+#line 176 "MB04XY.f"
 	*info = -1;
+#line 177 "MB04XY.f"
     } else if (! wantv && ! lsame_(jobv, "N", (ftnlen)1, (ftnlen)1)) {
+#line 178 "MB04XY.f"
 	*info = -2;
+#line 179 "MB04XY.f"
     } else if (*m < 0) {
+#line 180 "MB04XY.f"
 	*info = -3;
+#line 181 "MB04XY.f"
     } else if (*n < 0) {
+#line 182 "MB04XY.f"
 	*info = -4;
+#line 183 "MB04XY.f"
     } else if (*ldx < max(1,*m)) {
+#line 184 "MB04XY.f"
 	*info = -6;
+#line 185 "MB04XY.f"
     } else if (wantu && *ldu < max(1,*m) || ! wantu && *ldu < 1) {
+#line 187 "MB04XY.f"
 	*info = -10;
+#line 188 "MB04XY.f"
     } else if (wantv && *ldv < max(1,*n) || ! wantv && *ldv < 1) {
+#line 190 "MB04XY.f"
 	*info = -12;
+#line 191 "MB04XY.f"
     }
 
+#line 193 "MB04XY.f"
     if (*info != 0) {
 
 /*        Error return */
 
+#line 197 "MB04XY.f"
 	i__1 = -(*info);
+#line 197 "MB04XY.f"
 	xerbla_("MB04XY", &i__1, (ftnlen)6);
+#line 198 "MB04XY.f"
 	return 0;
+#line 199 "MB04XY.f"
     }
 
 /*     Quick return if possible. */
 
+#line 203 "MB04XY.f"
     p = min(*m,*n);
+#line 204 "MB04XY.f"
     if (p == 0) {
+#line 204 "MB04XY.f"
 	return 0;
+#line 204 "MB04XY.f"
     }
 
+#line 207 "MB04XY.f"
     if (*m < *n) {
+#line 208 "MB04XY.f"
 	ioff = 1;
+#line 209 "MB04XY.f"
     } else {
+#line 210 "MB04XY.f"
 	ioff = 0;
+#line 211 "MB04XY.f"
     }
 
 /*     Apply the Householder transformations Pj onto the desired */
 /*     columns of U. */
 
 /* Computing MIN */
+#line 216 "MB04XY.f"
     i__1 = *m - 1;
+#line 216 "MB04XY.f"
     im = min(i__1,*n);
+#line 217 "MB04XY.f"
     if (wantu && im > 0) {
+#line 218 "MB04XY.f"
 	if (ljobua) {
+#line 219 "MB04XY.f"
 	    ncol = *m;
+#line 220 "MB04XY.f"
 	} else {
+#line 221 "MB04XY.f"
 	    ncol = p;
+#line 222 "MB04XY.f"
 	}
 
+#line 224 "MB04XY.f"
 	i__1 = ncol;
+#line 224 "MB04XY.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 225 "MB04XY.f"
 	    if (inul[i__]) {
 
+#line 227 "MB04XY.f"
 		for (l = im; l >= 1; --l) {
+#line 228 "MB04XY.f"
 		    if (taup[l] != 0.) {
+#line 229 "MB04XY.f"
 			first = x[l + ioff + l * x_dim1];
+#line 230 "MB04XY.f"
 			x[l + ioff + l * x_dim1] = 1.;
+#line 231 "MB04XY.f"
 			i__2 = *m - l + 1 - ioff;
+#line 231 "MB04XY.f"
 			dlarf_("Left", &i__2, &c__1, &x[l + ioff + l * x_dim1]
 				, &c__1, &taup[l], &u[l + ioff + i__ * u_dim1]
 				, ldu, dwork, (ftnlen)4);
+#line 233 "MB04XY.f"
 			x[l + ioff + l * x_dim1] = first;
+#line 234 "MB04XY.f"
 		    }
+#line 235 "MB04XY.f"
 /* L20: */
+#line 235 "MB04XY.f"
 		}
 
+#line 237 "MB04XY.f"
 	    }
+#line 238 "MB04XY.f"
 /* L40: */
+#line 238 "MB04XY.f"
 	}
 
+#line 240 "MB04XY.f"
     }
 
 /*     Apply the Householder transformations Qj onto the desired columns */
 /*     of V. */
 
 /* Computing MIN */
+#line 245 "MB04XY.f"
     i__1 = *n - 1;
+#line 245 "MB04XY.f"
     im = min(i__1,*m);
+#line 246 "MB04XY.f"
     if (wantv && im > 0) {
+#line 247 "MB04XY.f"
 	if (ljobva) {
+#line 248 "MB04XY.f"
 	    ncol = *n;
+#line 249 "MB04XY.f"
 	} else {
+#line 250 "MB04XY.f"
 	    ncol = p;
+#line 251 "MB04XY.f"
 	}
 
+#line 253 "MB04XY.f"
 	i__1 = ncol;
+#line 253 "MB04XY.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 254 "MB04XY.f"
 	    if (inul[i__]) {
 
+#line 256 "MB04XY.f"
 		for (l = im; l >= 1; --l) {
+#line 257 "MB04XY.f"
 		    if (tauq[l] != 0.) {
+#line 258 "MB04XY.f"
 			first = x[l + (l + 1 - ioff) * x_dim1];
+#line 259 "MB04XY.f"
 			x[l + (l + 1 - ioff) * x_dim1] = 1.;
+#line 260 "MB04XY.f"
 			i__2 = *n - l + ioff;
+#line 260 "MB04XY.f"
 			dlarf_("Left", &i__2, &c__1, &x[l + (l + 1 - ioff) * 
 				x_dim1], ldx, &tauq[l], &v[l + 1 - ioff + i__ 
 				* v_dim1], ldv, dwork, (ftnlen)4);
+#line 263 "MB04XY.f"
 			x[l + (l + 1 - ioff) * x_dim1] = first;
+#line 264 "MB04XY.f"
 		    }
+#line 265 "MB04XY.f"
 /* L60: */
+#line 265 "MB04XY.f"
 		}
 
+#line 267 "MB04XY.f"
 	    }
+#line 268 "MB04XY.f"
 /* L80: */
+#line 268 "MB04XY.f"
 	}
 
+#line 270 "MB04XY.f"
     }
 
+#line 272 "MB04XY.f"
     return 0;
 /* *** Last line of MB04XY *** */
 } /* mb04xy_ */

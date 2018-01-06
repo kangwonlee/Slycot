@@ -1,3 +1,4 @@
+#line 1 "MB02RD.f"
 /* MB02RD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02RD.f"
 /* Table of constant values */
 
 static doublereal c_b11 = 1.;
@@ -148,42 +150,74 @@ static doublereal c_b11 = 1.;
 
 /*     Test the input parameters. */
 
+#line 127 "MB02RD.f"
     /* Parameter adjustments */
+#line 127 "MB02RD.f"
     h_dim1 = *ldh;
+#line 127 "MB02RD.f"
     h_offset = 1 + h_dim1;
+#line 127 "MB02RD.f"
     h__ -= h_offset;
+#line 127 "MB02RD.f"
     --ipiv;
+#line 127 "MB02RD.f"
     b_dim1 = *ldb;
+#line 127 "MB02RD.f"
     b_offset = 1 + b_dim1;
+#line 127 "MB02RD.f"
     b -= b_offset;
+#line 127 "MB02RD.f"
 
+#line 127 "MB02RD.f"
     /* Function Body */
+#line 127 "MB02RD.f"
     *info = 0;
+#line 128 "MB02RD.f"
     notran = lsame_(trans, "N", (ftnlen)1, (ftnlen)1);
+#line 129 "MB02RD.f"
     if (! notran && ! lsame_(trans, "T", (ftnlen)1, (ftnlen)1) && ! lsame_(
 	    trans, "C", (ftnlen)1, (ftnlen)1)) {
+#line 131 "MB02RD.f"
 	*info = -1;
+#line 132 "MB02RD.f"
     } else if (*n < 0) {
+#line 133 "MB02RD.f"
 	*info = -2;
+#line 134 "MB02RD.f"
     } else if (*nrhs < 0) {
+#line 135 "MB02RD.f"
 	*info = -3;
+#line 136 "MB02RD.f"
     } else if (*ldh < max(1,*n)) {
+#line 137 "MB02RD.f"
 	*info = -5;
+#line 138 "MB02RD.f"
     } else if (*ldb < max(1,*n)) {
+#line 139 "MB02RD.f"
 	*info = -8;
+#line 140 "MB02RD.f"
     }
+#line 141 "MB02RD.f"
     if (*info != 0) {
+#line 142 "MB02RD.f"
 	i__1 = -(*info);
+#line 142 "MB02RD.f"
 	xerbla_("MB02RD", &i__1, (ftnlen)6);
+#line 143 "MB02RD.f"
 	return 0;
+#line 144 "MB02RD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 148 "MB02RD.f"
     if (*n == 0 || *nrhs == 0) {
+#line 148 "MB02RD.f"
 	return 0;
+#line 148 "MB02RD.f"
     }
 
+#line 151 "MB02RD.f"
     if (notran) {
 
 /*        Solve H * X = B. */
@@ -195,46 +229,70 @@ static doublereal c_b11 = 1.;
 /*        where each transformation L(i) is a rank-one modification of */
 /*        the identity matrix. */
 
+#line 162 "MB02RD.f"
 	i__1 = *n - 1;
+#line 162 "MB02RD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 163 "MB02RD.f"
 	    jp = ipiv[j];
+#line 164 "MB02RD.f"
 	    if (jp != j) {
+#line 164 "MB02RD.f"
 		dswap_(nrhs, &b[jp + b_dim1], ldb, &b[j + b_dim1], ldb);
+#line 164 "MB02RD.f"
 	    }
+#line 166 "MB02RD.f"
 	    d__1 = -h__[j + 1 + j * h_dim1];
+#line 166 "MB02RD.f"
 	    daxpy_(nrhs, &d__1, &b[j + b_dim1], ldb, &b[j + 1 + b_dim1], ldb);
+#line 168 "MB02RD.f"
 /* L10: */
+#line 168 "MB02RD.f"
 	}
 
 /*        Solve U * X = B, overwriting B with X. */
 
+#line 172 "MB02RD.f"
 	dtrsm_("Left", "Upper", "No transpose", "Non-unit", n, nrhs, &c_b11, &
 		h__[h_offset], ldh, &b[b_offset], ldb, (ftnlen)4, (ftnlen)5, (
 		ftnlen)12, (ftnlen)8);
 
+#line 175 "MB02RD.f"
     } else {
 
 /*        Solve H' * X = B. */
 
 /*        Solve U' * X = B, overwriting B with X. */
 
+#line 181 "MB02RD.f"
 	dtrsm_("Left", "Upper", "Transpose", "Non-unit", n, nrhs, &c_b11, &
 		h__[h_offset], ldh, &b[b_offset], ldb, (ftnlen)4, (ftnlen)5, (
 		ftnlen)9, (ftnlen)8);
 
 /*        Solve L' * X = B, overwriting B with X. */
 
+#line 186 "MB02RD.f"
 	for (j = *n - 1; j >= 1; --j) {
+#line 187 "MB02RD.f"
 	    d__1 = -h__[j + 1 + j * h_dim1];
+#line 187 "MB02RD.f"
 	    daxpy_(nrhs, &d__1, &b[j + 1 + b_dim1], ldb, &b[j + b_dim1], ldb);
+#line 189 "MB02RD.f"
 	    jp = ipiv[j];
+#line 190 "MB02RD.f"
 	    if (jp != j) {
+#line 190 "MB02RD.f"
 		dswap_(nrhs, &b[jp + b_dim1], ldb, &b[j + b_dim1], ldb);
+#line 190 "MB02RD.f"
 	    }
+#line 192 "MB02RD.f"
 /* L20: */
+#line 192 "MB02RD.f"
 	}
+#line 193 "MB02RD.f"
     }
 
+#line 195 "MB02RD.f"
     return 0;
 /* *** Last line of MB02RD *** */
 } /* mb02rd_ */

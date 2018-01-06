@@ -1,3 +1,4 @@
+#line 1 "UD01DD.f"
 /* UD01DD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "UD01DD.f"
 /* Table of constant values */
 
 static doublereal c_b4 = 0.;
@@ -131,69 +133,121 @@ static integer c__5 = 5;
 
 /*     .. Executable statements .. */
 
+#line 101 "UD01DD.f"
     /* Parameter adjustments */
+#line 101 "UD01DD.f"
     a_dim1 = *lda;
+#line 101 "UD01DD.f"
     a_offset = 1 + a_dim1;
+#line 101 "UD01DD.f"
     a -= a_offset;
+#line 101 "UD01DD.f"
 
+#line 101 "UD01DD.f"
     /* Function Body */
+#line 101 "UD01DD.f"
     *info = 0;
 
 /*     Check the input scalar arguments. */
 
+#line 105 "UD01DD.f"
     if (*m < 0) {
+#line 106 "UD01DD.f"
 	*info = -1;
+#line 107 "UD01DD.f"
     } else if (*n < 0) {
+#line 108 "UD01DD.f"
 	*info = -2;
+#line 109 "UD01DD.f"
     } else if (*nin < 0) {
+#line 110 "UD01DD.f"
 	*info = -3;
+#line 111 "UD01DD.f"
     } else if (*lda < max(1,*m)) {
+#line 112 "UD01DD.f"
 	*info = -5;
+#line 113 "UD01DD.f"
     }
 
+#line 115 "UD01DD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 119 "UD01DD.f"
 	i__1 = -(*info);
+#line 119 "UD01DD.f"
 	xerbla_("UD01DD", &i__1, (ftnlen)6);
+#line 120 "UD01DD.f"
 	return 0;
+#line 121 "UD01DD.f"
     }
 
+#line 123 "UD01DD.f"
     dlaset_("Full", m, n, &c_b4, &c_b4, &a[a_offset], lda, (ftnlen)4);
 
 /*     Read (i, j, A(i,j)) of the nonzero elements one by one. */
 
+#line 127 "UD01DD.f"
 L10:
+#line 127 "UD01DD.f"
     io___1.ciunit = *nin;
+#line 127 "UD01DD.f"
     i__1 = s_rsle(&io___1);
+#line 127 "UD01DD.f"
     if (i__1 != 0) {
+#line 127 "UD01DD.f"
 	goto L20;
+#line 127 "UD01DD.f"
     }
+#line 127 "UD01DD.f"
     i__1 = do_lio(&c__3, &c__1, (char *)&i__, (ftnlen)sizeof(integer));
+#line 127 "UD01DD.f"
     if (i__1 != 0) {
+#line 127 "UD01DD.f"
 	goto L20;
+#line 127 "UD01DD.f"
     }
+#line 127 "UD01DD.f"
     i__1 = do_lio(&c__3, &c__1, (char *)&j, (ftnlen)sizeof(integer));
+#line 127 "UD01DD.f"
     if (i__1 != 0) {
+#line 127 "UD01DD.f"
 	goto L20;
+#line 127 "UD01DD.f"
     }
+#line 127 "UD01DD.f"
     i__1 = do_lio(&c__5, &c__1, (char *)&aij, (ftnlen)sizeof(doublereal));
+#line 127 "UD01DD.f"
     if (i__1 != 0) {
+#line 127 "UD01DD.f"
 	goto L20;
+#line 127 "UD01DD.f"
     }
+#line 127 "UD01DD.f"
     i__1 = e_rsle();
+#line 127 "UD01DD.f"
     if (i__1 != 0) {
+#line 127 "UD01DD.f"
 	goto L20;
+#line 127 "UD01DD.f"
     }
+#line 128 "UD01DD.f"
     if (i__ < 1 || i__ > *m || j < 1 || j > *n) {
+#line 129 "UD01DD.f"
 	*info = 1;
+#line 130 "UD01DD.f"
     } else {
+#line 131 "UD01DD.f"
 	a[i__ + j * a_dim1] = aij;
+#line 132 "UD01DD.f"
     }
+#line 133 "UD01DD.f"
     goto L10;
+#line 134 "UD01DD.f"
 L20:
 
+#line 136 "UD01DD.f"
     return 0;
 /* *** Last line of UD01DD *** */
 } /* ud01dd_ */

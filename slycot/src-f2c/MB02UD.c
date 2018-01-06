@@ -1,3 +1,4 @@
+#line 1 "MB02UD.f"
 /* MB02UD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02UD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -291,59 +293,112 @@ static doublereal c_b36 = 0.;
 
 /*     Check the input scalar arguments. */
 
+#line 253 "MB02UD.f"
     /* Parameter adjustments */
+#line 253 "MB02UD.f"
     r_dim1 = *ldr;
+#line 253 "MB02UD.f"
     r_offset = 1 + r_dim1;
+#line 253 "MB02UD.f"
     r__ -= r_offset;
+#line 253 "MB02UD.f"
     q_dim1 = *ldq;
+#line 253 "MB02UD.f"
     q_offset = 1 + q_dim1;
+#line 253 "MB02UD.f"
     q -= q_offset;
+#line 253 "MB02UD.f"
     --sv;
+#line 253 "MB02UD.f"
     b_dim1 = *ldb;
+#line 253 "MB02UD.f"
     b_offset = 1 + b_dim1;
+#line 253 "MB02UD.f"
     b -= b_offset;
+#line 253 "MB02UD.f"
     rp_dim1 = *ldrp;
+#line 253 "MB02UD.f"
     rp_offset = 1 + rp_dim1;
+#line 253 "MB02UD.f"
     rp -= rp_offset;
+#line 253 "MB02UD.f"
     --dwork;
+#line 253 "MB02UD.f"
 
+#line 253 "MB02UD.f"
     /* Function Body */
+#line 253 "MB02UD.f"
     *info = 0;
+#line 254 "MB02UD.f"
     nfct = lsame_(fact, "N", (ftnlen)1, (ftnlen)1);
+#line 255 "MB02UD.f"
     left = lsame_(side, "L", (ftnlen)1, (ftnlen)1);
+#line 256 "MB02UD.f"
     pinv = lsame_(jobp, "P", (ftnlen)1, (ftnlen)1);
+#line 257 "MB02UD.f"
     tran = lsame_(trans, "T", (ftnlen)1, (ftnlen)1) || lsame_(trans, "C", (
 	    ftnlen)1, (ftnlen)1);
+#line 258 "MB02UD.f"
     if (left) {
+#line 259 "MB02UD.f"
 	l = *m;
+#line 260 "MB02UD.f"
     } else {
+#line 261 "MB02UD.f"
 	l = *n;
+#line 262 "MB02UD.f"
     }
+#line 263 "MB02UD.f"
     mn = *m * *n;
+#line 264 "MB02UD.f"
     if (! nfct && ! lsame_(fact, "F", (ftnlen)1, (ftnlen)1)) {
+#line 265 "MB02UD.f"
 	*info = -1;
+#line 266 "MB02UD.f"
     } else if (! left && ! lsame_(side, "R", (ftnlen)1, (ftnlen)1)) {
+#line 267 "MB02UD.f"
 	*info = -2;
+#line 268 "MB02UD.f"
     } else if (! tran && ! lsame_(trans, "N", (ftnlen)1, (ftnlen)1)) {
+#line 269 "MB02UD.f"
 	*info = -3;
+#line 270 "MB02UD.f"
     } else if (! pinv && ! lsame_(jobp, "N", (ftnlen)1, (ftnlen)1)) {
+#line 271 "MB02UD.f"
 	*info = -4;
+#line 272 "MB02UD.f"
     } else if (*m < 0) {
+#line 273 "MB02UD.f"
 	*info = -5;
+#line 274 "MB02UD.f"
     } else if (*n < 0) {
+#line 275 "MB02UD.f"
 	*info = -6;
+#line 276 "MB02UD.f"
     } else if (nfct && *rcond > 1.) {
+#line 277 "MB02UD.f"
 	*info = -8;
+#line 278 "MB02UD.f"
     } else if (! nfct && ((doublereal) (*rank) < 0. || *rank > l)) {
+#line 279 "MB02UD.f"
 	*info = -9;
+#line 280 "MB02UD.f"
     } else if (*ldr < max(1,l)) {
+#line 281 "MB02UD.f"
 	*info = -11;
+#line 282 "MB02UD.f"
     } else if (*ldq < max(1,l)) {
+#line 283 "MB02UD.f"
 	*info = -13;
+#line 284 "MB02UD.f"
     } else if (*ldb < max(1,*m)) {
+#line 285 "MB02UD.f"
 	*info = -16;
+#line 286 "MB02UD.f"
     } else if (*ldrp < 1 || pinv && *ldrp < l) {
+#line 287 "MB02UD.f"
 	*info = -18;
+#line 288 "MB02UD.f"
     }
 
 /*     Compute workspace */
@@ -353,49 +408,81 @@ static doublereal c_b36 = 0.;
 /*     NB refers to the optimal block size for the immediately following */
 /*     subroutine, as returned by ILAENV.) */
 
+#line 297 "MB02UD.f"
     minwrk = 1;
+#line 298 "MB02UD.f"
     if (*info == 0 && *ldwork >= 1 && l > 0) {
+#line 299 "MB02UD.f"
 	minwrk = max(1,l);
+#line 300 "MB02UD.f"
 	maxwrk = max(minwrk,mn);
+#line 301 "MB02UD.f"
 	if (nfct) {
 /* Computing MAX */
+#line 302 "MB02UD.f"
 	    i__1 = maxwrk, i__2 = l * 3 + (l << 1) * ilaenv_(&c__1, "DGEBRD", 
 		    " ", &l, &l, &c_n1, &c_n1, (ftnlen)6, (ftnlen)1);
+#line 302 "MB02UD.f"
 	    maxwrk = max(i__1,i__2);
 /* Computing MAX */
+#line 304 "MB02UD.f"
 	    i__1 = maxwrk, i__2 = l * 3 + l * ilaenv_(&c__1, "DORGBR", "Q", &
 		    l, &l, &l, &c_n1, (ftnlen)6, (ftnlen)1);
+#line 304 "MB02UD.f"
 	    maxwrk = max(i__1,i__2);
 /* Computing MAX */
+#line 306 "MB02UD.f"
 	    i__1 = maxwrk, i__2 = l * 3 + l * ilaenv_(&c__1, "DORGBR", "P", &
 		    l, &l, &l, &c_n1, (ftnlen)6, (ftnlen)1);
+#line 306 "MB02UD.f"
 	    maxwrk = max(i__1,i__2);
 /* Computing MAX */
+#line 308 "MB02UD.f"
 	    i__1 = 1, i__2 = l * 5;
+#line 308 "MB02UD.f"
 	    minwrk = max(i__1,i__2);
+#line 309 "MB02UD.f"
 	    maxwrk = max(maxwrk,minwrk);
+#line 310 "MB02UD.f"
 	}
+#line 311 "MB02UD.f"
     }
 
+#line 313 "MB02UD.f"
     if (*ldwork < minwrk) {
+#line 314 "MB02UD.f"
 	*info = -20;
+#line 315 "MB02UD.f"
     }
+#line 316 "MB02UD.f"
     if (*info != 0) {
+#line 317 "MB02UD.f"
 	i__1 = -(*info);
+#line 317 "MB02UD.f"
 	xerbla_("MB02UD", &i__1, (ftnlen)6);
+#line 318 "MB02UD.f"
 	return 0;
+#line 319 "MB02UD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 323 "MB02UD.f"
     if (l == 0) {
+#line 324 "MB02UD.f"
 	if (nfct) {
+#line 324 "MB02UD.f"
 	    *rank = 0;
+#line 324 "MB02UD.f"
 	}
+#line 326 "MB02UD.f"
 	dwork[1] = 1.;
+#line 327 "MB02UD.f"
 	return 0;
+#line 328 "MB02UD.f"
     }
 
+#line 330 "MB02UD.f"
     if (nfct) {
 
 /*        Compute the SVD of R, R = Q*S*P'. */
@@ -403,350 +490,509 @@ static doublereal c_b36 = 0.;
 /*        Workspace: need   5*L; */
 /*                   prefer larger. */
 
+#line 337 "MB02UD.f"
 	mb03ud_("Vectors", "Vectors", &l, &r__[r_offset], ldr, &q[q_offset], 
 		ldq, &sv[1], &dwork[1], ldwork, info, (ftnlen)7, (ftnlen)7);
+#line 339 "MB02UD.f"
 	if (*info != 0) {
+#line 339 "MB02UD.f"
 	    return 0;
+#line 339 "MB02UD.f"
 	}
 
 /*        Use the default tolerance, if required. */
 
+#line 344 "MB02UD.f"
 	toll = *rcond;
+#line 345 "MB02UD.f"
 	if (toll <= 0.) {
+#line 345 "MB02UD.f"
 	    toll = dlamch_("Precision", (ftnlen)9);
+#line 345 "MB02UD.f"
 	}
 /* Computing MAX */
+#line 347 "MB02UD.f"
 	d__1 = toll * sv[1], d__2 = dlamch_("Safe minimum", (ftnlen)12);
+#line 347 "MB02UD.f"
 	toll = max(d__1,d__2);
 
 /*        Estimate the rank of R. */
 
+#line 351 "MB02UD.f"
 	i__1 = l;
+#line 351 "MB02UD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 352 "MB02UD.f"
 	    if (toll > sv[i__]) {
+#line 352 "MB02UD.f"
 		goto L20;
+#line 352 "MB02UD.f"
 	    }
+#line 354 "MB02UD.f"
 /* L10: */
+#line 354 "MB02UD.f"
 	}
 
+#line 356 "MB02UD.f"
 	i__ = l + 1;
+#line 357 "MB02UD.f"
 L20:
+#line 358 "MB02UD.f"
 	*rank = i__ - 1;
 
+#line 360 "MB02UD.f"
 	i__1 = *rank;
+#line 360 "MB02UD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 361 "MB02UD.f"
 	    sv[i__] = 1. / sv[i__];
+#line 362 "MB02UD.f"
 /* L30: */
+#line 362 "MB02UD.f"
 	}
 
+#line 364 "MB02UD.f"
 	if (pinv && *rank > 0) {
 
 /*           Compute  pinv(S)'*P'  in R. */
 
+#line 368 "MB02UD.f"
 	    mb01sd_("Row scaling", rank, &l, &r__[r_offset], ldr, &sv[1], &sv[
 		    1], (ftnlen)11);
 
 /*           Compute  pinv(R) = P*pinv(S)*Q'  in  RP. */
 
+#line 372 "MB02UD.f"
 	    dgemm_("Transpose", "Transpose", &l, &l, rank, &c_b35, &r__[
 		    r_offset], ldr, &q[q_offset], ldq, &c_b36, &rp[rp_offset],
 		     ldrp, (ftnlen)9, (ftnlen)9);
+#line 374 "MB02UD.f"
 	}
+#line 375 "MB02UD.f"
     }
 
 /*     Return if min(M,N) = 0 or RANK = 0. */
 
+#line 379 "MB02UD.f"
     if (min(*m,*n) == 0 || *rank == 0) {
+#line 380 "MB02UD.f"
 	dwork[1] = (doublereal) maxwrk;
+#line 381 "MB02UD.f"
 	return 0;
+#line 382 "MB02UD.f"
     }
 
 /*     Set X = 0 if alpha = 0. */
 
+#line 386 "MB02UD.f"
     if (*alpha == 0.) {
+#line 387 "MB02UD.f"
 	dlaset_("Full", m, n, &c_b36, &c_b36, &b[b_offset], ldb, (ftnlen)4);
+#line 388 "MB02UD.f"
 	dwork[1] = (doublereal) maxwrk;
+#line 389 "MB02UD.f"
 	return 0;
+#line 390 "MB02UD.f"
     }
 
+#line 392 "MB02UD.f"
     if (pinv) {
 
+#line 394 "MB02UD.f"
 	if (left) {
 
 /*           Compute  alpha*op(pinv(R))*B  in workspace and save it in B. */
 /*           Workspace:  need   M   (BLAS 2); */
 /*                       prefer M*N (BLAS 3). */
 
+#line 400 "MB02UD.f"
 	    if (*ldwork >= mn) {
+#line 401 "MB02UD.f"
 		dgemm_(trans, "NoTranspose", m, n, m, alpha, &rp[rp_offset], 
 			ldrp, &b[b_offset], ldb, &c_b36, &dwork[1], m, (
 			ftnlen)1, (ftnlen)11);
+#line 403 "MB02UD.f"
 		dlacpy_("Full", m, n, &dwork[1], m, &b[b_offset], ldb, (
 			ftnlen)4);
+#line 404 "MB02UD.f"
 	    } else {
 
+#line 406 "MB02UD.f"
 		i__1 = *n;
+#line 406 "MB02UD.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 407 "MB02UD.f"
 		    dgemv_(trans, m, m, alpha, &rp[rp_offset], ldrp, &b[i__ * 
 			    b_dim1 + 1], &c__1, &c_b36, &dwork[1], &c__1, (
 			    ftnlen)1);
+#line 409 "MB02UD.f"
 		    dcopy_(m, &dwork[1], &c__1, &b[i__ * b_dim1 + 1], &c__1);
+#line 410 "MB02UD.f"
 /* L40: */
+#line 410 "MB02UD.f"
 		}
 
+#line 412 "MB02UD.f"
 	    }
+#line 413 "MB02UD.f"
 	} else {
 
 /*           Compute  alpha*B*op(pinv(R))  in workspace and save it in B. */
 /*           Workspace:  need   N   (BLAS 2); */
 /*                       prefer M*N (BLAS 3). */
 
+#line 419 "MB02UD.f"
 	    if (*ldwork >= mn) {
+#line 420 "MB02UD.f"
 		dgemm_("NoTranspose", trans, m, n, n, alpha, &b[b_offset], 
 			ldb, &rp[rp_offset], ldrp, &c_b36, &dwork[1], m, (
 			ftnlen)11, (ftnlen)1);
+#line 422 "MB02UD.f"
 		dlacpy_("Full", m, n, &dwork[1], m, &b[b_offset], ldb, (
 			ftnlen)4);
+#line 423 "MB02UD.f"
 	    } else {
 
+#line 425 "MB02UD.f"
 		if (tran) {
+#line 426 "MB02UD.f"
 		    *(unsigned char *)ntran = 'N';
+#line 427 "MB02UD.f"
 		} else {
+#line 428 "MB02UD.f"
 		    *(unsigned char *)ntran = 'T';
+#line 429 "MB02UD.f"
 		}
 
+#line 431 "MB02UD.f"
 		i__1 = *m;
+#line 431 "MB02UD.f"
 		for (i__ = 1; i__ <= i__1; ++i__) {
+#line 432 "MB02UD.f"
 		    dgemv_(ntran, n, n, alpha, &rp[rp_offset], ldrp, &b[i__ + 
 			    b_dim1], ldb, &c_b36, &dwork[1], &c__1, (ftnlen)1)
 			    ;
+#line 434 "MB02UD.f"
 		    dcopy_(n, &dwork[1], &c__1, &b[i__ + b_dim1], ldb);
+#line 435 "MB02UD.f"
 /* L50: */
+#line 435 "MB02UD.f"
 		}
 
+#line 437 "MB02UD.f"
 	    }
+#line 438 "MB02UD.f"
 	}
 
+#line 440 "MB02UD.f"
     } else {
 
+#line 442 "MB02UD.f"
 	if (left) {
 
 /*           Compute  alpha*P*pinv(S)*Q'*B  or  alpha*Q*pinv(S)'*P'*B. */
 /*           Workspace:  need   M   (BLAS 2); */
 /*                       prefer M*N (BLAS 3). */
 
+#line 448 "MB02UD.f"
 	    if (*ldwork >= mn) {
+#line 449 "MB02UD.f"
 		if (tran) {
 
 /*                 Compute  alpha*P'*B  in workspace. */
 
+#line 453 "MB02UD.f"
 		    dgemm_("NoTranspose", "NoTranspose", m, n, m, alpha, &r__[
 			    r_offset], ldr, &b[b_offset], ldb, &c_b36, &dwork[
 			    1], m, (ftnlen)11, (ftnlen)11);
 
 /*                 Compute  alpha*pinv(S)'*P'*B. */
 
+#line 458 "MB02UD.f"
 		    mb01sd_("Row scaling", rank, n, &dwork[1], m, &sv[1], &sv[
 			    1], (ftnlen)11);
 
 /*                 Compute  alpha*Q*pinv(S)'*P'*B. */
 
+#line 463 "MB02UD.f"
 		    dgemm_("NoTranspose", "NoTranspose", m, n, rank, &c_b35, &
 			    q[q_offset], ldq, &dwork[1], m, &c_b36, &b[
 			    b_offset], ldb, (ftnlen)11, (ftnlen)11);
+#line 465 "MB02UD.f"
 		} else {
 
 /*                 Compute  alpha*Q'*B  in workspace. */
 
+#line 469 "MB02UD.f"
 		    dgemm_("Transpose", "NoTranspose", m, n, m, alpha, &q[
 			    q_offset], ldq, &b[b_offset], ldb, &c_b36, &dwork[
 			    1], m, (ftnlen)9, (ftnlen)11);
 
 /*                 Compute  alpha*pinv(S)*Q'*B. */
 
+#line 474 "MB02UD.f"
 		    mb01sd_("Row scaling", rank, n, &dwork[1], m, &sv[1], &sv[
 			    1], (ftnlen)11);
 
 /*                 Compute  alpha*P*pinv(S)*Q'*B. */
 
+#line 479 "MB02UD.f"
 		    dgemm_("Transpose", "NoTranspose", m, n, rank, &c_b35, &
 			    r__[r_offset], ldr, &dwork[1], m, &c_b36, &b[
 			    b_offset], ldb, (ftnlen)9, (ftnlen)11);
+#line 481 "MB02UD.f"
 		}
+#line 482 "MB02UD.f"
 	    } else {
+#line 483 "MB02UD.f"
 		if (tran) {
 
 /*                 Compute  alpha*P'*B  in B using workspace. */
 
+#line 487 "MB02UD.f"
 		    i__1 = *n;
+#line 487 "MB02UD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 488 "MB02UD.f"
 			dgemv_("NoTranspose", m, m, alpha, &r__[r_offset], 
 				ldr, &b[i__ * b_dim1 + 1], &c__1, &c_b36, &
 				dwork[1], &c__1, (ftnlen)11);
+#line 490 "MB02UD.f"
 			dcopy_(m, &dwork[1], &c__1, &b[i__ * b_dim1 + 1], &
 				c__1);
+#line 491 "MB02UD.f"
 /* L60: */
+#line 491 "MB02UD.f"
 		    }
 
 /*                 Compute  alpha*pinv(S)'*P'*B. */
 
+#line 495 "MB02UD.f"
 		    mb01sd_("Row scaling", rank, n, &b[b_offset], ldb, &sv[1],
 			     &sv[1], (ftnlen)11);
 
 /*                 Compute  alpha*Q*pinv(S)'*P'*B  in B using workspace. */
 
+#line 499 "MB02UD.f"
 		    i__1 = *n;
+#line 499 "MB02UD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 500 "MB02UD.f"
 			dgemv_("NoTranspose", m, rank, &c_b35, &q[q_offset], 
 				ldq, &b[i__ * b_dim1 + 1], &c__1, &c_b36, &
 				dwork[1], &c__1, (ftnlen)11);
+#line 502 "MB02UD.f"
 			dcopy_(m, &dwork[1], &c__1, &b[i__ * b_dim1 + 1], &
 				c__1);
+#line 503 "MB02UD.f"
 /* L70: */
+#line 503 "MB02UD.f"
 		    }
+#line 504 "MB02UD.f"
 		} else {
 
 /*                 Compute  alpha*Q'*B  in B using workspace. */
 
+#line 508 "MB02UD.f"
 		    i__1 = *n;
+#line 508 "MB02UD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 509 "MB02UD.f"
 			dgemv_("Transpose", m, m, alpha, &q[q_offset], ldq, &
 				b[i__ * b_dim1 + 1], &c__1, &c_b36, &dwork[1],
 				 &c__1, (ftnlen)9);
+#line 511 "MB02UD.f"
 			dcopy_(m, &dwork[1], &c__1, &b[i__ * b_dim1 + 1], &
 				c__1);
+#line 512 "MB02UD.f"
 /* L80: */
+#line 512 "MB02UD.f"
 		    }
 
 /*                 Compute  alpha*pinv(S)*Q'*B. */
 
+#line 516 "MB02UD.f"
 		    mb01sd_("Row scaling", rank, n, &b[b_offset], ldb, &sv[1],
 			     &sv[1], (ftnlen)11);
 
 /*                 Compute  alpha*P*pinv(S)*Q'*B  in B using workspace. */
 
+#line 520 "MB02UD.f"
 		    i__1 = *n;
+#line 520 "MB02UD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 521 "MB02UD.f"
 			dgemv_("Transpose", rank, m, &c_b35, &r__[r_offset], 
 				ldr, &b[i__ * b_dim1 + 1], &c__1, &c_b36, &
 				dwork[1], &c__1, (ftnlen)9);
+#line 523 "MB02UD.f"
 			dcopy_(m, &dwork[1], &c__1, &b[i__ * b_dim1 + 1], &
 				c__1);
+#line 524 "MB02UD.f"
 /* L90: */
+#line 524 "MB02UD.f"
 		    }
+#line 525 "MB02UD.f"
 		}
+#line 526 "MB02UD.f"
 	    }
+#line 527 "MB02UD.f"
 	} else {
 
 /*           Compute  alpha*B*P*pinv(S)*Q'  or  alpha*B*Q*pinv(S)'*P'. */
 /*           Workspace:  need   N   (BLAS 2); */
 /*                       prefer M*N (BLAS 3). */
 
+#line 533 "MB02UD.f"
 	    if (*ldwork >= mn) {
+#line 534 "MB02UD.f"
 		if (tran) {
 
 /*                 Compute  alpha*B*Q  in workspace. */
 
+#line 538 "MB02UD.f"
 		    dgemm_("NoTranspose", "NoTranspose", m, n, n, alpha, &b[
 			    b_offset], ldb, &q[q_offset], ldq, &c_b36, &dwork[
 			    1], m, (ftnlen)11, (ftnlen)11);
 
 /*                 Compute  alpha*B*Q*pinv(S)'. */
 
+#line 543 "MB02UD.f"
 		    mb01sd_("Column scaling", m, rank, &dwork[1], m, &sv[1], &
 			    sv[1], (ftnlen)14);
 
 /*                 Compute  alpha*B*Q*pinv(S)'*P' in B. */
 
+#line 548 "MB02UD.f"
 		    dgemm_("NoTranspose", "NoTranspose", m, n, rank, &c_b35, &
 			    dwork[1], m, &r__[r_offset], ldr, &c_b36, &b[
 			    b_offset], ldb, (ftnlen)11, (ftnlen)11);
+#line 550 "MB02UD.f"
 		} else {
 
 /*                 Compute  alpha*B*P  in workspace. */
 
+#line 554 "MB02UD.f"
 		    dgemm_("NoTranspose", "Transpose", m, n, n, alpha, &b[
 			    b_offset], ldb, &r__[r_offset], ldr, &c_b36, &
 			    dwork[1], m, (ftnlen)11, (ftnlen)9);
 
 /*                 Compute  alpha*B*P*pinv(S). */
 
+#line 559 "MB02UD.f"
 		    mb01sd_("Column scaling", m, rank, &dwork[1], m, &sv[1], &
 			    sv[1], (ftnlen)14);
 
 /*                 Compute  alpha*B*P*pinv(S)*Q' in B. */
 
+#line 564 "MB02UD.f"
 		    dgemm_("NoTranspose", "Transpose", m, n, rank, &c_b35, &
 			    dwork[1], m, &q[q_offset], ldq, &c_b36, &b[
 			    b_offset], ldb, (ftnlen)11, (ftnlen)9);
+#line 566 "MB02UD.f"
 		}
+#line 567 "MB02UD.f"
 	    } else {
+#line 568 "MB02UD.f"
 		if (tran) {
 
 /*                 Compute  alpha*B*Q  in B using workspace. */
 
+#line 572 "MB02UD.f"
 		    i__1 = *m;
+#line 572 "MB02UD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 573 "MB02UD.f"
 			dgemv_("Transpose", n, n, alpha, &q[q_offset], ldq, &
 				b[i__ + b_dim1], ldb, &c_b36, &dwork[1], &
 				c__1, (ftnlen)9);
+#line 575 "MB02UD.f"
 			dcopy_(n, &dwork[1], &c__1, &b[i__ + b_dim1], ldb);
+#line 576 "MB02UD.f"
 /* L100: */
+#line 576 "MB02UD.f"
 		    }
 
 /*                 Compute  alpha*B*Q*pinv(S)'. */
 
+#line 580 "MB02UD.f"
 		    mb01sd_("Column scaling", m, rank, &b[b_offset], ldb, &sv[
 			    1], &sv[1], (ftnlen)14);
 
 /*                 Compute  alpha*B*Q*pinv(S)'*P' in B using workspace. */
 
+#line 585 "MB02UD.f"
 		    i__1 = *m;
+#line 585 "MB02UD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 586 "MB02UD.f"
 			dgemv_("Transpose", rank, n, &c_b35, &r__[r_offset], 
 				ldr, &b[i__ + b_dim1], ldb, &c_b36, &dwork[1],
 				 &c__1, (ftnlen)9);
+#line 588 "MB02UD.f"
 			dcopy_(n, &dwork[1], &c__1, &b[i__ + b_dim1], ldb);
+#line 589 "MB02UD.f"
 /* L110: */
+#line 589 "MB02UD.f"
 		    }
 
+#line 591 "MB02UD.f"
 		} else {
 
 /*                 Compute  alpha*B*P  in B using workspace. */
 
+#line 595 "MB02UD.f"
 		    i__1 = *m;
+#line 595 "MB02UD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 596 "MB02UD.f"
 			dgemv_("NoTranspose", n, n, alpha, &r__[r_offset], 
 				ldr, &b[i__ + b_dim1], ldb, &c_b36, &dwork[1],
 				 &c__1, (ftnlen)11);
+#line 598 "MB02UD.f"
 			dcopy_(n, &dwork[1], &c__1, &b[i__ + b_dim1], ldb);
+#line 599 "MB02UD.f"
 /* L120: */
+#line 599 "MB02UD.f"
 		    }
 
 /*                 Compute  alpha*B*P*pinv(S). */
 
+#line 603 "MB02UD.f"
 		    mb01sd_("Column scaling", m, rank, &b[b_offset], ldb, &sv[
 			    1], &sv[1], (ftnlen)14);
 
 /*                 Compute  alpha*B*P*pinv(S)*Q' in B using workspace. */
 
+#line 608 "MB02UD.f"
 		    i__1 = *m;
+#line 608 "MB02UD.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 609 "MB02UD.f"
 			dgemv_("NoTranspose", n, rank, &c_b35, &q[q_offset], 
 				ldq, &b[i__ + b_dim1], ldb, &c_b36, &dwork[1],
 				 &c__1, (ftnlen)11);
+#line 611 "MB02UD.f"
 			dcopy_(n, &dwork[1], &c__1, &b[i__ + b_dim1], ldb);
+#line 612 "MB02UD.f"
 /* L130: */
+#line 612 "MB02UD.f"
 		    }
+#line 613 "MB02UD.f"
 		}
+#line 614 "MB02UD.f"
 	    }
+#line 615 "MB02UD.f"
 	}
+#line 616 "MB02UD.f"
     }
 
 /*     Return optimal workspace in DWORK(1). */
 
+#line 620 "MB02UD.f"
     dwork[1] = (doublereal) maxwrk;
 
+#line 622 "MB02UD.f"
     return 0;
 /* *** Last line of MB02UD *** */
 } /* mb02ud_ */

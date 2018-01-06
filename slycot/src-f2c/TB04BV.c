@@ -1,3 +1,4 @@
+#line 1 "TB04BV.f"
 /* TB04BV.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TB04BV.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -197,206 +199,349 @@ static integer c__1 = 1;
 
 /*     Test the input scalar parameters. */
 
+#line 178 "TB04BV.f"
     /* Parameter adjustments */
+#line 178 "TB04BV.f"
     ign_dim1 = *ldign;
+#line 178 "TB04BV.f"
     ign_offset = 1 + ign_dim1;
+#line 178 "TB04BV.f"
     ign -= ign_offset;
+#line 178 "TB04BV.f"
     igd_dim1 = *ldigd;
+#line 178 "TB04BV.f"
     igd_offset = 1 + igd_dim1;
+#line 178 "TB04BV.f"
     igd -= igd_offset;
+#line 178 "TB04BV.f"
     --gn;
+#line 178 "TB04BV.f"
     --gd;
+#line 178 "TB04BV.f"
     d_dim1 = *ldd;
+#line 178 "TB04BV.f"
     d_offset = 1 + d_dim1;
+#line 178 "TB04BV.f"
     d__ -= d_offset;
+#line 178 "TB04BV.f"
 
+#line 178 "TB04BV.f"
     /* Function Body */
+#line 178 "TB04BV.f"
     *info = 0;
+#line 179 "TB04BV.f"
     ascend = lsame_(order, "I", (ftnlen)1, (ftnlen)1);
+#line 180 "TB04BV.f"
     if (! ascend && ! lsame_(order, "D", (ftnlen)1, (ftnlen)1)) {
+#line 181 "TB04BV.f"
 	*info = -1;
+#line 182 "TB04BV.f"
     } else if (*p < 0) {
+#line 183 "TB04BV.f"
 	*info = -2;
+#line 184 "TB04BV.f"
     } else if (*m < 0) {
+#line 185 "TB04BV.f"
 	*info = -3;
+#line 186 "TB04BV.f"
     } else if (*md < 1) {
+#line 187 "TB04BV.f"
 	*info = -4;
+#line 188 "TB04BV.f"
     } else if (*ldign < max(1,*p)) {
+#line 189 "TB04BV.f"
 	*info = -6;
+#line 190 "TB04BV.f"
     } else if (*ldigd < max(1,*p)) {
+#line 191 "TB04BV.f"
 	*info = -8;
+#line 192 "TB04BV.f"
     } else if (*ldd < max(1,*p)) {
+#line 193 "TB04BV.f"
 	*info = -12;
+#line 194 "TB04BV.f"
     }
 
+#line 196 "TB04BV.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 200 "TB04BV.f"
 	i__1 = -(*info);
+#line 200 "TB04BV.f"
 	xerbla_("TB04BV", &i__1, (ftnlen)6);
+#line 201 "TB04BV.f"
 	return 0;
+#line 202 "TB04BV.f"
     }
 
 /*     Quick return if possible. */
 
+#line 206 "TB04BV.f"
     if (min(*p,*m) == 0) {
+#line 206 "TB04BV.f"
 	return 0;
+#line 206 "TB04BV.f"
     }
 
 /*     Prepare the computation of the default tolerance. */
 
+#line 211 "TB04BV.f"
     toldef = *tol;
+#line 212 "TB04BV.f"
     if (toldef <= 0.) {
+#line 212 "TB04BV.f"
 	eps = dlamch_("Epsilon", (ftnlen)7);
+#line 212 "TB04BV.f"
     }
 
+#line 215 "TB04BV.f"
     k = 1;
 
+#line 217 "TB04BV.f"
     if (ascend) {
 
 /*        Polynomial coefficients are stored in increasing order. */
 
+#line 221 "TB04BV.f"
 	i__1 = *m;
+#line 221 "TB04BV.f"
 	for (j = 1; j <= i__1; ++j) {
 
+#line 223 "TB04BV.f"
 	    i__2 = *p;
+#line 223 "TB04BV.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 224 "TB04BV.f"
 		nn = ign[i__ + j * ign_dim1];
+#line 225 "TB04BV.f"
 		nd = igd[i__ + j * igd_dim1];
+#line 226 "TB04BV.f"
 		if (nn > nd) {
 
 /*                 Error return: the transfer function matrix is */
 /*                               not proper. */
 
+#line 231 "TB04BV.f"
 		    *info = 1;
+#line 232 "TB04BV.f"
 		    return 0;
+#line 233 "TB04BV.f"
 		} else if (nn < nd || nd == 0 && gn[k] == 0.) {
+#line 235 "TB04BV.f"
 		    d__[i__ + j * d_dim1] = 0.;
+#line 236 "TB04BV.f"
 		} else {
 
 /*                 Here NN = ND. */
 
+#line 240 "TB04BV.f"
 		    kk = k + nn;
 
+#line 242 "TB04BV.f"
 		    if (gd[kk] == 0.) {
 
 /*                    Error return: the denominator is null. */
 
+#line 246 "TB04BV.f"
 			*info = 2;
+#line 247 "TB04BV.f"
 			return 0;
+#line 248 "TB04BV.f"
 		    }
 
+#line 250 "TB04BV.f"
 		    dij = gn[kk] / gd[kk];
+#line 251 "TB04BV.f"
 		    d__[i__ + j * d_dim1] = dij;
+#line 252 "TB04BV.f"
 		    gn[kk] = 0.;
+#line 253 "TB04BV.f"
 		    if (nn > 0) {
+#line 254 "TB04BV.f"
 			d__1 = -dij;
+#line 254 "TB04BV.f"
 			daxpy_(&nn, &d__1, &gd[k], &c__1, &gn[k], &c__1);
+#line 255 "TB04BV.f"
 			if (*tol <= 0.) {
+#line 255 "TB04BV.f"
 			    toldef = (doublereal) nn * eps * (d__1 = gn[
 				    idamax_(&nn, &gn[k], &c__1)], abs(d__1));
+#line 255 "TB04BV.f"
 			}
+#line 258 "TB04BV.f"
 			km = nn;
+#line 259 "TB04BV.f"
 			i__3 = km;
+#line 259 "TB04BV.f"
 			for (ii = 1; ii <= i__3; ++ii) {
+#line 260 "TB04BV.f"
 			    --kk;
+#line 261 "TB04BV.f"
 			    --nn;
+#line 262 "TB04BV.f"
 			    if ((d__1 = gn[kk], abs(d__1)) > toldef) {
+#line 262 "TB04BV.f"
 				goto L20;
+#line 262 "TB04BV.f"
 			    }
+#line 264 "TB04BV.f"
 /* L10: */
+#line 264 "TB04BV.f"
 			}
 
+#line 266 "TB04BV.f"
 L20:
 
+#line 268 "TB04BV.f"
 			ign[i__ + j * ign_dim1] = nn;
+#line 269 "TB04BV.f"
 		    }
+#line 270 "TB04BV.f"
 		}
+#line 271 "TB04BV.f"
 		k += *md;
+#line 272 "TB04BV.f"
 /* L30: */
+#line 272 "TB04BV.f"
 	    }
 
+#line 274 "TB04BV.f"
 /* L40: */
+#line 274 "TB04BV.f"
 	}
 
+#line 276 "TB04BV.f"
     } else {
 
 /*        Polynomial coefficients are stored in decreasing order. */
 
+#line 280 "TB04BV.f"
 	i__1 = *m;
+#line 280 "TB04BV.f"
 	for (j = 1; j <= i__1; ++j) {
 
+#line 282 "TB04BV.f"
 	    i__2 = *p;
+#line 282 "TB04BV.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 283 "TB04BV.f"
 		nn = ign[i__ + j * ign_dim1];
+#line 284 "TB04BV.f"
 		nd = igd[i__ + j * igd_dim1];
+#line 285 "TB04BV.f"
 		if (nn > nd) {
 
 /*                 Error return: the transfer function matrix is */
 /*                               not proper. */
 
+#line 290 "TB04BV.f"
 		    *info = 1;
+#line 291 "TB04BV.f"
 		    return 0;
+#line 292 "TB04BV.f"
 		} else if (nn < nd || nd == 0 && gn[k] == 0.) {
+#line 294 "TB04BV.f"
 		    d__[i__ + j * d_dim1] = 0.;
+#line 295 "TB04BV.f"
 		} else {
 
 /*                 Here NN = ND. */
 
+#line 299 "TB04BV.f"
 		    kk = k;
 
+#line 301 "TB04BV.f"
 		    if (gd[kk] == 0.) {
 
 /*                    Error return: the denominator is null. */
 
+#line 305 "TB04BV.f"
 			*info = 2;
+#line 306 "TB04BV.f"
 			return 0;
+#line 307 "TB04BV.f"
 		    }
 
+#line 309 "TB04BV.f"
 		    dij = gn[kk] / gd[kk];
+#line 310 "TB04BV.f"
 		    d__[i__ + j * d_dim1] = dij;
+#line 311 "TB04BV.f"
 		    gn[kk] = 0.;
+#line 312 "TB04BV.f"
 		    if (nn > 0) {
+#line 313 "TB04BV.f"
 			d__1 = -dij;
+#line 313 "TB04BV.f"
 			daxpy_(&nn, &d__1, &gd[k + 1], &c__1, &gn[k + 1], &
 				c__1);
+#line 314 "TB04BV.f"
 			if (*tol <= 0.) {
+#line 314 "TB04BV.f"
 			    toldef = (doublereal) nn * eps * (d__1 = gn[
 				    idamax_(&nn, &gn[k + 1], &c__1)], abs(
 				    d__1));
+#line 314 "TB04BV.f"
 			}
+#line 317 "TB04BV.f"
 			km = nn;
+#line 318 "TB04BV.f"
 			i__3 = km;
+#line 318 "TB04BV.f"
 			for (ii = 1; ii <= i__3; ++ii) {
+#line 319 "TB04BV.f"
 			    ++kk;
+#line 320 "TB04BV.f"
 			    --nn;
+#line 321 "TB04BV.f"
 			    if ((d__1 = gn[kk], abs(d__1)) > toldef) {
+#line 321 "TB04BV.f"
 				goto L60;
+#line 321 "TB04BV.f"
 			    }
+#line 323 "TB04BV.f"
 /* L50: */
+#line 323 "TB04BV.f"
 			}
 
+#line 325 "TB04BV.f"
 L60:
 
+#line 327 "TB04BV.f"
 			ign[i__ + j * ign_dim1] = nn;
+#line 328 "TB04BV.f"
 			i__3 = nn;
+#line 328 "TB04BV.f"
 			for (ii = 0; ii <= i__3; ++ii) {
+#line 329 "TB04BV.f"
 			    gn[k + ii] = gn[kk + ii];
+#line 330 "TB04BV.f"
 /* L70: */
+#line 330 "TB04BV.f"
 			}
 
+#line 332 "TB04BV.f"
 		    }
+#line 333 "TB04BV.f"
 		}
+#line 334 "TB04BV.f"
 		k += *md;
+#line 335 "TB04BV.f"
 /* L80: */
+#line 335 "TB04BV.f"
 	    }
 
+#line 337 "TB04BV.f"
 /* L90: */
+#line 337 "TB04BV.f"
 	}
 
+#line 339 "TB04BV.f"
     }
 
+#line 341 "TB04BV.f"
     return 0;
 /* *** Last line of TB04BV *** */
 } /* tb04bv_ */

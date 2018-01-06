@@ -1,0 +1,3 @@
+extern int mb04ty_(logical *updatq, logical *updatz, integer *m, integer *n, integer *nblcks, integer *inuk, integer *imuk, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *q, integer *ldq, doublereal *z__, integer *ldz, integer *info);
+/*:ref: mb04tw_ 14 14 12 4 4 4 4 4 4 4 7 4 7 4 7 4 */
+/*:ref: mb04tv_ 14 12 12 4 4 4 4 4 7 4 7 4 7 4 */

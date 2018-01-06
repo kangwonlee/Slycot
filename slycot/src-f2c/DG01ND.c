@@ -1,3 +1,4 @@
+#line 1 "DG01ND.f"
 /* DG01ND.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "DG01ND.f"
 /* Subroutine */ int dg01nd_(char *indi, integer *n, doublereal *xr, 
 	doublereal *xi, integer *info, ftnlen indi_len)
 {
@@ -223,56 +225,92 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 207 "DG01ND.f"
     /* Parameter adjustments */
+#line 207 "DG01ND.f"
     --xi;
+#line 207 "DG01ND.f"
     --xr;
+#line 207 "DG01ND.f"
 
+#line 207 "DG01ND.f"
     /* Function Body */
+#line 207 "DG01ND.f"
     *info = 0;
+#line 208 "DG01ND.f"
     lindi = lsame_(indi, "D", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 212 "DG01ND.f"
     if (! lindi && ! lsame_(indi, "I", (ftnlen)1, (ftnlen)1)) {
+#line 213 "DG01ND.f"
 	*info = -1;
+#line 214 "DG01ND.f"
     } else {
+#line 215 "DG01ND.f"
 	j = 0;
+#line 216 "DG01ND.f"
 	if (*n >= 2) {
+#line 217 "DG01ND.f"
 	    j = *n;
 /*           WHILE ( MOD( J, 2 ).EQ.0 ) DO */
+#line 219 "DG01ND.f"
 L10:
+#line 220 "DG01ND.f"
 	    if (j % 2 == 0) {
+#line 221 "DG01ND.f"
 		j /= 2;
+#line 222 "DG01ND.f"
 		goto L10;
+#line 223 "DG01ND.f"
 	    }
 /*           END WHILE 10 */
+#line 225 "DG01ND.f"
 	}
+#line 226 "DG01ND.f"
 	if (j != 1) {
+#line 226 "DG01ND.f"
 	    *info = -2;
+#line 226 "DG01ND.f"
 	}
+#line 227 "DG01ND.f"
     }
 
+#line 229 "DG01ND.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 233 "DG01ND.f"
 	i__1 = -(*info);
+#line 233 "DG01ND.f"
 	xerbla_("DG01ND", &i__1, (ftnlen)6);
+#line 234 "DG01ND.f"
 	return 0;
+#line 235 "DG01ND.f"
     }
 
 /*     Compute the Fourier transform of Z = (XR,XI). */
 
+#line 239 "DG01ND.f"
     if (! lindi) {
+#line 239 "DG01ND.f"
 	dg01ny_(indi, n, &xr[1], &xi[1], (ftnlen)1);
+#line 239 "DG01ND.f"
     }
 
+#line 241 "DG01ND.f"
     dg01md_(indi, n, &xr[1], &xi[1], info, (ftnlen)1);
 
+#line 243 "DG01ND.f"
     if (lindi) {
+#line 243 "DG01ND.f"
 	dg01ny_(indi, n, &xr[1], &xi[1], (ftnlen)1);
+#line 243 "DG01ND.f"
     }
 
+#line 245 "DG01ND.f"
     return 0;
 /* *** Last line of DG01ND *** */
 } /* dg01nd_ */

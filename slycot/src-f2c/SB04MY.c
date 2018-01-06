@@ -1,3 +1,4 @@
+#line 1 "SB04MY.f"
 /* SB04MY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB04MY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -146,70 +148,120 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 124 "SB04MY.f"
     /* Parameter adjustments */
+#line 124 "SB04MY.f"
     a_dim1 = *lda;
+#line 124 "SB04MY.f"
     a_offset = 1 + a_dim1;
+#line 124 "SB04MY.f"
     a -= a_offset;
+#line 124 "SB04MY.f"
     b_dim1 = *ldb;
+#line 124 "SB04MY.f"
     b_offset = 1 + b_dim1;
+#line 124 "SB04MY.f"
     b -= b_offset;
+#line 124 "SB04MY.f"
     c_dim1 = *ldc;
+#line 124 "SB04MY.f"
     c_offset = 1 + c_dim1;
+#line 124 "SB04MY.f"
     c__ -= c_offset;
+#line 124 "SB04MY.f"
     --d__;
+#line 124 "SB04MY.f"
     --ipr;
+#line 124 "SB04MY.f"
 
+#line 124 "SB04MY.f"
     /* Function Body */
+#line 124 "SB04MY.f"
     i__1 = *n;
+#line 124 "SB04MY.f"
     for (i__ = *ind + 1; i__ <= i__1; ++i__) {
+#line 125 "SB04MY.f"
 	d__1 = -b[*ind + i__ * b_dim1];
+#line 125 "SB04MY.f"
 	daxpy_(m, &d__1, &c__[i__ * c_dim1 + 1], &c__1, &c__[*ind * c_dim1 + 
 		1], &c__1);
+#line 126 "SB04MY.f"
 /* L20: */
+#line 126 "SB04MY.f"
     }
 
+#line 128 "SB04MY.f"
     m1 = *m + 1;
+#line 129 "SB04MY.f"
     i2 = *m * m1 / 2 + m1;
+#line 130 "SB04MY.f"
     k2 = 1;
+#line 131 "SB04MY.f"
     k = *m;
 
 /*     Construct the linear algebraic system of order M. */
 
+#line 135 "SB04MY.f"
     i__1 = *m;
+#line 135 "SB04MY.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 136 "SB04MY.f"
 	j = m1 - k;
+#line 137 "SB04MY.f"
 	dcopy_(&k, &a[i__ + j * a_dim1], lda, &d__[k2], &c__1);
+#line 138 "SB04MY.f"
 	k1 = k2;
+#line 139 "SB04MY.f"
 	k2 += k;
+#line 140 "SB04MY.f"
 	if (i__ > 1) {
+#line 141 "SB04MY.f"
 	    ++k1;
+#line 142 "SB04MY.f"
 	    --k;
+#line 143 "SB04MY.f"
 	}
+#line 144 "SB04MY.f"
 	d__[k1] += b[*ind + *ind * b_dim1];
 
 /*        Store the right hand side. */
 
+#line 148 "SB04MY.f"
 	d__[i2] = c__[i__ + *ind * c_dim1];
+#line 149 "SB04MY.f"
 	++i2;
+#line 150 "SB04MY.f"
 /* L40: */
+#line 150 "SB04MY.f"
     }
 
 /*     Solve the linear algebraic system and store the solution in C. */
 
+#line 154 "SB04MY.f"
     sb04mw_(m, &d__[1], &ipr[1], info);
 
+#line 156 "SB04MY.f"
     if (*info != 0) {
+#line 157 "SB04MY.f"
 	*info = *ind;
+#line 158 "SB04MY.f"
     } else {
 
+#line 160 "SB04MY.f"
 	i__1 = *m;
+#line 160 "SB04MY.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 161 "SB04MY.f"
 	    c__[i__ + *ind * c_dim1] = d__[ipr[i__]];
+#line 162 "SB04MY.f"
 /* L60: */
+#line 162 "SB04MY.f"
 	}
 
+#line 164 "SB04MY.f"
     }
 
+#line 166 "SB04MY.f"
     return 0;
 /* *** Last line of SB04MY *** */
 } /* sb04my_ */

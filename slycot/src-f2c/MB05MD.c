@@ -1,3 +1,4 @@
+#line 1 "MB05MD.f"
 /* MB05MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB05MD.f"
 /* Table of constant values */
 
 static doublereal c_b16 = 1.;
@@ -253,56 +255,99 @@ static doublereal c_b40 = 0.;
 
 /*     Test the input scalar arguments. */
 
+#line 210 "MB05MD.f"
     /* Parameter adjustments */
+#line 210 "MB05MD.f"
     a_dim1 = *lda;
+#line 210 "MB05MD.f"
     a_offset = 1 + a_dim1;
+#line 210 "MB05MD.f"
     a -= a_offset;
+#line 210 "MB05MD.f"
     v_dim1 = *ldv;
+#line 210 "MB05MD.f"
     v_offset = 1 + v_dim1;
+#line 210 "MB05MD.f"
     v -= v_offset;
+#line 210 "MB05MD.f"
     y_dim1 = *ldy;
+#line 210 "MB05MD.f"
     y_offset = 1 + y_dim1;
+#line 210 "MB05MD.f"
     y -= y_offset;
+#line 210 "MB05MD.f"
     --valr;
+#line 210 "MB05MD.f"
     --vali;
+#line 210 "MB05MD.f"
     --iwork;
+#line 210 "MB05MD.f"
     --dwork;
+#line 210 "MB05MD.f"
 
+#line 210 "MB05MD.f"
     /* Function Body */
+#line 210 "MB05MD.f"
     *info = 0;
+#line 211 "MB05MD.f"
     scale = lsame_(balanc, "S", (ftnlen)1, (ftnlen)1);
+#line 212 "MB05MD.f"
     if (! (lsame_(balanc, "N", (ftnlen)1, (ftnlen)1) || scale)) {
+#line 213 "MB05MD.f"
 	*info = -1;
+#line 214 "MB05MD.f"
     } else if (*n < 0) {
+#line 215 "MB05MD.f"
 	*info = -2;
+#line 216 "MB05MD.f"
     } else if (*lda < max(1,*n)) {
+#line 217 "MB05MD.f"
 	*info = -5;
+#line 218 "MB05MD.f"
     } else if (*ldv < max(1,*n)) {
+#line 219 "MB05MD.f"
 	*info = -7;
+#line 220 "MB05MD.f"
     } else if (*ldy < max(1,*n)) {
+#line 221 "MB05MD.f"
 	*info = -9;
+#line 222 "MB05MD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 222 "MB05MD.f"
 	i__1 = 1, i__2 = *n << 2;
+#line 222 "MB05MD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 223 "MB05MD.f"
 	    *info = -14;
+#line 224 "MB05MD.f"
 	}
+#line 224 "MB05MD.f"
     }
 
+#line 226 "MB05MD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 230 "MB05MD.f"
 	i__1 = -(*info);
+#line 230 "MB05MD.f"
 	xerbla_("MB05MD", &i__1, (ftnlen)6);
+#line 231 "MB05MD.f"
 	return 0;
+#line 232 "MB05MD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 236 "MB05MD.f"
     if (*n == 0) {
+#line 237 "MB05MD.f"
 	dwork[1] = 1.;
+#line 238 "MB05MD.f"
 	return 0;
+#line 239 "MB05MD.f"
     }
 
 /*     (Note: Comments in the code beginning "Workspace:" describe the */
@@ -316,82 +361,129 @@ static doublereal c_b40 = 0.;
 /*     transformation. */
 /*     Workspace:  need: 4*N. */
 
+#line 252 "MB05MD.f"
     mb05my_(balanc, n, &a[a_offset], lda, &valr[1], &vali[1], &v[v_offset], 
 	    ldv, &y[y_offset], ldy, &dwork[1], ldwork, info, (ftnlen)1);
 
+#line 255 "MB05MD.f"
     if (*info > 0) {
+#line 255 "MB05MD.f"
 	return 0;
+#line 255 "MB05MD.f"
     }
+#line 257 "MB05MD.f"
     wrkopt = dwork[1];
+#line 258 "MB05MD.f"
     if (scale) {
+#line 259 "MB05MD.f"
 	i__1 = *n;
+#line 259 "MB05MD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 260 "MB05MD.f"
 	    dwork[i__] = dwork[i__ + 1];
+#line 261 "MB05MD.f"
 /* L10: */
+#line 261 "MB05MD.f"
 	}
+#line 262 "MB05MD.f"
     }
 
 /*     Exit with INFO = N + 1 if V is exactly singular. */
 
+#line 266 "MB05MD.f"
     i__1 = *n;
+#line 266 "MB05MD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 267 "MB05MD.f"
 	if (v[i__ + i__ * v_dim1] == 0.) {
+#line 268 "MB05MD.f"
 	    *info = *n + 1;
+#line 269 "MB05MD.f"
 	    return 0;
+#line 270 "MB05MD.f"
 	}
+#line 271 "MB05MD.f"
 /* L20: */
+#line 271 "MB05MD.f"
     }
 
 /*     Compute the reciprocal condition number of the triangular matrix. */
 
+#line 275 "MB05MD.f"
     dtrcon_("1-norm", "Upper", "Non unit", n, &v[v_offset], ldv, &rcond, &
 	    dwork[*n + 1], &iwork[1], info, (ftnlen)6, (ftnlen)5, (ftnlen)8);
 
 /*     Return if the matrix is singular to working precision. */
 
+#line 280 "MB05MD.f"
     if (rcond < dlamch_("Epsilon", (ftnlen)7)) {
+#line 281 "MB05MD.f"
 	dwork[2] = rcond;
+#line 282 "MB05MD.f"
 	*info = *n + 2;
+#line 283 "MB05MD.f"
 	return 0;
+#line 284 "MB05MD.f"
     }
 
 /*     Compute the right eigenvector matrix (temporarily) in A. */
 
+#line 288 "MB05MD.f"
     dlacpy_("Full", n, n, &y[y_offset], ldy, &a[a_offset], lda, (ftnlen)4);
+#line 289 "MB05MD.f"
     dtrmm_("Right", "Upper", "No transpose", "Non unit", n, n, &c_b16, &v[
 	    v_offset], ldv, &a[a_offset], lda, (ftnlen)5, (ftnlen)5, (ftnlen)
 	    12, (ftnlen)8);
+#line 291 "MB05MD.f"
     if (scale) {
+#line 291 "MB05MD.f"
 	dgebak_(balanc, "Right", n, &c__1, n, &dwork[1], n, &a[a_offset], lda,
 		 info, (ftnlen)1, (ftnlen)5);
+#line 291 "MB05MD.f"
     }
 
 /*     Compute the inverse of the right eigenvector matrix, by solving */
 /*     a set of linear systems, V * X = Y' (if BALANC = 'N'). */
 
+#line 297 "MB05MD.f"
     i__1 = *n;
+#line 297 "MB05MD.f"
     for (i__ = 2; i__ <= i__1; ++i__) {
+#line 298 "MB05MD.f"
 	i__2 = i__ - 1;
+#line 298 "MB05MD.f"
 	dswap_(&i__2, &y[i__ + y_dim1], ldy, &y[i__ * y_dim1 + 1], &c__1);
+#line 299 "MB05MD.f"
 /* L40: */
+#line 299 "MB05MD.f"
     }
 
+#line 301 "MB05MD.f"
     dtrsm_("Left", "Upper", "No transpose", "Non unit", n, n, &c_b16, &v[
 	    v_offset], ldv, &y[y_offset], ldy, (ftnlen)4, (ftnlen)5, (ftnlen)
 	    12, (ftnlen)8);
+#line 303 "MB05MD.f"
     if (scale) {
 
+#line 305 "MB05MD.f"
 	i__1 = *n;
+#line 305 "MB05MD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 306 "MB05MD.f"
 	    tempr = 1. / dwork[i__];
+#line 307 "MB05MD.f"
 	    dscal_(n, &tempr, &y[i__ * y_dim1 + 1], &c__1);
+#line 308 "MB05MD.f"
 /* L60: */
+#line 308 "MB05MD.f"
 	}
 
+#line 310 "MB05MD.f"
     }
 
 /*     Save the right eigenvector matrix in V. */
 
+#line 314 "MB05MD.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &v[v_offset], ldv, (ftnlen)4);
 
 /*     Premultiply the inverse eigenvector matrix by the exponential of */
@@ -400,43 +492,67 @@ static doublereal c_b40 = 0.;
 /*     Note that only real arithmetic is used, taking the special storing */
 /*     of eigenvalues/eigenvectors into account. */
 
+#line 322 "MB05MD.f"
     i__ = 0;
 /*     REPEAT */
+#line 324 "MB05MD.f"
 L80:
+#line 325 "MB05MD.f"
     ++i__;
+#line 326 "MB05MD.f"
     if (vali[i__] == 0.) {
+#line 327 "MB05MD.f"
 	tempr = exp(valr[i__] * *delta);
+#line 328 "MB05MD.f"
 	dscal_(n, &tempr, &y[i__ + y_dim1], ldy);
+#line 329 "MB05MD.f"
     } else {
+#line 330 "MB05MD.f"
 	tempr = valr[i__] * *delta;
+#line 331 "MB05MD.f"
 	tempi = vali[i__] * *delta;
+#line 332 "MB05MD.f"
 	tmp[0] = cos(tempi) * exp(tempr);
+#line 333 "MB05MD.f"
 	tmp[2] = sin(tempi) * exp(tempr);
+#line 334 "MB05MD.f"
 	tmp[1] = -tmp[2];
+#line 335 "MB05MD.f"
 	tmp[3] = tmp[0];
+#line 336 "MB05MD.f"
 	dlacpy_("Full", &c__2, n, &y[i__ + y_dim1], ldy, &dwork[1], &c__2, (
 		ftnlen)4);
+#line 337 "MB05MD.f"
 	dgemm_("No transpose", "No transpose", &c__2, n, &c__2, &c_b16, tmp, &
 		c__2, &dwork[1], &c__2, &c_b40, &y[i__ + y_dim1], ldy, (
 		ftnlen)12, (ftnlen)12);
+#line 339 "MB05MD.f"
 	++i__;
+#line 340 "MB05MD.f"
     }
+#line 341 "MB05MD.f"
     if (i__ < *n) {
+#line 341 "MB05MD.f"
 	goto L80;
+#line 341 "MB05MD.f"
     }
 /*     UNTIL I = N. */
 
 /*     Compute the matrix exponential as the product V * Y. */
 
+#line 346 "MB05MD.f"
     dgemm_("No transpose", "No transpose", n, n, n, &c_b16, &v[v_offset], ldv,
 	     &y[y_offset], ldy, &c_b40, &a[a_offset], lda, (ftnlen)12, (
 	    ftnlen)12);
 
 /*     Set optimal workspace dimension and reciprocal condition number. */
 
+#line 351 "MB05MD.f"
     dwork[1] = wrkopt;
+#line 352 "MB05MD.f"
     dwork[2] = rcond;
 
+#line 354 "MB05MD.f"
     return 0;
 /* *** Last line of MB05MD *** */
 } /* mb05md_ */

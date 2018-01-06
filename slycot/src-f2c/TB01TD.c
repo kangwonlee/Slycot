@@ -1,3 +1,4 @@
+#line 1 "TB01TD.f"
 /* TB01TD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TB01TD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -233,144 +235,232 @@ static integer c__0 = 0;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 204 "TB01TD.f"
     /* Parameter adjustments */
+#line 204 "TB01TD.f"
     a_dim1 = *lda;
+#line 204 "TB01TD.f"
     a_offset = 1 + a_dim1;
+#line 204 "TB01TD.f"
     a -= a_offset;
+#line 204 "TB01TD.f"
     b_dim1 = *ldb;
+#line 204 "TB01TD.f"
     b_offset = 1 + b_dim1;
+#line 204 "TB01TD.f"
     b -= b_offset;
+#line 204 "TB01TD.f"
     c_dim1 = *ldc;
+#line 204 "TB01TD.f"
     c_offset = 1 + c_dim1;
+#line 204 "TB01TD.f"
     c__ -= c_offset;
+#line 204 "TB01TD.f"
     d_dim1 = *ldd;
+#line 204 "TB01TD.f"
     d_offset = 1 + d_dim1;
+#line 204 "TB01TD.f"
     d__ -= d_offset;
+#line 204 "TB01TD.f"
     --scstat;
+#line 204 "TB01TD.f"
     --scin;
+#line 204 "TB01TD.f"
     --scout;
+#line 204 "TB01TD.f"
     --dwork;
+#line 204 "TB01TD.f"
 
+#line 204 "TB01TD.f"
     /* Function Body */
+#line 204 "TB01TD.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 208 "TB01TD.f"
     if (*n < 0) {
+#line 209 "TB01TD.f"
 	*info = -1;
+#line 210 "TB01TD.f"
     } else if (*m < 0) {
+#line 211 "TB01TD.f"
 	*info = -2;
+#line 212 "TB01TD.f"
     } else if (*p < 0) {
+#line 213 "TB01TD.f"
 	*info = -3;
+#line 214 "TB01TD.f"
     } else if (*lda < max(1,*n)) {
+#line 215 "TB01TD.f"
 	*info = -5;
+#line 216 "TB01TD.f"
     } else if (*ldb < max(1,*n)) {
+#line 217 "TB01TD.f"
 	*info = -7;
+#line 218 "TB01TD.f"
     } else if (*ldc < max(1,*p)) {
+#line 219 "TB01TD.f"
 	*info = -9;
+#line 220 "TB01TD.f"
     } else if (*ldd < max(1,*p)) {
+#line 221 "TB01TD.f"
 	*info = -11;
+#line 222 "TB01TD.f"
     }
 
+#line 224 "TB01TD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 228 "TB01TD.f"
 	i__1 = -(*info);
+#line 228 "TB01TD.f"
 	xerbla_("TB01TD", &i__1, (ftnlen)6);
+#line 229 "TB01TD.f"
 	return 0;
+#line 230 "TB01TD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MAX */
+#line 234 "TB01TD.f"
     i__1 = max(*n,*m);
+#line 234 "TB01TD.f"
     if (max(i__1,*p) == 0) {
+#line 235 "TB01TD.f"
 	*low = 1;
+#line 236 "TB01TD.f"
 	*igh = *n;
+#line 237 "TB01TD.f"
 	return 0;
+#line 238 "TB01TD.f"
     }
 
 /*     Permute states, and balance a submatrix of A. */
 
+#line 242 "TB01TD.f"
     dgebal_("Both", n, &a[a_offset], lda, low, igh, &scstat[1], info, (ftnlen)
 	    4);
 
 /*     Use the information in SCSTAT on state scalings and reorderings */
 /*     to transform B and C. */
 
+#line 247 "TB01TD.f"
     i__1 = *n;
+#line 247 "TB01TD.f"
     for (k = 1; k <= i__1; ++k) {
+#line 248 "TB01TD.f"
 	kold = k;
+#line 249 "TB01TD.f"
 	if (*low > kold || kold > *igh) {
+#line 250 "TB01TD.f"
 	    if (kold < *low) {
+#line 250 "TB01TD.f"
 		kold = *low - kold;
+#line 250 "TB01TD.f"
 	    }
+#line 251 "TB01TD.f"
 	    knew = (integer) scstat[kold];
+#line 252 "TB01TD.f"
 	    if (knew != kold) {
 
 /*              Exchange rows KOLD and KNEW of B. */
 
+#line 256 "TB01TD.f"
 		dswap_(m, &b[kold + b_dim1], ldb, &b[knew + b_dim1], ldb);
 
 /*              Exchange columns KOLD and KNEW of C. */
 
+#line 260 "TB01TD.f"
 		dswap_(p, &c__[kold * c_dim1 + 1], &c__1, &c__[knew * c_dim1 
 			+ 1], &c__1);
+#line 261 "TB01TD.f"
 	    }
+#line 262 "TB01TD.f"
 	}
+#line 263 "TB01TD.f"
 /* L10: */
+#line 263 "TB01TD.f"
     }
 
+#line 265 "TB01TD.f"
     if (*igh != *low) {
 
+#line 267 "TB01TD.f"
 	i__1 = *igh;
+#line 267 "TB01TD.f"
 	for (k = *low; k <= i__1; ++k) {
+#line 268 "TB01TD.f"
 	    scale = scstat[k];
 
 /*           Scale the K-th row of permuted B. */
 
+#line 272 "TB01TD.f"
 	    d__1 = 1. / scale;
+#line 272 "TB01TD.f"
 	    dscal_(m, &d__1, &b[k + b_dim1], ldb);
 
 /*           Scale the K-th column of permuted C. */
 
+#line 276 "TB01TD.f"
 	    dscal_(p, &scale, &c__[k * c_dim1 + 1], &c__1);
+#line 277 "TB01TD.f"
 /* L20: */
+#line 277 "TB01TD.f"
 	}
 
+#line 279 "TB01TD.f"
     }
 
 /*     Calculate the column and row sum norms of A. */
 
+#line 283 "TB01TD.f"
     acnorm = dlange_("1-norm", n, n, &a[a_offset], lda, &dwork[1], (ftnlen)6);
+#line 284 "TB01TD.f"
     arnorm = dlange_("I-norm", n, n, &a[a_offset], lda, &dwork[1], (ftnlen)6);
 
 /*     Scale the columns of B (i.e. inputs) to have norms roughly ACNORM. */
 
+#line 288 "TB01TD.f"
     tb01ty_(&c__1, &c__0, &c__0, n, m, &acnorm, &b[b_offset], ldb, &scin[1]);
 
 /*     Scale the rows of C (i.e. outputs) to have norms roughly ARNORM. */
 
+#line 292 "TB01TD.f"
     tb01ty_(&c__0, &c__0, &c__0, p, n, &arnorm, &c__[c_offset], ldc, &scout[1]
 	    );
 
 /*     Finally, apply these input and output scalings to D and set SCIN. */
 
+#line 296 "TB01TD.f"
     i__1 = *m;
+#line 296 "TB01TD.f"
     for (j = 1; j <= i__1; ++j) {
+#line 297 "TB01TD.f"
 	scale = scin[j];
 
+#line 299 "TB01TD.f"
 	i__2 = *p;
+#line 299 "TB01TD.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 300 "TB01TD.f"
 	    d__[i__ + j * d_dim1] *= scale * scout[i__];
+#line 301 "TB01TD.f"
 /* L30: */
+#line 301 "TB01TD.f"
 	}
 
+#line 303 "TB01TD.f"
 	scin[j] = 1. / scale;
+#line 304 "TB01TD.f"
 /* L40: */
+#line 304 "TB01TD.f"
     }
 
+#line 306 "TB01TD.f"
     return 0;
 /* *** Last line of TB01TD *** */
 } /* tb01td_ */

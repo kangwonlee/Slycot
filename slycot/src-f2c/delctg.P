@@ -1,0 +1,1 @@
+extern logical delctg_(doublereal *par1, doublereal *par2, doublereal *par3);

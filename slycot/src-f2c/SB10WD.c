@@ -1,3 +1,4 @@
+#line 1 "SB10WD.f"
 /* SB10WD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB10WD.f"
 /* Table of constant values */
 
 static doublereal c_b5 = 1.;
@@ -244,131 +246,227 @@ static doublereal c_b22 = -1.;
 
 /*     Decode and Test input parameters. */
 
+#line 217 "SB10WD.f"
     /* Parameter adjustments */
+#line 217 "SB10WD.f"
     a_dim1 = *lda;
+#line 217 "SB10WD.f"
     a_offset = 1 + a_dim1;
+#line 217 "SB10WD.f"
     a -= a_offset;
+#line 217 "SB10WD.f"
     b_dim1 = *ldb;
+#line 217 "SB10WD.f"
     b_offset = 1 + b_dim1;
+#line 217 "SB10WD.f"
     b -= b_offset;
+#line 217 "SB10WD.f"
     c_dim1 = *ldc;
+#line 217 "SB10WD.f"
     c_offset = 1 + c_dim1;
+#line 217 "SB10WD.f"
     c__ -= c_offset;
+#line 217 "SB10WD.f"
     d_dim1 = *ldd;
+#line 217 "SB10WD.f"
     d_offset = 1 + d_dim1;
+#line 217 "SB10WD.f"
     d__ -= d_offset;
+#line 217 "SB10WD.f"
     f_dim1 = *ldf;
+#line 217 "SB10WD.f"
     f_offset = 1 + f_dim1;
+#line 217 "SB10WD.f"
     f -= f_offset;
+#line 217 "SB10WD.f"
     h_dim1 = *ldh;
+#line 217 "SB10WD.f"
     h_offset = 1 + h_dim1;
+#line 217 "SB10WD.f"
     h__ -= h_offset;
+#line 217 "SB10WD.f"
     tu_dim1 = *ldtu;
+#line 217 "SB10WD.f"
     tu_offset = 1 + tu_dim1;
+#line 217 "SB10WD.f"
     tu -= tu_offset;
+#line 217 "SB10WD.f"
     ty_dim1 = *ldty;
+#line 217 "SB10WD.f"
     ty_offset = 1 + ty_dim1;
+#line 217 "SB10WD.f"
     ty -= ty_offset;
+#line 217 "SB10WD.f"
     ak_dim1 = *ldak;
+#line 217 "SB10WD.f"
     ak_offset = 1 + ak_dim1;
+#line 217 "SB10WD.f"
     ak -= ak_offset;
+#line 217 "SB10WD.f"
     bk_dim1 = *ldbk;
+#line 217 "SB10WD.f"
     bk_offset = 1 + bk_dim1;
+#line 217 "SB10WD.f"
     bk -= bk_offset;
+#line 217 "SB10WD.f"
     ck_dim1 = *ldck;
+#line 217 "SB10WD.f"
     ck_offset = 1 + ck_dim1;
+#line 217 "SB10WD.f"
     ck -= ck_offset;
+#line 217 "SB10WD.f"
     dk_dim1 = *lddk;
+#line 217 "SB10WD.f"
     dk_offset = 1 + dk_dim1;
+#line 217 "SB10WD.f"
     dk -= dk_offset;
+#line 217 "SB10WD.f"
 
+#line 217 "SB10WD.f"
     /* Function Body */
+#line 217 "SB10WD.f"
     m1 = *m - *ncon;
+#line 218 "SB10WD.f"
     m2 = *ncon;
+#line 219 "SB10WD.f"
     np1 = *np - *nmeas;
+#line 220 "SB10WD.f"
     np2 = *nmeas;
 
+#line 222 "SB10WD.f"
     *info = 0;
+#line 223 "SB10WD.f"
     if (*n < 0) {
+#line 224 "SB10WD.f"
 	*info = -1;
+#line 225 "SB10WD.f"
     } else if (*m < 0) {
+#line 226 "SB10WD.f"
 	*info = -2;
+#line 227 "SB10WD.f"
     } else if (*np < 0) {
+#line 228 "SB10WD.f"
 	*info = -3;
+#line 229 "SB10WD.f"
     } else if (*ncon < 0 || m1 < 0 || m2 > np1) {
+#line 230 "SB10WD.f"
 	*info = -4;
+#line 231 "SB10WD.f"
     } else if (*nmeas < 0 || np1 < 0 || np2 > m1) {
+#line 232 "SB10WD.f"
 	*info = -5;
+#line 233 "SB10WD.f"
     } else if (*lda < max(1,*n)) {
+#line 234 "SB10WD.f"
 	*info = -7;
+#line 235 "SB10WD.f"
     } else if (*ldb < max(1,*n)) {
+#line 236 "SB10WD.f"
 	*info = -9;
+#line 237 "SB10WD.f"
     } else if (*ldc < max(1,*np)) {
+#line 238 "SB10WD.f"
 	*info = -11;
+#line 239 "SB10WD.f"
     } else if (*ldd < max(1,*np)) {
+#line 240 "SB10WD.f"
 	*info = -13;
+#line 241 "SB10WD.f"
     } else if (*ldf < max(1,m2)) {
+#line 242 "SB10WD.f"
 	*info = -15;
+#line 243 "SB10WD.f"
     } else if (*ldh < max(1,*n)) {
+#line 244 "SB10WD.f"
 	*info = -17;
+#line 245 "SB10WD.f"
     } else if (*ldtu < max(1,m2)) {
+#line 246 "SB10WD.f"
 	*info = -19;
+#line 247 "SB10WD.f"
     } else if (*ldty < max(1,np2)) {
+#line 248 "SB10WD.f"
 	*info = -21;
+#line 249 "SB10WD.f"
     } else if (*ldak < max(1,*n)) {
+#line 250 "SB10WD.f"
 	*info = -23;
+#line 251 "SB10WD.f"
     } else if (*ldbk < max(1,*n)) {
+#line 252 "SB10WD.f"
 	*info = -25;
+#line 253 "SB10WD.f"
     } else if (*ldck < max(1,m2)) {
+#line 254 "SB10WD.f"
 	*info = -27;
+#line 255 "SB10WD.f"
     } else if (*lddk < max(1,m2)) {
+#line 256 "SB10WD.f"
 	*info = -29;
+#line 257 "SB10WD.f"
     }
+#line 258 "SB10WD.f"
     if (*info != 0) {
+#line 259 "SB10WD.f"
 	i__1 = -(*info);
+#line 259 "SB10WD.f"
 	xerbla_("SB10WD", &i__1, (ftnlen)6);
+#line 260 "SB10WD.f"
 	return 0;
+#line 261 "SB10WD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 265 "SB10WD.f"
     if (*n == 0 || *m == 0 || *np == 0 || m1 == 0 || m2 == 0 || np1 == 0 || 
 	    np2 == 0) {
+#line 265 "SB10WD.f"
 	return 0;
+#line 265 "SB10WD.f"
     }
 
 /*     Compute the transpose of D22*F . BK is used as workspace. */
 
+#line 270 "SB10WD.f"
     dgemm_("T", "T", n, &np2, &m2, &c_b5, &f[f_offset], ldf, &d__[np1 + 1 + (
 	    m1 + 1) * d_dim1], ldd, &c_b6, &bk[bk_offset], ldbk, (ftnlen)1, (
 	    ftnlen)1);
 
 /*     Find AK = A + H*C2 + B2*F + H*D22*F . */
 
+#line 275 "SB10WD.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &ak[ak_offset], ldak, (ftnlen)4);
+#line 276 "SB10WD.f"
     dgemm_("N", "N", n, n, &np2, &c_b5, &h__[h_offset], ldh, &c__[np1 + 1 + 
 	    c_dim1], ldc, &c_b5, &ak[ak_offset], ldak, (ftnlen)1, (ftnlen)1);
+#line 278 "SB10WD.f"
     dgemm_("N", "N", n, n, &m2, &c_b5, &b[(m1 + 1) * b_dim1 + 1], ldb, &f[
 	    f_offset], ldf, &c_b5, &ak[ak_offset], ldak, (ftnlen)1, (ftnlen)1)
 	    ;
+#line 280 "SB10WD.f"
     dgemm_("N", "T", n, n, &np2, &c_b5, &h__[h_offset], ldh, &bk[bk_offset], 
 	    ldbk, &c_b5, &ak[ak_offset], ldak, (ftnlen)1, (ftnlen)1);
 
 /*     Find BK = -H*Ty . */
 
+#line 285 "SB10WD.f"
     dgemm_("N", "N", n, &np2, &np2, &c_b22, &h__[h_offset], ldh, &ty[
 	    ty_offset], ldty, &c_b6, &bk[bk_offset], ldbk, (ftnlen)1, (ftnlen)
 	    1);
 
 /*     Find CK = Tu*F . */
 
+#line 290 "SB10WD.f"
     dgemm_("N", "N", &m2, n, &m2, &c_b5, &tu[tu_offset], ldtu, &f[f_offset], 
 	    ldf, &c_b6, &ck[ck_offset], ldck, (ftnlen)1, (ftnlen)1);
 
 /*     Find DK . */
 
+#line 295 "SB10WD.f"
     dlaset_("Full", &m2, &np2, &c_b6, &c_b6, &dk[dk_offset], lddk, (ftnlen)4);
 
+#line 297 "SB10WD.f"
     return 0;
 /* *** Last line of SB10WD *** */
 } /* sb10wd_ */

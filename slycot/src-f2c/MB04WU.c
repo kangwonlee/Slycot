@@ -1,3 +1,4 @@
+#line 1 "MB04WU.f"
 /* MB04WU.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04WU.f"
 /* Table of constant values */
 
 static doublereal c_b12 = 0.;
@@ -208,334 +210,560 @@ static integer c__1 = 1;
 
 /*     Decode the scalar input parameters. */
 
+#line 181 "MB04WU.f"
     /* Parameter adjustments */
+#line 181 "MB04WU.f"
     q1_dim1 = *ldq1;
+#line 181 "MB04WU.f"
     q1_offset = 1 + q1_dim1;
+#line 181 "MB04WU.f"
     q1 -= q1_offset;
+#line 181 "MB04WU.f"
     q2_dim1 = *ldq2;
+#line 181 "MB04WU.f"
     q2_offset = 1 + q2_dim1;
+#line 181 "MB04WU.f"
     q2 -= q2_offset;
+#line 181 "MB04WU.f"
     --cs;
+#line 181 "MB04WU.f"
     --tau;
+#line 181 "MB04WU.f"
     --dwork;
+#line 181 "MB04WU.f"
 
+#line 181 "MB04WU.f"
     /* Function Body */
+#line 181 "MB04WU.f"
     *info = 0;
+#line 182 "MB04WU.f"
     ltrq1 = lsame_(tranq1, "T", (ftnlen)1, (ftnlen)1) || lsame_(tranq1, "C", (
 	    ftnlen)1, (ftnlen)1);
+#line 183 "MB04WU.f"
     ltrq2 = lsame_(tranq2, "T", (ftnlen)1, (ftnlen)1) || lsame_(tranq2, "C", (
 	    ftnlen)1, (ftnlen)1);
 
 /*     Check the scalar input parameters. */
 
+#line 187 "MB04WU.f"
     if (! (ltrq1 || lsame_(tranq1, "N", (ftnlen)1, (ftnlen)1))) {
+#line 188 "MB04WU.f"
 	*info = -1;
+#line 189 "MB04WU.f"
     } else if (! (ltrq2 || lsame_(tranq2, "N", (ftnlen)1, (ftnlen)1))) {
+#line 190 "MB04WU.f"
 	*info = -2;
+#line 191 "MB04WU.f"
     } else if (*m < 0) {
+#line 192 "MB04WU.f"
 	*info = -3;
+#line 193 "MB04WU.f"
     } else if (*n < 0 || *n > *m) {
+#line 194 "MB04WU.f"
 	*info = -4;
+#line 195 "MB04WU.f"
     } else if (*k < 0 || *k > *n) {
+#line 196 "MB04WU.f"
 	*info = -5;
+#line 197 "MB04WU.f"
     } else if (ltrq1 && *ldq1 < max(1,*n) || ! ltrq1 && *ldq1 < max(1,*m)) {
+#line 199 "MB04WU.f"
 	*info = -7;
+#line 200 "MB04WU.f"
     } else if (ltrq2 && *ldq2 < max(1,*n) || ! ltrq2 && *ldq2 < max(1,*m)) {
+#line 202 "MB04WU.f"
 	*info = -9;
+#line 203 "MB04WU.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 203 "MB04WU.f"
 	i__1 = 1, i__2 = *m + *n;
+#line 203 "MB04WU.f"
 	if (*ldwork < max(i__1,i__2)) {
 /* Computing MAX */
+#line 204 "MB04WU.f"
 	    i__1 = 1, i__2 = *m + *n;
+#line 204 "MB04WU.f"
 	    dwork[1] = (doublereal) max(i__1,i__2);
+#line 205 "MB04WU.f"
 	    *info = -13;
+#line 206 "MB04WU.f"
 	}
+#line 206 "MB04WU.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 210 "MB04WU.f"
     if (*info != 0) {
+#line 211 "MB04WU.f"
 	i__1 = -(*info);
+#line 211 "MB04WU.f"
 	xerbla_("MB04WU", &i__1, (ftnlen)6);
+#line 212 "MB04WU.f"
 	return 0;
+#line 213 "MB04WU.f"
     }
 
 /*     Quick return if possible. */
 
+#line 217 "MB04WU.f"
     if (*n == 0) {
+#line 218 "MB04WU.f"
 	dwork[1] = 1.;
+#line 219 "MB04WU.f"
 	return 0;
+#line 220 "MB04WU.f"
     }
 
 /*     Initialize columns K+1:N to columns of the unit matrix. */
 
+#line 224 "MB04WU.f"
     i__1 = *n;
+#line 224 "MB04WU.f"
     for (j = *k + 1; j <= i__1; ++j) {
+#line 225 "MB04WU.f"
 	i__2 = *m;
+#line 225 "MB04WU.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 226 "MB04WU.f"
 	    q1[i__ + j * q1_dim1] = 0.;
+#line 227 "MB04WU.f"
 /* L10: */
+#line 227 "MB04WU.f"
 	}
+#line 228 "MB04WU.f"
 	q1[j + j * q1_dim1] = 1.;
+#line 229 "MB04WU.f"
 /* L20: */
+#line 229 "MB04WU.f"
     }
+#line 230 "MB04WU.f"
     i__1 = *n - *k;
+#line 230 "MB04WU.f"
     dlaset_("All", m, &i__1, &c_b12, &c_b12, &q2[(*k + 1) * q2_dim1 + 1], 
 	    ldq2, (ftnlen)3);
 
+#line 232 "MB04WU.f"
     if (ltrq1 && ltrq2) {
+#line 233 "MB04WU.f"
 	for (i__ = *k; i__ >= 1; --i__) {
 
 /*           Apply F(I) to Q1(I+1:N,I:M) and Q2(I+1:N,I:M) from the */
 /*           right. */
 
+#line 238 "MB04WU.f"
 	    i__1 = *m - i__ + 1;
+#line 238 "MB04WU.f"
 	    dcopy_(&i__1, &q2[i__ + i__ * q2_dim1], ldq2, &dwork[1], &c__1);
+#line 239 "MB04WU.f"
 	    if (i__ < *n) {
+#line 240 "MB04WU.f"
 		q1[i__ + i__ * q1_dim1] = 1.;
+#line 241 "MB04WU.f"
 		i__1 = *n - i__;
+#line 241 "MB04WU.f"
 		i__2 = *m - i__ + 1;
+#line 241 "MB04WU.f"
 		dlarf_("Right", &i__1, &i__2, &q1[i__ + i__ * q1_dim1], ldq1, 
 			&tau[i__], &q1[i__ + 1 + i__ * q1_dim1], ldq1, &dwork[
 			*m + 1], (ftnlen)5);
+#line 243 "MB04WU.f"
 		i__1 = *n - i__;
+#line 243 "MB04WU.f"
 		i__2 = *m - i__ + 1;
+#line 243 "MB04WU.f"
 		dlarf_("Right", &i__1, &i__2, &q1[i__ + i__ * q1_dim1], ldq1, 
 			&tau[i__], &q2[i__ + 1 + i__ * q2_dim1], ldq2, &dwork[
 			*m + 1], (ftnlen)5);
+#line 245 "MB04WU.f"
 	    }
+#line 246 "MB04WU.f"
 	    if (i__ < *m) {
+#line 246 "MB04WU.f"
 		i__1 = *m - i__;
+#line 246 "MB04WU.f"
 		d__1 = -tau[i__];
+#line 246 "MB04WU.f"
 		dscal_(&i__1, &d__1, &q1[i__ + (i__ + 1) * q1_dim1], ldq1);
+#line 246 "MB04WU.f"
 	    }
+#line 248 "MB04WU.f"
 	    q1[i__ + i__ * q1_dim1] = 1. - tau[i__];
 
 /*           Set Q1(I,1:I-1) and Q2(I,1:M) to zero. */
 
+#line 252 "MB04WU.f"
 	    i__1 = i__ - 1;
+#line 252 "MB04WU.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 253 "MB04WU.f"
 		q1[i__ + j * q1_dim1] = 0.;
+#line 254 "MB04WU.f"
 /* L30: */
+#line 254 "MB04WU.f"
 	    }
+#line 255 "MB04WU.f"
 	    i__1 = *m;
+#line 255 "MB04WU.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 256 "MB04WU.f"
 		q2[i__ + j * q2_dim1] = 0.;
+#line 257 "MB04WU.f"
 /* L40: */
+#line 257 "MB04WU.f"
 	    }
 
 /*           Apply G(I) to Q1(I:N,I) and Q2(I:N,I) from the right. */
 
+#line 261 "MB04WU.f"
 	    i__1 = *n - i__ + 1;
+#line 261 "MB04WU.f"
 	    drot_(&i__1, &q1[i__ + i__ * q1_dim1], &c__1, &q2[i__ + i__ * 
 		    q2_dim1], &c__1, &cs[(i__ << 1) - 1], &cs[i__ * 2]);
 
 /*           Apply H(I) to Q1(I:N,I:M) and Q2(I:N,I:M) from the right. */
 
+#line 266 "MB04WU.f"
 	    nu = dwork[1];
+#line 267 "MB04WU.f"
 	    dwork[1] = 1.;
+#line 268 "MB04WU.f"
 	    i__1 = *n - i__ + 1;
+#line 268 "MB04WU.f"
 	    i__2 = *m - i__ + 1;
+#line 268 "MB04WU.f"
 	    dlarf_("Right", &i__1, &i__2, &dwork[1], &c__1, &nu, &q1[i__ + 
 		    i__ * q1_dim1], ldq1, &dwork[*m + 1], (ftnlen)5);
+#line 270 "MB04WU.f"
 	    i__1 = *n - i__ + 1;
+#line 270 "MB04WU.f"
 	    i__2 = *m - i__ + 1;
+#line 270 "MB04WU.f"
 	    dlarf_("Right", &i__1, &i__2, &dwork[1], &c__1, &nu, &q2[i__ + 
 		    i__ * q2_dim1], ldq2, &dwork[*m + 1], (ftnlen)5);
+#line 272 "MB04WU.f"
 /* L50: */
+#line 272 "MB04WU.f"
 	}
+#line 273 "MB04WU.f"
     } else if (ltrq1) {
+#line 274 "MB04WU.f"
 	for (i__ = *k; i__ >= 1; --i__) {
 
 /*           Apply F(I) to Q1(I+1:N,I:M) from the right and to */
 /*           Q2(I:M,I+1:N) from the left. */
 
+#line 279 "MB04WU.f"
 	    i__1 = *m - i__ + 1;
+#line 279 "MB04WU.f"
 	    dcopy_(&i__1, &q2[i__ + i__ * q2_dim1], &c__1, &dwork[1], &c__1);
+#line 280 "MB04WU.f"
 	    if (i__ < *n) {
+#line 281 "MB04WU.f"
 		q1[i__ + i__ * q1_dim1] = 1.;
+#line 282 "MB04WU.f"
 		i__1 = *n - i__;
+#line 282 "MB04WU.f"
 		i__2 = *m - i__ + 1;
+#line 282 "MB04WU.f"
 		dlarf_("Right", &i__1, &i__2, &q1[i__ + i__ * q1_dim1], ldq1, 
 			&tau[i__], &q1[i__ + 1 + i__ * q1_dim1], ldq1, &dwork[
 			*m + 1], (ftnlen)5);
+#line 284 "MB04WU.f"
 		i__1 = *m - i__ + 1;
+#line 284 "MB04WU.f"
 		i__2 = *n - i__;
+#line 284 "MB04WU.f"
 		dlarf_("Left", &i__1, &i__2, &q1[i__ + i__ * q1_dim1], ldq1, &
 			tau[i__], &q2[i__ + (i__ + 1) * q2_dim1], ldq2, &
 			dwork[*m + 1], (ftnlen)4);
+#line 286 "MB04WU.f"
 	    }
+#line 287 "MB04WU.f"
 	    if (i__ < *m) {
+#line 287 "MB04WU.f"
 		i__1 = *m - i__;
+#line 287 "MB04WU.f"
 		d__1 = -tau[i__];
+#line 287 "MB04WU.f"
 		dscal_(&i__1, &d__1, &q1[i__ + (i__ + 1) * q1_dim1], ldq1);
+#line 287 "MB04WU.f"
 	    }
+#line 289 "MB04WU.f"
 	    q1[i__ + i__ * q1_dim1] = 1. - tau[i__];
 
 /*           Set Q1(I,1:I-1) and Q2(1:M,I) to zero. */
 
+#line 293 "MB04WU.f"
 	    i__1 = i__ - 1;
+#line 293 "MB04WU.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 294 "MB04WU.f"
 		q1[i__ + j * q1_dim1] = 0.;
+#line 295 "MB04WU.f"
 /* L60: */
+#line 295 "MB04WU.f"
 	    }
+#line 296 "MB04WU.f"
 	    i__1 = *m;
+#line 296 "MB04WU.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 297 "MB04WU.f"
 		q2[j + i__ * q2_dim1] = 0.;
+#line 298 "MB04WU.f"
 /* L70: */
+#line 298 "MB04WU.f"
 	    }
 
 /*           Apply G(I) to Q1(I:N,I) from the right and to Q2(I,I:N) */
 /*           from the left. */
 
+#line 303 "MB04WU.f"
 	    i__1 = *n - i__ + 1;
+#line 303 "MB04WU.f"
 	    drot_(&i__1, &q1[i__ + i__ * q1_dim1], &c__1, &q2[i__ + i__ * 
 		    q2_dim1], ldq2, &cs[(i__ << 1) - 1], &cs[i__ * 2]);
 
 /*           Apply H(I) to Q1(I:N,I:M) from the right and to Q2(I:M,I:N) */
 /*           from the left. */
 
+#line 309 "MB04WU.f"
 	    nu = dwork[1];
+#line 310 "MB04WU.f"
 	    dwork[1] = 1.;
+#line 311 "MB04WU.f"
 	    i__1 = *n - i__ + 1;
+#line 311 "MB04WU.f"
 	    i__2 = *m - i__ + 1;
+#line 311 "MB04WU.f"
 	    dlarf_("Right", &i__1, &i__2, &dwork[1], &c__1, &nu, &q1[i__ + 
 		    i__ * q1_dim1], ldq1, &dwork[*m + 1], (ftnlen)5);
+#line 313 "MB04WU.f"
 	    i__1 = *m - i__ + 1;
+#line 313 "MB04WU.f"
 	    i__2 = *n - i__ + 1;
+#line 313 "MB04WU.f"
 	    dlarf_("Left", &i__1, &i__2, &dwork[1], &c__1, &nu, &q2[i__ + i__ 
 		    * q2_dim1], ldq2, &dwork[*m + 1], (ftnlen)4);
+#line 315 "MB04WU.f"
 /* L80: */
+#line 315 "MB04WU.f"
 	}
+#line 316 "MB04WU.f"
     } else if (ltrq2) {
+#line 317 "MB04WU.f"
 	for (i__ = *k; i__ >= 1; --i__) {
 
 /*           Apply F(I) to Q1(I:M,I+1:N) from the left and to */
 /*           Q2(I+1:N,I:M) from the right. */
 
+#line 322 "MB04WU.f"
 	    i__1 = *m - i__ + 1;
+#line 322 "MB04WU.f"
 	    dcopy_(&i__1, &q2[i__ + i__ * q2_dim1], ldq2, &dwork[1], &c__1);
+#line 323 "MB04WU.f"
 	    if (i__ < *n) {
+#line 324 "MB04WU.f"
 		q1[i__ + i__ * q1_dim1] = 1.;
+#line 325 "MB04WU.f"
 		i__1 = *m - i__ + 1;
+#line 325 "MB04WU.f"
 		i__2 = *n - i__;
+#line 325 "MB04WU.f"
 		dlarf_("Left", &i__1, &i__2, &q1[i__ + i__ * q1_dim1], &c__1, 
 			&tau[i__], &q1[i__ + (i__ + 1) * q1_dim1], ldq1, &
 			dwork[*m + 1], (ftnlen)4);
+#line 327 "MB04WU.f"
 		i__1 = *n - i__;
+#line 327 "MB04WU.f"
 		i__2 = *m - i__ + 1;
+#line 327 "MB04WU.f"
 		dlarf_("Right", &i__1, &i__2, &q1[i__ + i__ * q1_dim1], &c__1,
 			 &tau[i__], &q2[i__ + 1 + i__ * q2_dim1], ldq2, &
 			dwork[*m + 1], (ftnlen)5);
+#line 329 "MB04WU.f"
 	    }
+#line 330 "MB04WU.f"
 	    if (i__ < *m) {
+#line 330 "MB04WU.f"
 		i__1 = *m - i__;
+#line 330 "MB04WU.f"
 		d__1 = -tau[i__];
+#line 330 "MB04WU.f"
 		dscal_(&i__1, &d__1, &q1[i__ + 1 + i__ * q1_dim1], &c__1);
+#line 330 "MB04WU.f"
 	    }
+#line 332 "MB04WU.f"
 	    q1[i__ + i__ * q1_dim1] = 1. - tau[i__];
 
 /*           Set Q1(1:I-1,I) and Q2(I,1:M) to zero. */
 
+#line 336 "MB04WU.f"
 	    i__1 = i__ - 1;
+#line 336 "MB04WU.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 337 "MB04WU.f"
 		q1[j + i__ * q1_dim1] = 0.;
+#line 338 "MB04WU.f"
 /* L90: */
+#line 338 "MB04WU.f"
 	    }
+#line 339 "MB04WU.f"
 	    i__1 = *m;
+#line 339 "MB04WU.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 340 "MB04WU.f"
 		q2[i__ + j * q2_dim1] = 0.;
+#line 341 "MB04WU.f"
 /* L100: */
+#line 341 "MB04WU.f"
 	    }
 
 /*           Apply G(I) to Q1(I,I:N) from the left and to Q2(I:N,I) */
 /*           from the right. */
 
+#line 346 "MB04WU.f"
 	    i__1 = *n - i__ + 1;
+#line 346 "MB04WU.f"
 	    drot_(&i__1, &q1[i__ + i__ * q1_dim1], ldq1, &q2[i__ + i__ * 
 		    q2_dim1], &c__1, &cs[(i__ << 1) - 1], &cs[i__ * 2]);
 
 /*           Apply H(I) to Q1(I:M,I:N) from the left and to Q2(I:N,I:M) */
 /*           from the left. */
 
+#line 352 "MB04WU.f"
 	    nu = dwork[1];
+#line 353 "MB04WU.f"
 	    dwork[1] = 1.;
+#line 354 "MB04WU.f"
 	    i__1 = *m - i__ + 1;
+#line 354 "MB04WU.f"
 	    i__2 = *n - i__ + 1;
+#line 354 "MB04WU.f"
 	    dlarf_("Left", &i__1, &i__2, &dwork[1], &c__1, &nu, &q1[i__ + i__ 
 		    * q1_dim1], ldq1, &dwork[*m + 1], (ftnlen)4);
+#line 356 "MB04WU.f"
 	    i__1 = *n - i__ + 1;
+#line 356 "MB04WU.f"
 	    i__2 = *m - i__ + 1;
+#line 356 "MB04WU.f"
 	    dlarf_("Right", &i__1, &i__2, &dwork[1], &c__1, &nu, &q2[i__ + 
 		    i__ * q2_dim1], ldq2, &dwork[*m + 1], (ftnlen)5);
+#line 358 "MB04WU.f"
 /* L110: */
+#line 358 "MB04WU.f"
 	}
+#line 359 "MB04WU.f"
     } else {
+#line 360 "MB04WU.f"
 	for (i__ = *k; i__ >= 1; --i__) {
 
 /*           Apply F(I) to Q1(I:M,I+1:N) and Q2(I:M,I+1:N) from the left. */
 
+#line 364 "MB04WU.f"
 	    i__1 = *m - i__ + 1;
+#line 364 "MB04WU.f"
 	    dcopy_(&i__1, &q2[i__ + i__ * q2_dim1], &c__1, &dwork[1], &c__1);
+#line 365 "MB04WU.f"
 	    if (i__ < *n) {
+#line 366 "MB04WU.f"
 		q1[i__ + i__ * q1_dim1] = 1.;
+#line 367 "MB04WU.f"
 		i__1 = *m - i__ + 1;
+#line 367 "MB04WU.f"
 		i__2 = *n - i__;
+#line 367 "MB04WU.f"
 		dlarf_("Left", &i__1, &i__2, &q1[i__ + i__ * q1_dim1], &c__1, 
 			&tau[i__], &q1[i__ + (i__ + 1) * q1_dim1], ldq1, &
 			dwork[*m + 1], (ftnlen)4);
+#line 369 "MB04WU.f"
 		i__1 = *m - i__ + 1;
+#line 369 "MB04WU.f"
 		i__2 = *n - i__;
+#line 369 "MB04WU.f"
 		dlarf_("Left", &i__1, &i__2, &q1[i__ + i__ * q1_dim1], &c__1, 
 			&tau[i__], &q2[i__ + (i__ + 1) * q2_dim1], ldq2, &
 			dwork[*m + 1], (ftnlen)4);
+#line 371 "MB04WU.f"
 	    }
+#line 372 "MB04WU.f"
 	    if (i__ < *m) {
+#line 372 "MB04WU.f"
 		i__1 = *m - i__;
+#line 372 "MB04WU.f"
 		d__1 = -tau[i__];
+#line 372 "MB04WU.f"
 		dscal_(&i__1, &d__1, &q1[i__ + 1 + i__ * q1_dim1], &c__1);
+#line 372 "MB04WU.f"
 	    }
+#line 374 "MB04WU.f"
 	    q1[i__ + i__ * q1_dim1] = 1. - tau[i__];
 
 /*           Set Q1(1:I-1,I) and Q2(1:M,I) to zero. */
 
+#line 378 "MB04WU.f"
 	    i__1 = i__ - 1;
+#line 378 "MB04WU.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 379 "MB04WU.f"
 		q1[j + i__ * q1_dim1] = 0.;
+#line 380 "MB04WU.f"
 /* L120: */
+#line 380 "MB04WU.f"
 	    }
+#line 381 "MB04WU.f"
 	    i__1 = *m;
+#line 381 "MB04WU.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 382 "MB04WU.f"
 		q2[j + i__ * q2_dim1] = 0.;
+#line 383 "MB04WU.f"
 /* L130: */
+#line 383 "MB04WU.f"
 	    }
 
 /*           Apply G(I) to Q1(I,I:N) and Q2(I,I:N) from the left. */
 
+#line 387 "MB04WU.f"
 	    i__1 = *n - i__ + 1;
+#line 387 "MB04WU.f"
 	    drot_(&i__1, &q1[i__ + i__ * q1_dim1], ldq1, &q2[i__ + i__ * 
 		    q2_dim1], ldq2, &cs[(i__ << 1) - 1], &cs[i__ * 2]);
 
 /*           Apply H(I) to Q1(I:M,I:N) and Q2(I:M,I:N) from the left. */
 
+#line 392 "MB04WU.f"
 	    nu = dwork[1];
+#line 393 "MB04WU.f"
 	    dwork[1] = 1.;
+#line 394 "MB04WU.f"
 	    i__1 = *m - i__ + 1;
+#line 394 "MB04WU.f"
 	    i__2 = *n - i__ + 1;
+#line 394 "MB04WU.f"
 	    dlarf_("Left", &i__1, &i__2, &dwork[1], &c__1, &nu, &q1[i__ + i__ 
 		    * q1_dim1], ldq1, &dwork[*m + 1], (ftnlen)4);
+#line 396 "MB04WU.f"
 	    i__1 = *m - i__ + 1;
+#line 396 "MB04WU.f"
 	    i__2 = *n - i__ + 1;
+#line 396 "MB04WU.f"
 	    dlarf_("Left", &i__1, &i__2, &dwork[1], &c__1, &nu, &q2[i__ + i__ 
 		    * q2_dim1], ldq2, &dwork[*m + 1], (ftnlen)4);
+#line 398 "MB04WU.f"
 /* L140: */
+#line 398 "MB04WU.f"
 	}
+#line 399 "MB04WU.f"
     }
 /* Computing MAX */
+#line 400 "MB04WU.f"
     i__1 = 1, i__2 = *m + *n;
+#line 400 "MB04WU.f"
     dwork[1] = (doublereal) max(i__1,i__2);
 /* *** Last line of MB04WU *** */
+#line 402 "MB04WU.f"
     return 0;
 } /* mb04wu_ */
 

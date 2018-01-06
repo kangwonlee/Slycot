@@ -1,3 +1,4 @@
+#line 1 "MB04IZ.f"
 /* MB04IZ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04IZ.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -205,88 +207,157 @@ static integer c_n1 = -1;
 
 /*     Test the input scalar arguments. */
 
+#line 171 "MB04IZ.f"
     /* Parameter adjustments */
+#line 171 "MB04IZ.f"
     a_dim1 = *lda;
+#line 171 "MB04IZ.f"
     a_offset = 1 + a_dim1;
+#line 171 "MB04IZ.f"
     a -= a_offset;
+#line 171 "MB04IZ.f"
     b_dim1 = *ldb;
+#line 171 "MB04IZ.f"
     b_offset = 1 + b_dim1;
+#line 171 "MB04IZ.f"
     b -= b_offset;
+#line 171 "MB04IZ.f"
     --tau;
+#line 171 "MB04IZ.f"
     --zwork;
+#line 171 "MB04IZ.f"
 
+#line 171 "MB04IZ.f"
     /* Function Body */
+#line 171 "MB04IZ.f"
     *info = 0;
+#line 172 "MB04IZ.f"
     lquery = *lzwork == -1;
+#line 173 "MB04IZ.f"
     if (*n < 0) {
+#line 174 "MB04IZ.f"
 	*info = -1;
+#line 175 "MB04IZ.f"
     } else if (*m < 0) {
+#line 176 "MB04IZ.f"
 	*info = -2;
+#line 177 "MB04IZ.f"
     } else if (*p < 0) {
+#line 178 "MB04IZ.f"
 	*info = -3;
+#line 179 "MB04IZ.f"
     } else if (*l < 0) {
+#line 180 "MB04IZ.f"
 	*info = -4;
+#line 181 "MB04IZ.f"
     } else if (*lda < max(1,*n)) {
+#line 182 "MB04IZ.f"
 	*info = -6;
+#line 183 "MB04IZ.f"
     } else if (*ldb < 1 || *l > 0 && *ldb < *n) {
+#line 184 "MB04IZ.f"
 	*info = -8;
+#line 185 "MB04IZ.f"
     } else {
 /* Computing MAX */
+#line 186 "MB04IZ.f"
 	i__1 = 1, i__2 = *m - 1, i__1 = max(i__1,i__2), i__2 = *m - *p, i__1 =
 		 max(i__1,i__2);
+#line 186 "MB04IZ.f"
 	i__ = max(i__1,*l);
+#line 187 "MB04IZ.f"
 	if (lquery) {
+#line 188 "MB04IZ.f"
 	    if (*m > *p) {
+#line 189 "MB04IZ.f"
 		i__1 = *n - *p;
+#line 189 "MB04IZ.f"
 		i__2 = *m - *p;
+#line 189 "MB04IZ.f"
 		nb = ilaenv_(&c__1, "ZGEQRF", " ", &i__1, &i__2, &c_n1, &c_n1,
 			 (ftnlen)6, (ftnlen)1);
 /* Computing MAX */
+#line 190 "MB04IZ.f"
 		i__1 = i__, i__2 = (*m - *p) * nb;
+#line 190 "MB04IZ.f"
 		wrkopt = max(i__1,i__2);
+#line 191 "MB04IZ.f"
 		if (*l > 0) {
 /* Computing MIN */
+#line 192 "MB04IZ.f"
 		    i__3 = *n - *p;
+#line 192 "MB04IZ.f"
 		    i__4 = min(*n,*m) - *p;
+#line 192 "MB04IZ.f"
 		    i__1 = 64, i__2 = ilaenv_(&c__1, "ZUNMQR", "LC", &i__3, l,
 			     &i__4, &c_n1, (ftnlen)6, (ftnlen)2);
+#line 192 "MB04IZ.f"
 		    nb = min(i__1,i__2);
 /* Computing MAX */
+#line 194 "MB04IZ.f"
 		    i__1 = wrkopt, i__2 = max(1,*l) * nb;
+#line 194 "MB04IZ.f"
 		    wrkopt = max(i__1,i__2);
+#line 195 "MB04IZ.f"
 		}
+#line 196 "MB04IZ.f"
 	    }
+#line 197 "MB04IZ.f"
 	} else if (*lzwork < i__) {
+#line 198 "MB04IZ.f"
 	    *info = -11;
+#line 199 "MB04IZ.f"
 	}
+#line 200 "MB04IZ.f"
     }
 
+#line 202 "MB04IZ.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 206 "MB04IZ.f"
 	i__1 = -(*info);
+#line 206 "MB04IZ.f"
 	xerbla_("MB04IZ", &i__1, (ftnlen)6);
+#line 207 "MB04IZ.f"
 	return 0;
+#line 208 "MB04IZ.f"
     } else if (lquery) {
+#line 209 "MB04IZ.f"
 	zwork[1].r = (doublereal) wrkopt, zwork[1].i = 0.;
+#line 210 "MB04IZ.f"
 	return 0;
+#line 211 "MB04IZ.f"
     }
 
 /*     Quick return if possible. */
 
+#line 215 "MB04IZ.f"
     if (min(*m,*n) == 0) {
+#line 216 "MB04IZ.f"
 	zwork[1].r = 1., zwork[1].i = 0.;
+#line 217 "MB04IZ.f"
 	return 0;
+#line 218 "MB04IZ.f"
     } else if (*n <= *p + 1) {
+#line 219 "MB04IZ.f"
 	i__1 = min(*n,*m);
+#line 219 "MB04IZ.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 220 "MB04IZ.f"
 	    i__2 = i__;
+#line 220 "MB04IZ.f"
 	    tau[i__2].r = 0., tau[i__2].i = 0.;
+#line 221 "MB04IZ.f"
 /* L5: */
+#line 221 "MB04IZ.f"
 	}
+#line 222 "MB04IZ.f"
 	zwork[1].r = 1., zwork[1].i = 0.;
+#line 223 "MB04IZ.f"
 	return 0;
+#line 224 "MB04IZ.f"
     }
 
 /*     Annihilate the subdiagonal elements of A and apply the */
@@ -299,76 +370,120 @@ static integer c_n1 = -1;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 236 "MB04IZ.f"
     i__1 = min(*p,*m);
+#line 236 "MB04IZ.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
 
 /*        Exploit the structure of the I-th column of A. */
 
+#line 240 "MB04IZ.f"
 	i__2 = *n - *p;
+#line 240 "MB04IZ.f"
 	zlarfg_(&i__2, &a[i__ + i__ * a_dim1], &a[i__ + 1 + i__ * a_dim1], &
 		c__1, &tau[i__]);
+#line 241 "MB04IZ.f"
 	i__2 = i__;
+#line 241 "MB04IZ.f"
 	if (tau[i__2].r != 0. || tau[i__2].i != 0.) {
 
+#line 243 "MB04IZ.f"
 	    i__2 = i__ + i__ * a_dim1;
+#line 243 "MB04IZ.f"
 	    first.r = a[i__2].r, first.i = a[i__2].i;
+#line 244 "MB04IZ.f"
 	    i__2 = i__ + i__ * a_dim1;
+#line 244 "MB04IZ.f"
 	    a[i__2].r = 1., a[i__2].i = 0.;
 
+#line 246 "MB04IZ.f"
 	    if (i__ < *m) {
+#line 246 "MB04IZ.f"
 		i__2 = *n - *p;
+#line 246 "MB04IZ.f"
 		i__3 = *m - i__;
+#line 246 "MB04IZ.f"
 		d_cnjg(&z__1, &tau[i__]);
+#line 246 "MB04IZ.f"
 		zlarf_("Left", &i__2, &i__3, &a[i__ + i__ * a_dim1], &c__1, &
 			z__1, &a[i__ + (i__ + 1) * a_dim1], lda, &zwork[1], (
 			ftnlen)4);
+#line 246 "MB04IZ.f"
 	    }
+#line 249 "MB04IZ.f"
 	    if (*l > 0) {
+#line 249 "MB04IZ.f"
 		i__2 = *n - *p;
+#line 249 "MB04IZ.f"
 		d_cnjg(&z__1, &tau[i__]);
+#line 249 "MB04IZ.f"
 		zlarf_("Left", &i__2, l, &a[i__ + i__ * a_dim1], &c__1, &z__1,
 			 &b[i__ + b_dim1], ldb, &zwork[1], (ftnlen)4);
+#line 249 "MB04IZ.f"
 	    }
 
+#line 253 "MB04IZ.f"
 	    i__2 = i__ + i__ * a_dim1;
+#line 253 "MB04IZ.f"
 	    a[i__2].r = first.r, a[i__2].i = first.i;
+#line 254 "MB04IZ.f"
 	}
+#line 255 "MB04IZ.f"
 /* L10: */
+#line 255 "MB04IZ.f"
     }
 
 /* Computing MAX */
+#line 257 "MB04IZ.f"
     i__1 = 1, i__2 = *m - 1, i__1 = max(i__1,i__2);
+#line 257 "MB04IZ.f"
     wrkopt = max(i__1,*l);
 
 /*     Fast QR factorization of the remaining right submatrix, if any. */
 /*     Workspace: need M-P;  prefer (M-P)*NB. */
 
+#line 262 "MB04IZ.f"
     if (*m > *p) {
+#line 263 "MB04IZ.f"
 	i__1 = *n - *p;
+#line 263 "MB04IZ.f"
 	i__2 = *m - *p;
+#line 263 "MB04IZ.f"
 	zgeqrf_(&i__1, &i__2, &a[*p + 1 + (*p + 1) * a_dim1], lda, &tau[*p + 
 		1], &zwork[1], lzwork, info);
 /* Computing MAX */
+#line 265 "MB04IZ.f"
 	i__1 = wrkopt, i__2 = (integer) zwork[1].r;
+#line 265 "MB04IZ.f"
 	wrkopt = max(i__1,i__2);
 
+#line 267 "MB04IZ.f"
 	if (*l > 0) {
 
 /*           Apply the transformations to B. */
 /*           Workspace: need L;  prefer L*NB. */
 
+#line 272 "MB04IZ.f"
 	    i__1 = *n - *p;
+#line 272 "MB04IZ.f"
 	    i__2 = min(*n,*m) - *p;
+#line 272 "MB04IZ.f"
 	    zunmqr_("Left", "Conjugate", &i__1, l, &i__2, &a[*p + 1 + (*p + 1)
 		     * a_dim1], lda, &tau[*p + 1], &b[*p + 1 + b_dim1], ldb, &
 		    zwork[1], lzwork, info, (ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 275 "MB04IZ.f"
 	    i__1 = wrkopt, i__2 = (integer) zwork[1].r;
+#line 275 "MB04IZ.f"
 	    wrkopt = max(i__1,i__2);
+#line 276 "MB04IZ.f"
 	}
+#line 277 "MB04IZ.f"
     }
 
+#line 279 "MB04IZ.f"
     zwork[1].r = (doublereal) wrkopt, zwork[1].i = 0.;
+#line 280 "MB04IZ.f"
     return 0;
 /* *** Last line of MB04IZ *** */
 } /* mb04iz_ */

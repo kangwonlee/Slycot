@@ -1,3 +1,4 @@
+#line 1 "MB01ZD.f"
 /* MB01ZD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01ZD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -228,377 +230,647 @@ static integer c__1 = 1;
 
 /*     Test the input scalar arguments. */
 
+#line 204 "MB01ZD.f"
     /* Parameter adjustments */
+#line 204 "MB01ZD.f"
     t_dim1 = *ldt;
+#line 204 "MB01ZD.f"
     t_offset = 1 + t_dim1;
+#line 204 "MB01ZD.f"
     t -= t_offset;
+#line 204 "MB01ZD.f"
     h_dim1 = *ldh;
+#line 204 "MB01ZD.f"
     h_offset = 1 + h_dim1;
+#line 204 "MB01ZD.f"
     h__ -= h_offset;
+#line 204 "MB01ZD.f"
 
+#line 204 "MB01ZD.f"
     /* Function Body */
+#line 204 "MB01ZD.f"
     lside = lsame_(side, "L", (ftnlen)1, (ftnlen)1);
+#line 205 "MB01ZD.f"
     upper = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 206 "MB01ZD.f"
     trans = lsame_(transt, "T", (ftnlen)1, (ftnlen)1) || lsame_(transt, "C", (
 	    ftnlen)1, (ftnlen)1);
+#line 207 "MB01ZD.f"
     nounit = lsame_(diag, "N", (ftnlen)1, (ftnlen)1);
+#line 208 "MB01ZD.f"
     if (lside) {
+#line 209 "MB01ZD.f"
 	nrowt = *m;
+#line 210 "MB01ZD.f"
     } else {
+#line 211 "MB01ZD.f"
 	nrowt = *n;
+#line 212 "MB01ZD.f"
     }
 
+#line 214 "MB01ZD.f"
     if (upper) {
+#line 215 "MB01ZD.f"
 	m2 = *m;
+#line 216 "MB01ZD.f"
     } else {
+#line 217 "MB01ZD.f"
 	m2 = *n;
+#line 218 "MB01ZD.f"
     }
 
+#line 220 "MB01ZD.f"
     *info = 0;
+#line 221 "MB01ZD.f"
     if (! (lside || lsame_(side, "R", (ftnlen)1, (ftnlen)1))) {
+#line 222 "MB01ZD.f"
 	*info = -1;
+#line 223 "MB01ZD.f"
     } else if (! (upper || lsame_(uplo, "L", (ftnlen)1, (ftnlen)1))) {
+#line 224 "MB01ZD.f"
 	*info = -2;
+#line 225 "MB01ZD.f"
     } else if (! (trans || lsame_(transt, "N", (ftnlen)1, (ftnlen)1))) {
+#line 226 "MB01ZD.f"
 	*info = -3;
+#line 227 "MB01ZD.f"
     } else if (! (nounit || lsame_(diag, "U", (ftnlen)1, (ftnlen)1))) {
+#line 228 "MB01ZD.f"
 	*info = -4;
+#line 229 "MB01ZD.f"
     } else if (*m < 0) {
+#line 230 "MB01ZD.f"
 	*info = -5;
+#line 231 "MB01ZD.f"
     } else if (*n < 0) {
+#line 232 "MB01ZD.f"
 	*info = -6;
+#line 233 "MB01ZD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 233 "MB01ZD.f"
 	i__1 = 0, i__2 = m2 - 1;
+#line 233 "MB01ZD.f"
 	if (*l < 0 || *l > max(i__1,i__2)) {
+#line 234 "MB01ZD.f"
 	    *info = -7;
+#line 235 "MB01ZD.f"
 	} else if (*ldt < max(1,nrowt)) {
+#line 236 "MB01ZD.f"
 	    *info = -10;
+#line 237 "MB01ZD.f"
 	} else if (*ldh < max(1,*m)) {
+#line 238 "MB01ZD.f"
 	    *info = -12;
+#line 239 "MB01ZD.f"
 	}
+#line 239 "MB01ZD.f"
     }
 
+#line 241 "MB01ZD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 245 "MB01ZD.f"
 	i__1 = -(*info);
+#line 245 "MB01ZD.f"
 	xerbla_("MB01ZD", &i__1, (ftnlen)6);
+#line 246 "MB01ZD.f"
 	return 0;
+#line 247 "MB01ZD.f"
     }
 
 /*     Quick return, if possible. */
 
+#line 251 "MB01ZD.f"
     if (min(*m,*n) == 0) {
+#line 251 "MB01ZD.f"
 	return 0;
+#line 251 "MB01ZD.f"
     }
 
 /*     Also, when alpha = 0. */
 
+#line 256 "MB01ZD.f"
     if (*alpha == 0.) {
 
+#line 258 "MB01ZD.f"
 	i__1 = *n;
+#line 258 "MB01ZD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 259 "MB01ZD.f"
 	    if (upper) {
+#line 260 "MB01ZD.f"
 		i1 = 1;
 /* Computing MIN */
+#line 261 "MB01ZD.f"
 		i__2 = j + *l;
+#line 261 "MB01ZD.f"
 		i2 = min(i__2,*m);
+#line 262 "MB01ZD.f"
 	    } else {
 /* Computing MAX */
+#line 263 "MB01ZD.f"
 		i__2 = 1, i__3 = j - *l;
+#line 263 "MB01ZD.f"
 		i1 = max(i__2,i__3);
+#line 264 "MB01ZD.f"
 		i2 = *m;
+#line 265 "MB01ZD.f"
 	    }
 
+#line 267 "MB01ZD.f"
 	    i__2 = i2;
+#line 267 "MB01ZD.f"
 	    for (i__ = i1; i__ <= i__2; ++i__) {
+#line 268 "MB01ZD.f"
 		h__[i__ + j * h_dim1] = 0.;
+#line 269 "MB01ZD.f"
 /* L10: */
+#line 269 "MB01ZD.f"
 	    }
 
+#line 271 "MB01ZD.f"
 /* L20: */
+#line 271 "MB01ZD.f"
 	}
 
+#line 273 "MB01ZD.f"
 	return 0;
+#line 274 "MB01ZD.f"
     }
 
 /*     Start the operations. */
 
+#line 278 "MB01ZD.f"
     if (lside) {
+#line 279 "MB01ZD.f"
 	if (! trans) {
 
 /*           Form  H := alpha*T*H. */
 
+#line 283 "MB01ZD.f"
 	    if (upper) {
 
+#line 285 "MB01ZD.f"
 		i__1 = *n;
+#line 285 "MB01ZD.f"
 		for (j = 1; j <= i__1; ++j) {
 
 /* Computing MIN */
+#line 287 "MB01ZD.f"
 		    i__3 = j + *l;
+#line 287 "MB01ZD.f"
 		    i__2 = min(i__3,*m);
+#line 287 "MB01ZD.f"
 		    for (k = 1; k <= i__2; ++k) {
+#line 288 "MB01ZD.f"
 			if (h__[k + j * h_dim1] != 0.) {
+#line 289 "MB01ZD.f"
 			    temp = *alpha * h__[k + j * h_dim1];
+#line 290 "MB01ZD.f"
 			    i__3 = k - 1;
+#line 290 "MB01ZD.f"
 			    daxpy_(&i__3, &temp, &t[k * t_dim1 + 1], &c__1, &
 				    h__[j * h_dim1 + 1], &c__1);
+#line 292 "MB01ZD.f"
 			    if (nounit) {
+#line 292 "MB01ZD.f"
 				temp *= t[k + k * t_dim1];
+#line 292 "MB01ZD.f"
 			    }
+#line 294 "MB01ZD.f"
 			    h__[k + j * h_dim1] = temp;
+#line 295 "MB01ZD.f"
 			}
+#line 296 "MB01ZD.f"
 /* L30: */
+#line 296 "MB01ZD.f"
 		    }
 
+#line 298 "MB01ZD.f"
 /* L40: */
+#line 298 "MB01ZD.f"
 		}
 
+#line 300 "MB01ZD.f"
 	    } else {
 
+#line 302 "MB01ZD.f"
 		i__1 = *n;
+#line 302 "MB01ZD.f"
 		for (j = 1; j <= i__1; ++j) {
 
 /* Computing MAX */
+#line 304 "MB01ZD.f"
 		    i__3 = 1, i__4 = j - *l;
+#line 304 "MB01ZD.f"
 		    i__2 = max(i__3,i__4);
+#line 304 "MB01ZD.f"
 		    for (k = *m; k >= i__2; --k) {
+#line 305 "MB01ZD.f"
 			if (h__[k + j * h_dim1] != 0.) {
+#line 306 "MB01ZD.f"
 			    temp = *alpha * h__[k + j * h_dim1];
+#line 307 "MB01ZD.f"
 			    h__[k + j * h_dim1] = temp;
+#line 308 "MB01ZD.f"
 			    if (nounit) {
+#line 308 "MB01ZD.f"
 				h__[k + j * h_dim1] *= t[k + k * t_dim1];
+#line 308 "MB01ZD.f"
 			    }
+#line 310 "MB01ZD.f"
 			    i__3 = *m - k;
+#line 310 "MB01ZD.f"
 			    daxpy_(&i__3, &temp, &t[k + 1 + k * t_dim1], &
 				    c__1, &h__[k + 1 + j * h_dim1], &c__1);
+#line 312 "MB01ZD.f"
 			}
+#line 313 "MB01ZD.f"
 /* L50: */
+#line 313 "MB01ZD.f"
 		    }
 
+#line 315 "MB01ZD.f"
 /* L60: */
+#line 315 "MB01ZD.f"
 		}
 
+#line 317 "MB01ZD.f"
 	    }
 
+#line 319 "MB01ZD.f"
 	} else {
 
 /*           Form  H := alpha*T'*H. */
 
+#line 323 "MB01ZD.f"
 	    if (upper) {
 
+#line 325 "MB01ZD.f"
 		i__1 = *n;
+#line 325 "MB01ZD.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 326 "MB01ZD.f"
 		    i1 = j + *l;
 
+#line 328 "MB01ZD.f"
 		    for (i__ = *m; i__ >= 1; --i__) {
+#line 329 "MB01ZD.f"
 			if (i__ > i1) {
+#line 330 "MB01ZD.f"
 			    temp = ddot_(&i1, &t[i__ * t_dim1 + 1], &c__1, &
 				    h__[j * h_dim1 + 1], &c__1);
+#line 331 "MB01ZD.f"
 			} else {
+#line 332 "MB01ZD.f"
 			    temp = h__[i__ + j * h_dim1];
+#line 333 "MB01ZD.f"
 			    if (nounit) {
+#line 333 "MB01ZD.f"
 				temp *= t[i__ + i__ * t_dim1];
+#line 333 "MB01ZD.f"
 			    }
+#line 335 "MB01ZD.f"
 			    i__2 = i__ - 1;
+#line 335 "MB01ZD.f"
 			    temp += ddot_(&i__2, &t[i__ * t_dim1 + 1], &c__1, 
 				    &h__[j * h_dim1 + 1], &c__1);
+#line 337 "MB01ZD.f"
 			}
+#line 338 "MB01ZD.f"
 			h__[i__ + j * h_dim1] = *alpha * temp;
+#line 339 "MB01ZD.f"
 /* L70: */
+#line 339 "MB01ZD.f"
 		    }
 
+#line 341 "MB01ZD.f"
 /* L80: */
+#line 341 "MB01ZD.f"
 		}
 
+#line 343 "MB01ZD.f"
 	    } else {
 
 /* Computing MIN */
+#line 345 "MB01ZD.f"
 		i__2 = *m + *l;
+#line 345 "MB01ZD.f"
 		i__1 = min(i__2,*n);
+#line 345 "MB01ZD.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 346 "MB01ZD.f"
 		    i1 = j - *l;
 
+#line 348 "MB01ZD.f"
 		    i__2 = *m;
+#line 348 "MB01ZD.f"
 		    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 349 "MB01ZD.f"
 			if (i__ < i1) {
+#line 350 "MB01ZD.f"
 			    i__3 = *m - i1 + 1;
+#line 350 "MB01ZD.f"
 			    temp = ddot_(&i__3, &t[i1 + i__ * t_dim1], &c__1, 
 				    &h__[i1 + j * h_dim1], &c__1);
+#line 352 "MB01ZD.f"
 			} else {
+#line 353 "MB01ZD.f"
 			    temp = h__[i__ + j * h_dim1];
+#line 354 "MB01ZD.f"
 			    if (nounit) {
+#line 354 "MB01ZD.f"
 				temp *= t[i__ + i__ * t_dim1];
+#line 354 "MB01ZD.f"
 			    }
+#line 356 "MB01ZD.f"
 			    i__3 = *m - i__;
+#line 356 "MB01ZD.f"
 			    temp += ddot_(&i__3, &t[i__ + 1 + i__ * t_dim1], &
 				    c__1, &h__[i__ + 1 + j * h_dim1], &c__1);
+#line 358 "MB01ZD.f"
 			}
+#line 359 "MB01ZD.f"
 			h__[i__ + j * h_dim1] = *alpha * temp;
+#line 360 "MB01ZD.f"
 /* L90: */
+#line 360 "MB01ZD.f"
 		    }
 
+#line 362 "MB01ZD.f"
 /* L100: */
+#line 362 "MB01ZD.f"
 		}
 
+#line 364 "MB01ZD.f"
 	    }
 
+#line 366 "MB01ZD.f"
 	}
 
+#line 368 "MB01ZD.f"
     } else {
 
+#line 370 "MB01ZD.f"
 	if (! trans) {
 
 /*           Form  H := alpha*H*T. */
 
+#line 374 "MB01ZD.f"
 	    if (upper) {
 
+#line 376 "MB01ZD.f"
 		for (j = *n; j >= 1; --j) {
 /* Computing MIN */
+#line 377 "MB01ZD.f"
 		    i__1 = j + *l;
+#line 377 "MB01ZD.f"
 		    i2 = min(i__1,*m);
+#line 378 "MB01ZD.f"
 		    temp = *alpha;
+#line 379 "MB01ZD.f"
 		    if (nounit) {
+#line 379 "MB01ZD.f"
 			temp *= t[j + j * t_dim1];
+#line 379 "MB01ZD.f"
 		    }
+#line 381 "MB01ZD.f"
 		    dscal_(&i2, &temp, &h__[j * h_dim1 + 1], &c__1);
 
+#line 383 "MB01ZD.f"
 		    i__1 = j - 1;
+#line 383 "MB01ZD.f"
 		    for (k = 1; k <= i__1; ++k) {
+#line 384 "MB01ZD.f"
 			d__1 = *alpha * t[k + j * t_dim1];
+#line 384 "MB01ZD.f"
 			daxpy_(&i2, &d__1, &h__[k * h_dim1 + 1], &c__1, &h__[
 				j * h_dim1 + 1], &c__1);
+#line 386 "MB01ZD.f"
 /* L110: */
+#line 386 "MB01ZD.f"
 		    }
 
+#line 388 "MB01ZD.f"
 /* L120: */
+#line 388 "MB01ZD.f"
 		}
 
+#line 390 "MB01ZD.f"
 	    } else {
 
+#line 392 "MB01ZD.f"
 		i__1 = *n;
+#line 392 "MB01ZD.f"
 		for (j = 1; j <= i__1; ++j) {
 /* Computing MAX */
+#line 393 "MB01ZD.f"
 		    i__2 = 1, i__3 = j - *l;
+#line 393 "MB01ZD.f"
 		    i1 = max(i__2,i__3);
+#line 394 "MB01ZD.f"
 		    temp = *alpha;
+#line 395 "MB01ZD.f"
 		    if (nounit) {
+#line 395 "MB01ZD.f"
 			temp *= t[j + j * t_dim1];
+#line 395 "MB01ZD.f"
 		    }
+#line 397 "MB01ZD.f"
 		    i__2 = *m - i1 + 1;
+#line 397 "MB01ZD.f"
 		    dscal_(&i__2, &temp, &h__[i1 + j * h_dim1], &c__1);
 
+#line 399 "MB01ZD.f"
 		    i__2 = *n;
+#line 399 "MB01ZD.f"
 		    for (k = j + 1; k <= i__2; ++k) {
+#line 400 "MB01ZD.f"
 			i__3 = *m - i1 + 1;
+#line 400 "MB01ZD.f"
 			d__1 = *alpha * t[k + j * t_dim1];
+#line 400 "MB01ZD.f"
 			daxpy_(&i__3, &d__1, &h__[i1 + k * h_dim1], &c__1, &
 				h__[i1 + j * h_dim1], &c__1);
+#line 402 "MB01ZD.f"
 /* L130: */
+#line 402 "MB01ZD.f"
 		    }
 
+#line 404 "MB01ZD.f"
 /* L140: */
+#line 404 "MB01ZD.f"
 		}
 
+#line 406 "MB01ZD.f"
 	    }
 
+#line 408 "MB01ZD.f"
 	} else {
 
 /*           Form  H := alpha*H*T'. */
 
+#line 412 "MB01ZD.f"
 	    if (upper) {
 /* Computing MIN */
+#line 413 "MB01ZD.f"
 		i__1 = *n + *l;
+#line 413 "MB01ZD.f"
 		m2 = min(i__1,*m);
 
+#line 415 "MB01ZD.f"
 		i__1 = *n;
+#line 415 "MB01ZD.f"
 		for (k = 1; k <= i__1; ++k) {
 /* Computing MIN */
+#line 416 "MB01ZD.f"
 		    i__2 = k + *l;
+#line 416 "MB01ZD.f"
 		    i1 = min(i__2,*m);
 /* Computing MIN */
+#line 417 "MB01ZD.f"
 		    i__2 = k + *l;
+#line 417 "MB01ZD.f"
 		    i2 = min(i__2,m2);
 
+#line 419 "MB01ZD.f"
 		    i__2 = k - 1;
+#line 419 "MB01ZD.f"
 		    for (j = 1; j <= i__2; ++j) {
+#line 420 "MB01ZD.f"
 			if (t[j + k * t_dim1] != 0.) {
+#line 421 "MB01ZD.f"
 			    temp = *alpha * t[j + k * t_dim1];
+#line 422 "MB01ZD.f"
 			    daxpy_(&i1, &temp, &h__[k * h_dim1 + 1], &c__1, &
 				    h__[j * h_dim1 + 1], &c__1);
 
+#line 425 "MB01ZD.f"
 			    i__3 = i2;
+#line 425 "MB01ZD.f"
 			    for (i__ = i1 + 1; i__ <= i__3; ++i__) {
+#line 426 "MB01ZD.f"
 				h__[i__ + j * h_dim1] = temp * h__[i__ + k * 
 					h_dim1];
+#line 427 "MB01ZD.f"
 /* L150: */
+#line 427 "MB01ZD.f"
 			    }
 
+#line 429 "MB01ZD.f"
 			}
+#line 430 "MB01ZD.f"
 /* L160: */
+#line 430 "MB01ZD.f"
 		    }
 
+#line 432 "MB01ZD.f"
 		    temp = *alpha;
+#line 433 "MB01ZD.f"
 		    if (nounit) {
+#line 433 "MB01ZD.f"
 			temp *= t[k + k * t_dim1];
+#line 433 "MB01ZD.f"
 		    }
+#line 435 "MB01ZD.f"
 		    if (temp != 1.) {
+#line 435 "MB01ZD.f"
 			dscal_(&i2, &temp, &h__[k * h_dim1 + 1], &c__1);
+#line 435 "MB01ZD.f"
 		    }
+#line 437 "MB01ZD.f"
 /* L170: */
+#line 437 "MB01ZD.f"
 		}
 
+#line 439 "MB01ZD.f"
 	    } else {
 
+#line 441 "MB01ZD.f"
 		for (k = *n; k >= 1; --k) {
 /* Computing MAX */
+#line 442 "MB01ZD.f"
 		    i__1 = 1, i__2 = k - *l;
+#line 442 "MB01ZD.f"
 		    i1 = max(i__1,i__2);
 /* Computing MAX */
+#line 443 "MB01ZD.f"
 		    i__1 = 1, i__2 = k - *l + 1;
+#line 443 "MB01ZD.f"
 		    i2 = max(i__1,i__2);
 /* Computing MIN */
+#line 444 "MB01ZD.f"
 		    i__1 = *m, i__2 = i2 - 1;
+#line 444 "MB01ZD.f"
 		    m2 = min(i__1,i__2);
 
+#line 446 "MB01ZD.f"
 		    i__1 = *n;
+#line 446 "MB01ZD.f"
 		    for (j = k + 1; j <= i__1; ++j) {
+#line 447 "MB01ZD.f"
 			if (t[j + k * t_dim1] != 0.) {
+#line 448 "MB01ZD.f"
 			    temp = *alpha * t[j + k * t_dim1];
+#line 449 "MB01ZD.f"
 			    i__2 = *m - i2 + 1;
+#line 449 "MB01ZD.f"
 			    daxpy_(&i__2, &temp, &h__[i2 + k * h_dim1], &c__1,
 				     &h__[i2 + j * h_dim1], &c__1);
 
+#line 452 "MB01ZD.f"
 			    i__2 = m2;
+#line 452 "MB01ZD.f"
 			    for (i__ = i1; i__ <= i__2; ++i__) {
+#line 453 "MB01ZD.f"
 				h__[i__ + j * h_dim1] = temp * h__[i__ + k * 
 					h_dim1];
+#line 454 "MB01ZD.f"
 /* L180: */
+#line 454 "MB01ZD.f"
 			    }
 
+#line 456 "MB01ZD.f"
 			}
+#line 457 "MB01ZD.f"
 /* L190: */
+#line 457 "MB01ZD.f"
 		    }
 
+#line 459 "MB01ZD.f"
 		    temp = *alpha;
+#line 460 "MB01ZD.f"
 		    if (nounit) {
+#line 460 "MB01ZD.f"
 			temp *= t[k + k * t_dim1];
+#line 460 "MB01ZD.f"
 		    }
+#line 462 "MB01ZD.f"
 		    if (temp != 1.) {
+#line 462 "MB01ZD.f"
 			i__1 = *m - i1 + 1;
+#line 462 "MB01ZD.f"
 			dscal_(&i__1, &temp, &h__[i1 + k * h_dim1], &c__1);
+#line 462 "MB01ZD.f"
 		    }
+#line 464 "MB01ZD.f"
 /* L200: */
+#line 464 "MB01ZD.f"
 		}
 
+#line 466 "MB01ZD.f"
 	    }
 
+#line 468 "MB01ZD.f"
 	}
 
+#line 470 "MB01ZD.f"
     }
 
+#line 472 "MB01ZD.f"
     return 0;
 
 /* *** Last line of MB01ZD *** */

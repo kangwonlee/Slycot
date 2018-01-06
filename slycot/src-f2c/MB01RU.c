@@ -1,3 +1,4 @@
+#line 1 "MB01RU.f"
 /* MB01RU.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB01RU.f"
 /* Table of constant values */
 
 static doublereal c_b8 = 0.;
@@ -232,74 +234,125 @@ static doublereal c_b24 = 2.;
 
 /*     Test the input scalar arguments. */
 
+#line 200 "MB01RU.f"
     /* Parameter adjustments */
+#line 200 "MB01RU.f"
     r_dim1 = *ldr;
+#line 200 "MB01RU.f"
     r_offset = 1 + r_dim1;
+#line 200 "MB01RU.f"
     r__ -= r_offset;
+#line 200 "MB01RU.f"
     a_dim1 = *lda;
+#line 200 "MB01RU.f"
     a_offset = 1 + a_dim1;
+#line 200 "MB01RU.f"
     a -= a_offset;
+#line 200 "MB01RU.f"
     x_dim1 = *ldx;
+#line 200 "MB01RU.f"
     x_offset = 1 + x_dim1;
+#line 200 "MB01RU.f"
     x -= x_offset;
+#line 200 "MB01RU.f"
     --dwork;
+#line 200 "MB01RU.f"
 
+#line 200 "MB01RU.f"
     /* Function Body */
+#line 200 "MB01RU.f"
     *info = 0;
+#line 201 "MB01RU.f"
     luplo = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 202 "MB01RU.f"
     ltrans = lsame_(trans, "T", (ftnlen)1, (ftnlen)1) || lsame_(trans, "C", (
 	    ftnlen)1, (ftnlen)1);
 
+#line 204 "MB01RU.f"
     if (! luplo && ! lsame_(uplo, "L", (ftnlen)1, (ftnlen)1)) {
+#line 205 "MB01RU.f"
 	*info = -1;
+#line 206 "MB01RU.f"
     } else if (! ltrans && ! lsame_(trans, "N", (ftnlen)1, (ftnlen)1)) {
+#line 207 "MB01RU.f"
 	*info = -2;
+#line 208 "MB01RU.f"
     } else if (*m < 0) {
+#line 209 "MB01RU.f"
 	*info = -3;
+#line 210 "MB01RU.f"
     } else if (*n < 0) {
+#line 211 "MB01RU.f"
 	*info = -4;
+#line 212 "MB01RU.f"
     } else if (*ldr < max(1,*m)) {
+#line 213 "MB01RU.f"
 	*info = -8;
+#line 214 "MB01RU.f"
     } else if (*lda < 1 || ltrans && *lda < *n || ! ltrans && *lda < *m) {
+#line 216 "MB01RU.f"
 	*info = -10;
+#line 217 "MB01RU.f"
     } else if (*ldx < max(1,*n)) {
+#line 218 "MB01RU.f"
 	*info = -12;
+#line 219 "MB01RU.f"
     } else if (*beta != 0. && *ldwork < *m * *n || *beta == 0. && *ldwork < 0)
 	     {
+#line 221 "MB01RU.f"
 	*info = -14;
+#line 222 "MB01RU.f"
     }
 
+#line 224 "MB01RU.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 228 "MB01RU.f"
 	i__1 = -(*info);
+#line 228 "MB01RU.f"
 	xerbla_("MB01RU", &i__1, (ftnlen)6);
+#line 229 "MB01RU.f"
 	return 0;
+#line 230 "MB01RU.f"
     }
 
 /*     Quick return if possible. */
 
+#line 234 "MB01RU.f"
     if (*m == 0) {
+#line 234 "MB01RU.f"
 	return 0;
+#line 234 "MB01RU.f"
     }
 
+#line 237 "MB01RU.f"
     if (*beta == 0. || *n == 0) {
+#line 238 "MB01RU.f"
 	if (*alpha == 0.) {
 
 /*           Special case alpha = 0. */
 
+#line 242 "MB01RU.f"
 	    dlaset_(uplo, m, m, &c_b8, &c_b8, &r__[r_offset], ldr, (ftnlen)1);
+#line 243 "MB01RU.f"
 	} else {
 
 /*           Special case beta = 0 or N = 0. */
 
+#line 247 "MB01RU.f"
 	    if (*alpha != 1.) {
+#line 247 "MB01RU.f"
 		dlascl_(uplo, &c__0, &c__0, &c_b12, alpha, m, m, &r__[
 			r_offset], ldr, info, (ftnlen)1);
+#line 247 "MB01RU.f"
 	    }
+#line 249 "MB01RU.f"
 	}
+#line 250 "MB01RU.f"
 	return 0;
+#line 251 "MB01RU.f"
     }
 
 /*     General case: beta <> 0. */
@@ -307,32 +360,46 @@ static doublereal c_b24 = 2.;
 /*     updating formula (see METHOD section). */
 /*     Workspace: need M*N. */
 
+#line 258 "MB01RU.f"
     i__1 = *ldx + 1;
+#line 258 "MB01RU.f"
     dscal_(n, &c_b13, &x[x_offset], &i__1);
 
+#line 260 "MB01RU.f"
     if (ltrans) {
 
+#line 262 "MB01RU.f"
 	dlacpy_("Full", n, m, &a[a_offset], lda, &dwork[1], n, (ftnlen)4);
+#line 263 "MB01RU.f"
 	dtrmm_("Left", uplo, "NoTranspose", "Non-unit", n, m, &c_b12, &x[
 		x_offset], ldx, &dwork[1], n, (ftnlen)4, (ftnlen)1, (ftnlen)
 		11, (ftnlen)8);
+#line 265 "MB01RU.f"
 	dsyr2k_(uplo, trans, m, n, beta, &dwork[1], n, &a[a_offset], lda, 
 		alpha, &r__[r_offset], ldr, (ftnlen)1, (ftnlen)1);
 
+#line 268 "MB01RU.f"
     } else {
 
+#line 270 "MB01RU.f"
 	dlacpy_("Full", m, n, &a[a_offset], lda, &dwork[1], m, (ftnlen)4);
+#line 271 "MB01RU.f"
 	dtrmm_("Right", uplo, "NoTranspose", "Non-unit", m, n, &c_b12, &x[
 		x_offset], ldx, &dwork[1], m, (ftnlen)5, (ftnlen)1, (ftnlen)
 		11, (ftnlen)8);
+#line 273 "MB01RU.f"
 	dsyr2k_(uplo, trans, m, n, beta, &dwork[1], m, &a[a_offset], lda, 
 		alpha, &r__[r_offset], ldr, (ftnlen)1, (ftnlen)1);
 
+#line 276 "MB01RU.f"
     }
 
+#line 278 "MB01RU.f"
     i__1 = *ldx + 1;
+#line 278 "MB01RU.f"
     dscal_(n, &c_b24, &x[x_offset], &i__1);
 
+#line 280 "MB01RU.f"
     return 0;
 /* *** Last line of MB01RU *** */
 } /* mb01ru_ */

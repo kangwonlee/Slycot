@@ -1,3 +1,4 @@
+#line 1 "MB03NY.f"
 /* MB03NY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03NY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -162,104 +164,179 @@ doublereal mb03ny_(integer *n, doublereal *omega, doublereal *a, integer *lda,
 
 /*     Test the input scalar arguments. */
 
+#line 141 "MB03NY.f"
     /* Parameter adjustments */
+#line 141 "MB03NY.f"
     a_dim1 = *lda;
+#line 141 "MB03NY.f"
     a_offset = 1 + a_dim1;
+#line 141 "MB03NY.f"
     a -= a_offset;
+#line 141 "MB03NY.f"
     --s;
+#line 141 "MB03NY.f"
     --dwork;
+#line 141 "MB03NY.f"
     --cwork;
+#line 141 "MB03NY.f"
 
+#line 141 "MB03NY.f"
     /* Function Body */
+#line 141 "MB03NY.f"
     *info = 0;
 
+#line 143 "MB03NY.f"
     if (*n < 0) {
+#line 144 "MB03NY.f"
 	*info = -1;
+#line 145 "MB03NY.f"
     } else if (*lda < max(1,*n)) {
+#line 146 "MB03NY.f"
 	*info = -4;
+#line 147 "MB03NY.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 147 "MB03NY.f"
 	i__1 = 1, i__2 = *n * 5;
+#line 147 "MB03NY.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 148 "MB03NY.f"
 	    *info = -7;
+#line 149 "MB03NY.f"
 	} else if (*lcwork < 1 || *omega != 0. && *lcwork < *n * *n + *n * 3) 
 		{
+#line 151 "MB03NY.f"
 	    *info = -9;
+#line 152 "MB03NY.f"
 	}
+#line 152 "MB03NY.f"
     }
 
+#line 154 "MB03NY.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 158 "MB03NY.f"
 	i__1 = -(*info);
+#line 158 "MB03NY.f"
 	xerbla_("MB03NY", &i__1, (ftnlen)6);
+#line 159 "MB03NY.f"
 	return ret_val;
+#line 160 "MB03NY.f"
     }
 
 /*     Quick return if possible. */
 
+#line 164 "MB03NY.f"
     if (*n == 0) {
+#line 165 "MB03NY.f"
 	ret_val = 0.;
+#line 166 "MB03NY.f"
 	dwork[1] = 1.;
+#line 167 "MB03NY.f"
 	if (*omega != 0.) {
+#line 167 "MB03NY.f"
 	    cwork[1].r = 1., cwork[1].i = 0.;
+#line 167 "MB03NY.f"
 	}
+#line 169 "MB03NY.f"
 	return ret_val;
+#line 170 "MB03NY.f"
     }
 
+#line 172 "MB03NY.f"
     if (*omega == 0.) {
 
 /*        OMEGA = 0 allows real SVD. */
 
+#line 176 "MB03NY.f"
 	dgesvd_("No vectors", "No vectors", n, n, &a[a_offset], n, &s[1], 
 		dummy, &c__1, dummy, &c__1, &dwork[1], ldwork, info, (ftnlen)
 		10, (ftnlen)10);
+#line 178 "MB03NY.f"
 	if (*info != 0) {
+#line 179 "MB03NY.f"
 	    *info = 2;
+#line 180 "MB03NY.f"
 	    return ret_val;
+#line 181 "MB03NY.f"
 	}
+#line 182 "MB03NY.f"
     } else {
 
 /*        General case, that is complex SVD. */
 
+#line 186 "MB03NY.f"
 	ic = 1;
+#line 187 "MB03NY.f"
 	i__1 = *n;
+#line 187 "MB03NY.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 188 "MB03NY.f"
 	    i__2 = *n;
+#line 188 "MB03NY.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 189 "MB03NY.f"
 		i__3 = ic;
+#line 189 "MB03NY.f"
 		i__4 = i__ + j * a_dim1;
+#line 189 "MB03NY.f"
 		cwork[i__3].r = a[i__4], cwork[i__3].i = 0.;
+#line 190 "MB03NY.f"
 		++ic;
+#line 191 "MB03NY.f"
 /* L10: */
+#line 191 "MB03NY.f"
 	    }
+#line 192 "MB03NY.f"
 	    i__2 = (j - 1) * *n + j;
+#line 192 "MB03NY.f"
 	    i__3 = (j - 1) * *n + j;
+#line 192 "MB03NY.f"
 	    z__2.r = *omega * 0., z__2.i = *omega * 1.;
+#line 192 "MB03NY.f"
 	    z__1.r = cwork[i__3].r - z__2.r, z__1.i = cwork[i__3].i - z__2.i;
+#line 192 "MB03NY.f"
 	    cwork[i__2].r = z__1.r, cwork[i__2].i = z__1.i;
+#line 193 "MB03NY.f"
 /* L20: */
+#line 193 "MB03NY.f"
 	}
+#line 194 "MB03NY.f"
 	i__1 = *lcwork - *n * *n;
+#line 194 "MB03NY.f"
 	zgesvd_("No vectors", "No vectors", n, n, &cwork[1], n, &s[1], zdummy,
 		 &c__1, zdummy, &c__1, &cwork[*n * *n + 1], &i__1, &dwork[1], 
 		info, (ftnlen)10, (ftnlen)10);
+#line 197 "MB03NY.f"
 	if (*info != 0) {
+#line 198 "MB03NY.f"
 	    *info = 2;
+#line 199 "MB03NY.f"
 	    return ret_val;
+#line 200 "MB03NY.f"
 	}
+#line 201 "MB03NY.f"
 	i__1 = *n * *n + 1;
+#line 201 "MB03NY.f"
 	d__1 = (doublereal) (*n * *n);
+#line 201 "MB03NY.f"
 	z__2.r = d__1 * 1., z__2.i = d__1 * 0.;
+#line 201 "MB03NY.f"
 	z__1.r = cwork[i__1].r + z__2.r, z__1.i = cwork[i__1].i + z__2.i;
+#line 201 "MB03NY.f"
 	cwork[1].r = z__1.r, cwork[1].i = z__1.i;
+#line 202 "MB03NY.f"
 	dwork[1] = (doublereal) (*n * 5);
+#line 203 "MB03NY.f"
     }
 
+#line 205 "MB03NY.f"
     ret_val = s[*n];
 
 /* *** Last line of MB03NY *** */
+#line 208 "MB03NY.f"
     return ret_val;
 } /* mb03ny_ */
 

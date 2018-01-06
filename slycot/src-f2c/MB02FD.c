@@ -1,3 +1,4 @@
+#line 1 "MB02FD.f"
 /* MB02FD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02FD.f"
 /* Table of constant values */
 
 static doublereal c_b10 = 1.;
@@ -235,226 +237,369 @@ static doublereal c_b10 = 1.;
 
 /*     Decode the scalar input parameters. */
 
+#line 205 "MB02FD.f"
     /* Parameter adjustments */
+#line 205 "MB02FD.f"
     t_dim1 = *ldt;
+#line 205 "MB02FD.f"
     t_offset = 1 + t_dim1;
+#line 205 "MB02FD.f"
     t -= t_offset;
+#line 205 "MB02FD.f"
     r_dim1 = *ldr;
+#line 205 "MB02FD.f"
     r_offset = 1 + r_dim1;
+#line 205 "MB02FD.f"
     r__ -= r_offset;
+#line 205 "MB02FD.f"
     --dwork;
+#line 205 "MB02FD.f"
 
+#line 205 "MB02FD.f"
     /* Function Body */
+#line 205 "MB02FD.f"
     *info = 0;
+#line 206 "MB02FD.f"
     isrow = lsame_(typet, "R", (ftnlen)1, (ftnlen)1);
 
 /*     Check the scalar input parameters. */
 
+#line 210 "MB02FD.f"
     if (! (isrow || lsame_(typet, "C", (ftnlen)1, (ftnlen)1))) {
+#line 211 "MB02FD.f"
 	*info = -1;
+#line 212 "MB02FD.f"
     } else if (*k < 0) {
+#line 213 "MB02FD.f"
 	*info = -2;
+#line 214 "MB02FD.f"
     } else if (*n < 0) {
+#line 215 "MB02FD.f"
 	*info = -3;
+#line 216 "MB02FD.f"
     } else if (*p < 0 || *p > *n) {
+#line 217 "MB02FD.f"
 	*info = -4;
+#line 218 "MB02FD.f"
     } else if (*s < 0 || *s > *n - *p) {
+#line 219 "MB02FD.f"
 	*info = -5;
+#line 220 "MB02FD.f"
     } else if (*ldt < 1 || isrow && *ldt < *k || ! isrow && *ldt < (*n - *p) *
 	     *k) {
+#line 222 "MB02FD.f"
 	*info = -7;
+#line 223 "MB02FD.f"
     } else if (*ldr < 1 || isrow && *p == 0 && *ldr < *s * *k || isrow && *p 
 	    > 0 && *ldr < (*s + 1) * *k || ! isrow && *p == 0 && *ldr < *n * *
 	    k || ! isrow && *p > 0 && *ldr < (*n - *p + 1) * *k) {
+#line 228 "MB02FD.f"
 	*info = -9;
+#line 229 "MB02FD.f"
     } else {
+#line 230 "MB02FD.f"
 	if (*p == 0) {
+#line 231 "MB02FD.f"
 	    countr = (*n + 1) * *k;
+#line 232 "MB02FD.f"
 	} else {
+#line 233 "MB02FD.f"
 	    countr = (*n - *p + 2) * *k;
+#line 234 "MB02FD.f"
 	}
 /* Computing MAX */
+#line 235 "MB02FD.f"
 	i__1 = countr, i__2 = *k << 2;
+#line 235 "MB02FD.f"
 	countr = max(i__1,i__2);
+#line 236 "MB02FD.f"
 	if (*ldwork < max(1,countr)) {
+#line 237 "MB02FD.f"
 	    dwork[1] = (doublereal) max(1,countr);
+#line 238 "MB02FD.f"
 	    *info = -11;
+#line 239 "MB02FD.f"
 	}
+#line 240 "MB02FD.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 244 "MB02FD.f"
     if (*info != 0) {
+#line 245 "MB02FD.f"
 	i__1 = -(*info);
+#line 245 "MB02FD.f"
 	xerbla_("MB02FD", &i__1, (ftnlen)6);
+#line 246 "MB02FD.f"
 	return 0;
+#line 247 "MB02FD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 251 "MB02FD.f"
     i__1 = min(*k,*n);
+#line 251 "MB02FD.f"
     if (min(i__1,*s) == 0) {
+#line 252 "MB02FD.f"
 	dwork[1] = 1.;
+#line 253 "MB02FD.f"
 	return 0;
+#line 254 "MB02FD.f"
     }
 
+#line 256 "MB02FD.f"
     maxwrk = 1;
 
+#line 258 "MB02FD.f"
     if (isrow) {
 
+#line 260 "MB02FD.f"
 	if (*p == 0) {
 
 /*           T is the first block row of a block Toeplitz matrix. */
 /*           Bring T to proper form by triangularizing its first block. */
 
+#line 265 "MB02FD.f"
 	    dpotrf_("Upper", k, &t[t_offset], ldt, &ierr, (ftnlen)5);
+#line 266 "MB02FD.f"
 	    if (ierr != 0) {
 
 /*              Error return:  The matrix is not positive definite. */
 
+#line 270 "MB02FD.f"
 		*info = 1;
+#line 271 "MB02FD.f"
 		return 0;
+#line 272 "MB02FD.f"
 	    }
 
+#line 274 "MB02FD.f"
 	    if (*n > 1) {
+#line 274 "MB02FD.f"
 		i__1 = (*n - 1) * *k;
+#line 274 "MB02FD.f"
 		dtrsm_("Left", "Upper", "Transpose", "NonUnit", k, &i__1, &
 			c_b10, &t[t_offset], ldt, &t[(*k + 1) * t_dim1 + 1], 
 			ldt, (ftnlen)4, (ftnlen)5, (ftnlen)9, (ftnlen)7);
+#line 274 "MB02FD.f"
 	    }
+#line 277 "MB02FD.f"
 	    i__1 = *n * *k;
+#line 277 "MB02FD.f"
 	    dlacpy_("Upper", k, &i__1, &t[t_offset], ldt, &r__[r_offset], ldr,
 		     (ftnlen)5);
 
+#line 279 "MB02FD.f"
 	    if (*s == 1) {
+#line 280 "MB02FD.f"
 		dwork[1] = 1.;
+#line 281 "MB02FD.f"
 		return 0;
+#line 282 "MB02FD.f"
 	    }
 
+#line 284 "MB02FD.f"
 	    st = 2;
+#line 285 "MB02FD.f"
 	    countr = (*n - 1) * *k;
+#line 286 "MB02FD.f"
 	} else {
+#line 287 "MB02FD.f"
 	    st = 1;
+#line 288 "MB02FD.f"
 	    countr = (*n - *p) * *k;
+#line 289 "MB02FD.f"
 	}
 
+#line 291 "MB02FD.f"
 	startr = 1;
 
+#line 293 "MB02FD.f"
 	i__1 = *s;
+#line 293 "MB02FD.f"
 	for (i__ = st; i__ <= i__1; ++i__) {
+#line 294 "MB02FD.f"
 	    dlacpy_("Upper", k, &countr, &r__[startr + startr * r_dim1], ldr, 
 		    &r__[startr + *k + (startr + *k) * r_dim1], ldr, (ftnlen)
 		    5);
+#line 296 "MB02FD.f"
 	    startr += *k;
+#line 297 "MB02FD.f"
 	    countr -= *k;
+#line 298 "MB02FD.f"
 	    i__2 = *k * 3;
+#line 298 "MB02FD.f"
 	    i__3 = *ldwork - *k * 3;
+#line 298 "MB02FD.f"
 	    mb02cx_("Row", k, k, k, &r__[startr + startr * r_dim1], ldr, &t[
 		    startr * t_dim1 + 1], ldt, &dwork[1], &i__2, &dwork[*k * 
 		    3 + 1], &i__3, &ierr, (ftnlen)3);
+#line 301 "MB02FD.f"
 	    if (ierr != 0) {
 
 /*              Error return:  The matrix is not positive definite. */
 
+#line 305 "MB02FD.f"
 		*info = 1;
+#line 306 "MB02FD.f"
 		return 0;
+#line 307 "MB02FD.f"
 	    }
 
 /* Computing MAX */
+#line 309 "MB02FD.f"
 	    i__2 = maxwrk, i__3 = (integer) dwork[*k * 3 + 1] + *k * 3;
+#line 309 "MB02FD.f"
 	    maxwrk = max(i__2,i__3);
+#line 310 "MB02FD.f"
 	    i__2 = *k * 3;
+#line 310 "MB02FD.f"
 	    i__3 = *ldwork - *k * 3;
+#line 310 "MB02FD.f"
 	    mb02cy_("Row", "NoStructure", k, k, &countr, k, &r__[startr + (
 		    startr + *k) * r_dim1], ldr, &t[(startr + *k) * t_dim1 + 
 		    1], ldt, &t[startr * t_dim1 + 1], ldt, &dwork[1], &i__2, &
 		    dwork[*k * 3 + 1], &i__3, &ierr, (ftnlen)3, (ftnlen)11);
 /* Computing MAX */
+#line 314 "MB02FD.f"
 	    i__2 = maxwrk, i__3 = (integer) dwork[*k * 3 + 1] + *k * 3;
+#line 314 "MB02FD.f"
 	    maxwrk = max(i__2,i__3);
+#line 315 "MB02FD.f"
 /* L10: */
+#line 315 "MB02FD.f"
 	}
 
+#line 317 "MB02FD.f"
     } else {
 
+#line 319 "MB02FD.f"
 	if (*p == 0) {
 
 /*           T is the first block column of a block Toeplitz matrix. */
 /*           Bring T to proper form by triangularizing its first block. */
 
+#line 324 "MB02FD.f"
 	    dpotrf_("Lower", k, &t[t_offset], ldt, &ierr, (ftnlen)5);
+#line 325 "MB02FD.f"
 	    if (ierr != 0) {
 
 /*              Error return:  The matrix is not positive definite. */
 
+#line 329 "MB02FD.f"
 		*info = 1;
+#line 330 "MB02FD.f"
 		return 0;
+#line 331 "MB02FD.f"
 	    }
 
+#line 333 "MB02FD.f"
 	    if (*n > 1) {
+#line 333 "MB02FD.f"
 		i__1 = (*n - 1) * *k;
+#line 333 "MB02FD.f"
 		dtrsm_("Right", "Lower", "Transpose", "NonUnit", &i__1, k, &
 			c_b10, &t[t_offset], ldt, &t[*k + 1 + t_dim1], ldt, (
 			ftnlen)5, (ftnlen)5, (ftnlen)9, (ftnlen)7);
+#line 333 "MB02FD.f"
 	    }
+#line 336 "MB02FD.f"
 	    i__1 = *n * *k;
+#line 336 "MB02FD.f"
 	    dlacpy_("Lower", &i__1, k, &t[t_offset], ldt, &r__[r_offset], ldr,
 		     (ftnlen)5);
 
+#line 338 "MB02FD.f"
 	    if (*s == 1) {
+#line 339 "MB02FD.f"
 		dwork[1] = 1.;
+#line 340 "MB02FD.f"
 		return 0;
+#line 341 "MB02FD.f"
 	    }
 
+#line 343 "MB02FD.f"
 	    st = 2;
+#line 344 "MB02FD.f"
 	    countr = (*n - 1) * *k;
+#line 345 "MB02FD.f"
 	} else {
+#line 346 "MB02FD.f"
 	    st = 1;
+#line 347 "MB02FD.f"
 	    countr = (*n - *p) * *k;
+#line 348 "MB02FD.f"
 	}
 
+#line 350 "MB02FD.f"
 	startr = 1;
 
+#line 352 "MB02FD.f"
 	i__1 = *s;
+#line 352 "MB02FD.f"
 	for (i__ = st; i__ <= i__1; ++i__) {
+#line 353 "MB02FD.f"
 	    dlacpy_("Lower", &countr, k, &r__[startr + startr * r_dim1], ldr, 
 		    &r__[startr + *k + (startr + *k) * r_dim1], ldr, (ftnlen)
 		    5);
+#line 355 "MB02FD.f"
 	    startr += *k;
+#line 356 "MB02FD.f"
 	    countr -= *k;
+#line 357 "MB02FD.f"
 	    i__2 = *k * 3;
+#line 357 "MB02FD.f"
 	    i__3 = *ldwork - *k * 3;
+#line 357 "MB02FD.f"
 	    mb02cx_("Column", k, k, k, &r__[startr + startr * r_dim1], ldr, &
 		    t[startr + t_dim1], ldt, &dwork[1], &i__2, &dwork[*k * 3 
 		    + 1], &i__3, &ierr, (ftnlen)6);
+#line 360 "MB02FD.f"
 	    if (ierr != 0) {
 
 /*              Error return:  The matrix is not positive definite. */
 
+#line 364 "MB02FD.f"
 		*info = 1;
+#line 365 "MB02FD.f"
 		return 0;
+#line 366 "MB02FD.f"
 	    }
 
 /* Computing MAX */
+#line 368 "MB02FD.f"
 	    i__2 = maxwrk, i__3 = (integer) dwork[*k * 3 + 1] + *k * 3;
+#line 368 "MB02FD.f"
 	    maxwrk = max(i__2,i__3);
+#line 369 "MB02FD.f"
 	    i__2 = *k * 3;
+#line 369 "MB02FD.f"
 	    i__3 = *ldwork - *k * 3;
+#line 369 "MB02FD.f"
 	    mb02cy_("Column", "NoStructure", k, k, &countr, k, &r__[startr + *
 		    k + startr * r_dim1], ldr, &t[startr + *k + t_dim1], ldt, 
 		    &t[startr + t_dim1], ldt, &dwork[1], &i__2, &dwork[*k * 3 
 		    + 1], &i__3, &ierr, (ftnlen)6, (ftnlen)11);
 /* Computing MAX */
+#line 373 "MB02FD.f"
 	    i__2 = maxwrk, i__3 = (integer) dwork[*k * 3 + 1] + *k * 3;
+#line 373 "MB02FD.f"
 	    maxwrk = max(i__2,i__3);
+#line 374 "MB02FD.f"
 /* L20: */
+#line 374 "MB02FD.f"
 	}
 
+#line 376 "MB02FD.f"
     }
 
+#line 378 "MB02FD.f"
     dwork[1] = (doublereal) maxwrk;
 
+#line 380 "MB02FD.f"
     return 0;
 
 /* *** Last line of MB02FD *** */

@@ -1,3 +1,4 @@
+#line 1 "SB03OU.f"
 /* SB03OU.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB03OU.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -307,59 +309,101 @@ static doublereal c_b8 = 0.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 280 "SB03OU.f"
     /* Parameter adjustments */
+#line 280 "SB03OU.f"
     a_dim1 = *lda;
+#line 280 "SB03OU.f"
     a_offset = 1 + a_dim1;
+#line 280 "SB03OU.f"
     a -= a_offset;
+#line 280 "SB03OU.f"
     b_dim1 = *ldb;
+#line 280 "SB03OU.f"
     b_offset = 1 + b_dim1;
+#line 280 "SB03OU.f"
     b -= b_offset;
+#line 280 "SB03OU.f"
     --tau;
+#line 280 "SB03OU.f"
     u_dim1 = *ldu;
+#line 280 "SB03OU.f"
     u_offset = 1 + u_dim1;
+#line 280 "SB03OU.f"
     u -= u_offset;
+#line 280 "SB03OU.f"
     --dwork;
+#line 280 "SB03OU.f"
 
+#line 280 "SB03OU.f"
     /* Function Body */
+#line 280 "SB03OU.f"
     *info = 0;
 
 /*     Test the input scalar arguments. */
 
+#line 284 "SB03OU.f"
     if (*n < 0) {
+#line 285 "SB03OU.f"
 	*info = -3;
+#line 286 "SB03OU.f"
     } else if (*m < 0) {
+#line 287 "SB03OU.f"
 	*info = -4;
+#line 288 "SB03OU.f"
     } else if (*lda < max(1,*n)) {
+#line 289 "SB03OU.f"
 	*info = -6;
+#line 290 "SB03OU.f"
     } else if (*ldb < max(1,*m) && ! (*ltrans) || *ldb < max(1,*n) && *ltrans)
 	     {
+#line 292 "SB03OU.f"
 	*info = -8;
+#line 293 "SB03OU.f"
     } else if (*ldu < max(1,*n)) {
+#line 294 "SB03OU.f"
 	*info = -11;
+#line 295 "SB03OU.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 295 "SB03OU.f"
 	i__1 = 1, i__2 = *n << 2;
+#line 295 "SB03OU.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 296 "SB03OU.f"
 	    *info = -14;
+#line 297 "SB03OU.f"
 	}
+#line 297 "SB03OU.f"
     }
 
+#line 299 "SB03OU.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 303 "SB03OU.f"
 	i__1 = -(*info);
+#line 303 "SB03OU.f"
 	xerbla_("SB03OU", &i__1, (ftnlen)6);
+#line 304 "SB03OU.f"
 	return 0;
+#line 305 "SB03OU.f"
     }
 
 /*     Quick return if possible. */
 
+#line 309 "SB03OU.f"
     mn = min(*n,*m);
+#line 310 "SB03OU.f"
     if (mn == 0) {
+#line 311 "SB03OU.f"
 	*scale = 1.;
+#line 312 "SB03OU.f"
 	dwork[1] = 1.;
+#line 313 "SB03OU.f"
 	return 0;
+#line 314 "SB03OU.f"
     }
 
 /*     (Note: Comments in the code beginning "Workspace:" describe the */
@@ -368,6 +412,7 @@ static doublereal c_b8 = 0.;
 /*     NB refers to the optimal block size for the immediately */
 /*     following subroutine, as returned by ILAENV.) */
 
+#line 322 "SB03OU.f"
     if (*ltrans) {
 
 /*        Case op(K) = K'. */
@@ -376,27 +421,40 @@ static doublereal c_b8 = 0.;
 /*        Workspace: need   N; */
 /*                   prefer N*NB. */
 
+#line 330 "SB03OU.f"
 	dgerqf_(n, m, &b[b_offset], ldb, &tau[1], &dwork[1], ldwork, info);
 
 /*        The triangular matrix F is constructed in the array U so that */
 /*        U can share the same memory as B. */
 
+#line 335 "SB03OU.f"
 	if (*m >= *n) {
+#line 336 "SB03OU.f"
 	    dlacpy_("Upper", &mn, n, &b[(*m - *n + 1) * b_dim1 + 1], ldb, &u[
 		    u_offset], ldu, (ftnlen)5);
+#line 337 "SB03OU.f"
 	} else {
 
+#line 339 "SB03OU.f"
 	    for (i__ = *m; i__ >= 1; --i__) {
+#line 340 "SB03OU.f"
 		i__1 = *n - *m + i__;
+#line 340 "SB03OU.f"
 		dcopy_(&i__1, &b[i__ * b_dim1 + 1], &c__1, &u[(*n - *m + i__) 
 			* u_dim1 + 1], &c__1);
+#line 341 "SB03OU.f"
 /* L10: */
+#line 341 "SB03OU.f"
 	    }
 
+#line 343 "SB03OU.f"
 	    i__1 = *n - *m;
+#line 343 "SB03OU.f"
 	    dlaset_("Full", n, &i__1, &c_b8, &c_b8, &u[u_offset], ldu, (
 		    ftnlen)4);
+#line 344 "SB03OU.f"
 	}
+#line 345 "SB03OU.f"
     } else {
 
 /*        Case op(K) = K. */
@@ -405,16 +463,25 @@ static doublereal c_b8 = 0.;
 /*        Workspace: need   N; */
 /*                   prefer N*NB. */
 
+#line 353 "SB03OU.f"
 	dgeqrf_(m, n, &b[b_offset], ldb, &tau[1], &dwork[1], ldwork, info);
+#line 354 "SB03OU.f"
 	dlacpy_("Upper", &mn, n, &b[b_offset], ldb, &u[u_offset], ldu, (
 		ftnlen)5);
+#line 355 "SB03OU.f"
 	if (*m < *n) {
+#line 355 "SB03OU.f"
 	    i__1 = *n - *m;
+#line 355 "SB03OU.f"
 	    i__2 = *n - *m;
+#line 355 "SB03OU.f"
 	    dlaset_("Upper", &i__1, &i__2, &c_b8, &c_b8, &u[*m + 1 + (*m + 1) 
 		    * u_dim1], ldu, (ftnlen)5);
+#line 355 "SB03OU.f"
 	}
+#line 358 "SB03OU.f"
     }
+#line 359 "SB03OU.f"
     wrkopt = (integer) dwork[1];
 
 /*     Solve the canonical Lyapunov equation */
@@ -427,56 +494,93 @@ static doublereal c_b8 = 0.;
 
 /*     for U. */
 
+#line 371 "SB03OU.f"
     sb03ot_(discr, ltrans, n, &a[a_offset], lda, &u[u_offset], ldu, scale, &
 	    dwork[1], info);
+#line 373 "SB03OU.f"
     if (*info != 0 && *info != 1) {
+#line 373 "SB03OU.f"
 	return 0;
+#line 373 "SB03OU.f"
     }
 
 /*     Make the diagonal elements of U non-negative. */
 
+#line 378 "SB03OU.f"
     if (*ltrans) {
 
+#line 380 "SB03OU.f"
 	i__1 = *n;
+#line 380 "SB03OU.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 381 "SB03OU.f"
 	    if (u[j + j * u_dim1] < 0.) {
 
+#line 383 "SB03OU.f"
 		i__2 = j;
+#line 383 "SB03OU.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 384 "SB03OU.f"
 		    u[i__ + j * u_dim1] = -u[i__ + j * u_dim1];
+#line 385 "SB03OU.f"
 /* L20: */
+#line 385 "SB03OU.f"
 		}
 
+#line 387 "SB03OU.f"
 	    }
+#line 388 "SB03OU.f"
 /* L30: */
+#line 388 "SB03OU.f"
 	}
 
+#line 390 "SB03OU.f"
     } else {
+#line 391 "SB03OU.f"
 	k = 1;
 
+#line 393 "SB03OU.f"
 	i__1 = *n;
+#line 393 "SB03OU.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 394 "SB03OU.f"
 	    dwork[k] = u[j + j * u_dim1];
+#line 395 "SB03OU.f"
 	    l = 1;
 
+#line 397 "SB03OU.f"
 	    i__2 = j;
+#line 397 "SB03OU.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 398 "SB03OU.f"
 		if (dwork[l] < 0.) {
+#line 398 "SB03OU.f"
 		    u[i__ + j * u_dim1] = -u[i__ + j * u_dim1];
+#line 398 "SB03OU.f"
 		}
+#line 399 "SB03OU.f"
 		++l;
+#line 400 "SB03OU.f"
 /* L40: */
+#line 400 "SB03OU.f"
 	    }
 
+#line 402 "SB03OU.f"
 	    ++k;
+#line 403 "SB03OU.f"
 /* L50: */
+#line 403 "SB03OU.f"
 	}
 
+#line 405 "SB03OU.f"
     }
 
 /* Computing MAX */
+#line 407 "SB03OU.f"
     i__1 = wrkopt, i__2 = *n << 2;
+#line 407 "SB03OU.f"
     dwork[1] = (doublereal) max(i__1,i__2);
+#line 408 "SB03OU.f"
     return 0;
 /* *** Last line of SB03OU *** */
 } /* sb03ou_ */

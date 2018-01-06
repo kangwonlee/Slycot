@@ -1,3 +1,4 @@
+#line 1 "TG01JD.f"
 /* TG01JD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TG01JD.f"
 /* Table of constant values */
 
 static doublereal c_b12 = 0.;
@@ -346,390 +348,617 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 307 "TG01JD.f"
     /* Parameter adjustments */
+#line 307 "TG01JD.f"
     a_dim1 = *lda;
+#line 307 "TG01JD.f"
     a_offset = 1 + a_dim1;
+#line 307 "TG01JD.f"
     a -= a_offset;
+#line 307 "TG01JD.f"
     e_dim1 = *lde;
+#line 307 "TG01JD.f"
     e_offset = 1 + e_dim1;
+#line 307 "TG01JD.f"
     e -= e_offset;
+#line 307 "TG01JD.f"
     b_dim1 = *ldb;
+#line 307 "TG01JD.f"
     b_offset = 1 + b_dim1;
+#line 307 "TG01JD.f"
     b -= b_offset;
+#line 307 "TG01JD.f"
     c_dim1 = *ldc;
+#line 307 "TG01JD.f"
     c_offset = 1 + c_dim1;
+#line 307 "TG01JD.f"
     c__ -= c_offset;
+#line 307 "TG01JD.f"
     --infred;
+#line 307 "TG01JD.f"
     --iwork;
+#line 307 "TG01JD.f"
     --dwork;
+#line 307 "TG01JD.f"
 
+#line 307 "TG01JD.f"
     /* Function Body */
+#line 307 "TG01JD.f"
     *info = 0;
+#line 308 "TG01JD.f"
     maxmp = max(*m,*p);
+#line 309 "TG01JD.f"
     n1 = max(1,*n);
 
 /*     Decode JOB. */
 
+#line 313 "TG01JD.f"
     ljobir = lsame_(job, "I", (ftnlen)1, (ftnlen)1);
+#line 314 "TG01JD.f"
     ljobc = ljobir || lsame_(job, "C", (ftnlen)1, (ftnlen)1);
+#line 315 "TG01JD.f"
     ljobo = ljobir || lsame_(job, "O", (ftnlen)1, (ftnlen)1);
 
 /*     Decode SYSTYP. */
 
+#line 319 "TG01JD.f"
     lsysr = lsame_(systyp, "R", (ftnlen)1, (ftnlen)1);
+#line 320 "TG01JD.f"
     lsyss = lsysr || lsame_(systyp, "S", (ftnlen)1, (ftnlen)1);
+#line 321 "TG01JD.f"
     lsysp = lsysr || lsame_(systyp, "P", (ftnlen)1, (ftnlen)1);
 
+#line 323 "TG01JD.f"
     lequil = lsame_(equil, "S", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 327 "TG01JD.f"
     if (! ljobc && ! ljobo) {
+#line 328 "TG01JD.f"
 	*info = -1;
+#line 329 "TG01JD.f"
     } else if (! lsyss && ! lsysp) {
+#line 330 "TG01JD.f"
 	*info = -2;
+#line 331 "TG01JD.f"
     } else if (! lequil && ! lsame_(equil, "N", (ftnlen)1, (ftnlen)1)) {
+#line 332 "TG01JD.f"
 	*info = -3;
+#line 333 "TG01JD.f"
     } else if (*n < 0) {
+#line 334 "TG01JD.f"
 	*info = -4;
+#line 335 "TG01JD.f"
     } else if (*m < 0) {
+#line 336 "TG01JD.f"
 	*info = -5;
+#line 337 "TG01JD.f"
     } else if (*p < 0) {
+#line 338 "TG01JD.f"
 	*info = -6;
+#line 339 "TG01JD.f"
     } else if (*lda < n1) {
+#line 340 "TG01JD.f"
 	*info = -8;
+#line 341 "TG01JD.f"
     } else if (*lde < n1) {
+#line 342 "TG01JD.f"
 	*info = -10;
+#line 343 "TG01JD.f"
     } else if (*ldb < n1) {
+#line 344 "TG01JD.f"
 	*info = -12;
+#line 345 "TG01JD.f"
     } else if (*ldc < 1 || *n > 0 && *ldc < maxmp) {
+#line 346 "TG01JD.f"
 	*info = -14;
+#line 347 "TG01JD.f"
     } else if (*tol >= 1.) {
+#line 348 "TG01JD.f"
 	*info = -17;
+#line 349 "TG01JD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 349 "TG01JD.f"
 	i__1 = *n, i__2 = maxmp << 1;
 /* Computing MAX */
+#line 349 "TG01JD.f"
 	i__3 = *n << 3, i__4 = maxmp << 1;
+#line 349 "TG01JD.f"
 	if (! lequil && *ldwork < max(i__1,i__2) || lequil && *ldwork < max(
 		i__3,i__4)) {
+#line 351 "TG01JD.f"
 	    *info = -20;
+#line 352 "TG01JD.f"
 	}
+#line 352 "TG01JD.f"
     }
 
+#line 354 "TG01JD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 358 "TG01JD.f"
 	i__1 = -(*info);
+#line 358 "TG01JD.f"
 	xerbla_("TG01JD", &i__1, (ftnlen)6);
+#line 359 "TG01JD.f"
 	return 0;
+#line 360 "TG01JD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 364 "TG01JD.f"
     infred[1] = -1;
+#line 365 "TG01JD.f"
     infred[2] = -1;
+#line 366 "TG01JD.f"
     infred[3] = -1;
+#line 367 "TG01JD.f"
     infred[4] = -1;
+#line 368 "TG01JD.f"
     infred[5] = 0;
+#line 369 "TG01JD.f"
     infred[6] = 0;
+#line 370 "TG01JD.f"
     infred[7] = 0;
 
+#line 372 "TG01JD.f"
     if (max(*n,maxmp) == 0) {
+#line 373 "TG01JD.f"
 	*nr = 0;
+#line 374 "TG01JD.f"
 	return 0;
+#line 375 "TG01JD.f"
     }
 
+#line 377 "TG01JD.f"
     m1 = max(1,*m);
+#line 378 "TG01JD.f"
     p1 = max(1,*p);
+#line 379 "TG01JD.f"
     ldm = max(*ldc,*m);
+#line 380 "TG01JD.f"
     ldp = max(*ldc,*p);
 
 /*     Set controllability/observability determination options. */
 
+#line 384 "TG01JD.f"
     fincon = ljobc && lsyss;
+#line 385 "TG01JD.f"
     infcon = ljobc && lsysp;
+#line 386 "TG01JD.f"
     finobs = ljobo && lsyss;
+#line 387 "TG01JD.f"
     infobs = ljobo && lsysp;
 
 /*     Set large workspace option and determine offsets. */
 
 /* Computing MAX */
+#line 391 "TG01JD.f"
     i__1 = *n, i__2 = maxmp << 1;
+#line 391 "TG01JD.f"
     lspace = *ldwork >= *n * ((*n << 1) + *m + *p) + max(i__1,i__2);
 /* Computing MAX */
+#line 392 "TG01JD.f"
     i__1 = *n, i__2 = maxmp << 1;
+#line 392 "TG01JD.f"
     kwa = max(i__1,i__2) + 1;
+#line 393 "TG01JD.f"
     kwe = kwa + *n * *n;
+#line 394 "TG01JD.f"
     kwb = kwe + *n * *n;
+#line 395 "TG01JD.f"
     kwc = kwb + *n * *m;
 
 /*     If required, scale the system (A-lambda*E,B,C). */
 /*     Workspace: need 8*N. */
 
+#line 400 "TG01JD.f"
     if (lequil) {
+#line 401 "TG01JD.f"
 	tg01ad_("All", n, n, m, p, &c_b12, &a[a_offset], lda, &e[e_offset], 
 		lde, &b[b_offset], ldb, &c__[c_offset], &ldp, &dwork[1], &
 		dwork[*n + 1], &dwork[(*n << 1) + 1], info, (ftnlen)3);
+#line 403 "TG01JD.f"
     }
 
+#line 405 "TG01JD.f"
     *(unsigned char *)jobq = 'N';
+#line 406 "TG01JD.f"
     *(unsigned char *)jobz = 'N';
+#line 407 "TG01JD.f"
     ldq = 1;
+#line 408 "TG01JD.f"
     ldz = 1;
 /* Computing MAX */
+#line 409 "TG01JD.f"
     i__1 = 0, i__2 = *n - 1;
+#line 409 "TG01JD.f"
     lba = max(i__1,i__2);
+#line 410 "TG01JD.f"
     lbe = lba;
+#line 411 "TG01JD.f"
     nc = *n;
+#line 412 "TG01JD.f"
     *nr = *n;
 
+#line 414 "TG01JD.f"
     if (fincon) {
 
 /*        Phase 1: Eliminate all finite uncontrolable eigenvalues. */
 
+#line 418 "TG01JD.f"
 	if (lspace) {
 
 /*           Save system matrices. */
 
+#line 422 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &a[a_offset], lda, &dwork[kwa], &n1, (
 		    ftnlen)4);
+#line 423 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &e[e_offset], lde, &dwork[kwe], &n1, (
 		    ftnlen)4);
+#line 424 "TG01JD.f"
 	    dlacpy_("Full", &nc, m, &b[b_offset], ldb, &dwork[kwb], &n1, (
 		    ftnlen)4);
+#line 425 "TG01JD.f"
 	    dlacpy_("Full", p, &nc, &c__[c_offset], ldc, &dwork[kwc], &p1, (
 		    ftnlen)4);
+#line 426 "TG01JD.f"
 	}
 
 /*        Perform finite controllability form reduction. */
 /*        Workspace: need   MAX(N,2*M). */
 
+#line 431 "TG01JD.f"
 	tg01hx_(jobq, jobz, &nc, &nc, m, p, &nc, &lbe, &a[a_offset], lda, &e[
 		e_offset], lde, &b[b_offset], ldb, &c__[c_offset], &ldp, dum, 
 		&ldq, dum, &ldz, nr, &nblck, &iwork[1], tol, &iwork[*n + 1], &
 		dwork[1], info, (ftnlen)1, (ftnlen)1);
+#line 434 "TG01JD.f"
 	if (*nr < nc || ! lspace) {
+#line 435 "TG01JD.f"
 	    if (nblck > 1) {
+#line 436 "TG01JD.f"
 		lba = iwork[1] + iwork[2] - 1;
+#line 437 "TG01JD.f"
 	    } else if (nblck == 1) {
+#line 438 "TG01JD.f"
 		lba = iwork[1] - 1;
+#line 439 "TG01JD.f"
 	    } else {
+#line 440 "TG01JD.f"
 		lba = 0;
+#line 441 "TG01JD.f"
 	    }
+#line 442 "TG01JD.f"
 	    lbe = 0;
+#line 443 "TG01JD.f"
 	    infred[1] = nc - *nr;
+#line 444 "TG01JD.f"
 	    infred[7] = nblck;
+#line 445 "TG01JD.f"
 	    nc = *nr;
+#line 446 "TG01JD.f"
 	} else {
 
 /*           Restore system matrices. */
 
+#line 450 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &dwork[kwa], &n1, &a[a_offset], lda, (
 		    ftnlen)4);
+#line 451 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &dwork[kwe], &n1, &e[e_offset], lde, (
 		    ftnlen)4);
+#line 452 "TG01JD.f"
 	    dlacpy_("Full", &nc, m, &dwork[kwb], &n1, &b[b_offset], ldb, (
 		    ftnlen)4);
+#line 453 "TG01JD.f"
 	    dlacpy_("Full", p, &nc, &dwork[kwc], &p1, &c__[c_offset], ldc, (
 		    ftnlen)4);
+#line 454 "TG01JD.f"
 	}
+#line 455 "TG01JD.f"
     }
 
+#line 457 "TG01JD.f"
     if (infcon) {
 
 /*        Phase 2: Eliminate all infinite and all finite nonzero */
 /*                 uncontrolable eigenvalues. */
 
+#line 462 "TG01JD.f"
 	if (lspace) {
 
 /*           Save system matrices. */
 
+#line 466 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &a[a_offset], lda, &dwork[kwa], &n1, (
 		    ftnlen)4);
+#line 467 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &e[e_offset], lde, &dwork[kwe], &n1, (
 		    ftnlen)4);
+#line 468 "TG01JD.f"
 	    dlacpy_("Full", &nc, m, &b[b_offset], ldb, &dwork[kwb], &n1, (
 		    ftnlen)4);
+#line 469 "TG01JD.f"
 	    dlacpy_("Full", p, &nc, &c__[c_offset], ldc, &dwork[kwc], &p1, (
 		    ftnlen)4);
+#line 470 "TG01JD.f"
 	}
 
 /*        Perform infinite controllability form reduction. */
 /*        Workspace: need   MAX(N,2*M). */
 
+#line 475 "TG01JD.f"
 	tg01hx_(jobq, jobz, &nc, &nc, m, p, &nc, &lba, &e[e_offset], lde, &a[
 		a_offset], lda, &b[b_offset], ldb, &c__[c_offset], &ldp, dum, 
 		&ldq, dum, &ldz, nr, &nblck, &iwork[1], tol, &iwork[*n + 1], &
 		dwork[1], info, (ftnlen)1, (ftnlen)1);
+#line 478 "TG01JD.f"
 	if (*nr < nc || ! lspace) {
+#line 479 "TG01JD.f"
 	    if (nblck > 1) {
+#line 480 "TG01JD.f"
 		lbe = iwork[1] + iwork[2] - 1;
+#line 481 "TG01JD.f"
 	    } else if (nblck == 1) {
+#line 482 "TG01JD.f"
 		lbe = iwork[1] - 1;
+#line 483 "TG01JD.f"
 	    } else {
+#line 484 "TG01JD.f"
 		lbe = 0;
+#line 485 "TG01JD.f"
 	    }
+#line 486 "TG01JD.f"
 	    lba = 0;
+#line 487 "TG01JD.f"
 	    infred[2] = nc - *nr;
+#line 488 "TG01JD.f"
 	    infred[7] = nblck;
+#line 489 "TG01JD.f"
 	    nc = *nr;
+#line 490 "TG01JD.f"
 	} else {
 
 /*           Restore system matrices. */
 
+#line 494 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &dwork[kwa], &n1, &a[a_offset], lda, (
 		    ftnlen)4);
+#line 495 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &dwork[kwe], &n1, &e[e_offset], lde, (
 		    ftnlen)4);
+#line 496 "TG01JD.f"
 	    dlacpy_("Full", &nc, m, &dwork[kwb], &n1, &b[b_offset], ldb, (
 		    ftnlen)4);
+#line 497 "TG01JD.f"
 	    dlacpy_("Full", p, &nc, &dwork[kwc], &p1, &c__[c_offset], ldc, (
 		    ftnlen)4);
+#line 498 "TG01JD.f"
 	}
+#line 499 "TG01JD.f"
     }
 
+#line 501 "TG01JD.f"
     if (finobs || infobs) {
 
 /*        Compute the pertransposed dual system exploiting matrix shapes. */
 
 /* Computing MAX */
+#line 505 "TG01JD.f"
 	i__2 = 0, i__3 = nc - 1;
+#line 505 "TG01JD.f"
 	i__1 = max(i__2,i__3);
+#line 505 "TG01JD.f"
 	tb01xd_("Z", &nc, m, p, &lba, &i__1, &a[a_offset], lda, &b[b_offset], 
 		ldb, &c__[c_offset], ldc, dum, &c__1, info, (ftnlen)1);
 /* Computing MAX */
+#line 507 "TG01JD.f"
 	i__2 = 0, i__3 = nc - 1;
+#line 507 "TG01JD.f"
 	i__1 = max(i__2,i__3);
+#line 507 "TG01JD.f"
 	ma02cd_(&nc, &lbe, &i__1, &e[e_offset], lde);
+#line 508 "TG01JD.f"
     }
 
+#line 510 "TG01JD.f"
     if (finobs) {
 
 /*        Phase 3: Eliminate all finite unobservable eigenvalues. */
 
+#line 514 "TG01JD.f"
 	if (lspace) {
 
 /*           Save system matrices. */
 
+#line 518 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &a[a_offset], lda, &dwork[kwa], &n1, (
 		    ftnlen)4);
+#line 519 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &e[e_offset], lde, &dwork[kwe], &n1, (
 		    ftnlen)4);
+#line 520 "TG01JD.f"
 	    dlacpy_("Full", &nc, p, &b[b_offset], ldb, &dwork[kwc], &n1, (
 		    ftnlen)4);
+#line 521 "TG01JD.f"
 	    dlacpy_("Full", m, &nc, &c__[c_offset], ldc, &dwork[kwb], &m1, (
 		    ftnlen)4);
+#line 522 "TG01JD.f"
 	}
 
 /*        Perform finite observability form reduction. */
 /*        Workspace: need   MAX(N,2*P). */
 
+#line 527 "TG01JD.f"
 	tg01hx_(jobz, jobq, &nc, &nc, p, m, &nc, &lbe, &a[a_offset], lda, &e[
 		e_offset], lde, &b[b_offset], ldb, &c__[c_offset], &ldm, dum, 
 		&ldz, dum, &ldq, nr, &nblck, &iwork[1], tol, &iwork[*n + 1], &
 		dwork[1], info, (ftnlen)1, (ftnlen)1);
+#line 530 "TG01JD.f"
 	if (*nr < nc || ! lspace) {
+#line 531 "TG01JD.f"
 	    if (nblck > 1) {
+#line 532 "TG01JD.f"
 		lba = iwork[1] + iwork[2] - 1;
+#line 533 "TG01JD.f"
 	    } else if (nblck == 1) {
+#line 534 "TG01JD.f"
 		lba = iwork[1] - 1;
+#line 535 "TG01JD.f"
 	    } else {
+#line 536 "TG01JD.f"
 		lba = 0;
+#line 537 "TG01JD.f"
 	    }
+#line 538 "TG01JD.f"
 	    lbe = 0;
+#line 539 "TG01JD.f"
 	    infred[3] = nc - *nr;
+#line 540 "TG01JD.f"
 	    infred[7] = nblck;
+#line 541 "TG01JD.f"
 	    nc = *nr;
+#line 542 "TG01JD.f"
 	} else {
 
 /*           Restore system matrices. */
 
+#line 546 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &dwork[kwa], &n1, &a[a_offset], lda, (
 		    ftnlen)4);
+#line 547 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &dwork[kwe], &n1, &e[e_offset], lde, (
 		    ftnlen)4);
+#line 548 "TG01JD.f"
 	    dlacpy_("Full", &nc, p, &dwork[kwc], &n1, &b[b_offset], ldb, (
 		    ftnlen)4);
+#line 549 "TG01JD.f"
 	    dlacpy_("Full", m, &nc, &dwork[kwb], &m1, &c__[c_offset], ldc, (
 		    ftnlen)4);
+#line 550 "TG01JD.f"
 	}
+#line 551 "TG01JD.f"
     }
 
+#line 553 "TG01JD.f"
     if (infobs) {
 
 /*        Phase 4: Eliminate all infinite and all finite nonzero */
 /*                 unobservable eigenvalues. */
 
+#line 558 "TG01JD.f"
 	if (lspace) {
 
 /*           Save system matrices. */
 
+#line 562 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &a[a_offset], lda, &dwork[kwa], &n1, (
 		    ftnlen)4);
+#line 563 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &e[e_offset], lde, &dwork[kwe], &n1, (
 		    ftnlen)4);
+#line 564 "TG01JD.f"
 	    dlacpy_("Full", &nc, p, &b[b_offset], ldb, &dwork[kwc], &n1, (
 		    ftnlen)4);
+#line 565 "TG01JD.f"
 	    dlacpy_("Full", m, &nc, &c__[c_offset], ldc, &dwork[kwb], &m1, (
 		    ftnlen)4);
+#line 566 "TG01JD.f"
 	}
 
 /*        Perform infinite observability form reduction. */
 /*        Workspace: need   MAX(N,2*P). */
 
+#line 571 "TG01JD.f"
 	tg01hx_(jobz, jobq, &nc, &nc, p, m, &nc, &lba, &e[e_offset], lde, &a[
 		a_offset], lda, &b[b_offset], ldb, &c__[c_offset], &ldm, dum, 
 		&ldz, dum, &ldq, nr, &nblck, &iwork[1], tol, &iwork[*n + 1], &
 		dwork[1], info, (ftnlen)1, (ftnlen)1);
+#line 574 "TG01JD.f"
 	if (*nr < nc || ! lspace) {
+#line 575 "TG01JD.f"
 	    if (nblck > 1) {
+#line 576 "TG01JD.f"
 		lbe = iwork[1] + iwork[2] - 1;
+#line 577 "TG01JD.f"
 	    } else if (nblck == 1) {
+#line 578 "TG01JD.f"
 		lbe = iwork[1] - 1;
+#line 579 "TG01JD.f"
 	    } else {
+#line 580 "TG01JD.f"
 		lbe = 0;
+#line 581 "TG01JD.f"
 	    }
+#line 582 "TG01JD.f"
 	    lba = 0;
+#line 583 "TG01JD.f"
 	    infred[4] = nc - *nr;
+#line 584 "TG01JD.f"
 	    infred[7] = nblck;
+#line 585 "TG01JD.f"
 	    nc = *nr;
+#line 586 "TG01JD.f"
 	} else {
 
 /*           Restore system matrices. */
 
+#line 590 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &dwork[kwa], &n1, &a[a_offset], lda, (
 		    ftnlen)4);
+#line 591 "TG01JD.f"
 	    dlacpy_("Full", &nc, &nc, &dwork[kwe], &n1, &e[e_offset], lde, (
 		    ftnlen)4);
+#line 592 "TG01JD.f"
 	    dlacpy_("Full", &nc, p, &dwork[kwc], &n1, &b[b_offset], ldb, (
 		    ftnlen)4);
+#line 593 "TG01JD.f"
 	    dlacpy_("Full", m, &nc, &dwork[kwb], &m1, &c__[c_offset], ldc, (
 		    ftnlen)4);
+#line 594 "TG01JD.f"
 	}
+#line 595 "TG01JD.f"
     }
 
+#line 597 "TG01JD.f"
     if (finobs || infobs) {
 
 /*        Compute the pertransposed dual system exploiting matrix shapes. */
 
 /* Computing MAX */
+#line 601 "TG01JD.f"
 	i__2 = 0, i__3 = nc - 1;
+#line 601 "TG01JD.f"
 	i__1 = max(i__2,i__3);
+#line 601 "TG01JD.f"
 	tb01xd_("Z", &nc, p, m, &lba, &i__1, &a[a_offset], lda, &b[b_offset], 
 		ldb, &c__[c_offset], ldc, dum, &c__1, info, (ftnlen)1);
 /* Computing MAX */
+#line 603 "TG01JD.f"
 	i__2 = 0, i__3 = nc - 1;
+#line 603 "TG01JD.f"
 	i__1 = max(i__2,i__3);
+#line 603 "TG01JD.f"
 	ma02cd_(&nc, &lbe, &i__1, &e[e_offset], lde);
+#line 604 "TG01JD.f"
     }
 
 /*     Set structural information on A and E. */
 
+#line 608 "TG01JD.f"
     infred[5] = lba;
+#line 609 "TG01JD.f"
     infred[6] = lbe;
 
+#line 611 "TG01JD.f"
     return 0;
 /* *** Last line of TG01JD *** */
 } /* tg01jd_ */

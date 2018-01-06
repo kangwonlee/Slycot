@@ -1,3 +1,4 @@
+#line 1 "MC01SW.f"
 /* MC01SW.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC01SW.f"
 /* Subroutine */ int mc01sw_(doublereal *a, integer *b, doublereal *m, 
 	integer *e)
 {
@@ -83,38 +85,62 @@
 
 /*     Quick return if possible. */
 
+#line 74 "MC01SW.f"
     if (*a == 0.) {
+#line 75 "MC01SW.f"
 	*m = 0.;
+#line 76 "MC01SW.f"
 	*e = 0;
+#line 77 "MC01SW.f"
 	return 0;
+#line 78 "MC01SW.f"
     }
 
 /*     A non-zero. */
 
+#line 82 "MC01SW.f"
     db = (doublereal) (*b);
+#line 83 "MC01SW.f"
     *m = abs(*a);
+#line 84 "MC01SW.f"
     *e = 0;
 /*     WHILE ( M >= B ) DO */
+#line 86 "MC01SW.f"
 L20:
+#line 86 "MC01SW.f"
     if (*m >= db) {
+#line 87 "MC01SW.f"
 	*m /= db;
+#line 88 "MC01SW.f"
 	++(*e);
+#line 89 "MC01SW.f"
 	goto L20;
+#line 90 "MC01SW.f"
     }
 /*     END WHILE 20 */
 /*     WHILE ( M < 1 ) DO */
+#line 93 "MC01SW.f"
 L40:
+#line 93 "MC01SW.f"
     if (*m < 1.) {
+#line 94 "MC01SW.f"
 	*m *= db;
+#line 95 "MC01SW.f"
 	--(*e);
+#line 96 "MC01SW.f"
 	goto L40;
+#line 97 "MC01SW.f"
     }
 /*     END WHILE 40 */
 
+#line 100 "MC01SW.f"
     if (*a < 0.) {
+#line 100 "MC01SW.f"
 	*m = -(*m);
+#line 100 "MC01SW.f"
     }
 
+#line 102 "MC01SW.f"
     return 0;
 /* *** Last line of MC01SW *** */
 } /* mc01sw_ */

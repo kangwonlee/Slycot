@@ -1,0 +1,17 @@
+extern int tb03ad_(char *leri, char *equil, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *nr, integer *index, doublereal *pcoeff, integer *ldpco1, integer *ldpco2, doublereal *qcoeff, integer *ldqco1, integer *ldqco2, doublereal *vcoeff, integer *ldvco1, integer *ldvco2, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info, ftnlen leri_len, ftnlen equil_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: ab07md_ 14 14 13 4 4 4 7 4 7 4 7 4 7 4 4 124 */
+/*:ref: tb01id_ 14 14 13 4 4 4 7 7 4 7 4 7 4 7 4 124 */
+/*:ref: tb01ud_ 14 22 13 4 4 4 7 4 7 4 7 4 4 4 4 7 4 7 7 4 7 4 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dgeqrf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dormqr_ 14 15 13 13 4 4 4 7 4 7 7 4 7 4 4 124 124 */
+/*:ref: tb03ay_ 14 12 4 7 4 4 4 7 4 4 7 4 4 4 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dtrsm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: dgetrf_ 14 6 4 4 7 4 4 4 */
+/*:ref: ma02gd_ 14 7 4 7 4 4 4 4 4 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: tc01od_ 14 12 13 4 4 4 7 4 4 7 4 4 4 124 */
+/*:ref: tb01yd_ 14 10 4 4 4 7 4 7 4 7 4 4 */

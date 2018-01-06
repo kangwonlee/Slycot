@@ -1,3 +1,4 @@
+#line 1 "MB03YA.f"
 /* MB03YA.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03YA.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -229,152 +231,268 @@ static integer c__1 = 1;
 
 /*     Check the scalar input parameters. */
 
+#line 206 "MB03YA.f"
     /* Parameter adjustments */
+#line 206 "MB03YA.f"
     a_dim1 = *lda;
+#line 206 "MB03YA.f"
     a_offset = 1 + a_dim1;
+#line 206 "MB03YA.f"
     a -= a_offset;
+#line 206 "MB03YA.f"
     b_dim1 = *ldb;
+#line 206 "MB03YA.f"
     b_offset = 1 + b_dim1;
+#line 206 "MB03YA.f"
     b -= b_offset;
+#line 206 "MB03YA.f"
     q_dim1 = *ldq;
+#line 206 "MB03YA.f"
     q_offset = 1 + q_dim1;
+#line 206 "MB03YA.f"
     q -= q_offset;
+#line 206 "MB03YA.f"
     z_dim1 = *ldz;
+#line 206 "MB03YA.f"
     z_offset = 1 + z_dim1;
+#line 206 "MB03YA.f"
     z__ -= z_offset;
+#line 206 "MB03YA.f"
 
+#line 206 "MB03YA.f"
     /* Function Body */
+#line 206 "MB03YA.f"
     *info = 0;
+#line 207 "MB03YA.f"
     nq = *ihiq - *iloq + 1;
+#line 208 "MB03YA.f"
     if (*n < 0) {
+#line 209 "MB03YA.f"
 	*info = -4;
+#line 210 "MB03YA.f"
     } else if (*ilo < 1 || *ilo > max(1,*n)) {
+#line 211 "MB03YA.f"
 	*info = -5;
+#line 212 "MB03YA.f"
     } else if (*ihi < min(*ilo,*n) || *ihi > *n) {
+#line 213 "MB03YA.f"
 	*info = -6;
+#line 214 "MB03YA.f"
     } else if (*iloq < 1 || *iloq > *ilo) {
+#line 215 "MB03YA.f"
 	*info = -7;
+#line 216 "MB03YA.f"
     } else if (*ihiq < *ihi || *ihiq > *n) {
+#line 217 "MB03YA.f"
 	*info = -8;
+#line 218 "MB03YA.f"
     } else if (*pos < *ilo || *pos > *ihi) {
+#line 219 "MB03YA.f"
 	*info = -9;
+#line 220 "MB03YA.f"
     } else if (*lda < max(1,*n)) {
+#line 221 "MB03YA.f"
 	*info = -11;
+#line 222 "MB03YA.f"
     } else if (*ldb < max(1,*n)) {
+#line 223 "MB03YA.f"
 	*info = -13;
+#line 224 "MB03YA.f"
     } else if (*ldq < 1 || *wantq && *ldq < *n) {
+#line 225 "MB03YA.f"
 	*info = -15;
+#line 226 "MB03YA.f"
     } else if (*ldz < 1 || *wantz && *ldz < *n) {
+#line 227 "MB03YA.f"
 	*info = -17;
+#line 228 "MB03YA.f"
     }
 
 /*     Return if there were illegal values. */
 
+#line 232 "MB03YA.f"
     if (*info != 0) {
+#line 233 "MB03YA.f"
 	i__1 = -(*info);
+#line 233 "MB03YA.f"
 	xerbla_("MB03YA", &i__1, (ftnlen)6);
+#line 234 "MB03YA.f"
 	return 0;
+#line 235 "MB03YA.f"
     }
 
 /*     Quick return if possible. */
 
+#line 239 "MB03YA.f"
     if (*n == 0) {
+#line 239 "MB03YA.f"
 	return 0;
+#line 239 "MB03YA.f"
     }
 
+#line 242 "MB03YA.f"
     if (*wantt) {
+#line 243 "MB03YA.f"
 	i1 = 1;
+#line 244 "MB03YA.f"
 	i2 = *n;
+#line 245 "MB03YA.f"
     } else {
+#line 246 "MB03YA.f"
 	i1 = *ilo;
+#line 247 "MB03YA.f"
 	i2 = *ihi;
+#line 248 "MB03YA.f"
     }
 
 /*     Apply a zero-shifted QR step. */
 
+#line 252 "MB03YA.f"
     i__1 = *pos - 1;
+#line 252 "MB03YA.f"
     for (j = *ilo; j <= i__1; ++j) {
+#line 253 "MB03YA.f"
 	temp = a[j + j * a_dim1];
+#line 254 "MB03YA.f"
 	dlartg_(&temp, &a[j + 1 + j * a_dim1], &cs, &sn, &a[j + j * a_dim1]);
+#line 255 "MB03YA.f"
 	a[j + 1 + j * a_dim1] = 0.;
+#line 256 "MB03YA.f"
 	i__2 = i2 - j;
+#line 256 "MB03YA.f"
 	drot_(&i__2, &a[j + (j + 1) * a_dim1], lda, &a[j + 1 + (j + 1) * 
 		a_dim1], lda, &cs, &sn);
 /* Computing MIN */
+#line 257 "MB03YA.f"
 	i__3 = j, i__4 = *pos - 2;
+#line 257 "MB03YA.f"
 	i__2 = min(i__3,i__4) - i1 + 2;
+#line 257 "MB03YA.f"
 	drot_(&i__2, &b[i1 + j * b_dim1], &c__1, &b[i1 + (j + 1) * b_dim1], &
 		c__1, &cs, &sn);
+#line 259 "MB03YA.f"
 	if (*wantq) {
+#line 259 "MB03YA.f"
 	    drot_(&nq, &q[*iloq + j * q_dim1], &c__1, &q[*iloq + (j + 1) * 
 		    q_dim1], &c__1, &cs, &sn);
+#line 259 "MB03YA.f"
 	}
+#line 261 "MB03YA.f"
 /* L10: */
+#line 261 "MB03YA.f"
     }
+#line 262 "MB03YA.f"
     i__1 = *pos - 2;
+#line 262 "MB03YA.f"
     for (j = *ilo; j <= i__1; ++j) {
+#line 263 "MB03YA.f"
 	temp = b[j + j * b_dim1];
+#line 264 "MB03YA.f"
 	dlartg_(&temp, &b[j + 1 + j * b_dim1], &cs, &sn, &b[j + j * b_dim1]);
+#line 265 "MB03YA.f"
 	b[j + 1 + j * b_dim1] = 0.;
+#line 266 "MB03YA.f"
 	i__2 = i2 - j;
+#line 266 "MB03YA.f"
 	drot_(&i__2, &b[j + (j + 1) * b_dim1], ldb, &b[j + 1 + (j + 1) * 
 		b_dim1], ldb, &cs, &sn);
+#line 267 "MB03YA.f"
 	i__2 = j - i1 + 2;
+#line 267 "MB03YA.f"
 	drot_(&i__2, &a[i1 + j * a_dim1], &c__1, &a[i1 + (j + 1) * a_dim1], &
 		c__1, &cs, &sn);
+#line 268 "MB03YA.f"
 	if (*wantz) {
+#line 268 "MB03YA.f"
 	    drot_(&nq, &z__[*iloq + j * z_dim1], &c__1, &z__[*iloq + (j + 1) *
 		     z_dim1], &c__1, &cs, &sn);
+#line 268 "MB03YA.f"
 	}
+#line 270 "MB03YA.f"
 /* L20: */
+#line 270 "MB03YA.f"
     }
 
 /*     Apply a zero-shifted RQ step. */
 
+#line 274 "MB03YA.f"
     i__1 = *pos + 1;
+#line 274 "MB03YA.f"
     for (j = *ihi; j >= i__1; --j) {
+#line 275 "MB03YA.f"
 	temp = a[j + j * a_dim1];
+#line 276 "MB03YA.f"
 	dlartg_(&temp, &a[j + (j - 1) * a_dim1], &cs, &sn, &a[j + j * a_dim1])
 		;
+#line 277 "MB03YA.f"
 	a[j + (j - 1) * a_dim1] = 0.;
+#line 278 "MB03YA.f"
 	sn = -sn;
+#line 279 "MB03YA.f"
 	i__2 = j - i1;
+#line 279 "MB03YA.f"
 	drot_(&i__2, &a[i1 + (j - 1) * a_dim1], &c__1, &a[i1 + j * a_dim1], &
 		c__1, &cs, &sn);
 /* Computing MAX */
+#line 280 "MB03YA.f"
 	i__3 = j - 1, i__4 = *pos + 1;
+#line 280 "MB03YA.f"
 	i__2 = i2 - max(i__3,i__4) + 1;
 /* Computing MAX */
+#line 280 "MB03YA.f"
 	i__5 = j - 1, i__6 = *pos + 1;
 /* Computing MAX */
+#line 280 "MB03YA.f"
 	i__7 = j - 1, i__8 = *pos + 1;
+#line 280 "MB03YA.f"
 	drot_(&i__2, &b[j - 1 + max(i__5,i__6) * b_dim1], ldb, &b[j + max(
 		i__7,i__8) * b_dim1], ldb, &cs, &sn);
+#line 282 "MB03YA.f"
 	if (*wantz) {
+#line 282 "MB03YA.f"
 	    drot_(&nq, &z__[*iloq + (j - 1) * z_dim1], &c__1, &z__[*iloq + j *
 		     z_dim1], &c__1, &cs, &sn);
+#line 282 "MB03YA.f"
 	}
+#line 284 "MB03YA.f"
 /* L30: */
+#line 284 "MB03YA.f"
     }
+#line 285 "MB03YA.f"
     i__1 = *pos + 2;
+#line 285 "MB03YA.f"
     for (j = *ihi; j >= i__1; --j) {
+#line 286 "MB03YA.f"
 	temp = b[j + j * b_dim1];
+#line 287 "MB03YA.f"
 	dlartg_(&temp, &b[j + (j - 1) * b_dim1], &cs, &sn, &b[j + j * b_dim1])
 		;
+#line 288 "MB03YA.f"
 	b[j + (j - 1) * b_dim1] = 0.;
+#line 289 "MB03YA.f"
 	sn = -sn;
+#line 290 "MB03YA.f"
 	i__2 = j - i1;
+#line 290 "MB03YA.f"
 	drot_(&i__2, &b[i1 + (j - 1) * b_dim1], &c__1, &b[i1 + j * b_dim1], &
 		c__1, &cs, &sn);
+#line 291 "MB03YA.f"
 	i__2 = i2 - j + 2;
+#line 291 "MB03YA.f"
 	drot_(&i__2, &a[j - 1 + (j - 1) * a_dim1], lda, &a[j + (j - 1) * 
 		a_dim1], lda, &cs, &sn);
+#line 292 "MB03YA.f"
 	if (*wantq) {
+#line 292 "MB03YA.f"
 	    drot_(&nq, &q[*iloq + (j - 1) * q_dim1], &c__1, &q[*iloq + j * 
 		    q_dim1], &c__1, &cs, &sn);
+#line 292 "MB03YA.f"
 	}
+#line 294 "MB03YA.f"
 /* L40: */
+#line 294 "MB03YA.f"
     }
+#line 295 "MB03YA.f"
     return 0;
 /* *** Last line of MB03YA *** */
 } /* mb03ya_ */

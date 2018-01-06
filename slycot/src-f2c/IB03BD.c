@@ -1,3 +1,4 @@
+#line 1 "IB03BD.f"
 /* IB03BD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "IB03BD.f"
 /* Table of constant values */
 
 static integer c__4 = 4;
@@ -548,239 +550,396 @@ static doublereal c_b64 = 0.;
 
 /*     Check the scalar input parameters. */
 
+#line 504 "IB03BD.f"
     /* Parameter adjustments */
+#line 504 "IB03BD.f"
     u_dim1 = *ldu;
+#line 504 "IB03BD.f"
     u_offset = 1 + u_dim1;
+#line 504 "IB03BD.f"
     u -= u_offset;
+#line 504 "IB03BD.f"
     y_dim1 = *ldy;
+#line 504 "IB03BD.f"
     y_offset = 1 + y_dim1;
+#line 504 "IB03BD.f"
     y -= y_offset;
+#line 504 "IB03BD.f"
     --x;
+#line 504 "IB03BD.f"
     --iwork;
+#line 504 "IB03BD.f"
     --dwork;
+#line 504 "IB03BD.f"
 
+#line 504 "IB03BD.f"
     /* Function Body */
+#line 504 "IB03BD.f"
     init1 = lsame_(init, "B", (ftnlen)1, (ftnlen)1) || lsame_(init, "L", (
 	    ftnlen)1, (ftnlen)1);
+#line 505 "IB03BD.f"
     init2 = lsame_(init, "B", (ftnlen)1, (ftnlen)1) || lsame_(init, "S", (
 	    ftnlen)1, (ftnlen)1);
 
+#line 507 "IB03BD.f"
     ml = *m + *l;
+#line 508 "IB03BD.f"
     *info = 0;
+#line 509 "IB03BD.f"
     *iwarn = 0;
+#line 510 "IB03BD.f"
     if (! (init1 || init2 || lsame_(init, "N", (ftnlen)1, (ftnlen)1))) {
+#line 511 "IB03BD.f"
 	*info = -1;
+#line 512 "IB03BD.f"
     } else if (init1 && *nobr <= 0) {
+#line 513 "IB03BD.f"
 	*info = -2;
+#line 514 "IB03BD.f"
     } else if (*m < 0) {
+#line 515 "IB03BD.f"
 	*info = -3;
+#line 516 "IB03BD.f"
     } else if (*l < 0 || init1 && *l == 0) {
+#line 517 "IB03BD.f"
 	*info = -4;
+#line 518 "IB03BD.f"
     } else if (*nsmp < 0 || init1 && *nsmp < (ml + 1 << 1) * *nobr - 1) {
+#line 520 "IB03BD.f"
 	*info = -5;
+#line 521 "IB03BD.f"
     } else if (*n < 0 && ! init1 || (*n == 0 || *n >= *nobr) && init1) {
+#line 523 "IB03BD.f"
 	*info = -6;
+#line 524 "IB03BD.f"
     } else if (*nn < 0) {
+#line 525 "IB03BD.f"
 	*info = -7;
+#line 526 "IB03BD.f"
     } else if (init2 && *itmax1 < 0) {
+#line 527 "IB03BD.f"
 	*info = -8;
+#line 528 "IB03BD.f"
     } else if (*itmax2 < 0) {
+#line 529 "IB03BD.f"
 	*info = -9;
+#line 530 "IB03BD.f"
     } else if (*ldu < max(1,*nsmp)) {
+#line 531 "IB03BD.f"
 	*info = -12;
+#line 532 "IB03BD.f"
     } else if (*ldy < max(1,*nsmp)) {
+#line 533 "IB03BD.f"
 	*info = -14;
+#line 534 "IB03BD.f"
     } else {
+#line 535 "IB03BD.f"
 	lnol = *l * *nobr - *l;
+#line 536 "IB03BD.f"
 	mno = *m * *nobr;
+#line 537 "IB03BD.f"
 	bsn = *nn * (*l + 2) + 1;
+#line 538 "IB03BD.f"
 	nths = bsn * *l;
+#line 539 "IB03BD.f"
 	nsml = *nsmp * *l;
+#line 540 "IB03BD.f"
 	if (*n > 0) {
+#line 541 "IB03BD.f"
 	    ldac = *n + *l;
+#line 542 "IB03BD.f"
 	    isad = ldac * (*n + *m);
+#line 543 "IB03BD.f"
 	    n2 = *n * *n;
+#line 544 "IB03BD.f"
 	}
 
 /*        Check the workspace size. */
 
+#line 548 "IB03BD.f"
 	jwork = 0;
+#line 549 "IB03BD.f"
 	if (init1) {
 /*           Workspace for IB01AD. */
+#line 551 "IB03BD.f"
 	    jwork = (ml << 1) * *nobr * ((ml << 1) * (*nobr + 1) + 3) + *l * *
 		    nobr;
+#line 552 "IB03BD.f"
 	    if (*n > 0) {
 /*              Workspace for IB01BD. */
 /* Computing MAX */
 /* Computing MAX */
+#line 554 "IB03BD.f"
 		i__3 = lnol * *n + (*n << 1) + (*m + ml) * *nobr + *l, i__4 = 
 			(lnol << 1) * *n + n2 + (*n << 3), i__3 = max(i__3,
 			i__4), i__4 = *n + (mno + *n << 2) + 1, i__3 = max(
 			i__3,i__4), i__4 = mno + *n * 3 + *l;
+#line 554 "IB03BD.f"
 		i__1 = (lnol << 1) * *n + (*n << 1), i__2 = lnol * *n + n2 + *
 			n * 7, i__1 = max(i__1,i__2), i__2 = *l * *nobr * *n 
 			+ max(i__3,i__4);
+#line 554 "IB03BD.f"
 		iw1 = max(i__1,i__2);
+#line 558 "IB03BD.f"
 		if (*m > 0) {
 /* Computing MAX */
 /* Computing 2nd power */
+#line 559 "IB03BD.f"
 		    i__3 = ldac;
+#line 559 "IB03BD.f"
 		    i__1 = i__3 * i__3, i__2 = (*m << 2) * ldac + 1;
+#line 559 "IB03BD.f"
 		    iw2 = *l * *nobr * *n + mno * ldac * (*m * ldac + 1) + 
 			    max(i__1,i__2);
+#line 561 "IB03BD.f"
 		} else {
+#line 562 "IB03BD.f"
 		    iw2 = 0;
+#line 563 "IB03BD.f"
 		}
 /* Computing MAX */
 /* Computing 2nd power */
+#line 564 "IB03BD.f"
 		i__3 = (ml << 1) * *nobr;
+#line 564 "IB03BD.f"
 		i__1 = jwork, i__2 = i__3 * i__3 + isad + max(iw1,iw2);
+#line 564 "IB03BD.f"
 		jwork = max(i__1,i__2);
 /*              Workspace for IB01CD. */
 /* Computing MAX */
+#line 567 "IB03BD.f"
 		i__1 = n2 << 1, i__2 = *n << 2;
+#line 567 "IB03BD.f"
 		iw1 = nsml * (*n + 1) + (*n << 1) + max(i__1,i__2);
 /* Computing MAX */
+#line 568 "IB03BD.f"
 		i__1 = *n * *l * (*n + 1) + (n2 << 1) + *l * *n, i__2 = *n << 
 			2;
+#line 568 "IB03BD.f"
 		iw2 = *n * (*n + 1) + (*n << 1) + max(i__1,i__2);
 /* Computing MAX */
 /* Computing MAX */
+#line 570 "IB03BD.f"
 		i__3 = *n * 5, i__3 = max(i__3,2), i__4 = min(iw1,iw2);
+#line 570 "IB03BD.f"
 		i__1 = jwork, i__2 = isad + 2 + *n * (*n + 1 + ldac + *m) + 
 			max(i__3,i__4);
+#line 570 "IB03BD.f"
 		jwork = max(i__1,i__2);
 /*              Workspace for TF01MX. */
 /* Computing MAX */
+#line 573 "IB03BD.f"
 		i__1 = jwork, i__2 = nsml + isad + ldac + (*n << 1) + *m;
+#line 573 "IB03BD.f"
 		jwork = max(i__1,i__2);
 /*              Workspace for TB01VD. */
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
+#line 575 "IB03BD.f"
 		i__5 = n2 + *n * max(*n,*l) + *n * 6 + min(*n,*l), i__6 = *n *
 			 *m;
+#line 575 "IB03BD.f"
 		i__3 = 1, i__4 = n2 * *l + *n * *l + *n, i__3 = max(i__3,i__4)
 			, i__4 = n2 + max(i__5,i__6);
+#line 575 "IB03BD.f"
 		i__1 = jwork, i__2 = nsml + isad + *n + max(i__3,i__4);
+#line 575 "IB03BD.f"
 		jwork = max(i__1,i__2);
+#line 579 "IB03BD.f"
 	    }
+#line 580 "IB03BD.f"
 	}
 
+#line 582 "IB03BD.f"
 	if (init2) {
 /*           Workspace for MD03BD (initialization of the nonlinear part). */
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
+#line 584 "IB03BD.f"
 	    i__7 = *nn << 1, i__8 = bsn * 5 + 1;
 /* Computing 2nd power */
+#line 584 "IB03BD.f"
 	    i__9 = bsn;
 /* Computing MAX */
+#line 584 "IB03BD.f"
 	    i__10 = *nsmp + (*nn << 1), i__11 = bsn * 5;
+#line 584 "IB03BD.f"
 	    i__5 = *nsmp * bsn + max(i__7,i__8), i__6 = i__9 * i__9 + bsn + 
 		    max(i__10,i__11);
+#line 584 "IB03BD.f"
 	    i__3 = 4, i__4 = *nsmp + max(i__5,i__6);
+#line 584 "IB03BD.f"
 	    i__1 = jwork, i__2 = nsml + bsn + max(i__3,i__4);
+#line 584 "IB03BD.f"
 	    jwork = max(i__1,i__2);
+#line 589 "IB03BD.f"
 	    if (*n > 0 && ! init1) {
 /*              Workspace for TB01VY. */
 /* Computing MAX */
+#line 591 "IB03BD.f"
 		i__1 = jwork, i__2 = nsml + ldac * ((*n << 1) + *m) + (*n << 
 			1);
+#line 591 "IB03BD.f"
 		jwork = max(i__1,i__2);
 /*              Workspace for TF01MX. */
+#line 593 "IB03BD.f"
 		if (*m > 0) {
+#line 594 "IB03BD.f"
 		    iw1 = *n + *m;
+#line 595 "IB03BD.f"
 		} else {
+#line 596 "IB03BD.f"
 		    iw1 = 0;
+#line 597 "IB03BD.f"
 		}
 /* Computing MAX */
+#line 598 "IB03BD.f"
 		i__1 = jwork, i__2 = nsml + isad + iw1 + ldac + *n;
+#line 598 "IB03BD.f"
 		jwork = max(i__1,i__2);
+#line 599 "IB03BD.f"
 	    }
+#line 600 "IB03BD.f"
 	}
 
+#line 602 "IB03BD.f"
 	if (*n >= 0) {
 
 /*           Find the number of parameters. */
 
+#line 606 "IB03BD.f"
 	    lths = *n * (ml + 1) + *l * *m;
+#line 607 "IB03BD.f"
 	    nx = nths + lths;
 
+#line 609 "IB03BD.f"
 	    if (*lx < nx) {
+#line 610 "IB03BD.f"
 		*info = -16;
+#line 611 "IB03BD.f"
 		i__1 = -(*info);
+#line 611 "IB03BD.f"
 		xerbla_("IB03BD", &i__1, (ftnlen)6);
+#line 612 "IB03BD.f"
 		return 0;
+#line 613 "IB03BD.f"
 	    }
 
 /*           Workspace for MD03BD (whole optimization). */
 
+#line 617 "IB03BD.f"
 	    if (*m > 0) {
+#line 618 "IB03BD.f"
 		iw1 = ldac + *m;
+#line 619 "IB03BD.f"
 	    } else {
+#line 620 "IB03BD.f"
 		iw1 = *l;
+#line 621 "IB03BD.f"
 	    }
 /* Computing MAX */
 /* Computing MAX */
+#line 622 "IB03BD.f"
 	    i__3 = *n * ldac;
+#line 622 "IB03BD.f"
 	    i__1 = *nn << 1, i__2 = isad + (*n << 1) + max(i__3,iw1);
+#line 622 "IB03BD.f"
 	    iw1 = nsml + max(i__1,i__2);
+#line 623 "IB03BD.f"
 	    if (*l <= 1 || bsn == 0) {
+#line 624 "IB03BD.f"
 		iw3 = nx << 2;
+#line 625 "IB03BD.f"
 		iw2 = iw3 + 1;
+#line 626 "IB03BD.f"
 	    } else {
 /* Computing MAX */
+#line 627 "IB03BD.f"
 		i__1 = bsn * 3 + 1;
+#line 627 "IB03BD.f"
 		iw2 = bsn + max(i__1,lths);
+#line 628 "IB03BD.f"
 		if (*nsmp > bsn) {
 /* Computing MAX */
+#line 629 "IB03BD.f"
 		    i__1 = iw2, i__2 = (lths << 2) + 1;
+#line 629 "IB03BD.f"
 		    iw2 = max(i__1,i__2);
+#line 630 "IB03BD.f"
 		    if (*nsmp < bsn << 1) {
 /* Computing MAX */
+#line 630 "IB03BD.f"
 			i__1 = iw2, i__2 = (*nsmp - bsn) * (*l - 1);
+#line 630 "IB03BD.f"
 			iw2 = max(i__1,i__2);
+#line 630 "IB03BD.f"
 		    }
+#line 632 "IB03BD.f"
 		}
+#line 633 "IB03BD.f"
 		iw3 = lths * bsn + (nx << 1) + (max(bsn,lths) << 1);
+#line 634 "IB03BD.f"
 	    }
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
+#line 635 "IB03BD.f"
 	    i__7 = nsml + iw1, i__8 = iw2 + nx;
 /* Computing MAX */
+#line 635 "IB03BD.f"
 	    i__9 = nsml + iw1, i__10 = nx + iw3;
+#line 635 "IB03BD.f"
 	    i__5 = nsml * (bsn + lths) + max(i__7,i__8), i__6 = nx * (bsn + 
 		    lths) + nx + max(i__9,i__10);
+#line 635 "IB03BD.f"
 	    i__3 = 4, i__4 = nsml + max(i__5,i__6);
+#line 635 "IB03BD.f"
 	    i__1 = jwork, i__2 = nsml + nx + max(i__3,i__4);
+#line 635 "IB03BD.f"
 	    jwork = max(i__1,i__2);
+#line 642 "IB03BD.f"
 	}
 
+#line 644 "IB03BD.f"
 	if (*ldwork < jwork) {
+#line 645 "IB03BD.f"
 	    *info = -21;
+#line 646 "IB03BD.f"
 	    dwork[1] = (doublereal) jwork;
+#line 647 "IB03BD.f"
 	}
+#line 648 "IB03BD.f"
     }
 
+#line 650 "IB03BD.f"
     if (*info != 0) {
+#line 651 "IB03BD.f"
 	i__1 = -(*info);
+#line 651 "IB03BD.f"
 	xerbla_("IB03BD", &i__1, (ftnlen)6);
+#line 652 "IB03BD.f"
 	return 0;
+#line 653 "IB03BD.f"
     }
 
 /*     Initialize the pointers to system matrices and save the possible */
 /*     seed for random numbers generation. */
 
+#line 658 "IB03BD.f"
     z__ = 1;
+#line 659 "IB03BD.f"
     ac = z__ + nsml;
+#line 660 "IB03BD.f"
     dcopy_(&c__4, &dwork[1], &c__1, seed, &c__1);
 
+#line 662 "IB03BD.f"
     wrkopt = 1;
 
+#line 664 "IB03BD.f"
     if (init1) {
 
 /*        Initialize the linear part. */
@@ -792,174 +951,293 @@ static doublereal c_b64 = 0.;
 /*                    prefer: larger. */
 /*        Integer workspace:  M+L. (If METH = 'N', (M+L)*NOBR.) */
 
+#line 675 "IB03BD.f"
 	ns = *n;
+#line 676 "IB03BD.f"
 	ir = 1;
+#line 677 "IB03BD.f"
 	isv = (ml << 1) * *nobr;
+#line 678 "IB03BD.f"
 	ldr = isv;
+#line 679 "IB03BD.f"
 	if (lsame_("N", "M", (ftnlen)1, (ftnlen)1)) {
 /* Computing MAX */
+#line 679 "IB03BD.f"
 	    i__1 = ldr, i__2 = mno * 3;
+#line 679 "IB03BD.f"
 	    ldr = max(i__1,i__2);
+#line 679 "IB03BD.f"
 	}
+#line 681 "IB03BD.f"
 	isv = ir + ldr * isv;
+#line 682 "IB03BD.f"
 	jwork = isv + *l * *nobr;
 
+#line 684 "IB03BD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 684 "IB03BD.f"
 	ib01ad_("M", "F", "N", "O", "N", "N", nobr, m, l, nsmp, &u[u_offset], 
 		ldu, &y[y_offset], ldy, n, &dwork[ir], &ldr, &dwork[isv], &
 		c_b20, &c_b20, &iwork[1], &dwork[jwork], &i__1, &iwarnl, &
 		infol, (ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)1, (ftnlen)1, 
 		(ftnlen)1);
 
+#line 689 "IB03BD.f"
 	if (infol != 0) {
+#line 690 "IB03BD.f"
 	    *info = infol * 100;
+#line 691 "IB03BD.f"
 	    return 0;
+#line 692 "IB03BD.f"
 	}
+#line 693 "IB03BD.f"
 	if (iwarnl != 0) {
+#line 693 "IB03BD.f"
 	    *iwarn = iwarnl * 100;
+#line 693 "IB03BD.f"
 	}
 /* Computing MAX */
+#line 695 "IB03BD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 695 "IB03BD.f"
 	wrkopt = max(i__1,i__2);
+#line 696 "IB03BD.f"
 	ircnd = 0;
+#line 697 "IB03BD.f"
 	if (lsame_("M", "N", (ftnlen)1, (ftnlen)1)) {
+#line 698 "IB03BD.f"
 	    ircnd = 2;
+#line 699 "IB03BD.f"
 	    dcopy_(&ircnd, &dwork[jwork + 1], &c__1, rcnd, &c__1);
+#line 700 "IB03BD.f"
 	}
 
+#line 702 "IB03BD.f"
 	if (ns >= 0) {
+#line 703 "IB03BD.f"
 	    *n = ns;
+#line 704 "IB03BD.f"
 	} else {
 
 /*           Find the number of parameters. */
 
+#line 708 "IB03BD.f"
 	    ldac = *n + *l;
+#line 709 "IB03BD.f"
 	    isad = ldac * (*n + *m);
+#line 710 "IB03BD.f"
 	    n2 = *n * *n;
+#line 711 "IB03BD.f"
 	    lths = *n * (ml + 1) + *l * *m;
+#line 712 "IB03BD.f"
 	    nx = nths + lths;
 
+#line 714 "IB03BD.f"
 	    if (*lx < nx) {
+#line 715 "IB03BD.f"
 		*lx = nx;
+#line 716 "IB03BD.f"
 		*info = -16;
+#line 717 "IB03BD.f"
 		i__1 = -(*info);
+#line 717 "IB03BD.f"
 		xerbla_("IB03BD", &i__1, (ftnlen)6);
+#line 718 "IB03BD.f"
 		return 0;
+#line 719 "IB03BD.f"
 	    }
 /*           Workspace for IB01BD. */
 /* Computing MAX */
 /* Computing MAX */
+#line 721 "IB03BD.f"
 	    i__3 = lnol * *n + (*n << 1) + (*m + ml) * *nobr + *l, i__4 = (
 		    lnol << 1) * *n + n2 + (*n << 3), i__3 = max(i__3,i__4), 
 		    i__4 = *n + (mno + *n << 2) + 1, i__3 = max(i__3,i__4), 
 		    i__4 = mno + *n * 3 + *l;
+#line 721 "IB03BD.f"
 	    i__1 = (lnol << 1) * *n + (*n << 1), i__2 = lnol * *n + n2 + *n * 
 		    7, i__1 = max(i__1,i__2), i__2 = *l * *nobr * *n + max(
 		    i__3,i__4);
+#line 721 "IB03BD.f"
 	    iw1 = max(i__1,i__2);
+#line 725 "IB03BD.f"
 	    if (*m > 0) {
 /* Computing MAX */
 /* Computing 2nd power */
+#line 726 "IB03BD.f"
 		i__3 = ldac;
+#line 726 "IB03BD.f"
 		i__1 = i__3 * i__3, i__2 = (*m << 2) * ldac + 1;
+#line 726 "IB03BD.f"
 		iw2 = *l * *nobr * *n + mno * ldac * (*m * ldac + 1) + max(
 			i__1,i__2);
+#line 728 "IB03BD.f"
 	    } else {
+#line 729 "IB03BD.f"
 		iw2 = 0;
+#line 730 "IB03BD.f"
 	    }
+#line 731 "IB03BD.f"
 	    jwork = isv + isad + max(iw1,iw2);
 /*           Workspace for IB01CD. */
 /* Computing MAX */
+#line 733 "IB03BD.f"
 	    i__1 = n2 << 1, i__2 = *n << 2;
+#line 733 "IB03BD.f"
 	    iw1 = nsml * (*n + 1) + (*n << 1) + max(i__1,i__2);
 /* Computing MAX */
+#line 734 "IB03BD.f"
 	    i__1 = *n * *l * (*n + 1) + (n2 << 1) + *l * *n, i__2 = *n << 2;
+#line 734 "IB03BD.f"
 	    iw2 = *n * (*n + 1) + (*n << 1) + max(i__1,i__2);
 /* Computing MAX */
 /* Computing MAX */
+#line 736 "IB03BD.f"
 	    i__3 = *n * 5, i__3 = max(i__3,2), i__4 = min(iw1,iw2);
+#line 736 "IB03BD.f"
 	    i__1 = jwork, i__2 = isad + 2 + *n * (*n + 1 + ldac + *m) + max(
 		    i__3,i__4);
+#line 736 "IB03BD.f"
 	    jwork = max(i__1,i__2);
 /*           Workspace for TF01MX. */
 /* Computing MAX */
+#line 739 "IB03BD.f"
 	    i__1 = jwork, i__2 = nsml + isad + ldac + (*n << 1) + *m;
+#line 739 "IB03BD.f"
 	    jwork = max(i__1,i__2);
 /*           Workspace for TB01VD. */
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
+#line 741 "IB03BD.f"
 	    i__5 = n2 + *n * max(*n,*l) + *n * 6 + min(*n,*l), i__6 = *n * *m;
+#line 741 "IB03BD.f"
 	    i__3 = 1, i__4 = n2 * *l + *n * *l + *n, i__3 = max(i__3,i__4), 
 		    i__4 = n2 + max(i__5,i__6);
+#line 741 "IB03BD.f"
 	    i__1 = jwork, i__2 = nsml + isad + *n + max(i__3,i__4);
+#line 741 "IB03BD.f"
 	    jwork = max(i__1,i__2);
 /*           Workspace for MD03BD (whole optimization). */
+#line 746 "IB03BD.f"
 	    if (*m > 0) {
+#line 747 "IB03BD.f"
 		iw1 = ldac + *m;
+#line 748 "IB03BD.f"
 	    } else {
+#line 749 "IB03BD.f"
 		iw1 = *l;
+#line 750 "IB03BD.f"
 	    }
 /* Computing MAX */
 /* Computing MAX */
+#line 751 "IB03BD.f"
 	    i__3 = *n * ldac;
+#line 751 "IB03BD.f"
 	    i__1 = *nn << 1, i__2 = isad + (*n << 1) + max(i__3,iw1);
+#line 751 "IB03BD.f"
 	    iw1 = nsml + max(i__1,i__2);
+#line 752 "IB03BD.f"
 	    if (*l <= 1 || bsn == 0) {
+#line 753 "IB03BD.f"
 		iw3 = nx << 2;
+#line 754 "IB03BD.f"
 		iw2 = iw3 + 1;
+#line 755 "IB03BD.f"
 	    } else {
 /* Computing MAX */
+#line 756 "IB03BD.f"
 		i__1 = bsn * 3 + 1;
+#line 756 "IB03BD.f"
 		iw2 = bsn + max(i__1,lths);
+#line 757 "IB03BD.f"
 		if (*nsmp > bsn) {
 /* Computing MAX */
+#line 758 "IB03BD.f"
 		    i__1 = iw2, i__2 = (lths << 2) + 1;
+#line 758 "IB03BD.f"
 		    iw2 = max(i__1,i__2);
+#line 759 "IB03BD.f"
 		    if (*nsmp < bsn << 1) {
 /* Computing MAX */
+#line 759 "IB03BD.f"
 			i__1 = iw2, i__2 = (*nsmp - bsn) * (*l - 1);
+#line 759 "IB03BD.f"
 			iw2 = max(i__1,i__2);
+#line 759 "IB03BD.f"
 		    }
+#line 761 "IB03BD.f"
 		}
+#line 762 "IB03BD.f"
 		iw3 = lths * bsn + (nx << 1) + (max(bsn,lths) << 1);
+#line 763 "IB03BD.f"
 	    }
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
 /* Computing MAX */
+#line 764 "IB03BD.f"
 	    i__7 = nsml + iw1, i__8 = iw2 + nx;
 /* Computing MAX */
+#line 764 "IB03BD.f"
 	    i__9 = nsml + iw1, i__10 = nx + iw3;
+#line 764 "IB03BD.f"
 	    i__5 = nsml * (bsn + lths) + max(i__7,i__8), i__6 = nx * (bsn + 
 		    lths) + nx + max(i__9,i__10);
+#line 764 "IB03BD.f"
 	    i__3 = 4, i__4 = nsml + max(i__5,i__6);
+#line 764 "IB03BD.f"
 	    i__1 = jwork, i__2 = nsml + nx + max(i__3,i__4);
+#line 764 "IB03BD.f"
 	    jwork = max(i__1,i__2);
+#line 771 "IB03BD.f"
 	    if (*ldwork < jwork) {
+#line 772 "IB03BD.f"
 		*info = -21;
+#line 773 "IB03BD.f"
 		dwork[1] = (doublereal) jwork;
+#line 774 "IB03BD.f"
 		i__1 = -(*info);
+#line 774 "IB03BD.f"
 		xerbla_("IB03BD", &i__1, (ftnlen)6);
+#line 775 "IB03BD.f"
 		return 0;
+#line 776 "IB03BD.f"
 	    }
+#line 777 "IB03BD.f"
 	}
 
+#line 779 "IB03BD.f"
 	bd = ac + ldac * *n;
+#line 780 "IB03BD.f"
 	ix = bd + ldac * *m;
+#line 781 "IB03BD.f"
 	ia = isv;
+#line 782 "IB03BD.f"
 	ib = ia + ldac * *n;
+#line 783 "IB03BD.f"
 	iq = ib + ldac * *m;
+#line 784 "IB03BD.f"
 	if (lsame_("N", "N", (ftnlen)1, (ftnlen)1)) {
+#line 785 "IB03BD.f"
 	    iry = iq;
+#line 786 "IB03BD.f"
 	    is = iq;
+#line 787 "IB03BD.f"
 	    ik = iq;
+#line 788 "IB03BD.f"
 	    jwork = iq;
+#line 789 "IB03BD.f"
 	} else {
+#line 790 "IB03BD.f"
 	    iry = iq + n2;
+#line 791 "IB03BD.f"
 	    is = iry + *l * *l;
+#line 792 "IB03BD.f"
 	    ik = is + *n * *l;
+#line 793 "IB03BD.f"
 	    jwork = ik + *n * *l;
+#line 794 "IB03BD.f"
 	}
 
 /*        The workspace needed is defined for the options set above */
@@ -978,44 +1256,73 @@ static doublereal c_b64 = 0.;
 /*          prefer: larger. */
 /*        Integer workspace:  MAX(M*NOBR+N,M*(N+L)). */
 
+#line 812 "IB03BD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 812 "IB03BD.f"
 	ib01bd_("C", "A", "N", nobr, n, m, l, nsmp, &dwork[ir], &ldr, &dwork[
 		ia], &ldac, &dwork[ia + *n], &ldac, &dwork[ib], &ldac, &dwork[
 		ib + *n], &ldac, &dwork[iq], n, &dwork[iry], l, &dwork[is], n,
 		 &dwork[ik], n, &c_b20, &iwork[1], &dwork[jwork], &i__1, 
 		bwork, &iwarnl, &infol, (ftnlen)1, (ftnlen)1, (ftnlen)1);
 
+#line 819 "IB03BD.f"
 	if (infol == -30) {
+#line 820 "IB03BD.f"
 	    *info = -21;
+#line 821 "IB03BD.f"
 	    dwork[1] = dwork[jwork];
+#line 822 "IB03BD.f"
 	    i__1 = -(*info);
+#line 822 "IB03BD.f"
 	    xerbla_("IB03BD", &i__1, (ftnlen)6);
+#line 823 "IB03BD.f"
 	    return 0;
+#line 824 "IB03BD.f"
 	}
+#line 825 "IB03BD.f"
 	if (infol != 0) {
+#line 826 "IB03BD.f"
 	    *info = infol * 100;
+#line 827 "IB03BD.f"
 	    return 0;
+#line 828 "IB03BD.f"
 	}
+#line 829 "IB03BD.f"
 	if (iwarnl != 0) {
+#line 829 "IB03BD.f"
 	    *iwarn = iwarnl * 100;
+#line 829 "IB03BD.f"
 	}
 /* Computing MAX */
+#line 831 "IB03BD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 831 "IB03BD.f"
 	wrkopt = max(i__1,i__2);
+#line 832 "IB03BD.f"
 	ircndb = 4;
+#line 833 "IB03BD.f"
 	if (lsame_("N", "K", (ftnlen)1, (ftnlen)1)) {
+#line 833 "IB03BD.f"
 	    ircndb += 8;
+#line 833 "IB03BD.f"
 	}
+#line 835 "IB03BD.f"
 	dcopy_(&ircndb, &dwork[jwork + 1], &c__1, &rcnd[ircnd], &c__1);
+#line 836 "IB03BD.f"
 	ircnd += ircndb;
 
 /*        Copy the system matrices to the beginning of DWORK, to save */
 /*        space, and redefine the pointers. */
 
+#line 841 "IB03BD.f"
 	dcopy_(&isad, &dwork[ia], &c__1, &dwork[1], &c__1);
+#line 842 "IB03BD.f"
 	ia = 1;
+#line 843 "IB03BD.f"
 	ib = ia + ldac * *n;
+#line 844 "IB03BD.f"
 	ix0 = ib + ldac * *m;
+#line 845 "IB03BD.f"
 	iv = ix0 + *n;
 
 /*        Compute the initial condition of the system. On normal exit, */
@@ -1037,48 +1344,82 @@ static doublereal c_b64 = 0.;
 /*          prefer: larger. */
 /*        Integer workspace:  N. */
 
+#line 866 "IB03BD.f"
 	jwork = iv + n2;
+#line 867 "IB03BD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 867 "IB03BD.f"
 	ib01cd_("X needed", "U", "D", n, m, l, nsmp, &dwork[ia], &ldac, &
 		dwork[ib], &ldac, &dwork[ia + *n], &ldac, &dwork[ib + *n], &
 		ldac, &u[u_offset], ldu, &y[y_offset], ldy, &dwork[ix0], &
 		dwork[iv], n, &c_b20, &iwork[1], &dwork[jwork], &i__1, &
 		iwarnl, &infol, (ftnlen)8, (ftnlen)1, (ftnlen)1);
 
+#line 873 "IB03BD.f"
 	if (infol == -26) {
+#line 874 "IB03BD.f"
 	    *info = -21;
+#line 875 "IB03BD.f"
 	    dwork[1] = dwork[jwork];
+#line 876 "IB03BD.f"
 	    i__1 = -(*info);
+#line 876 "IB03BD.f"
 	    xerbla_("IB03BD", &i__1, (ftnlen)6);
+#line 877 "IB03BD.f"
 	    return 0;
+#line 878 "IB03BD.f"
 	}
+#line 879 "IB03BD.f"
 	if (infol == 1) {
+#line 879 "IB03BD.f"
 	    infol = 10;
+#line 879 "IB03BD.f"
 	}
+#line 881 "IB03BD.f"
 	if (infol != 0) {
+#line 882 "IB03BD.f"
 	    *info = infol * 100;
+#line 883 "IB03BD.f"
 	    return 0;
+#line 884 "IB03BD.f"
 	}
+#line 885 "IB03BD.f"
 	if (iwarnl != 0) {
+#line 885 "IB03BD.f"
 	    *iwarn = iwarnl * 100;
+#line 885 "IB03BD.f"
 	}
 /* Computing MAX */
+#line 887 "IB03BD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 887 "IB03BD.f"
 	wrkopt = max(i__1,i__2);
+#line 888 "IB03BD.f"
 	++ircnd;
+#line 889 "IB03BD.f"
 	rcnd[ircnd - 1] = dwork[jwork + 1];
 
 /*        Now, save the system matrices and x0 in the final location. */
 
+#line 893 "IB03BD.f"
 	if (iv < ac) {
+#line 894 "IB03BD.f"
 	    i__1 = isad + *n;
+#line 894 "IB03BD.f"
 	    dcopy_(&i__1, &dwork[ia], &c__1, &dwork[ac], &c__1);
+#line 895 "IB03BD.f"
 	} else {
+#line 896 "IB03BD.f"
 	    i__1 = ac;
+#line 896 "IB03BD.f"
 	    for (j = ac + isad + *n - 1; j >= i__1; --j) {
+#line 897 "IB03BD.f"
 		dwork[j] = dwork[ia + j - ac];
+#line 898 "IB03BD.f"
 /* L10: */
+#line 898 "IB03BD.f"
 	    }
+#line 899 "IB03BD.f"
 	}
 
 /*        Compute the output of the linear part. */
@@ -1087,9 +1428,13 @@ static doublereal c_b64 = 0.;
 /*                          NSMP*L + (N + L)*N + 2*N + L,       if M = 0; */
 /*                   prefer larger. */
 
+#line 907 "IB03BD.f"
 	jwork = ix + *n;
+#line 908 "IB03BD.f"
 	dcopy_(n, &dwork[ix], &c__1, &x[nths + 1], &c__1);
+#line 909 "IB03BD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 909 "IB03BD.f"
 	tf01mx_(n, m, l, nsmp, &dwork[ac], &ldac, &u[u_offset], ldu, &x[nths 
 		+ 1], &dwork[z__], nsmp, &dwork[jwork], &i__1, info);
 
@@ -1100,32 +1445,49 @@ static doublereal c_b64 = 0.;
 /*                      MAX(N*N + N*MAX(N,L) + 6*N + MIN(N,L), N*M)); */
 /*          prefer: larger. */
 
+#line 920 "IB03BD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 920 "IB03BD.f"
 	tb01vd_("Apply", n, m, l, &dwork[ac], &ldac, &dwork[bd], &ldac, &
 		dwork[ac + *n], &ldac, &dwork[bd + *n], &ldac, &dwork[ix], &x[
 		nths + 1], &lths, &dwork[jwork], &i__1, &infol, (ftnlen)5);
 
+#line 925 "IB03BD.f"
 	if (infol > 0) {
+#line 926 "IB03BD.f"
 	    *info = infol + 4;
+#line 927 "IB03BD.f"
 	    return 0;
+#line 928 "IB03BD.f"
 	}
 /* Computing MAX */
+#line 929 "IB03BD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 929 "IB03BD.f"
 	wrkopt = max(i__1,i__2);
 
+#line 931 "IB03BD.f"
     }
 
+#line 933 "IB03BD.f"
     lipar = 7;
+#line 934 "IB03BD.f"
     iw1 = 0;
+#line 935 "IB03BD.f"
     iw2 = 0;
+#line 936 "IB03BD.f"
     idiag = ac;
 
+#line 938 "IB03BD.f"
     if (init2) {
 
 /*        Initialize the nonlinear part. */
 
+#line 942 "IB03BD.f"
 	if (! init1) {
+#line 943 "IB03BD.f"
 	    bd = ac + ldac * *n;
+#line 944 "IB03BD.f"
 	    ix = bd + ldac * *m;
 
 /*           Convert the output normal form to state-space model. */
@@ -1133,8 +1495,11 @@ static doublereal c_b64 = 0.;
 /*           (NSMP*L locations are reserved for the output of the linear */
 /*           part.) */
 
+#line 951 "IB03BD.f"
 	    jwork = ix + *n;
+#line 952 "IB03BD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 952 "IB03BD.f"
 	    tb01vy_("Apply", n, m, l, &x[nths + 1], &lths, &dwork[ac], &ldac, 
 		    &dwork[bd], &ldac, &dwork[ac + *n], &ldac, &dwork[bd + *n]
 		    , &ldac, &dwork[ix], &dwork[jwork], &i__1, info, (ftnlen)
@@ -1146,9 +1511,12 @@ static doublereal c_b64 = 0.;
 /*                             NSMP*L + (N + L)*N + 2*N + L,    if M = 0; */
 /*                      prefer larger. */
 
+#line 963 "IB03BD.f"
 	    i__1 = *ldwork - jwork + 1;
+#line 963 "IB03BD.f"
 	    tf01mx_(n, m, l, nsmp, &dwork[ac], &ldac, &u[u_offset], ldu, &
 		    dwork[ix], &dwork[z__], nsmp, &dwork[jwork], &i__1, info);
+#line 966 "IB03BD.f"
 	}
 
 /*        Optimize the parameters of the nonlinear part. */
@@ -1160,21 +1528,32 @@ static doublereal c_b64 = 0.;
 /*          prefer larger. */
 /*        Integer workspace:  NN*(L + 2) + 2. */
 
+#line 977 "IB03BD.f"
 	work[0] = 0.;
+#line 978 "IB03BD.f"
 	dcopy_(&c__3, work, &c__0, &work[1], &c__1);
 
 /*        Set the integer parameters needed, including the number of */
 /*        neurons. */
 
+#line 983 "IB03BD.f"
 	ipar[0] = *nsmp;
+#line 984 "IB03BD.f"
 	ipar[1] = *l;
+#line 985 "IB03BD.f"
 	ipar[2] = *nn;
+#line 986 "IB03BD.f"
 	jwork = idiag + bsn;
 
+#line 988 "IB03BD.f"
 	i__1 = *l - 1;
+#line 988 "IB03BD.f"
 	for (i__ = 0; i__ <= i__1; ++i__) {
+#line 989 "IB03BD.f"
 	    dcopy_(&c__4, seed, &c__1, &dwork[jwork], &c__1);
+#line 990 "IB03BD.f"
 	    i__2 = *ldwork - jwork + 1;
+#line 990 "IB03BD.f"
 	    md03bd_("Random initialization", "I", "E", (U_fp)nf01be_, (U_fp)
 		    md03ba_, (U_fp)md03bb_, nsmp, &bsn, itmax1, &c_b63, 
 		    nprint, ipar, &lipar, &dwork[z__], nsmp, &y[(i__ + 1) * 
@@ -1182,40 +1561,69 @@ static doublereal c_b64 = 0.;
 		     &njev, tol1, tol1, &c_b64, &c_b64, &iwork[1], &dwork[
 		    jwork], &i__2, &iwarnl, &infol, (ftnlen)21, (ftnlen)1, (
 		    ftnlen)1);
+#line 996 "IB03BD.f"
 	    if (infol != 0) {
+#line 997 "IB03BD.f"
 		*info = infol * 10;
+#line 998 "IB03BD.f"
 		return 0;
+#line 999 "IB03BD.f"
 	    }
+#line 1000 "IB03BD.f"
 	    if (iwarnl < 0) {
+#line 1001 "IB03BD.f"
 		*info = infol;
+#line 1002 "IB03BD.f"
 		*iwarn = iwarnl;
+#line 1003 "IB03BD.f"
 		goto L50;
+#line 1004 "IB03BD.f"
 	    } else if (iwarnl > 0) {
+#line 1005 "IB03BD.f"
 		if (*iwarn > 100) {
 /* Computing MAX */
+#line 1006 "IB03BD.f"
 		    i__2 = *iwarn, i__3 = *iwarn / 100 * 100 + iwarnl * 10;
+#line 1006 "IB03BD.f"
 		    *iwarn = max(i__2,i__3);
+#line 1007 "IB03BD.f"
 		} else {
 /* Computing MAX */
+#line 1008 "IB03BD.f"
 		    i__2 = *iwarn, i__3 = iwarnl * 10;
+#line 1008 "IB03BD.f"
 		    *iwarn = max(i__2,i__3);
+#line 1009 "IB03BD.f"
 		}
+#line 1010 "IB03BD.f"
 	    }
 /* Computing MAX */
+#line 1011 "IB03BD.f"
 	    d__1 = work[0], d__2 = dwork[jwork];
+#line 1011 "IB03BD.f"
 	    work[0] = max(d__1,d__2);
 /* Computing MAX */
+#line 1012 "IB03BD.f"
 	    d__1 = work[1], d__2 = dwork[jwork + 1];
+#line 1012 "IB03BD.f"
 	    work[1] = max(d__1,d__2);
 /* Computing MAX */
+#line 1013 "IB03BD.f"
 	    d__1 = work[3], d__2 = dwork[jwork + 3];
+#line 1013 "IB03BD.f"
 	    work[3] = max(d__1,d__2);
+#line 1014 "IB03BD.f"
 	    work[2] += dwork[jwork + 2];
+#line 1015 "IB03BD.f"
 	    iw1 = nfev + iw1;
+#line 1016 "IB03BD.f"
 	    iw2 = njev + iw2;
+#line 1017 "IB03BD.f"
 /* L30: */
+#line 1017 "IB03BD.f"
 	}
 
+#line 1019 "IB03BD.f"
     }
 
 /*     Main iteration. */
@@ -1242,50 +1650,87 @@ static doublereal c_b64 = 0.;
 /*     Set the integer parameters describing the Jacobian structure */
 /*     and the number of neurons. */
 
+#line 1045 "IB03BD.f"
     ipar[0] = lths;
+#line 1046 "IB03BD.f"
     ipar[1] = *l;
+#line 1047 "IB03BD.f"
     ipar[2] = *nsmp;
+#line 1048 "IB03BD.f"
     ipar[3] = bsn;
+#line 1049 "IB03BD.f"
     ipar[4] = *m;
+#line 1050 "IB03BD.f"
     ipar[5] = *n;
+#line 1051 "IB03BD.f"
     ipar[6] = *nn;
+#line 1052 "IB03BD.f"
     jwork = idiag + nx;
 
+#line 1054 "IB03BD.f"
     i__1 = *ldwork - jwork + 1;
+#line 1054 "IB03BD.f"
     md03bd_("Given initialization", "I", "E", (U_fp)nf01bf_, (U_fp)nf01bs_, (
 	    U_fp)nf01bp_, &nsml, &nx, itmax2, &c_b63, nprint, ipar, &lipar, &
 	    u[u_offset], ldu, &y[y_offset], ldy, &x[1], &dwork[idiag], &nfev, 
 	    &njev, tol2, tol2, &c_b64, &c_b64, &iwork[1], &dwork[jwork], &
 	    i__1, &iwarnl, info, (ftnlen)20, (ftnlen)1, (ftnlen)1);
+#line 1059 "IB03BD.f"
     if (*info != 0) {
+#line 1059 "IB03BD.f"
 	return 0;
+#line 1059 "IB03BD.f"
     }
 
+#line 1062 "IB03BD.f"
     i__1 = nx + *l;
+#line 1062 "IB03BD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 1063 "IB03BD.f"
 	iwork[i__ + 3] = iwork[i__];
+#line 1064 "IB03BD.f"
 /* L40: */
+#line 1064 "IB03BD.f"
     }
 
+#line 1066 "IB03BD.f"
 L50:
+#line 1067 "IB03BD.f"
     iwork[1] = iw1 + nfev;
+#line 1068 "IB03BD.f"
     iwork[2] = iw2 + njev;
+#line 1069 "IB03BD.f"
     if (iwarnl < 0) {
+#line 1070 "IB03BD.f"
 	*iwarn = iwarnl;
+#line 1071 "IB03BD.f"
     } else {
+#line 1072 "IB03BD.f"
 	*iwarn += iwarnl;
+#line 1073 "IB03BD.f"
     }
+#line 1074 "IB03BD.f"
     dcopy_(&c__4, &dwork[jwork], &c__1, &dwork[1], &c__1);
+#line 1075 "IB03BD.f"
     if (init2) {
+#line 1075 "IB03BD.f"
 	dcopy_(&c__4, work, &c__1, &dwork[5], &c__1);
+#line 1075 "IB03BD.f"
     }
+#line 1077 "IB03BD.f"
     if (init1) {
+#line 1078 "IB03BD.f"
 	iwork[3] = ircnd;
+#line 1079 "IB03BD.f"
 	dcopy_(&ircnd, rcnd, &c__1, &dwork[9], &c__1);
+#line 1080 "IB03BD.f"
     } else {
+#line 1081 "IB03BD.f"
 	iwork[3] = 0;
+#line 1082 "IB03BD.f"
     }
 
+#line 1084 "IB03BD.f"
     return 0;
 
 /* *** Last line of IB03BD *** */

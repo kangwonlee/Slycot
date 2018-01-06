@@ -1,3 +1,4 @@
+#line 1 "FD01AD.f"
 /* FD01AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "FD01AD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -301,113 +303,190 @@ static integer c__1 = 1;
 
 /*     Test the input scalar arguments. */
 
+#line 276 "FD01AD.f"
     /* Parameter adjustments */
+#line 276 "FD01AD.f"
     --salph;
+#line 276 "FD01AD.f"
     --yq;
+#line 276 "FD01AD.f"
     --steta;
+#line 276 "FD01AD.f"
     --cteta;
+#line 276 "FD01AD.f"
     --epsbck;
+#line 276 "FD01AD.f"
     --xf;
+#line 276 "FD01AD.f"
 
+#line 276 "FD01AD.f"
     /* Function Body */
+#line 276 "FD01AD.f"
     both = lsame_(jp, "B", (ftnlen)1, (ftnlen)1);
+#line 277 "FD01AD.f"
     *iwarn = 0;
+#line 278 "FD01AD.f"
     *info = 0;
 
+#line 280 "FD01AD.f"
     if (! both && ! lsame_(jp, "P", (ftnlen)1, (ftnlen)1)) {
+#line 281 "FD01AD.f"
 	*info = -1;
+#line 282 "FD01AD.f"
     } else if (*l < 1) {
+#line 283 "FD01AD.f"
 	*info = -2;
+#line 284 "FD01AD.f"
     } else if (*lambda <= 0. || *lambda > 1.) {
+#line 285 "FD01AD.f"
 	*info = -3;
+#line 286 "FD01AD.f"
     }
 
+#line 288 "FD01AD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 292 "FD01AD.f"
 	i__1 = -(*info);
+#line 292 "FD01AD.f"
 	xerbla_("FD01AD", &i__1, (ftnlen)6);
+#line 293 "FD01AD.f"
 	return 0;
+#line 294 "FD01AD.f"
     }
 
 /*     Computation of the machine precision EPS. */
 
+#line 298 "FD01AD.f"
     eps = dlamch_("Epsilon", (ftnlen)7);
 
 /*     Forward prediction rotations. */
 
+#line 302 "FD01AD.f"
     fnode = *xin;
 
+#line 304 "FD01AD.f"
     i__1 = *l;
+#line 304 "FD01AD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 305 "FD01AD.f"
 	xfi = xf[i__] * *lambda;
+#line 306 "FD01AD.f"
 	xf[i__] = steta[i__] * fnode + cteta[i__] * xfi;
+#line 307 "FD01AD.f"
 	fnode = cteta[i__] * fnode - steta[i__] * xfi;
+#line 308 "FD01AD.f"
 /* L10: */
+#line 308 "FD01AD.f"
     }
 
+#line 310 "FD01AD.f"
     *epos = fnode * epsbck[*l + 1];
 
 /*     Update the square root of the prediction energy. */
 
+#line 314 "FD01AD.f"
     *efor *= *lambda;
+#line 315 "FD01AD.f"
     temp = dlapy2_(&fnode, efor);
+#line 316 "FD01AD.f"
     if (temp < eps) {
+#line 317 "FD01AD.f"
 	fnode = 0.;
+#line 318 "FD01AD.f"
 	*iwarn = 1;
+#line 319 "FD01AD.f"
     } else {
+#line 320 "FD01AD.f"
 	fnode = fnode * epsbck[*l + 1] / temp;
+#line 321 "FD01AD.f"
     }
+#line 322 "FD01AD.f"
     *efor = temp;
 
 /*     Calculate the reflection coefficients and the backward prediction */
 /*     errors. */
 
+#line 327 "FD01AD.f"
     for (i__ = *l; i__ >= 1; --i__) {
+#line 328 "FD01AD.f"
 	if ((d__1 = xf[i__], abs(d__1)) < eps) {
+#line 328 "FD01AD.f"
 	    *iwarn = 1;
+#line 328 "FD01AD.f"
 	}
+#line 330 "FD01AD.f"
 	dlartg_(&temp, &xf[i__], &ctemp, &salph[i__], &norm);
+#line 331 "FD01AD.f"
 	epsbck[i__ + 1] = ctemp * epsbck[i__] - salph[i__] * fnode;
+#line 332 "FD01AD.f"
 	fnode = ctemp * fnode + salph[i__] * epsbck[i__];
+#line 333 "FD01AD.f"
 	temp = norm;
+#line 334 "FD01AD.f"
 /* L20: */
+#line 334 "FD01AD.f"
     }
 
+#line 336 "FD01AD.f"
     epsbck[1] = fnode;
 
 /*     Update to new rotation angles. */
 
+#line 340 "FD01AD.f"
     norm = dnrm2_(l, &epsbck[1], &c__1);
+#line 341 "FD01AD.f"
     temp = sqrt((norm + 1.) * (1. - norm));
+#line 342 "FD01AD.f"
     epsbck[*l + 1] = temp;
 
+#line 344 "FD01AD.f"
     for (i__ = *l; i__ >= 1; --i__) {
+#line 345 "FD01AD.f"
 	if ((d__1 = epsbck[i__], abs(d__1)) < eps) {
+#line 345 "FD01AD.f"
 	    *iwarn = 1;
+#line 345 "FD01AD.f"
 	}
+#line 347 "FD01AD.f"
 	dlartg_(&temp, &epsbck[i__], &cteta[i__], &steta[i__], &norm);
+#line 348 "FD01AD.f"
 	temp = norm;
+#line 349 "FD01AD.f"
 /* L30: */
+#line 349 "FD01AD.f"
     }
 
 /*     Joint process section. */
 
+#line 353 "FD01AD.f"
     if (both) {
+#line 354 "FD01AD.f"
 	fnode = *yin;
 
+#line 356 "FD01AD.f"
 	i__1 = *l;
+#line 356 "FD01AD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 357 "FD01AD.f"
 	    yqi = yq[i__] * *lambda;
+#line 358 "FD01AD.f"
 	    yq[i__] = steta[i__] * fnode + cteta[i__] * yqi;
+#line 359 "FD01AD.f"
 	    fnode = cteta[i__] * fnode - steta[i__] * yqi;
+#line 360 "FD01AD.f"
 /* L40: */
+#line 360 "FD01AD.f"
 	}
 
+#line 362 "FD01AD.f"
 	*eout = fnode * epsbck[*l + 1];
+#line 363 "FD01AD.f"
     }
 
+#line 365 "FD01AD.f"
     return 0;
 /* *** Last line of FD01AD *** */
 } /* fd01ad_ */

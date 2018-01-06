@@ -1,3 +1,4 @@
+#line 1 "MB03PY.f"
 /* MB03PY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03PY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -254,202 +256,342 @@ static integer c__2 = 2;
 
 /*     Test the input scalar arguments. */
 
+#line 220 "MB03PY.f"
     /* Parameter adjustments */
+#line 220 "MB03PY.f"
     a_dim1 = *lda;
+#line 220 "MB03PY.f"
     a_offset = 1 + a_dim1;
+#line 220 "MB03PY.f"
     a -= a_offset;
+#line 220 "MB03PY.f"
     --sval;
+#line 220 "MB03PY.f"
     --jpvt;
+#line 220 "MB03PY.f"
     --tau;
+#line 220 "MB03PY.f"
     --dwork;
+#line 220 "MB03PY.f"
 
+#line 220 "MB03PY.f"
     /* Function Body */
+#line 220 "MB03PY.f"
     *info = 0;
+#line 221 "MB03PY.f"
     if (*m < 0) {
+#line 222 "MB03PY.f"
 	*info = -1;
+#line 223 "MB03PY.f"
     } else if (*n < 0) {
+#line 224 "MB03PY.f"
 	*info = -2;
+#line 225 "MB03PY.f"
     } else if (*lda < max(1,*m)) {
+#line 226 "MB03PY.f"
 	*info = -4;
+#line 227 "MB03PY.f"
     } else if (*rcond < 0. || *rcond > 1.) {
+#line 228 "MB03PY.f"
 	*info = -5;
+#line 229 "MB03PY.f"
     } else if (*svlmax < 0.) {
+#line 230 "MB03PY.f"
 	*info = -6;
+#line 231 "MB03PY.f"
     }
 
+#line 233 "MB03PY.f"
     if (*info != 0) {
+#line 234 "MB03PY.f"
 	i__1 = -(*info);
+#line 234 "MB03PY.f"
 	xerbla_("MB03PY", &i__1, (ftnlen)6);
+#line 235 "MB03PY.f"
 	return 0;
+#line 236 "MB03PY.f"
     }
 
 /*     Quick return if possible. */
 
+#line 240 "MB03PY.f"
     k = min(*m,*n);
+#line 241 "MB03PY.f"
     if (k == 0) {
+#line 242 "MB03PY.f"
 	*rank = 0;
+#line 243 "MB03PY.f"
 	sval[1] = 0.;
+#line 244 "MB03PY.f"
 	sval[2] = 0.;
+#line 245 "MB03PY.f"
 	sval[3] = 0.;
+#line 246 "MB03PY.f"
 	return 0;
+#line 247 "MB03PY.f"
     }
 
+#line 249 "MB03PY.f"
     ismin = *m;
+#line 250 "MB03PY.f"
     ismax = ismin + *m;
+#line 251 "MB03PY.f"
     jwork = ismax + 1;
 
 /*     Initialize partial row norms and pivoting vector. The first m */
 /*     elements of DWORK store the exact row norms. The already used */
 /*     trailing part is then overwritten by the condition estimator. */
 
+#line 257 "MB03PY.f"
     i__1 = *m;
+#line 257 "MB03PY.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 258 "MB03PY.f"
 	dwork[i__] = dnrm2_(n, &a[i__ + a_dim1], lda);
+#line 259 "MB03PY.f"
 	dwork[*m + i__] = dwork[i__];
+#line 260 "MB03PY.f"
 	jpvt[i__] = i__;
+#line 261 "MB03PY.f"
 /* L10: */
+#line 261 "MB03PY.f"
     }
 
 /*     Compute factorization and determine RANK using incremental */
 /*     condition estimation. */
 
+#line 266 "MB03PY.f"
     *rank = 0;
 
+#line 268 "MB03PY.f"
 L20:
+#line 269 "MB03PY.f"
     if (*rank < k) {
+#line 270 "MB03PY.f"
 	i__ = k - *rank;
 
 /*        Determine ith pivot row and swap if necessary. */
 
+#line 274 "MB03PY.f"
 	mki = *m - *rank;
+#line 275 "MB03PY.f"
 	nki = *n - *rank;
+#line 276 "MB03PY.f"
 	pvt = idamax_(&mki, &dwork[1], &c__1);
 
+#line 278 "MB03PY.f"
 	if (pvt != mki) {
+#line 279 "MB03PY.f"
 	    dswap_(n, &a[pvt + a_dim1], lda, &a[mki + a_dim1], lda);
+#line 280 "MB03PY.f"
 	    itemp = jpvt[pvt];
+#line 281 "MB03PY.f"
 	    jpvt[pvt] = jpvt[mki];
+#line 282 "MB03PY.f"
 	    jpvt[mki] = itemp;
+#line 283 "MB03PY.f"
 	    dwork[pvt] = dwork[mki];
+#line 284 "MB03PY.f"
 	    dwork[*m + pvt] = dwork[*m + mki];
+#line 285 "MB03PY.f"
 	}
 
+#line 287 "MB03PY.f"
 	if (nki > 1) {
 
 /*           Save A(m-k+i,n-k+i) and generate elementary reflector H(i) */
 /*           to annihilate A(m-k+i,1:n-k+i-1), k = min(m,n). */
 
+#line 292 "MB03PY.f"
 	    aii = a[mki + nki * a_dim1];
+#line 293 "MB03PY.f"
 	    dlarfg_(&nki, &a[mki + nki * a_dim1], &a[mki + a_dim1], lda, &tau[
 		    i__]);
+#line 295 "MB03PY.f"
 	}
 
+#line 297 "MB03PY.f"
 	if (*rank == 0) {
 
 /*           Initialize; exit if matrix is zero (RANK = 0). */
 
+#line 301 "MB03PY.f"
 	    smax = (d__1 = a[*m + *n * a_dim1], abs(d__1));
+#line 302 "MB03PY.f"
 	    if (smax == 0.) {
+#line 303 "MB03PY.f"
 		sval[1] = 0.;
+#line 304 "MB03PY.f"
 		sval[2] = 0.;
+#line 305 "MB03PY.f"
 		sval[3] = 0.;
+#line 306 "MB03PY.f"
 		return 0;
+#line 307 "MB03PY.f"
 	    }
+#line 308 "MB03PY.f"
 	    smin = smax;
+#line 309 "MB03PY.f"
 	    smaxpr = smax;
+#line 310 "MB03PY.f"
 	    sminpr = smin;
+#line 311 "MB03PY.f"
 	    c1 = 1.;
+#line 312 "MB03PY.f"
 	    c2 = 1.;
+#line 313 "MB03PY.f"
 	} else {
 
 /*           One step of incremental condition estimation. */
 
+#line 317 "MB03PY.f"
 	    dcopy_(rank, &a[mki + (nki + 1) * a_dim1], lda, &dwork[jwork], &
 		    c__1);
+#line 318 "MB03PY.f"
 	    dlaic1_(&c__2, rank, &dwork[ismin], &smin, &dwork[jwork], &a[mki 
 		    + nki * a_dim1], &sminpr, &s1, &c1);
+#line 320 "MB03PY.f"
 	    dlaic1_(&c__1, rank, &dwork[ismax], &smax, &dwork[jwork], &a[mki 
 		    + nki * a_dim1], &smaxpr, &s2, &c2);
+#line 322 "MB03PY.f"
 	}
 
+#line 324 "MB03PY.f"
 	if (*svlmax * *rcond <= smaxpr) {
+#line 325 "MB03PY.f"
 	    if (*svlmax * *rcond <= sminpr) {
+#line 326 "MB03PY.f"
 		if (smaxpr * *rcond <= sminpr) {
 
+#line 328 "MB03PY.f"
 		    if (mki > 1) {
 
 /*                    Continue factorization, as rank is at least RANK. */
 /*                    Apply H(i) to A(1:m-k+i-1,1:n-k+i) from the right. */
 
+#line 333 "MB03PY.f"
 			aii = a[mki + nki * a_dim1];
+#line 334 "MB03PY.f"
 			a[mki + nki * a_dim1] = 1.;
+#line 335 "MB03PY.f"
 			i__1 = mki - 1;
+#line 335 "MB03PY.f"
 			dlarf_("Right", &i__1, &nki, &a[mki + a_dim1], lda, &
 				tau[i__], &a[a_offset], lda, &dwork[jwork], (
 				ftnlen)5);
+#line 337 "MB03PY.f"
 			a[mki + nki * a_dim1] = aii;
 
 /*                    Update partial row norms. */
 
+#line 341 "MB03PY.f"
 			i__1 = mki - 1;
+#line 341 "MB03PY.f"
 			for (j = 1; j <= i__1; ++j) {
+#line 342 "MB03PY.f"
 			    if (dwork[j] != 0.) {
 /* Computing 2nd power */
+#line 343 "MB03PY.f"
 				d__2 = (d__1 = a[j + nki * a_dim1], abs(d__1))
 					 / dwork[j];
+#line 343 "MB03PY.f"
 				temp = 1. - d__2 * d__2;
+#line 345 "MB03PY.f"
 				temp = max(temp,0.);
 /* Computing 2nd power */
+#line 346 "MB03PY.f"
 				d__1 = dwork[j] / dwork[*m + j];
+#line 346 "MB03PY.f"
 				temp2 = temp * .05 * (d__1 * d__1) + 1.;
+#line 348 "MB03PY.f"
 				if (temp2 == 1.) {
+#line 349 "MB03PY.f"
 				    i__2 = nki - 1;
+#line 349 "MB03PY.f"
 				    dwork[j] = dnrm2_(&i__2, &a[j + a_dim1], 
 					    lda);
+#line 351 "MB03PY.f"
 				    dwork[*m + j] = dwork[j];
+#line 352 "MB03PY.f"
 				} else {
+#line 353 "MB03PY.f"
 				    dwork[j] *= sqrt(temp);
+#line 354 "MB03PY.f"
 				}
+#line 355 "MB03PY.f"
 			    }
+#line 356 "MB03PY.f"
 /* L30: */
+#line 356 "MB03PY.f"
 			}
 
+#line 358 "MB03PY.f"
 		    }
 
+#line 360 "MB03PY.f"
 		    i__1 = *rank;
+#line 360 "MB03PY.f"
 		    for (i__ = 1; i__ <= i__1; ++i__) {
+#line 361 "MB03PY.f"
 			dwork[ismin + i__ - 1] = s1 * dwork[ismin + i__ - 1];
+#line 362 "MB03PY.f"
 			dwork[ismax + i__ - 1] = s2 * dwork[ismax + i__ - 1];
+#line 363 "MB03PY.f"
 /* L40: */
+#line 363 "MB03PY.f"
 		    }
 
+#line 365 "MB03PY.f"
 		    if (*rank > 0) {
+#line 366 "MB03PY.f"
 			--ismin;
+#line 367 "MB03PY.f"
 			--ismax;
+#line 368 "MB03PY.f"
 		    }
+#line 369 "MB03PY.f"
 		    dwork[ismin] = c1;
+#line 370 "MB03PY.f"
 		    dwork[ismax] = c2;
+#line 371 "MB03PY.f"
 		    smin = sminpr;
+#line 372 "MB03PY.f"
 		    smax = smaxpr;
+#line 373 "MB03PY.f"
 		    ++(*rank);
+#line 374 "MB03PY.f"
 		    goto L20;
+#line 375 "MB03PY.f"
 		}
+#line 376 "MB03PY.f"
 	    }
+#line 377 "MB03PY.f"
 	}
+#line 378 "MB03PY.f"
     }
 
 /*     Restore the changed part of the (M-RANK)-th row and set SVAL. */
 
+#line 382 "MB03PY.f"
     if (*rank < k && nki > 1) {
+#line 383 "MB03PY.f"
 	i__1 = nki - 1;
+#line 383 "MB03PY.f"
 	d__1 = -a[mki + nki * a_dim1] * tau[i__];
+#line 383 "MB03PY.f"
 	dscal_(&i__1, &d__1, &a[mki + a_dim1], lda);
+#line 384 "MB03PY.f"
 	a[mki + nki * a_dim1] = aii;
+#line 385 "MB03PY.f"
     }
+#line 386 "MB03PY.f"
     sval[1] = smax;
+#line 387 "MB03PY.f"
     sval[2] = smin;
+#line 388 "MB03PY.f"
     sval[3] = sminpr;
 
+#line 390 "MB03PY.f"
     return 0;
 /* *** Last line of MB03PY *** */
 } /* mb03py_ */

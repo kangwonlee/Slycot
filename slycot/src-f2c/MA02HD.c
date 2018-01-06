@@ -1,3 +1,4 @@
+#line 1 "MA02HD.f"
 /* MA02HD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MA02HD.f"
 logical ma02hd_(char *job, integer *m, integer *n, doublereal *diag, 
 	doublereal *a, integer *lda, ftnlen job_len)
 {
@@ -116,107 +118,187 @@ logical ma02hd_(char *job, integer *m, integer *n, doublereal *diag,
 
 /*     Do not check parameters, for efficiency. */
 
+#line 105 "MA02HD.f"
     /* Parameter adjustments */
+#line 105 "MA02HD.f"
     a_dim1 = *lda;
+#line 105 "MA02HD.f"
     a_offset = 1 + a_dim1;
+#line 105 "MA02HD.f"
     a -= a_offset;
+#line 105 "MA02HD.f"
 
+#line 105 "MA02HD.f"
     /* Function Body */
+#line 105 "MA02HD.f"
     if (lsame_(job, "U", (ftnlen)1, (ftnlen)1)) {
 
+#line 107 "MA02HD.f"
 	i__1 = *n;
+#line 107 "MA02HD.f"
 	for (j = 1; j <= i__1; ++j) {
 
 /* Computing MIN */
+#line 109 "MA02HD.f"
 	    i__3 = j - 1;
+#line 109 "MA02HD.f"
 	    i__2 = min(i__3,*m);
+#line 109 "MA02HD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 110 "MA02HD.f"
 		if (a[i__ + j * a_dim1] != 0.) {
+#line 111 "MA02HD.f"
 		    ret_val = FALSE_;
+#line 112 "MA02HD.f"
 		    return ret_val;
+#line 113 "MA02HD.f"
 		}
+#line 114 "MA02HD.f"
 /* L10: */
+#line 114 "MA02HD.f"
 	    }
 
+#line 116 "MA02HD.f"
 	    if (j <= *m) {
+#line 117 "MA02HD.f"
 		if (a[j + j * a_dim1] != *diag) {
+#line 118 "MA02HD.f"
 		    ret_val = FALSE_;
+#line 119 "MA02HD.f"
 		    return ret_val;
+#line 120 "MA02HD.f"
 		}
+#line 121 "MA02HD.f"
 	    }
+#line 122 "MA02HD.f"
 /* L20: */
+#line 122 "MA02HD.f"
 	}
 
+#line 124 "MA02HD.f"
     } else if (lsame_(job, "L", (ftnlen)1, (ftnlen)1)) {
 
+#line 126 "MA02HD.f"
 	i__1 = min(*m,*n);
+#line 126 "MA02HD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 127 "MA02HD.f"
 	    if (a[j + j * a_dim1] != *diag) {
+#line 128 "MA02HD.f"
 		ret_val = FALSE_;
+#line 129 "MA02HD.f"
 		return ret_val;
+#line 130 "MA02HD.f"
 	    }
 
+#line 132 "MA02HD.f"
 	    if (j != *m) {
 
 /* Computing MIN */
+#line 134 "MA02HD.f"
 		i__2 = j + 1;
+#line 134 "MA02HD.f"
 		i__3 = *m;
+#line 134 "MA02HD.f"
 		for (i__ = min(i__2,*m); i__ <= i__3; ++i__) {
+#line 135 "MA02HD.f"
 		    if (a[i__ + j * a_dim1] != 0.) {
+#line 136 "MA02HD.f"
 			ret_val = FALSE_;
+#line 137 "MA02HD.f"
 			return ret_val;
+#line 138 "MA02HD.f"
 		    }
+#line 139 "MA02HD.f"
 /* L30: */
+#line 139 "MA02HD.f"
 		}
 
+#line 141 "MA02HD.f"
 	    }
+#line 142 "MA02HD.f"
 /* L40: */
+#line 142 "MA02HD.f"
 	}
 
+#line 144 "MA02HD.f"
     } else {
 
+#line 146 "MA02HD.f"
 	i__1 = *n;
+#line 146 "MA02HD.f"
 	for (j = 1; j <= i__1; ++j) {
 
 /* Computing MIN */
+#line 148 "MA02HD.f"
 	    i__2 = j - 1;
+#line 148 "MA02HD.f"
 	    i__3 = min(i__2,*m);
+#line 148 "MA02HD.f"
 	    for (i__ = 1; i__ <= i__3; ++i__) {
+#line 149 "MA02HD.f"
 		if (a[i__ + j * a_dim1] != 0.) {
+#line 150 "MA02HD.f"
 		    ret_val = FALSE_;
+#line 151 "MA02HD.f"
 		    return ret_val;
+#line 152 "MA02HD.f"
 		}
+#line 153 "MA02HD.f"
 /* L50: */
+#line 153 "MA02HD.f"
 	    }
 
+#line 155 "MA02HD.f"
 	    if (j <= *m) {
+#line 156 "MA02HD.f"
 		if (a[j + j * a_dim1] != *diag) {
+#line 157 "MA02HD.f"
 		    ret_val = FALSE_;
+#line 158 "MA02HD.f"
 		    return ret_val;
+#line 159 "MA02HD.f"
 		}
+#line 160 "MA02HD.f"
 	    }
 
+#line 162 "MA02HD.f"
 	    if (j < *m) {
 
 /* Computing MIN */
+#line 164 "MA02HD.f"
 		i__3 = j + 1;
+#line 164 "MA02HD.f"
 		i__2 = *m;
+#line 164 "MA02HD.f"
 		for (i__ = min(i__3,*m); i__ <= i__2; ++i__) {
+#line 165 "MA02HD.f"
 		    if (a[i__ + j * a_dim1] != 0.) {
+#line 166 "MA02HD.f"
 			ret_val = FALSE_;
+#line 167 "MA02HD.f"
 			return ret_val;
+#line 168 "MA02HD.f"
 		    }
+#line 169 "MA02HD.f"
 /* L60: */
+#line 169 "MA02HD.f"
 		}
 
+#line 171 "MA02HD.f"
 	    }
+#line 172 "MA02HD.f"
 /* L70: */
+#line 172 "MA02HD.f"
 	}
 
+#line 174 "MA02HD.f"
     }
 
+#line 176 "MA02HD.f"
     ret_val = TRUE_;
 
+#line 178 "MA02HD.f"
     return ret_val;
 /* *** Last line of MA02HD *** */
 } /* ma02hd_ */

@@ -1,3 +1,4 @@
+#line 1 "MB02QY.f"
 /* MB02QY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02QY.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -220,54 +222,95 @@ static integer c__1 = 1;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 182 "MB02QY.f"
     /* Parameter adjustments */
+#line 182 "MB02QY.f"
     a_dim1 = *lda;
+#line 182 "MB02QY.f"
     a_offset = 1 + a_dim1;
+#line 182 "MB02QY.f"
     a -= a_offset;
+#line 182 "MB02QY.f"
     --jpvt;
+#line 182 "MB02QY.f"
     b_dim1 = *ldb;
+#line 182 "MB02QY.f"
     b_offset = 1 + b_dim1;
+#line 182 "MB02QY.f"
     b -= b_offset;
+#line 182 "MB02QY.f"
     --tau;
+#line 182 "MB02QY.f"
     --dwork;
+#line 182 "MB02QY.f"
 
+#line 182 "MB02QY.f"
     /* Function Body */
+#line 182 "MB02QY.f"
     mn = min(*m,*n);
 
 /*     Test the input scalar arguments. */
 
+#line 186 "MB02QY.f"
     *info = 0;
+#line 187 "MB02QY.f"
     if (*m < 0) {
+#line 188 "MB02QY.f"
 	*info = -1;
+#line 189 "MB02QY.f"
     } else if (*n < 0) {
+#line 190 "MB02QY.f"
 	*info = -2;
+#line 191 "MB02QY.f"
     } else if (*nrhs < 0) {
+#line 192 "MB02QY.f"
 	*info = -3;
+#line 193 "MB02QY.f"
     } else if (*rank < 0 || *rank > mn) {
+#line 194 "MB02QY.f"
 	*info = -4;
+#line 195 "MB02QY.f"
     } else if (*lda < max(1,*m)) {
+#line 196 "MB02QY.f"
 	*info = -6;
+#line 197 "MB02QY.f"
     } else if (*ldb < 1 || *nrhs > 0 && *ldb < max(*m,*n)) {
+#line 199 "MB02QY.f"
 	*info = -9;
+#line 200 "MB02QY.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 200 "MB02QY.f"
 	i__1 = max(1,*n);
+#line 200 "MB02QY.f"
 	if (*ldwork < max(i__1,*nrhs)) {
+#line 201 "MB02QY.f"
 	    *info = -12;
+#line 202 "MB02QY.f"
 	}
+#line 202 "MB02QY.f"
     }
 
+#line 204 "MB02QY.f"
     if (*info != 0) {
+#line 205 "MB02QY.f"
 	i__1 = -(*info);
+#line 205 "MB02QY.f"
 	xerbla_("MB02QY", &i__1, (ftnlen)6);
+#line 206 "MB02QY.f"
 	return 0;
+#line 207 "MB02QY.f"
     }
 
 /*     Quick return if possible. */
 
+#line 211 "MB02QY.f"
     if (min(mn,*nrhs) == 0) {
+#line 212 "MB02QY.f"
 	dwork[1] = 1.;
+#line 213 "MB02QY.f"
 	return 0;
+#line 214 "MB02QY.f"
     }
 
 /*     Logically partition R = [ R11 R12 ], */
@@ -275,132 +318,194 @@ static integer c__1 = 1;
 
 /*     where R11 = R(1:RANK,1:RANK).  If  RANK = N,  let  T11 = R11. */
 
+#line 221 "MB02QY.f"
     maxwrk = (doublereal) (*n);
+#line 222 "MB02QY.f"
     if (*rank < *n) {
 
 /*        Get machine parameters. */
 
+#line 226 "MB02QY.f"
 	smlnum = dlamch_("Safe minimum", (ftnlen)12) / dlamch_("Precision", (
 		ftnlen)9);
+#line 227 "MB02QY.f"
 	bignum = 1. / smlnum;
+#line 228 "MB02QY.f"
 	dlabad_(&smlnum, &bignum);
 
 /*        Scale A, B if max entries outside range [SMLNUM,BIGNUM]. */
 
+#line 232 "MB02QY.f"
 	anrm = dlantr_("MaxNorm", "Upper", "Non-unit", rank, n, &a[a_offset], 
 		lda, &dwork[1], (ftnlen)7, (ftnlen)5, (ftnlen)8);
+#line 234 "MB02QY.f"
 	iascl = 0;
+#line 235 "MB02QY.f"
 	if (anrm > 0. && anrm < smlnum) {
 
 /*           Scale matrix norm up to SMLNUM. */
 
+#line 239 "MB02QY.f"
 	    dlascl_("Upper", &c__0, &c__0, &anrm, &smlnum, rank, n, &a[
 		    a_offset], lda, info, (ftnlen)5);
+#line 241 "MB02QY.f"
 	    iascl = 1;
+#line 242 "MB02QY.f"
 	} else if (anrm > bignum) {
 
 /*           Scale matrix norm down to BIGNUM. */
 
+#line 246 "MB02QY.f"
 	    dlascl_("Upper", &c__0, &c__0, &anrm, &bignum, rank, n, &a[
 		    a_offset], lda, info, (ftnlen)5);
+#line 248 "MB02QY.f"
 	    iascl = 2;
+#line 249 "MB02QY.f"
 	} else if (anrm == 0.) {
 
 /*           Matrix all zero. Return zero solution. */
 
+#line 253 "MB02QY.f"
 	    dlaset_("Full", n, nrhs, &c_b15, &c_b15, &b[b_offset], ldb, (
 		    ftnlen)4);
+#line 254 "MB02QY.f"
 	    dwork[1] = 1.;
+#line 255 "MB02QY.f"
 	    return 0;
+#line 256 "MB02QY.f"
 	}
 
+#line 258 "MB02QY.f"
 	bnrm = dlange_("MaxNorm", m, nrhs, &b[b_offset], ldb, &dwork[1], (
 		ftnlen)7);
+#line 259 "MB02QY.f"
 	ibscl = 0;
+#line 260 "MB02QY.f"
 	if (bnrm > 0. && bnrm < smlnum) {
 
 /*           Scale matrix norm up to SMLNUM. */
 
+#line 264 "MB02QY.f"
 	    dlascl_("General", &c__0, &c__0, &bnrm, &smlnum, m, nrhs, &b[
 		    b_offset], ldb, info, (ftnlen)7);
+#line 266 "MB02QY.f"
 	    ibscl = 1;
+#line 267 "MB02QY.f"
 	} else if (bnrm > bignum) {
 
 /*           Scale matrix norm down to BIGNUM. */
 
+#line 271 "MB02QY.f"
 	    dlascl_("General", &c__0, &c__0, &bnrm, &bignum, m, nrhs, &b[
 		    b_offset], ldb, info, (ftnlen)7);
+#line 273 "MB02QY.f"
 	    ibscl = 2;
+#line 274 "MB02QY.f"
 	}
 
 /*        [R11,R12] = [ T11, 0 ] * Z. */
 /*        Details of Householder rotations are stored in TAU. */
 /*        Workspace need RANK, prefer RANK*NB. */
 
+#line 280 "MB02QY.f"
 	dtzrzf_(rank, n, &a[a_offset], lda, &tau[1], &dwork[1], ldwork, info);
+#line 281 "MB02QY.f"
 	maxwrk = max(maxwrk,dwork[1]);
+#line 282 "MB02QY.f"
     }
 
 /*     B(1:RANK,1:NRHS) := inv(T11) * B(1:RANK,1:NRHS). */
 
+#line 286 "MB02QY.f"
     dtrsm_("Left", "Upper", "No transpose", "Non-unit", rank, nrhs, &c_b28, &
 	    a[a_offset], lda, &b[b_offset], ldb, (ftnlen)4, (ftnlen)5, (
 	    ftnlen)12, (ftnlen)8);
 
+#line 289 "MB02QY.f"
     if (*rank < *n) {
 
+#line 291 "MB02QY.f"
 	i__1 = *n - *rank;
+#line 291 "MB02QY.f"
 	dlaset_("Full", &i__1, nrhs, &c_b15, &c_b15, &b[*rank + 1 + b_dim1], 
 		ldb, (ftnlen)4);
 
 /*        B(1:N,1:NRHS) := Z' * B(1:N,1:NRHS). */
 /*        Workspace need NRHS, prefer NRHS*NB. */
 
+#line 297 "MB02QY.f"
 	i__1 = *n - *rank;
+#line 297 "MB02QY.f"
 	dormrz_("Left", "Transpose", n, nrhs, rank, &i__1, &a[a_offset], lda, 
 		&tau[1], &b[b_offset], ldb, &dwork[1], ldwork, info, (ftnlen)
 		4, (ftnlen)9);
+#line 299 "MB02QY.f"
 	maxwrk = max(maxwrk,dwork[1]);
 
 /*        Undo scaling. */
 
+#line 303 "MB02QY.f"
 	if (iascl == 1) {
+#line 304 "MB02QY.f"
 	    dlascl_("General", &c__0, &c__0, &anrm, &smlnum, n, nrhs, &b[
 		    b_offset], ldb, info, (ftnlen)7);
+#line 306 "MB02QY.f"
 	    dlascl_("Upper", &c__0, &c__0, &smlnum, &anrm, rank, rank, &a[
 		    a_offset], lda, info, (ftnlen)5);
+#line 308 "MB02QY.f"
 	} else if (iascl == 2) {
+#line 309 "MB02QY.f"
 	    dlascl_("General", &c__0, &c__0, &anrm, &bignum, n, nrhs, &b[
 		    b_offset], ldb, info, (ftnlen)7);
+#line 311 "MB02QY.f"
 	    dlascl_("Upper", &c__0, &c__0, &bignum, &anrm, rank, rank, &a[
 		    a_offset], lda, info, (ftnlen)5);
+#line 313 "MB02QY.f"
 	}
+#line 314 "MB02QY.f"
 	if (ibscl == 1) {
+#line 315 "MB02QY.f"
 	    dlascl_("General", &c__0, &c__0, &smlnum, &bnrm, n, nrhs, &b[
 		    b_offset], ldb, info, (ftnlen)7);
+#line 317 "MB02QY.f"
 	} else if (ibscl == 2) {
+#line 318 "MB02QY.f"
 	    dlascl_("General", &c__0, &c__0, &bignum, &bnrm, n, nrhs, &b[
 		    b_offset], ldb, info, (ftnlen)7);
+#line 320 "MB02QY.f"
 	}
+#line 321 "MB02QY.f"
     }
 
 /*     B(1:N,1:NRHS) := P * B(1:N,1:NRHS). */
 /*     Workspace N. */
 
+#line 326 "MB02QY.f"
     i__1 = *nrhs;
+#line 326 "MB02QY.f"
     for (j = 1; j <= i__1; ++j) {
 
+#line 328 "MB02QY.f"
 	i__2 = *n;
+#line 328 "MB02QY.f"
 	for (i__ = 1; i__ <= i__2; ++i__) {
+#line 329 "MB02QY.f"
 	    dwork[jpvt[i__]] = b[i__ + j * b_dim1];
+#line 330 "MB02QY.f"
 /* L10: */
+#line 330 "MB02QY.f"
 	}
 
+#line 332 "MB02QY.f"
 	dcopy_(n, &dwork[1], &c__1, &b[j * b_dim1 + 1], &c__1);
+#line 333 "MB02QY.f"
 /* L20: */
+#line 333 "MB02QY.f"
     }
 
+#line 335 "MB02QY.f"
     dwork[1] = maxwrk;
+#line 336 "MB02QY.f"
     return 0;
 
 /* *** Last line of MB02QY *** */

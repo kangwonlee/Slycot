@@ -1,3 +1,4 @@
+#line 1 "MB02QD.f"
 /* MB02QD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB02QD.f"
 /* Table of constant values */
 
 static integer c__0 = 0;
@@ -309,126 +311,210 @@ static doublereal c_b33 = 1.;
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 264 "MB02QD.f"
     /* Parameter adjustments */
+#line 264 "MB02QD.f"
     a_dim1 = *lda;
+#line 264 "MB02QD.f"
     a_offset = 1 + a_dim1;
+#line 264 "MB02QD.f"
     a -= a_offset;
+#line 264 "MB02QD.f"
     b_dim1 = *ldb;
+#line 264 "MB02QD.f"
     b_offset = 1 + b_dim1;
+#line 264 "MB02QD.f"
     b -= b_offset;
+#line 264 "MB02QD.f"
     --y;
+#line 264 "MB02QD.f"
     --jpvt;
+#line 264 "MB02QD.f"
     --sval;
+#line 264 "MB02QD.f"
     --dwork;
+#line 264 "MB02QD.f"
 
+#line 264 "MB02QD.f"
     /* Function Body */
+#line 264 "MB02QD.f"
     mn = min(*m,*n);
+#line 265 "MB02QD.f"
     leasts = lsame_(job, "L", (ftnlen)1, (ftnlen)1);
+#line 266 "MB02QD.f"
     permut = lsame_(iniper, "P", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 270 "MB02QD.f"
     *info = 0;
 /* Computing MAX */
+#line 271 "MB02QD.f"
     i__1 = mn + *n * 3 + 1, i__2 = (mn << 1) + *nrhs;
+#line 271 "MB02QD.f"
     minwrk = max(i__1,i__2);
+#line 272 "MB02QD.f"
     if (! (leasts || lsame_(job, "F", (ftnlen)1, (ftnlen)1))) {
+#line 273 "MB02QD.f"
 	*info = -1;
+#line 274 "MB02QD.f"
     } else if (! (permut || lsame_(iniper, "N", (ftnlen)1, (ftnlen)1))) {
+#line 275 "MB02QD.f"
 	*info = -2;
+#line 276 "MB02QD.f"
     } else if (*m < 0) {
+#line 277 "MB02QD.f"
 	*info = -3;
+#line 278 "MB02QD.f"
     } else if (*n < 0) {
+#line 279 "MB02QD.f"
 	*info = -4;
+#line 280 "MB02QD.f"
     } else if (*nrhs < 0) {
+#line 281 "MB02QD.f"
 	*info = -5;
+#line 282 "MB02QD.f"
     } else if (*rcond < 0. || *rcond > 1.) {
+#line 283 "MB02QD.f"
 	*info = -6;
+#line 284 "MB02QD.f"
     } else if (*svlmax < 0.) {
+#line 285 "MB02QD.f"
 	*info = -7;
+#line 286 "MB02QD.f"
     } else if (*lda < max(1,*m)) {
+#line 287 "MB02QD.f"
 	*info = -9;
+#line 288 "MB02QD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 288 "MB02QD.f"
 	i__1 = max(1,*m);
+#line 288 "MB02QD.f"
 	if (*ldb < max(i__1,*n)) {
+#line 289 "MB02QD.f"
 	    *info = -11;
+#line 290 "MB02QD.f"
 	} else if (*ldwork < minwrk) {
+#line 291 "MB02QD.f"
 	    *info = -17;
+#line 292 "MB02QD.f"
 	}
+#line 292 "MB02QD.f"
     }
 
+#line 294 "MB02QD.f"
     if (*info != 0) {
+#line 295 "MB02QD.f"
 	i__1 = -(*info);
+#line 295 "MB02QD.f"
 	xerbla_("MB02QD", &i__1, (ftnlen)6);
+#line 296 "MB02QD.f"
 	return 0;
+#line 297 "MB02QD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 301 "MB02QD.f"
     if (mn == 0) {
+#line 302 "MB02QD.f"
 	*rank = 0;
+#line 303 "MB02QD.f"
 	dwork[1] = 1.;
+#line 304 "MB02QD.f"
 	return 0;
+#line 305 "MB02QD.f"
     }
 
 /*     Get machine parameters. */
 
+#line 309 "MB02QD.f"
     smlnum = dlamch_("Safe minimum", (ftnlen)12) / dlamch_("Precision", (
 	    ftnlen)9);
+#line 310 "MB02QD.f"
     bignum = 1. / smlnum;
+#line 311 "MB02QD.f"
     dlabad_(&smlnum, &bignum);
 
 /*     Scale A, B if max entries outside range [SMLNUM,BIGNUM]. */
 
+#line 315 "MB02QD.f"
     anrm = dlange_("M", m, n, &a[a_offset], lda, &dwork[1], (ftnlen)1);
+#line 316 "MB02QD.f"
     iascl = 0;
+#line 317 "MB02QD.f"
     if (anrm > 0. && anrm < smlnum) {
 
 /*        Scale matrix norm up to SMLNUM. */
 
+#line 321 "MB02QD.f"
 	dlascl_("G", &c__0, &c__0, &anrm, &smlnum, m, n, &a[a_offset], lda, 
 		info, (ftnlen)1);
+#line 322 "MB02QD.f"
 	iascl = 1;
+#line 323 "MB02QD.f"
     } else if (anrm > bignum) {
 
 /*        Scale matrix norm down to BIGNUM. */
 
+#line 327 "MB02QD.f"
 	dlascl_("G", &c__0, &c__0, &anrm, &bignum, m, n, &a[a_offset], lda, 
 		info, (ftnlen)1);
+#line 328 "MB02QD.f"
 	iascl = 2;
+#line 329 "MB02QD.f"
     } else if (anrm == 0.) {
 
 /*        Matrix all zero. Return zero solution. */
 
+#line 333 "MB02QD.f"
 	if (*nrhs > 0) {
+#line 333 "MB02QD.f"
 	    i__1 = max(*m,*n);
+#line 333 "MB02QD.f"
 	    dlaset_("Full", &i__1, nrhs, &c_b17, &c_b17, &b[b_offset], ldb, (
 		    ftnlen)4);
+#line 333 "MB02QD.f"
 	}
+#line 335 "MB02QD.f"
 	*rank = 0;
+#line 336 "MB02QD.f"
 	dwork[1] = 1.;
+#line 337 "MB02QD.f"
 	return 0;
+#line 338 "MB02QD.f"
     }
 
+#line 340 "MB02QD.f"
     if (*nrhs > 0) {
+#line 341 "MB02QD.f"
 	bnrm = dlange_("M", m, nrhs, &b[b_offset], ldb, &dwork[1], (ftnlen)1);
+#line 342 "MB02QD.f"
 	ibscl = 0;
+#line 343 "MB02QD.f"
 	if (bnrm > 0. && bnrm < smlnum) {
 
 /*           Scale matrix norm up to SMLNUM. */
 
+#line 347 "MB02QD.f"
 	    dlascl_("G", &c__0, &c__0, &bnrm, &smlnum, m, nrhs, &b[b_offset], 
 		    ldb, info, (ftnlen)1);
+#line 349 "MB02QD.f"
 	    ibscl = 1;
+#line 350 "MB02QD.f"
 	} else if (bnrm > bignum) {
 
 /*           Scale matrix norm down to BIGNUM. */
 
+#line 354 "MB02QD.f"
 	    dlascl_("G", &c__0, &c__0, &bnrm, &bignum, m, nrhs, &b[b_offset], 
 		    ldb, info, (ftnlen)1);
+#line 356 "MB02QD.f"
 	    ibscl = 2;
+#line 357 "MB02QD.f"
 	}
+#line 358 "MB02QD.f"
     }
 
 /*     Compute a rank-revealing QR factorization of A and estimate its */
@@ -443,17 +529,26 @@ static doublereal c_b33 = 1.;
 /*      NB refers to the optimal block size for the immediately */
 /*      following subroutine, as returned by ILAENV.) */
 
+#line 372 "MB02QD.f"
     maxwrk = minwrk;
+#line 373 "MB02QD.f"
     if (permut) {
+#line 374 "MB02QD.f"
 	i__1 = *ldwork - mn;
+#line 374 "MB02QD.f"
 	mb03od_("Q", m, n, &a[a_offset], lda, &jpvt[1], rcond, svlmax, &dwork[
 		1], rank, &sval[1], &dwork[mn + 1], &i__1, info, (ftnlen)1);
 /* Computing MAX */
+#line 377 "MB02QD.f"
 	i__1 = maxwrk, i__2 = (integer) dwork[mn + 1] + mn;
+#line 377 "MB02QD.f"
 	maxwrk = max(i__1,i__2);
+#line 378 "MB02QD.f"
     } else {
+#line 379 "MB02QD.f"
 	mb03oy_(m, n, &a[a_offset], lda, rcond, svlmax, rank, &sval[1], &jpvt[
 		1], &dwork[1], &dwork[mn + 1], info);
+#line 381 "MB02QD.f"
     }
 
 /*     Logically partition R = [ R11 R12 ] */
@@ -466,15 +561,22 @@ static doublereal c_b33 = 1.;
 /*     Workspace need   3*min(M,N); */
 /*               prefer 2*min(M,N)+min(M,N)*NB. */
 
+#line 393 "MB02QD.f"
     if (*rank < *n) {
+#line 394 "MB02QD.f"
 	i__1 = *ldwork - (mn << 1);
+#line 394 "MB02QD.f"
 	dtzrzf_(rank, n, &a[a_offset], lda, &dwork[mn + 1], &dwork[(mn << 1) 
 		+ 1], &i__1, info);
 /* Computing MAX */
+#line 396 "MB02QD.f"
 	i__1 = maxwrk, i__2 = (integer) dwork[(mn << 1) + 1] + (mn << 1);
+#line 396 "MB02QD.f"
 	maxwrk = max(i__1,i__2);
+#line 397 "MB02QD.f"
     }
 
+#line 399 "MB02QD.f"
     if (*nrhs > 0) {
 
 /*        B(1:M,1:NRHS) := Q' * B(1:M,1:NRHS). */
@@ -482,33 +584,47 @@ static doublereal c_b33 = 1.;
 /*        Workspace: need   2*min(M,N)+NRHS; */
 /*                   prefer   min(M,N)+NRHS*NB. */
 
+#line 406 "MB02QD.f"
 	i__1 = *ldwork - (mn << 1);
+#line 406 "MB02QD.f"
 	dormqr_("Left", "Transpose", m, nrhs, &mn, &a[a_offset], lda, &dwork[
 		1], &b[b_offset], ldb, &dwork[(mn << 1) + 1], &i__1, info, (
 		ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 409 "MB02QD.f"
 	i__1 = maxwrk, i__2 = (integer) dwork[(mn << 1) + 1] + (mn << 1);
+#line 409 "MB02QD.f"
 	maxwrk = max(i__1,i__2);
 
 /*        B(1:RANK,1:NRHS) := inv(T11) * B(1:RANK,1:NRHS). */
 
+#line 413 "MB02QD.f"
 	dtrsm_("Left", "Upper", "No transpose", "Non-unit", rank, nrhs, &
 		c_b33, &a[a_offset], lda, &b[b_offset], ldb, (ftnlen)4, (
 		ftnlen)5, (ftnlen)12, (ftnlen)8);
 
+#line 416 "MB02QD.f"
 	if (*rank < *n) {
 
 /*           Set B(RANK+1:N,1:NRHS). */
 
+#line 420 "MB02QD.f"
 	    if (leasts) {
+#line 421 "MB02QD.f"
 		i__1 = *n - *rank;
+#line 421 "MB02QD.f"
 		dlaset_("Full", &i__1, nrhs, &c_b17, &c_b17, &b[*rank + 1 + 
 			b_dim1], ldb, (ftnlen)4);
+#line 423 "MB02QD.f"
 	    } else {
+#line 424 "MB02QD.f"
 		i__1 = *n - *rank;
+#line 424 "MB02QD.f"
 		i__2 = *n - *rank;
+#line 424 "MB02QD.f"
 		dlacpy_("Full", &i__1, nrhs, &y[1], &i__2, &b[*rank + 1 + 
 			b_dim1], ldb, (ftnlen)4);
+#line 426 "MB02QD.f"
 	    }
 
 /*           B(1:N,1:NRHS) := Z' * B(1:N,1:NRHS). */
@@ -516,87 +632,147 @@ static doublereal c_b33 = 1.;
 /*           Workspace need   2*min(M,N)+NRHS; */
 /*                     prefer 2*min(M,N)+NRHS*NB. */
 
+#line 433 "MB02QD.f"
 	    i__1 = *n - *rank;
+#line 433 "MB02QD.f"
 	    i__2 = *ldwork - (mn << 1);
+#line 433 "MB02QD.f"
 	    dormrz_("Left", "Transpose", n, nrhs, rank, &i__1, &a[a_offset], 
 		    lda, &dwork[mn + 1], &b[b_offset], ldb, &dwork[(mn << 1) 
 		    + 1], &i__2, info, (ftnlen)4, (ftnlen)9);
 /* Computing MAX */
+#line 436 "MB02QD.f"
 	    i__1 = maxwrk, i__2 = (integer) dwork[(mn << 1) + 1] + (mn << 1);
+#line 436 "MB02QD.f"
 	    maxwrk = max(i__1,i__2);
+#line 437 "MB02QD.f"
 	}
 
 /*        Additional workspace: NRHS. */
 
 /*        B(1:N,1:NRHS) := P * B(1:N,1:NRHS). */
 
+#line 443 "MB02QD.f"
 	i__1 = *nrhs;
+#line 443 "MB02QD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 444 "MB02QD.f"
 	    i__2 = *n;
+#line 444 "MB02QD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 445 "MB02QD.f"
 		dwork[(mn << 1) + i__] = 1.;
+#line 446 "MB02QD.f"
 /* L20: */
+#line 446 "MB02QD.f"
 	    }
+#line 447 "MB02QD.f"
 	    i__2 = *n;
+#line 447 "MB02QD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 448 "MB02QD.f"
 		if (dwork[(mn << 1) + i__] == 1.) {
+#line 449 "MB02QD.f"
 		    if (jpvt[i__] != i__) {
+#line 450 "MB02QD.f"
 			k = i__;
+#line 451 "MB02QD.f"
 			t1 = b[k + j * b_dim1];
+#line 452 "MB02QD.f"
 			t2 = b[jpvt[k] + j * b_dim1];
+#line 453 "MB02QD.f"
 L30:
+#line 454 "MB02QD.f"
 			b[jpvt[k] + j * b_dim1] = t1;
+#line 455 "MB02QD.f"
 			dwork[(mn << 1) + k] = 0.;
+#line 456 "MB02QD.f"
 			t1 = t2;
+#line 457 "MB02QD.f"
 			k = jpvt[k];
+#line 458 "MB02QD.f"
 			t2 = b[jpvt[k] + j * b_dim1];
+#line 459 "MB02QD.f"
 			if (jpvt[k] != i__) {
+#line 459 "MB02QD.f"
 			    goto L30;
+#line 459 "MB02QD.f"
 			}
+#line 461 "MB02QD.f"
 			b[i__ + j * b_dim1] = t1;
+#line 462 "MB02QD.f"
 			dwork[(mn << 1) + k] = 0.;
+#line 463 "MB02QD.f"
 		    }
+#line 464 "MB02QD.f"
 		}
+#line 465 "MB02QD.f"
 /* L40: */
+#line 465 "MB02QD.f"
 	    }
+#line 466 "MB02QD.f"
 /* L50: */
+#line 466 "MB02QD.f"
 	}
 
 /*        Undo scaling for B. */
 
+#line 470 "MB02QD.f"
 	if (ibscl == 1) {
+#line 471 "MB02QD.f"
 	    dlascl_("G", &c__0, &c__0, &smlnum, &bnrm, n, nrhs, &b[b_offset], 
 		    ldb, info, (ftnlen)1);
+#line 473 "MB02QD.f"
 	} else if (ibscl == 2) {
+#line 474 "MB02QD.f"
 	    dlascl_("G", &c__0, &c__0, &bignum, &bnrm, n, nrhs, &b[b_offset], 
 		    ldb, info, (ftnlen)1);
+#line 476 "MB02QD.f"
 	}
+#line 477 "MB02QD.f"
     }
 
 /*     Undo scaling for A. */
 
+#line 481 "MB02QD.f"
     if (iascl == 1) {
+#line 482 "MB02QD.f"
 	if (*nrhs > 0) {
+#line 482 "MB02QD.f"
 	    dlascl_("G", &c__0, &c__0, &anrm, &smlnum, n, nrhs, &b[b_offset], 
 		    ldb, info, (ftnlen)1);
+#line 482 "MB02QD.f"
 	}
+#line 485 "MB02QD.f"
 	dlascl_("U", &c__0, &c__0, &smlnum, &anrm, rank, rank, &a[a_offset], 
 		lda, info, (ftnlen)1);
+#line 487 "MB02QD.f"
     } else if (iascl == 2) {
+#line 488 "MB02QD.f"
 	if (*nrhs > 0) {
+#line 488 "MB02QD.f"
 	    dlascl_("G", &c__0, &c__0, &anrm, &bignum, n, nrhs, &b[b_offset], 
 		    ldb, info, (ftnlen)1);
+#line 488 "MB02QD.f"
 	}
+#line 491 "MB02QD.f"
 	dlascl_("U", &c__0, &c__0, &bignum, &anrm, rank, rank, &a[a_offset], 
 		lda, info, (ftnlen)1);
+#line 493 "MB02QD.f"
     }
 
+#line 495 "MB02QD.f"
     for (i__ = mn + *rank; i__ >= 1; --i__) {
+#line 496 "MB02QD.f"
 	dwork[i__ + 1] = dwork[i__];
+#line 497 "MB02QD.f"
 /* L60: */
+#line 497 "MB02QD.f"
     }
 
+#line 499 "MB02QD.f"
     dwork[1] = (doublereal) maxwrk;
+#line 500 "MB02QD.f"
     return 0;
 /* *** Last line of MB02QD *** */
 } /* mb02qd_ */

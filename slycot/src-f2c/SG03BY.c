@@ -1,3 +1,4 @@
+#line 1 "SG03BY.f"
 /* SG03BY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SG03BY.f"
 /* Subroutine */ int sg03by_(doublereal *xr, doublereal *xi, doublereal *yr, 
 	doublereal *yi, doublereal *cr, doublereal *ci, doublereal *sr, 
 	doublereal *si, doublereal *z__)
@@ -91,31 +93,50 @@
 /*      .. Executable Statements .. */
 
 /* Computing MAX */
+#line 74 "SG03BY.f"
     d__1 = abs(*xr), d__2 = abs(*xi), d__1 = max(d__1,d__2), d__2 = abs(*yr), 
 	    d__1 = max(d__1,d__2), d__2 = abs(*yi);
+#line 74 "SG03BY.f"
     *z__ = max(d__1,d__2);
 
+#line 76 "SG03BY.f"
     if (*z__ == 0.) {
+#line 77 "SG03BY.f"
 	*cr = 1.;
+#line 78 "SG03BY.f"
 	*ci = 0.;
+#line 79 "SG03BY.f"
 	*sr = 0.;
+#line 80 "SG03BY.f"
 	*si = 0.;
+#line 81 "SG03BY.f"
     } else {
 /* Computing 2nd power */
+#line 82 "SG03BY.f"
 	d__1 = *xr / *z__;
 /* Computing 2nd power */
+#line 82 "SG03BY.f"
 	d__2 = *xi / *z__;
 /* Computing 2nd power */
+#line 82 "SG03BY.f"
 	d__3 = *yr / *z__;
 /* Computing 2nd power */
+#line 82 "SG03BY.f"
 	d__4 = *yi / *z__;
+#line 82 "SG03BY.f"
 	*z__ *= sqrt(d__1 * d__1 + d__2 * d__2 + d__3 * d__3 + d__4 * d__4);
+#line 84 "SG03BY.f"
 	*cr = *xr / *z__;
+#line 85 "SG03BY.f"
 	*ci = *xi / *z__;
+#line 86 "SG03BY.f"
 	*sr = *yr / *z__;
+#line 87 "SG03BY.f"
 	*si = *yi / *z__;
+#line 88 "SG03BY.f"
     }
 
+#line 90 "SG03BY.f"
     return 0;
 
 /* *** Last line of SG03BY *** */

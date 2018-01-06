@@ -1,3 +1,4 @@
+#line 1 "SB16CY.f"
 /* SB16CY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB16CY.f"
 /* Table of constant values */
 
 static doublereal c_b10 = 1.;
@@ -259,122 +261,211 @@ static doublereal c_b10 = 1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 233 "SB16CY.f"
     /* Parameter adjustments */
+#line 233 "SB16CY.f"
     a_dim1 = *lda;
+#line 233 "SB16CY.f"
     a_offset = 1 + a_dim1;
+#line 233 "SB16CY.f"
     a -= a_offset;
+#line 233 "SB16CY.f"
     b_dim1 = *ldb;
+#line 233 "SB16CY.f"
     b_offset = 1 + b_dim1;
+#line 233 "SB16CY.f"
     b -= b_offset;
+#line 233 "SB16CY.f"
     c_dim1 = *ldc;
+#line 233 "SB16CY.f"
     c_offset = 1 + c_dim1;
+#line 233 "SB16CY.f"
     c__ -= c_offset;
+#line 233 "SB16CY.f"
     f_dim1 = *ldf;
+#line 233 "SB16CY.f"
     f_offset = 1 + f_dim1;
+#line 233 "SB16CY.f"
     f -= f_offset;
+#line 233 "SB16CY.f"
     g_dim1 = *ldg;
+#line 233 "SB16CY.f"
     g_offset = 1 + g_dim1;
+#line 233 "SB16CY.f"
     g -= g_offset;
+#line 233 "SB16CY.f"
     s_dim1 = *lds;
+#line 233 "SB16CY.f"
     s_offset = 1 + s_dim1;
+#line 233 "SB16CY.f"
     s -= s_offset;
+#line 233 "SB16CY.f"
     r_dim1 = *ldr;
+#line 233 "SB16CY.f"
     r_offset = 1 + r_dim1;
+#line 233 "SB16CY.f"
     r__ -= r_offset;
+#line 233 "SB16CY.f"
     --dwork;
+#line 233 "SB16CY.f"
 
+#line 233 "SB16CY.f"
     /* Function Body */
+#line 233 "SB16CY.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 234 "SB16CY.f"
     leftw = lsame_(jobcf, "L", (ftnlen)1, (ftnlen)1);
 
+#line 236 "SB16CY.f"
     *info = 0;
+#line 237 "SB16CY.f"
     if (leftw) {
+#line 238 "SB16CY.f"
 	mp = *m;
+#line 239 "SB16CY.f"
     } else {
+#line 240 "SB16CY.f"
 	mp = *p;
+#line 241 "SB16CY.f"
     }
+#line 242 "SB16CY.f"
     lw = *n * (*n + max(*n,mp) + min(*n,mp) + 6);
 
+#line 244 "SB16CY.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 245 "SB16CY.f"
 	*info = -1;
+#line 246 "SB16CY.f"
     } else if (! (leftw || lsame_(jobcf, "R", (ftnlen)1, (ftnlen)1))) {
+#line 247 "SB16CY.f"
 	*info = -2;
+#line 248 "SB16CY.f"
     } else if (*n < 0) {
+#line 249 "SB16CY.f"
 	*info = -3;
+#line 250 "SB16CY.f"
     } else if (*m < 0) {
+#line 251 "SB16CY.f"
 	*info = -4;
+#line 252 "SB16CY.f"
     } else if (*p < 0) {
+#line 253 "SB16CY.f"
 	*info = -5;
+#line 254 "SB16CY.f"
     } else if (*lda < max(1,*n)) {
+#line 255 "SB16CY.f"
 	*info = -7;
+#line 256 "SB16CY.f"
     } else if (*ldb < max(1,*n)) {
+#line 257 "SB16CY.f"
 	*info = -9;
+#line 258 "SB16CY.f"
     } else if (*ldc < max(1,*p)) {
+#line 259 "SB16CY.f"
 	*info = -11;
+#line 260 "SB16CY.f"
     } else if (*ldf < max(1,*m)) {
+#line 261 "SB16CY.f"
 	*info = -13;
+#line 262 "SB16CY.f"
     } else if (*ldg < max(1,*n)) {
+#line 263 "SB16CY.f"
 	*info = -15;
+#line 264 "SB16CY.f"
     } else if (*lds < max(1,*n)) {
+#line 265 "SB16CY.f"
 	*info = -19;
+#line 266 "SB16CY.f"
     } else if (*ldr < max(1,*n)) {
+#line 267 "SB16CY.f"
 	*info = -21;
+#line 268 "SB16CY.f"
     } else if (*ldwork < max(1,lw)) {
+#line 269 "SB16CY.f"
 	*info = -23;
+#line 270 "SB16CY.f"
     }
 
+#line 272 "SB16CY.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 276 "SB16CY.f"
 	i__1 = -(*info);
+#line 276 "SB16CY.f"
 	xerbla_("SB16CY", &i__1, (ftnlen)6);
+#line 277 "SB16CY.f"
 	return 0;
+#line 278 "SB16CY.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 282 "SB16CY.f"
     i__1 = min(*n,*m);
+#line 282 "SB16CY.f"
     if (min(i__1,*p) == 0) {
+#line 283 "SB16CY.f"
 	*scalec = 1.;
+#line 284 "SB16CY.f"
 	*scaleo = 1.;
+#line 285 "SB16CY.f"
 	dwork[1] = 1.;
+#line 286 "SB16CY.f"
 	return 0;
+#line 287 "SB16CY.f"
     }
 
 /*     Allocate storage for work arrays. */
 
+#line 291 "SB16CY.f"
     kaw = 1;
+#line 292 "SB16CY.f"
     ku = kaw + *n * *n;
+#line 293 "SB16CY.f"
     kwr = ku + *n * max(*n,mp);
+#line 294 "SB16CY.f"
     kwi = kwr + *n;
+#line 295 "SB16CY.f"
     kw = kwi + *n;
 
 /*     Form A+G*C. */
 
+#line 299 "SB16CY.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &dwork[kaw], n, (ftnlen)4);
+#line 300 "SB16CY.f"
     dgemm_("No-transpose", "No-transpose", n, n, p, &c_b10, &g[g_offset], ldg,
 	     &c__[c_offset], ldc, &c_b10, &dwork[kaw], n, (ftnlen)12, (ftnlen)
 	    12);
 
 /*     Form the factor H of the free term. */
 
+#line 305 "SB16CY.f"
     if (leftw) {
 
 /*        H = F. */
 
+#line 309 "SB16CY.f"
 	ldu = max(*n,*m);
+#line 310 "SB16CY.f"
 	me = *m;
+#line 311 "SB16CY.f"
 	dlacpy_("Full", m, n, &f[f_offset], ldf, &dwork[ku], &ldu, (ftnlen)4);
+#line 312 "SB16CY.f"
     } else {
 
 /*        H = C. */
 
+#line 316 "SB16CY.f"
 	ldu = max(*n,*p);
+#line 317 "SB16CY.f"
 	me = *p;
+#line 318 "SB16CY.f"
 	dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[ku], &ldu, (ftnlen)
 		4);
+#line 319 "SB16CY.f"
     }
 
 /*     Solve for the Cholesky factor Ru of Q, Q = Ru'*Ru, */
@@ -390,46 +481,70 @@ static doublereal c_b10 = 1.;
 /*                        N*(N + MAX(N,P) + MIN(N,P) + 6) if JOBCF = 'R'. */
 /*                 prefer larger. */
 
+#line 334 "SB16CY.f"
     i__1 = *ldwork - kw + 1;
+#line 334 "SB16CY.f"
     sb03od_(dico, "NoFact", "NoTransp", n, &me, &dwork[kaw], n, &r__[r_offset]
 	    , ldr, &dwork[ku], &ldu, scaleo, &dwork[kwr], &dwork[kwi], &dwork[
 	    kw], &i__1, &ierr, (ftnlen)1, (ftnlen)6, (ftnlen)8);
+#line 337 "SB16CY.f"
     if (ierr != 0) {
+#line 338 "SB16CY.f"
 	if (ierr == 2) {
+#line 339 "SB16CY.f"
 	    *info = 2;
+#line 340 "SB16CY.f"
 	} else if (ierr == 1) {
+#line 341 "SB16CY.f"
 	    *info = 4;
+#line 342 "SB16CY.f"
 	} else if (ierr == 6) {
+#line 343 "SB16CY.f"
 	    *info = 1;
+#line 344 "SB16CY.f"
 	}
+#line 345 "SB16CY.f"
 	return 0;
+#line 346 "SB16CY.f"
     }
 
+#line 348 "SB16CY.f"
     wrkopt = (integer) dwork[kw] + kw - 1;
+#line 349 "SB16CY.f"
     dlacpy_("Upper", n, n, &dwork[ku], &ldu, &r__[r_offset], ldr, (ftnlen)5);
 
 /*     Form A+B*F. */
 
+#line 353 "SB16CY.f"
     dlacpy_("Full", n, n, &a[a_offset], lda, &dwork[kaw], n, (ftnlen)4);
+#line 354 "SB16CY.f"
     dgemm_("No-transpose", "No-transpose", n, n, m, &c_b10, &b[b_offset], ldb,
 	     &f[f_offset], ldf, &c_b10, &dwork[kaw], n, (ftnlen)12, (ftnlen)
 	    12);
 
 /*     Form the factor K of the free term. */
 
+#line 359 "SB16CY.f"
     ldu = *n;
+#line 360 "SB16CY.f"
     if (leftw) {
 
 /*        K = B. */
 
+#line 364 "SB16CY.f"
 	me = *m;
+#line 365 "SB16CY.f"
 	dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[ku], &ldu, (ftnlen)4);
+#line 366 "SB16CY.f"
     } else {
 
 /*        K = G. */
 
+#line 370 "SB16CY.f"
 	me = *p;
+#line 371 "SB16CY.f"
 	dlacpy_("Full", n, p, &g[g_offset], ldg, &dwork[ku], &ldu, (ftnlen)4);
+#line 372 "SB16CY.f"
     }
 
 /*     Solve for the Cholesky factor Su of P, P = Su*Su', */
@@ -445,29 +560,46 @@ static doublereal c_b10 = 1.;
 /*                        N*(N + MAX(N,P) + MIN(N,P) + 6) if JOBCF = 'R'. */
 /*                        prefer larger. */
 
+#line 387 "SB16CY.f"
     i__1 = *ldwork - kw + 1;
+#line 387 "SB16CY.f"
     sb03od_(dico, "NoFact", "Transp", n, &me, &dwork[kaw], n, &s[s_offset], 
 	    lds, &dwork[ku], &ldu, scalec, &dwork[kwr], &dwork[kwi], &dwork[
 	    kw], &i__1, &ierr, (ftnlen)1, (ftnlen)6, (ftnlen)6);
+#line 390 "SB16CY.f"
     if (ierr != 0) {
+#line 391 "SB16CY.f"
 	if (ierr == 2) {
+#line 392 "SB16CY.f"
 	    *info = 3;
+#line 393 "SB16CY.f"
 	} else if (ierr == 1) {
+#line 394 "SB16CY.f"
 	    *info = 5;
+#line 395 "SB16CY.f"
 	} else if (ierr == 6) {
+#line 396 "SB16CY.f"
 	    *info = 1;
+#line 397 "SB16CY.f"
 	}
+#line 398 "SB16CY.f"
 	return 0;
+#line 399 "SB16CY.f"
     }
 /* Computing MAX */
+#line 400 "SB16CY.f"
     i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 400 "SB16CY.f"
     wrkopt = max(i__1,i__2);
+#line 401 "SB16CY.f"
     dlacpy_("Upper", n, n, &dwork[ku], &ldu, &s[s_offset], lds, (ftnlen)5);
 
 /*     Save the optimal workspace. */
 
+#line 405 "SB16CY.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 407 "SB16CY.f"
     return 0;
 /* *** Last line of SB16CY *** */
 } /* sb16cy_ */

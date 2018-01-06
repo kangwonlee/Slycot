@@ -1,3 +1,4 @@
+#line 1 "SB10ED.f"
 /* SB10ED.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB10ED.f"
 /* Subroutine */ int sb10ed_(integer *n, integer *m, integer *np, integer *
 	ncon, integer *nmeas, doublereal *a, integer *lda, doublereal *b, 
 	integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer 
@@ -347,149 +349,263 @@
 
 /*     Decode and Test input parameters. */
 
+#line 314 "SB10ED.f"
     /* Parameter adjustments */
+#line 314 "SB10ED.f"
     a_dim1 = *lda;
+#line 314 "SB10ED.f"
     a_offset = 1 + a_dim1;
+#line 314 "SB10ED.f"
     a -= a_offset;
+#line 314 "SB10ED.f"
     b_dim1 = *ldb;
+#line 314 "SB10ED.f"
     b_offset = 1 + b_dim1;
+#line 314 "SB10ED.f"
     b -= b_offset;
+#line 314 "SB10ED.f"
     c_dim1 = *ldc;
+#line 314 "SB10ED.f"
     c_offset = 1 + c_dim1;
+#line 314 "SB10ED.f"
     c__ -= c_offset;
+#line 314 "SB10ED.f"
     d_dim1 = *ldd;
+#line 314 "SB10ED.f"
     d_offset = 1 + d_dim1;
+#line 314 "SB10ED.f"
     d__ -= d_offset;
+#line 314 "SB10ED.f"
     ak_dim1 = *ldak;
+#line 314 "SB10ED.f"
     ak_offset = 1 + ak_dim1;
+#line 314 "SB10ED.f"
     ak -= ak_offset;
+#line 314 "SB10ED.f"
     bk_dim1 = *ldbk;
+#line 314 "SB10ED.f"
     bk_offset = 1 + bk_dim1;
+#line 314 "SB10ED.f"
     bk -= bk_offset;
+#line 314 "SB10ED.f"
     ck_dim1 = *ldck;
+#line 314 "SB10ED.f"
     ck_offset = 1 + ck_dim1;
+#line 314 "SB10ED.f"
     ck -= ck_offset;
+#line 314 "SB10ED.f"
     dk_dim1 = *lddk;
+#line 314 "SB10ED.f"
     dk_offset = 1 + dk_dim1;
+#line 314 "SB10ED.f"
     dk -= dk_offset;
+#line 314 "SB10ED.f"
     --rcond;
+#line 314 "SB10ED.f"
     --iwork;
+#line 314 "SB10ED.f"
     --dwork;
+#line 314 "SB10ED.f"
     --bwork;
+#line 314 "SB10ED.f"
 
+#line 314 "SB10ED.f"
     /* Function Body */
+#line 314 "SB10ED.f"
     m1 = *m - *ncon;
+#line 315 "SB10ED.f"
     m2 = *ncon;
+#line 316 "SB10ED.f"
     np1 = *np - *nmeas;
+#line 317 "SB10ED.f"
     np2 = *nmeas;
+#line 318 "SB10ED.f"
     nl = max(1,*n);
+#line 319 "SB10ED.f"
     npl = max(1,*np);
+#line 320 "SB10ED.f"
     m2l = max(1,m2);
+#line 321 "SB10ED.f"
     nlp = max(1,np2);
 
+#line 323 "SB10ED.f"
     *info = 0;
+#line 324 "SB10ED.f"
     if (*n < 0) {
+#line 325 "SB10ED.f"
 	*info = -1;
+#line 326 "SB10ED.f"
     } else if (*m < 0) {
+#line 327 "SB10ED.f"
 	*info = -2;
+#line 328 "SB10ED.f"
     } else if (*np < 0) {
+#line 329 "SB10ED.f"
 	*info = -3;
+#line 330 "SB10ED.f"
     } else if (*ncon < 0 || m1 < 0 || m2 > np1) {
+#line 331 "SB10ED.f"
 	*info = -4;
+#line 332 "SB10ED.f"
     } else if (*nmeas < 0 || np1 < 0 || np2 > m1) {
+#line 333 "SB10ED.f"
 	*info = -5;
+#line 334 "SB10ED.f"
     } else if (*lda < nl) {
+#line 335 "SB10ED.f"
 	*info = -7;
+#line 336 "SB10ED.f"
     } else if (*ldb < nl) {
+#line 337 "SB10ED.f"
 	*info = -9;
+#line 338 "SB10ED.f"
     } else if (*ldc < npl) {
+#line 339 "SB10ED.f"
 	*info = -11;
+#line 340 "SB10ED.f"
     } else if (*ldd < npl) {
+#line 341 "SB10ED.f"
 	*info = -13;
+#line 342 "SB10ED.f"
     } else if (*ldak < nl) {
+#line 343 "SB10ED.f"
 	*info = -15;
+#line 344 "SB10ED.f"
     } else if (*ldbk < nl) {
+#line 345 "SB10ED.f"
 	*info = -17;
+#line 346 "SB10ED.f"
     } else if (*ldck < m2l) {
+#line 347 "SB10ED.f"
 	*info = -19;
+#line 348 "SB10ED.f"
     } else if (*lddk < m2l) {
+#line 349 "SB10ED.f"
 	*info = -21;
+#line 350 "SB10ED.f"
     } else {
 
 /*        Compute workspace. */
 
 /* Computing MAX */
+#line 354 "SB10ED.f"
 	i__1 = (*n + m2) * 3 + *n + np1, i__2 = (*n + m2) * 5;
+#line 354 "SB10ED.f"
 	lw1 = (*n + np1 + 1) * (*n + m2) + max(i__1,i__2);
 /* Computing MAX */
+#line 356 "SB10ED.f"
 	i__1 = (*n + np2) * 3 + *n + m1, i__2 = (*n + np2) * 5;
+#line 356 "SB10ED.f"
 	lw2 = (*n + np2) * (*n + m1 + 1) + max(i__1,i__2);
 /* Computing MAX */
+#line 358 "SB10ED.f"
 	i__1 = np1 * max(*n,m1), i__2 = m2 * 3 + np1, i__1 = max(i__1,i__2), 
 		i__2 = m2 * 5;
+#line 358 "SB10ED.f"
 	lw3 = m2 + np1 * np1 + max(i__1,i__2);
 /* Computing MAX */
+#line 359 "SB10ED.f"
 	i__1 = max(*n,np1) * m1, i__2 = np2 * 3 + m1, i__1 = max(i__1,i__2), 
 		i__2 = np2 * 5;
+#line 359 "SB10ED.f"
 	lw4 = np2 + m1 * m1 + max(i__1,i__2);
 /* Computing MAX */
 /* Computing MAX */
+#line 360 "SB10ED.f"
 	i__3 = *n * 14 + 23, i__4 = *n << 4;
+#line 360 "SB10ED.f"
 	i__1 = 1, i__2 = *n * 14 * *n + *n * 6 + max(i__3,i__4), i__1 = max(
 		i__1,i__2), i__2 = m2 * (*n + m2 + max(3,m1)), i__1 = max(
 		i__1,i__2), i__2 = np2 * (*n + np2 + 3);
+#line 360 "SB10ED.f"
 	lw5 = (*n << 1) * *n + max(i__1,i__2);
 /* Computing MAX */
+#line 364 "SB10ED.f"
 	i__1 = *n * m2, i__2 = *n * np2, i__1 = max(i__1,i__2), i__2 = m2 * 
 		np2, i__1 = max(i__1,i__2), i__2 = m2 * m2 + (m2 << 2);
+#line 364 "SB10ED.f"
 	lw6 = max(i__1,i__2);
 /* Computing MAX */
+#line 365 "SB10ED.f"
 	i__1 = max(1,lw1), i__1 = max(i__1,lw2), i__1 = max(i__1,lw3), i__1 = 
 		max(i__1,lw4), i__1 = max(i__1,lw5);
+#line 365 "SB10ED.f"
 	minwrk = *n * *m + *np * (*n + *m) + m2 * m2 + np2 * np2 + max(i__1,
 		lw6);
+#line 367 "SB10ED.f"
 	if (*ldwork < minwrk) {
+#line 367 "SB10ED.f"
 	    *info = -26;
+#line 367 "SB10ED.f"
 	}
+#line 369 "SB10ED.f"
     }
+#line 370 "SB10ED.f"
     if (*info != 0) {
+#line 371 "SB10ED.f"
 	i__1 = -(*info);
+#line 371 "SB10ED.f"
 	xerbla_("SB10ED", &i__1, (ftnlen)6);
+#line 372 "SB10ED.f"
 	return 0;
+#line 373 "SB10ED.f"
     }
 
 /*     Quick return if possible. */
 
+#line 377 "SB10ED.f"
     if (*n == 0 && max(m2,np2) == 0) {
+#line 378 "SB10ED.f"
 	rcond[1] = 1.;
+#line 379 "SB10ED.f"
 	rcond[2] = 1.;
+#line 380 "SB10ED.f"
 	rcond[3] = 1.;
+#line 381 "SB10ED.f"
 	rcond[4] = 1.;
+#line 382 "SB10ED.f"
 	rcond[5] = 1.;
+#line 383 "SB10ED.f"
 	rcond[6] = 1.;
+#line 384 "SB10ED.f"
 	rcond[7] = 1.;
+#line 385 "SB10ED.f"
 	dwork[1] = 1.;
+#line 386 "SB10ED.f"
 	return 0;
+#line 387 "SB10ED.f"
     }
 
+#line 389 "SB10ED.f"
     toll = *tol;
+#line 390 "SB10ED.f"
     if (toll <= 0.) {
 
 /*        Set the default value of the tolerance for rank tests. */
 
+#line 394 "SB10ED.f"
 	toll = sqrt(dlamch_("Epsilon", (ftnlen)7));
+#line 395 "SB10ED.f"
     }
 
 /*     Workspace usage. */
 
+#line 399 "SB10ED.f"
     iwc = *n * *m + 1;
+#line 400 "SB10ED.f"
     iwd = iwc + *np * *n;
+#line 401 "SB10ED.f"
     iwtu = iwd + *np * *m;
+#line 402 "SB10ED.f"
     iwty = iwtu + m2 * m2;
+#line 403 "SB10ED.f"
     iwrk = iwty + np2 * np2;
 
+#line 405 "SB10ED.f"
     dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[1], &nl, (ftnlen)4);
+#line 406 "SB10ED.f"
     dlacpy_("Full", np, n, &c__[c_offset], ldc, &dwork[iwc], &npl, (ftnlen)4);
+#line 407 "SB10ED.f"
     dlacpy_("Full", np, m, &d__[d_offset], ldd, &dwork[iwd], &npl, (ftnlen)4);
 
 /*     Transform the system so that D12 and D21 satisfy the formulas */
@@ -499,64 +615,101 @@
 /*     assumptions (A3) and (A4), for the frequency w = 0, the */
 /*     next SB10PD routine call uses A - I. */
 
+#line 416 "SB10ED.f"
     i__1 = *n;
+#line 416 "SB10ED.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 417 "SB10ED.f"
 	a[i__ + i__ * a_dim1] += -1.;
+#line 418 "SB10ED.f"
 /* L10: */
+#line 418 "SB10ED.f"
     }
 
+#line 420 "SB10ED.f"
     i__1 = *ldwork - iwrk + 1;
+#line 420 "SB10ED.f"
     sb10pd_(n, m, np, ncon, nmeas, &a[a_offset], lda, &dwork[1], &nl, &dwork[
 	    iwc], &npl, &dwork[iwd], &npl, &dwork[iwtu], &m2l, &dwork[iwty], &
 	    nlp, &rcond[1], &toll, &dwork[iwrk], &i__1, &info2);
 
+#line 425 "SB10ED.f"
     i__1 = *n;
+#line 425 "SB10ED.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 426 "SB10ED.f"
 	a[i__ + i__ * a_dim1] += 1.;
+#line 427 "SB10ED.f"
 /* L20: */
+#line 427 "SB10ED.f"
     }
 
+#line 429 "SB10ED.f"
     if (info2 > 0) {
+#line 430 "SB10ED.f"
 	*info = info2;
+#line 431 "SB10ED.f"
 	return 0;
+#line 432 "SB10ED.f"
     }
+#line 433 "SB10ED.f"
     lwamax = (integer) dwork[iwrk] + iwrk - 1;
 
+#line 435 "SB10ED.f"
     iwx = iwrk;
+#line 436 "SB10ED.f"
     iwy = iwx + *n * *n;
+#line 437 "SB10ED.f"
     iwrk = iwy + *n * *n;
 
 /*     Compute the optimal H2 controller for the normalized system. */
 
+#line 441 "SB10ED.f"
     i__1 = *ldwork - iwrk + 1;
+#line 441 "SB10ED.f"
     sb10sd_(n, m, np, ncon, nmeas, &a[a_offset], lda, &dwork[1], &nl, &dwork[
 	    iwc], &npl, &dwork[iwd], &npl, &ak[ak_offset], ldak, &bk[
 	    bk_offset], ldbk, &ck[ck_offset], ldck, &dk[dk_offset], lddk, &
 	    dwork[iwx], &nl, &dwork[iwy], &nl, &rcond[3], &toll, &iwork[1], &
 	    dwork[iwrk], &i__1, &bwork[1], &info2);
+#line 446 "SB10ED.f"
     if (info2 > 0) {
+#line 447 "SB10ED.f"
 	*info = info2 + 5;
+#line 448 "SB10ED.f"
 	return 0;
+#line 449 "SB10ED.f"
     }
 /* Computing MAX */
+#line 450 "SB10ED.f"
     i__1 = (integer) dwork[iwrk] + iwrk - 1;
+#line 450 "SB10ED.f"
     lwamax = max(i__1,lwamax);
 
+#line 452 "SB10ED.f"
     iwrk = iwx;
 
 /*     Compute the H2 optimal controller for the original system. */
 
+#line 456 "SB10ED.f"
     i__1 = *ldwork - iwrk + 1;
+#line 456 "SB10ED.f"
     sb10td_(n, m, np, ncon, nmeas, &dwork[iwd], &npl, &dwork[iwtu], &m2l, &
 	    dwork[iwty], &nlp, &ak[ak_offset], ldak, &bk[bk_offset], ldbk, &
 	    ck[ck_offset], ldck, &dk[dk_offset], lddk, &rcond[7], &toll, &
 	    iwork[1], &dwork[iwrk], &i__1, &info2);
+#line 460 "SB10ED.f"
     if (info2 > 0) {
+#line 461 "SB10ED.f"
 	*info = 10;
+#line 462 "SB10ED.f"
 	return 0;
+#line 463 "SB10ED.f"
     }
 
+#line 465 "SB10ED.f"
     dwork[1] = (doublereal) lwamax;
+#line 466 "SB10ED.f"
     return 0;
 /* *** Last line of SB10ED *** */
 } /* sb10ed_ */

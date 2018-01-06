@@ -1,3 +1,4 @@
+#line 1 "NF01AD.f"
 /* NF01AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "NF01AD.f"
 /* Subroutine */ int nf01ad_(integer *nsmp, integer *m, integer *l, integer *
 	ipar, integer *lipar, doublereal *x, integer *lx, doublereal *u, 
 	integer *ldu, doublereal *y, integer *ldy, doublereal *dwork, integer 
@@ -174,86 +176,150 @@
 /*     .. */
 /*     .. Executable Statements .. */
 
+#line 149 "NF01AD.f"
     /* Parameter adjustments */
+#line 149 "NF01AD.f"
     --ipar;
+#line 149 "NF01AD.f"
     --x;
+#line 149 "NF01AD.f"
     u_dim1 = *ldu;
+#line 149 "NF01AD.f"
     u_offset = 1 + u_dim1;
+#line 149 "NF01AD.f"
     u -= u_offset;
+#line 149 "NF01AD.f"
     y_dim1 = *ldy;
+#line 149 "NF01AD.f"
     y_offset = 1 + y_dim1;
+#line 149 "NF01AD.f"
     y -= y_offset;
+#line 149 "NF01AD.f"
     --dwork;
+#line 149 "NF01AD.f"
 
+#line 149 "NF01AD.f"
     /* Function Body */
+#line 149 "NF01AD.f"
     *info = 0;
+#line 150 "NF01AD.f"
     if (*nsmp < 0) {
+#line 151 "NF01AD.f"
 	*info = -1;
+#line 152 "NF01AD.f"
     } else if (*m < 0) {
+#line 153 "NF01AD.f"
 	*info = -2;
+#line 154 "NF01AD.f"
     } else if (*l < 0) {
+#line 155 "NF01AD.f"
 	*info = -3;
+#line 156 "NF01AD.f"
     } else if (*lipar < 2) {
+#line 157 "NF01AD.f"
 	*info = -5;
+#line 158 "NF01AD.f"
     } else {
 
+#line 160 "NF01AD.f"
 	n = ipar[1];
+#line 161 "NF01AD.f"
 	nn = ipar[2];
+#line 162 "NF01AD.f"
 	ldac = n + *l;
+#line 163 "NF01AD.f"
 	nths = (nn * (*l + 2) + 1) * *l;
+#line 164 "NF01AD.f"
 	lths = n * (*m + *l + 1) + *l * *m;
 
+#line 166 "NF01AD.f"
 	if (n < 0 || nn < 0) {
+#line 167 "NF01AD.f"
 	    *info = -4;
+#line 168 "NF01AD.f"
 	} else if (*lx < nths + lths) {
+#line 169 "NF01AD.f"
 	    *info = -7;
+#line 170 "NF01AD.f"
 	} else if (*ldu < max(1,*nsmp)) {
+#line 171 "NF01AD.f"
 	    *info = -9;
+#line 172 "NF01AD.f"
 	} else if (*ldy < max(1,*nsmp)) {
+#line 173 "NF01AD.f"
 	    *info = -11;
+#line 174 "NF01AD.f"
 	} else {
+#line 175 "NF01AD.f"
 	    if (*m > 0) {
 /* Computing MAX */
+#line 176 "NF01AD.f"
 		i__1 = n * ldac, i__2 = n + *m + *l;
+#line 176 "NF01AD.f"
 		jw = max(i__1,i__2);
+#line 177 "NF01AD.f"
 	    } else {
 /* Computing MAX */
+#line 178 "NF01AD.f"
 		i__1 = n * ldac;
+#line 178 "NF01AD.f"
 		jw = max(i__1,*l);
+#line 179 "NF01AD.f"
 	    }
 /* Computing MAX */
+#line 180 "NF01AD.f"
 	    i__1 = nn << 1, i__2 = ldac * (n + *m) + (n << 1) + jw;
+#line 180 "NF01AD.f"
 	    if (*ldwork < *nsmp * *l + max(i__1,i__2)) {
+#line 180 "NF01AD.f"
 		*info = -13;
+#line 180 "NF01AD.f"
 	    }
+#line 183 "NF01AD.f"
 	}
+#line 184 "NF01AD.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 188 "NF01AD.f"
     if (*info != 0) {
+#line 189 "NF01AD.f"
 	i__1 = -(*info);
+#line 189 "NF01AD.f"
 	xerbla_("NF01AD", &i__1, (ftnlen)6);
+#line 190 "NF01AD.f"
 	return 0;
+#line 191 "NF01AD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 195 "NF01AD.f"
     if (min(*nsmp,*l) == 0) {
+#line 195 "NF01AD.f"
 	return 0;
+#line 195 "NF01AD.f"
     }
 
 /*     Compute the output of the linear part. */
 /*     Workspace: need   NSMP*L + (N + L)*(N + M) + N + N*(N + L + 1). */
 /*     (NSMP*L locations are reserved for the output of the linear part.) */
 
+#line 202 "NF01AD.f"
     z__ = 1;
+#line 203 "NF01AD.f"
     ac = z__ + *nsmp * *l;
+#line 204 "NF01AD.f"
     bd = ac + ldac * n;
+#line 205 "NF01AD.f"
     ix = bd + ldac * *m;
+#line 206 "NF01AD.f"
     jw = ix + n;
 
+#line 208 "NF01AD.f"
     i__1 = *ldwork - jw + 1;
+#line 208 "NF01AD.f"
     tb01vy_("Apply", &n, m, l, &x[nths + 1], &lths, &dwork[ac], &ldac, &dwork[
 	    bd], &ldac, &dwork[ac + n], &ldac, &dwork[bd + n], &ldac, &dwork[
 	    ix], &dwork[jw], &i__1, info, (ftnlen)5);
@@ -262,7 +328,9 @@
 /*                       NSMP*L + (N + L)*N + 2*N + L,           if M=0; */
 /*                prefer larger. */
 
+#line 216 "NF01AD.f"
     i__1 = *ldwork - jw + 1;
+#line 216 "NF01AD.f"
     tf01mx_(&n, m, l, nsmp, &dwork[ac], &ldac, &u[u_offset], ldu, &dwork[ix], 
 	    &dwork[z__], nsmp, &dwork[jw], &i__1, info);
 
@@ -270,12 +338,17 @@
 /*     Workspace: need   NSMP*L + 2*NN; */
 /*                prefer larger. */
 
+#line 223 "NF01AD.f"
     jw = ac;
+#line 224 "NF01AD.f"
     i__1 = *lipar - 1;
+#line 224 "NF01AD.f"
     i__2 = *ldwork - jw + 1;
+#line 224 "NF01AD.f"
     nf01ay_(nsmp, l, l, &ipar[2], &i__1, &x[1], &nths, &dwork[z__], nsmp, &y[
 	    y_offset], ldy, &dwork[jw], &i__2, info);
 
+#line 227 "NF01AD.f"
     return 0;
 
 /* *** Last line of NF01AD *** */

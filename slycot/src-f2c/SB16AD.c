@@ -1,3 +1,4 @@
+#line 1 "SB16AD.f"
 /* SB16AD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB16AD.f"
 /* Subroutine */ int sb16ad_(char *dico, char *jobc, char *jobo, char *jobmr, 
 	char *weight, char *equil, char *ordsel, integer *n, integer *m, 
 	integer *p, integer *nc, integer *ncr, doublereal *alpha, doublereal *
@@ -538,147 +540,266 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 489 "SB16AD.f"
     /* Parameter adjustments */
+#line 489 "SB16AD.f"
     a_dim1 = *lda;
+#line 489 "SB16AD.f"
     a_offset = 1 + a_dim1;
+#line 489 "SB16AD.f"
     a -= a_offset;
+#line 489 "SB16AD.f"
     b_dim1 = *ldb;
+#line 489 "SB16AD.f"
     b_offset = 1 + b_dim1;
+#line 489 "SB16AD.f"
     b -= b_offset;
+#line 489 "SB16AD.f"
     c_dim1 = *ldc;
+#line 489 "SB16AD.f"
     c_offset = 1 + c_dim1;
+#line 489 "SB16AD.f"
     c__ -= c_offset;
+#line 489 "SB16AD.f"
     d_dim1 = *ldd;
+#line 489 "SB16AD.f"
     d_offset = 1 + d_dim1;
+#line 489 "SB16AD.f"
     d__ -= d_offset;
+#line 489 "SB16AD.f"
     ac_dim1 = *ldac;
+#line 489 "SB16AD.f"
     ac_offset = 1 + ac_dim1;
+#line 489 "SB16AD.f"
     ac -= ac_offset;
+#line 489 "SB16AD.f"
     bc_dim1 = *ldbc;
+#line 489 "SB16AD.f"
     bc_offset = 1 + bc_dim1;
+#line 489 "SB16AD.f"
     bc -= bc_offset;
+#line 489 "SB16AD.f"
     cc_dim1 = *ldcc;
+#line 489 "SB16AD.f"
     cc_offset = 1 + cc_dim1;
+#line 489 "SB16AD.f"
     cc -= cc_offset;
+#line 489 "SB16AD.f"
     dc_dim1 = *lddc;
+#line 489 "SB16AD.f"
     dc_offset = 1 + dc_dim1;
+#line 489 "SB16AD.f"
     dc -= dc_offset;
+#line 489 "SB16AD.f"
     --hsvc;
+#line 489 "SB16AD.f"
     --iwork;
+#line 489 "SB16AD.f"
     --dwork;
+#line 489 "SB16AD.f"
 
+#line 489 "SB16AD.f"
     /* Function Body */
+#line 489 "SB16AD.f"
     *info = 0;
+#line 490 "SB16AD.f"
     *iwarn = 0;
+#line 491 "SB16AD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 492 "SB16AD.f"
     bta = lsame_(jobmr, "B", (ftnlen)1, (ftnlen)1) || lsame_(jobmr, "F", (
 	    ftnlen)1, (ftnlen)1);
+#line 493 "SB16AD.f"
     spa = lsame_(jobmr, "S", (ftnlen)1, (ftnlen)1) || lsame_(jobmr, "P", (
 	    ftnlen)1, (ftnlen)1);
+#line 494 "SB16AD.f"
     bal = lsame_(jobmr, "B", (ftnlen)1, (ftnlen)1) || lsame_(jobmr, "S", (
 	    ftnlen)1, (ftnlen)1);
+#line 495 "SB16AD.f"
     fixord = lsame_(ordsel, "F", (ftnlen)1, (ftnlen)1);
+#line 496 "SB16AD.f"
     istab = lsame_(weight, "I", (ftnlen)1, (ftnlen)1);
+#line 497 "SB16AD.f"
     ostab = lsame_(weight, "O", (ftnlen)1, (ftnlen)1);
+#line 498 "SB16AD.f"
     perf = lsame_(weight, "P", (ftnlen)1, (ftnlen)1);
+#line 499 "SB16AD.f"
     leftw = ostab || perf;
+#line 500 "SB16AD.f"
     rightw = istab || perf;
+#line 501 "SB16AD.f"
     frwght = leftw || rightw;
 
+#line 503 "SB16AD.f"
     lw = 1;
+#line 504 "SB16AD.f"
     nnc = *n + *nc;
+#line 505 "SB16AD.f"
     mp = *m + *p;
+#line 506 "SB16AD.f"
     if (frwght) {
 /* Computing MAX */
 /* Computing MAX */
+#line 507 "SB16AD.f"
 	i__3 = max(nnc,*m);
+#line 507 "SB16AD.f"
 	i__1 = nnc * (nnc + max(i__3,*p) + 7), i__2 = mp * (mp + 4);
+#line 507 "SB16AD.f"
 	lw = nnc * (nnc + (mp << 1)) + max(i__1,i__2);
+#line 509 "SB16AD.f"
     } else {
+#line 510 "SB16AD.f"
 	lw = *nc * (max(*m,*p) + 5);
+#line 511 "SB16AD.f"
 	if (lsame_(equil, "S", (ftnlen)1, (ftnlen)1)) {
+#line 511 "SB16AD.f"
 	    lw = max(*n,lw);
+#line 511 "SB16AD.f"
 	}
+#line 513 "SB16AD.f"
     }
 /* Computing MAX */
+#line 514 "SB16AD.f"
     i__1 = max(1,lw), i__2 = *nc * ((*nc << 1) + 5);
+#line 514 "SB16AD.f"
     lw = (*nc << 1) * *nc + max(i__1,i__2);
 
 /*     Check the input scalar arguments. */
 
+#line 518 "SB16AD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 519 "SB16AD.f"
 	*info = -1;
+#line 520 "SB16AD.f"
     } else if (! (lsame_(jobc, "S", (ftnlen)1, (ftnlen)1) || lsame_(jobc, 
 	    "E", (ftnlen)1, (ftnlen)1))) {
+#line 522 "SB16AD.f"
 	*info = -2;
+#line 523 "SB16AD.f"
     } else if (! (lsame_(jobo, "S", (ftnlen)1, (ftnlen)1) || lsame_(jobo, 
 	    "E", (ftnlen)1, (ftnlen)1))) {
+#line 525 "SB16AD.f"
 	*info = -3;
+#line 526 "SB16AD.f"
     } else if (! (bta || spa)) {
+#line 527 "SB16AD.f"
 	*info = -4;
+#line 528 "SB16AD.f"
     } else if (! (frwght || lsame_(weight, "N", (ftnlen)1, (ftnlen)1))) {
+#line 529 "SB16AD.f"
 	*info = -5;
+#line 530 "SB16AD.f"
     } else if (! (lsame_(equil, "S", (ftnlen)1, (ftnlen)1) || lsame_(equil, 
 	    "N", (ftnlen)1, (ftnlen)1))) {
+#line 532 "SB16AD.f"
 	*info = -6;
+#line 533 "SB16AD.f"
     } else if (! (fixord || lsame_(ordsel, "A", (ftnlen)1, (ftnlen)1))) {
+#line 534 "SB16AD.f"
 	*info = -7;
+#line 535 "SB16AD.f"
     } else if (*n < 0) {
+#line 536 "SB16AD.f"
 	*info = -8;
+#line 537 "SB16AD.f"
     } else if (*m < 0) {
+#line 538 "SB16AD.f"
 	*info = -9;
+#line 539 "SB16AD.f"
     } else if (*p < 0) {
+#line 540 "SB16AD.f"
 	*info = -10;
+#line 541 "SB16AD.f"
     } else if (*nc < 0) {
+#line 542 "SB16AD.f"
 	*info = -11;
+#line 543 "SB16AD.f"
     } else if (fixord && (*ncr < 0 || *ncr > *nc)) {
+#line 544 "SB16AD.f"
 	*info = -12;
+#line 545 "SB16AD.f"
     } else if (discr && (*alpha < 0. || *alpha > 1.) || ! discr && *alpha > 
 	    0.) {
+#line 547 "SB16AD.f"
 	*info = -13;
+#line 548 "SB16AD.f"
     } else if (*lda < max(1,*n)) {
+#line 549 "SB16AD.f"
 	*info = -15;
+#line 550 "SB16AD.f"
     } else if (*ldb < max(1,*n)) {
+#line 551 "SB16AD.f"
 	*info = -17;
+#line 552 "SB16AD.f"
     } else if (*ldc < max(1,*p)) {
+#line 553 "SB16AD.f"
 	*info = -19;
+#line 554 "SB16AD.f"
     } else if (*ldd < max(1,*p)) {
+#line 555 "SB16AD.f"
 	*info = -21;
+#line 556 "SB16AD.f"
     } else if (*ldac < max(1,*nc)) {
+#line 557 "SB16AD.f"
 	*info = -23;
+#line 558 "SB16AD.f"
     } else if (*ldbc < max(1,*nc)) {
+#line 559 "SB16AD.f"
 	*info = -25;
+#line 560 "SB16AD.f"
     } else if (*ldcc < max(1,*m)) {
+#line 561 "SB16AD.f"
 	*info = -27;
+#line 562 "SB16AD.f"
     } else if (*lddc < max(1,*m)) {
+#line 563 "SB16AD.f"
 	*info = -29;
+#line 564 "SB16AD.f"
     } else if (*tol2 > 0. && ! fixord && *tol2 > *tol1) {
+#line 565 "SB16AD.f"
 	*info = -33;
+#line 566 "SB16AD.f"
     } else if (*ldwork < lw) {
+#line 567 "SB16AD.f"
 	*info = -36;
+#line 568 "SB16AD.f"
     }
 
+#line 570 "SB16AD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 574 "SB16AD.f"
 	i__1 = -(*info);
+#line 574 "SB16AD.f"
 	xerbla_("SB16AD", &i__1, (ftnlen)6);
+#line 575 "SB16AD.f"
 	return 0;
+#line 576 "SB16AD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 580 "SB16AD.f"
     i__1 = min(*nc,*m);
+#line 580 "SB16AD.f"
     if (min(i__1,*p) == 0) {
+#line 581 "SB16AD.f"
 	*ncr = 0;
+#line 582 "SB16AD.f"
 	*ncs = 0;
+#line 583 "SB16AD.f"
 	iwork[1] = 0;
+#line 584 "SB16AD.f"
 	dwork[1] = 1.;
+#line 585 "SB16AD.f"
 	return 0;
+#line 586 "SB16AD.f"
     }
 
+#line 588 "SB16AD.f"
     if (lsame_(equil, "S", (ftnlen)1, (ftnlen)1)) {
 
 /*        Scale simultaneously the matrices A, B and C and AC, BC and CC; */
@@ -689,25 +810,40 @@
 
 /*        Real workspace: need MAX(N,NC). */
 
+#line 598 "SB16AD.f"
 	maxred = 100.;
+#line 599 "SB16AD.f"
 	tb01id_("All", n, m, p, &maxred, &a[a_offset], lda, &b[b_offset], ldb,
 		 &c__[c_offset], ldc, &dwork[1], info, (ftnlen)3);
+#line 601 "SB16AD.f"
 	maxred = 100.;
+#line 602 "SB16AD.f"
 	tb01id_("All", nc, p, m, &maxred, &ac[ac_offset], ldac, &bc[bc_offset]
 		, ldbc, &cc[cc_offset], ldcc, &dwork[1], info, (ftnlen)3);
+#line 604 "SB16AD.f"
     }
 
 /*     Correct the value of ALPHA to ensure stability. */
 
+#line 608 "SB16AD.f"
     alpwrk = *alpha;
+#line 609 "SB16AD.f"
     if (discr) {
+#line 610 "SB16AD.f"
 	if (*alpha == 1.) {
+#line 610 "SB16AD.f"
 	    alpwrk = 1. - sqrt(dlamch_("E", (ftnlen)1));
+#line 610 "SB16AD.f"
 	}
+#line 611 "SB16AD.f"
     } else {
+#line 612 "SB16AD.f"
 	if (*alpha == 0.) {
+#line 612 "SB16AD.f"
 	    alpwrk = -sqrt(dlamch_("E", (ftnlen)1));
+#line 612 "SB16AD.f"
 	}
+#line 613 "SB16AD.f"
     }
 
 /*     Reduce Ac to a block-diagonal real Schur form, with the */
@@ -719,56 +855,93 @@
 /*     Workspace:  need   NC*(NC+5); */
 /*                 prefer larger. */
 
+#line 624 "SB16AD.f"
     wrkopt = 1;
+#line 625 "SB16AD.f"
     ku = 1;
+#line 626 "SB16AD.f"
     kr = ku + *nc * *nc;
+#line 627 "SB16AD.f"
     ki = kr + *nc;
+#line 628 "SB16AD.f"
     kw = ki + *nc;
 
+#line 630 "SB16AD.f"
     i__1 = *ldwork - kw + 1;
+#line 630 "SB16AD.f"
     tb01kd_(dico, "Unstable", "General", nc, p, m, &alpwrk, &ac[ac_offset], 
 	    ldac, &bc[bc_offset], ldbc, &cc[cc_offset], ldcc, &ncu, &dwork[ku]
 	    , nc, &dwork[kr], &dwork[ki], &dwork[kw], &i__1, &ierr, (ftnlen)1,
 	     (ftnlen)8, (ftnlen)7);
 
+#line 634 "SB16AD.f"
     if (ierr != 0) {
+#line 635 "SB16AD.f"
 	if (ierr != 3) {
+#line 636 "SB16AD.f"
 	    *info = 5;
+#line 637 "SB16AD.f"
 	} else {
+#line 638 "SB16AD.f"
 	    *info = 6;
+#line 639 "SB16AD.f"
 	}
+#line 640 "SB16AD.f"
 	return 0;
+#line 641 "SB16AD.f"
     }
 /* Computing MAX */
+#line 642 "SB16AD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 642 "SB16AD.f"
     wrkopt = max(i__1,i__2);
 
+#line 644 "SB16AD.f"
     iwarnl = 0;
+#line 645 "SB16AD.f"
     *ncs = *nc - ncu;
+#line 646 "SB16AD.f"
     if (fixord) {
 /* Computing MAX */
+#line 647 "SB16AD.f"
 	i__1 = 0, i__2 = *ncr - ncu;
+#line 647 "SB16AD.f"
 	nra = max(i__1,i__2);
+#line 648 "SB16AD.f"
 	if (*ncr < ncu) {
+#line 648 "SB16AD.f"
 	    iwarnl = 3;
+#line 648 "SB16AD.f"
 	}
+#line 650 "SB16AD.f"
     } else {
+#line 651 "SB16AD.f"
 	nra = 0;
+#line 652 "SB16AD.f"
     }
 
 /*     Finish if only unstable part is present. */
 
+#line 656 "SB16AD.f"
     if (*ncs == 0) {
+#line 657 "SB16AD.f"
 	*ncr = ncu;
+#line 658 "SB16AD.f"
 	iwork[1] = 0;
+#line 659 "SB16AD.f"
 	dwork[1] = (doublereal) wrkopt;
+#line 660 "SB16AD.f"
 	return 0;
+#line 661 "SB16AD.f"
     }
 
 /*     Allocate working storage. */
 
+#line 665 "SB16AD.f"
     kt = 1;
+#line 666 "SB16AD.f"
     kti = kt + *nc * *nc;
+#line 667 "SB16AD.f"
     kw = kti + *nc * *nc;
 
 /*     Compute in DWORK(KTI) and DWORK(KT) the Cholesky factors S and R */
@@ -786,18 +959,25 @@
 /*     Integer workspace:      2*(M+P) if WEIGHT = 'I' or 'O' or 'P'; */
 /*                             0,      if WEIGHT = 'N'. */
 
+#line 684 "SB16AD.f"
     i__1 = *ldwork - kw + 1;
+#line 684 "SB16AD.f"
     sb16ay_(dico, jobc, jobo, weight, n, m, p, nc, ncs, &a[a_offset], lda, &b[
 	    b_offset], ldb, &c__[c_offset], ldc, &d__[d_offset], ldd, &ac[
 	    ac_offset], ldac, &bc[bc_offset], ldbc, &cc[cc_offset], ldcc, &dc[
 	    dc_offset], lddc, &scalec, &scaleo, &dwork[kti], nc, &dwork[kt], 
 	    nc, &iwork[1], &dwork[kw], &i__1, info, (ftnlen)1, (ftnlen)1, (
 	    ftnlen)1, (ftnlen)1);
+#line 689 "SB16AD.f"
     if (*info != 0) {
+#line 689 "SB16AD.f"
 	return 0;
+#line 689 "SB16AD.f"
     }
 /* Computing MAX */
+#line 691 "SB16AD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 691 "SB16AD.f"
     wrkopt = max(i__1,i__2);
 
 /*     Compute a BTA or SPA of the stable part. */
@@ -808,25 +988,38 @@
 /*                             NC,    if JOBMR = 'F'; */
 /*                             2*NC,  if JOBMR = 'S' or 'P'. */
 
+#line 701 "SB16AD.f"
     ncu1 = ncu + 1;
+#line 702 "SB16AD.f"
     i__1 = *ldwork - kw + 1;
+#line 702 "SB16AD.f"
     ab09ix_(dico, jobmr, "Schur", ordsel, ncs, p, m, &nra, &scalec, &scaleo, &
 	    ac[ncu1 + ncu1 * ac_dim1], ldac, &bc[ncu1 + bc_dim1], ldbc, &cc[
 	    ncu1 * cc_dim1 + 1], ldcc, &dc[dc_offset], lddc, &dwork[kti], nc, 
 	    &dwork[kt], nc, &nmr, &hsvc[1], tol1, tol2, &iwork[1], &dwork[kw],
 	     &i__1, iwarn, &ierr, (ftnlen)1, (ftnlen)1, (ftnlen)5, (ftnlen)1);
+#line 707 "SB16AD.f"
     *iwarn = max(*iwarn,iwarnl);
+#line 708 "SB16AD.f"
     if (ierr != 0) {
+#line 709 "SB16AD.f"
 	*info = 7;
+#line 710 "SB16AD.f"
 	return 0;
+#line 711 "SB16AD.f"
     }
+#line 712 "SB16AD.f"
     *ncr = nra + ncu;
+#line 713 "SB16AD.f"
     iwork[1] = nmr;
 
 /* Computing MAX */
+#line 715 "SB16AD.f"
     i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 715 "SB16AD.f"
     dwork[1] = (doublereal) max(i__1,i__2);
 
+#line 717 "SB16AD.f"
     return 0;
 /* *** Last line of SB16AD *** */
 } /* sb16ad_ */

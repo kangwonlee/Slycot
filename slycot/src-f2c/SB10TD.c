@@ -1,3 +1,4 @@
+#line 1 "SB10TD.f"
 /* SB10TD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB10TD.f"
 /* Table of constant values */
 
 static doublereal c_b6 = 1.;
@@ -264,160 +266,261 @@ static doublereal c_b39 = -1.;
 
 /*     Decode and Test input parameters. */
 
+#line 229 "SB10TD.f"
     /* Parameter adjustments */
+#line 229 "SB10TD.f"
     d_dim1 = *ldd;
+#line 229 "SB10TD.f"
     d_offset = 1 + d_dim1;
+#line 229 "SB10TD.f"
     d__ -= d_offset;
+#line 229 "SB10TD.f"
     tu_dim1 = *ldtu;
+#line 229 "SB10TD.f"
     tu_offset = 1 + tu_dim1;
+#line 229 "SB10TD.f"
     tu -= tu_offset;
+#line 229 "SB10TD.f"
     ty_dim1 = *ldty;
+#line 229 "SB10TD.f"
     ty_offset = 1 + ty_dim1;
+#line 229 "SB10TD.f"
     ty -= ty_offset;
+#line 229 "SB10TD.f"
     ak_dim1 = *ldak;
+#line 229 "SB10TD.f"
     ak_offset = 1 + ak_dim1;
+#line 229 "SB10TD.f"
     ak -= ak_offset;
+#line 229 "SB10TD.f"
     bk_dim1 = *ldbk;
+#line 229 "SB10TD.f"
     bk_offset = 1 + bk_dim1;
+#line 229 "SB10TD.f"
     bk -= bk_offset;
+#line 229 "SB10TD.f"
     ck_dim1 = *ldck;
+#line 229 "SB10TD.f"
     ck_offset = 1 + ck_dim1;
+#line 229 "SB10TD.f"
     ck -= ck_offset;
+#line 229 "SB10TD.f"
     dk_dim1 = *lddk;
+#line 229 "SB10TD.f"
     dk_offset = 1 + dk_dim1;
+#line 229 "SB10TD.f"
     dk -= dk_offset;
+#line 229 "SB10TD.f"
     --iwork;
+#line 229 "SB10TD.f"
     --dwork;
+#line 229 "SB10TD.f"
 
+#line 229 "SB10TD.f"
     /* Function Body */
+#line 229 "SB10TD.f"
     m1 = *m - *ncon;
+#line 230 "SB10TD.f"
     m2 = *ncon;
+#line 231 "SB10TD.f"
     np1 = *np - *nmeas;
+#line 232 "SB10TD.f"
     np2 = *nmeas;
 
+#line 234 "SB10TD.f"
     *info = 0;
+#line 235 "SB10TD.f"
     if (*n < 0) {
+#line 236 "SB10TD.f"
 	*info = -1;
+#line 237 "SB10TD.f"
     } else if (*m < 0) {
+#line 238 "SB10TD.f"
 	*info = -2;
+#line 239 "SB10TD.f"
     } else if (*np < 0) {
+#line 240 "SB10TD.f"
 	*info = -3;
+#line 241 "SB10TD.f"
     } else if (*ncon < 0 || m1 < 0 || m2 > np1) {
+#line 242 "SB10TD.f"
 	*info = -4;
+#line 243 "SB10TD.f"
     } else if (*nmeas < 0 || np1 < 0 || np2 > m1) {
+#line 244 "SB10TD.f"
 	*info = -5;
+#line 245 "SB10TD.f"
     } else if (*ldd < max(1,*np)) {
+#line 246 "SB10TD.f"
 	*info = -7;
+#line 247 "SB10TD.f"
     } else if (*ldtu < max(1,m2)) {
+#line 248 "SB10TD.f"
 	*info = -9;
+#line 249 "SB10TD.f"
     } else if (*ldty < max(1,np2)) {
+#line 250 "SB10TD.f"
 	*info = -11;
+#line 251 "SB10TD.f"
     } else if (*ldak < max(1,*n)) {
+#line 252 "SB10TD.f"
 	*info = -13;
+#line 253 "SB10TD.f"
     } else if (*ldbk < max(1,*n)) {
+#line 254 "SB10TD.f"
 	*info = -15;
+#line 255 "SB10TD.f"
     } else if (*ldck < max(1,m2)) {
+#line 256 "SB10TD.f"
 	*info = -17;
+#line 257 "SB10TD.f"
     } else if (*lddk < max(1,m2)) {
+#line 258 "SB10TD.f"
 	*info = -19;
+#line 259 "SB10TD.f"
     } else {
 
 /*        Compute workspace. */
 
 /* Computing MAX */
+#line 263 "SB10TD.f"
 	i__1 = *n * m2, i__2 = *n * np2, i__1 = max(i__1,i__2), i__2 = m2 * 
 		np2, i__1 = max(i__1,i__2), i__2 = m2 * (m2 + 4);
+#line 263 "SB10TD.f"
 	minwrk = max(i__1,i__2);
+#line 264 "SB10TD.f"
 	if (*ldwork < minwrk) {
+#line 264 "SB10TD.f"
 	    *info = -24;
+#line 264 "SB10TD.f"
 	}
+#line 266 "SB10TD.f"
     }
+#line 267 "SB10TD.f"
     if (*info != 0) {
+#line 268 "SB10TD.f"
 	i__1 = -(*info);
+#line 268 "SB10TD.f"
 	xerbla_("SB10TD", &i__1, (ftnlen)6);
+#line 269 "SB10TD.f"
 	return 0;
+#line 270 "SB10TD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 274 "SB10TD.f"
     if (*n == 0 || *m == 0 || *np == 0 || m1 == 0 || m2 == 0 || np1 == 0 || 
 	    np2 == 0) {
+#line 276 "SB10TD.f"
 	*rcond = 1.;
+#line 277 "SB10TD.f"
 	return 0;
+#line 278 "SB10TD.f"
     }
 
+#line 280 "SB10TD.f"
     toll = *tol;
+#line 281 "SB10TD.f"
     if (toll <= 0.) {
 
 /*        Set the default value of the tolerance for nonsingularity test. */
 
+#line 285 "SB10TD.f"
 	toll = sqrt(dlamch_("Epsilon", (ftnlen)7));
+#line 286 "SB10TD.f"
     }
 
 /*     Find BKHAT . */
 
+#line 290 "SB10TD.f"
     dgemm_("N", "N", n, &np2, &np2, &c_b6, &bk[bk_offset], ldbk, &ty[
 	    ty_offset], ldty, &c_b7, &dwork[1], n, (ftnlen)1, (ftnlen)1);
+#line 292 "SB10TD.f"
     dlacpy_("Full", n, &np2, &dwork[1], n, &bk[bk_offset], ldbk, (ftnlen)4);
 
 /*     Find CKHAT . */
 
+#line 296 "SB10TD.f"
     dgemm_("N", "N", &m2, n, &m2, &c_b6, &tu[tu_offset], ldtu, &ck[ck_offset],
 	     ldck, &c_b7, &dwork[1], &m2, (ftnlen)1, (ftnlen)1);
+#line 298 "SB10TD.f"
     dlacpy_("Full", &m2, n, &dwork[1], &m2, &ck[ck_offset], ldck, (ftnlen)4);
 
 /*     Compute DKHAT . */
 
+#line 302 "SB10TD.f"
     dgemm_("N", "N", &m2, &np2, &m2, &c_b6, &tu[tu_offset], ldtu, &dk[
 	    dk_offset], lddk, &c_b7, &dwork[1], &m2, (ftnlen)1, (ftnlen)1);
+#line 304 "SB10TD.f"
     dgemm_("N", "N", &m2, &np2, &np2, &c_b6, &dwork[1], &m2, &ty[ty_offset], 
 	    ldty, &c_b7, &dk[dk_offset], lddk, (ftnlen)1, (ftnlen)1);
 
 /*     Compute Im2 + DKHAT*D22 . */
 
+#line 309 "SB10TD.f"
     iwrk = m2 * m2 + 1;
+#line 310 "SB10TD.f"
     dlaset_("Full", &m2, &m2, &c_b7, &c_b6, &dwork[1], &m2, (ftnlen)4);
+#line 311 "SB10TD.f"
     dgemm_("N", "N", &m2, &m2, &np2, &c_b6, &dk[dk_offset], lddk, &d__[np1 + 
 	    1 + (m1 + 1) * d_dim1], ldd, &c_b6, &dwork[1], &m2, (ftnlen)1, (
 	    ftnlen)1);
+#line 313 "SB10TD.f"
     anorm = dlange_("1", &m2, &m2, &dwork[1], &m2, &dwork[iwrk], (ftnlen)1);
+#line 314 "SB10TD.f"
     dgetrf_(&m2, &m2, &dwork[1], &m2, &iwork[1], &info2);
+#line 315 "SB10TD.f"
     if (info2 > 0) {
+#line 316 "SB10TD.f"
 	*info = 1;
+#line 317 "SB10TD.f"
 	return 0;
+#line 318 "SB10TD.f"
     }
+#line 319 "SB10TD.f"
     dgecon_("1", &m2, &dwork[1], &m2, &anorm, rcond, &dwork[iwrk], &iwork[m2 
 	    + 1], &info2, (ftnlen)1);
 
 /*     Return if the matrix is singular to working precision. */
 
+#line 324 "SB10TD.f"
     if (*rcond < toll) {
+#line 325 "SB10TD.f"
 	*info = 1;
+#line 326 "SB10TD.f"
 	return 0;
+#line 327 "SB10TD.f"
     }
 
 /*     Compute CK . */
 
+#line 331 "SB10TD.f"
     dgetrs_("N", &m2, n, &dwork[1], &m2, &iwork[1], &ck[ck_offset], ldck, &
 	    info2, (ftnlen)1);
 
 /*     Compute DK . */
 
+#line 335 "SB10TD.f"
     dgetrs_("N", &m2, &np2, &dwork[1], &m2, &iwork[1], &dk[dk_offset], lddk, &
 	    info2, (ftnlen)1);
 
 /*     Compute AK . */
 
+#line 339 "SB10TD.f"
     dgemm_("N", "N", n, &m2, &np2, &c_b6, &bk[bk_offset], ldbk, &d__[np1 + 1 
 	    + (m1 + 1) * d_dim1], ldd, &c_b7, &dwork[1], n, (ftnlen)1, (
 	    ftnlen)1);
+#line 341 "SB10TD.f"
     dgemm_("N", "N", n, n, &m2, &c_b39, &dwork[1], n, &ck[ck_offset], ldck, &
 	    c_b6, &ak[ak_offset], ldak, (ftnlen)1, (ftnlen)1);
 
 /*     Compute BK . */
 
+#line 346 "SB10TD.f"
     dgemm_("N", "N", n, &np2, &m2, &c_b39, &dwork[1], n, &dk[dk_offset], lddk,
 	     &c_b6, &bk[bk_offset], ldbk, (ftnlen)1, (ftnlen)1);
+#line 348 "SB10TD.f"
     return 0;
 /* *** Last line of SB10TD *** */
 } /* sb10td_ */

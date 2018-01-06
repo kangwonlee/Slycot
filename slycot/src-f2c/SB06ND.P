@@ -1,0 +1,9 @@
+extern int sb06nd_(integer *n, integer *m, integer *kmax, doublereal *a, integer *lda, doublereal *b, integer *ldb, integer *kstair, doublereal *u, integer *ldu, doublereal *f, integer *ldf, doublereal *dwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dlatzm_ 14 11 13 4 4 7 4 7 7 7 4 7 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dtrsm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */

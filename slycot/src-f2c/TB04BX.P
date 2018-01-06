@@ -1,0 +1,4 @@
+extern int tb04bx_(integer *ip, integer *iz, doublereal *a, integer *lda, doublereal *b, doublereal *c__, doublereal *d__, doublereal *pr, doublereal *pi, doublereal *zr, doublereal *zi, doublereal *gain, integer *iwork);
+/*:ref: mb02sd_ 14 5 4 7 4 4 4 */
+/*:ref: mb02rd_ 14 10 13 4 4 7 4 4 7 4 4 124 */
+/*:ref: ddot_ 7 5 4 7 4 7 4 */

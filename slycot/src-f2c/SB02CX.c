@@ -1,3 +1,4 @@
+#line 1 "SB02CX.f"
 /* SB02CX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB02CX.f"
 logical sb02cx_(doublereal *reig, doublereal *ieig)
 {
     /* System generated locals */
@@ -96,14 +98,18 @@ logical sb02cx_(doublereal *reig, doublereal *ieig)
 
 /*     Get the machine precision. */
 
+#line 84 "SB02CX.f"
     eps = dlamch_("Epsilon", (ftnlen)7);
 
 /*     Set the tolerance in the determination of the purely */
 /*     imaginary eigenvalues. */
 
+#line 89 "SB02CX.f"
     tol = eps * 100.;
+#line 90 "SB02CX.f"
     ret_val = abs(*reig) < tol;
 
+#line 92 "SB02CX.f"
     return ret_val;
 /* *** Last line of SB02CX *** */
 } /* sb02cx_ */

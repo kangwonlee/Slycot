@@ -1,3 +1,4 @@
+#line 1 "TB01PD.f"
 /* TB01PD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TB01PD.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -249,76 +251,133 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 218 "TB01PD.f"
     /* Parameter adjustments */
+#line 218 "TB01PD.f"
     a_dim1 = *lda;
+#line 218 "TB01PD.f"
     a_offset = 1 + a_dim1;
+#line 218 "TB01PD.f"
     a -= a_offset;
+#line 218 "TB01PD.f"
     b_dim1 = *ldb;
+#line 218 "TB01PD.f"
     b_offset = 1 + b_dim1;
+#line 218 "TB01PD.f"
     b -= b_offset;
+#line 218 "TB01PD.f"
     c_dim1 = *ldc;
+#line 218 "TB01PD.f"
     c_offset = 1 + c_dim1;
+#line 218 "TB01PD.f"
     c__ -= c_offset;
+#line 218 "TB01PD.f"
     --iwork;
+#line 218 "TB01PD.f"
     --dwork;
+#line 218 "TB01PD.f"
 
+#line 218 "TB01PD.f"
     /* Function Body */
+#line 218 "TB01PD.f"
     *info = 0;
+#line 219 "TB01PD.f"
     maxmp = max(*m,*p);
+#line 220 "TB01PD.f"
     lnjobc = ! lsame_(job, "C", (ftnlen)1, (ftnlen)1);
+#line 221 "TB01PD.f"
     lnjobo = ! lsame_(job, "O", (ftnlen)1, (ftnlen)1);
+#line 222 "TB01PD.f"
     lequil = lsame_(equil, "S", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 226 "TB01PD.f"
     if (lnjobc && lnjobo && ! lsame_(job, "M", (ftnlen)1, (ftnlen)1)) {
+#line 227 "TB01PD.f"
 	*info = -1;
+#line 228 "TB01PD.f"
     } else if (! lequil && ! lsame_(equil, "N", (ftnlen)1, (ftnlen)1)) {
+#line 229 "TB01PD.f"
 	*info = -2;
+#line 230 "TB01PD.f"
     } else if (*n < 0) {
+#line 231 "TB01PD.f"
 	*info = -3;
+#line 232 "TB01PD.f"
     } else if (*m < 0) {
+#line 233 "TB01PD.f"
 	*info = -4;
+#line 234 "TB01PD.f"
     } else if (*p < 0) {
+#line 235 "TB01PD.f"
 	*info = -5;
+#line 236 "TB01PD.f"
     } else if (*lda < max(1,*n)) {
+#line 237 "TB01PD.f"
 	*info = -7;
+#line 238 "TB01PD.f"
     } else if (*ldb < max(1,*n)) {
+#line 239 "TB01PD.f"
 	*info = -9;
+#line 240 "TB01PD.f"
     } else if (*ldc < 1 || *n > 0 && *ldc < maxmp) {
+#line 241 "TB01PD.f"
 	*info = -11;
+#line 242 "TB01PD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 242 "TB01PD.f"
 	i__3 = *n, i__4 = maxmp * 3;
+#line 242 "TB01PD.f"
 	i__1 = 1, i__2 = *n + max(i__3,i__4);
+#line 242 "TB01PD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 243 "TB01PD.f"
 	    *info = -16;
+#line 244 "TB01PD.f"
 	}
+#line 244 "TB01PD.f"
     }
 
+#line 246 "TB01PD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 250 "TB01PD.f"
 	i__1 = -(*info);
+#line 250 "TB01PD.f"
 	xerbla_("TB01PD", &i__1, (ftnlen)6);
+#line 251 "TB01PD.f"
 	return 0;
+#line 252 "TB01PD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 256 "TB01PD.f"
     if (*n == 0 || lnjobc && min(*n,*p) == 0 || lnjobo && min(*n,*m) == 0) {
+#line 258 "TB01PD.f"
 	*nr = 0;
 
+#line 260 "TB01PD.f"
 	i__1 = *n;
+#line 260 "TB01PD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 261 "TB01PD.f"
 	    iwork[i__] = 0;
+#line 262 "TB01PD.f"
 /* L5: */
+#line 262 "TB01PD.f"
 	}
 
+#line 264 "TB01PD.f"
 	dwork[1] = 1.;
+#line 265 "TB01PD.f"
 	return 0;
+#line 266 "TB01PD.f"
     }
 
 /*     If required, balance the triplet (A,B,C) (default MAXRED). */
@@ -328,18 +387,29 @@ static integer c__1 = 1;
 /*     minimal amount of real workspace needed at that point in the code, */
 /*     as well as the preferred amount for good performance.) */
 
+#line 275 "TB01PD.f"
     if (lequil) {
+#line 276 "TB01PD.f"
 	maxred = 0.;
+#line 277 "TB01PD.f"
 	tb01id_("A", n, m, p, &maxred, &a[a_offset], lda, &b[b_offset], ldb, &
 		c__[c_offset], ldc, &dwork[1], info, (ftnlen)1);
+#line 279 "TB01PD.f"
 	wrkopt = *n;
+#line 280 "TB01PD.f"
     } else {
+#line 281 "TB01PD.f"
 	wrkopt = 1;
+#line 282 "TB01PD.f"
     }
 
+#line 284 "TB01PD.f"
     iz = 1;
+#line 285 "TB01PD.f"
     itau = 1;
+#line 286 "TB01PD.f"
     jwork = itau + *n;
+#line 287 "TB01PD.f"
     if (lnjobo) {
 
 /*        Separate out controllable subsystem (of order NCONT): */
@@ -348,23 +418,31 @@ static integer c__1 = 1;
 /*        Workspace: need   N + MAX(N, 3*M, P). */
 /*                   prefer larger. */
 
+#line 295 "TB01PD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 295 "TB01PD.f"
 	tb01ud_("No Z", n, m, p, &a[a_offset], lda, &b[b_offset], ldb, &c__[
 		c_offset], ldc, &ncont, &indcon, &iwork[1], &dwork[iz], &c__1,
 		 &dwork[itau], tol, &iwork[*n + 1], &dwork[jwork], &i__1, 
 		info, (ftnlen)4);
 
+#line 299 "TB01PD.f"
 	wrkopt = (integer) dwork[jwork] + jwork - 1;
+#line 300 "TB01PD.f"
     } else {
+#line 301 "TB01PD.f"
 	ncont = *n;
+#line 302 "TB01PD.f"
     }
 
+#line 304 "TB01PD.f"
     if (lnjobc) {
 
 /*        Separate out the observable subsystem (of order NR): */
 /*        Form the dual of the subsystem of order NCONT (which is */
 /*        controllable, if JOB = 'M'), leaving rest as it is. */
 
+#line 310 "TB01PD.f"
 	ab07md_("Z", &ncont, m, p, &a[a_offset], lda, &b[b_offset], ldb, &c__[
 		c_offset], ldc, &dwork[1], &c__1, info, (ftnlen)1);
 
@@ -373,49 +451,74 @@ static integer c__1 = 1;
 /*        Workspace: need   NCONT + MAX(NCONT, 3*P, M). */
 /*                   prefer larger. */
 
+#line 318 "TB01PD.f"
 	i__1 = *ldwork - jwork + 1;
+#line 318 "TB01PD.f"
 	tb01ud_("No Z", &ncont, p, m, &a[a_offset], lda, &b[b_offset], ldb, &
 		c__[c_offset], ldc, nr, &indcon, &iwork[1], &dwork[iz], &c__1,
 		 &dwork[itau], tol, &iwork[*n + 1], &dwork[jwork], &i__1, 
 		info, (ftnlen)4);
 
 /* Computing MAX */
+#line 322 "TB01PD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[jwork] + jwork - 1;
+#line 322 "TB01PD.f"
 	wrkopt = max(i__1,i__2);
 
 /*        Transpose and reorder (to get a block upper Hessenberg */
 /*        matrix A), giving, for JOB = 'M', the controllable and */
 /*        observable (i.e., minimal) part of original system. */
 
+#line 328 "TB01PD.f"
 	if (indcon > 0) {
+#line 329 "TB01PD.f"
 	    kl = iwork[1] - 1;
+#line 330 "TB01PD.f"
 	    if (indcon >= 2) {
+#line 330 "TB01PD.f"
 		kl += iwork[2];
+#line 330 "TB01PD.f"
 	    }
+#line 332 "TB01PD.f"
 	} else {
+#line 333 "TB01PD.f"
 	    kl = 0;
+#line 334 "TB01PD.f"
 	}
 /* Computing MAX */
+#line 335 "TB01PD.f"
 	i__2 = 0, i__3 = *nr - 1;
+#line 335 "TB01PD.f"
 	i__1 = max(i__2,i__3);
+#line 335 "TB01PD.f"
 	tb01xd_("Zero D", nr, p, m, &kl, &i__1, &a[a_offset], lda, &b[
 		b_offset], ldb, &c__[c_offset], ldc, &dwork[1], &c__1, info, (
 		ftnlen)6);
+#line 337 "TB01PD.f"
     } else {
+#line 338 "TB01PD.f"
 	*nr = ncont;
+#line 339 "TB01PD.f"
     }
 
 /*     Annihilate the trailing components of IWORK(1:N). */
 
+#line 343 "TB01PD.f"
     i__1 = *n;
+#line 343 "TB01PD.f"
     for (i__ = indcon + 1; i__ <= i__1; ++i__) {
+#line 344 "TB01PD.f"
 	iwork[i__] = 0;
+#line 345 "TB01PD.f"
 /* L10: */
+#line 345 "TB01PD.f"
     }
 
 /*     Set optimal workspace dimension. */
 
+#line 349 "TB01PD.f"
     dwork[1] = (doublereal) wrkopt;
+#line 350 "TB01PD.f"
     return 0;
 /* *** Last line of TB01PD *** */
 } /* tb01pd_ */

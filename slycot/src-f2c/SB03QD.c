@@ -1,3 +1,4 @@
+#line 1 "SB03QD.f"
 /* SB03QD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB03QD.f"
 /* Table of constant values */
 
 static doublereal c_b21 = 0.;
@@ -374,212 +376,374 @@ static doublereal c_b41 = 1.;
 
 /*     Decode and Test input parameters. */
 
+#line 312 "SB03QD.f"
     /* Parameter adjustments */
+#line 312 "SB03QD.f"
     a_dim1 = *lda;
+#line 312 "SB03QD.f"
     a_offset = 1 + a_dim1;
+#line 312 "SB03QD.f"
     a -= a_offset;
+#line 312 "SB03QD.f"
     t_dim1 = *ldt;
+#line 312 "SB03QD.f"
     t_offset = 1 + t_dim1;
+#line 312 "SB03QD.f"
     t -= t_offset;
+#line 312 "SB03QD.f"
     u_dim1 = *ldu;
+#line 312 "SB03QD.f"
     u_offset = 1 + u_dim1;
+#line 312 "SB03QD.f"
     u -= u_offset;
+#line 312 "SB03QD.f"
     c_dim1 = *ldc;
+#line 312 "SB03QD.f"
     c_offset = 1 + c_dim1;
+#line 312 "SB03QD.f"
     c__ -= c_offset;
+#line 312 "SB03QD.f"
     x_dim1 = *ldx;
+#line 312 "SB03QD.f"
     x_offset = 1 + x_dim1;
+#line 312 "SB03QD.f"
     x -= x_offset;
+#line 312 "SB03QD.f"
     --iwork;
+#line 312 "SB03QD.f"
     --dwork;
+#line 312 "SB03QD.f"
 
+#line 312 "SB03QD.f"
     /* Function Body */
+#line 312 "SB03QD.f"
     jobc = lsame_(job, "C", (ftnlen)1, (ftnlen)1);
+#line 313 "SB03QD.f"
     jobe = lsame_(job, "E", (ftnlen)1, (ftnlen)1);
+#line 314 "SB03QD.f"
     jobb = lsame_(job, "B", (ftnlen)1, (ftnlen)1);
+#line 315 "SB03QD.f"
     nofact = lsame_(fact, "N", (ftnlen)1, (ftnlen)1);
+#line 316 "SB03QD.f"
     notrna = lsame_(trana, "N", (ftnlen)1, (ftnlen)1);
+#line 317 "SB03QD.f"
     lower = lsame_(uplo, "L", (ftnlen)1, (ftnlen)1);
+#line 318 "SB03QD.f"
     update = lsame_(lyapun, "O", (ftnlen)1, (ftnlen)1);
 
+#line 320 "SB03QD.f"
     nn = *n * *n;
+#line 321 "SB03QD.f"
     if (jobc) {
+#line 322 "SB03QD.f"
 	ldw = nn << 1;
+#line 323 "SB03QD.f"
     } else {
+#line 324 "SB03QD.f"
 	ldw = nn * 3;
+#line 325 "SB03QD.f"
     }
+#line 326 "SB03QD.f"
     if (! (jobc || update)) {
+#line 326 "SB03QD.f"
 	ldw = ldw + *n - 1;
+#line 326 "SB03QD.f"
     }
 
+#line 329 "SB03QD.f"
     *info = 0;
+#line 330 "SB03QD.f"
     if (! (jobb || jobc || jobe)) {
+#line 331 "SB03QD.f"
 	*info = -1;
+#line 332 "SB03QD.f"
     } else if (! (nofact || lsame_(fact, "F", (ftnlen)1, (ftnlen)1))) {
+#line 333 "SB03QD.f"
 	*info = -2;
+#line 334 "SB03QD.f"
     } else if (! (notrna || lsame_(trana, "T", (ftnlen)1, (ftnlen)1) || 
 	    lsame_(trana, "C", (ftnlen)1, (ftnlen)1))) {
+#line 336 "SB03QD.f"
 	*info = -3;
+#line 337 "SB03QD.f"
     } else if (! (lower || lsame_(uplo, "U", (ftnlen)1, (ftnlen)1))) {
+#line 338 "SB03QD.f"
 	*info = -4;
+#line 339 "SB03QD.f"
     } else if (! (update || lsame_(lyapun, "R", (ftnlen)1, (ftnlen)1))) {
+#line 340 "SB03QD.f"
 	*info = -5;
+#line 341 "SB03QD.f"
     } else if (*n < 0) {
+#line 342 "SB03QD.f"
 	*info = -6;
+#line 343 "SB03QD.f"
     } else if (*scale < 0. || *scale > 1.) {
+#line 344 "SB03QD.f"
 	*info = -7;
+#line 345 "SB03QD.f"
     } else if (*lda < 1 || *lda < *n && (update || nofact)) {
+#line 347 "SB03QD.f"
 	*info = -9;
+#line 348 "SB03QD.f"
     } else if (*ldt < max(1,*n)) {
+#line 349 "SB03QD.f"
 	*info = -11;
+#line 350 "SB03QD.f"
     } else if (*ldu < 1 || *ldu < *n && update) {
+#line 351 "SB03QD.f"
 	*info = -13;
+#line 352 "SB03QD.f"
     } else if (*ldc < max(1,*n)) {
+#line 353 "SB03QD.f"
 	*info = -15;
+#line 354 "SB03QD.f"
     } else if (*ldx < max(1,*n)) {
+#line 355 "SB03QD.f"
 	*info = -17;
+#line 356 "SB03QD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
+#line 356 "SB03QD.f"
 	i__1 = ldw, i__2 = *n * 5;
+#line 356 "SB03QD.f"
 	if (*ldwork < 1 || *ldwork < ldw && ! nofact || *ldwork < max(i__1,
 		i__2) && nofact) {
+#line 359 "SB03QD.f"
 	    *info = -23;
+#line 360 "SB03QD.f"
 	}
+#line 360 "SB03QD.f"
     }
 
+#line 362 "SB03QD.f"
     if (*info != 0) {
+#line 363 "SB03QD.f"
 	i__1 = -(*info);
+#line 363 "SB03QD.f"
 	xerbla_("SB03QD", &i__1, (ftnlen)6);
+#line 364 "SB03QD.f"
 	return 0;
+#line 365 "SB03QD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 369 "SB03QD.f"
     if (*n == 0) {
+#line 370 "SB03QD.f"
 	if (! jobe) {
+#line 370 "SB03QD.f"
 	    *rcond = 1.;
+#line 370 "SB03QD.f"
 	}
+#line 372 "SB03QD.f"
 	if (! jobc) {
+#line 372 "SB03QD.f"
 	    *ferr = 0.;
+#line 372 "SB03QD.f"
 	}
+#line 374 "SB03QD.f"
 	dwork[1] = 1.;
+#line 375 "SB03QD.f"
 	return 0;
+#line 376 "SB03QD.f"
     }
 
 /*     Compute the 1-norm of the matrix X. */
 
+#line 380 "SB03QD.f"
     xnorm = dlansy_("1-norm", uplo, n, &x[x_offset], ldx, &dwork[1], (ftnlen)
 	    6, (ftnlen)1);
+#line 381 "SB03QD.f"
     if (xnorm == 0.) {
 
 /*        The solution is zero. */
 
+#line 385 "SB03QD.f"
 	if (! jobe) {
+#line 385 "SB03QD.f"
 	    *rcond = 0.;
+#line 385 "SB03QD.f"
 	}
+#line 387 "SB03QD.f"
 	if (! jobc) {
+#line 387 "SB03QD.f"
 	    *ferr = 0.;
+#line 387 "SB03QD.f"
 	}
+#line 389 "SB03QD.f"
 	dwork[1] = (doublereal) (*n);
+#line 390 "SB03QD.f"
 	return 0;
+#line 391 "SB03QD.f"
     }
 
 /*     Compute the 1-norm of A or T. */
 
+#line 395 "SB03QD.f"
     if (nofact || update) {
+#line 396 "SB03QD.f"
 	anorm = dlange_("1-norm", n, n, &a[a_offset], lda, &dwork[1], (ftnlen)
 		6);
+#line 397 "SB03QD.f"
     } else {
+#line 398 "SB03QD.f"
 	anorm = dlanhs_("1-norm", n, &t[t_offset], ldt, &dwork[1], (ftnlen)6);
+#line 399 "SB03QD.f"
     }
 
 /*     For the special case A = 0, set SEP and RCOND to 0. */
 /*     For the special case A = I, set SEP to 2 and RCOND to 1. */
 /*     A quick test is used in general. */
 
+#line 405 "SB03QD.f"
     if (anorm == 1.) {
+#line 406 "SB03QD.f"
 	if (nofact || update) {
+#line 407 "SB03QD.f"
 	    dlacpy_("Full", n, n, &a[a_offset], lda, &dwork[1], n, (ftnlen)4);
+#line 408 "SB03QD.f"
 	} else {
+#line 409 "SB03QD.f"
 	    dlacpy_("Full", n, n, &t[t_offset], ldt, &dwork[1], n, (ftnlen)4);
+#line 410 "SB03QD.f"
 	    if (*n > 2) {
+#line 410 "SB03QD.f"
 		i__1 = *n - 2;
+#line 410 "SB03QD.f"
 		i__2 = *n - 2;
+#line 410 "SB03QD.f"
 		dlaset_("Lower", &i__1, &i__2, &c_b21, &c_b21, &dwork[3], n, (
 			ftnlen)5);
+#line 410 "SB03QD.f"
 	    }
+#line 413 "SB03QD.f"
 	}
+#line 414 "SB03QD.f"
 	dwork[nn + 1] = 1.;
+#line 415 "SB03QD.f"
 	i__1 = *n + 1;
+#line 415 "SB03QD.f"
 	daxpy_(n, &c_b23, &dwork[nn + 1], &c__0, &dwork[1], &i__1);
+#line 416 "SB03QD.f"
 	if (dlange_("Max", n, n, &dwork[1], n, &dwork[1], (ftnlen)3) == 0.) {
+#line 417 "SB03QD.f"
 	    if (! jobe) {
+#line 418 "SB03QD.f"
 		*sep = 2.;
+#line 419 "SB03QD.f"
 		*rcond = 1.;
+#line 420 "SB03QD.f"
 	    }
+#line 421 "SB03QD.f"
 	    if (jobc) {
+#line 422 "SB03QD.f"
 		dwork[1] = (doublereal) (nn + 1);
+#line 423 "SB03QD.f"
 		return 0;
+#line 424 "SB03QD.f"
 	    } else {
 
 /*              Set FERR for the special case A = I. */
 
+#line 428 "SB03QD.f"
 		dlacpy_(uplo, n, n, &x[x_offset], ldx, &dwork[1], n, (ftnlen)
 			1);
 
+#line 430 "SB03QD.f"
 		if (lower) {
+#line 431 "SB03QD.f"
 		    i__1 = *n;
+#line 431 "SB03QD.f"
 		    for (j = 1; j <= i__1; ++j) {
+#line 432 "SB03QD.f"
 			i__2 = *n - j + 1;
+#line 432 "SB03QD.f"
 			d__1 = -(*scale) / 2.;
+#line 432 "SB03QD.f"
 			daxpy_(&i__2, &d__1, &c__[j + j * c_dim1], &c__1, &
 				dwork[(j - 1) * *n + j], &c__1);
+#line 434 "SB03QD.f"
 /* L10: */
+#line 434 "SB03QD.f"
 		    }
+#line 435 "SB03QD.f"
 		} else {
+#line 436 "SB03QD.f"
 		    i__1 = *n;
+#line 436 "SB03QD.f"
 		    for (j = 1; j <= i__1; ++j) {
+#line 437 "SB03QD.f"
 			d__1 = -(*scale) / 2.;
+#line 437 "SB03QD.f"
 			daxpy_(&j, &d__1, &c__[j * c_dim1 + 1], &c__1, &dwork[
 				(j - 1) * *n + 1], &c__1);
+#line 439 "SB03QD.f"
 /* L20: */
+#line 439 "SB03QD.f"
 		    }
+#line 440 "SB03QD.f"
 		}
 
 /* Computing MIN */
+#line 442 "SB03QD.f"
 		d__1 = 1., d__2 = dlansy_("1-norm", uplo, n, &dwork[1], n, &
 			dwork[nn + 1], (ftnlen)6, (ftnlen)1) / xnorm;
+#line 442 "SB03QD.f"
 		*ferr = min(d__1,d__2);
+#line 444 "SB03QD.f"
 		dwork[1] = (doublereal) (nn + *n);
+#line 445 "SB03QD.f"
 		return 0;
+#line 446 "SB03QD.f"
 	    }
+#line 447 "SB03QD.f"
 	}
 
+#line 449 "SB03QD.f"
     } else if (anorm == 0.) {
+#line 450 "SB03QD.f"
 	if (! jobe) {
+#line 451 "SB03QD.f"
 	    *sep = 0.;
+#line 452 "SB03QD.f"
 	    *rcond = 0.;
+#line 453 "SB03QD.f"
 	}
+#line 454 "SB03QD.f"
 	if (! jobc) {
+#line 454 "SB03QD.f"
 	    *ferr = 1.;
+#line 454 "SB03QD.f"
 	}
+#line 456 "SB03QD.f"
 	dwork[1] = (doublereal) (*n);
+#line 457 "SB03QD.f"
 	return 0;
+#line 458 "SB03QD.f"
     }
 
 /*     General case. */
 
+#line 462 "SB03QD.f"
     cnorm = dlansy_("1-norm", uplo, n, &c__[c_offset], ldc, &dwork[1], (
 	    ftnlen)6, (ftnlen)1);
 
 /*     Workspace usage. */
 
+#line 466 "SB03QD.f"
     iabs = 0;
+#line 467 "SB03QD.f"
     ixbs = iabs + nn;
+#line 468 "SB03QD.f"
     ires = ixbs + nn;
+#line 469 "SB03QD.f"
     iwrk = ires + nn;
+#line 470 "SB03QD.f"
     wrkopt = 0;
 
+#line 472 "SB03QD.f"
     if (nofact) {
 
 /*        Compute the Schur factorization of A, A = U*T*U'. */
@@ -589,68 +753,109 @@ static doublereal c_b41 = 1.;
 /*        minimal amount of real workspace needed at that point in the */
 /*        code, as well as the preferred amount for good performance.) */
 
+#line 481 "SB03QD.f"
 	dlacpy_("Full", n, n, &a[a_offset], lda, &t[t_offset], ldt, (ftnlen)4)
 		;
+#line 482 "SB03QD.f"
 	if (update) {
+#line 483 "SB03QD.f"
 	    *(unsigned char *)sjob = 'V';
+#line 484 "SB03QD.f"
 	} else {
+#line 485 "SB03QD.f"
 	    *(unsigned char *)sjob = 'N';
+#line 486 "SB03QD.f"
 	}
+#line 487 "SB03QD.f"
 	i__1 = *ldwork - (*n << 1);
+#line 487 "SB03QD.f"
 	dgees_(sjob, "Not ordered", (L_fp)select_, n, &t[t_offset], ldt, &
 		sdim, &dwork[1], &dwork[*n + 1], &u[u_offset], ldu, &dwork[(*
 		n << 1) + 1], &i__1, bwork, info, (ftnlen)1, (ftnlen)11);
+#line 490 "SB03QD.f"
 	if (*info > 0) {
+#line 490 "SB03QD.f"
 	    return 0;
+#line 490 "SB03QD.f"
 	}
+#line 492 "SB03QD.f"
 	wrkopt = (integer) dwork[(*n << 1) + 1] + (*n << 1);
+#line 493 "SB03QD.f"
     }
 
+#line 495 "SB03QD.f"
     if (! jobe) {
 
 /*        Estimate sep(op(A),-op(A)') = sep(op(T),-op(T)') and */
 /*        norm(Theta). */
 /*        Workspace 2*N*N. */
 
+#line 501 "SB03QD.f"
 	sb03qy_("Both", trana, lyapun, n, &t[t_offset], ldt, &u[u_offset], 
 		ldu, &x[x_offset], ldx, sep, &thnorm, &iwork[1], &dwork[1], 
 		ldwork, info, (ftnlen)4, (ftnlen)1, (ftnlen)1);
 
 /* Computing MAX */
+#line 504 "SB03QD.f"
 	i__1 = wrkopt, i__2 = nn << 1;
+#line 504 "SB03QD.f"
 	wrkopt = max(i__1,i__2);
 
 /*        Return if the equation is singular. */
 
+#line 508 "SB03QD.f"
 	if (*sep == 0.) {
+#line 509 "SB03QD.f"
 	    *rcond = 0.;
+#line 510 "SB03QD.f"
 	    if (jobb) {
+#line 510 "SB03QD.f"
 		*ferr = 1.;
+#line 510 "SB03QD.f"
 	    }
+#line 512 "SB03QD.f"
 	    dwork[1] = (doublereal) wrkopt;
+#line 513 "SB03QD.f"
 	    return 0;
+#line 514 "SB03QD.f"
 	}
 
 /*        Estimate the reciprocal condition number. */
 
 /* Computing MAX */
+#line 518 "SB03QD.f"
 	d__1 = max(*sep,xnorm);
+#line 518 "SB03QD.f"
 	tmax = max(d__1,anorm);
+#line 519 "SB03QD.f"
 	if (tmax <= 1.) {
+#line 520 "SB03QD.f"
 	    temp = *sep * xnorm;
+#line 521 "SB03QD.f"
 	    denom = *scale * cnorm + *sep * anorm * thnorm;
+#line 522 "SB03QD.f"
 	} else {
+#line 523 "SB03QD.f"
 	    temp = *sep / tmax * (xnorm / tmax);
+#line 524 "SB03QD.f"
 	    denom = *scale / tmax * (cnorm / tmax) + *sep / tmax * (anorm / 
 		    tmax) * thnorm;
+#line 526 "SB03QD.f"
 	}
+#line 527 "SB03QD.f"
 	if (temp >= denom) {
+#line 528 "SB03QD.f"
 	    *rcond = 1.;
+#line 529 "SB03QD.f"
 	} else {
+#line 530 "SB03QD.f"
 	    *rcond = temp / denom;
+#line 531 "SB03QD.f"
 	}
+#line 532 "SB03QD.f"
     }
 
+#line 534 "SB03QD.f"
     if (! jobc) {
 
 /*        Form a triangle of the residual matrix */
@@ -659,59 +864,98 @@ static doublereal c_b41 = 1.;
 /*        exploiting the symmetry. */
 /*        Workspace 3*N*N. */
 
+#line 542 "SB03QD.f"
 	if (notrna) {
+#line 543 "SB03QD.f"
 	    *(unsigned char *)tranat = 'T';
+#line 544 "SB03QD.f"
 	} else {
+#line 545 "SB03QD.f"
 	    *(unsigned char *)tranat = 'N';
+#line 546 "SB03QD.f"
 	}
 
+#line 548 "SB03QD.f"
 	if (update) {
 
+#line 550 "SB03QD.f"
 	    dlacpy_(uplo, n, n, &c__[c_offset], ldc, &dwork[ires + 1], n, (
 		    ftnlen)1);
+#line 551 "SB03QD.f"
 	    d__1 = -(*scale);
+#line 551 "SB03QD.f"
 	    dsyr2k_(uplo, tranat, n, n, &c_b41, &a[a_offset], lda, &x[
 		    x_offset], ldx, &d__1, &dwork[ires + 1], n, (ftnlen)1, (
 		    ftnlen)1);
+#line 553 "SB03QD.f"
 	} else {
+#line 554 "SB03QD.f"
 	    mb01ud_("Right", trana, n, n, &c_b41, &t[t_offset], ldt, &x[
 		    x_offset], ldx, &dwork[ires + 1], n, info, (ftnlen)5, (
 		    ftnlen)1);
+#line 556 "SB03QD.f"
 	    jj = ires + 1;
+#line 557 "SB03QD.f"
 	    if (lower) {
+#line 558 "SB03QD.f"
 		i__1 = *n;
+#line 558 "SB03QD.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 559 "SB03QD.f"
 		    i__2 = *n - j + 1;
+#line 559 "SB03QD.f"
 		    daxpy_(&i__2, &c_b41, &dwork[jj], n, &dwork[jj], &c__1);
+#line 561 "SB03QD.f"
 		    i__2 = *n - j + 1;
+#line 561 "SB03QD.f"
 		    d__1 = -(*scale);
+#line 561 "SB03QD.f"
 		    daxpy_(&i__2, &d__1, &c__[j + j * c_dim1], &c__1, &dwork[
 			    jj], &c__1);
+#line 563 "SB03QD.f"
 		    jj = jj + *n + 1;
+#line 564 "SB03QD.f"
 /* L30: */
+#line 564 "SB03QD.f"
 		}
+#line 565 "SB03QD.f"
 	    } else {
+#line 566 "SB03QD.f"
 		i__1 = *n;
+#line 566 "SB03QD.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 567 "SB03QD.f"
 		    daxpy_(&j, &c_b41, &dwork[ires + j], n, &dwork[jj], &c__1)
 			    ;
+#line 569 "SB03QD.f"
 		    d__1 = -(*scale);
+#line 569 "SB03QD.f"
 		    daxpy_(&j, &d__1, &c__[j * c_dim1 + 1], &c__1, &dwork[jj],
 			     &c__1);
+#line 570 "SB03QD.f"
 		    jj += *n;
+#line 571 "SB03QD.f"
 /* L40: */
+#line 571 "SB03QD.f"
 		}
+#line 572 "SB03QD.f"
 	    }
+#line 573 "SB03QD.f"
 	}
 
 /* Computing MAX */
+#line 575 "SB03QD.f"
 	i__1 = wrkopt, i__2 = nn * 3;
+#line 575 "SB03QD.f"
 	wrkopt = max(i__1,i__2);
 
 /*        Get the machine precision. */
 
+#line 579 "SB03QD.f"
 	eps = dlamch_("Epsilon", (ftnlen)7);
+#line 580 "SB03QD.f"
 	epsn = eps * (doublereal) (*n + 3);
+#line 581 "SB03QD.f"
 	temp = eps * 3. * *scale;
 
 /*        Add to abs(R) a term that takes account of rounding errors in */
@@ -722,125 +966,210 @@ static doublereal c_b41 = 1.;
 /*                    (n+3)*(abs(op(T))'*abs(X) + abs(X)*abs(op(T)))), */
 /*        where EPS is the machine precision. */
 
+#line 591 "SB03QD.f"
 	i__1 = *n;
+#line 591 "SB03QD.f"
 	for (j = 1; j <= i__1; ++j) {
+#line 592 "SB03QD.f"
 	    i__2 = *n;
+#line 592 "SB03QD.f"
 	    for (i__ = 1; i__ <= i__2; ++i__) {
+#line 593 "SB03QD.f"
 		dwork[ixbs + (j - 1) * *n + i__] = (d__1 = x[i__ + j * x_dim1]
 			, abs(d__1));
+#line 594 "SB03QD.f"
 /* L50: */
+#line 594 "SB03QD.f"
 	    }
+#line 595 "SB03QD.f"
 /* L60: */
+#line 595 "SB03QD.f"
 	}
 
+#line 597 "SB03QD.f"
 	if (lower) {
+#line 598 "SB03QD.f"
 	    i__1 = *n;
+#line 598 "SB03QD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 599 "SB03QD.f"
 		i__2 = *n;
+#line 599 "SB03QD.f"
 		for (i__ = j; i__ <= i__2; ++i__) {
+#line 600 "SB03QD.f"
 		    dwork[ires + (j - 1) * *n + i__] = temp * (d__1 = c__[i__ 
 			    + j * c_dim1], abs(d__1)) + (d__2 = dwork[ires + (
 			    j - 1) * *n + i__], abs(d__2));
+#line 602 "SB03QD.f"
 /* L70: */
+#line 602 "SB03QD.f"
 		}
+#line 603 "SB03QD.f"
 /* L80: */
+#line 603 "SB03QD.f"
 	    }
+#line 604 "SB03QD.f"
 	} else {
+#line 605 "SB03QD.f"
 	    i__1 = *n;
+#line 605 "SB03QD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 606 "SB03QD.f"
 		i__2 = j;
+#line 606 "SB03QD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 607 "SB03QD.f"
 		    dwork[ires + (j - 1) * *n + i__] = temp * (d__1 = c__[i__ 
 			    + j * c_dim1], abs(d__1)) + (d__2 = dwork[ires + (
 			    j - 1) * *n + i__], abs(d__2));
+#line 609 "SB03QD.f"
 /* L90: */
+#line 609 "SB03QD.f"
 		}
+#line 610 "SB03QD.f"
 /* L100: */
+#line 610 "SB03QD.f"
 	    }
+#line 611 "SB03QD.f"
 	}
 
+#line 613 "SB03QD.f"
 	if (update) {
 
 /*           Workspace 3*N*N. */
 
+#line 617 "SB03QD.f"
 	    i__1 = *n;
+#line 617 "SB03QD.f"
 	    for (j = 1; j <= i__1; ++j) {
+#line 618 "SB03QD.f"
 		i__2 = *n;
+#line 618 "SB03QD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 619 "SB03QD.f"
 		    dwork[iabs + (j - 1) * *n + i__] = (d__1 = a[i__ + j * 
 			    a_dim1], abs(d__1));
+#line 620 "SB03QD.f"
 /* L110: */
+#line 620 "SB03QD.f"
 		}
+#line 621 "SB03QD.f"
 /* L120: */
+#line 621 "SB03QD.f"
 	    }
 
+#line 623 "SB03QD.f"
 	    dsyr2k_(uplo, tranat, n, n, &epsn, &dwork[iabs + 1], n, &dwork[
 		    ixbs + 1], n, &c_b41, &dwork[ires + 1], n, (ftnlen)1, (
 		    ftnlen)1);
+#line 625 "SB03QD.f"
 	} else {
 
 /*           Workspace 3*N*N + N - 1. */
 
+#line 629 "SB03QD.f"
 	    i__1 = *n;
+#line 629 "SB03QD.f"
 	    for (j = 1; j <= i__1; ++j) {
 /* Computing MIN */
+#line 630 "SB03QD.f"
 		i__3 = j + 1;
+#line 630 "SB03QD.f"
 		i__2 = min(i__3,*n);
+#line 630 "SB03QD.f"
 		for (i__ = 1; i__ <= i__2; ++i__) {
+#line 631 "SB03QD.f"
 		    dwork[iabs + (j - 1) * *n + i__] = (d__1 = t[i__ + j * 
 			    t_dim1], abs(d__1));
+#line 632 "SB03QD.f"
 /* L130: */
+#line 632 "SB03QD.f"
 		}
+#line 633 "SB03QD.f"
 /* L140: */
+#line 633 "SB03QD.f"
 	    }
 
+#line 635 "SB03QD.f"
 	    i__1 = *ldwork - iwrk;
+#line 635 "SB03QD.f"
 	    mb01uw_("Left", tranat, n, n, &epsn, &dwork[iabs + 1], n, &dwork[
 		    ixbs + 1], n, &dwork[iwrk + 1], &i__1, info, (ftnlen)4, (
 		    ftnlen)1);
+#line 638 "SB03QD.f"
 	    jj = ires + 1;
+#line 639 "SB03QD.f"
 	    jx = ixbs + 1;
+#line 640 "SB03QD.f"
 	    if (lower) {
+#line 641 "SB03QD.f"
 		i__1 = *n;
+#line 641 "SB03QD.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 642 "SB03QD.f"
 		    i__2 = *n - j + 1;
+#line 642 "SB03QD.f"
 		    daxpy_(&i__2, &c_b41, &dwork[jx], n, &dwork[jx], &c__1);
+#line 644 "SB03QD.f"
 		    i__2 = *n - j + 1;
+#line 644 "SB03QD.f"
 		    daxpy_(&i__2, &c_b41, &dwork[jx], &c__1, &dwork[jj], &
 			    c__1);
+#line 646 "SB03QD.f"
 		    jj = jj + *n + 1;
+#line 647 "SB03QD.f"
 		    jx = jx + *n + 1;
+#line 648 "SB03QD.f"
 /* L150: */
+#line 648 "SB03QD.f"
 		}
+#line 649 "SB03QD.f"
 	    } else {
+#line 650 "SB03QD.f"
 		i__1 = *n;
+#line 650 "SB03QD.f"
 		for (j = 1; j <= i__1; ++j) {
+#line 651 "SB03QD.f"
 		    daxpy_(&j, &c_b41, &dwork[ixbs + j], n, &dwork[jx], &c__1)
 			    ;
+#line 653 "SB03QD.f"
 		    daxpy_(&j, &c_b41, &dwork[jx], &c__1, &dwork[jj], &c__1);
+#line 654 "SB03QD.f"
 		    jj += *n;
+#line 655 "SB03QD.f"
 		    jx += *n;
+#line 656 "SB03QD.f"
 /* L160: */
+#line 656 "SB03QD.f"
 		}
+#line 657 "SB03QD.f"
 	    }
 
 /* Computing MAX */
+#line 659 "SB03QD.f"
 	    i__1 = wrkopt, i__2 = nn * 3 + *n - 1;
+#line 659 "SB03QD.f"
 	    wrkopt = max(i__1,i__2);
+#line 660 "SB03QD.f"
 	}
 
 /*        Compute forward error bound, using matrix norm estimator. */
 /*        Workspace 3*N*N. */
 
+#line 665 "SB03QD.f"
 	xanorm = dlansy_("Max", uplo, n, &x[x_offset], ldx, &dwork[1], (
 		ftnlen)3, (ftnlen)1);
 
+#line 667 "SB03QD.f"
 	sb03qx_(trana, uplo, lyapun, n, &xanorm, &t[t_offset], ldt, &u[
 		u_offset], ldu, &dwork[ires + 1], n, ferr, &iwork[1], &dwork[
 		1], &ires, info, (ftnlen)1, (ftnlen)1, (ftnlen)1);
+#line 670 "SB03QD.f"
     }
 
+#line 672 "SB03QD.f"
     dwork[1] = (doublereal) wrkopt;
+#line 673 "SB03QD.f"
     return 0;
 
 /* *** Last line of SB03QD *** */

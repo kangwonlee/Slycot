@@ -1,3 +1,4 @@
+#line 1 "AB13BD.f"
 /* AB13BD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB13BD.f"
 /* Table of constant values */
 
 static logical c_false = FALSE_;
@@ -294,89 +296,153 @@ doublereal ab13bd_(char *dico, char *jobn, integer *n, integer *m, integer *p,
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 260 "AB13BD.f"
     /* Parameter adjustments */
+#line 260 "AB13BD.f"
     a_dim1 = *lda;
+#line 260 "AB13BD.f"
     a_offset = 1 + a_dim1;
+#line 260 "AB13BD.f"
     a -= a_offset;
+#line 260 "AB13BD.f"
     b_dim1 = *ldb;
+#line 260 "AB13BD.f"
     b_offset = 1 + b_dim1;
+#line 260 "AB13BD.f"
     b -= b_offset;
+#line 260 "AB13BD.f"
     c_dim1 = *ldc;
+#line 260 "AB13BD.f"
     c_offset = 1 + c_dim1;
+#line 260 "AB13BD.f"
     c__ -= c_offset;
+#line 260 "AB13BD.f"
     d_dim1 = *ldd;
+#line 260 "AB13BD.f"
     d_offset = 1 + d_dim1;
+#line 260 "AB13BD.f"
     d__ -= d_offset;
+#line 260 "AB13BD.f"
     --dwork;
+#line 260 "AB13BD.f"
 
+#line 260 "AB13BD.f"
     /* Function Body */
+#line 260 "AB13BD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 261 "AB13BD.f"
     *info = 0;
+#line 262 "AB13BD.f"
     *iwarn = 0;
 
 /*     Check the scalar input parameters. */
 
+#line 266 "AB13BD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 267 "AB13BD.f"
 	*info = -1;
+#line 268 "AB13BD.f"
     } else if (! (lsame_(jobn, "H", (ftnlen)1, (ftnlen)1) || lsame_(jobn, 
 	    "L", (ftnlen)1, (ftnlen)1))) {
+#line 270 "AB13BD.f"
 	*info = -2;
+#line 271 "AB13BD.f"
     } else if (*n < 0) {
+#line 272 "AB13BD.f"
 	*info = -3;
+#line 273 "AB13BD.f"
     } else if (*m < 0) {
+#line 274 "AB13BD.f"
 	*info = -4;
+#line 275 "AB13BD.f"
     } else if (*p < 0) {
+#line 276 "AB13BD.f"
 	*info = -5;
+#line 277 "AB13BD.f"
     } else if (*lda < max(1,*n)) {
+#line 278 "AB13BD.f"
 	*info = -7;
+#line 279 "AB13BD.f"
     } else if (*ldb < max(1,*n)) {
+#line 280 "AB13BD.f"
 	*info = -9;
+#line 281 "AB13BD.f"
     } else if (*ldc < max(1,*p)) {
+#line 282 "AB13BD.f"
 	*info = -11;
+#line 283 "AB13BD.f"
     } else if (*ldd < max(1,*p)) {
+#line 284 "AB13BD.f"
 	*info = -13;
+#line 285 "AB13BD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 285 "AB13BD.f"
 	i__3 = *n * (*n + 5), i__4 = *m * (*m + 2), i__3 = max(i__3,i__4), 
 		i__4 = *p << 2;
+#line 285 "AB13BD.f"
 	i__1 = 1, i__2 = *m * (*n + *m) + max(i__3,i__4), i__1 = max(i__1,
 		i__2), i__2 = *n * (max(*n,*p) + 4) + min(*n,*p);
+#line 285 "AB13BD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 289 "AB13BD.f"
 	    *info = -17;
+#line 290 "AB13BD.f"
 	}
+#line 290 "AB13BD.f"
     }
+#line 291 "AB13BD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 295 "AB13BD.f"
 	i__1 = -(*info);
+#line 295 "AB13BD.f"
 	xerbla_("AB13BD", &i__1, (ftnlen)6);
+#line 296 "AB13BD.f"
 	return ret_val;
+#line 297 "AB13BD.f"
     }
 
 /*     Compute the Frobenius norm of D. */
 
+#line 301 "AB13BD.f"
     s2norm = dlange_("Frobenius", p, m, &d__[d_offset], ldd, &dwork[1], (
 	    ftnlen)9);
+#line 302 "AB13BD.f"
     if (! discr && s2norm != 0.) {
+#line 303 "AB13BD.f"
 	*info = 5;
+#line 304 "AB13BD.f"
 	return ret_val;
+#line 305 "AB13BD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 309 "AB13BD.f"
     i__1 = min(*n,*m);
+#line 309 "AB13BD.f"
     if (min(i__1,*p) == 0) {
+#line 310 "AB13BD.f"
 	*nq = 0;
+#line 311 "AB13BD.f"
 	ret_val = 0.;
+#line 312 "AB13BD.f"
 	dwork[1] = 1.;
+#line 313 "AB13BD.f"
 	return ret_val;
+#line 314 "AB13BD.f"
     }
 
+#line 316 "AB13BD.f"
     kcr = 1;
+#line 317 "AB13BD.f"
     kdr = kcr + *m * *n;
+#line 318 "AB13BD.f"
     krw = kdr + *m * *m;
 
 /*     Compute the right coprime factorization with inner denominator */
@@ -386,27 +452,42 @@ doublereal ab13bd_(char *dico, char *jobn, integer *n, integer *m, integer *p,
 /*     Additional workspace:  need MAX( N*(N+5), M*(M+2), 4*M, 4*P ); */
 /*                            prefer larger. */
 
+#line 327 "AB13BD.f"
     i__1 = *ldwork - krw + 1;
+#line 327 "AB13BD.f"
     sb08dd_(dico, n, m, p, &a[a_offset], lda, &b[b_offset], ldb, &c__[
 	    c_offset], ldc, &d__[d_offset], ldd, nq, &nr, &dwork[kcr], m, &
 	    dwork[kdr], m, tol, &dwork[krw], &i__1, iwarn, info, (ftnlen)1);
+#line 330 "AB13BD.f"
     if (*info != 0) {
+#line 330 "AB13BD.f"
 	return ret_val;
+#line 330 "AB13BD.f"
     }
 
+#line 333 "AB13BD.f"
     wrkopt = dwork[krw] + (doublereal) (krw - 1);
 
 /*     Check stability. */
 
+#line 337 "AB13BD.f"
     if (lsame_(jobn, "H", (ftnlen)1, (ftnlen)1) && nr > 0) {
+#line 338 "AB13BD.f"
 	*info = 6;
+#line 339 "AB13BD.f"
 	return ret_val;
+#line 340 "AB13BD.f"
     }
 
+#line 342 "AB13BD.f"
     if (*nq > 0) {
+#line 343 "AB13BD.f"
 	ku = 1;
+#line 344 "AB13BD.f"
 	mxnp = max(*nq,*p);
+#line 345 "AB13BD.f"
 	ktau = *nq * mxnp + 1;
+#line 346 "AB13BD.f"
 	krw = ktau + min(*nq,*p);
 
 /*        Find X, the solution of Lyapunov equation. */
@@ -415,48 +496,73 @@ doublereal ab13bd_(char *dico, char *jobn, integer *n, integer *m, integer *p,
 /*        Additional workspace:  4*N; */
 /*                               prefer larger. */
 
+#line 354 "AB13BD.f"
 	dlacpy_("Full", p, nq, &c__[c_offset], ldc, &dwork[ku], &mxnp, (
 		ftnlen)4);
+#line 355 "AB13BD.f"
 	i__1 = *ldwork - krw + 1;
+#line 355 "AB13BD.f"
 	sb03ou_(&discr, &c_false, nq, p, &a[a_offset], lda, &dwork[ku], &mxnp,
 		 &dwork[ktau], &dwork[ku], nq, &scale, &dwork[krw], &i__1, 
 		info);
+#line 358 "AB13BD.f"
 	if (*info != 0) {
+#line 359 "AB13BD.f"
 	    if (*info == 1) {
+#line 360 "AB13BD.f"
 		*info = 4;
+#line 361 "AB13BD.f"
 	    } else if (*info == 2) {
+#line 362 "AB13BD.f"
 		*info = 3;
+#line 363 "AB13BD.f"
 	    }
+#line 364 "AB13BD.f"
 	    return ret_val;
+#line 365 "AB13BD.f"
 	}
 
 /* Computing MAX */
+#line 367 "AB13BD.f"
 	d__1 = wrkopt, d__2 = dwork[krw] + (doublereal) (krw - 1);
+#line 367 "AB13BD.f"
 	wrkopt = max(d__1,d__2);
 
 /*        Add the contribution of BQ'*X*BQ. */
 
 /*        Workspace needed:      N*(N+M). */
 
+#line 373 "AB13BD.f"
 	ktau = *nq * *nq + 1;
+#line 374 "AB13BD.f"
 	dlacpy_("Full", nq, m, &b[b_offset], ldb, &dwork[ktau], nq, (ftnlen)4)
 		;
+#line 375 "AB13BD.f"
 	dtrmm_("Left", "Upper", "NoTranspose", "NonUnit", nq, m, &c_b16, &
 		dwork[ku], nq, &dwork[ktau], nq, (ftnlen)4, (ftnlen)5, (
 		ftnlen)11, (ftnlen)7);
+#line 377 "AB13BD.f"
 	if (nr > 0) {
+#line 377 "AB13BD.f"
 	    s2norm = dlange_("Frobenius", p, m, &d__[d_offset], ldd, &dwork[1]
 		    , (ftnlen)9);
+#line 377 "AB13BD.f"
 	}
+#line 379 "AB13BD.f"
 	d__1 = dlange_("Frobenius", nq, m, &dwork[ktau], nq, &dwork[1], (
 		ftnlen)9) / scale;
+#line 379 "AB13BD.f"
 	s2norm = dlapy2_(&s2norm, &d__1);
+#line 382 "AB13BD.f"
     }
 
+#line 384 "AB13BD.f"
     ret_val = s2norm;
 
+#line 386 "AB13BD.f"
     dwork[1] = wrkopt;
 
+#line 388 "AB13BD.f"
     return ret_val;
 /* *** Last line of AB13BD *** */
 } /* ab13bd_ */

@@ -1,3 +1,4 @@
+#line 1 "MB04UD.f"
 /* MB04UD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04UD.f"
 /* Table of constant values */
 
 static doublereal c_b10 = 0.;
@@ -247,86 +249,148 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 214 "MB04UD.f"
     /* Parameter adjustments */
+#line 214 "MB04UD.f"
     a_dim1 = *lda;
+#line 214 "MB04UD.f"
     a_offset = 1 + a_dim1;
+#line 214 "MB04UD.f"
     a -= a_offset;
+#line 214 "MB04UD.f"
     e_dim1 = *lde;
+#line 214 "MB04UD.f"
     e_offset = 1 + e_dim1;
+#line 214 "MB04UD.f"
     e -= e_offset;
+#line 214 "MB04UD.f"
     q_dim1 = *ldq;
+#line 214 "MB04UD.f"
     q_offset = 1 + q_dim1;
+#line 214 "MB04UD.f"
     q -= q_offset;
+#line 214 "MB04UD.f"
     z_dim1 = *ldz;
+#line 214 "MB04UD.f"
     z_offset = 1 + z_dim1;
+#line 214 "MB04UD.f"
     z__ -= z_offset;
+#line 214 "MB04UD.f"
     --istair;
+#line 214 "MB04UD.f"
     --dwork;
+#line 214 "MB04UD.f"
 
+#line 214 "MB04UD.f"
     /* Function Body */
+#line 214 "MB04UD.f"
     *info = 0;
+#line 215 "MB04UD.f"
     ljobqi = lsame_(jobq, "I", (ftnlen)1, (ftnlen)1);
+#line 216 "MB04UD.f"
     updatq = ljobqi || lsame_(jobq, "U", (ftnlen)1, (ftnlen)1);
+#line 217 "MB04UD.f"
     ljobzi = lsame_(jobz, "I", (ftnlen)1, (ftnlen)1);
+#line 218 "MB04UD.f"
     updatz = ljobzi || lsame_(jobz, "U", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 222 "MB04UD.f"
     if (! updatq && ! lsame_(jobq, "N", (ftnlen)1, (ftnlen)1)) {
+#line 223 "MB04UD.f"
 	*info = -1;
+#line 224 "MB04UD.f"
     } else if (! updatz && ! lsame_(jobz, "N", (ftnlen)1, (ftnlen)1)) {
+#line 225 "MB04UD.f"
 	*info = -2;
+#line 226 "MB04UD.f"
     } else if (*m < 0) {
+#line 227 "MB04UD.f"
 	*info = -3;
+#line 228 "MB04UD.f"
     } else if (*n < 0) {
+#line 229 "MB04UD.f"
 	*info = -4;
+#line 230 "MB04UD.f"
     } else if (*lda < max(1,*m)) {
+#line 231 "MB04UD.f"
 	*info = -6;
+#line 232 "MB04UD.f"
     } else if (*lde < max(1,*m)) {
+#line 233 "MB04UD.f"
 	*info = -8;
+#line 234 "MB04UD.f"
     } else if (! updatq && *ldq < 1 || updatq && *ldq < max(1,*m)) {
+#line 236 "MB04UD.f"
 	*info = -10;
+#line 237 "MB04UD.f"
     } else if (! updatz && *ldz < 1 || updatz && *ldz < max(1,*n)) {
+#line 239 "MB04UD.f"
 	*info = -12;
+#line 240 "MB04UD.f"
     }
 
+#line 242 "MB04UD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 246 "MB04UD.f"
 	i__1 = -(*info);
+#line 246 "MB04UD.f"
 	xerbla_("MB04UD", &i__1, (ftnlen)6);
+#line 247 "MB04UD.f"
 	return 0;
+#line 248 "MB04UD.f"
     }
 
 /*     Initialize Q and Z to the identity matrices, if needed. */
 
+#line 252 "MB04UD.f"
     if (ljobqi) {
+#line 252 "MB04UD.f"
 	dlaset_("Full", m, m, &c_b10, &c_b11, &q[q_offset], ldq, (ftnlen)4);
+#line 252 "MB04UD.f"
     }
+#line 254 "MB04UD.f"
     if (ljobzi) {
+#line 254 "MB04UD.f"
 	dlaset_("Full", n, n, &c_b10, &c_b11, &z__[z_offset], ldz, (ftnlen)4);
+#line 254 "MB04UD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 259 "MB04UD.f"
     *ranke = min(*m,*n);
 
+#line 261 "MB04UD.f"
     if (*ranke == 0) {
+#line 261 "MB04UD.f"
 	return 0;
+#line 261 "MB04UD.f"
     }
 
+#line 264 "MB04UD.f"
     toler = *tol;
+#line 265 "MB04UD.f"
     if (toler <= 0.) {
+#line 265 "MB04UD.f"
 	toler = dlamch_("Epsilon", (ftnlen)7) * dlange_("M", m, n, &e[
 		e_offset], lde, &dwork[1], (ftnlen)1);
+#line 265 "MB04UD.f"
     }
 
+#line 268 "MB04UD.f"
     k = *n;
+#line 269 "MB04UD.f"
     lzero = FALSE_;
 
 /*     WHILE ( ( K > 0 ) AND ( NOT a zero submatrix encountered ) ) DO */
+#line 272 "MB04UD.f"
 L20:
+#line 272 "MB04UD.f"
     if (k > 0 && ! lzero) {
 
 /*         Intermediate form of E */
@@ -348,47 +412,71 @@ L20:
 /*        Determine row LK in submatrix Ek with largest max-norm */
 /*        (starting with row m-n+k). */
 
+#line 293 "MB04UD.f"
 	mnk = *m - *n + k;
+#line 294 "MB04UD.f"
 	emxnrm = 0.;
+#line 295 "MB04UD.f"
 	lk = mnk;
 
+#line 297 "MB04UD.f"
 	for (l = mnk; l >= 1; --l) {
+#line 298 "MB04UD.f"
 	    emx = (d__1 = e[l + idamax_(&k, &e[l + e_dim1], lde) * e_dim1], 
 		    abs(d__1));
+#line 299 "MB04UD.f"
 	    if (emx > emxnrm) {
+#line 300 "MB04UD.f"
 		emxnrm = emx;
+#line 301 "MB04UD.f"
 		lk = l;
+#line 302 "MB04UD.f"
 	    }
+#line 303 "MB04UD.f"
 /* L40: */
+#line 303 "MB04UD.f"
 	}
 
+#line 305 "MB04UD.f"
 	if (emxnrm <= toler) {
 
 /*           Set submatrix Ek to zero. */
 
+#line 309 "MB04UD.f"
 	    dlaset_("Full", &mnk, &k, &c_b10, &c_b10, &e[e_offset], lde, (
 		    ftnlen)4);
+#line 310 "MB04UD.f"
 	    lzero = TRUE_;
+#line 311 "MB04UD.f"
 	    *ranke = *n - k;
+#line 312 "MB04UD.f"
 	} else {
 
 /*           Submatrix Ek is not considered to be identically zero. */
 /*           Check whether rows have to be interchanged. */
 
+#line 317 "MB04UD.f"
 	    if (lk != mnk) {
 
 /*              Interchange rows lk and m-n+k in whole A- and E-matrix */
 /*              and update the row transformation matrix Q, if needed. */
 /*              (For Q, the number of elements involved is m.) */
 
+#line 323 "MB04UD.f"
 		dswap_(n, &e[lk + e_dim1], lde, &e[mnk + e_dim1], lde);
+#line 324 "MB04UD.f"
 		dswap_(n, &a[lk + a_dim1], lda, &a[mnk + a_dim1], lda);
+#line 325 "MB04UD.f"
 		if (updatq) {
+#line 325 "MB04UD.f"
 		    dswap_(m, &q[lk * q_dim1 + 1], &c__1, &q[mnk * q_dim1 + 1]
 			    , &c__1);
+#line 325 "MB04UD.f"
 		}
+#line 326 "MB04UD.f"
 	    }
 
+#line 328 "MB04UD.f"
 	    km1 = k - 1;
 
 /*           Determine a Householder transformation to annihilate */
@@ -398,25 +486,40 @@ L20:
 /*           Update the column transformation matrix Z, if needed */
 /*           (number of elements involved is n). */
 
+#line 337 "MB04UD.f"
 	    dlarfg_(&k, &e[mnk + k * e_dim1], &e[mnk + e_dim1], lde, &tau);
+#line 338 "MB04UD.f"
 	    emx = e[mnk + k * e_dim1];
+#line 339 "MB04UD.f"
 	    e[mnk + k * e_dim1] = 1.;
+#line 340 "MB04UD.f"
 	    i__1 = mnk - 1;
+#line 340 "MB04UD.f"
 	    dlarf_("Right", &i__1, &k, &e[mnk + e_dim1], lde, &tau, &e[
 		    e_offset], lde, &dwork[1], (ftnlen)5);
+#line 342 "MB04UD.f"
 	    dlarf_("Right", m, &k, &e[mnk + e_dim1], lde, &tau, &a[a_offset], 
 		    lda, &dwork[1], (ftnlen)5);
+#line 344 "MB04UD.f"
 	    if (updatz) {
+#line 344 "MB04UD.f"
 		dlarf_("Right", n, &k, &e[mnk + e_dim1], lde, &tau, &z__[
 			z_offset], ldz, &dwork[1], (ftnlen)5);
+#line 344 "MB04UD.f"
 	    }
+#line 346 "MB04UD.f"
 	    e[mnk + k * e_dim1] = emx;
+#line 347 "MB04UD.f"
 	    dlaset_("Full", &c__1, &km1, &c_b10, &c_b10, &e[mnk + e_dim1], 
 		    lde, (ftnlen)4);
 
+#line 349 "MB04UD.f"
 	    k = km1;
+#line 350 "MB04UD.f"
 	}
+#line 351 "MB04UD.f"
 	goto L20;
+#line 352 "MB04UD.f"
     }
 /*     END WHILE 20 */
 
@@ -428,20 +531,32 @@ L20:
 /*     ISTAIR(m-k) =   n-k           for k=0,...,rank(E)-1 */
 /*                 = -(n-rank(E)+1)  for k=rank(E),...,m-1. */
 
+#line 363 "MB04UD.f"
     i__1 = *ranke - 1;
+#line 363 "MB04UD.f"
     for (i__ = 0; i__ <= i__1; ++i__) {
+#line 364 "MB04UD.f"
 	istair[*m - i__] = *n - i__;
+#line 365 "MB04UD.f"
 /* L60: */
+#line 365 "MB04UD.f"
     }
 
+#line 367 "MB04UD.f"
     nr1 = -(*n - *ranke + 1);
 
+#line 369 "MB04UD.f"
     i__1 = *m - *ranke;
+#line 369 "MB04UD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 370 "MB04UD.f"
 	istair[i__] = nr1;
+#line 371 "MB04UD.f"
 /* L80: */
+#line 371 "MB04UD.f"
     }
 
+#line 373 "MB04UD.f"
     return 0;
 /* *** Last line of MB04UD *** */
 } /* mb04ud_ */

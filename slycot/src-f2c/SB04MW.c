@@ -1,3 +1,4 @@
+#line 1 "SB04MW.f"
 /* SB04MW.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "SB04MW.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -126,107 +128,184 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 106 "SB04MW.f"
     /* Parameter adjustments */
+#line 106 "SB04MW.f"
     --ipr;
+#line 106 "SB04MW.f"
     --d__;
+#line 106 "SB04MW.f"
 
+#line 106 "SB04MW.f"
     /* Function Body */
+#line 106 "SB04MW.f"
     *info = 0;
+#line 107 "SB04MW.f"
     m1 = *m * (*m + 3) / 2;
+#line 108 "SB04MW.f"
     m2 = *m + *m;
+#line 109 "SB04MW.f"
     mpi = *m;
+#line 110 "SB04MW.f"
     iprm = m1;
+#line 111 "SB04MW.f"
     m1 = *m;
+#line 112 "SB04MW.f"
     i1 = 1;
 
+#line 114 "SB04MW.f"
     i__1 = *m;
+#line 114 "SB04MW.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 115 "SB04MW.f"
 	++mpi;
+#line 116 "SB04MW.f"
 	++iprm;
+#line 117 "SB04MW.f"
 	ipr[mpi] = i1;
+#line 118 "SB04MW.f"
 	ipr[i__] = iprm;
+#line 119 "SB04MW.f"
 	i1 += m1;
+#line 120 "SB04MW.f"
 	if (i__ > 1) {
+#line 120 "SB04MW.f"
 	    --m1;
+#line 120 "SB04MW.f"
 	}
+#line 121 "SB04MW.f"
 /* L20: */
+#line 121 "SB04MW.f"
     }
 
+#line 123 "SB04MW.f"
     m1 = *m - 1;
+#line 124 "SB04MW.f"
     mpi = *m;
 
 /*     Reduce to upper triangular form. */
 
+#line 128 "SB04MW.f"
     i__1 = m1;
+#line 128 "SB04MW.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 129 "SB04MW.f"
 	i1 = i__ + 1;
+#line 130 "SB04MW.f"
 	++mpi;
+#line 131 "SB04MW.f"
 	iprm = ipr[mpi];
+#line 132 "SB04MW.f"
 	iprm1 = ipr[mpi + 1];
+#line 133 "SB04MW.f"
 	d1 = d__[iprm];
+#line 134 "SB04MW.f"
 	d2 = d__[iprm1];
+#line 135 "SB04MW.f"
 	if (abs(d1) <= abs(d2)) {
 
 /*           Permute the row indices. */
 
+#line 139 "SB04MW.f"
 	    k = iprm;
+#line 140 "SB04MW.f"
 	    ipr[mpi] = iprm1;
+#line 141 "SB04MW.f"
 	    iprm = iprm1;
+#line 142 "SB04MW.f"
 	    iprm1 = k;
+#line 143 "SB04MW.f"
 	    k = ipr[i__];
+#line 144 "SB04MW.f"
 	    ipr[i__] = ipr[i1];
+#line 145 "SB04MW.f"
 	    ipr[i1] = k;
+#line 146 "SB04MW.f"
 	    d1 = d2;
+#line 147 "SB04MW.f"
 	}
 
 /*        Check singularity. */
 
+#line 151 "SB04MW.f"
 	if (d1 == 0.) {
+#line 152 "SB04MW.f"
 	    *info = 1;
+#line 153 "SB04MW.f"
 	    return 0;
+#line 154 "SB04MW.f"
 	}
 
+#line 156 "SB04MW.f"
 	mult = -d__[iprm1] / d1;
+#line 157 "SB04MW.f"
 	++iprm1;
+#line 158 "SB04MW.f"
 	ipr[mpi + 1] = iprm1;
 
 /*        Annihilate the subdiagonal elements of the matrix. */
 
+#line 162 "SB04MW.f"
 	d__[ipr[i1]] += mult * d__[ipr[i__]];
+#line 163 "SB04MW.f"
 	i__2 = *m - i__;
+#line 163 "SB04MW.f"
 	daxpy_(&i__2, &mult, &d__[iprm + 1], &c__1, &d__[iprm1], &c__1);
+#line 164 "SB04MW.f"
 /* L40: */
+#line 164 "SB04MW.f"
     }
 
 /*     Check singularity. */
 
+#line 168 "SB04MW.f"
     if (d__[ipr[m2]] == 0.) {
+#line 169 "SB04MW.f"
 	*info = 1;
+#line 170 "SB04MW.f"
 	return 0;
+#line 171 "SB04MW.f"
     }
 
 /*     Back substitution. */
 
+#line 175 "SB04MW.f"
     d__[ipr[*m]] /= d__[ipr[m2]];
+#line 176 "SB04MW.f"
     mpi = m2;
 
+#line 178 "SB04MW.f"
     for (i__ = m1; i__ >= 1; --i__) {
+#line 179 "SB04MW.f"
 	--mpi;
+#line 180 "SB04MW.f"
 	iprm = ipr[mpi];
+#line 181 "SB04MW.f"
 	iprm1 = iprm;
+#line 182 "SB04MW.f"
 	mult = 0.;
 
+#line 184 "SB04MW.f"
 	i__1 = *m;
+#line 184 "SB04MW.f"
 	for (i1 = i__ + 1; i1 <= i__1; ++i1) {
+#line 185 "SB04MW.f"
 	    ++iprm1;
+#line 186 "SB04MW.f"
 	    mult += d__[ipr[i1]] * d__[iprm1];
+#line 187 "SB04MW.f"
 /* L60: */
+#line 187 "SB04MW.f"
 	}
 
+#line 189 "SB04MW.f"
 	d__[ipr[i__]] = (d__[ipr[i__]] - mult) / d__[iprm];
+#line 190 "SB04MW.f"
 /* L80: */
+#line 190 "SB04MW.f"
     }
 
+#line 192 "SB04MW.f"
     return 0;
 /* *** Last line of SB04MW *** */
 } /* sb04mw_ */

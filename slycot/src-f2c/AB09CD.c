@@ -1,3 +1,4 @@
+#line 1 "AB09CD.f"
 /* AB09CD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB09CD.f"
 /* Subroutine */ int ab09cd_(char *dico, char *equil, char *ordsel, integer *
 	n, integer *m, integer *p, integer *nr, doublereal *a, integer *lda, 
 	doublereal *b, integer *ldb, doublereal *c__, integer *ldc, 
@@ -303,131 +305,218 @@
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 279 "AB09CD.f"
     /* Parameter adjustments */
+#line 279 "AB09CD.f"
     a_dim1 = *lda;
+#line 279 "AB09CD.f"
     a_offset = 1 + a_dim1;
+#line 279 "AB09CD.f"
     a -= a_offset;
+#line 279 "AB09CD.f"
     b_dim1 = *ldb;
+#line 279 "AB09CD.f"
     b_offset = 1 + b_dim1;
+#line 279 "AB09CD.f"
     b -= b_offset;
+#line 279 "AB09CD.f"
     c_dim1 = *ldc;
+#line 279 "AB09CD.f"
     c_offset = 1 + c_dim1;
+#line 279 "AB09CD.f"
     c__ -= c_offset;
+#line 279 "AB09CD.f"
     d_dim1 = *ldd;
+#line 279 "AB09CD.f"
     d_offset = 1 + d_dim1;
+#line 279 "AB09CD.f"
     d__ -= d_offset;
+#line 279 "AB09CD.f"
     --hsv;
+#line 279 "AB09CD.f"
     --iwork;
+#line 279 "AB09CD.f"
     --dwork;
+#line 279 "AB09CD.f"
 
+#line 279 "AB09CD.f"
     /* Function Body */
+#line 279 "AB09CD.f"
     *info = 0;
+#line 280 "AB09CD.f"
     *iwarn = 0;
+#line 281 "AB09CD.f"
     fixord = lsame_(ordsel, "F", (ftnlen)1, (ftnlen)1);
 
 /*     Check the input scalar arguments. */
 
+#line 285 "AB09CD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || lsame_(dico, "D", (
 	    ftnlen)1, (ftnlen)1))) {
+#line 286 "AB09CD.f"
 	*info = -1;
+#line 287 "AB09CD.f"
     } else if (! (lsame_(equil, "S", (ftnlen)1, (ftnlen)1) || lsame_(equil, 
 	    "N", (ftnlen)1, (ftnlen)1))) {
+#line 289 "AB09CD.f"
 	*info = -2;
+#line 290 "AB09CD.f"
     } else if (! (fixord || lsame_(ordsel, "A", (ftnlen)1, (ftnlen)1))) {
+#line 291 "AB09CD.f"
 	*info = -3;
+#line 292 "AB09CD.f"
     } else if (*n < 0) {
+#line 293 "AB09CD.f"
 	*info = -4;
+#line 294 "AB09CD.f"
     } else if (*m < 0) {
+#line 295 "AB09CD.f"
 	*info = -5;
+#line 296 "AB09CD.f"
     } else if (*p < 0) {
+#line 297 "AB09CD.f"
 	*info = -6;
+#line 298 "AB09CD.f"
     } else if (fixord && (*nr < 0 || *nr > *n)) {
+#line 299 "AB09CD.f"
 	*info = -7;
+#line 300 "AB09CD.f"
     } else if (*lda < max(1,*n)) {
+#line 301 "AB09CD.f"
 	*info = -9;
+#line 302 "AB09CD.f"
     } else if (*ldb < max(1,*n)) {
+#line 303 "AB09CD.f"
 	*info = -11;
+#line 304 "AB09CD.f"
     } else if (*ldc < max(1,*p)) {
+#line 305 "AB09CD.f"
 	*info = -13;
+#line 306 "AB09CD.f"
     } else if (*ldd < max(1,*p)) {
+#line 307 "AB09CD.f"
 	*info = -15;
+#line 308 "AB09CD.f"
     } else if (*tol2 > 0. && *tol2 > *tol1) {
+#line 309 "AB09CD.f"
 	*info = -18;
+#line 310 "AB09CD.f"
     } else /* if(complicated condition) */ {
 /* Computing MAX */
 /* Computing MAX */
+#line 310 "AB09CD.f"
 	i__3 = max(*n,*m);
 /* Computing MAX */
+#line 310 "AB09CD.f"
 	i__4 = *m * 3 + 1, i__5 = min(*n,*m) + *p;
+#line 310 "AB09CD.f"
 	i__1 = *n * ((*n << 1) + max(i__3,*p) + 5) + *n * (*n + 1) / 2, i__2 =
 		 *n * (*m + *p + 2) + (*m << 1) * *p + min(*n,*m) + max(i__4,
 		i__5);
+#line 310 "AB09CD.f"
 	if (*ldwork < max(i__1,i__2)) {
+#line 314 "AB09CD.f"
 	    *info = -21;
+#line 315 "AB09CD.f"
 	}
+#line 315 "AB09CD.f"
     }
 
+#line 317 "AB09CD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 321 "AB09CD.f"
 	i__1 = -(*info);
+#line 321 "AB09CD.f"
 	xerbla_("AB09CD", &i__1, (ftnlen)6);
+#line 322 "AB09CD.f"
 	return 0;
+#line 323 "AB09CD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 327 "AB09CD.f"
     i__1 = min(*n,*m);
+#line 327 "AB09CD.f"
     if (min(i__1,*p) == 0) {
+#line 328 "AB09CD.f"
 	*nr = 0;
+#line 329 "AB09CD.f"
 	iwork[1] = 0;
+#line 330 "AB09CD.f"
 	dwork[1] = 1.;
+#line 331 "AB09CD.f"
 	return 0;
+#line 332 "AB09CD.f"
     }
 
+#line 334 "AB09CD.f"
     if (lsame_(equil, "S", (ftnlen)1, (ftnlen)1)) {
 
 /*        Scale simultaneously the matrices A, B and C: */
 /*        A <- inv(D)*A*D, B <- inv(D)*B and C <- C*D, where D is a */
 /*        diagonal matrix. */
 
+#line 340 "AB09CD.f"
 	maxred = 100.;
+#line 341 "AB09CD.f"
 	tb01id_("All", n, m, p, &maxred, &a[a_offset], lda, &b[b_offset], ldb,
 		 &c__[c_offset], ldc, &dwork[1], info, (ftnlen)3);
+#line 343 "AB09CD.f"
     }
 
 /*     Reduce A to the real Schur form using an orthogonal similarity */
 /*     transformation A <- T'*A*T and apply the transformation to B */
 /*     and C: B <- T'*B and C <- C*T. */
 
+#line 349 "AB09CD.f"
     kt = 1;
+#line 350 "AB09CD.f"
     kl = kt + *n * *n;
+#line 351 "AB09CD.f"
     ki = kl + *n;
+#line 352 "AB09CD.f"
     kw = ki + *n;
+#line 353 "AB09CD.f"
     i__1 = *ldwork - kw + 1;
+#line 353 "AB09CD.f"
     tb01wd_(n, m, p, &a[a_offset], lda, &b[b_offset], ldb, &c__[c_offset], 
 	    ldc, &dwork[kt], n, &dwork[kl], &dwork[ki], &dwork[kw], &i__1, &
 	    ierr);
+#line 355 "AB09CD.f"
     if (ierr != 0) {
+#line 356 "AB09CD.f"
 	*info = 1;
+#line 357 "AB09CD.f"
 	return 0;
+#line 358 "AB09CD.f"
     }
 
+#line 360 "AB09CD.f"
     wrkopt = dwork[kw] + (doublereal) (kw - 1);
 
+#line 362 "AB09CD.f"
     ab09cx_(dico, ordsel, n, m, p, nr, &a[a_offset], lda, &b[b_offset], ldb, &
 	    c__[c_offset], ldc, &d__[d_offset], ldd, &hsv[1], tol1, tol2, &
 	    iwork[1], &dwork[1], ldwork, iwarn, &ierr, (ftnlen)1, (ftnlen)1);
 
+#line 366 "AB09CD.f"
     if (ierr != 0) {
+#line 367 "AB09CD.f"
 	*info = ierr + 1;
+#line 368 "AB09CD.f"
 	return 0;
+#line 369 "AB09CD.f"
     }
 
+#line 371 "AB09CD.f"
     dwork[1] = max(wrkopt,dwork[1]);
 
+#line 373 "AB09CD.f"
     return 0;
 /* *** Last line of AB09CD *** */
 } /* ab09cd_ */

@@ -1,3 +1,4 @@
+#line 1 "TB01MD.f"
 /* TB01MD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "TB01MD.f"
 /* Table of constant values */
 
 static doublereal c_b9 = 0.;
@@ -221,187 +223,307 @@ static integer c__1 = 1;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 196 "TB01MD.f"
     /* Parameter adjustments */
+#line 196 "TB01MD.f"
     a_dim1 = *lda;
+#line 196 "TB01MD.f"
     a_offset = 1 + a_dim1;
+#line 196 "TB01MD.f"
     a -= a_offset;
+#line 196 "TB01MD.f"
     b_dim1 = *ldb;
+#line 196 "TB01MD.f"
     b_offset = 1 + b_dim1;
+#line 196 "TB01MD.f"
     b -= b_offset;
+#line 196 "TB01MD.f"
     u_dim1 = *ldu;
+#line 196 "TB01MD.f"
     u_offset = 1 + u_dim1;
+#line 196 "TB01MD.f"
     u -= u_offset;
+#line 196 "TB01MD.f"
     --dwork;
+#line 196 "TB01MD.f"
 
+#line 196 "TB01MD.f"
     /* Function Body */
+#line 196 "TB01MD.f"
     *info = 0;
+#line 197 "TB01MD.f"
     luplo = lsame_(uplo, "U", (ftnlen)1, (ftnlen)1);
+#line 198 "TB01MD.f"
     ljobi = lsame_(jobu, "I", (ftnlen)1, (ftnlen)1);
+#line 199 "TB01MD.f"
     ljoba = ljobi || lsame_(jobu, "U", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 203 "TB01MD.f"
     if (! ljoba && ! lsame_(jobu, "N", (ftnlen)1, (ftnlen)1)) {
+#line 204 "TB01MD.f"
 	*info = -1;
+#line 205 "TB01MD.f"
     } else if (! luplo && ! lsame_(uplo, "L", (ftnlen)1, (ftnlen)1)) {
+#line 206 "TB01MD.f"
 	*info = -2;
+#line 207 "TB01MD.f"
     } else if (*n < 0) {
+#line 208 "TB01MD.f"
 	*info = -3;
+#line 209 "TB01MD.f"
     } else if (*m < 0) {
+#line 210 "TB01MD.f"
 	*info = -4;
+#line 211 "TB01MD.f"
     } else if (*lda < max(1,*n)) {
+#line 212 "TB01MD.f"
 	*info = -6;
+#line 213 "TB01MD.f"
     } else if (*ldb < max(1,*n)) {
+#line 214 "TB01MD.f"
 	*info = -8;
+#line 215 "TB01MD.f"
     } else if (! ljoba && *ldu < 1 || ljoba && *ldu < max(1,*n)) {
+#line 217 "TB01MD.f"
 	*info = -10;
+#line 218 "TB01MD.f"
     }
 
+#line 220 "TB01MD.f"
     if (*info != 0) {
 
 /*        Error return */
 
+#line 224 "TB01MD.f"
 	i__1 = -(*info);
+#line 224 "TB01MD.f"
 	xerbla_("TB01MD", &i__1, (ftnlen)6);
+#line 225 "TB01MD.f"
 	return 0;
+#line 226 "TB01MD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 230 "TB01MD.f"
     if (*n == 0 || *m == 0) {
+#line 230 "TB01MD.f"
 	return 0;
+#line 230 "TB01MD.f"
     }
 
+#line 233 "TB01MD.f"
     m1 = *m + 1;
+#line 234 "TB01MD.f"
     n1 = *n - 1;
 
+#line 236 "TB01MD.f"
     if (ljobi) {
 
 /*        Initialize U to the identity matrix. */
 
+#line 240 "TB01MD.f"
 	dlaset_("Full", n, n, &c_b9, &c_b10, &u[u_offset], ldu, (ftnlen)4);
+#line 241 "TB01MD.f"
     }
 
 /*     Perform transformations involving both B and A. */
 
+#line 245 "TB01MD.f"
     i__1 = min(*m,n1);
+#line 245 "TB01MD.f"
     for (j = 1; j <= i__1; ++j) {
+#line 246 "TB01MD.f"
 	nj = *n - j;
+#line 247 "TB01MD.f"
 	if (luplo) {
+#line 248 "TB01MD.f"
 	    par1 = j;
+#line 249 "TB01MD.f"
 	    par2 = j;
+#line 250 "TB01MD.f"
 	    par3 = j + 1;
+#line 251 "TB01MD.f"
 	    par4 = *m;
+#line 252 "TB01MD.f"
 	    par5 = *n;
+#line 253 "TB01MD.f"
 	} else {
+#line 254 "TB01MD.f"
 	    par1 = *m - j + 1;
+#line 255 "TB01MD.f"
 	    par2 = nj + 1;
+#line 256 "TB01MD.f"
 	    par3 = 1;
+#line 257 "TB01MD.f"
 	    par4 = *m - j;
+#line 258 "TB01MD.f"
 	    par5 = nj;
+#line 259 "TB01MD.f"
 	}
 
+#line 261 "TB01MD.f"
 	i__2 = nj + 1;
+#line 261 "TB01MD.f"
 	dlarfg_(&i__2, &b[par2 + par1 * b_dim1], &b[par3 + par1 * b_dim1], &
 		c__1, &dz);
 
 /*        Update A. */
 
+#line 265 "TB01MD.f"
 	i__2 = nj + 1;
+#line 265 "TB01MD.f"
 	dlatzm_("Left", &i__2, n, &b[par3 + par1 * b_dim1], &c__1, &dz, &a[
 		par2 + a_dim1], &a[par3 + a_dim1], lda, &dwork[1], (ftnlen)4);
+#line 267 "TB01MD.f"
 	i__2 = nj + 1;
+#line 267 "TB01MD.f"
 	dlatzm_("Right", n, &i__2, &b[par3 + par1 * b_dim1], &c__1, &dz, &a[
 		par2 * a_dim1 + 1], &a[par3 * a_dim1 + 1], lda, &dwork[1], (
 		ftnlen)5);
 
+#line 270 "TB01MD.f"
 	if (ljoba) {
 
 /*           Update U. */
 
+#line 274 "TB01MD.f"
 	    i__2 = nj + 1;
+#line 274 "TB01MD.f"
 	    dlatzm_("Right", n, &i__2, &b[par3 + par1 * b_dim1], &c__1, &dz, &
 		    u[par2 * u_dim1 + 1], &u[par3 * u_dim1 + 1], ldu, &dwork[
 		    1], (ftnlen)5);
+#line 276 "TB01MD.f"
 	}
 
+#line 278 "TB01MD.f"
 	if (j != *m) {
 
 /*           Update B */
 
+#line 282 "TB01MD.f"
 	    i__2 = nj + 1;
+#line 282 "TB01MD.f"
 	    i__3 = par4 - par3 + 1;
+#line 282 "TB01MD.f"
 	    dlatzm_("Left", &i__2, &i__3, &b[par3 + par1 * b_dim1], &c__1, &
 		    dz, &b[par2 + par3 * b_dim1], &b[par3 + par3 * b_dim1], 
 		    ldb, &dwork[1], (ftnlen)4);
+#line 284 "TB01MD.f"
 	}
 
+#line 286 "TB01MD.f"
 	i__2 = par5;
+#line 286 "TB01MD.f"
 	for (ii = par3; ii <= i__2; ++ii) {
+#line 287 "TB01MD.f"
 	    b[ii + par1 * b_dim1] = 0.;
+#line 288 "TB01MD.f"
 /* L10: */
+#line 288 "TB01MD.f"
 	}
 
+#line 290 "TB01MD.f"
 /* L20: */
+#line 290 "TB01MD.f"
     }
 
+#line 292 "TB01MD.f"
     i__1 = n1;
+#line 292 "TB01MD.f"
     for (j = m1; j <= i__1; ++j) {
 
 /*        Perform next transformations only involving A. */
 
+#line 296 "TB01MD.f"
 	nj = *n - j;
+#line 297 "TB01MD.f"
 	if (luplo) {
+#line 298 "TB01MD.f"
 	    par1 = j - *m;
+#line 299 "TB01MD.f"
 	    par2 = j;
+#line 300 "TB01MD.f"
 	    par3 = j + 1;
+#line 301 "TB01MD.f"
 	    par4 = *n;
+#line 302 "TB01MD.f"
 	    par5 = j - *m + 1;
+#line 303 "TB01MD.f"
 	    par6 = *n;
+#line 304 "TB01MD.f"
 	} else {
+#line 305 "TB01MD.f"
 	    par1 = *n + m1 - j;
+#line 306 "TB01MD.f"
 	    par2 = nj + 1;
+#line 307 "TB01MD.f"
 	    par3 = 1;
+#line 308 "TB01MD.f"
 	    par4 = nj;
+#line 309 "TB01MD.f"
 	    par5 = 1;
+#line 310 "TB01MD.f"
 	    par6 = *n + *m - j;
+#line 311 "TB01MD.f"
 	}
 
+#line 313 "TB01MD.f"
 	i__2 = nj + 1;
+#line 313 "TB01MD.f"
 	dlarfg_(&i__2, &a[par2 + par1 * a_dim1], &a[par3 + par1 * a_dim1], &
 		c__1, &dz);
 
 /*        Update A. */
 
+#line 317 "TB01MD.f"
 	i__2 = nj + 1;
+#line 317 "TB01MD.f"
 	i__3 = par6 - par5 + 1;
+#line 317 "TB01MD.f"
 	dlatzm_("Left", &i__2, &i__3, &a[par3 + par1 * a_dim1], &c__1, &dz, &
 		a[par2 + par5 * a_dim1], &a[par3 + par5 * a_dim1], lda, &
 		dwork[1], (ftnlen)4);
+#line 319 "TB01MD.f"
 	i__2 = nj + 1;
+#line 319 "TB01MD.f"
 	dlatzm_("Right", n, &i__2, &a[par3 + par1 * a_dim1], &c__1, &dz, &a[
 		par2 * a_dim1 + 1], &a[par3 * a_dim1 + 1], lda, &dwork[1], (
 		ftnlen)5);
 
+#line 322 "TB01MD.f"
 	if (ljoba) {
 
 /*           Update U. */
 
+#line 326 "TB01MD.f"
 	    i__2 = nj + 1;
+#line 326 "TB01MD.f"
 	    dlatzm_("Right", n, &i__2, &a[par3 + par1 * a_dim1], &c__1, &dz, &
 		    u[par2 * u_dim1 + 1], &u[par3 * u_dim1 + 1], ldu, &dwork[
 		    1], (ftnlen)5);
+#line 328 "TB01MD.f"
 	}
 
+#line 330 "TB01MD.f"
 	i__2 = par4;
+#line 330 "TB01MD.f"
 	for (ii = par3; ii <= i__2; ++ii) {
+#line 331 "TB01MD.f"
 	    a[ii + par1 * a_dim1] = 0.;
+#line 332 "TB01MD.f"
 /* L30: */
+#line 332 "TB01MD.f"
 	}
 
+#line 334 "TB01MD.f"
 /* L40: */
+#line 334 "TB01MD.f"
     }
 
+#line 336 "TB01MD.f"
     return 0;
 /* *** Last line of TB01MD *** */
 } /* tb01md_ */

@@ -1,3 +1,4 @@
+#line 1 "MB05MY.f"
 /* MB05MY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB05MY.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -235,33 +237,61 @@ static integer c__4 = 4;
 
 /*     Test the input scalar arguments. */
 
+#line 185 "MB05MY.f"
     /* Parameter adjustments */
+#line 185 "MB05MY.f"
     a_dim1 = *lda;
+#line 185 "MB05MY.f"
     a_offset = 1 + a_dim1;
+#line 185 "MB05MY.f"
     a -= a_offset;
+#line 185 "MB05MY.f"
     --wr;
+#line 185 "MB05MY.f"
     --wi;
+#line 185 "MB05MY.f"
     r_dim1 = *ldr;
+#line 185 "MB05MY.f"
     r_offset = 1 + r_dim1;
+#line 185 "MB05MY.f"
     r__ -= r_offset;
+#line 185 "MB05MY.f"
     q_dim1 = *ldq;
+#line 185 "MB05MY.f"
     q_offset = 1 + q_dim1;
+#line 185 "MB05MY.f"
     q -= q_offset;
+#line 185 "MB05MY.f"
     --dwork;
+#line 185 "MB05MY.f"
 
+#line 185 "MB05MY.f"
     /* Function Body */
+#line 185 "MB05MY.f"
     *info = 0;
+#line 186 "MB05MY.f"
     scale = lsame_(balanc, "S", (ftnlen)1, (ftnlen)1);
+#line 187 "MB05MY.f"
     if (! (lsame_(balanc, "N", (ftnlen)1, (ftnlen)1) || scale)) {
+#line 188 "MB05MY.f"
 	*info = -1;
+#line 189 "MB05MY.f"
     } else if (*n < 0) {
+#line 190 "MB05MY.f"
 	*info = -2;
+#line 191 "MB05MY.f"
     } else if (*lda < max(1,*n)) {
+#line 192 "MB05MY.f"
 	*info = -4;
+#line 193 "MB05MY.f"
     } else if (*ldr < max(1,*n)) {
+#line 194 "MB05MY.f"
 	*info = -8;
+#line 195 "MB05MY.f"
     } else if (*ldq < max(1,*n)) {
+#line 196 "MB05MY.f"
 	*info = -10;
+#line 197 "MB05MY.f"
     }
 
 /*     Compute workspace. */
@@ -274,162 +304,252 @@ static integer c__4 = 4;
 /*       calculated below. HSDWOR is computed assuming ILO=1 and IHI=N, */
 /*       the worst case.) */
 
+#line 209 "MB05MY.f"
     minwrk = 1;
+#line 210 "MB05MY.f"
     if (*info == 0 && *ldwork >= 1) {
+#line 211 "MB05MY.f"
 	maxwrk = (*n << 1) + *n * ilaenv_(&c__1, "DGEHRD", " ", n, &c__1, n, &
 		c__0, (ftnlen)6, (ftnlen)1);
 /* Computing MAX */
+#line 212 "MB05MY.f"
 	i__1 = 1, i__2 = *n << 2;
+#line 212 "MB05MY.f"
 	minwrk = max(i__1,i__2);
 /* Computing MAX */
+#line 213 "MB05MY.f"
 	i__1 = maxwrk, i__2 = (*n << 1) + (*n - 1) * ilaenv_(&c__1, "DORGHR", 
 		" ", n, &c__1, n, &c_n1, (ftnlen)6, (ftnlen)1);
+#line 213 "MB05MY.f"
 	maxwrk = max(i__1,i__2);
 /* Computing MAX */
+#line 215 "MB05MY.f"
 	i__1 = ilaenv_(&c__8, "DHSEQR", "SV", n, &c__1, n, &c_n1, (ftnlen)6, (
 		ftnlen)2);
+#line 215 "MB05MY.f"
 	maxb = max(i__1,2);
 /* Computing MIN */
 /* Computing MAX */
+#line 216 "MB05MY.f"
 	i__3 = 2, i__4 = ilaenv_(&c__4, "DHSEQR", "SV", n, &c__1, n, &c_n1, (
 		ftnlen)6, (ftnlen)2);
+#line 216 "MB05MY.f"
 	i__1 = min(maxb,*n), i__2 = max(i__3,i__4);
+#line 216 "MB05MY.f"
 	k = min(i__1,i__2);
 /* Computing MAX */
+#line 218 "MB05MY.f"
 	i__1 = k * (k + 2), i__2 = *n << 1;
+#line 218 "MB05MY.f"
 	hsdwor = max(i__1,i__2);
 /* Computing MAX */
+#line 219 "MB05MY.f"
 	i__1 = maxwrk, i__2 = *n + 1, i__1 = max(i__1,i__2), i__2 = *n + 
 		hsdwor;
+#line 219 "MB05MY.f"
 	maxwrk = max(i__1,i__2);
 /* Computing MAX */
+#line 220 "MB05MY.f"
 	i__1 = maxwrk, i__2 = *n << 2;
+#line 220 "MB05MY.f"
 	maxwrk = max(i__1,i__2);
+#line 221 "MB05MY.f"
 	dwork[1] = (doublereal) maxwrk;
+#line 222 "MB05MY.f"
     }
+#line 223 "MB05MY.f"
     if (*ldwork < minwrk) {
+#line 224 "MB05MY.f"
 	*info = -12;
+#line 225 "MB05MY.f"
     }
+#line 226 "MB05MY.f"
     if (*info != 0) {
+#line 227 "MB05MY.f"
 	i__1 = -(*info);
+#line 227 "MB05MY.f"
 	xerbla_("MB05MY", &i__1, (ftnlen)6);
+#line 228 "MB05MY.f"
 	return 0;
+#line 229 "MB05MY.f"
     }
 
 /*     Quick return if possible. */
 
+#line 233 "MB05MY.f"
     if (*n == 0) {
+#line 233 "MB05MY.f"
 	return 0;
+#line 233 "MB05MY.f"
     }
 
 /*     Get machine constants. */
 
+#line 238 "MB05MY.f"
     eps = dlamch_("P", (ftnlen)1);
+#line 239 "MB05MY.f"
     smlnum = dlamch_("S", (ftnlen)1);
+#line 240 "MB05MY.f"
     bignum = 1. / smlnum;
+#line 241 "MB05MY.f"
     dlabad_(&smlnum, &bignum);
+#line 242 "MB05MY.f"
     smlnum = sqrt(smlnum) / eps;
+#line 243 "MB05MY.f"
     bignum = 1. / smlnum;
 
 /*     Scale A if max element outside range [SMLNUM,BIGNUM]. */
 
+#line 247 "MB05MY.f"
     anrm = dlange_("M", n, n, &a[a_offset], lda, dum, (ftnlen)1);
+#line 248 "MB05MY.f"
     scalea = FALSE_;
+#line 249 "MB05MY.f"
     if (anrm > 0. && anrm < smlnum) {
+#line 250 "MB05MY.f"
 	scalea = TRUE_;
+#line 251 "MB05MY.f"
 	cscale = smlnum;
+#line 252 "MB05MY.f"
     } else if (anrm > bignum) {
+#line 253 "MB05MY.f"
 	scalea = TRUE_;
+#line 254 "MB05MY.f"
 	cscale = bignum;
+#line 255 "MB05MY.f"
     }
+#line 256 "MB05MY.f"
     if (scalea) {
+#line 256 "MB05MY.f"
 	dlascl_("G", &c__0, &c__0, &anrm, &cscale, n, n, &a[a_offset], lda, &
 		ierr, (ftnlen)1);
+#line 256 "MB05MY.f"
     }
 
 /*     Balance the matrix, if requested. (Permutation is not possible.) */
 /*     (Workspace: need N) */
 
+#line 262 "MB05MY.f"
     ibal = 1;
+#line 263 "MB05MY.f"
     dgebal_(balanc, n, &a[a_offset], lda, &ilo, &ihi, &dwork[ibal], &ierr, (
 	    ftnlen)1);
 
 /*     Reduce to upper Hessenberg form. */
 /*     (Workspace: need 3*N, prefer 2*N+N*NB) */
 
+#line 268 "MB05MY.f"
     itau = ibal + *n;
+#line 269 "MB05MY.f"
     jwork = itau + *n;
+#line 270 "MB05MY.f"
     i__1 = *ldwork - jwork + 1;
+#line 270 "MB05MY.f"
     dgehrd_(n, &ilo, &ihi, &a[a_offset], lda, &dwork[itau], &dwork[jwork], &
 	    i__1, &ierr);
 
 /*     Compute right eigenvectors of T. */
 /*     Copy Householder vectors to Q. */
 
+#line 276 "MB05MY.f"
     dlacpy_("Lower", n, n, &a[a_offset], lda, &q[q_offset], ldq, (ftnlen)5);
 
 /*     Generate orthogonal matrix in Q. */
 /*     (Workspace: need 3*N-1, prefer 2*N+(N-1)*NB) */
 
+#line 281 "MB05MY.f"
     i__1 = *ldwork - jwork + 1;
+#line 281 "MB05MY.f"
     dorghr_(n, &ilo, &ihi, &q[q_offset], ldq, &dwork[itau], &dwork[jwork], &
 	    i__1, &ierr);
 
 /*     Perform QR iteration, accumulating Schur vectors in Q. */
 /*     (Workspace: need N+1, prefer N+HSDWOR (see comments) ) */
 
+#line 287 "MB05MY.f"
     jwork = itau;
+#line 288 "MB05MY.f"
     i__1 = *ldwork - jwork + 1;
+#line 288 "MB05MY.f"
     dhseqr_("S", "V", n, &ilo, &ihi, &a[a_offset], lda, &wr[1], &wi[1], &q[
 	    q_offset], ldq, &dwork[jwork], &i__1, info, (ftnlen)1, (ftnlen)1);
 
 /*     If INFO > 0 from DHSEQR, then quit. */
 
+#line 293 "MB05MY.f"
     if (*info > 0) {
+#line 293 "MB05MY.f"
 	goto L10;
+#line 293 "MB05MY.f"
     }
 
 /*     Compute right eigenvectors of T in R. */
 /*     (Workspace: need 4*N) */
 
+#line 299 "MB05MY.f"
     dtrevc_("Right", "All", select, n, &a[a_offset], lda, dum, &c__1, &r__[
 	    r_offset], ldr, n, &nout, &dwork[jwork], &ierr, (ftnlen)5, (
 	    ftnlen)3);
 
 /*     Undo scaling if necessary. */
 
+#line 304 "MB05MY.f"
 L10:
+#line 305 "MB05MY.f"
     if (scalea) {
+#line 306 "MB05MY.f"
 	i__1 = *n - *info;
 /* Computing MAX */
+#line 306 "MB05MY.f"
 	i__3 = *n - *info;
+#line 306 "MB05MY.f"
 	i__2 = max(i__3,1);
+#line 306 "MB05MY.f"
 	dlascl_("G", &c__0, &c__0, &cscale, &anrm, &i__1, &c__1, &wr[*info + 
 		1], &i__2, &ierr, (ftnlen)1);
+#line 308 "MB05MY.f"
 	i__1 = *n - *info;
 /* Computing MAX */
+#line 308 "MB05MY.f"
 	i__3 = *n - *info;
+#line 308 "MB05MY.f"
 	i__2 = max(i__3,1);
+#line 308 "MB05MY.f"
 	dlascl_("G", &c__0, &c__0, &cscale, &anrm, &i__1, &c__1, &wi[*info + 
 		1], &i__2, &ierr, (ftnlen)1);
+#line 310 "MB05MY.f"
 	if (*info > 0) {
+#line 311 "MB05MY.f"
 	    i__1 = ilo - 1;
+#line 311 "MB05MY.f"
 	    dlascl_("G", &c__0, &c__0, &cscale, &anrm, &i__1, &c__1, &wr[1], 
 		    n, &ierr, (ftnlen)1);
+#line 313 "MB05MY.f"
 	    i__1 = ilo - 1;
+#line 313 "MB05MY.f"
 	    dlascl_("G", &c__0, &c__0, &cscale, &anrm, &i__1, &c__1, &wi[1], 
 		    n, &ierr, (ftnlen)1);
+#line 315 "MB05MY.f"
 	}
+#line 316 "MB05MY.f"
     }
 
+#line 318 "MB05MY.f"
     if (scale) {
+#line 319 "MB05MY.f"
 	for (k = *n; k >= 1; --k) {
+#line 320 "MB05MY.f"
 	    dwork[k + 1] = dwork[k];
+#line 321 "MB05MY.f"
 /* L20: */
+#line 321 "MB05MY.f"
 	}
+#line 322 "MB05MY.f"
     }
+#line 323 "MB05MY.f"
     dwork[1] = (doublereal) maxwrk;
 
+#line 325 "MB05MY.f"
     return 0;
 /* *** Last line of MB05MY *** */
 } /* mb05my_ */

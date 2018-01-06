@@ -1,3 +1,4 @@
+#line 1 "AB09FD.f"
 /* AB09FD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "AB09FD.f"
 /* Table of constant values */
 
 static doublereal c_b20 = 0.;
@@ -419,142 +421,237 @@ static doublereal c_b20 = 0.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 359 "AB09FD.f"
     /* Parameter adjustments */
+#line 359 "AB09FD.f"
     a_dim1 = *lda;
+#line 359 "AB09FD.f"
     a_offset = 1 + a_dim1;
+#line 359 "AB09FD.f"
     a -= a_offset;
+#line 359 "AB09FD.f"
     b_dim1 = *ldb;
+#line 359 "AB09FD.f"
     b_offset = 1 + b_dim1;
+#line 359 "AB09FD.f"
     b -= b_offset;
+#line 359 "AB09FD.f"
     c_dim1 = *ldc;
+#line 359 "AB09FD.f"
     c_offset = 1 + c_dim1;
+#line 359 "AB09FD.f"
     c__ -= c_offset;
+#line 359 "AB09FD.f"
     --hsv;
+#line 359 "AB09FD.f"
     --iwork;
+#line 359 "AB09FD.f"
     --dwork;
+#line 359 "AB09FD.f"
 
+#line 359 "AB09FD.f"
     /* Function Body */
+#line 359 "AB09FD.f"
     *info = 0;
+#line 360 "AB09FD.f"
     *iwarn = 0;
+#line 361 "AB09FD.f"
     discr = lsame_(dico, "D", (ftnlen)1, (ftnlen)1);
+#line 362 "AB09FD.f"
     fixord = lsame_(ordsel, "F", (ftnlen)1, (ftnlen)1);
+#line 363 "AB09FD.f"
     left = lsame_(jobcf, "L", (ftnlen)1, (ftnlen)1);
+#line 364 "AB09FD.f"
     stabd = lsame_(fact, "S", (ftnlen)1, (ftnlen)1);
+#line 365 "AB09FD.f"
     maxmp = max(*m,*p);
 
 /* Computing MAX */
+#line 367 "AB09FD.f"
     i__1 = *n, i__2 = *m + *p;
+#line 367 "AB09FD.f"
     lwr = (*n << 1) * *n + *n * (max(i__1,i__2) + 5) + *n * (*n + 1) / 2;
+#line 368 "AB09FD.f"
     lw1 = *n * ((maxmp << 1) + *p) + maxmp * (maxmp + *p);
 /* Computing MAX */
 /* Computing MAX */
+#line 369 "AB09FD.f"
     i__2 = *n * (*n + 5), i__3 = *p * (*p + 2), i__2 = max(i__2,i__3), i__3 = 
 	    *p << 2, i__2 = max(i__2,i__3), i__3 = *m << 2;
+#line 369 "AB09FD.f"
     i__1 = *n * *p + max(i__2,i__3);
+#line 369 "AB09FD.f"
     lw2 = lw1 + max(i__1,lwr);
 /* Computing MAX */
 /* Computing MAX */
+#line 371 "AB09FD.f"
     i__2 = *n * (*n + 5), i__3 = *p * 5, i__2 = max(i__2,i__3), i__3 = *m << 
 	    2;
+#line 371 "AB09FD.f"
     i__1 = *n * *p + max(i__2,i__3);
+#line 371 "AB09FD.f"
     lw1 += max(i__1,lwr);
 /* Computing MAX */
+#line 372 "AB09FD.f"
     i__1 = *m * 5, i__2 = *p << 2, i__1 = max(i__1,i__2);
+#line 372 "AB09FD.f"
     lw3 = (*n + *m) * (*m + *p) + max(i__1,lwr);
 /* Computing MAX */
+#line 373 "AB09FD.f"
     i__1 = *m * (*m + 2), i__2 = *m << 2, i__1 = max(i__1,i__2), i__2 = *p << 
 	    2, i__1 = max(i__1,i__2);
+#line 373 "AB09FD.f"
     lw4 = (*n + *m) * (*m + *p) + max(i__1,lwr);
 
 /*     Test the input scalar arguments. */
 
+#line 377 "AB09FD.f"
     if (! (lsame_(dico, "C", (ftnlen)1, (ftnlen)1) || discr)) {
+#line 378 "AB09FD.f"
 	*info = -1;
+#line 379 "AB09FD.f"
     } else if (! (left || lsame_(jobcf, "R", (ftnlen)1, (ftnlen)1))) {
+#line 380 "AB09FD.f"
 	*info = -2;
+#line 381 "AB09FD.f"
     } else if (! (stabd || lsame_(fact, "I", (ftnlen)1, (ftnlen)1))) {
+#line 382 "AB09FD.f"
 	*info = -3;
+#line 383 "AB09FD.f"
     } else if (! (lsame_(jobmr, "B", (ftnlen)1, (ftnlen)1) || lsame_(jobmr, 
 	    "N", (ftnlen)1, (ftnlen)1))) {
+#line 385 "AB09FD.f"
 	*info = -4;
+#line 386 "AB09FD.f"
     } else if (! (lsame_(equil, "S", (ftnlen)1, (ftnlen)1) || lsame_(equil, 
 	    "N", (ftnlen)1, (ftnlen)1))) {
+#line 388 "AB09FD.f"
 	*info = -5;
+#line 389 "AB09FD.f"
     } else if (! (fixord || lsame_(ordsel, "A", (ftnlen)1, (ftnlen)1))) {
+#line 390 "AB09FD.f"
 	*info = -6;
+#line 391 "AB09FD.f"
     } else if (stabd && (! discr && *alpha >= 0. || discr && (*alpha < 0. || *
 	    alpha >= 1.))) {
+#line 394 "AB09FD.f"
 	*info = -7;
+#line 395 "AB09FD.f"
     } else if (*n < 0) {
+#line 396 "AB09FD.f"
 	*info = -8;
+#line 397 "AB09FD.f"
     } else if (*m < 0) {
+#line 398 "AB09FD.f"
 	*info = -9;
+#line 399 "AB09FD.f"
     } else if (*p < 0) {
+#line 400 "AB09FD.f"
 	*info = -10;
+#line 401 "AB09FD.f"
     } else if (fixord && (*nr < 0 || *nr > *n)) {
+#line 402 "AB09FD.f"
 	*info = -11;
+#line 403 "AB09FD.f"
     } else if (*lda < max(1,*n)) {
+#line 404 "AB09FD.f"
 	*info = -13;
+#line 405 "AB09FD.f"
     } else if (*ldb < max(1,*n)) {
+#line 406 "AB09FD.f"
 	*info = -15;
+#line 407 "AB09FD.f"
     } else if (*ldc < max(1,*p)) {
+#line 408 "AB09FD.f"
 	*info = -17;
+#line 409 "AB09FD.f"
     } else if (*ldwork < 1 || stabd && left && *ldwork < lw1 || ! stabd && 
 	    left && *ldwork < lw2 || stabd && ! left && *ldwork < lw3 || ! 
 	    stabd && ! left && *ldwork < lw4) {
+#line 414 "AB09FD.f"
 	*info = -24;
+#line 415 "AB09FD.f"
     }
 
+#line 417 "AB09FD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 421 "AB09FD.f"
 	i__1 = -(*info);
+#line 421 "AB09FD.f"
 	xerbla_("AB09FD", &i__1, (ftnlen)6);
+#line 422 "AB09FD.f"
 	return 0;
+#line 423 "AB09FD.f"
     }
 
 /*     Quick return if possible. */
 
 /* Computing MIN */
+#line 427 "AB09FD.f"
     i__1 = min(*n,*m);
+#line 427 "AB09FD.f"
     if (min(i__1,*p) == 0 || fixord && *nr == 0) {
+#line 428 "AB09FD.f"
 	*nr = 0;
+#line 429 "AB09FD.f"
 	*nq = 0;
+#line 430 "AB09FD.f"
 	dwork[1] = 1.;
+#line 431 "AB09FD.f"
 	return 0;
+#line 432 "AB09FD.f"
     }
 
+#line 434 "AB09FD.f"
     if (lsame_(equil, "S", (ftnlen)1, (ftnlen)1)) {
 
 /*        Scale simultaneously the matrices A, B and C: */
 /*        A <- inv(D)*A*D,  B <- inv(D)*B and C <- C*D, where D is a */
 /*        diagonal matrix. */
 
+#line 440 "AB09FD.f"
 	maxred = 100.;
+#line 441 "AB09FD.f"
 	tb01id_("A", n, m, p, &maxred, &a[a_offset], lda, &b[b_offset], ldb, &
 		c__[c_offset], ldc, &dwork[1], info, (ftnlen)1);
+#line 443 "AB09FD.f"
     }
 
 /*     Perform the coprime factor model reduction procedure. */
 
+#line 447 "AB09FD.f"
     kd = 1;
+#line 448 "AB09FD.f"
     if (left) {
 /*                           -1 */
 /*        Compute a LCF G = R  *Q. */
 
+#line 452 "AB09FD.f"
 	mp = *m + *p;
+#line 453 "AB09FD.f"
 	kdr = kd + maxmp * maxmp;
+#line 454 "AB09FD.f"
 	kc = kdr + maxmp * *p;
+#line 455 "AB09FD.f"
 	kb = kc + maxmp * *n;
+#line 456 "AB09FD.f"
 	kbr = kb + *n * maxmp;
+#line 457 "AB09FD.f"
 	kw = kbr + *n * *p;
+#line 458 "AB09FD.f"
 	lwr = *ldwork - kw + 1;
+#line 459 "AB09FD.f"
 	dlacpy_("Full", n, m, &b[b_offset], ldb, &dwork[kb], n, (ftnlen)4);
+#line 460 "AB09FD.f"
 	dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[kc], &maxmp, (
 		ftnlen)4);
+#line 461 "AB09FD.f"
 	dlaset_("Full", p, m, &c_b20, &c_b20, &dwork[kd], &maxmp, (ftnlen)4);
 
+#line 463 "AB09FD.f"
 	if (stabd) {
 
 /*           Compute a LCF with prescribed stability degree. */
@@ -564,10 +661,12 @@ static doublereal c_b20 = 0.;
 /*           Additional workspace:  need   N*P+MAX(N*(N+5),5*P,4*M); */
 /*                                  prefer larger. */
 
+#line 472 "AB09FD.f"
 	    sb08ed_(dico, n, m, p, alpha, &a[a_offset], lda, &dwork[kb], n, &
 		    dwork[kc], &maxmp, &dwork[kd], &maxmp, nq, &ndr, &dwork[
 		    kbr], n, &dwork[kdr], &maxmp, tol2, &dwork[kw], &lwr, 
 		    iwarn, info, (ftnlen)1);
+#line 476 "AB09FD.f"
 	} else {
 
 /*           Compute a LCF with inner denominator. */
@@ -578,37 +677,57 @@ static doublereal c_b20 = 0.;
 /*                                         MAX(N*(N+5),P*(P+2),4*P,4*M). */
 /*                                  prefer larger; */
 
+#line 486 "AB09FD.f"
 	    sb08cd_(dico, n, m, p, &a[a_offset], lda, &dwork[kb], n, &dwork[
 		    kc], &maxmp, &dwork[kd], &maxmp, nq, &ndr, &dwork[kbr], n,
 		     &dwork[kdr], &maxmp, tol2, &dwork[kw], &lwr, iwarn, info,
 		     (ftnlen)1);
+#line 490 "AB09FD.f"
 	}
 
+#line 492 "AB09FD.f"
 	*iwarn *= 10;
+#line 493 "AB09FD.f"
 	if (*info != 0) {
+#line 493 "AB09FD.f"
 	    return 0;
+#line 493 "AB09FD.f"
 	}
 
+#line 496 "AB09FD.f"
 	wrkopt = (integer) dwork[kw] + kw - 1;
 
+#line 498 "AB09FD.f"
 	if (*nq == 0) {
+#line 499 "AB09FD.f"
 	    *nr = 0;
+#line 500 "AB09FD.f"
 	    dwork[1] = (doublereal) wrkopt;
+#line 501 "AB09FD.f"
 	    return 0;
+#line 502 "AB09FD.f"
 	}
 
+#line 504 "AB09FD.f"
 	if (maxmp > *m) {
 
 /*           Form the matrices ( BQ, BR ) and ( DQ, DR ) in consecutive */
 /*           columns (see SLICOT Library routines SB08CD/SB08ED). */
 
+#line 509 "AB09FD.f"
 	    kbt = kbr;
+#line 510 "AB09FD.f"
 	    kbr = kb + *n * *m;
+#line 511 "AB09FD.f"
 	    kdt = kdr;
+#line 512 "AB09FD.f"
 	    kdr = kd + maxmp * *m;
+#line 513 "AB09FD.f"
 	    dlacpy_("Full", nq, p, &dwork[kbt], n, &dwork[kbr], n, (ftnlen)4);
+#line 514 "AB09FD.f"
 	    dlacpy_("Full", p, p, &dwork[kdt], &maxmp, &dwork[kdr], &maxmp, (
 		    ftnlen)4);
+#line 516 "AB09FD.f"
 	}
 
 /*        Perform model reduction on ( Q, R ) to determine ( Qr, Rr ). */
@@ -618,23 +737,35 @@ static doublereal c_b20 = 0.;
 /*        Additional workspace:  need   N*(MAX(N,M+P)+5) + N*(N+1)/2; */
 /*                               prefer larger. */
 
+#line 525 "AB09FD.f"
 	kt = kw;
+#line 526 "AB09FD.f"
 	kti = kt + *nq * *nq;
+#line 527 "AB09FD.f"
 	kw = kti + *nq * *nq;
+#line 528 "AB09FD.f"
 	i__1 = *ldwork - kw + 1;
+#line 528 "AB09FD.f"
 	ab09ax_(dico, jobmr, ordsel, nq, &mp, p, nr, &a[a_offset], lda, &
 		dwork[kb], n, &dwork[kc], &maxmp, &hsv[1], &dwork[kt], n, &
 		dwork[kti], n, tol1, &iwork[1], &dwork[kw], &i__1, &iwarnk, &
 		ierr, (ftnlen)1, (ftnlen)1, (ftnlen)1);
 
+#line 533 "AB09FD.f"
 	*iwarn += iwarnk;
+#line 534 "AB09FD.f"
 	if (ierr != 0) {
+#line 535 "AB09FD.f"
 	    *info = 4;
+#line 536 "AB09FD.f"
 	    return 0;
+#line 537 "AB09FD.f"
 	}
 
 /* Computing MAX */
+#line 539 "AB09FD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 539 "AB09FD.f"
 	wrkopt = max(i__1,i__2);
 /*                                                -1 */
 /*        Compute the reduced order system Gr = Rr  *Qr. */
@@ -643,31 +774,45 @@ static doublereal c_b20 = 0.;
 /*                               MAX(M,P)*(MAX(M,P)+P); */
 /*        Additional workspace:  need   4*P. */
 
+#line 547 "AB09FD.f"
 	kw = kt;
+#line 548 "AB09FD.f"
 	sb08gd_(nr, m, p, &a[a_offset], lda, &dwork[kb], n, &dwork[kc], &
 		maxmp, &dwork[kd], &maxmp, &dwork[kbr], n, &dwork[kdr], &
 		maxmp, &iwork[1], &dwork[kw], info);
 
 /*        Copy the reduced system matrices Br and Cr to B and C. */
 
+#line 554 "AB09FD.f"
 	dlacpy_("Full", nr, m, &dwork[kb], n, &b[b_offset], ldb, (ftnlen)4);
+#line 555 "AB09FD.f"
 	dlacpy_("Full", p, nr, &dwork[kc], &maxmp, &c__[c_offset], ldc, (
 		ftnlen)4);
 
+#line 557 "AB09FD.f"
     } else {
 /*                             -1 */
 /*        Compute a RCF G = Q*R  . */
 
+#line 561 "AB09FD.f"
 	pm = *p + *m;
+#line 562 "AB09FD.f"
 	kdr = kd + *p;
+#line 563 "AB09FD.f"
 	kc = kd + pm * *m;
+#line 564 "AB09FD.f"
 	kcr = kc + *p;
+#line 565 "AB09FD.f"
 	kw = kc + pm * *n;
+#line 566 "AB09FD.f"
 	lwr = *ldwork - kw + 1;
+#line 567 "AB09FD.f"
 	dlacpy_("Full", p, n, &c__[c_offset], ldc, &dwork[kc], &pm, (ftnlen)4)
 		;
+#line 568 "AB09FD.f"
 	dlaset_("Full", p, m, &c_b20, &c_b20, &dwork[kd], &pm, (ftnlen)4);
 
+#line 570 "AB09FD.f"
 	if (stabd) {
 
 /*           Compute a RCF with prescribed stability degree. */
@@ -676,10 +821,12 @@ static doublereal c_b20 = 0.;
 /*           Additional workspace:  need   MAX( N*(N+5), 5*M, 4*P ); */
 /*                                  prefer larger. */
 
+#line 578 "AB09FD.f"
 	    sb08fd_(dico, n, m, p, alpha, &a[a_offset], lda, &b[b_offset], 
 		    ldb, &dwork[kc], &pm, &dwork[kd], &pm, nq, &ndr, &dwork[
 		    kcr], &pm, &dwork[kdr], &pm, tol2, &dwork[kw], &lwr, 
 		    iwarn, info, (ftnlen)1);
+#line 582 "AB09FD.f"
 	} else {
 
 /*           Compute a RCF with inner denominator. */
@@ -688,23 +835,35 @@ static doublereal c_b20 = 0.;
 /*           Additional workspace:  need   MAX(N*(N+5),M*(M+2),4*M,4*P); */
 /*                                  prefer larger. */
 
+#line 590 "AB09FD.f"
 	    sb08dd_(dico, n, m, p, &a[a_offset], lda, &b[b_offset], ldb, &
 		    dwork[kc], &pm, &dwork[kd], &pm, nq, &ndr, &dwork[kcr], &
 		    pm, &dwork[kdr], &pm, tol2, &dwork[kw], &lwr, iwarn, info,
 		     (ftnlen)1);
+#line 594 "AB09FD.f"
 	}
 
+#line 596 "AB09FD.f"
 	*iwarn *= 10;
+#line 597 "AB09FD.f"
 	if (*info != 0) {
+#line 597 "AB09FD.f"
 	    return 0;
+#line 597 "AB09FD.f"
 	}
 
+#line 600 "AB09FD.f"
 	wrkopt = (integer) dwork[kw] + kw - 1;
 
+#line 602 "AB09FD.f"
 	if (*nq == 0) {
+#line 603 "AB09FD.f"
 	    *nr = 0;
+#line 604 "AB09FD.f"
 	    dwork[1] = (doublereal) wrkopt;
+#line 605 "AB09FD.f"
 	    return 0;
+#line 606 "AB09FD.f"
 	}
 /*                                   ( Q )              ( Qr ) */
 /*        Perform model reduction on ( R ) to determine ( Rr ). */
@@ -713,23 +872,35 @@ static doublereal c_b20 = 0.;
 /*        Additional workspace:  need   N*(MAX(N,M+P)+5) + N*(N+1)/2; */
 /*                               prefer larger. */
 
+#line 614 "AB09FD.f"
 	kt = kw;
+#line 615 "AB09FD.f"
 	kti = kt + *nq * *nq;
+#line 616 "AB09FD.f"
 	kw = kti + *nq * *nq;
+#line 617 "AB09FD.f"
 	i__1 = *ldwork - kw + 1;
+#line 617 "AB09FD.f"
 	ab09ax_(dico, jobmr, ordsel, nq, m, &pm, nr, &a[a_offset], lda, &b[
 		b_offset], ldb, &dwork[kc], &pm, &hsv[1], &dwork[kt], n, &
 		dwork[kti], n, tol1, &iwork[1], &dwork[kw], &i__1, &iwarnk, &
 		ierr, (ftnlen)1, (ftnlen)1, (ftnlen)1);
 
+#line 622 "AB09FD.f"
 	*iwarn += iwarnk;
+#line 623 "AB09FD.f"
 	if (ierr != 0) {
+#line 624 "AB09FD.f"
 	    *info = 4;
+#line 625 "AB09FD.f"
 	    return 0;
+#line 626 "AB09FD.f"
 	}
 
 /* Computing MAX */
+#line 628 "AB09FD.f"
 	i__1 = wrkopt, i__2 = (integer) dwork[kw] + kw - 1;
+#line 628 "AB09FD.f"
 	wrkopt = max(i__1,i__2);
 /*                                                   -1 */
 /*        Compute the reduced order system Gr = Qr*Rr  . */
@@ -737,19 +908,25 @@ static doublereal c_b20 = 0.;
 /*        Workspace needed:      (N+M)*(M+P); */
 /*        Additional workspace:  need 4*M. */
 
+#line 635 "AB09FD.f"
 	kw = kt;
+#line 636 "AB09FD.f"
 	sb08hd_(nr, m, p, &a[a_offset], lda, &b[b_offset], ldb, &dwork[kc], &
 		pm, &dwork[kd], &pm, &dwork[kcr], &pm, &dwork[kdr], &pm, &
 		iwork[1], &dwork[kw], info);
 
 /*        Copy the reduced system matrix Cr to C. */
 
+#line 642 "AB09FD.f"
 	dlacpy_("Full", p, nr, &dwork[kc], &pm, &c__[c_offset], ldc, (ftnlen)
 		4);
+#line 643 "AB09FD.f"
     }
 
+#line 645 "AB09FD.f"
     dwork[1] = (doublereal) wrkopt;
 
+#line 647 "AB09FD.f"
     return 0;
 /* *** Last line of AB09FD *** */
 } /* ab09fd_ */

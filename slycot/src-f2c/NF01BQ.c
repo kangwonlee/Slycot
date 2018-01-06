@@ -1,3 +1,4 @@
+#line 1 "NF01BQ.f"
 /* NF01BQ.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "NF01BQ.f"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -310,201 +312,341 @@ static integer c__0 = 0;
 
 /*     Check the scalar input parameters. */
 
+#line 282 "NF01BQ.f"
     /* Parameter adjustments */
+#line 282 "NF01BQ.f"
     --ipar;
+#line 282 "NF01BQ.f"
     r_dim1 = *ldr;
+#line 282 "NF01BQ.f"
     r_offset = 1 + r_dim1;
+#line 282 "NF01BQ.f"
     r__ -= r_offset;
+#line 282 "NF01BQ.f"
     --ipvt;
+#line 282 "NF01BQ.f"
     --diag;
+#line 282 "NF01BQ.f"
     --qtb;
+#line 282 "NF01BQ.f"
     --ranks;
+#line 282 "NF01BQ.f"
     --x;
+#line 282 "NF01BQ.f"
     --dwork;
+#line 282 "NF01BQ.f"
 
+#line 282 "NF01BQ.f"
     /* Function Body */
+#line 282 "NF01BQ.f"
     econd = lsame_(cond, "E", (ftnlen)1, (ftnlen)1);
+#line 283 "NF01BQ.f"
     *info = 0;
+#line 284 "NF01BQ.f"
     if (! (econd || lsame_(cond, "N", (ftnlen)1, (ftnlen)1) || lsame_(cond, 
 	    "U", (ftnlen)1, (ftnlen)1))) {
+#line 286 "NF01BQ.f"
 	*info = -1;
+#line 287 "NF01BQ.f"
     } else if (*n < 0) {
+#line 288 "NF01BQ.f"
 	*info = -2;
+#line 289 "NF01BQ.f"
     } else if (*lipar < 4) {
+#line 290 "NF01BQ.f"
 	*info = -4;
+#line 291 "NF01BQ.f"
     } else {
+#line 292 "NF01BQ.f"
 	st = ipar[1];
+#line 293 "NF01BQ.f"
 	bn = ipar[2];
+#line 294 "NF01BQ.f"
 	bsm = ipar[3];
+#line 295 "NF01BQ.f"
 	bsn = ipar[4];
+#line 296 "NF01BQ.f"
 	nths = bn * bsn;
 /* Computing MIN */
+#line 297 "NF01BQ.f"
 	i__1 = min(st,bn), i__1 = min(i__1,bsm);
+#line 297 "NF01BQ.f"
 	if (min(i__1,bsn) < 0) {
+#line 298 "NF01BQ.f"
 	    *info = -3;
+#line 299 "NF01BQ.f"
 	} else if (*n != nths + st) {
+#line 300 "NF01BQ.f"
 	    *info = -2;
+#line 301 "NF01BQ.f"
 	} else if (*ldr < max(1,*n)) {
+#line 302 "NF01BQ.f"
 	    *info = -6;
+#line 303 "NF01BQ.f"
 	} else {
+#line 304 "NF01BQ.f"
 	    jw = *n << 1;
+#line 305 "NF01BQ.f"
 	    if (bn <= 1 || bsn == 0) {
+#line 306 "NF01BQ.f"
 		if (econd) {
+#line 306 "NF01BQ.f"
 		    jw = *n << 2;
+#line 306 "NF01BQ.f"
 		}
+#line 308 "NF01BQ.f"
 	    } else {
+#line 309 "NF01BQ.f"
 		jw = st * nths + jw;
+#line 310 "NF01BQ.f"
 		if (econd) {
+#line 310 "NF01BQ.f"
 		    jw = (max(bsn,st) << 1) + jw;
+#line 310 "NF01BQ.f"
 		}
+#line 312 "NF01BQ.f"
 	    }
+#line 313 "NF01BQ.f"
 	    if (*ldwork < jw) {
+#line 313 "NF01BQ.f"
 		*info = -14;
+#line 313 "NF01BQ.f"
 	    }
+#line 315 "NF01BQ.f"
 	}
+#line 316 "NF01BQ.f"
     }
 
 /*     Return if there are illegal arguments. */
 
+#line 320 "NF01BQ.f"
     if (*info != 0) {
+#line 321 "NF01BQ.f"
 	i__1 = -(*info);
+#line 321 "NF01BQ.f"
 	xerbla_("NF01BQ", &i__1, (ftnlen)6);
+#line 322 "NF01BQ.f"
 	return 0;
+#line 323 "NF01BQ.f"
     }
 
 /*     Quick return if possible. */
 
+#line 327 "NF01BQ.f"
     if (*n == 0) {
+#line 327 "NF01BQ.f"
 	return 0;
+#line 327 "NF01BQ.f"
     }
 
+#line 330 "NF01BQ.f"
     if (bn <= 1 || bsn == 0) {
 
 /*        Special case: R is an upper triangular matrix. */
 /*        Workspace: 4*N, if COND =  'E'; */
 /*                   2*N, if COND <> 'E'. */
 
+#line 336 "NF01BQ.f"
 	mb02yd_(cond, n, &r__[r_offset], ldr, &ipvt[1], &diag[1], &qtb[1], &
 		ranks[1], &x[1], tol, &dwork[1], ldwork, info, (ftnlen)1);
+#line 338 "NF01BQ.f"
 	return 0;
+#line 339 "NF01BQ.f"
     }
 
 /*     General case: BN > 1 and BSN > 0. */
 /*     Copy R and Q'*b to preserve input and initialize S. */
 /*     In particular, save the diagonal elements of R in X. */
 
+#line 345 "NF01BQ.f"
     ib = *n + 1;
+#line 346 "NF01BQ.f"
     is = ib + *n;
+#line 347 "NF01BQ.f"
     jw = is + st * nths;
+#line 348 "NF01BQ.f"
     i__ = 1;
+#line 349 "NF01BQ.f"
     l = is;
+#line 350 "NF01BQ.f"
     nc = bsn + st;
+#line 351 "NF01BQ.f"
     kf = nc;
 
+#line 353 "NF01BQ.f"
     i__1 = bn;
+#line 353 "NF01BQ.f"
     for (k = 1; k <= i__1; ++k) {
 
+#line 355 "NF01BQ.f"
 	i__2 = bsn;
+#line 355 "NF01BQ.f"
 	for (j = 1; j <= i__2; ++j) {
+#line 356 "NF01BQ.f"
 	    x[i__] = r__[i__ + j * r_dim1];
+#line 357 "NF01BQ.f"
 	    i__3 = bsn - j + 1;
+#line 357 "NF01BQ.f"
 	    dcopy_(&i__3, &r__[i__ + j * r_dim1], ldr, &r__[i__ + j * r_dim1],
 		     &c__1);
+#line 358 "NF01BQ.f"
 	    ++i__;
+#line 359 "NF01BQ.f"
 /* L10: */
+#line 359 "NF01BQ.f"
 	}
 
+#line 361 "NF01BQ.f"
 /* L20: */
+#line 361 "NF01BQ.f"
     }
 
 /*     DWORK(IS) contains a copy of [ L_1' ... L_l' ]. */
 /*     Workspace:  ST*(N-ST)+2*N; */
 
+#line 366 "NF01BQ.f"
     i__1 = nc;
+#line 366 "NF01BQ.f"
     for (j = bsn + 1; j <= i__1; ++j) {
+#line 367 "NF01BQ.f"
 	dcopy_(&nths, &r__[j * r_dim1 + 1], &c__1, &dwork[l], &st);
+#line 368 "NF01BQ.f"
 	x[i__] = r__[i__ + j * r_dim1];
+#line 369 "NF01BQ.f"
 	i__2 = nc - j + 1;
+#line 369 "NF01BQ.f"
 	dcopy_(&i__2, &r__[i__ + j * r_dim1], ldr, &r__[i__ + j * r_dim1], &
 		c__1);
+#line 370 "NF01BQ.f"
 	++i__;
+#line 371 "NF01BQ.f"
 	++l;
+#line 372 "NF01BQ.f"
 /* L30: */
+#line 372 "NF01BQ.f"
     }
 
+#line 374 "NF01BQ.f"
     dcopy_(n, &qtb[1], &c__1, &dwork[ib], &c__1);
+#line 375 "NF01BQ.f"
     if (st > 0) {
+#line 376 "NF01BQ.f"
 	itr = nths + 1;
+#line 377 "NF01BQ.f"
 	itc = bsn + 1;
+#line 378 "NF01BQ.f"
     } else {
+#line 379 "NF01BQ.f"
 	itr = 1;
+#line 380 "NF01BQ.f"
 	itc = 1;
+#line 381 "NF01BQ.f"
     }
+#line 382 "NF01BQ.f"
     ibsn = 0;
 
 /*     Eliminate the diagonal matrix D using Givens rotations. */
 
+#line 386 "NF01BQ.f"
     i__1 = *n;
+#line 386 "NF01BQ.f"
     for (j = 1; j <= i__1; ++j) {
+#line 387 "NF01BQ.f"
 	++ibsn;
+#line 388 "NF01BQ.f"
 	i__ = ibsn;
 
 /*        Prepare the row of D to be eliminated, locating the */
 /*        diagonal element using P from the QR factorization. */
 
+#line 393 "NF01BQ.f"
 	l = ipvt[j];
+#line 394 "NF01BQ.f"
 	if (diag[l] != 0.) {
+#line 395 "NF01BQ.f"
 	    qtbpj = 0.;
+#line 396 "NF01BQ.f"
 	    dwork[j] = diag[l];
 
 /* Computing MIN */
+#line 398 "NF01BQ.f"
 	    i__3 = j + kf - 1;
+#line 398 "NF01BQ.f"
 	    i__2 = min(i__3,*n);
+#line 398 "NF01BQ.f"
 	    for (k = j + 1; k <= i__2; ++k) {
+#line 399 "NF01BQ.f"
 		dwork[k] = 0.;
+#line 400 "NF01BQ.f"
 /* L40: */
+#line 400 "NF01BQ.f"
 	    }
 
 /*           The transformations to eliminate the row of D modify only */
 /*           a single element of Q'*b beyond the first n, which is */
 /*           initially zero. */
 
+#line 406 "NF01BQ.f"
 	    if (j < nths) {
+#line 407 "NF01BQ.f"
 		i__2 = bsn - ibsn + 1;
+#line 407 "NF01BQ.f"
 		mb04ow_(&i__2, &st, &c__1, &r__[j + ibsn * r_dim1], ldr, &r__[
 			itr + itc * r_dim1], ldr, &dwork[j], &c__1, &dwork[ib 
 			+ j - 1], &bsn, &dwork[ib + nths], &st, &qtbpj, &c__1)
 			;
+#line 410 "NF01BQ.f"
 		if (ibsn == bsn) {
+#line 410 "NF01BQ.f"
 		    ibsn = 0;
+#line 410 "NF01BQ.f"
 		}
+#line 412 "NF01BQ.f"
 	    } else if (j == nths) {
+#line 413 "NF01BQ.f"
 		mb04ow_(&c__1, &st, &c__1, &r__[j + ibsn * r_dim1], ldr, &r__[
 			itr + itc * r_dim1], ldr, &dwork[j], &c__1, &dwork[ib 
 			+ j - 1], &bsn, &dwork[ib + nths], &st, &qtbpj, &c__1)
 			;
+#line 416 "NF01BQ.f"
 		kf = st;
+#line 417 "NF01BQ.f"
 	    } else {
+#line 418 "NF01BQ.f"
 		i__2 = *n - j + 1;
+#line 418 "NF01BQ.f"
 		mb04ow_(&c__0, &i__2, &c__1, &r__[j + ibsn * r_dim1], ldr, &
 			r__[j + ibsn * r_dim1], ldr, &dwork[j], &c__1, &dwork[
 			ib + j - 1], &c__1, &dwork[ib + j - 1], &st, &qtbpj, &
 			c__1);
+#line 421 "NF01BQ.f"
 	    }
+#line 422 "NF01BQ.f"
 	} else {
+#line 423 "NF01BQ.f"
 	    if (j < nths) {
+#line 424 "NF01BQ.f"
 		if (ibsn == bsn) {
+#line 424 "NF01BQ.f"
 		    ibsn = 0;
+#line 424 "NF01BQ.f"
 		}
+#line 426 "NF01BQ.f"
 	    } else if (j == nths) {
+#line 427 "NF01BQ.f"
 		kf = st;
+#line 428 "NF01BQ.f"
 	    }
+#line 429 "NF01BQ.f"
 	}
 
 /*        Store the diagonal element of S. */
 
+#line 433 "NF01BQ.f"
 	dwork[j] = r__[j + i__ * r_dim1];
+#line 434 "NF01BQ.f"
 /* L50: */
+#line 434 "NF01BQ.f"
     }
 
 /*     Solve the triangular system for z. If the system is singular, */
@@ -512,52 +654,84 @@ static integer c__0 = 0;
 /*     Additional workspace:   2*MAX(BSN,ST), if COND =  'E'; */
 /*                             0,             if COND <> 'E'. */
 
+#line 441 "NF01BQ.f"
     i__1 = *ldwork - jw + 1;
+#line 441 "NF01BQ.f"
     nf01br_(cond, "Upper", "NoTranspose", n, &ipar[1], lipar, &r__[r_offset], 
 	    ldr, &dwork[1], &dwork[is], &c__1, &dwork[ib], &ranks[1], tol, &
 	    dwork[jw], &i__1, info, (ftnlen)1, (ftnlen)5, (ftnlen)11);
+#line 444 "NF01BQ.f"
     i__ = 1;
 
 /*     Restore the diagonal elements of R from X and interchange */
 /*     the upper and lower triangular parts of R. */
 
+#line 449 "NF01BQ.f"
     i__1 = bn;
+#line 449 "NF01BQ.f"
     for (k = 1; k <= i__1; ++k) {
 
+#line 451 "NF01BQ.f"
 	i__2 = bsn;
+#line 451 "NF01BQ.f"
 	for (j = 1; j <= i__2; ++j) {
+#line 452 "NF01BQ.f"
 	    r__[i__ + j * r_dim1] = x[i__];
+#line 453 "NF01BQ.f"
 	    i__3 = bsn - j + 1;
+#line 453 "NF01BQ.f"
 	    dswap_(&i__3, &r__[i__ + j * r_dim1], ldr, &r__[i__ + j * r_dim1],
 		     &c__1);
+#line 454 "NF01BQ.f"
 	    ++i__;
+#line 455 "NF01BQ.f"
 /* L60: */
+#line 455 "NF01BQ.f"
 	}
 
+#line 457 "NF01BQ.f"
 /* L70: */
+#line 457 "NF01BQ.f"
     }
 
+#line 459 "NF01BQ.f"
     i__1 = nc;
+#line 459 "NF01BQ.f"
     for (j = bsn + 1; j <= i__1; ++j) {
+#line 460 "NF01BQ.f"
 	dswap_(&nths, &r__[j * r_dim1 + 1], &c__1, &dwork[is], &st);
+#line 461 "NF01BQ.f"
 	r__[i__ + j * r_dim1] = x[i__];
+#line 462 "NF01BQ.f"
 	i__2 = nc - j + 1;
+#line 462 "NF01BQ.f"
 	dswap_(&i__2, &r__[i__ + j * r_dim1], ldr, &r__[i__ + j * r_dim1], &
 		c__1);
+#line 463 "NF01BQ.f"
 	++i__;
+#line 464 "NF01BQ.f"
 	++is;
+#line 465 "NF01BQ.f"
 /* L80: */
+#line 465 "NF01BQ.f"
     }
 
 /*     Permute the components of z back to components of x. */
 
+#line 469 "NF01BQ.f"
     i__1 = *n;
+#line 469 "NF01BQ.f"
     for (j = 1; j <= i__1; ++j) {
+#line 470 "NF01BQ.f"
 	l = ipvt[j];
+#line 471 "NF01BQ.f"
 	x[l] = dwork[*n + j];
+#line 472 "NF01BQ.f"
 /* L90: */
+#line 472 "NF01BQ.f"
     }
 
+#line 474 "NF01BQ.f"
     return 0;
 
 /* *** Last line of NF01BQ *** */

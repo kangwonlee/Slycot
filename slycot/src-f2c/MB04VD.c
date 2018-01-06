@@ -1,3 +1,4 @@
+#line 1 "MB04VD.f"
 /* MB04VD.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB04VD.f"
 /* Table of constant values */
 
 static doublereal c_b13 = 0.;
@@ -372,110 +374,197 @@ static doublereal c_b14 = 1.;
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 341 "MB04VD.f"
     /* Parameter adjustments */
+#line 341 "MB04VD.f"
     a_dim1 = *lda;
+#line 341 "MB04VD.f"
     a_offset = 1 + a_dim1;
+#line 341 "MB04VD.f"
     a -= a_offset;
+#line 341 "MB04VD.f"
     e_dim1 = *lde;
+#line 341 "MB04VD.f"
     e_offset = 1 + e_dim1;
+#line 341 "MB04VD.f"
     e -= e_offset;
+#line 341 "MB04VD.f"
     q_dim1 = *ldq;
+#line 341 "MB04VD.f"
     q_offset = 1 + q_dim1;
+#line 341 "MB04VD.f"
     q -= q_offset;
+#line 341 "MB04VD.f"
     z_dim1 = *ldz;
+#line 341 "MB04VD.f"
     z_offset = 1 + z_dim1;
+#line 341 "MB04VD.f"
     z__ -= z_offset;
+#line 341 "MB04VD.f"
     --istair;
+#line 341 "MB04VD.f"
     --imuk;
+#line 341 "MB04VD.f"
     --inuk;
+#line 341 "MB04VD.f"
     --imuk0;
+#line 341 "MB04VD.f"
     --mnei;
+#line 341 "MB04VD.f"
     --iwork;
+#line 341 "MB04VD.f"
 
+#line 341 "MB04VD.f"
     /* Function Body */
+#line 341 "MB04VD.f"
     *info = 0;
+#line 342 "MB04VD.f"
     lmodeb = lsame_(mode, "B", (ftnlen)1, (ftnlen)1);
+#line 343 "MB04VD.f"
     lmodet = lsame_(mode, "T", (ftnlen)1, (ftnlen)1);
+#line 344 "MB04VD.f"
     lmodes = lsame_(mode, "S", (ftnlen)1, (ftnlen)1);
+#line 345 "MB04VD.f"
     ljobqi = lsame_(jobq, "I", (ftnlen)1, (ftnlen)1);
+#line 346 "MB04VD.f"
     updatq = ljobqi || lsame_(jobq, "U", (ftnlen)1, (ftnlen)1);
+#line 347 "MB04VD.f"
     ljobzi = lsame_(jobz, "I", (ftnlen)1, (ftnlen)1);
+#line 348 "MB04VD.f"
     updatz = ljobzi || lsame_(jobz, "U", (ftnlen)1, (ftnlen)1);
 
 /*     Test the input scalar arguments. */
 
+#line 352 "MB04VD.f"
     if (! lmodeb && ! lmodet && ! lmodes) {
+#line 353 "MB04VD.f"
 	*info = -1;
+#line 354 "MB04VD.f"
     } else if (! updatq && ! lsame_(jobq, "N", (ftnlen)1, (ftnlen)1)) {
+#line 355 "MB04VD.f"
 	*info = -2;
+#line 356 "MB04VD.f"
     } else if (! updatz && ! lsame_(jobz, "N", (ftnlen)1, (ftnlen)1)) {
+#line 357 "MB04VD.f"
 	*info = -3;
+#line 358 "MB04VD.f"
     } else if (*m < 0) {
+#line 359 "MB04VD.f"
 	*info = -4;
+#line 360 "MB04VD.f"
     } else if (*n < 0) {
+#line 361 "MB04VD.f"
 	*info = -5;
+#line 362 "MB04VD.f"
     } else if (*ranke < 0) {
+#line 363 "MB04VD.f"
 	*info = -6;
+#line 364 "MB04VD.f"
     } else if (*lda < max(1,*m)) {
+#line 365 "MB04VD.f"
 	*info = -8;
+#line 366 "MB04VD.f"
     } else if (*lde < max(1,*m)) {
+#line 367 "MB04VD.f"
 	*info = -10;
+#line 368 "MB04VD.f"
     } else if (! updatq && *ldq < 1 || updatq && *ldq < max(1,*m)) {
+#line 370 "MB04VD.f"
 	*info = -12;
+#line 371 "MB04VD.f"
     } else if (! updatz && *ldz < 1 || updatz && *ldz < max(1,*n)) {
+#line 373 "MB04VD.f"
 	*info = -14;
+#line 374 "MB04VD.f"
     }
 
+#line 376 "MB04VD.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 380 "MB04VD.f"
 	i__1 = -(*info);
+#line 380 "MB04VD.f"
 	xerbla_("MB04VD", &i__1, (ftnlen)6);
+#line 381 "MB04VD.f"
 	return 0;
+#line 382 "MB04VD.f"
     }
 
 /*     Initialize Q and Z to the identity matrices, if needed. */
 
+#line 386 "MB04VD.f"
     if (ljobqi) {
+#line 386 "MB04VD.f"
 	dlaset_("Full", m, m, &c_b13, &c_b14, &q[q_offset], ldq, (ftnlen)4);
+#line 386 "MB04VD.f"
     }
+#line 388 "MB04VD.f"
     if (ljobzi) {
+#line 388 "MB04VD.f"
 	dlaset_("Full", n, n, &c_b13, &c_b14, &z__[z_offset], ldz, (ftnlen)4);
+#line 388 "MB04VD.f"
     }
 
 /*     Quick return if possible. */
 
+#line 393 "MB04VD.f"
     *nblcks = 0;
+#line 394 "MB04VD.f"
     *nblcki = 0;
 
+#line 396 "MB04VD.f"
     if (*n == 0) {
+#line 397 "MB04VD.f"
 	mnei[1] = 0;
+#line 398 "MB04VD.f"
 	mnei[2] = 0;
+#line 399 "MB04VD.f"
 	mnei[3] = 0;
+#line 400 "MB04VD.f"
 	return 0;
+#line 401 "MB04VD.f"
     }
 
+#line 403 "MB04VD.f"
     if (*m == 0) {
+#line 404 "MB04VD.f"
 	*nblcks = *n;
+#line 405 "MB04VD.f"
 	i__1 = *n;
+#line 405 "MB04VD.f"
 	for (i__ = 1; i__ <= i__1; ++i__) {
+#line 406 "MB04VD.f"
 	    imuk[i__] = 1;
+#line 407 "MB04VD.f"
 	    inuk[i__] = 0;
+#line 408 "MB04VD.f"
 /* L10: */
+#line 408 "MB04VD.f"
 	}
+#line 409 "MB04VD.f"
 	mnei[1] = 0;
+#line 410 "MB04VD.f"
 	mnei[2] = *n;
+#line 411 "MB04VD.f"
 	mnei[3] = 0;
+#line 412 "MB04VD.f"
 	return 0;
+#line 413 "MB04VD.f"
     }
 
+#line 415 "MB04VD.f"
     toler = *tol;
+#line 416 "MB04VD.f"
     if (toler <= 0.) {
 /* Computing MAX */
+#line 416 "MB04VD.f"
 	d__1 = dlange_("M", m, n, &a[a_offset], lda, dwork, (ftnlen)1), d__2 =
 		 dlange_("M", m, n, &e[e_offset], lde, dwork, (ftnlen)1);
+#line 416 "MB04VD.f"
 	toler = dlamch_("Epsilon", (ftnlen)7) * max(d__1,d__2);
+#line 416 "MB04VD.f"
     }
 
 /*     A(k) is the submatrix in A that will be row compressed. */
@@ -484,67 +573,104 @@ static doublereal c_b14 = 1.;
 /*     IFIRA, IFICA: first row and first column index of A(k) in A. */
 /*     NRA, NCA: number of rows and columns in A(k). */
 
+#line 427 "MB04VD.f"
     ifira = 1;
+#line 428 "MB04VD.f"
     ifica = 1;
+#line 429 "MB04VD.f"
     nra = *m;
+#line 430 "MB04VD.f"
     nca = *n - *ranke;
+#line 431 "MB04VD.f"
     isnuk = 0;
+#line 432 "MB04VD.f"
     ismuk = 0;
+#line 433 "MB04VD.f"
     k = 0;
 
 /*     Initialization of the arrays INUK and IMUK. */
 
+#line 437 "MB04VD.f"
     i__1 = *m + 1;
+#line 437 "MB04VD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 438 "MB04VD.f"
 	inuk[i__] = -1;
+#line 439 "MB04VD.f"
 /* L20: */
+#line 439 "MB04VD.f"
     }
 
 /*     Note: it is necessary that array INUK has DIMENSION M+1 since it */
 /*           is possible that M = 1 and NBLCKS = 2. */
 /*           Example sE-A = (0 0 s -1). */
 
+#line 445 "MB04VD.f"
     i__1 = *n;
+#line 445 "MB04VD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 446 "MB04VD.f"
 	imuk[i__] = -1;
+#line 447 "MB04VD.f"
 /* L40: */
+#line 447 "MB04VD.f"
     }
 
 /*     Compress the rows of A while keeping E in column echelon form. */
 
 /*     REPEAT */
 
+#line 453 "MB04VD.f"
 L60:
+#line 453 "MB04VD.f"
     ++k;
+#line 454 "MB04VD.f"
     mb04tt_(&updatq, &updatz, m, n, &ifira, &ifica, &nca, &a[a_offset], lda, &
 	    e[e_offset], lde, &q[q_offset], ldq, &z__[z_offset], ldz, &istair[
 	    1], &ranka, &toler, &iwork[1]);
+#line 457 "MB04VD.f"
     imuk[k] = nca;
+#line 458 "MB04VD.f"
     ismuk += nca;
 
+#line 460 "MB04VD.f"
     inuk[k] = ranka;
+#line 461 "MB04VD.f"
     isnuk += ranka;
+#line 462 "MB04VD.f"
     ++(*nblcks);
 
 /*        If the rank of A(k) is nra then A has full row rank; */
 /*        JK = the first column index (in A) after the right most column */
 /*        of matrix A(k+1). (In case A(k+1) is empty, then JK = N+1.) */
 
+#line 468 "MB04VD.f"
     ifira = isnuk + 1;
+#line 469 "MB04VD.f"
     ifica = ismuk + 1;
+#line 470 "MB04VD.f"
     if (ifira > *m) {
+#line 471 "MB04VD.f"
 	jk = *n + 1;
+#line 472 "MB04VD.f"
     } else {
+#line 473 "MB04VD.f"
 	jk = (i__1 = istair[ifira], abs(i__1));
+#line 474 "MB04VD.f"
     }
+#line 475 "MB04VD.f"
     nra = *m - isnuk;
+#line 476 "MB04VD.f"
     nca = jk - 1 - ismuk;
 
 /*        If NCA > 0 then there can be done some more row compression */
 /*        of matrix A while keeping matrix E in column echelon form. */
 
+#line 481 "MB04VD.f"
     if (nca > 0) {
+#line 481 "MB04VD.f"
 	goto L60;
+#line 481 "MB04VD.f"
     }
 /*     UNTIL NCA <= 0 */
 
@@ -553,35 +679,51 @@ L60:
 /*     to E(k+1). Ignoring these columns in E changes the ranks of the */
 /*     submatrices E(i), (i=1,...,k-1). */
 
+#line 489 "MB04VD.f"
     mnei[1] = isnuk;
+#line 490 "MB04VD.f"
     mnei[2] = ismuk;
+#line 491 "MB04VD.f"
     mnei[3] = 0;
 
+#line 493 "MB04VD.f"
     if (lmodeb) {
+#line 493 "MB04VD.f"
 	return 0;
+#line 493 "MB04VD.f"
     }
 
 /*     Triangularization of the submatrices in A and E. */
 
+#line 498 "MB04VD.f"
     mb04ty_(&updatq, &updatz, m, n, nblcks, &inuk[1], &imuk[1], &a[a_offset], 
 	    lda, &e[e_offset], lde, &q[q_offset], ldq, &z__[z_offset], ldz, 
 	    info);
 
+#line 501 "MB04VD.f"
     if (*info > 0 || lmodet) {
+#line 501 "MB04VD.f"
 	return 0;
+#line 501 "MB04VD.f"
     }
 
 /*     Save the row dimensions of the diagonal submatrices in pencil */
 /*     sE(eps,inf)-A(eps,inf). */
 
+#line 507 "MB04VD.f"
     i__1 = *nblcks;
+#line 507 "MB04VD.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 508 "MB04VD.f"
 	imuk0[i__] = inuk[i__];
+#line 509 "MB04VD.f"
 /* L80: */
+#line 509 "MB04VD.f"
     }
 
 /*     Reduction to square submatrices E(k)'s in E. */
 
+#line 513 "MB04VD.f"
     mb04vx_(&updatq, &updatz, m, n, nblcks, &inuk[1], &imuk[1], &a[a_offset], 
 	    lda, &e[e_offset], lde, &q[q_offset], ldq, &z__[z_offset], ldz, &
 	    mnei[1]);
@@ -589,26 +731,45 @@ L60:
 /*     Determine the dimensions of the inf diagonal submatrices and */
 /*     update block numbers if necessary. */
 
+#line 519 "MB04VD.f"
     first = TRUE_;
+#line 520 "MB04VD.f"
     firsti = TRUE_;
+#line 521 "MB04VD.f"
     *nblcki = *nblcks;
+#line 522 "MB04VD.f"
     k = *nblcks;
 
+#line 524 "MB04VD.f"
     for (i__ = k; i__ >= 1; --i__) {
+#line 525 "MB04VD.f"
 	imuk0[i__] -= inuk[i__];
+#line 526 "MB04VD.f"
 	if (firsti && imuk0[i__] == 0) {
+#line 527 "MB04VD.f"
 	    --(*nblcki);
+#line 528 "MB04VD.f"
 	} else {
+#line 529 "MB04VD.f"
 	    firsti = FALSE_;
+#line 530 "MB04VD.f"
 	}
+#line 531 "MB04VD.f"
 	if (first && imuk[i__] == 0) {
+#line 532 "MB04VD.f"
 	    --(*nblcks);
+#line 533 "MB04VD.f"
 	} else {
+#line 534 "MB04VD.f"
 	    first = FALSE_;
+#line 535 "MB04VD.f"
 	}
+#line 536 "MB04VD.f"
 /* L100: */
+#line 536 "MB04VD.f"
     }
 
+#line 538 "MB04VD.f"
     return 0;
 /* *** Last line of MB04VD *** */
 } /* mb04vd_ */

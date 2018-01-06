@@ -1,3 +1,4 @@
+#line 1 "MC03NY.f"
 /* MC03NY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC03NY.f"
 /* Table of constant values */
 
 static doublereal c_b9 = -1.;
@@ -209,48 +211,84 @@ static doublereal c_b26 = 1.;
 /*     .. External Subroutines .. */
 /*     .. Executable Statements .. */
 
+#line 179 "MC03NY.f"
     /* Parameter adjustments */
+#line 179 "MC03NY.f"
     a_dim1 = *lda;
+#line 179 "MC03NY.f"
     a_offset = 1 + a_dim1;
+#line 179 "MC03NY.f"
     a -= a_offset;
+#line 179 "MC03NY.f"
     e_dim1 = *lde;
+#line 179 "MC03NY.f"
     e_offset = 1 + e_dim1;
+#line 179 "MC03NY.f"
     e -= e_offset;
+#line 179 "MC03NY.f"
     --imuk;
+#line 179 "MC03NY.f"
     --inuk;
+#line 179 "MC03NY.f"
     veps_dim1 = *ldveps;
+#line 179 "MC03NY.f"
     veps_offset = 1 + veps_dim1;
+#line 179 "MC03NY.f"
     veps -= veps_offset;
+#line 179 "MC03NY.f"
 
+#line 179 "MC03NY.f"
     /* Function Body */
+#line 179 "MC03NY.f"
     *info = 0;
+#line 180 "MC03NY.f"
     if (*nblcks < 0) {
+#line 181 "MC03NY.f"
 	*info = -1;
+#line 182 "MC03NY.f"
     } else if (*nra < 0) {
+#line 183 "MC03NY.f"
 	*info = -2;
+#line 184 "MC03NY.f"
     } else if (*nca < 0) {
+#line 185 "MC03NY.f"
 	*info = -3;
+#line 186 "MC03NY.f"
     } else if (*lda < max(1,*nra)) {
+#line 187 "MC03NY.f"
 	*info = -5;
+#line 188 "MC03NY.f"
     } else if (*lde < max(1,*nra)) {
+#line 189 "MC03NY.f"
 	*info = -7;
+#line 190 "MC03NY.f"
     } else if (*ldveps < max(1,*nca)) {
+#line 191 "MC03NY.f"
 	*info = -11;
+#line 192 "MC03NY.f"
     }
 
+#line 194 "MC03NY.f"
     if (*info != 0) {
 
 /*        Error return. */
 
+#line 198 "MC03NY.f"
 	i__1 = -(*info);
+#line 198 "MC03NY.f"
 	xerbla_("MC03NY", &i__1, (ftnlen)6);
+#line 199 "MC03NY.f"
 	return 0;
+#line 200 "MC03NY.f"
     }
 
 /*     Quick return if possible. */
 
+#line 204 "MC03NY.f"
     if (*nblcks == 0 || *nra == 0 || *nca == 0) {
+#line 204 "MC03NY.f"
 	return 0;
+#line 204 "MC03NY.f"
     }
 
 /*     Computation of the nonzero parts of W1 and W2: */
@@ -274,41 +312,69 @@ static doublereal c_b26 = 1.;
 /*     submatrix Ri in matrix Aii. */
 /*     EC1 is the index of the first column of Ai,i+1/Ei,i+1. */
 
+#line 228 "MC03NY.f"
     ec1 = 1;
+#line 229 "MC03NY.f"
     ar1 = 1;
 
+#line 231 "MC03NY.f"
     i__1 = *nblcks - 1;
+#line 231 "MC03NY.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 232 "MC03NY.f"
 	nui = inuk[i__];
+#line 233 "MC03NY.f"
 	if (nui == 0) {
+#line 233 "MC03NY.f"
 	    goto L60;
+#line 233 "MC03NY.f"
 	}
+#line 234 "MC03NY.f"
 	mui = imuk[i__];
+#line 235 "MC03NY.f"
 	ec1 += mui;
+#line 236 "MC03NY.f"
 	ac1 = ec1 - nui;
+#line 237 "MC03NY.f"
 	i__2 = *nca - ec1 + 1;
+#line 237 "MC03NY.f"
 	dtrtrs_("Upper", "No transpose", "Non-unit", &nui, &i__2, &a[ar1 + 
 		ac1 * a_dim1], lda, &e[ar1 + ec1 * e_dim1], lde, info, (
 		ftnlen)5, (ftnlen)12, (ftnlen)8);
+#line 240 "MC03NY.f"
 	if (*info > 0) {
+#line 241 "MC03NY.f"
 	    *info = i__;
+#line 242 "MC03NY.f"
 	    return 0;
+#line 243 "MC03NY.f"
 	}
 
+#line 245 "MC03NY.f"
 	i__2 = nui;
+#line 245 "MC03NY.f"
 	for (j = 1; j <= i__2; ++j) {
+#line 246 "MC03NY.f"
 	    dscal_(&j, &c_b9, &a[ar1 + (ac1 + j - 1) * a_dim1], &c__1);
+#line 247 "MC03NY.f"
 /* L20: */
+#line 247 "MC03NY.f"
 	}
 
+#line 249 "MC03NY.f"
 	i__2 = *nca - ec1 + 1;
+#line 249 "MC03NY.f"
 	dtrtrs_("Upper", "No transpose", "Non-unit", &nui, &i__2, &a[ar1 + 
 		ac1 * a_dim1], lda, &a[ar1 + ec1 * a_dim1], lda, info, (
 		ftnlen)5, (ftnlen)12, (ftnlen)8);
+#line 252 "MC03NY.f"
 	ar1 += nui;
+#line 253 "MC03NY.f"
 /* L40: */
+#line 253 "MC03NY.f"
     }
 
+#line 255 "MC03NY.f"
 L60:
 
 /*     The contents of the array IMUK is changed for temporary use in */
@@ -323,24 +389,36 @@ L60:
 /*        NRV = Sum(i=1,...,NBLCKS) mu(i) = NCA, */
 /*        NCV = Sum(i=1,...,NBLCKS) i*(mu(i)-nu(i)). */
 
+#line 269 "MC03NY.f"
     smui = 0;
+#line 270 "MC03NY.f"
     ncv = 0;
 
+#line 272 "MC03NY.f"
     i__1 = *nblcks;
+#line 272 "MC03NY.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 273 "MC03NY.f"
 	mui = imuk[i__];
+#line 274 "MC03NY.f"
 	smui += mui;
+#line 275 "MC03NY.f"
 	imuk[i__] = smui;
+#line 276 "MC03NY.f"
 	ncv += i__ * (mui - inuk[i__]);
+#line 277 "MC03NY.f"
 /* L80: */
+#line 277 "MC03NY.f"
     }
 
+#line 279 "MC03NY.f"
     nrv = *nca;
 
 /*     Computation of the matrix VEPS. */
 
 /*     Initialisation of VEPS to zero. */
 
+#line 285 "MC03NY.f"
     dlaset_("Full", &nrv, &ncv, &c_b16, &c_b16, &veps[veps_offset], ldveps, (
 	    ftnlen)4);
 /*                                                           | I | */
@@ -354,21 +432,36 @@ L60:
 /*     WC1 := Sum(j=1,...,i-1) j*(mu(j)-nu(j)) + 1 */
 /*            is the index of the first column in Vii,0 in VEPS. */
 
+#line 297 "MC03NY.f"
     dummy[0] = 1.;
+#line 298 "MC03NY.f"
     nui = imuk[1] - inuk[1];
+#line 299 "MC03NY.f"
     i__1 = *ldveps + 1;
+#line 299 "MC03NY.f"
     dcopy_(&nui, dummy, &c__0, &veps[veps_offset], &i__1);
+#line 300 "MC03NY.f"
     wr1 = imuk[1] + 1;
+#line 301 "MC03NY.f"
     wc1 = nui + 1;
 
+#line 303 "MC03NY.f"
     i__1 = *nblcks;
+#line 303 "MC03NY.f"
     for (i__ = 2; i__ <= i__1; ++i__) {
+#line 304 "MC03NY.f"
 	nui = imuk[i__] - imuk[i__ - 1] - inuk[i__];
+#line 305 "MC03NY.f"
 	i__2 = *ldveps + 1;
+#line 305 "MC03NY.f"
 	dcopy_(&nui, dummy, &c__0, &veps[wr1 + wc1 * veps_dim1], &i__2);
+#line 306 "MC03NY.f"
 	wr1 = imuk[i__] + 1;
+#line 307 "MC03NY.f"
 	wc1 += i__ * nui;
+#line 308 "MC03NY.f"
 /* L100: */
+#line 308 "MC03NY.f"
     }
 
 /*     Determination of the remaining nontrivial matrices in Vij,k */
@@ -386,28 +479,42 @@ L60:
 /*     This recurrence relation can be derived from [1], (4.6.8) */
 /*     and formula (1) in Section PURPOSE. */
 
+#line 325 "MC03NY.f"
     vc1 = imuk[1] - inuk[1] + 1;
+#line 326 "MC03NY.f"
     ari = 1;
 
+#line 328 "MC03NY.f"
     i__1 = *nblcks;
+#line 328 "MC03NY.f"
     for (j = 2; j <= i__1; ++j) {
+#line 329 "MC03NY.f"
 	dif = imuk[j] - imuk[j - 1] - inuk[j];
+#line 330 "MC03NY.f"
 	ari += inuk[j - 1];
+#line 331 "MC03NY.f"
 	ark = ari;
 
 /*        Computation of the matrices Vij,k where i + k < j. */
 /*        Each matrix Vij,k has dimension mu(i)-by-(mu(j) - nu(j)). */
 
+#line 336 "MC03NY.f"
 	i__2 = j - 2;
+#line 336 "MC03NY.f"
 	for (k = 0; k <= i__2; ++k) {
 
 /*           VC1, VC2 are the first and last column index of Vij,k. */
 
+#line 340 "MC03NY.f"
 	    vc2 = vc1 + dif - 1;
+#line 341 "MC03NY.f"
 	    ac2 = imuk[j - k];
+#line 342 "MC03NY.f"
 	    ar1 = ark;
+#line 343 "MC03NY.f"
 	    ark -= inuk[j - k - 1];
 
+#line 345 "MC03NY.f"
 	    for (i__ = j - k - 1; i__ >= 1; --i__) {
 
 /*              Compute the first part of Vij,k in decreasing order: */
@@ -418,21 +525,32 @@ L60:
 /*              The non-zero part of the result is stored in */
 /*              VEPS(VR1:VR2,VC1:VC2). */
 
+#line 355 "MC03NY.f"
 		vr2 = imuk[i__];
+#line 356 "MC03NY.f"
 		ac1 = vr2 + 1;
+#line 357 "MC03NY.f"
 		vr1 = ac1 - inuk[i__];
+#line 358 "MC03NY.f"
 		ar1 -= inuk[i__];
+#line 359 "MC03NY.f"
 		i__3 = ac2 - vr2;
+#line 359 "MC03NY.f"
 		dgemm_("No transpose", "No transpose", &inuk[i__], &dif, &
 			i__3, &c_b26, &a[ar1 + ac1 * a_dim1], lda, &veps[ac1 
 			+ vc1 * veps_dim1], ldveps, &c_b26, &veps[vr1 + vc1 * 
 			veps_dim1], ldveps, (ftnlen)12, (ftnlen)12);
+#line 363 "MC03NY.f"
 /* L120: */
+#line 363 "MC03NY.f"
 	    }
 
+#line 365 "MC03NY.f"
 	    er1 = 1;
 
+#line 367 "MC03NY.f"
 	    i__3 = j - k - 1;
+#line 367 "MC03NY.f"
 	    for (i__ = 1; i__ <= i__3; ++i__) {
 
 /*              Compute the second part of Vij,k+1 in normal order: */
@@ -445,24 +563,38 @@ L60:
 /*              DIF = VC2 - VC1 + 1 = mu(j) - nu(j). */
 /*              This code portion also computes Vij,k+1 for i + k = j. */
 
+#line 379 "MC03NY.f"
 		vr2 = imuk[i__];
+#line 380 "MC03NY.f"
 		ec1 = vr2 + 1;
+#line 381 "MC03NY.f"
 		vr1 = ec1 - inuk[i__];
+#line 382 "MC03NY.f"
 		i__4 = ac2 - vr2;
+#line 382 "MC03NY.f"
 		dgemm_("No transpose", "No transpose", &inuk[i__], &dif, &
 			i__4, &c_b26, &e[er1 + ec1 * e_dim1], lde, &veps[ec1 
 			+ vc1 * veps_dim1], ldveps, &c_b16, &veps[vr1 + (vc2 
 			+ 1) * veps_dim1], ldveps, (ftnlen)12, (ftnlen)12);
+#line 386 "MC03NY.f"
 		er1 += inuk[i__];
+#line 387 "MC03NY.f"
 /* L140: */
+#line 387 "MC03NY.f"
 	    }
 
+#line 389 "MC03NY.f"
 	    vc1 = vc2 + 1;
+#line 390 "MC03NY.f"
 /* L160: */
+#line 390 "MC03NY.f"
 	}
 
+#line 392 "MC03NY.f"
 	vc1 += dif;
+#line 393 "MC03NY.f"
 /* L180: */
+#line 393 "MC03NY.f"
     }
 
 /*     Restore original contents of the array IMUK. */
@@ -472,16 +604,25 @@ L60:
 /*     the original values are: */
 /*       mu(i) = IMUK(i) - IMUK(i-1)  with IMUK(0 ) = 0. */
 
+#line 402 "MC03NY.f"
     smui1 = 0;
 
+#line 404 "MC03NY.f"
     i__1 = *nblcks;
+#line 404 "MC03NY.f"
     for (i__ = 1; i__ <= i__1; ++i__) {
+#line 405 "MC03NY.f"
 	smui = imuk[i__];
+#line 406 "MC03NY.f"
 	imuk[i__] = smui - smui1;
+#line 407 "MC03NY.f"
 	smui1 = smui;
+#line 408 "MC03NY.f"
 /* L200: */
+#line 408 "MC03NY.f"
     }
 
+#line 410 "MC03NY.f"
     return 0;
 /* *** Last line of MC03NY *** */
 } /* mc03ny_ */

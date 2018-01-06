@@ -1,3 +1,4 @@
+#line 1 "MB03MY.f"
 /* MB03MY.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MB03MY.f"
 doublereal mb03my_(integer *nx, doublereal *x, integer *incx)
 {
     /* System generated locals */
@@ -90,27 +92,46 @@ doublereal mb03my_(integer *nx, doublereal *x, integer *incx)
 
 /*     Quick return if possible. */
 
+#line 77 "MB03MY.f"
     /* Parameter adjustments */
+#line 77 "MB03MY.f"
     --x;
+#line 77 "MB03MY.f"
 
+#line 77 "MB03MY.f"
     /* Function Body */
+#line 77 "MB03MY.f"
     if (*nx <= 0) {
+#line 78 "MB03MY.f"
 	ret_val = 0.;
+#line 79 "MB03MY.f"
 	return ret_val;
+#line 80 "MB03MY.f"
     }
 
+#line 82 "MB03MY.f"
     ret_val = abs(x[1]);
 
+#line 84 "MB03MY.f"
     i__1 = *nx * *incx;
+#line 84 "MB03MY.f"
     i__2 = *incx;
+#line 84 "MB03MY.f"
     for (i__ = *incx + 1; i__2 < 0 ? i__ >= i__1 : i__ <= i__1; i__ += i__2) {
+#line 85 "MB03MY.f"
 	dx = (d__1 = x[i__], abs(d__1));
+#line 86 "MB03MY.f"
 	if (dx < ret_val) {
+#line 86 "MB03MY.f"
 	    ret_val = dx;
+#line 86 "MB03MY.f"
 	}
+#line 87 "MB03MY.f"
 /* L20: */
+#line 87 "MB03MY.f"
     }
 
+#line 89 "MB03MY.f"
     return ret_val;
 /* *** Last line of MB03MY *** */
 } /* mb03my_ */

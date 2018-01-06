@@ -1,3 +1,4 @@
+#line 1 "MC01SX.f"
 /* MC01SX.f -- translated by f2c (version 20100827).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
@@ -12,6 +13,7 @@
 
 #include "f2c.h"
 
+#line 1 "MC01SX.f"
 integer mc01sx_(integer *lb, integer *ub, integer *e, doublereal *mant)
 {
     /* System generated locals */
@@ -65,29 +67,48 @@ integer mc01sx_(integer *lb, integer *ub, integer *e, doublereal *mant)
 /*     .. Intrinsic Functions .. */
 /*     .. Executable Statements .. */
 
+#line 54 "MC01SX.f"
     /* Parameter adjustments */
+#line 54 "MC01SX.f"
     --mant;
+#line 54 "MC01SX.f"
     --e;
+#line 54 "MC01SX.f"
 
+#line 54 "MC01SX.f"
     /* Function Body */
+#line 54 "MC01SX.f"
     maxe = e[*lb];
+#line 55 "MC01SX.f"
     mine = maxe;
 
+#line 57 "MC01SX.f"
     i__1 = *ub;
+#line 57 "MC01SX.f"
     for (j = *lb + 1; j <= i__1; ++j) {
+#line 58 "MC01SX.f"
 	if (mant[j] != 0.) {
 /* Computing MAX */
+#line 59 "MC01SX.f"
 	    i__2 = maxe, i__3 = e[j];
+#line 59 "MC01SX.f"
 	    maxe = max(i__2,i__3);
 /* Computing MIN */
+#line 60 "MC01SX.f"
 	    i__2 = mine, i__3 = e[j];
+#line 60 "MC01SX.f"
 	    mine = min(i__2,i__3);
+#line 61 "MC01SX.f"
 	}
+#line 62 "MC01SX.f"
 /* L20: */
+#line 62 "MC01SX.f"
     }
 
+#line 64 "MC01SX.f"
     ret_val = maxe - mine;
 
+#line 66 "MC01SX.f"
     return ret_val;
 /* *** Last line of MC01SX *** */
 } /* mc01sx_ */
