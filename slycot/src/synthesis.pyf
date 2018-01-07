@@ -402,51 +402,92 @@ subroutine sb04qd(n,m,a,lda,b,ldb,c,ldc,z,ldz,iwork,dwork,ldwork,info) ! in SB04
      integer intent(out) :: info
 end subroutine sb04qd
 subroutine sb10ad(job,n,m,np,ncon,nmeas,gamma,a,lda,b,ldb,c,ldc,d,ldd,ak,ldak,bk,ldbk,ck,ldck,dk,lddk,ac,ldac,bc,ldbc,cc,ldcc,dc,lddc,rcond,gtol,actol,iwork,liwork,dwork,ldwork,bwork,lbwork,info) ! in :python-control:SB10AD.f
+    ! passed
     integer :: job
+    ! passed
     integer check(n>0) :: n
+    ! passed
     integer check(m>0) :: m
+    ! passed
     integer check(np>0) :: np
+    ! passed
     integer check(ncon>=0) :: ncon
     ! the following check togheter with ncon>=0 should guarantee the following:
     ! m>=ncon
     ! np>=nmeas
     ! m-ncon>=nmeas
     ! np-nmeas>=ncon
+    ! passed
     integer check(nmeas>=0 && nmeas<=min(m,np)-ncon), depend(m,np,ncon) :: nmeas
-    double precision intent(in,out) :: gamma            
+    ! passed
+    double precision intent(in,out) :: gamma
+    ! passed
     double precision dimension(n,n), depend(n) :: a
+    ! hidden
     integer intent(hide), depend(a) :: lda=shape(a,0)
+    ! passed
     double precision dimension(n,m), depend(n,m) :: b
+    ! hidden
     integer intent(hide), depend(b) :: ldb=shape(b,0)
+    ! passed
     double precision dimension(np,n), depend(np,n) :: c
+    ! hidden
     integer intent(hide), depend(c) :: ldc=shape(c,0)
+    ! passed
     double precision dimension(np,m), depend(np,m) :: d
+    ! hidden
     integer intent(hide), depend(d) :: ldd=shape(d,0)
+    ! not passed
     double precision intent(out), dimension(n,n), depend(n) :: ak
+    ! hidden
     integer intent(hide), depend(ak) :: ldak=shape(ak,0)
+    ! not passed
     double precision intent(out), dimension(n,nmeas), depend(n,nmeas) :: bk
+    ! hidden
     integer intent(hide), depend(bk) :: ldbk=shape(bk,0)
+    ! not passed
     double precision intent(out), dimension(ncon,n), depend(ncon,n) :: ck
+    ! hidden
     integer intent(hide), depend(ck) :: ldck=shape(ck,0)
+    ! not passed
     double precision intent(out), dimension(ncon,nmeas), depend(ncon,nmeas) :: dk
+    ! hidden
     integer intent(hide), depend(dk) :: lddk=shape(dk,0)
+    ! not passed
     double precision intent(out), dimension(2*n,2*n), depend(n) :: ac
+    ! hidden
     integer intent(hide), depend(ac) :: ldac=shape(ac,0)
+    ! not passed
     double precision intent(out), dimension(2*n,m-ncon), depend(n,m,ncon) :: bc
+    ! hidden
     integer intent(hide), depend(bc) :: ldbc=shape(bc,0)
+    ! not passed
     double precision intent(out), dimension(np-nmeas,2*n), depend(np,nmeas,n) :: cc
+    ! hidden
     integer intent(hide), depend(cc) :: ldcc=shape(cc,0)
+    ! not passed
     double precision intent(out), dimension(np-nmeas,m-ncon), depend(np,nmeas,m,ncon) :: dc
+    ! hidden
     integer intent(hide), depend(dc) :: lddc=shape(dc,0)
+    ! not passed
     double precision intent(out), dimension(4) :: rcond
+    ! passed
     double precision optional :: gtol=0.0
+    ! passed
     double precision optional :: actol=0.0
+    ! hidden
     integer intent(hide), dimension(liwork), depend(liwork) :: iwork
+    ! passed
     integer optional :: liwork
+    ! hidden
     double precision intent(hide), dimension(ldwork), depend(ldwork) :: dwork
+    ! passed
     integer optional :: ldwork
+    ! hidden
     logical intent(hide), dimension(lbwork), depend(lbwork) :: bwork
+    ! hidden
     integer intent(hide), depend(n):: lbwork=2*n
+    ! output
     integer intent(out) :: info
 end subroutine sb10ad
 subroutine sb10dd(n,m,np,ncon,nmeas,gamma,a,lda,b,ldb,c,ldc,d,ldd,ak,ldak,bk,ldbk,ck,ldck,dk,lddk,x,ldx,z,ldz,rcond,tol,iwork,dwork,ldwork,bwork,info) ! in :python-control:SB10DD.f
