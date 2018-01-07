@@ -8,26 +8,39 @@ python:
   - "3.5"
 
 before_install:
+  # install gfortran compiler
   - sudo apt-get install gfortran
+  # download miniconda
   - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
       wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh;
     else
       wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
     fi
+  # install miniconda == conda
   - bash miniconda.sh -b -p $HOME/miniconda
+  # add conda to path
   - export PATH="$HOME/miniconda/bin:$PATH"
   - hash -r
+  # set answers to all y/n question to y
   - conda config --set always_yes yes --set changeps1 no
+  # update conda
   - conda update -q conda
+  # install conda-build
   - conda install conda-build
+  # add python-control channel
   - conda config --add channels http://conda.binstar.org/python-control
+  # present debug information
   - conda info -a
+  # create test environmnet
   - conda create -q -n test-environment python="$TRAVIS_PYTHON_VERSION" pip coverage nose
+  # activate test environment
   - source activate test-environment
   # coveralls not in conda repos :-(
   - pip install coveralls
 
 install:
+  # build based on conda-recipe folder
+  # basically $ python setup.py install
   - conda build --python "$TRAVIS_PYTHON_VERSION" conda-recipe
   - conda install slycot --use-local
 
