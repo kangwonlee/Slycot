@@ -58,12 +58,20 @@ class FunctionName(object):
 
 
 class CFlow(object):
+    """
+    Interface to GNU CFlow capable of generating graphs on C source files
+
+    """
     def __init__(self, cflow_path=os.path.join('/', 'usr', 'bin', 'cflow')):
+        """
+
+        :param str cflow_path: path to a cflow execution file
+        """
         self.cflow_path = cflow_path
         if not os.path.exists(self.cflow_path):
-            ValueError('Invalid cflow path')
+            raise ValueError('Invalid cflow path')
         if not os.path.isfile(self.cflow_path):
-            ValueError('CFlow not a file')
+            raise ValueError('CFlow not a file')
         self.calls_dict = {}
         self.called_dict = {}
 
