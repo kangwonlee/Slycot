@@ -1,0 +1,13 @@
+extern int ab09hy_(integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *scalec, doublereal *scaleo, doublereal *s, integer *lds, doublereal *r__, integer *ldr, integer *iwork, doublereal *dwork, integer *ldwork, logical *bwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: sb03ou_ 14 15 12 12 4 4 7 4 7 4 7 7 4 7 7 4 4 */
+/*:ref: dgerqf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dtrsm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: dtrmm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: dorgrq_ 14 9 4 4 4 7 4 7 7 4 4 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dsyrk_ 14 12 13 13 4 4 7 7 4 7 7 4 124 124 */
+/*:ref: sb02md_ 14 29 13 13 13 13 13 4 7 4 7 4 7 4 7 7 7 7 4 7 4 4 7 4 12 4 124 124 124 124 124 */

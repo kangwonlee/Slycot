@@ -1,0 +1,9 @@
+extern int mb02yd_(char *cond, integer *n, doublereal *r__, integer *ldr, integer *ipvt, doublereal *diag, doublereal *qtb, integer *rank, doublereal *x, doublereal *tol, doublereal *dwork, integer *ldwork, integer *info, ftnlen cond_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dlartg_ 14 5 7 7 7 7 7 */
+/*:ref: drot_ 14 7 4 7 4 7 4 7 7 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: mb03od_ 14 15 13 4 4 7 4 4 7 7 7 4 7 7 4 4 124 */

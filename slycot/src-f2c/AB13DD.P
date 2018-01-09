@@ -1,0 +1,32 @@
+extern int ab13dd_(char *dico, char *jobe, char *equil, char *jobd, integer *n, integer *m, integer *p, doublereal *fpeak, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *gpeak, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, doublecomplex *cwork, integer *lcwork, integer *info, ftnlen dico_len, ftnlen jobe_len, ftnlen equil_len, ftnlen jobd_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dgesvd_ 14 16 13 13 4 4 7 4 7 7 4 7 4 7 4 4 124 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlabad_ 14 2 7 7 */
+/*:ref: dlascl_ 14 11 13 4 4 7 7 4 4 7 4 4 124 */
+/*:ref: tg01ad_ 14 19 13 4 4 4 4 7 7 4 7 4 7 4 7 4 7 7 7 4 124 */
+/*:ref: dggbal_ 14 13 13 4 7 4 7 4 4 4 7 7 7 4 124 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: tg01bd_ 14 26 13 13 13 4 4 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 4 124 124 124 */
+/*:ref: dtrcon_ 14 13 13 13 13 4 7 4 7 7 4 4 124 124 124 */
+/*:ref: dhgeqz_ 14 23 13 13 13 4 4 4 7 4 7 4 7 7 7 7 4 7 4 7 4 4 124 124 124 */
+/*:ref: tb01id_ 14 14 13 4 4 4 7 7 4 7 4 7 4 7 4 124 */
+/*:ref: dgebal_ 14 9 13 4 7 4 4 4 7 4 124 */
+/*:ref: dgehrd_ 14 9 4 4 4 7 4 7 7 4 4 */
+/*:ref: dormhr_ 14 16 13 13 4 4 4 4 7 4 7 7 4 7 4 4 124 124 */
+/*:ref: dhseqr_ 14 16 13 13 4 4 4 7 4 7 7 7 4 7 4 4 124 124 */
+/*:ref: dlapy2_ 7 2 7 7 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: ab13dx_ 7 26 13 13 13 4 4 4 7 7 4 7 4 7 4 7 4 7 4 4 7 4 9 4 4 124 124 124 */
+/*:ref: dgeqrf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dorgqr_ 14 9 4 4 4 7 4 7 7 4 4 */
+/*:ref: ma02ad_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dggev_ 14 19 13 13 4 7 4 7 4 7 7 7 7 4 7 4 7 4 4 124 124 */
+/*:ref: dsyrk_ 14 12 13 13 4 4 7 7 4 7 7 4 124 124 */
+/*:ref: mb01sd_ 14 8 13 4 4 7 4 7 7 124 */
+/*:ref: mb03xd_ 14 30 13 13 13 13 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 7 4 7 7 4 4 124 124 124 124 */
+/*:ref: dlasrt_ 14 5 13 4 7 4 124 */

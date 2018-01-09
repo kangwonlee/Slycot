@@ -1,0 +1,8 @@
+extern int sb04nx_(char *rc, char *ul, integer *m, doublereal *a, integer *lda, doublereal *lambd1, doublereal *lambd2, doublereal *lambd3, doublereal *lambd4, doublereal *d__, doublereal *tol, integer *iwork, doublereal *dwork, integer *lddwor, integer *info, ftnlen rc_len, ftnlen ul_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dlartg_ 14 5 7 7 7 7 7 */
+/*:ref: drot_ 14 7 4 7 4 7 4 7 7 */
+/*:ref: dtrcon_ 14 13 13 13 13 4 7 4 7 7 4 4 124 124 124 */
+/*:ref: dtrsv_ 14 11 13 13 13 4 7 4 7 4 124 124 124 */

@@ -1,0 +1,11 @@
+extern int nf01bd_(char *cjte, integer *nsmp, integer *m, integer *l, integer *ipar, integer *lipar, doublereal *x, integer *lx, doublereal *u, integer *ldu, doublereal *e, doublereal *j, integer *ldj, doublereal *jte, doublereal *dwork, integer *ldwork, integer *info, ftnlen cjte_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: tb01vy_ 14 19 13 4 4 4 7 4 7 4 7 4 7 4 7 4 7 7 4 4 124 */
+/*:ref: tf01mx_ 14 14 4 4 4 4 7 4 7 4 7 7 4 7 4 4 */
+/*:ref: nf01by_ 14 18 13 4 4 4 4 4 7 4 7 4 7 7 4 7 7 4 4 124 */
+/*:ref: nf01ay_ 14 14 4 4 4 4 4 7 4 7 4 7 4 7 4 4 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: nf01ad_ 14 14 4 4 4 4 4 7 4 7 4 7 4 7 4 4 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */

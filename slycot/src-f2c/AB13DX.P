@@ -1,0 +1,13 @@
+extern doublereal ab13dx_(char *dico, char *jobe, char *jobd, integer *n, integer *m, integer *p, doublereal *omega, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *iwork, doublereal *dwork, integer *ldwork, doublecomplex *cwork, integer *lcwork, integer *info, ftnlen dico_len, ftnlen jobe_len, ftnlen jobd_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dgesvd_ 14 16 13 13 4 4 7 4 7 7 4 7 4 7 4 4 124 124 */
+/*:ref: mb02sd_ 14 5 4 7 4 4 4 */
+/*:ref: mb02rd_ 14 10 13 4 4 7 4 4 7 4 4 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: zlacp2_ 14 8 13 4 4 7 4 9 4 124 */
+/*:ref: mb02sz_ 14 5 4 9 4 4 4 */
+/*:ref: mb02rz_ 14 10 13 4 4 9 4 4 9 4 4 124 */
+/*:ref: zgemm_ 14 15 13 13 4 4 4 9 9 4 9 4 9 9 4 124 124 */
+/*:ref: zgesvd_ 14 17 13 13 4 4 9 4 7 9 4 9 4 9 4 7 4 124 124 */

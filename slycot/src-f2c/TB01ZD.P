@@ -1,0 +1,13 @@
+extern int tb01zd_(char *jobz, integer *n, integer *p, doublereal *a, integer *lda, doublereal *b, doublereal *c__, integer *ldc, integer *ncont, doublereal *z__, integer *ldz, doublereal *tau, doublereal *tol, doublereal *dwork, integer *ldwork, integer *info, ftnlen jobz_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: mb01pd_ 14 14 13 13 4 4 4 4 7 4 7 7 4 4 124 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dlarf_ 14 10 13 4 4 7 4 7 7 4 7 124 */
+/*:ref: dgehrd_ 14 9 4 4 4 7 4 7 7 4 4 */
+/*:ref: dormhr_ 14 16 13 13 4 4 4 4 7 4 7 7 4 7 4 4 124 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dorgqr_ 14 9 4 4 4 7 4 7 7 4 4 */

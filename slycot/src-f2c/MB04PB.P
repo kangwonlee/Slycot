@@ -1,0 +1,7 @@
+extern int mb04pb_(integer *n, integer *ilo, doublereal *a, integer *lda, doublereal *qg, integer *ldqg, doublereal *cs, doublereal *tau, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: ue01md_ 4 8 4 13 13 4 4 4 124 124 */
+/*:ref: mb04pa_ 14 19 12 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 7 7 7 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dsyr2k_ 14 14 13 13 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: mb04pu_ 14 11 4 4 7 4 7 4 7 7 7 4 4 */

@@ -1,0 +1,8 @@
+extern int tg01wd_(integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *q, integer *ldq, doublereal *z__, integer *ldz, doublereal *alphar, doublereal *alphai, doublereal *beta, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: delctg_ 12 :*/
+/*:ref: dgges_ 14 24 13 13 13 212 4 7 4 7 4 4 7 7 7 7 4 7 4 7 4 12 4 124 124 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */

@@ -1,0 +1,1 @@
+extern int sb01bx_(logical *reig, integer *n, doublereal *xr, doublereal *xi, doublereal *wr, doublereal *wi, doublereal *s, doublereal *p);

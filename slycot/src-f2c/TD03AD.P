@@ -1,0 +1,10 @@
+extern int td03ad_(char *rowcol, char *leri, char *equil, integer *m, integer *p, integer *indexd, doublereal *dcoeff, integer *lddcoe, doublereal *ucoeff, integer *lduco1, integer *lduco2, integer *nr, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *indexp, doublereal *pcoeff, integer *ldpco1, integer *ldpco2, doublereal *qcoeff, integer *ldqco1, integer *ldqco2, doublereal *vcoeff, integer *ldvco1, integer *ldvco2, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info, ftnlen rowcol_len, ftnlen leri_len, ftnlen equil_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: td03ay_ 14 18 4 4 4 7 4 7 4 4 4 7 4 7 4 7 4 7 4 4 */
+/*:ref: ab07md_ 14 14 13 4 4 4 7 4 7 4 7 4 7 4 4 124 */
+/*:ref: tb03ad_ 14 31 13 13 4 4 4 7 4 7 4 7 4 7 4 4 4 7 4 4 7 4 4 7 4 4 7 4 7 4 4 124 124 */
+/*:ref: tb01xd_ 14 16 13 4 4 4 4 4 7 4 7 4 7 4 7 4 4 124 */
+/*:ref: tc01od_ 14 12 13 4 4 4 7 4 4 7 4 4 4 124 */

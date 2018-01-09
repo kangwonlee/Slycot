@@ -1,0 +1,17 @@
+extern int ag8byz_(logical *first, integer *n, integer *m, integer *p, doublereal *svlmax, doublecomplex *abcd, integer *ldabcd, doublecomplex *e, integer *lde, integer *nr, integer *pr, integer *ninfz, integer *dinfz, integer *nkronl, integer *infz, integer *kronl, doublereal *tol, integer *iwork, doublereal *dwork, doublecomplex *zwork, integer *lzwork, integer *info);
+/*:ref: ilaenv_ 4 9 4 13 13 4 4 4 4 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: zlarfg_ 14 5 4 9 9 4 9 */
+/*:ref: zlatzm_ 14 11 13 4 4 9 4 9 9 9 4 9 124 */
+/*:ref: zcopy_ 14 5 4 9 4 9 4 */
+/*:ref: mb3oyz_ 14 13 4 4 9 4 7 7 4 7 4 9 7 9 4 */
+/*:ref: zlapmt_ 14 6 12 4 4 9 4 4 */
+/*:ref: zunmqr_ 14 15 13 13 4 4 4 9 4 9 9 4 9 4 4 124 124 */
+/*:ref: zlaset_ 14 8 13 4 4 9 9 9 4 124 */
+/*:ref: dznrm2_ 7 3 4 9 4 */
+/*:ref: idamax_ 4 3 4 7 4 */
+/*:ref: zswap_ 14 5 4 9 4 9 4 */
+/*:ref: zlartg_ 14 5 9 9 7 9 9 */
+/*:ref: zrot_ 14 7 4 9 4 9 4 7 9 */
+/*:ref: zlaic1_ 14 9 4 4 9 7 9 9 7 9 9 */

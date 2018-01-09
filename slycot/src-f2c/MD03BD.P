@@ -1,0 +1,7 @@
+extern int md03bd_(char *xinit, char *scale, char *cond, S_fp fcn, S_fp qrfact, S_fp lmparm, integer *m, integer *n, integer *itmax, doublereal *factor, integer *nprint, integer *ipar, integer *lipar, doublereal *dpar1, integer *ldpar1, doublereal *dpar2, integer *ldpar2, doublereal *x, doublereal *diag, integer *nfev, integer *njev, doublereal *ftol, doublereal *xtol, doublereal *gtol, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen xinit_len, ftnlen scale_len, ftnlen cond_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlarnv_ 14 4 4 4 4 7 */
+/*:ref: dnrm2_ 7 3 4 7 4 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */

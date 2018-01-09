@@ -1,0 +1,5 @@
+extern int mb03md_(integer *n, integer *l, doublereal *theta, doublereal *q, doublereal *e, doublereal *q2, doublereal *e2, doublereal *pivmin, doublereal *tol, doublereal *reltol, integer *iwarn, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: mb03my_ 7 3 4 7 4 */
+/*:ref: mb03nd_ 4 6 4 7 7 7 7 4 */
+/*:ref: dlamch_ 7 2 13 124 */

@@ -1,0 +1,2 @@
+extern integer ue01md_(integer *ispec, char *name__, char *opts, integer *n1, integer *n2, integer *n3, ftnlen name_len, ftnlen opts_len);
+/*:ref: ilaenv_ 4 9 4 13 13 4 4 4 4 124 124 */

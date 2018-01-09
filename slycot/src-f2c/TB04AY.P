@@ -1,0 +1,7 @@
+extern int tb04ay_(integer *n, integer *mwork, integer *pwork, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *ncont, integer *indexd, doublereal *dcoeff, integer *lddcoe, doublereal *ucoeff, integer *lduco1, integer *lduco2, doublereal *at, integer *n1, doublereal *tau, doublereal *tol1, doublereal *tol2, integer *iwork, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: tb01ud_ 14 22 13 4 4 4 7 4 7 4 7 4 4 4 4 7 4 7 7 4 7 4 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: tb01zd_ 14 17 13 4 4 7 4 7 7 4 4 7 4 7 7 7 4 4 124 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: ddot_ 7 5 4 7 4 7 4 */

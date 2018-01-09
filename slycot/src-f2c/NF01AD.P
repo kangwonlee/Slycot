@@ -1,0 +1,5 @@
+extern int nf01ad_(integer *nsmp, integer *m, integer *l, integer *ipar, integer *lipar, doublereal *x, integer *lx, doublereal *u, integer *ldu, doublereal *y, integer *ldy, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: tb01vy_ 14 19 13 4 4 4 7 4 7 4 7 4 7 4 7 4 7 7 4 4 124 */
+/*:ref: tf01mx_ 14 14 4 4 4 4 7 4 7 4 7 7 4 7 4 4 */
+/*:ref: nf01ay_ 14 14 4 4 4 4 4 7 4 7 4 7 4 7 4 4 */

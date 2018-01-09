@@ -1,0 +1,12 @@
+extern int mb04xd_(char *jobu, char *jobv, integer *m, integer *n, integer *rank, doublereal *theta, doublereal *a, integer *lda, doublereal *u, integer *ldu, doublereal *v, integer *ldv, doublereal *q, logical *inul, doublereal *tol, doublereal *reltol, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen jobu_len, ftnlen jobv_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: ilaenv_ 4 9 4 13 13 4 4 4 4 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dgeqrf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dgebrd_ 14 11 4 4 7 4 7 7 7 7 7 4 4 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dlartg_ 14 5 7 7 7 7 7 */
+/*:ref: dlasr_ 14 12 13 13 13 4 4 7 7 7 4 124 124 124 */
+/*:ref: mb04yd_ 14 21 13 13 4 4 4 7 7 7 7 4 7 4 12 7 7 7 4 4 4 124 124 */
+/*:ref: mb04xy_ 14 16 13 13 4 4 7 4 7 7 7 4 7 4 12 4 124 124 */

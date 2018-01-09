@@ -1,0 +1,6 @@
+extern int mc01sd_(integer *dp, doublereal *p, integer *s, integer *t, doublereal *mant, integer *e, integer *iwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: mc01sw_ 14 4 7 4 7 4 */
+/*:ref: mc01sx_ 4 4 4 4 4 7 */
+/*:ref: mc01sy_ 14 5 7 4 4 7 12 */

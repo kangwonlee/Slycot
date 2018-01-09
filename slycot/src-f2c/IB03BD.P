@@ -1,0 +1,11 @@
+extern int ib03bd_(char *init, integer *nobr, integer *m, integer *l, integer *nsmp, integer *n, integer *nn, integer *itmax1, integer *itmax2, integer *nprint, doublereal *u, integer *ldu, doublereal *y, integer *ldy, doublereal *x, integer *lx, doublereal *tol1, doublereal *tol2, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen init_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: ib01ad_ 14 31 13 13 13 13 13 13 4 4 4 4 7 4 7 4 4 7 4 7 7 7 4 7 4 4 4 124 124 124 124 124 124 */
+/*:ref: ib01bd_ 14 36 13 13 13 4 4 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 12 4 4 124 124 124 */
+/*:ref: ib01cd_ 14 31 13 13 13 4 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 7 7 4 7 4 7 4 4 4 124 124 124 */
+/*:ref: tf01mx_ 14 14 4 4 4 4 7 4 7 4 7 7 4 7 4 4 */
+/*:ref: tb01vd_ 14 19 13 4 4 4 7 4 7 4 7 4 7 4 7 7 4 7 4 4 124 */
+/*:ref: tb01vy_ 14 19 13 4 4 4 7 4 7 4 7 4 7 4 7 4 7 7 4 4 124 */
+/*:ref: md03bd_ 14 33 13 13 13 200 200 200 4 4 4 7 4 4 4 7 4 7 4 7 7 4 4 7 7 7 7 4 7 4 4 4 124 124 124 */

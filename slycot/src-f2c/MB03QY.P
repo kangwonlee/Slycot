@@ -1,0 +1,4 @@
+extern int mb03qy_(integer *n, integer *l, doublereal *a, integer *lda, doublereal *u, integer *ldu, doublereal *e1, doublereal *e2, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlanv2_ 14 10 7 7 7 7 7 7 7 7 7 7 */
+/*:ref: drot_ 14 7 4 7 4 7 4 7 7 */

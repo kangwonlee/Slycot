@@ -1,0 +1,3 @@
+extern int tf01pd_(integer *nh1, integer *nh2, integer *nr, integer *nc, doublereal *h__, integer *ldh, doublereal *t, integer *ldt, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */

@@ -1,0 +1,17 @@
+extern int mb03xd_(char *balanc, char *job, char *jobu, char *jobv, integer *n, doublereal *a, integer *lda, doublereal *qg, integer *ldqg, doublereal *t, integer *ldt, doublereal *u1, integer *ldu1, doublereal *u2, integer *ldu2, doublereal *v1, integer *ldv1, doublereal *v2, integer *ldv2, doublereal *wr, doublereal *wi, integer *ilo, doublereal *scale, doublereal *dwork, integer *ldwork, integer *info, ftnlen balanc_len, ftnlen job_len, ftnlen jobu_len, ftnlen jobv_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlabad_ 14 2 7 7 */
+/*:ref: ma02id_ 7 10 13 13 4 7 4 7 4 7 124 124 */
+/*:ref: dlascl_ 14 11 13 4 4 7 7 4 4 7 4 4 124 */
+/*:ref: mb04dd_ 14 10 13 4 7 4 7 4 4 7 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: mb04tb_ 14 21 13 13 4 4 7 4 7 4 7 4 7 4 7 7 7 7 7 4 4 124 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: mb03xp_ 14 23 13 13 13 4 4 4 7 4 7 4 7 4 7 4 7 7 7 7 4 4 124 124 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: ma01ad_ 14 4 7 7 7 7 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: mb04qb_ 14 26 13 13 13 13 13 4 4 4 7 4 7 4 7 4 7 4 7 7 7 4 4 124 124 124 124 124 */

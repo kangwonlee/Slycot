@@ -1,0 +1,7 @@
+extern int tb01pd_(char *job, char *equil, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, integer *nr, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info, ftnlen job_len, ftnlen equil_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: tb01id_ 14 14 13 4 4 4 7 7 4 7 4 7 4 7 4 124 */
+/*:ref: tb01ud_ 14 22 13 4 4 4 7 4 7 4 7 4 4 4 4 7 4 7 7 4 7 4 4 124 */
+/*:ref: ab07md_ 14 14 13 4 4 4 7 4 7 4 7 4 7 4 4 124 */
+/*:ref: tb01xd_ 14 16 13 4 4 4 4 4 7 4 7 4 7 4 7 4 4 124 */

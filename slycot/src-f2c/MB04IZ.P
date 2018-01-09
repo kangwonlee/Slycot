@@ -1,0 +1,7 @@
+extern int mb04iz_(integer *n, integer *m, integer *p, integer *l, doublecomplex *a, integer *lda, doublecomplex *b, integer *ldb, doublecomplex *tau, doublecomplex *zwork, integer *lzwork, integer *info);
+/*:ref: ilaenv_ 4 9 4 13 13 4 4 4 4 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: zlarfg_ 14 5 4 9 9 4 9 */
+/*:ref: zlarf_ 14 10 13 4 4 9 4 9 9 4 9 124 */
+/*:ref: zgeqrf_ 14 8 4 4 9 4 9 9 4 4 */
+/*:ref: zunmqr_ 14 15 13 13 4 4 4 9 4 9 9 4 9 4 4 124 124 */

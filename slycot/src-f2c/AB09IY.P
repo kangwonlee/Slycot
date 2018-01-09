@@ -1,0 +1,14 @@
+extern int ab09iy_(char *dico, char *jobc, char *jobo, char *weight, integer *n, integer *m, integer *p, integer *nv, integer *pv, integer *nw, integer *mw, doublereal *alphac, doublereal *alphao, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *av, integer *ldav, doublereal *bv, integer *ldbv, doublereal *cv, integer *ldcv, doublereal *dv, integer *lddv, doublereal *aw, integer *ldaw, doublereal *bw, integer *ldbw, doublereal *cw, integer *ldcw, doublereal *dw, integer *lddw, doublereal *scalec, doublereal *scaleo, doublereal *s, integer *lds, doublereal *r__, integer *ldr, doublereal *dwork, integer *ldwork, integer *info, ftnlen dico_len, ftnlen jobc_len, ftnlen jobo_len, ftnlen weight_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: sb03ou_ 14 15 12 12 4 4 7 4 7 4 7 7 4 7 7 4 4 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: mb04od_ 14 15 13 4 4 4 7 4 7 4 7 4 7 4 7 7 124 */
+/*:ref: mb01wd_ 14 18 13 13 13 13 4 7 7 7 4 7 4 7 4 4 124 124 124 124 */
+/*:ref: dsyev_ 14 11 13 13 4 7 4 7 7 4 4 124 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: mb04nd_ 14 15 13 4 4 4 7 4 7 4 7 4 7 4 7 7 124 */

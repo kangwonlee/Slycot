@@ -1,0 +1,3 @@
+extern int ib01oy_(integer *ns, integer *nmax, integer *n, doublereal *sv, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: lsame_ 12 4 13 13 124 124 */

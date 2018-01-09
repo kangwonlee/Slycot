@@ -1,0 +1,16 @@
+extern int ab09jw_(char *job, char *dico, char *jobew, char *stbchk, integer *n, integer *m, integer *p, integer *nw, integer *mw, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *aw, integer *ldaw, doublereal *ew, integer *ldew, doublereal *bw, integer *ldbw, doublereal *cw, integer *ldcw, doublereal *dw, integer *lddw, integer *iwork, doublereal *dwork, integer *ldwork, integer *info, ftnlen job_len, ftnlen dico_len, ftnlen jobew_len, ftnlen stbchk_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: tb01wd_ 14 16 4 4 4 7 4 7 4 7 4 7 4 7 7 7 4 4 */
+/*:ref: ab09jx_ 14 13 13 13 13 4 7 7 7 7 7 4 124 124 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: sb04py_ 14 16 13 13 4 4 4 7 4 7 4 7 4 7 7 4 124 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dtrsyl_ 14 15 13 13 4 4 4 7 4 7 4 7 4 7 4 124 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: delctg_ 12 :*/
+/*:ref: dgges_ 14 24 13 13 13 212 4 7 4 7 4 4 7 7 7 7 4 7 4 7 4 12 4 124 124 124 */
+/*:ref: dtgsyl_ 14 23 13 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 7 7 7 4 4 4 124 */

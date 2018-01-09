@@ -1,0 +1,2 @@
+extern int mc01nd_(integer *dp, doublereal *xr, doublereal *xi, doublereal *p, doublereal *vr, doublereal *vi, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */

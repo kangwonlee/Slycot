@@ -1,0 +1,20 @@
+extern int mb02nd_(integer *m, integer *n, integer *l, integer *rank, doublereal *theta, doublereal *c__, integer *ldc, doublereal *x, integer *ldx, doublereal *q, logical *inul, doublereal *tol, doublereal *reltol, integer *iwork, doublereal *dwork, integer *ldwork, logical *bwork, integer *iwarn, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: ilaenv_ 4 9 4 13 13 4 4 4 4 124 124 */
+/*:ref: dgeqrf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dgebrd_ 14 11 4 4 7 4 7 7 7 7 7 4 4 */
+/*:ref: dlartg_ 14 5 7 7 7 7 7 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: mb04yd_ 14 21 13 13 4 4 4 7 7 7 7 4 7 4 12 7 7 7 4 4 4 124 124 */
+/*:ref: dormbr_ 14 17 13 13 13 4 4 4 7 4 7 7 4 7 4 4 124 124 124 */
+/*:ref: dlarf_ 14 10 13 4 4 7 4 7 7 4 7 124 */
+/*:ref: dgerqf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dormrq_ 14 15 13 13 4 4 4 7 4 7 7 4 7 4 4 124 124 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dtrcon_ 14 13 13 13 13 4 7 4 7 7 4 4 124 124 124 */
+/*:ref: dlantr_ 7 11 13 13 13 4 4 7 4 7 124 124 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dtrsm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */

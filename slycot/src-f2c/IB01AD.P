@@ -1,0 +1,6 @@
+extern int ib01ad_(char *meth, char *alg, char *jobd, char *batch, char *conct, char *ctrl, integer *nobr, integer *m, integer *l, integer *nsmp, doublereal *u, integer *ldu, doublereal *y, integer *ldy, integer *n, doublereal *r__, integer *ldr, doublereal *sv, doublereal *rcond, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen meth_len, ftnlen alg_len, ftnlen jobd_len, ftnlen batch_len, ftnlen conct_len, ftnlen ctrl_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: ib01md_ 14 23 13 13 13 13 4 4 4 4 7 4 7 4 7 4 4 7 4 4 4 124 124 124 124 */
+/*:ref: ib01nd_ 14 16 13 13 4 4 4 7 4 7 7 4 7 4 4 4 124 124 */
+/*:ref: ib01od_ 14 9 13 4 4 7 4 7 4 4 124 */

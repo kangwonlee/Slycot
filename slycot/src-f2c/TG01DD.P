@@ -1,0 +1,6 @@
+extern int tg01dd_(char *compz, integer *l, integer *n, integer *p, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *c__, integer *ldc, doublereal *z__, integer *ldz, doublereal *dwork, integer *ldwork, integer *info, ftnlen compz_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dgerqf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dormrq_ 14 15 13 13 4 4 4 7 4 7 7 4 7 4 4 124 124 */

@@ -1,0 +1,11 @@
+extern int ab08nx_(integer *n, integer *m, integer *p, integer *ro, integer *sigma, doublereal *svlmax, doublereal *abcd, integer *ldabcd, integer *ninfz, integer *infz, integer *kronl, integer *mu, integer *nu, integer *nkrol, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: ilaenv_ 4 9 4 13 13 4 4 4 4 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dlatzm_ 14 11 13 4 4 7 4 7 7 7 4 7 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: mb03oy_ 14 12 4 4 7 4 7 7 4 7 4 7 7 4 */
+/*:ref: dlapmt_ 14 6 12 4 4 7 4 4 */
+/*:ref: dormqr_ 14 15 13 13 4 4 4 7 4 7 7 4 7 4 4 124 124 */
+/*:ref: mb03py_ 14 12 4 4 7 4 7 7 4 7 4 7 7 4 */
+/*:ref: dormrq_ 14 15 13 13 4 4 4 7 4 7 7 4 7 4 4 124 124 */

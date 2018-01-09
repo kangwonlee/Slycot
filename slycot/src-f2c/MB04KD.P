@@ -1,0 +1,8 @@
+extern int mb04kd_(char *uplo, integer *n, integer *m, integer *p, doublereal *r__, integer *ldr, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *tau, doublereal *dwork, ftnlen uplo_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: dger_ 14 9 4 4 7 7 4 7 4 7 4 */
+/*:ref: dscal_ 14 4 4 7 7 4 */

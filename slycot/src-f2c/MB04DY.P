@@ -1,0 +1,10 @@
+extern int mb04dy_(char *jobscl, integer *n, doublereal *a, integer *lda, doublereal *qg, integer *ldqg, doublereal *d__, doublereal *dwork, integer *info, ftnlen jobscl_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlabad_ 14 2 7 7 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dlansy_ 7 8 13 13 4 7 4 7 124 124 */
+/*:ref: dlascl_ 14 11 13 4 4 7 7 4 4 7 4 4 124 */
+/*:ref: dgebal_ 14 9 13 4 7 4 4 4 7 4 124 */
+/*:ref: drscl_ 14 4 4 7 7 4 */

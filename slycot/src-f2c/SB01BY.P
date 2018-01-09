@@ -1,0 +1,9 @@
+extern int sb01by_(integer *n, integer *m, doublereal *s, doublereal *p, doublereal *a, doublereal *b, doublereal *f, doublereal *tol, doublereal *dwork, integer *info);
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dlatzm_ 14 11 13 4 4 7 4 7 7 7 4 7 124 */
+/*:ref: dlasv2_ 14 9 7 7 7 7 7 7 7 7 7 */
+/*:ref: drot_ 14 7 4 7 4 7 4 7 7 */
+/*:ref: dlamc3_ 7 2 7 7 */
+/*:ref: dlanv2_ 14 10 7 7 7 7 7 7 7 7 7 7 */
+/*:ref: dlamch_ 7 2 13 124 */

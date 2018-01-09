@@ -1,0 +1,17 @@
+extern int ag08by_(logical *first, integer *n, integer *m, integer *p, doublereal *svlmax, doublereal *abcd, integer *ldabcd, doublereal *e, integer *lde, integer *nr, integer *pr, integer *ninfz, integer *dinfz, integer *nkronl, integer *infz, integer *kronl, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: ilaenv_ 4 9 4 13 13 4 4 4 4 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dlatzm_ 14 11 13 4 4 7 4 7 7 7 4 7 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: mb03oy_ 14 12 4 4 7 4 7 7 4 7 4 7 7 4 */
+/*:ref: dlapmt_ 14 6 12 4 4 7 4 4 */
+/*:ref: dormqr_ 14 15 13 13 4 4 4 7 4 7 7 4 7 4 4 124 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dnrm2_ 7 3 4 7 4 */
+/*:ref: idamax_ 4 3 4 7 4 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: dlartg_ 14 5 7 7 7 7 7 */
+/*:ref: drot_ 14 7 4 7 4 7 4 7 7 */
+/*:ref: dlaic1_ 14 9 4 4 7 7 7 7 7 7 7 */

@@ -1,0 +1,9 @@
+extern int ab09kd_(char *job, char *dico, char *weight, char *equil, char *ordsel, integer *n, integer *nv, integer *nw, integer *m, integer *p, integer *nr, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *av, integer *ldav, doublereal *bv, integer *ldbv, doublereal *cv, integer *ldcv, doublereal *dv, integer *lddv, doublereal *aw, integer *ldaw, doublereal *bw, integer *ldbw, doublereal *cw, integer *ldcw, doublereal *dw, integer *lddw, integer *ns, doublereal *hsv, doublereal *tol1, doublereal *tol2, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen job_len, ftnlen dico_len, ftnlen weight_len, ftnlen equil_len, ftnlen ordsel_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: tb01id_ 14 14 13 4 4 4 7 7 4 7 4 7 4 7 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: tb01kd_ 14 24 13 13 13 4 4 4 7 7 4 7 4 7 4 4 7 4 7 7 7 4 4 124 124 124 */
+/*:ref: ab09kx_ 14 39 13 13 13 4 4 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 7 4 4 4 124 124 124 */
+/*:ref: ab09cx_ 14 24 13 13 4 4 4 4 7 4 7 4 7 4 7 4 7 7 7 4 7 4 4 4 124 124 */
+/*:ref: ab07nd_ 14 15 4 4 7 4 7 4 7 4 7 4 7 4 7 4 4 */

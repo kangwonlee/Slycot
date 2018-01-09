@@ -1,0 +1,4 @@
+extern int mc03nx_(integer *mp, integer *np, integer *dp, doublereal *p, integer *ldp1, integer *ldp2, doublereal *a, integer *lda, doublereal *e, integer *lde);
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dscal_ 14 4 4 7 7 4 */

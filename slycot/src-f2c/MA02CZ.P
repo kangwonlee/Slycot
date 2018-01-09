@@ -1,0 +1,2 @@
+extern int ma02cz_(integer *n, integer *kl, integer *ku, doublecomplex *a, integer *lda);
+/*:ref: zswap_ 14 5 4 9 4 9 4 */

@@ -1,0 +1,17 @@
+extern int sg03bu_(char *trans, integer *n, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *b, integer *ldb, doublereal *scale, doublereal *dwork, integer *info, ftnlen trans_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlabad_ 14 2 7 7 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: sg03bx_ 14 18 13 13 7 4 7 4 7 4 7 4 7 7 4 7 4 4 124 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: sg03bw_ 14 16 13 4 4 7 4 7 4 7 4 7 4 7 4 7 4 124 */
+/*:ref: dsyrk_ 14 12 13 13 4 4 7 7 4 7 7 4 124 124 */
+/*:ref: dsyevx_ 14 23 13 13 13 4 7 4 7 7 4 4 7 4 7 7 4 7 4 4 4 4 124 124 124 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: drotg_ 14 4 7 7 7 7 */
+/*:ref: drot_ 14 7 4 7 4 7 4 7 7 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */

@@ -1,0 +1,7 @@
+extern int mb04qf_(char *direct, char *storev, char *storew, integer *n, integer *k, doublereal *v, integer *ldv, doublereal *w, integer *ldw, doublereal *cs, doublereal *tau, doublereal *rs, integer *ldrs, doublereal *t, integer *ldt, doublereal *dwork, ftnlen direct_len, ftnlen storev_len, ftnlen storew_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dtrmv_ 14 11 13 13 13 4 7 4 7 4 124 124 124 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
