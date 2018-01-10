@@ -39,6 +39,13 @@ class TestF2cP(unittest.TestCase):
         self.assertEqual(self.function_info_dict['name'], results.group('name'), msg='name')
         self.assertEqual(self.function_info_dict['arg list str'], results.group('arg_list'), msg='argument list')
 
+    def test_find_function_info(self):
+        # function under test
+        result = self.reader.find_function_info(self.first_line)
+        self.assertEqual(self.function_info_dict['return type'], result['return type'], msg='return type')
+        self.assertEqual(self.function_info_dict['name'], result['name'], msg='name')
+        self.assertSequenceEqual(self.function_info_dict['arg list'], result['arg list'], msg='argument list')
+
     def test_get_second_line_pattern(self):
         # input
         sample_input_output_list = [
