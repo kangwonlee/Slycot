@@ -17,6 +17,15 @@ default_path_dict = {
     },
 }
 
+f2c_path_dict = {
+    'src': {},
+    'f2c': {},
+}
+
+for lib, path_dict in default_path_dict.items():
+    f2c_path_dict['src'][lib] = path_dict['src']
+    f2c_path_dict['f2c'][lib] = path_dict['f2c']
+
 
 class F2cpReader(object):
     def __init__(self):
@@ -44,7 +53,7 @@ class F2cpReader(object):
     @staticmethod
     def get_calling_function_name_pattern():
         # for lines 2nd ~
-        return re.compile(r'/\*:ref:\s+(.*?)\s')
+        return re.compile(r'/\*:ref:\s+(?P<name>.*?)\s')
 
     @staticmethod
     def get_latter_lines_pattern():
@@ -64,14 +73,15 @@ class F2cpReader(object):
         # first line : c definitions
         # second line and after : list of other functions called
 
-        result = self.find_function_info(lines[0])
-        print(result)
+        for line in lines:
+            line = line.strip()
 
-        self.update_big_table(result)
-
-        # functions used inside
-        for latter_line in lines[1:]:
-            info = self.find_calling_function_info(latter_line)
+            if not line.startswith('/*'):
+                # functions defined
+                info = self.find_function_info(line)
+            else:
+                # functions used inside
+                info = self.find_calling_function_info(line)
             print(info)
             self.update_big_table(info)
 
@@ -126,17 +136,30 @@ class F2cpReader(object):
 
     def find_calling_function_info(self, f2c_p_latter_line):
         match = self.re_latter_line.search(f2c_p_latter_line)
-        result = {
-            'name': match.group('name'),
-            'return type': int(match.group('return_type')),
-            '# arg': int(match.group('no_args')),
-            'arg types': [int(s) for s in match.group('arg_types').split()],
-        }
+        if match is not None:
+            result = {
+                'name': match.group('name'),
+                'return type': int(match.group('return_type')),
+                '# arg': int(match.group('no_args')),
+                'arg types': [int(s) for s in match.group('arg_types').split()],
+            }
+        else:
+            match = self.get_calling_function_name_pattern().search(f2c_p_latter_line)
+            result = {'name': match.group('name')}
 
         return result
 
 
-if __name__ == '__main__':
+def scan_f2c():
     reader = F2cpReader()
-    reader.parse_f2c_p(os.path.join(default_path_dict['slycot']['f2c'], 'AB09AD.P'))
+    for lib, lib_path in f2c_path_dict['f2c'].items():
+        for dir_name, dir_list, file_list in os.walk(lib_path):
+            for file_name in file_list:
+                if '.P' == os.path.splitext(file_name)[-1]:
+                    reader.parse_f2c_p(os.path.join(dir_name, file_name))
+    return reader
+
+
+if __name__ == '__main__':
+    reader = scan_f2c()
     pprint.pprint(reader.big_table)
