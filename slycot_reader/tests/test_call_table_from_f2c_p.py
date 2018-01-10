@@ -39,3 +39,27 @@ class TestF2cP(unittest.TestCase):
         for sample in sample_input_output_list:
             results = p.search(sample['input'])
             self.assertEqual(sample['output'], results.groups()[0])
+
+    def test_get_second_line_numbers_pattern(self):
+        # input
+        sample_input_output_list = [
+            {'input': '''/*:ref: lsame_ 12 4 13 13 124 124 */''', 'name': 'lsame_', 'return_type': '12',
+             'no_args': '4'},
+            {'input': '''/*:ref: xerbla_ 14 3 13 4 124 */''', 'name': 'xerbla_', 'return_type': '14', 'no_args': '3'},
+            {'input': '''/*:ref: tb01id_ 14 14 13 4 4 4 7 7 4 7 4 7 4 7 4 124 */''', 'name': 'tb01id_',
+             'return_type': '14', 'no_args': '14'},
+            {'input': '''/*:ref: tb01wd_ 14 16 4 4 4 7 4 7 4 7 4 7 4 7 7 7 4 4 */''', 'name': 'tb01wd_',
+             'return_type': '14', 'no_args': '16'},
+            {'input': '''/*:ref: ab09ax_ 14 27 13 13 13 4 4 4 4 7 4 7 4 7 4 7 7 4 7 4 7 4 7 4 4 4 124 124 124 */''',
+             'name': 'ab09ax_', 'return_type': '14', 'no_args': '27'},
+        ]
+
+        # function under test
+        p = self.reader.get_calling_function_numbers_pattern()
+
+        # check search
+        for sample in sample_input_output_list:
+            results = p.search(sample['input'])
+            self.assertEqual(sample['name'], results.group('name'))
+            self.assertEqual(sample['return_type'], results.group('return_type'))
+            self.assertEqual(sample['no_args'], results.group('no_args'))
