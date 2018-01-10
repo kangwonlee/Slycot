@@ -17,3 +17,22 @@ class TestF2cP(unittest.TestCase):
         # check search
         results = p.search(sample_input)
         self.assertEqual('ab09ad_', results.groups()[0])
+
+    def test_get_second_line_pattern(self):
+        # input
+        sample_input_output_list = [
+            {'input': '''/*:ref: lsame_ 12 4 13 13 124 124 */''', 'output': 'lsame_'},
+            {'input': '''/*:ref: xerbla_ 14 3 13 4 124 */''', 'output': 'xerbla_'},
+            {'input': '''/*:ref: tb01id_ 14 14 13 4 4 4 7 7 4 7 4 7 4 7 4 124 */''', 'output': 'tb01id_'},
+            {'input': '''/*:ref: tb01wd_ 14 16 4 4 4 7 4 7 4 7 4 7 4 7 7 7 4 4 */''', 'output': 'tb01wd_'},
+            {'input': '''/*:ref: ab09ax_ 14 27 13 13 13 4 4 4 4 7 4 7 4 7 4 7 7 4 7 4 7 4 7 4 4 4 124 124 124 */''',
+             'output': 'ab09ax_'},
+        ]
+
+        # function under test
+        p = self.reader.get_calling_function_pattern()
+
+        # check search
+        for sample in sample_input_output_list:
+            results = p.search(sample['input'])
+            self.assertEqual(sample['output'], results.groups()[0])

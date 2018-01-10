@@ -25,6 +25,11 @@ class F2cpReader(object):
     def get_function_name_pattern():
         return re.compile(r'.*\s+(.*?)\s*\(')
 
+    @staticmethod
+    def get_calling_function_pattern():
+        # for lines 2nd ~
+        return re.compile(r'/\*:ref:\s+(.*?)\s')
+
     def parse_f2c_p(self, f2c_p_file_path):
         with open(f2c_p_file_path) as f:
             lines = f.readlines()
