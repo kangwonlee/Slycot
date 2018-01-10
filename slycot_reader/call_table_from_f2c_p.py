@@ -81,10 +81,10 @@ class F2cpReader(object):
             if not line.startswith('/*'):
                 # functions defined
                 info = self.find_function_info(line)
+                print(info)
             else:
                 # functions used inside
                 info = self.find_calling_function_info(line)
-            print(info)
             self.update_big_table(info)
 
     def update_big_table(self, info_dict):
@@ -163,6 +163,19 @@ class F2cpReader(object):
 
         return result
 
+    def find_any_missing_function(self):
+        definition_missing = set(self.big_table.keys())
+        never_called = set(self.big_table.keys())
+
+        # function loop
+        for function_name, function_info in self.big_table.items():
+            if 'arg list' in function_info:
+                definition_missing.remove(function_name)
+            if 'arg types' in function_info:
+                never_called.remove(function_name)
+
+        return definition_missing, never_called
+
 
 def scan_f2c():
     reader = F2cpReader()
@@ -174,7 +187,20 @@ def scan_f2c():
     return reader
 
 
-if __name__ == '__main__':
+def main():
+    # scan through f2c folders
     reader = scan_f2c()
-    pprint.pprint(reader.big_table)
+    # argument_type_id vs argument_type lookup table
     pprint.pprint(reader.arg_type_lookup)
+    # size of the big table
+    print('total functions: %d' % len(reader.big_table))
+    # find functions not defined or not used
+    definition_missing_set, never_called_set = reader.find_any_missing_function()
+    print('never used %d' % len(never_called_set))
+    print(never_called_set)
+    print('not defined %d' % len(definition_missing_set))
+    print(definition_missing_set)
+
+
+if __name__ == '__main__':
+    main()
