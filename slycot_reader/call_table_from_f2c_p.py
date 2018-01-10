@@ -20,9 +20,11 @@ default_path_dict = {
 class F2cpReader(object):
     def __init__(self):
         self.re_function_name = self.get_function_name_pattern()
+        self.re_latter_line = self.get_calling_function_numbers_pattern()
 
     def __del__(self):
         del self.re_function_name
+        del self.re_latter_line
 
     @staticmethod
     def get_function_name_pattern():
@@ -60,6 +62,17 @@ class F2cpReader(object):
             'name': match.groups()[0],
             'start': match.regs[1][0],
             'end': match.regs[1][1],
+        }
+
+        return result
+
+    def find_calling_function_info(self, f2c_p_latter_line):
+        match = self.re_latter_line.search(f2c_p_latter_line)
+        result = {
+            'name': match.group('name'),
+            'return type': int(match.group('return_type')),
+            '# arg': int(match.group('no_args')),
+            'arg types': match.group('arg_types'),
         }
 
         return result
