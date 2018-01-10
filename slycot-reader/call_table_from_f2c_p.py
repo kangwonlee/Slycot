@@ -1,6 +1,5 @@
-import re
 import os
-import sys
+import re
 
 default_path_dict = {
     'slycot': {
@@ -18,10 +17,20 @@ default_path_dict = {
 }
 
 
+def get_function_name_pattern():
+    return re.compile(r'.*\s+(.*?)\s*\(')
+
+
 def parse_f2c_p(f2c_p_file_path):
     with open(f2c_p_file_path) as f:
         lines = f.readlines()
+    # first line : c definitions
+    # second line and after : list of other functions called
 
+    r = get_function_name_pattern()
+
+    result = r.search(lines[0])
+    print(result.groups())
 
 
 if __name__ == '__main__':
