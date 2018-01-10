@@ -53,6 +53,9 @@ class F2cpReader(object):
 
     @staticmethod
     def get_arg_type_name_split():
+        # '(char *)a' -> ('(char *)', 'a')
+        # 'char *a' -> ('char *', 'a')
+        # 'char a' -> ('char', 'a')
         return re.compile(r'(?P<type>(\(.+\s+\*\))|(.+\s+\*)|(\w+))\s?(?P<name>.+)')
 
     def parse_f2c_p(self, f2c_p_file_path):
