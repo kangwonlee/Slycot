@@ -21,10 +21,12 @@ class F2cpReader(object):
     def __init__(self):
         self.re_function_name = self.get_function_name_pattern()
         self.re_latter_line = self.get_latter_lines_pattern()
+        self.re_first_line = self.get_first_line_pattern()
 
     def __del__(self):
         del self.re_function_name
         del self.re_latter_line
+        del self.re_first_line
 
     @staticmethod
     def get_function_name_pattern():
@@ -71,6 +73,18 @@ class F2cpReader(object):
             'name': match.groups()[0],
             'start': match.regs[1][0],
             'end': match.regs[1][1],
+        }
+
+        return result
+
+    def find_function_info(self, f2c_p_first_line):
+        match = self.re_first_line.search(f2c_p_first_line)
+        arg_list = [s.strip() for s in match.group('arg_list').split(',')]
+        result = {
+            'name': match.group('name'),
+            'return type': match.group('return_type'),
+            '# arg': len(arg_list),
+            'arg list': arg_list,
         }
 
         return result
