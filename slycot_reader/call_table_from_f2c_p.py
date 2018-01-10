@@ -101,8 +101,9 @@ class F2cpReader(object):
         if ('arg types' in big_table_entry) and ('arg list' in big_table_entry):
             # begin update arg_type_lookup
             for type_id, arg_type_name in zip(big_table_entry['arg types'], big_table_entry['arg list']):
-                arg_type_lookup_entry = self.arg_type_lookup.get(type_id, set())
-                arg_type_lookup_entry.add(arg_type_name[0])
+                arg_type_lookup_entry = self.arg_type_lookup.get(type_id, {})
+                # count number of each case
+                arg_type_lookup_entry[arg_type_name[0]] = arg_type_lookup_entry.get(arg_type_name[0], 0) + 1
                 self.arg_type_lookup[type_id] = arg_type_lookup_entry
             # end update arg_type_lookup
 
