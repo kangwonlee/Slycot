@@ -72,7 +72,7 @@ class F2cpReader(object):
             'name': match.group('name'),
             'return type': int(match.group('return_type')),
             '# arg': int(match.group('no_args')),
-            'arg types': match.group('arg_types'),
+            'arg types': [int(s) for s in match.group('arg_types').split()],
         }
 
         return result
