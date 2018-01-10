@@ -23,7 +23,15 @@ class TestF2cP(unittest.TestCase):
                               ('doublereal *', 'tol'), ('integer *', 'iwork'), ('doublereal *', 'dwork'),
                               ('integer *', 'ldwork'), ('integer *', 'iwarn'), ('integer *', 'info'),
                               ('ftnlen', 'dico_len'), ('ftnlen', 'job_len'), ('ftnlen', 'equil_len'),
-                              ('ftnlen', 'ordsel_len'), ]
+                              ('ftnlen', 'ordsel_len'), ],
+            'arg type name list': [('char *', 'dico'), ('(char *)', 'job'), ('char *', 'equil'), ('char *', 'ordsel'),
+                                   ('integer *', 'n'), ('integer *', 'm'), ('integer *', 'p'), ('integer *', 'nr'),
+                                   ('doublereal *', 'a'), ('integer *', 'lda'), ('doublereal *', 'b'),
+                                   ('integer *', 'ldb'), ('doublereal *', 'c__'), ('integer *', 'ldc'),
+                                   ('doublereal *', 'hsv'), ('doublereal *', 'tol'), ('integer *', 'iwork'),
+                                   ('doublereal *', 'dwork'), ('integer *', 'ldwork'), ('integer *', 'iwarn'),
+                                   ('integer *', 'info'), ('ftnlen', 'dico_len'), ('ftnlen', 'job_len'),
+                                   ('ftnlen', 'equil_len'), ('ftnlen', 'ordsel_len')],
         }
 
     def tearDown(self):
@@ -54,9 +62,10 @@ class TestF2cP(unittest.TestCase):
     def test_find_function_info(self):
         # function under test
         result = self.reader.find_function_info(self.first_line)
+        self.maxDiff = None
         self.assertEqual(self.function_info_dict['return type'], result['return type'], msg='return type')
         self.assertEqual(self.function_info_dict['name'], result['name'], msg='name')
-        self.assertSequenceEqual(self.function_info_dict['arg list'], result['arg list'], msg='argument list')
+        self.assertSequenceEqual(self.function_info_dict['arg type name list'], result['arg list'], msg='argument list')
 
     def test_get_second_line_pattern(self):
         # input
