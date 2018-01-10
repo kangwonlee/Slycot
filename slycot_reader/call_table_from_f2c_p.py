@@ -21,6 +21,9 @@ class F2cpReader(object):
     def __init__(self):
         self.re_function_name = self.get_function_name_pattern()
 
+    def __del__(self):
+        del self.re_function_name
+
     @staticmethod
     def get_function_name_pattern():
         return re.compile(r'.*\s+(.*?)\s*\(')
