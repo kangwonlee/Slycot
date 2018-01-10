@@ -28,11 +28,11 @@ class F2cpReader(object):
 
     @staticmethod
     def get_function_name_pattern():
-        return re.compile(r'.*\s+(.*?)\s*\(')
+        return re.compile(r'\w\s+\w+\s+(\w+?)\s*\(')
 
     @staticmethod
     def get_first_line_pattern():
-        return re.compile(r'\w\s(?P<return_type>\w+)\s+(?P<name>.+?)\s*\((?P<arg_list>.*)\);')
+        return re.compile(r'\w\s+(?P<return_type>\w+)\s+(?P<name>\w+?)\s*\((?P<arg_list>.*)\);')
 
     @staticmethod
     def get_calling_function_name_pattern():
