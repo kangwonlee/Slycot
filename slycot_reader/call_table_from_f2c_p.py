@@ -36,7 +36,7 @@ class F2cpReader(object):
     @staticmethod
     def get_calling_function_numbers_pattern():
         # for lines 2nd ~
-        return re.compile(r'/\*:ref:\s+(?P<name>.*?)\s(?P<return_type>\d+)\s(?P<no_args>\d+)(\s(?P<arg_types>\d)+)')
+        return re.compile(r'/\*:ref:\s+(?P<name>.*?)\s(?P<return_type>\d+)\s(?P<no_args>\d+)\s(?P<arg_types>.+)\s+\*/')
 
     def parse_f2c_p(self, f2c_p_file_path):
         with open(f2c_p_file_path) as f:
