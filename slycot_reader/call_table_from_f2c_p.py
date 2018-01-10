@@ -1,4 +1,5 @@
 import os
+import pprint
 import re
 
 default_path_dict = {
@@ -23,12 +24,14 @@ class F2cpReader(object):
         self.re_latter_line = self.get_latter_lines_pattern()
         self.re_first_line = self.get_first_line_pattern()
         self.re_arg_type_name_split = self.get_arg_type_name_split()
+        self.big_table = {}
 
     def __del__(self):
         del self.re_function_name
         del self.re_latter_line
         del self.re_first_line
         del self.re_arg_type_name_split
+        del self.big_table
 
     @staticmethod
     def get_function_name_pattern():
@@ -61,10 +64,21 @@ class F2cpReader(object):
         result = self.find_function_info(lines[0])
         print(result)
 
+        self.update_big_table(result)
+
         # functions used inside
         for latter_line in lines[1:]:
             info = self.find_calling_function_info(latter_line)
             print(info)
+            self.update_big_table(info)
+
+    def update_big_table(self, info_dict):
+        # begin update big table using the first line info
+        big_table_entry = self.big_table.get(info_dict['name'], {})
+        big_table_entry.update(info_dict)
+        del big_table_entry['name']
+        self.big_table[info_dict['name']] = big_table_entry
+        # end update big table using the first line info
 
     def find_c_function_name(self, f2c_p_first_line):
         """
@@ -122,3 +136,4 @@ class F2cpReader(object):
 if __name__ == '__main__':
     reader = F2cpReader()
     reader.parse_f2c_p(os.path.join(default_path_dict['slycot']['f2c'], 'AB09AD.P'))
+    pprint.pprint(reader.big_table)
