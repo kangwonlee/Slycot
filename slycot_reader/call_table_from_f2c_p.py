@@ -31,6 +31,10 @@ class F2cpReader(object):
         return re.compile(r'.*\s+(.*?)\s*\(')
 
     @staticmethod
+    def get_first_line_pattern():
+        return re.compile(r'\w*\s*(?P<return_type>\w+).*\s+(?P<name>.+?)\s*\(')
+
+    @staticmethod
     def get_calling_function_name_pattern():
         # for lines 2nd ~
         return re.compile(r'/\*:ref:\s+(.*?)\s')
