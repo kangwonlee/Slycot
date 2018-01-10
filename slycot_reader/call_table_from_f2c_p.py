@@ -37,7 +37,8 @@ class F2cpReader(object):
         # second line and after : list of other functions called
 
         result = self.find_c_function_name(lines[0])
-        print(result.groups())
+        print(result)
+        print(lines[0][result['start']:result['end']])
 
     def find_c_function_name(self, f2c_p_first_line):
         """
@@ -46,7 +47,13 @@ class F2cpReader(object):
         :param str f2c_p_first_line: first line of f2c P file
         :return: function name string
         """
-        result = self.re_function_name.search(f2c_p_first_line)
+        match = self.re_function_name.search(f2c_p_first_line)
+        result = {
+            'name': match.groups()[0],
+            'start': match.regs[1][0],
+            'end': match.regs[1][1],
+        }
+
         return result
 
 
