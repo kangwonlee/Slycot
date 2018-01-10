@@ -34,6 +34,7 @@ class F2cpReader(object):
         self.re_first_line = self.get_first_line_pattern()
         self.re_arg_type_name_split = self.get_arg_type_name_split()
         self.big_table = {}
+        self.arg_type_lookup = {}
 
     def __del__(self):
         del self.re_function_name
@@ -41,6 +42,7 @@ class F2cpReader(object):
         del self.re_first_line
         del self.re_arg_type_name_split
         del self.big_table
+        del self.arg_type_lookup
 
     @staticmethod
     def get_function_name_pattern():
@@ -86,12 +88,20 @@ class F2cpReader(object):
             self.update_big_table(info)
 
     def update_big_table(self, info_dict):
-        # begin update big table using the first line info
+        # begin update big table using the info_dict
         big_table_entry = self.big_table.get(info_dict['name'], {})
         big_table_entry.update(info_dict)
         del big_table_entry['name']
         self.big_table[info_dict['name']] = big_table_entry
         # end update big table using the first line info
+
+        if ('arg types' in big_table_entry) and ('arg list' in big_table_entry):
+            # begin update arg_type_lookup
+            for type_id, arg_type_name in zip(big_table_entry['arg types'], big_table_entry['arg list']):
+                arg_type_lookup_entry = self.arg_type_lookup.get(type_id, set())
+                arg_type_lookup_entry.add(arg_type_name[0])
+                self.arg_type_lookup[type_id] = arg_type_lookup_entry
+            # end update arg_type_lookup
 
     def find_c_function_name(self, f2c_p_first_line):
         """
@@ -163,3 +173,4 @@ def scan_f2c():
 if __name__ == '__main__':
     reader = scan_f2c()
     pprint.pprint(reader.big_table)
+    pprint.pprint(reader.arg_type_lookup)
