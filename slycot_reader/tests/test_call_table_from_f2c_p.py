@@ -33,7 +33,7 @@ class TestF2cP(unittest.TestCase):
         ]
 
         # function under test
-        p = self.reader.get_calling_function_pattern()
+        p = self.reader.get_calling_function_name_pattern()
 
         # check search
         for sample in sample_input_output_list:
