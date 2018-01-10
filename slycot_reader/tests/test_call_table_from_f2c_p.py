@@ -6,16 +6,24 @@ import slycot_reader.call_table_from_f2c_p as cp
 class TestF2cP(unittest.TestCase):
     def setUp(self):
         self.reader = cp.F2cpReader()
-        self.first_line = 'extern int ab09ad_(char *dico, (char *)job, char *equil, char *ordsel, integer *n, integer *m, integer *p, integer *nr, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *hsv, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen dico_len, ftnlen job_len, ftnlen equil_len, ftnlen ordsel_len);'
+        self.first_line = 'extern int ab09ad_(char *dico, char *job, char *equil, char *ordsel, integer *n, integer *m, integer *p, integer *nr, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *hsv, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen dico_len, ftnlen job_len, ftnlen equil_len, ftnlen ordsel_len);'
         self.function_info_dict = {
             'name': 'ab09ad_',
             'return type': 'int',
-            'arg list str': 'char *dico, (char *)job, char *equil, char *ordsel, integer *n, integer *m, integer *p, integer *nr, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *hsv, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen dico_len, ftnlen job_len, ftnlen equil_len, ftnlen ordsel_len',
-            'arg list': ['char *dico', '(char *)job', 'char *equil', 'char *ordsel', 'integer *n', 'integer *m',
+            'arg list str': 'char *dico, char *job, char *equil, char *ordsel, integer *n, integer *m, integer *p, integer *nr, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *hsv, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen dico_len, ftnlen job_len, ftnlen equil_len, ftnlen ordsel_len',
+            'arg list': ['char *dico', 'char *job', 'char *equil', 'char *ordsel', 'integer *n', 'integer *m',
                          'integer *p', 'integer *nr', 'doublereal *a', 'integer *lda', 'doublereal *b', 'integer *ldb',
                          'doublereal *c__', 'integer *ldc', 'doublereal *hsv', 'doublereal *tol', 'integer *iwork',
                          'doublereal *dwork', 'integer *ldwork', 'integer *iwarn', 'integer *info', 'ftnlen dico_len',
                          'ftnlen job_len', 'ftnlen equil_len', 'ftnlen ordsel_len'],
+            'arg type name': [('char *', 'dico'), ('char *', 'job'), ('char *', 'equil'), ('char *', 'ordsel'),
+                              ('integer *', 'n'), ('integer *', 'm'), ('integer *', 'p'), ('integer *', 'nr'),
+                              ('doublereal *', 'a'), ('integer *', 'lda'), ('doublereal *', 'b'), ('integer *', 'ldb'),
+                              ('doublereal *', 'c__'), ('integer *', 'ldc'), ('doublereal *', 'hsv'),
+                              ('doublereal *', 'tol'), ('integer *', 'iwork'), ('doublereal *', 'dwork'),
+                              ('integer *', 'ldwork'), ('integer *', 'iwarn'), ('integer *', 'info'),
+                              ('ftnlen ', 'dico_len'), ('ftnlen ', 'job_len'), ('ftnlen ', 'equil_len'),
+                              ('ftnlen ', 'ordsel_len'), ]
         }
 
     def tearDown(self):
@@ -95,3 +103,12 @@ class TestF2cP(unittest.TestCase):
             self.assertEqual(sample['return_type'], results.group('return_type'))
             self.assertEqual(sample['no_args'], results.group('no_args'))
             self.assertEqual(sample['arg_types'], results.group('arg_types'))
+
+    def test_get_arg_type_name_split(self):
+        # function under test
+        p = self.reader.get_arg_type_name_split()
+
+        for type_name, expected in zip(self.function_info_dict['arg list'], self.function_info_dict['arg type name']):
+            result = p.search(type_name)
+            self.assertIsNotNone(result)
+            self.assertSequenceEqual(expected, (result.group('type'), result.group('name')))
