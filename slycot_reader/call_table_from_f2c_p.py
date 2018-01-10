@@ -35,6 +35,9 @@ class F2cpReader(object):
         self.re_arg_type_name_split = self.get_arg_type_name_split()
         self.big_table = {}
         self.arg_type_lookup = {}
+        self.p_file_name = ''
+        self.lib_name = ''
+        self.p_file_path = ''
 
     def __del__(self):
         del self.re_function_name
@@ -144,6 +147,8 @@ class F2cpReader(object):
             'return type': match.group('return_type'),
             '# arg': len(arg_list),
             'arg list': arg_type_name_list,
+            'lib': self.lib_name,
+            'path': self.p_file_path,
         }
 
         return result
@@ -156,6 +161,8 @@ class F2cpReader(object):
                 'return type': int(match.group('return_type')),
                 '# arg': int(match.group('no_args')),
                 'arg types': [int(s) for s in match.group('arg_types').split()],
+                'lib': self.lib_name,
+                'path': self.p_file_path,
             }
         else:
             match = self.get_calling_function_name_pattern().search(f2c_p_latter_line)
@@ -164,25 +171,40 @@ class F2cpReader(object):
         return result
 
     def find_any_missing_function(self):
-        definition_missing = set(self.big_table.keys())
-        never_called = set(self.big_table.keys())
+        definition_missing_set = set(self.big_table.keys())
+        never_called_set = set(self.big_table.keys())
 
         # function loop
         for function_name, function_info in self.big_table.items():
             if 'arg list' in function_info:
-                definition_missing.remove(function_name)
+                # found definition
+                definition_missing_set.remove(function_name)
             if 'arg types' in function_info:
-                never_called.remove(function_name)
+                # found usage
+                never_called_set.remove(function_name)
 
-        return definition_missing, never_called
+        definition_missing_dict = {}
+        for function_name in definition_missing_set:
+            definition_missing_dict[function_name] = self.big_table[function_name]
+            definition_missing_dict[function_name].pop('arg types', None)
+
+        never_called_dict = {}
+        for function_name in never_called_set:
+            never_called_dict[function_name] = self.big_table[function_name]
+            never_called_dict[function_name].pop('arg types', None)
+
+        return definition_missing_dict, never_called_dict
 
 
 def scan_f2c():
     reader = F2cpReader()
     for lib, lib_path in f2c_path_dict['f2c'].items():
+        reader.lib_name = lib
         for dir_name, dir_list, file_list in os.walk(lib_path):
             for file_name in file_list:
                 if '.P' == os.path.splitext(file_name)[-1]:
+                    reader.p_file_path = dir_name
+                    reader.p_file_name = file_name
                     reader.parse_f2c_p(os.path.join(dir_name, file_name))
     return reader
 
@@ -195,11 +217,11 @@ def main():
     # size of the big table
     print('total functions: %d' % len(reader.big_table))
     # find functions not defined or not used
-    definition_missing_set, never_called_set = reader.find_any_missing_function()
-    print('never used %d' % len(never_called_set))
-    print(never_called_set)
-    print('not defined %d' % len(definition_missing_set))
-    print(definition_missing_set)
+    definition_missing, never_called = reader.find_any_missing_function()
+    print('never used %d' % len(never_called))
+    pprint.pprint(never_called)
+    print('not defined %d' % len(definition_missing))
+    pprint.pprint(definition_missing)
 
 
 if __name__ == '__main__':
