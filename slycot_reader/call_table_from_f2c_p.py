@@ -50,6 +50,11 @@ class F2cpReader(object):
         print(result)
         print(lines[0][result['start']:result['end']])
 
+        # functions used inside
+        for latter_line in lines[1:]:
+            info = self.find_calling_function_info(latter_line)
+            print(info)
+
     def find_c_function_name(self, f2c_p_first_line):
         """
         From the first line of the f2c P file, find function name using regex
