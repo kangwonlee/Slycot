@@ -57,7 +57,7 @@ class TestF2cP(unittest.TestCase):
         ]
 
         # function under test
-        p = self.reader.get_calling_function_numbers_pattern()
+        p = self.reader.get_latter_lines_pattern()
 
         # check search
         for sample in sample_input_output_list:

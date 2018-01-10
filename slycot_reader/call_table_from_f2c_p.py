@@ -20,7 +20,7 @@ default_path_dict = {
 class F2cpReader(object):
     def __init__(self):
         self.re_function_name = self.get_function_name_pattern()
-        self.re_latter_line = self.get_calling_function_numbers_pattern()
+        self.re_latter_line = self.get_latter_lines_pattern()
 
     def __del__(self):
         del self.re_function_name
@@ -36,7 +36,7 @@ class F2cpReader(object):
         return re.compile(r'/\*:ref:\s+(.*?)\s')
 
     @staticmethod
-    def get_calling_function_numbers_pattern():
+    def get_latter_lines_pattern():
         # for lines 2nd ~
         return re.compile(r'/\*:ref:\s+(?P<name>.*?)\s(?P<return_type>\d+)\s(?P<no_args>\d+)\s(?P<arg_types>.+)\s+\*/')
 
