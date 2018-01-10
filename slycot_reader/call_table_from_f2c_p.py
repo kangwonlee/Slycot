@@ -95,6 +95,9 @@ class F2cpReader(object):
         self.big_table[info_dict['name']] = big_table_entry
         # end update big table using the first line info
 
+        self.update_arg_type_lookup(big_table_entry)
+
+    def update_arg_type_lookup(self, big_table_entry):
         if ('arg types' in big_table_entry) and ('arg list' in big_table_entry):
             # begin update arg_type_lookup
             for type_id, arg_type_name in zip(big_table_entry['arg types'], big_table_entry['arg list']):
