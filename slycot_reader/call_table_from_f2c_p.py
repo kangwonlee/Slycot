@@ -275,13 +275,13 @@ class Dict2MDTable(object):
 
     def third_and_latter_row(self):
         row_list = []
-        for key, value in self.input_dict.items():
-            column_list = ['|', str(key), '|']
+        for function_name, function_info_dict in self.input_dict.items():
+            column_list = ['|', str(function_name), '|']
             # first column
 
             # following columns
             for column in self.column_order_list:
-                column_list.append(str(value.get(column['name'], '')))
+                column_list.append(str(function_info_dict.get(column['name'], '')))
                 column_list.append('|')
 
             row_text = ' '.join(column_list)
