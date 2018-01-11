@@ -73,6 +73,9 @@ class F2cpReader(object):
         return re.compile(r'(?P<type>(\(.+\s+\*\))|(.+\s+\*)|(\w+))\s?(?P<name>.+)')
 
     def parse_f2c_p(self, f2c_p_file_path, b_verbose=False):
+
+        self.get_lib_name_from_p_file_path(f2c_p_file_path)
+
         with open(f2c_p_file_path) as f:
             lines = f.readlines()
         # first line : c definitions
@@ -90,6 +93,26 @@ class F2cpReader(object):
                 # functions used inside
                 info = self.find_calling_function_info(line)
             self.update_big_table(info)
+
+    def get_lib_name_from_p_file_path(self, f2c_p_file_path):
+        """
+
+        :param str f2c_p_file_path: path to the f2c P file
+        :return:
+        """
+
+        path_lower = f2c_p_file_path.lower()
+
+        # because lapack is a subfolder of slycot/f2c
+        # and blas is a a subfolder of lapack
+        if 'blas' in path_lower:
+            self.lib_name = 'blas'
+        elif 'lapack' in path_lower:
+            self.lib_name = 'lapack'
+        elif 'slycot' in path_lower:
+            self.lib_name = 'slycot'
+        else:
+            raise ValueError('library unknown')
 
     def update_big_table(self, info_dict):
         # begin update big table using the info_dict
