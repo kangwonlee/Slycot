@@ -7,6 +7,8 @@
 """ Example of wrapping a C function that takes C double arrays as input using
     the Numpy declarations from Cython """
 
+from f2c cimport *
+
 # cimport the Cython declarations for numpy
 cimport numpy as np
 
