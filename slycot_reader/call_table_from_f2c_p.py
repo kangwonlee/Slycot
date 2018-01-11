@@ -117,8 +117,13 @@ class F2cpReader(object):
     def update_big_table(self, info_dict):
         # begin update big table using the info_dict
         big_table_entry = self.big_table.get(info_dict['name'], {})
+
+        # if already know return type in a string, do not update
+        if ('return type' in big_table_entry) and (isinstance(big_table_entry['return type'], str)):
+            info_dict.pop('return type', None)
+        # end if already know return type in a string, do not update
+
         big_table_entry.update(info_dict)
-        del big_table_entry['name']
         self.big_table[info_dict['name']] = big_table_entry
         # end update big table using the first line info
 
