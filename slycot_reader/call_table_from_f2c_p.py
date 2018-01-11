@@ -1,5 +1,4 @@
 import os
-import pprint
 import re
 
 default_path_dict = {
@@ -248,9 +247,31 @@ class Dict2MDTable(object):
         'left': ':------',
     }
 
-    def __init__(self, input_dict, column_order_list):
+    def __init__(self, input_dict, column_order_list=None, row_selection_list=None):
+        """
+
+        :param input_dict:
+        :param column_order_list:
+        :param list | tuple | set row_selection_list: if not given, all rows
+        """
         self.input_dict = input_dict
-        self.column_order_list = column_order_list
+
+        # to select rows of interest
+        if row_selection_list is None:
+            self.row_selection_list = list(self.input_dict.keys())
+        elif isinstance(row_selection_list, (list, tuple, set)):
+            self.row_selection_list = row_selection_list
+        else:
+            raise ValueError('expect row_selection_list to be one of list, tuple, and set')
+
+        # column selection
+        if column_order_list is None:
+            one_sample = self.input_dict[set(self.input_dict.keys()).pop()]
+            self.column_order_list = {'name': key for key in one_sample}
+        elif isinstance(column_order_list, dict):
+            self.column_order_list = column_order_list
+        else:
+            raise ValueError('expect column_order_list to be a dict')
 
     def first_row(self):
         space = '    '
@@ -275,22 +296,31 @@ class Dict2MDTable(object):
 
     def third_and_latter_row(self):
         row_list = []
-        for function_name, function_info_dict in self.input_dict.items():
-            column_list = ['|', str(function_name), '|']
-            # first column
 
-            # following columns
-            for column in self.column_order_list:
-                column_list.append(str(function_info_dict.get(column['name'], '')))
-                column_list.append('|')
+        # row loop
+        for function_name in self.row_selection_list:
+            function_info_dict = self.input_dict[function_name]
+
+            column_list = self.get_column_list_third_and_latter_row(function_info_dict, function_name)
 
             row_text = ' '.join(column_list)
+            # this completes one row
 
             row_list.append(row_text)
+        # this completes all rows
 
         result = '\n'.join(row_list)
 
         return result
+
+    def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
+        column_list = ['|', str(function_name), '|']
+        # first column
+        # loop for the following columns
+        for column in self.column_order_list:
+            column_list.append(str(function_info_dict.get(column['name'], '')))
+            column_list.append('|')
+        return column_list
 
     def __str__(self):
         table_list = [
@@ -300,6 +330,26 @@ class Dict2MDTable(object):
         ]
 
         result = '\n'.join(table_list)
+
+        return result
+
+
+class Dict2Cython(Dict2MDTable):
+    def __init__(self, input_dict, row_selection_list):
+        super(Dict2Cython, self).__init__(input_dict, row_selection_list=row_selection_list)
+
+    def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
+        column_list = [
+            function_info_dict['return type'],
+            function_info_dict['name'],
+            '(',
+            ', '.join([' '.join(arg_type_name) for arg_type_name in function_info_dict['arg list']]),
+            ')'
+        ]
+        return column_list
+
+    def __str__(self):
+        result = self.third_and_latter_row()
 
         return result
 
@@ -318,38 +368,20 @@ def scan_f2c():
 
 
 def main():
-    # scan through f2c folders
+    function_selection_list = ['sb03md_', 'sb04md_', 'sg03ad_', 'sb04qd_', 'sb02md_', 'sb02mt_', 'sg02ad_', 'ab09md_',
+                               'ab09md_', 'ab09nd_', 'sb10hd_', 'sb10hd_', 'sb10hd_', 'sb03od_', 'tb01pd_', 'td04ad_',
+                               'td04ad_', 'sb02od_', ]
+
+    # scan through f2c folders to build database
     reader = scan_f2c()
-    # argument_type_id vs argument_type lookup table
-    pprint.pprint(reader.arg_type_lookup)
+
     # size of the big table
     print('total functions: %d\n' % len(reader.big_table))
-    big_table_printer = Dict2MDTable(
+    cython_writer = Dict2Cython(
         reader.big_table,
-        [{'name': 'return type'}, {'name': 'name'}, {'name': 'arg list'}, {'name': 'lib'},
-         {'name': 'path', 'align': 'left'},
-         ]
+        function_selection_list
     )
-    print(big_table_printer)
-
-    # find functions not defined or not used
-    definition_missing, never_called = reader.find_any_missing_function()
-
-    # never called table
-    print('never used %d\n' % len(never_called))
-    never_called_table_converter = Dict2MDTable(
-        never_called,
-        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
-    )
-    print(never_called_table_converter)
-
-    # not defined table
-    print('not defined %d\n' % len(definition_missing))
-    not_defined_table_converter = Dict2MDTable(
-        definition_missing,
-        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
-    )
-    print(not_defined_table_converter)
+    print(cython_writer)
 
 
 if __name__ == '__main__':
