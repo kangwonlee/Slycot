@@ -243,6 +243,24 @@ class F2cpReader(object):
         return definition_missing_dict, never_called_dict
 
 
+def get_function_list_from_pyf(pyf_file_name, comment_start='!'):
+    """
+    Objective : to make a list of functions in a .pyf file of f2py
+
+    :param pyf_file_name:
+    :param comment_start:
+    :return:
+    """
+    with open(pyf_file_name) as f:
+        pyf_lines = f.readlines()
+
+    # remove comment
+    for k, pyf_line in enumerate(pyf_lines):
+        if '!' in pyf_line:
+            i_comment_start = pyf_line.index(comment_start)
+            pyf_lines[k] = pyf_line[:i_comment_start]
+
+
 class Dict2MDTable(object):
     """
     >>> table = Dict2MDTable(
