@@ -10,6 +10,10 @@ class ReadF2cHeader(object):
         # https://stackoverflow.com/questions/3534507/python-regex-matching-pattern-over-multiple-lines-why-isnt-this-working
         return re.compile(r'/\*.*?\*/', flags=re.S)
 
+    @staticmethod
+    def get_c_typedef_struct_parenthesis():
+        return re.compile(r'typedef\s+struct\s+\{.*?\}\s*(?P<name>\w+)\s*;', flags=re.S)
+
     def remove_c_comment(self, txt):
         """
         From C source code text, remove /* ... */ comments

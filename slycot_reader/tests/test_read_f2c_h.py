@@ -71,3 +71,12 @@ class TestF2cH(unittest.TestCase):
                          '/* undef any lower-case symbols that your C compiler predefines, e.g.: */',
                          ]
         self.assertSequenceEqual(expected_list, result_list)
+
+    def test_get_c_typedef_struct_parenthesis(self):
+        r = self.reader.get_c_typedef_struct_parenthesis()
+
+        result_list = r.findall(self.input_txt)
+
+        expected_list = ['complex', 'doublecomplex', 'cilist', 'icilist', 'olist', 'cllist', 'alist', 'inlist', ]
+
+        self.assertSequenceEqual(expected_list, result_list)
