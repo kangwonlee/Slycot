@@ -256,6 +256,6 @@ union Multitype {	/* for multiple entry points */
         ]
 
         for input_txt, expected in zip(input_txt_list, expected_list):
-            result = self.reader.replace_typedef_struct(input_txt)
+            result = self.reader.replace_typedef_struct_parenthesis(input_txt)
 
             self.assertEqual(expected, result)

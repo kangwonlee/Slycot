@@ -32,7 +32,7 @@ class ReadF2cHeader(object):
 
         return txt_without_comments
 
-    def replace_typedef_struct(self, txt):
+    def replace_typedef_struct_parenthesis(self, txt):
         """
         From C source code text, replace 'typedef struct {} <type name> ;' with 'ctypedef struct <name>:\n pass'
 
