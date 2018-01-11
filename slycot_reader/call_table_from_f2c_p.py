@@ -326,7 +326,8 @@ def main():
     print('total functions: %d\n' % len(reader.big_table))
     big_table_printer = Dict2MDTable(
         reader.big_table,
-        [{'name': 'return type'}, {'name': 'arg list'}, {'name': 'lib'}, {'name': 'path', 'align': 'left'},
+        [{'name': 'return type'}, {'name': 'name'}, {'name': 'arg list'}, {'name': 'lib'},
+         {'name': 'path', 'align': 'left'},
          ]
     )
     print(big_table_printer)
