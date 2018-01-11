@@ -299,8 +299,16 @@ def main():
     print('total functions: %d' % len(reader.big_table))
     # find functions not defined or not used
     definition_missing, never_called = reader.find_any_missing_function()
+
+    # never called table
     print('never used %d' % len(never_called))
-    pprint.pprint(never_called)
+    table_converter = Dict2MDTable(
+        never_called,
+        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
+    )
+    print(table_converter)
+
+    # not defined table
     print('not defined %d' % len(definition_missing))
     table_converter = Dict2MDTable(
         definition_missing,
