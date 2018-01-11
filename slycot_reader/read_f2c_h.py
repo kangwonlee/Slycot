@@ -17,7 +17,7 @@ class ReadF2cHeader(object):
 
     @staticmethod
     def get_c_typedef_struct_parenthesis():
-        return re.compile(r'typedef\s+struct\s+\{.*?\}\s*(?P<name>\w+)\s*;', flags=re.S)
+        return re.compile(r'typedef\s+struct\s+{.*?}\s*(?P<name>\w+)\s*;', flags=re.S)
 
     def remove_c_comment(self, txt):
         """
