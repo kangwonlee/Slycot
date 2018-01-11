@@ -25,7 +25,8 @@ class ReadF2cHeader(object):
         :return:
         """
         # remove comments
-        txt_without_comments = self.re_c_comment.sub(txt, '')
+        # https://stackoverflow.com/questions/17620301/how-does-the-python-re-sub-function-work
+        txt_without_comments = self.re_c_comment.sub('', txt,)
 
         return txt_without_comments
 
