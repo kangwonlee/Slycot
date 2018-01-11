@@ -72,7 +72,7 @@ class F2cpReader(object):
         # 'char a' -> ('char', 'a')
         return re.compile(r'(?P<type>(\(.+\s+\*\))|(.+\s+\*)|(\w+))\s?(?P<name>.+)')
 
-    def parse_f2c_p(self, f2c_p_file_path):
+    def parse_f2c_p(self, f2c_p_file_path, b_verbose=False):
         with open(f2c_p_file_path) as f:
             lines = f.readlines()
         # first line : c definitions
@@ -84,7 +84,8 @@ class F2cpReader(object):
             if not line.startswith('/*'):
                 # functions defined
                 info = self.find_function_info(line)
-                print(info)
+                if b_verbose:
+                    print(info)
             else:
                 # functions used inside
                 info = self.find_calling_function_info(line)
