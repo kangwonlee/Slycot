@@ -1,10 +1,10 @@
-""" Example of wrapping a C function that takes C double arrays as input using
+""" Example of wrapping a C function that takes C doublereal arrays as input using
     the Numpy declarations from Cython 
     Valentin Haenel, 2.8.5.2. Numpy Support, 2.8.5. Cython, Scipy Lectures, Oct 18 2016, [Online] 
         Available: http://www.scipy-lectures.org/advanced/interfacing_with_c/interfacing_with_c.html#id13 
 """
 
-""" Example of wrapping a C function that takes C double arrays as input using
+""" Example of wrapping a C function that takes C doublereal arrays as input using
     the Numpy declarations from Cython """
 
 from f2c cimport *
@@ -18,11 +18,11 @@ np.import_array()
 
 # cdefine the signature of our c function
 cdef extern from "cos_cython_numpy.h":
-    void cos_cython_numpy_func (double * in_array, double * out_array, int size)
+    void cos_cython_numpy_func (doublereal * in_array, doublereal * out_array, int size)
 
 # create the wrapper code, with numpy type annotations
-def cos_cython_numpy_py_func(np.ndarray[double, ndim=1, mode="c"] in_array not None,
-                     np.ndarray[double, ndim=1, mode="c"] out_array not None):
-    cos_cython_numpy_func(<double*> np.PyArray_DATA(in_array),
-                <double*> np.PyArray_DATA(out_array),
+def cos_cython_numpy_py_func(np.ndarray[doublereal, ndim=1, mode="c"] in_array not None,
+                     np.ndarray[doublereal, ndim=1, mode="c"] out_array not None):
+    cos_cython_numpy_func(<doublereal*> np.PyArray_DATA(in_array),
+                <doublereal*> np.PyArray_DATA(out_array),
                 in_array.shape[0])
