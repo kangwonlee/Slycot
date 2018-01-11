@@ -32,6 +32,22 @@ class ReadF2cHeader(object):
 
         return txt_without_comments
 
+    def replace_typedef_struct(self, txt):
+        """
+        From C source code text, replace 'typedef struct {} <type name> ;' with 'ctypedef struct <name>:\n pass'
+
+        :param str txt: C source code text
+        :return:
+        """
+        # first, get names
+        names_list = self.re_typedef_struct.findall(txt)
+        for name in names_list:
+            new_text = 'ctypedef struct %s:\n    pass' % name
+            # https://stackoverflow.com/questions/17620301/how-does-the-python-re-sub-function-work
+            txt = self.re_typedef_struct.sub(new_text, txt, 1)
+
+        return txt
+
     @staticmethod
     def get_header():
         return 'cdef extern from "f2c.h":'
