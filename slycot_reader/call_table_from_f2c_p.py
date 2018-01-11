@@ -297,25 +297,31 @@ def main():
     # argument_type_id vs argument_type lookup table
     pprint.pprint(reader.arg_type_lookup)
     # size of the big table
-    print('total functions: %d' % len(reader.big_table))
+    print('total functions: %d\n' % len(reader.big_table))
+    big_table_printer = Dict2MDTable(
+        reader.big_table,
+        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
+    )
+    print(big_table_printer)
+
     # find functions not defined or not used
     definition_missing, never_called = reader.find_any_missing_function()
 
     # never called table
-    print('never used %d' % len(never_called))
-    table_converter = Dict2MDTable(
+    print('never used %d\n' % len(never_called))
+    never_called_table_converter = Dict2MDTable(
         never_called,
         [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
     )
-    print(table_converter)
+    print(never_called_table_converter)
 
     # not defined table
-    print('not defined %d' % len(definition_missing))
-    table_converter = Dict2MDTable(
+    print('not defined %d\n' % len(definition_missing))
+    not_defined_table_converter = Dict2MDTable(
         definition_missing,
         [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
     )
-    print(table_converter)
+    print(not_defined_table_converter)
 
 
 if __name__ == '__main__':
