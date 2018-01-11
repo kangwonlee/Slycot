@@ -196,6 +196,87 @@ class F2cpReader(object):
         return definition_missing_dict, never_called_dict
 
 
+class Dict2MDTable(object):
+    """
+    >>> table = Dict2MDTable(
+        {   # table data
+            'a': {'b': 1, 'c': 2, 'd': 3},
+            'e': {'b': 4, 'c': 5, 'd': 6},
+        },
+        [   # column order
+            {'name':'b'}, {'name':'c', 'align': 'right'}, {'name':'d', 'align': 'left'}
+        ],
+    )
+    >>> print(table)
+    |    | b | c | d |
+    |:-----:|:-----:|------:|:------|
+    | a | 1 | 2 | 3 |
+    | e | 4 | 5 | 6 |
+    """
+    align = {
+        'right': '------:',
+        'center': ':-----:',
+        'left': ':------',
+    }
+
+    def __init__(self, input_dict, column_order_list):
+        self.input_dict = input_dict
+        self.column_order_list = column_order_list
+
+    def first_row(self):
+        space = '    '
+        row_list = ['', space]
+        for column in self.column_order_list:
+            row_list.append(' %s ' % column.get('name', space))
+
+        row_list.append('')
+
+        result = '|'.join(row_list)
+
+        return result
+
+    def second_row(self):
+        row_list = ['', self.align['center']]
+        for column in self.column_order_list:
+            row_list.append(self.align[column.get('align', 'center')])
+        row_list.append('')
+        result = '|'.join(row_list)
+
+        return result
+
+    def third_and_latter_row(self):
+        row_list = []
+        for key, value in self.input_dict.items():
+            column_list = ['|']
+            # first column
+            column_list.append(str(key))
+            column_list.append('|')
+
+            # following columns
+            for column in self.column_order_list:
+                column_list.append(str(value[column['name']]))
+                column_list.append('|')
+
+            row_text = ' '.join(column_list)
+
+            row_list.append(row_text)
+
+        result = '\n'.join(row_list)
+
+        return result
+
+    def __str__(self):
+        table_list = [
+            self.first_row(),
+            self.second_row(),
+            self.third_and_latter_row(),
+        ]
+
+        result = '\n'.join(table_list)
+
+        return result
+
+
 def scan_f2c():
     reader = F2cpReader()
     for lib, lib_path in f2c_path_dict['f2c'].items():
@@ -221,7 +302,11 @@ def main():
     print('never used %d' % len(never_called))
     pprint.pprint(never_called)
     print('not defined %d' % len(definition_missing))
-    pprint.pprint(definition_missing)
+    table_converter = Dict2MDTable(
+        definition_missing,
+        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
+    )
+    print(table_converter)
 
 
 if __name__ == '__main__':
