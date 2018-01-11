@@ -18,3 +18,10 @@ setup(cmdclass={'build_ext': build_ext},
                              sources=['_cos_cython_numpy.pyx', "cos_cython_numpy.c"],
                              include_dirs=[numpy.get_include()])],
       )
+
+print('for NumPy Support of Slycot f2c '.ljust(60, '#'))
+setup(cmdclass={'build_ext': build_ext},
+      ext_modules=[Extension("analysis",
+                             sources=['analysis.pyx', "SB03MD.c"],
+                             include_dirs=[numpy.get_include()])],
+      )
