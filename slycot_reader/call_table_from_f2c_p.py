@@ -292,13 +292,7 @@ class Dict2MDTable(object):
         for function_name in self.row_selection_list:
             function_info_dict = self.input_dict[function_name]
 
-            column_list = ['|', str(function_name), '|']
-            # first column
-
-            # loop for the following columns
-            for column in self.column_order_list:
-                column_list.append(str(function_info_dict.get(column['name'], '')))
-                column_list.append('|')
+            column_list = self.get_column_list_third_and_latter_row(function_info_dict, function_name)
 
             row_text = ' '.join(column_list)
             # this completes one row
@@ -309,6 +303,15 @@ class Dict2MDTable(object):
         result = '\n'.join(row_list)
 
         return result
+
+    def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
+        column_list = ['|', str(function_name), '|']
+        # first column
+        # loop for the following columns
+        for column in self.column_order_list:
+            column_list.append(str(function_info_dict.get(column['name'], '')))
+            column_list.append('|')
+        return column_list
 
     def __str__(self):
         table_list = [
