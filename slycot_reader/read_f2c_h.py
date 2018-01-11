@@ -5,6 +5,9 @@ class ReadF2cHeader(object):
     def __init__(self):
         self.re_c_comment = self.get_c_comment_pattern()
 
+    def __del__(self):
+        del self.re_c_comment
+
     @staticmethod
     def get_c_comment_pattern():
         # https://stackoverflow.com/questions/3534507/python-regex-matching-pattern-over-multiple-lines-why-isnt-this-working
