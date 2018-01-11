@@ -22,6 +22,10 @@ class ReadF2cHeader(object):
 
         return txt_without_comments
 
+    @staticmethod
+    def get_header():
+        return 'cdef extern from "f2c.h":'
+
     def read_f2c_h(self, f2c_h_path):
         """
         Objective : read f2c.h file, collect information, and produce a pxd file
@@ -34,3 +38,5 @@ class ReadF2cHeader(object):
             txt = f.read()
 
         txt_without_comments = self.remove_c_comment(txt)
+
+        f2c_h_lines = txt_without_comments.splitlines()
