@@ -16,14 +16,17 @@ def read_f2c_h_text():
 class TestF2cH(unittest.TestCase):
     input_txt = read_f2c_h_text()
 
+    def setUp(self):
+        self.reader = ch.ReadF2cHeader()
+
     def test_remove_c_comment(self):
-        result = ch.remove_c_comment(self.input_txt)
+        result = self.reader.remove_c_comment(self.input_txt)
 
         self.assertFalse('/*' in result)
         self.assertFalse('*/' in result)
 
     def test_get_c_comment_pattern(self):
-        r = ch.get_c_comment_pattern()
+        r = self.reader.get_c_comment_pattern()
 
         result_list = r.findall(self.input_txt)
 
