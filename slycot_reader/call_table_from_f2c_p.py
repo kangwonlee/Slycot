@@ -248,9 +248,21 @@ class Dict2MDTable(object):
         'left': ':------',
     }
 
-    def __init__(self, input_dict, column_order_list):
+    def __init__(self, input_dict, column_order_list, row_selection_list=None):
+        """
+
+        :param input_dict:
+        :param column_order_list:
+        :param list | tuple | set row_selection_list: if not given, all rows
+        """
         self.input_dict = input_dict
         self.column_order_list = column_order_list
+
+        # to select rows of interest
+        if row_selection_list is None:
+            self.row_selection_list = list(self.input_dict.keys())
+        elif isinstance(row_selection_list, (list, tuple, set)):
+            self.row_selection_list = row_selection_list
 
     def first_row(self):
         space = '    '
@@ -275,18 +287,24 @@ class Dict2MDTable(object):
 
     def third_and_latter_row(self):
         row_list = []
-        for function_name, function_info_dict in self.input_dict.items():
+
+        # row loop
+        for function_name in self.row_selection_list:
+            function_info_dict = self.input_dict[function_name]
+
             column_list = ['|', str(function_name), '|']
             # first column
 
-            # following columns
+            # loop for the following columns
             for column in self.column_order_list:
                 column_list.append(str(function_info_dict.get(column['name'], '')))
                 column_list.append('|')
 
             row_text = ' '.join(column_list)
+            # this completes one row
 
             row_list.append(row_text)
+        # this completes all rows
 
         result = '\n'.join(row_list)
 
@@ -326,9 +344,11 @@ def main():
     print('total functions: %d\n' % len(reader.big_table))
     big_table_printer = Dict2MDTable(
         reader.big_table,
-        [{'name': 'return type'}, {'name': 'name'}, {'name': 'arg list'}, {'name': 'lib'},
+        [{'name': 'return type'}, {'name': '# arg'}, {'name': 'arg list'}, {'name': 'lib'},
          {'name': 'path', 'align': 'left'},
-         ]
+         ],
+        ['sb03md_', 'sb04md_', 'sg03ad_', 'sb04qd_', 'sb02md_', 'sb02mt_', 'sg02ad_', 'ab09md_', 'ab09md_', 'ab09nd_',
+         'sb10hd_', 'sb10hd_', 'sb10hd_', 'sb03od_', 'tb01pd_', 'td04ad_', 'td04ad_', 'sb02od_', ],
     )
     print(big_table_printer)
 
