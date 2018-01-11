@@ -1,0 +1,2 @@
+extern integer mb03nd_(integer *n, doublereal *theta, doublereal *q2, doublereal *e2, doublereal *pivmin, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */

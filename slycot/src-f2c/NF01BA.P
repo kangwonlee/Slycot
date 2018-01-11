@@ -1,0 +1,5 @@
+extern int nf01ba_(integer *iflag, integer *nsmp, integer *n, integer *ipar, integer *lipar, doublereal *z__, integer *ldz, doublereal *y, integer *ldy, doublereal *x, integer *nfevl, doublereal *e, doublereal *j, integer *ldj, doublereal *jte, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: nf01ay_ 14 14 4 4 4 4 4 7 4 7 4 7 4 7 4 4 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: nf01by_ 14 18 13 4 4 4 4 4 7 4 7 4 7 7 4 7 7 4 4 124 */
+/*:ref: dnrm2_ 7 3 4 7 4 */

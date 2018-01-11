@@ -1,0 +1,12 @@
+extern int nf01bp_(char *cond, integer *n, integer *ipar, integer *lipar, doublereal *r__, integer *ldr, integer *ipvt, doublereal *diag, doublereal *qtb, doublereal *delta, doublereal *par, integer *ranks, doublereal *x, doublereal *rx, doublereal *tol, doublereal *dwork, integer *ldwork, integer *info, ftnlen cond_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: md03by_ 14 17 13 4 7 4 4 7 7 7 7 4 7 7 7 7 4 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: nf01br_ 14 20 13 13 13 4 4 4 7 4 7 7 4 7 4 7 7 4 4 124 124 124 */
+/*:ref: dnrm2_ 7 3 4 7 4 */
+/*:ref: ddot_ 7 5 4 7 4 7 4 */
+/*:ref: nf01bq_ 14 16 13 4 4 4 7 4 4 7 7 4 7 7 7 4 4 124 */
+/*:ref: dtrmv_ 14 11 13 13 13 4 7 4 7 4 124 124 124 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */

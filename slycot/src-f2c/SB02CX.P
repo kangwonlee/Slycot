@@ -1,0 +1,2 @@
+extern logical sb02cx_(doublereal *reig, doublereal *ieig);
+/*:ref: dlamch_ 7 2 13 124 */

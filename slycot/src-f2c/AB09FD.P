@@ -1,0 +1,13 @@
+extern int ab09fd_(char *dico, char *jobcf, char *fact, char *jobmr, char *equil, char *ordsel, integer *n, integer *m, integer *p, integer *nr, doublereal *alpha, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, integer *nq, doublereal *hsv, doublereal *tol1, doublereal *tol2, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen dico_len, ftnlen jobcf_len, ftnlen fact_len, ftnlen jobmr_len, ftnlen equil_len, ftnlen ordsel_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: tb01id_ 14 14 13 4 4 4 7 7 4 7 4 7 4 7 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: sb08ed_ 14 25 13 4 4 4 7 7 4 7 4 7 4 7 4 4 4 7 4 7 4 7 7 4 4 4 124 */
+/*:ref: sb08cd_ 14 24 13 4 4 4 7 4 7 4 7 4 7 4 4 4 7 4 7 4 7 7 4 4 4 124 */
+/*:ref: ab09ax_ 14 27 13 13 13 4 4 4 4 7 4 7 4 7 4 7 7 4 7 4 7 4 7 4 4 4 124 124 124 */
+/*:ref: sb08gd_ 14 18 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 4 7 4 */
+/*:ref: sb08fd_ 14 25 13 4 4 4 7 7 4 7 4 7 4 7 4 4 4 7 4 7 4 7 7 4 4 4 124 */
+/*:ref: sb08dd_ 14 24 13 4 4 4 7 4 7 4 7 4 7 4 4 4 7 4 7 4 7 7 4 4 4 124 */
+/*:ref: sb08hd_ 14 18 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 4 7 4 */

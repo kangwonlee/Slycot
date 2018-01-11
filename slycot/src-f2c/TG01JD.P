@@ -1,0 +1,8 @@
+extern int tg01jd_(char *job, char *systyp, char *equil, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, integer *nr, integer *infred, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info, ftnlen job_len, ftnlen systyp_len, ftnlen equil_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: tg01ad_ 14 19 13 4 4 4 4 7 7 4 7 4 7 4 7 4 7 7 7 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: tg01hx_ 14 29 13 13 4 4 4 4 4 4 7 4 7 4 7 4 7 4 7 4 7 4 4 4 4 7 4 7 4 124 124 */
+/*:ref: tb01xd_ 14 16 13 4 4 4 4 4 7 4 7 4 7 4 7 4 4 124 */
+/*:ref: ma02cd_ 14 5 4 4 4 7 4 */

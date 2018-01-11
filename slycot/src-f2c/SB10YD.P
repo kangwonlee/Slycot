@@ -1,0 +1,11 @@
+extern int sb10yd_(integer *discfl, integer *flag__, integer *lendat, doublereal *rfrdat, doublereal *ifrdat, doublereal *omega, integer *n, doublereal *a, integer *lda, doublereal *b, doublereal *c__, doublereal *d__, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, doublecomplex *zwork, integer *lzwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dlapy2_ 7 2 7 7 */
+/*:ref: dg01md_ 14 6 13 4 7 7 4 124 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: dgelsy_ 14 13 4 4 4 7 4 7 4 4 7 4 7 4 4 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: ab04md_ 14 19 13 4 4 4 7 7 7 4 7 4 7 4 7 4 4 7 4 4 124 */
+/*:ref: sb10zp_ 14 11 4 4 7 4 7 7 7 4 7 4 4 */

@@ -1,0 +1,4 @@
+extern int mc01vd_(doublereal *a, doublereal *b, doublereal *c__, doublereal *z1re, doublereal *z1im, doublereal *z2re, doublereal *z2im, integer *info);
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: mc01sw_ 14 4 7 4 7 4 */
+/*:ref: mc01sy_ 14 5 7 4 4 7 12 */

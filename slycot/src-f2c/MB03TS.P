@@ -1,0 +1,19 @@
+extern int mb03ts_(logical *isham, logical *wantu, integer *n, doublereal *a, integer *lda, doublereal *g, integer *ldg, doublereal *u1, integer *ldu1, doublereal *u2, integer *ldu2, integer *j1, integer *n1, integer *n2, doublereal *dwork, integer *info);
+/*:ref: dlartg_ 14 5 7 7 7 7 7 */
+/*:ref: drot_ 14 7 4 7 4 7 4 7 7 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlasy2_ 14 16 12 12 4 4 4 7 4 7 4 7 4 7 7 4 7 4 */
+/*:ref: dlanv2_ 14 10 7 7 7 7 7 7 7 7 7 7 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dlarfx_ 14 9 13 4 4 7 7 7 4 7 124 */
+/*:ref: dsymv_ 14 11 13 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: ddot_ 7 5 4 7 4 7 4 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: dsyr2_ 14 10 13 4 7 7 4 7 4 7 4 124 */
+/*:ref: mb01md_ 14 11 13 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: mb01nd_ 14 10 13 4 7 7 4 7 4 7 4 124 */

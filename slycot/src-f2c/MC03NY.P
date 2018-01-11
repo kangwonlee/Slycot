@@ -1,0 +1,7 @@
+extern int mc03ny_(integer *nblcks, integer *nra, integer *nca, doublereal *a, integer *lda, doublereal *e, integer *lde, integer *imuk, integer *inuk, doublereal *veps, integer *ldveps, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dtrtrs_ 14 13 13 13 13 4 4 7 4 7 4 4 124 124 124 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */

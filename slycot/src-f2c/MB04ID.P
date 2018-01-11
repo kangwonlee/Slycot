@@ -1,0 +1,7 @@
+extern int mb04id_(integer *n, integer *m, integer *p, integer *l, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *tau, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: ilaenv_ 4 9 4 13 13 4 4 4 4 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dlarf_ 14 10 13 4 4 7 4 7 7 4 7 124 */
+/*:ref: dgeqrf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dormqr_ 14 15 13 13 4 4 4 7 4 7 7 4 7 4 4 124 124 */

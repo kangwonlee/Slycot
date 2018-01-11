@@ -1,0 +1,2 @@
+extern int md03bb_(char *cond, integer *n, integer *ipar, integer *lipar, doublereal *r__, integer *ldr, integer *ipvt, doublereal *diag, doublereal *qtb, doublereal *delta, doublereal *par, integer *ranks, doublereal *x, doublereal *rx, doublereal *tol, doublereal *dwork, integer *ldwork, integer *info, ftnlen cond_len);
+/*:ref: md03by_ 14 17 13 4 7 4 4 7 7 7 7 4 7 7 7 7 4 4 124 */

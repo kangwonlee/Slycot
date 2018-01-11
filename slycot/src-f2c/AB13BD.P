@@ -1,0 +1,9 @@
+extern doublereal ab13bd_(char *dico, char *jobn, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *nq, doublereal *tol, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen dico_len, ftnlen jobn_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: sb08dd_ 14 24 13 4 4 4 7 4 7 4 7 4 7 4 4 4 7 4 7 4 7 7 4 4 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: sb03ou_ 14 15 12 12 4 4 7 4 7 4 7 7 4 7 7 4 4 */
+/*:ref: dtrmm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: dlapy2_ 7 2 7 7 */

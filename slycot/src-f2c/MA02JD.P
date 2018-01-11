@@ -1,0 +1,4 @@
+extern doublereal ma02jd_(logical *ltran1, logical *ltran2, integer *n, doublereal *q1, integer *ldq1, doublereal *q2, integer *ldq2, doublereal *res, integer *ldres);
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dlapy2_ 7 2 7 7 */

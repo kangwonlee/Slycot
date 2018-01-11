@@ -1,0 +1,2 @@
+extern int ma02cd_(integer *n, integer *kl, integer *ku, doublereal *a, integer *lda);
+/*:ref: dswap_ 14 5 4 7 4 7 4 */

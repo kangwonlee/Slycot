@@ -1,0 +1,3 @@
+extern int mb04tv_(logical *updatz, integer *n, integer *nra, integer *nca, integer *ifira, integer *ifica, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *z__, integer *ldz);
+/*:ref: drotg_ 14 4 7 7 7 7 */
+/*:ref: drot_ 14 7 4 7 4 7 4 7 7 */

@@ -1,0 +1,9 @@
+extern int mb3oyz_(integer *m, integer *n, doublecomplex *a, integer *lda, doublereal *rcond, doublereal *svlmax, integer *rank, doublereal *sval, integer *jpvt, doublecomplex *tau, doublereal *dwork, doublecomplex *zwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dznrm2_ 7 3 4 9 4 */
+/*:ref: idamax_ 4 3 4 7 4 */
+/*:ref: zswap_ 14 5 4 9 4 9 4 */
+/*:ref: zlarfg_ 14 5 4 9 9 4 9 */
+/*:ref: zlaic1_ 14 9 4 4 9 7 9 9 7 9 9 */
+/*:ref: zlarf_ 14 10 13 4 4 9 4 9 9 4 9 124 */
+/*:ref: zscal_ 14 4 4 9 9 4 */

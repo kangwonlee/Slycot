@@ -1,0 +1,1 @@
+extern logical sb02ow_(doublereal *alphar, doublereal *alphai, doublereal *beta);

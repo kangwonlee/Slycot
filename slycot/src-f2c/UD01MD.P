@@ -1,0 +1,2 @@
+extern int ud01md_(integer *m, integer *n, integer *l, integer *nout, doublereal *a, integer *lda, char *text, integer *info, ftnlen text_len);
+/*:ref: xerbla_ 14 3 13 4 124 */

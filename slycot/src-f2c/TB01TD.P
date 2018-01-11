@@ -1,0 +1,7 @@
+extern int tb01td_(integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *low, integer *igh, doublereal *scstat, doublereal *scin, doublereal *scout, doublereal *dwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dgebal_ 14 9 13 4 7 4 4 4 7 4 124 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: tb01ty_ 14 9 4 4 4 4 4 7 7 4 7 */

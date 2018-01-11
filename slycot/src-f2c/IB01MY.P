@@ -1,0 +1,19 @@
+extern int ib01my_(char *meth, char *batch, char *conct, integer *nobr, integer *m, integer *l, integer *nsmp, doublereal *u, integer *ldu, doublereal *y, integer *ldy, doublereal *r__, integer *ldr, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen meth_len, ftnlen batch_len, ftnlen conct_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dsyrk_ 14 12 13 13 4 4 7 7 4 7 7 4 124 124 */
+/*:ref: ma02ed_ 14 5 13 4 7 4 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: idamax_ 4 3 4 7 4 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: dgeqrf_ 14 8 4 4 7 4 7 7 4 4 */
+/*:ref: dormqr_ 14 15 13 13 4 4 4 7 4 7 7 4 7 4 4 124 124 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: dlarf_ 14 10 13 4 4 7 4 7 7 4 7 124 */
+/*:ref: ma02fd_ 14 5 7 7 7 7 4 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: mb04od_ 14 15 13 4 4 4 7 4 7 4 7 4 7 4 7 7 124 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: mb04id_ 14 12 4 4 4 4 7 4 7 4 7 7 4 4 */

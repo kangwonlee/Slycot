@@ -1,0 +1,10 @@
+extern int ib01px_(char *job, integer *nobr, integer *n, integer *m, integer *l, doublereal *uf, integer *lduf, doublereal *un, integer *ldun, doublereal *ul, integer *ldul, doublereal *pgal, integer *ldpgal, doublereal *k, integer *ldk, doublereal *r__, integer *ldr, doublereal *x, doublereal *b, integer *ldb, doublereal *d__, integer *ldd, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen job_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: mb01vd_ 14 19 13 13 4 4 4 4 7 7 7 4 7 4 7 4 4 4 4 124 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dgelsy_ 14 13 4 4 4 7 4 7 4 4 7 4 7 4 4 */
+/*:ref: dtrcon_ 14 13 13 13 13 4 7 4 7 7 4 4 124 124 124 */

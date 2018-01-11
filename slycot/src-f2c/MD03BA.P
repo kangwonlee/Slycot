@@ -1,0 +1,2 @@
+extern int md03ba_(integer *n, integer *ipar, integer *lipar, doublereal *fnorm, doublereal *j, integer *ldj, doublereal *e, doublereal *jnorms, doublereal *gnorm, integer *ipvt, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: md03bx_ 14 12 4 4 7 7 4 7 7 7 4 7 4 4 */

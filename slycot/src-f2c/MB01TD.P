@@ -1,0 +1,4 @@
+extern int mb01td_(integer *n, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *dwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dtrmv_ 14 11 13 13 13 4 7 4 7 4 124 124 124 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */

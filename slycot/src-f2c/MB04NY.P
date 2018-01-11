@@ -1,0 +1,5 @@
+extern int mb04ny_(integer *m, integer *n, doublereal *v, integer *incv, doublereal *tau, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *dwork);
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: dger_ 14 9 4 4 7 7 4 7 4 7 4 */

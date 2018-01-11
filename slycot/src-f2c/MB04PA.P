@@ -1,0 +1,10 @@
+extern int mb04pa_(logical *lham, integer *n, integer *k, integer *nb, doublereal *a, integer *lda, doublereal *qg, integer *ldqg, doublereal *xa, integer *ldxa, doublereal *xg, integer *ldxg, doublereal *xq, integer *ldxq, doublereal *ya, integer *ldya, doublereal *cs, doublereal *tau, doublereal *dwork);
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: ddot_ 7 5 4 7 4 7 4 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: dlartg_ 14 5 7 7 7 7 7 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: dsymv_ 14 11 13 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: drot_ 14 7 4 7 4 7 4 7 7 */
+/*:ref: mb01md_ 14 11 13 4 7 7 4 7 4 7 7 4 124 */

@@ -1,0 +1,13 @@
+extern int mb03sd_(char *jobscl, integer *n, doublereal *a, integer *lda, doublereal *qg, integer *ldqg, doublereal *wr, doublereal *wi, doublereal *dwork, integer *ldwork, integer *info, ftnlen jobscl_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: ma02ed_ 14 5 13 4 7 4 124 */
+/*:ref: dsymm_ 14 14 13 13 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dsymv_ 14 11 13 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dgebal_ 14 9 13 4 7 4 4 4 7 4 124 */
+/*:ref: dhseqr_ 14 16 13 13 4 4 4 7 4 7 7 7 4 7 4 4 124 124 */
+/*:ref: ma01ad_ 14 4 7 7 7 7 */

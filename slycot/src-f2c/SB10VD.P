@@ -1,0 +1,7 @@
+extern int sb10vd_(integer *n, integer *m, integer *np, integer *ncon, integer *nmeas, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *f, integer *ldf, doublereal *h__, integer *ldh, doublereal *x, integer *ldx, doublereal *y, integer *ldy, doublereal *xycond, integer *iwork, doublereal *dwork, integer *ldwork, logical *bwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dsyrk_ 14 12 13 13 4 4 7 7 4 7 7 4 124 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: sb02rd_ 14 43 13 13 13 13 13 13 13 13 13 4 7 4 7 4 7 4 7 4 7 4 7 4 7 7 7 7 7 7 4 4 7 4 12 4 124 124 124 124 124 124 124 124 124 */

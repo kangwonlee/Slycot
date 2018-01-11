@@ -1,0 +1,4 @@
+[submodule "lapack"]
+	path = slycot/src-f2c/lapack
+	url = https://github.com/autodrive/lapack-release
+	branch = feature/f2c/3.5.0

@@ -1,0 +1,1 @@
+extern integer mc01sx_(integer *lb, integer *ub, integer *e, doublereal *mant);

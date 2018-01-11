@@ -1,0 +1,4 @@
+extern int mb04wp_(integer *n, integer *ilo, doublereal *u1, integer *ldu1, doublereal *u2, integer *ldu2, doublereal *cs, doublereal *tau, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: mb04wd_ 14 16 13 13 4 4 4 7 4 7 4 7 7 7 4 4 124 124 */

@@ -1,0 +1,9 @@
+extern int sb08hd_(integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *cr, integer *ldcr, doublereal *dr, integer *lddr, integer *iwork, doublereal *dwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dgetrf_ 14 6 4 4 7 4 4 4 */
+/*:ref: dtrsm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: ma02gd_ 14 7 4 7 4 4 4 4 4 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dgecon_ 14 10 13 4 7 4 7 7 7 4 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */

@@ -1,0 +1,19 @@
+extern doublereal ab13cd_(integer *n, integer *m, integer *np, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, doublecomplex *cwork, integer *lcwork, logical *bwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */
+/*:ref: dgesvd_ 14 16 13 13 4 4 7 4 7 7 4 7 4 7 4 4 124 124 */
+/*:ref: sb02mv_ 12 :*/
+/*:ref: dgees_ 14 17 13 13 212 4 7 4 4 7 7 7 4 7 4 12 4 124 124 */
+/*:ref: dgesv_ 14 8 4 4 7 4 4 7 4 4 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dlapy2_ 7 2 7 7 */
+/*:ref: zgesv_ 14 8 4 4 9 4 4 9 4 4 */
+/*:ref: zgemm_ 14 15 13 13 4 4 4 9 9 4 9 4 9 9 4 124 124 */
+/*:ref: zgesvd_ 14 17 13 13 4 4 9 4 7 9 4 9 4 9 4 7 4 124 124 */
+/*:ref: dsyrk_ 14 12 13 13 4 4 7 7 4 7 7 4 124 124 */
+/*:ref: dpotrf_ 14 6 13 4 7 4 4 124 */
+/*:ref: dpotrs_ 14 9 13 4 4 7 4 7 4 4 124 */
+/*:ref: dposv_ 14 9 13 4 4 7 4 7 4 4 124 */
+/*:ref: mb01rx_ 14 17 13 13 13 4 4 7 7 7 4 7 4 7 4 4 124 124 124 */
+/*:ref: ma02ed_ 14 5 13 4 7 4 124 */
+/*:ref: sb02cx_ 12 :*/

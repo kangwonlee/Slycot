@@ -1,0 +1,3 @@
+extern int mb02ny_(logical *updatu, logical *updatv, integer *m, integer *n, integer *i__, integer *k, doublereal *q, doublereal *e, doublereal *u, integer *ldu, doublereal *v, integer *ldv, doublereal *dwork);
+/*:ref: dlartg_ 14 5 7 7 7 7 7 */
+/*:ref: dlasr_ 14 12 13 13 13 4 4 7 7 7 4 124 124 124 */

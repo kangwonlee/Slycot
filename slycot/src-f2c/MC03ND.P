@@ -1,0 +1,12 @@
+extern int mc03nd_(integer *mp, integer *np, integer *dp, doublereal *p, integer *ldp1, integer *ldp2, integer *dk, integer *gam, doublereal *nullsp, integer *ldnull, doublereal *ker, integer *ldker1, integer *ldker2, doublereal *tol, integer *iwork, doublereal *dwork, integer *ldwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: mc03nx_ 14 10 4 4 4 7 4 4 7 4 7 4 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlapy2_ 7 2 7 7 */
+/*:ref: mb04ud_ 14 19 13 13 4 4 7 4 7 4 7 4 7 4 4 4 7 7 4 124 124 */
+/*:ref: mb04vd_ 14 27 13 13 13 4 4 4 7 4 7 4 7 4 7 4 4 4 4 4 4 4 4 7 4 4 124 124 124 */
+/*:ref: mc03ny_ 14 12 4 4 4 7 4 7 4 4 4 7 4 4 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */

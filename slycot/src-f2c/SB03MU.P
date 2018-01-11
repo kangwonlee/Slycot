@@ -1,0 +1,4 @@
+extern int sb03mu_(logical *ltranl, logical *ltranr, integer *isgn, integer *n1, integer *n2, doublereal *tl, integer *ldtl, doublereal *tr, integer *ldtr, doublereal *b, integer *ldb, doublereal *scale, doublereal *x, integer *ldx, doublereal *xnorm, integer *info);
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: idamax_ 4 3 4 7 4 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */

@@ -1,0 +1,2 @@
+extern int sb03ov_(doublereal *a, doublereal *b, doublereal *c__, doublereal *s);
+/*:ref: dlapy3_ 7 3 7 7 7 */

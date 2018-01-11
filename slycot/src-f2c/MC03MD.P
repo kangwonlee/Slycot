@@ -1,0 +1,6 @@
+extern int mc03md_(integer *rp1, integer *cp1, integer *cp2, integer *dp1, integer *dp2, integer *dp3, doublereal *alpha, doublereal *p1, integer *ldp11, integer *ldp12, doublereal *p2, integer *ldp21, integer *ldp22, doublereal *p3, integer *ldp31, integer *ldp32, doublereal *dwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: ddot_ 7 5 4 7 4 7 4 */

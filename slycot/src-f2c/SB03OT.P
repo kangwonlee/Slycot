@@ -1,0 +1,16 @@
+extern int sb03ot_(logical *discr, logical *ltrans, integer *n, doublereal *s, integer *lds, doublereal *r__, integer *ldr, doublereal *scale, doublereal *dwork, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dlabad_ 14 2 7 7 */
+/*:ref: dlanhs_ 7 6 13 4 7 4 7 124 */
+/*:ref: sb03oy_ 14 11 12 12 4 7 4 7 4 7 4 7 4 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: dcopy_ 14 5 4 7 4 7 4 */
+/*:ref: dtrmm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: sb03or_ 14 12 12 12 4 4 7 4 7 4 7 4 7 4 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: mb04od_ 14 15 13 4 4 4 7 4 7 4 7 4 7 4 7 7 124 */
+/*:ref: dtrmv_ 14 11 13 13 13 4 7 4 7 4 124 124 124 */
+/*:ref: mb04nd_ 14 15 13 4 4 4 7 4 7 4 7 4 7 4 7 7 124 */

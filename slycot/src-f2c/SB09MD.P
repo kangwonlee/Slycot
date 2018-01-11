@@ -1,0 +1,3 @@
+extern int sb09md_(integer *n, integer *nc, integer *nb, doublereal *h1, integer *ldh1, doublereal *h2, integer *ldh2, doublereal *ss, integer *ldss, doublereal *se, integer *ldse, doublereal *pre, integer *ldpre, doublereal *tol, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlamch_ 7 2 13 124 */

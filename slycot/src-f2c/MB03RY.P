@@ -1,0 +1,5 @@
+extern int mb03ry_(integer *m, integer *n, doublereal *pmax, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, integer *info);
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: ddot_ 7 5 4 7 4 7 4 */
+/*:ref: dlasy2_ 14 16 12 12 4 4 4 7 4 7 4 7 4 7 7 4 7 4 */

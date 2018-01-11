@@ -1,0 +1,1 @@
+extern int sg03by_(doublereal *xr, doublereal *xi, doublereal *yr, doublereal *yi, doublereal *cr, doublereal *ci, doublereal *sr, doublereal *si, doublereal *z__);

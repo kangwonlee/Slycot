@@ -1,0 +1,8 @@
+extern int mb03xu_(logical *ltra, logical *ltrb, integer *n, integer *k, integer *nb, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *g, integer *ldg, doublereal *q, integer *ldq, doublereal *xa, integer *ldxa, doublereal *xb, integer *ldxb, doublereal *xg, integer *ldxg, doublereal *xq, integer *ldxq, doublereal *ya, integer *ldya, doublereal *yb, integer *ldyb, doublereal *yg, integer *ldyg, doublereal *yq, integer *ldyq, doublereal *csl, doublereal *csr, doublereal *taul, doublereal *taur, doublereal *dwork);
+/*:ref: dlarfg_ 14 5 4 7 7 4 7 */
+/*:ref: ddot_ 7 5 4 7 4 7 4 */
+/*:ref: daxpy_ 14 6 4 7 7 4 7 4 */
+/*:ref: dlartg_ 14 5 7 7 7 7 7 */
+/*:ref: dgemv_ 14 12 13 4 4 7 7 4 7 4 7 7 4 124 */
+/*:ref: dscal_ 14 4 4 7 7 4 */
+/*:ref: drot_ 14 7 4 7 4 7 4 7 7 */

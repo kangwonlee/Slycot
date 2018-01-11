@@ -1,0 +1,15 @@
+extern int sb08dd_(char *dico, integer *n, integer *m, integer *p, doublereal *a, integer *lda, doublereal *b, integer *ldb, doublereal *c__, integer *ldc, doublereal *d__, integer *ldd, integer *nq, integer *nr, doublereal *cr, integer *ldcr, doublereal *dr, integer *lddr, doublereal *tol, doublereal *dwork, integer *ldwork, integer *iwarn, integer *info, ftnlen dico_len);
+/*:ref: lsame_ 12 4 13 13 124 124 */
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dlange_ 7 7 13 4 4 7 4 7 124 */
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: tb01ld_ 14 24 13 13 13 4 4 4 7 7 4 7 4 7 4 4 7 4 7 7 7 4 4 124 124 124 */
+/*:ref: sb01fy_ 14 12 12 4 4 7 4 7 4 7 4 7 4 4 */
+/*:ref: dgemm_ 14 15 13 13 4 4 4 7 7 4 7 4 7 7 4 124 124 */
+/*:ref: dtrmm_ 14 15 13 13 13 13 4 4 7 7 4 7 4 124 124 124 124 */
+/*:ref: dtrmv_ 14 11 13 13 13 4 7 4 7 4 124 124 124 */
+/*:ref: dlanv2_ 14 10 7 7 7 7 7 7 7 7 7 7 */
+/*:ref: drot_ 14 7 4 7 4 7 4 7 7 */
+/*:ref: dlaexc_ 14 11 12 4 7 4 7 4 4 4 4 7 4 */
+/*:ref: dlacpy_ 14 8 13 4 4 7 4 7 4 124 */

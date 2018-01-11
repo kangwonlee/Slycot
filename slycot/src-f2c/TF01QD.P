@@ -1,0 +1,3 @@
+extern int tf01qd_(integer *nc, integer *nb, integer *n, integer *iord, doublereal *ar, doublereal *ma, doublereal *h__, integer *ldh, integer *info);
+/*:ref: xerbla_ 14 3 13 4 124 */
+/*:ref: ddot_ 7 5 4 7 4 7 4 */

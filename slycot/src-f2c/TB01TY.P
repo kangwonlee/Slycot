@@ -1,0 +1,4 @@
+extern int tb01ty_(integer *mode, integer *ioff, integer *joff, integer *nrow, integer *ncol, doublereal *size, doublereal *x, integer *ldx, doublereal *bvect);
+/*:ref: dlamch_ 7 2 13 124 */
+/*:ref: dasum_ 7 3 4 7 4 */
+/*:ref: dscal_ 14 4 4 7 7 4 */

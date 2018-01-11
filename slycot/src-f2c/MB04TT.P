@@ -1,0 +1,7 @@
+extern int mb04tt_(logical *updatq, logical *updatz, integer *m, integer *n, integer *ifira, integer *ifica, integer *nca, doublereal *a, integer *lda, doublereal *e, integer *lde, doublereal *q, integer *ldq, doublereal *z__, integer *ldz, integer *istair, integer *rank, doublereal *tol, integer *iwork);
+/*:ref: idamax_ 4 3 4 7 4 */
+/*:ref: dlaset_ 14 8 13 4 4 7 7 7 4 124 */
+/*:ref: dswap_ 14 5 4 7 4 7 4 */
+/*:ref: drotg_ 14 4 7 7 7 7 */
+/*:ref: drot_ 14 7 4 7 4 7 4 7 7 */
+/*:ref: dlapmt_ 14 6 12 4 4 7 4 4 */
