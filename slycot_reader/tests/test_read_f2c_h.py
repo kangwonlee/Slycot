@@ -4,19 +4,28 @@ import unittest
 import slycot_reader.read_f2c_h as ch
 
 
+def read_f2c_h_text():
+    path_to_f2c_h = os.path.abspath(os.path.join(os.pardir, os.pardir, 'slycot', 'src-f2c', 'f2c.h'))
+    assert os.path.exists(path_to_f2c_h)
+    assert os.path.isfile(path_to_f2c_h)
+    with open(path_to_f2c_h, 'r') as f:
+        input_txt = f.read()
+    return input_txt
+
+
 class TestF2cH(unittest.TestCase):
+    input_txt = read_f2c_h_text()
+
+    def test_remove_c_comment(self):
+        result = ch.remove_c_comment(self.input_txt)
+
+        self.assertFalse('/*' in result)
+        self.assertFalse('*/' in result)
+
     def test_get_c_comment_pattern(self):
         r = ch.get_c_comment_pattern()
 
-        path_to_f2c_h = os.path.abspath(os.path.join(os.pardir, os.pardir, 'slycot', 'src-f2c', 'f2c.h'))
-        assert os.path.exists(path_to_f2c_h)
-
-        assert os.path.isfile(path_to_f2c_h)
-
-        with open(path_to_f2c_h, 'r') as f:
-            input_txt = f.read()
-
-        result_list = r.findall(input_txt)
+        result_list = r.findall(self.input_txt)
 
         expected_list = ['/* f2c.h  --  Standard Fortran to C header file */',
                          '''/**  barf  [ba:rf]  2.  "He suggested using FORTRAN, and everybody barfed."

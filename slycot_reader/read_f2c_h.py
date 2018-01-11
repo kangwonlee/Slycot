@@ -17,4 +17,18 @@ def read_f2c_h(f2c_h_path):
     with open(f2c_h_path) as f:
         txt = f.read()
 
+    txt_without_comments = remove_c_comment(txt)
+
+
+def remove_c_comment(txt):
+    """
+    From C source code text, remove /* ... */ comments
+
+    :param str txt: C source code text
+    :return:
+    """
+    re_comments = get_c_comment_pattern()
     # remove comments
+    txt_without_comments = re_comments.sub(txt, '')
+
+    return txt_without_comments
