@@ -4,9 +4,11 @@ import re
 class ReadF2cHeader(object):
     def __init__(self):
         self.re_c_comment = self.get_c_comment_pattern()
+        self.re_typedef_struct = self.get_c_typedef_struct_parenthesis()
 
     def __del__(self):
         del self.re_c_comment
+        del self.re_typedef_struct
 
     @staticmethod
     def get_c_comment_pattern():
