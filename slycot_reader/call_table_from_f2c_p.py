@@ -248,10 +248,8 @@ class Dict2MDTable(object):
     def third_and_latter_row(self):
         row_list = []
         for key, value in self.input_dict.items():
-            column_list = ['|']
+            column_list = ['|', str(key), '|']
             # first column
-            column_list.append(str(key))
-            column_list.append('|')
 
             # following columns
             for column in self.column_order_list:
