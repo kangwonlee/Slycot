@@ -1,0 +1,61 @@
+import os
+import unittest
+
+import slycot_reader.read_f2c_h as ch
+
+
+class TestF2cH(unittest.TestCase):
+    def test_get_c_comment_pattern(self):
+        r = ch.get_c_comment_pattern()
+
+        path_to_f2c_h = os.path.abspath(os.path.join(os.pardir, os.pardir, 'slycot', 'src-f2c', 'f2c.h'))
+        assert os.path.exists(path_to_f2c_h)
+
+        assert os.path.isfile(path_to_f2c_h)
+
+        with open(path_to_f2c_h, 'r') as f:
+            input_txt = f.read()
+
+        result_list = r.findall(input_txt)
+
+        expected_list = ['/* f2c.h  --  Standard Fortran to C header file */',
+                         '''/**  barf  [ba:rf]  2.  "He suggested using FORTRAN, and everybody barfed."
+
+	- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */''',
+                         '/* Adjust for integer*8. */',
+                         '/* system-dependent */',
+                         '/* system-dependent */',
+                         '/* Extern is for use with -E */',
+                         '/* I/O stuff */',
+                         '/* for -i2 */',
+                         '/*external read, write*/',
+                         '/*internal read, write*/',
+                         '/*open*/',
+                         '/*close*/',
+                         '/*rewind, backspace, endfile*/',
+                         '/* inquire */',
+                         "/*parameters in standard's order*/",
+                         '/* for multiple entry points */',
+                         '/* longint j; */',
+                         '/*typedef long int Long;*/',
+                         '/* No longer used; formerly in Namelist */',
+                         '/* for Namelist */',
+                         '/* procedure parameter types for -A and -C++ */',
+                         '/* Unknown procedure type */',
+                         '/* Complex */',
+                         '/* Double Complex */',
+                         '/* Character */',
+                         '/* Subroutine */',
+                         '/* Unknown procedure type */',
+                         '/* Complex */',
+                         '/* Double Complex */',
+                         '/* Character */',
+                         '/* Subroutine */',
+                         '/* E_fp is for real functions when -R is not specified */',
+                         '/* complex function */',
+                         '/* character function */',
+                         '/* double complex function */',
+                         '/* real function with -R not specified */',
+                         '/* undef any lower-case symbols that your C compiler predefines, e.g.: */',
+                         ]
+        self.assertSequenceEqual(expected_list, result_list)
