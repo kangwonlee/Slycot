@@ -1,4 +1,7 @@
+import os
 import re
+
+from slycot_reader.call_table_from_f2c_p import default_path_dict
 
 
 class ReadF2cHeader(object):
@@ -66,3 +69,17 @@ class ReadF2cHeader(object):
         txt_without_comments = self.remove_c_comment(txt)
 
         f2c_h_lines = txt_without_comments.splitlines()
+
+        for k, line in enumerate(f2c_h_lines):
+            print(k, line)
+
+
+def main():
+    reader = ReadF2cHeader()
+    reader.read_f2c_h(os.path.join(default_path_dict['slycot']['f2c'], 'f2c.h'))
+
+
+if __name__ == '__main__':
+    # it might not be absolutely necessary
+    # http://grokbase.com/t/gg/cython-users/128rn1399p/equivalent-of-ifdef-preprocessor
+    main()
