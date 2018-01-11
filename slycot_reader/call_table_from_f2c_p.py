@@ -253,7 +253,7 @@ class Dict2MDTable(object):
 
             # following columns
             for column in self.column_order_list:
-                column_list.append(str(value[column['name']]))
+                column_list.append(str(value.get(column['name'], '')))
                 column_list.append('|')
 
             row_text = ' '.join(column_list)
@@ -298,7 +298,8 @@ def main():
     print('total functions: %d\n' % len(reader.big_table))
     big_table_printer = Dict2MDTable(
         reader.big_table,
-        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
+        [{'name': 'return type'}, {'name': 'arg list'}, {'name': 'lib'}, {'name': 'path', 'align': 'left'},
+         ]
     )
     print(big_table_printer)
 
