@@ -44,8 +44,18 @@ class Dict2Cython(Dict2MDTable):
     def __init__(self, input_dict, row_selection_list):
         super(Dict2Cython, self).__init__(input_dict, row_selection_list=row_selection_list)
 
+    @staticmethod
+    def write_pyx_header():
+        return """from f2c cimport *
+
+cimport numpy as np
+
+np.import_array()
+"""
+
     def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
         column_list = [
+            '   ',
             function_info_dict['return type'],
             function_info_dict['name'],
             '(',
