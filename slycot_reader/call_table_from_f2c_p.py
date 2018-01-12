@@ -335,6 +335,45 @@ class Dict2MDTable(object):
 
 
 class Dict2Cython(Dict2MDTable):
+    """
+    Objective : To automatically generate files for cython wraps around C functions
+
+    * pyx files : (cython will generate a .c file with the same name so be careful not to overwrite the original c file)
+        from f2c cimport *
+
+        cimport numpy as np
+
+        np.import_array()
+
+        # c function signature
+        cdef extern from "{c_header_file_name:s}.h":
+            {return_type:s} {c_function_name:s} ({c_prototype_argument_list:s})
+
+        # wrap the c function
+        def {python_function_name:s} ({python_argument_list}):
+            # c_function_argument_list may contain appropriate type casting
+            {c_function_name:s} ({c_function_argument_list})
+
+    * .h files :
+        # include "f2c.h"
+        {return_type:s} {c_function_name:s} ({c_prototype_argument_list:s})
+
+    * setup.py entry :
+        from distutils.core import setup, Extension
+
+        import numpy
+        from Cython.Distutils import build_ext
+
+        setup(
+            cmdclass={'build_ext': build_ext},
+            ext_modules=[Extension("{module_name:s},
+                                    sources=['{pyx_filename}', '{c_filename}', ...],
+                                    include_dirs=[numpy.get_include()])],
+        )
+
+    ref : Valentin Haenel, 2.8.5.2. Numpy Support, 2.8.5. Cython, Scipy Lectures, Oct 18 2016, [Online] Available: http://www.scipy-lectures.org/advanced/interfacing_with_c/interfacing_with_c.html#id13
+    """
+
     def __init__(self, input_dict, row_selection_list):
         super(Dict2Cython, self).__init__(input_dict, row_selection_list=row_selection_list)
 
