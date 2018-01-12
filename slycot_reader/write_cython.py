@@ -65,13 +65,16 @@ np.import_array()
         :return:
         """
         if header_name is None:
-            header_name = c_function_name.strip('_').upper()
+            header_name = self.get_c_file_name(c_function_name)
 
         return '''cdef extern from "{c_header_file_name:s}.h":
     {prototype:s}'''.format(
             c_header_file_name=header_name,
             prototype=self.get_function_prototype_text(c_function_name),
         )
+
+    def get_c_file_name(self, c_function_name):
+        return c_function_name.strip('_').upper()
 
     def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
         column_list = [
