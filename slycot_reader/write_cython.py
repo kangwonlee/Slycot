@@ -53,9 +53,11 @@ cimport numpy as np
 np.import_array()
 """
 
+    def get_function_prototype_text(self, function_name):
+        return super().get_third_and_latter_row_text(function_name)
+
     def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
         column_list = [
-            '   ',
             function_info_dict['return type'],
             function_info_dict['name'],
             '(',
@@ -71,9 +73,9 @@ np.import_array()
 
 
 def main():
-    function_selection_list = ['sb03md_', 'sb04md_', 'sg03ad_', 'sb04qd_', 'sb02md_', 'sb02mt_', 'sg02ad_', 'ab09md_',
-                               'ab09md_', 'ab09nd_', 'sb10hd_', 'sb10hd_', 'sb10hd_', 'sb03od_', 'tb01pd_', 'td04ad_',
-                               'td04ad_', 'sb02od_', ]
+    function_selection_list = ['sb03md_', 'sb04md_', 'sg03ad_', 'sb04qd_', 'sb02md_',
+                               'sb02mt_', 'sg02ad_', 'ab09md_', 'ab09nd_', 'sb10hd_',
+                               'sb03od_', 'tb01pd_', 'td04ad_', 'sb02od_', ]
 
     # scan through f2c folders to build database
     reader = scan_f2c()
