@@ -296,19 +296,9 @@ class Dict2MDTable(object):
         return result
 
     def third_and_latter_row(self):
-        row_list = []
-
-        # row loop
-        for function_name in self.row_selection_list:
-            row_text = self.get_third_and_latter_row_text(function_name)
-            # this completes one row
-
-            row_list.append(row_text)
-        # this completes all rows
-
-        result = '\n'.join(row_list)
-
-        return result
+        # run get_third_and_latter_row_text() across self.row_selection_list and join with '\n'
+        return '\n'.join(
+            [self.get_third_and_latter_row_text(function_name) for function_name in self.row_selection_list])
 
     def get_third_and_latter_row_text(self, function_name):
         """
