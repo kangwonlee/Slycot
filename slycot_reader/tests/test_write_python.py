@@ -211,6 +211,22 @@ class TestF2cP(unittest.TestCase):
         'sb02md_': 'SB02MD',
         'sg03ad_': 'SG03AD',
     }
+    py_func_name_dict = {
+        'sb02od_': 'sb02od',
+        'ab09md_': 'ab09md',
+        'sb03md_': 'sb03md',
+        'sb02mt_': 'sb02mt',
+        'sb03od_': 'sb03od',
+        'sg03ad_': 'sg03ad',
+        'sb02md_': 'sb02md',
+        'sg02ad_': 'sg02ad',
+        'ab09nd_': 'ab09nd',
+        'tb01pd_': 'tb01pd',
+        'td04ad_': 'td04ad',
+        'sb10hd_': 'sb10hd',
+        'sb04md_': 'sb04md',
+        'sb04qd_': 'sb04qd',
+    }
 
     def setUp(self):
         self.writer = cw.Dict2Cython(self.input_dict, self.function_name_set)
@@ -236,6 +252,15 @@ class TestF2cP(unittest.TestCase):
                 self.c_file_name_dict[function_name],
                 self.writer.get_c_file_name(function_name)
             )
+
+    def test_get_py_func_name(self):
+        for function_name in self.function_name_set:
+            # print('%r:%r,' % (function_name, self.writer.get_py_func_name(function_name)))
+            self.assertEqual(
+                self.py_func_name_dict[function_name],
+                self.writer.get_py_func_name(function_name)
+            )
+
 
 if __name__ == '__main__':
     unittest.main()

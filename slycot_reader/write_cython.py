@@ -67,8 +67,21 @@ np.import_array()
     def get_py_func_arg_list_txt(self, c_function_name):
         raise NotImplementedError()
 
-    def get_def_py_func_block(self, c_function_name):
+    def get_c_func_arg_list_txt(self, c_function_name):
         raise NotImplementedError()
+
+    def get_def_py_func_block(self, c_function_name):
+        return '''def {python_function_name:s} ({python_argument_list}):
+    {c_function_name:s} ({c_function_argument_list})'''.format(
+            c_function_name=c_function_name,
+            c_function_argument_list=self.get_c_func_arg_list_txt(c_function_name),
+            python_function_name=self.get_py_func_name(c_function_name),
+            python_argument_list=self.get_py_func_arg_list_txt(c_function_name),
+        )
+
+    @staticmethod
+    def get_py_func_name(c_function_name):
+        return c_function_name.strip('_').lower()
 
     def get_cdef_c_func_block(self, c_function_name, header_name=None):
         """
