@@ -100,7 +100,8 @@ np.import_array()
             prototype=self.get_function_prototype_text(c_function_name),
         )
 
-    def get_c_file_name(self, c_function_name):
+    @staticmethod
+    def get_c_file_name(c_function_name):
         return c_function_name.strip('_').upper()
 
     def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
