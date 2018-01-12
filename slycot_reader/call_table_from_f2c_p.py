@@ -300,11 +300,7 @@ class Dict2MDTable(object):
 
         # row loop
         for function_name in self.row_selection_list:
-            function_info_dict = self.input_dict[function_name]
-
-            column_list = self.get_column_list_third_and_latter_row(function_info_dict, function_name)
-
-            row_text = ' '.join(column_list)
+            row_text = self.get_third_and_latter_row_text(function_name)
             # this completes one row
 
             row_list.append(row_text)
@@ -313,6 +309,18 @@ class Dict2MDTable(object):
         result = '\n'.join(row_list)
 
         return result
+
+    def get_third_and_latter_row_text(self, function_name):
+        """
+        Prepare third row text on the given function
+        
+        :param function_name: 
+        :return: 
+        """
+        function_info_dict = self.input_dict[function_name]
+        column_list = self.get_column_list_third_and_latter_row(function_info_dict, function_name)
+        row_text = ' '.join(column_list)
+        return row_text
 
     def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
         column_list = ['|', str(function_name), '|']
