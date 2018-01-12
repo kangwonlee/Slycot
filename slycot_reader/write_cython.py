@@ -56,6 +56,23 @@ np.import_array()
     def get_function_prototype_text(self, function_name):
         return super().get_third_and_latter_row_text(function_name)
 
+    def get_cdef_c_func_block(self, c_function_name, header_name=None):
+        """
+        For *.pyx file
+
+        :param str c_function_name: for example, sb03md_
+        :param str|None header_name: if None, for example, SB03MD
+        :return:
+        """
+        if header_name is None:
+            header_name = c_function_name.strip('_').upper()
+
+        return '''cdef extern from "{c_header_file_name:s}.h":
+    {prototype:s}'''.format(
+            c_header_file_name=header_name,
+            prototype=self.get_function_prototype_text(c_function_name),
+        )
+
     def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
         column_list = [
             function_info_dict['return type'],
