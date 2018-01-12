@@ -1,4 +1,5 @@
 import os
+import pprint
 import re
 
 default_path_dict = {
@@ -268,10 +269,10 @@ class Dict2MDTable(object):
         if column_order_list is None:
             one_sample = self.input_dict[set(self.input_dict.keys()).pop()]
             self.column_order_list = {'name': key for key in one_sample}
-        elif isinstance(column_order_list, dict):
+        elif isinstance(column_order_list, (list, tuple)):
             self.column_order_list = column_order_list
         else:
-            raise ValueError('expect column_order_list to be a dict')
+            raise ValueError('expect column_order_list to be a list or tuple')
 
     def first_row(self):
         space = '    '
@@ -334,65 +335,6 @@ class Dict2MDTable(object):
         return result
 
 
-class Dict2Cython(Dict2MDTable):
-    """
-    Objective : To automatically generate files for cython wraps around C functions
-
-    * pyx files : (cython will generate a .c file with the same name so be careful not to overwrite the original c file)
-        from f2c cimport *
-
-        cimport numpy as np
-
-        np.import_array()
-
-        # c function signature
-        cdef extern from "{c_header_file_name:s}.h":
-            {return_type:s} {c_function_name:s} ({c_prototype_argument_list:s})
-
-        # wrap the c function
-        def {python_function_name:s} ({python_argument_list}):
-            # c_function_argument_list may contain appropriate type casting
-            {c_function_name:s} ({c_function_argument_list})
-
-    * .h files :
-        # include "f2c.h"
-        {return_type:s} {c_function_name:s} ({c_prototype_argument_list:s})
-
-    * setup.py entry :
-        from distutils.core import setup, Extension
-
-        import numpy
-        from Cython.Distutils import build_ext
-
-        setup(
-            cmdclass={'build_ext': build_ext},
-            ext_modules=[Extension("{module_name:s},
-                                    sources=['{pyx_filename}', '{c_filename}', ...],
-                                    include_dirs=[numpy.get_include()])],
-        )
-
-    ref : Valentin Haenel, 2.8.5.2. Numpy Support, 2.8.5. Cython, Scipy Lectures, Oct 18 2016, [Online] Available: http://www.scipy-lectures.org/advanced/interfacing_with_c/interfacing_with_c.html#id13
-    """
-
-    def __init__(self, input_dict, row_selection_list):
-        super(Dict2Cython, self).__init__(input_dict, row_selection_list=row_selection_list)
-
-    def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
-        column_list = [
-            function_info_dict['return type'],
-            function_info_dict['name'],
-            '(',
-            ', '.join([' '.join(arg_type_name) for arg_type_name in function_info_dict['arg list']]),
-            ')'
-        ]
-        return column_list
-
-    def __str__(self):
-        result = self.third_and_latter_row()
-
-        return result
-
-
 def scan_f2c():
     reader = F2cpReader()
     for lib, lib_path in f2c_path_dict['f2c'].items():
@@ -407,20 +349,40 @@ def scan_f2c():
 
 
 def main():
-    function_selection_list = ['sb03md_', 'sb04md_', 'sg03ad_', 'sb04qd_', 'sb02md_', 'sb02mt_', 'sg02ad_', 'ab09md_',
-                               'ab09md_', 'ab09nd_', 'sb10hd_', 'sb10hd_', 'sb10hd_', 'sb03od_', 'tb01pd_', 'td04ad_',
-                               'td04ad_', 'sb02od_', ]
-
-    # scan through f2c folders to build database
+    # scan through f2c folders
     reader = scan_f2c()
-
+    # argument_type_id vs argument_type lookup table
+    pprint.pprint(reader.arg_type_lookup)
     # size of the big table
     print('total functions: %d\n' % len(reader.big_table))
-    cython_writer = Dict2Cython(
+    big_table_printer = Dict2MDTable(
         reader.big_table,
-        function_selection_list
+        [{'name': 'return type'}, {'name': '# arg'}, {'name': 'arg list'}, {'name': 'lib'},
+         {'name': 'path', 'align': 'left'},
+         ],
+        ['sb03md_', 'sb04md_', 'sg03ad_', 'sb04qd_', 'sb02md_', 'sb02mt_', 'sg02ad_', 'ab09md_', 'ab09md_', 'ab09nd_',
+         'sb10hd_', 'sb10hd_', 'sb10hd_', 'sb03od_', 'tb01pd_', 'td04ad_', 'td04ad_', 'sb02od_', ],
     )
-    print(cython_writer)
+    print(big_table_printer)
+
+    # find functions not defined or not used
+    definition_missing, never_called = reader.find_any_missing_function()
+
+    # never called table
+    print('never used %d\n' % len(never_called))
+    never_called_table_converter = Dict2MDTable(
+        never_called,
+        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
+    )
+    print(never_called_table_converter)
+
+    # not defined table
+    print('not defined %d\n' % len(definition_missing))
+    not_defined_table_converter = Dict2MDTable(
+        definition_missing,
+        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
+    )
+    print(not_defined_table_converter)
 
 
 if __name__ == '__main__':

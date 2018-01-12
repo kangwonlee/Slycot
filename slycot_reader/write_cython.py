@@ -1,0 +1,81 @@
+from slycot_reader.call_table_from_f2c_p import Dict2MDTable, scan_f2c
+
+
+class Dict2Cython(Dict2MDTable):
+    """
+    Objective : To automatically generate files for cython wraps around C functions
+
+    * pyx files : (cython will generate a .c file with the same name so be careful not to overwrite the original c file)
+        from f2c cimport *
+
+        cimport numpy as np
+
+        np.import_array()
+
+        # c function signature
+        cdef extern from "{c_header_file_name:s}.h":
+            {return_type:s} {c_function_name:s} ({c_prototype_argument_list:s})
+
+        # wrap the c function
+        def {python_function_name:s} ({python_argument_list}):
+            # c_function_argument_list may contain appropriate type casting
+            {c_function_name:s} ({c_function_argument_list})
+
+    * .h files :
+        # include "f2c.h"
+        {return_type:s} {c_function_name:s} ({c_prototype_argument_list:s})
+
+    * setup.py entry :
+        from distutils.core import setup, Extension
+
+        import numpy
+        from Cython.Distutils import build_ext
+
+        setup(
+            cmdclass={'build_ext': build_ext},
+            ext_modules=[Extension("{module_name:s},
+                                    sources=['{pyx_filename}', '{c_filename}', ...],
+                                    include_dirs=[numpy.get_include()])],
+        )
+
+    ref : Valentin Haenel, 2.8.5.2. Numpy Support, 2.8.5. Cython, Scipy Lectures, Oct 18 2016, [Online] Available: http://www.scipy-lectures.org/advanced/interfacing_with_c/interfacing_with_c.html#id13
+    """
+
+    def __init__(self, input_dict, row_selection_list):
+        super(Dict2Cython, self).__init__(input_dict, row_selection_list=row_selection_list)
+
+    def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
+        column_list = [
+            function_info_dict['return type'],
+            function_info_dict['name'],
+            '(',
+            ', '.join([' '.join(arg_type_name) for arg_type_name in function_info_dict['arg list']]),
+            ')'
+        ]
+        return column_list
+
+    def __str__(self):
+        result = self.third_and_latter_row()
+
+        return result
+
+
+def main():
+    function_selection_list = ['sb03md_', 'sb04md_', 'sg03ad_', 'sb04qd_', 'sb02md_', 'sb02mt_', 'sg02ad_', 'ab09md_',
+                               'ab09md_', 'ab09nd_', 'sb10hd_', 'sb10hd_', 'sb10hd_', 'sb03od_', 'tb01pd_', 'td04ad_',
+                               'td04ad_', 'sb02od_', ]
+
+    # scan through f2c folders to build database
+    reader = scan_f2c()
+
+    # size of the big table
+    print('total functions: %d\n' % len(reader.big_table))
+    cython_writer = Dict2Cython(
+        reader.big_table,
+        function_selection_list
+    )
+    print(cython_writer)
+
+
+if __name__ == '__main__':
+    main()
