@@ -41,6 +41,14 @@ class Dict2Cython(Dict2MDTable):
     ref : Valentin Haenel, 2.8.5.2. Numpy Support, 2.8.5. Cython, Scipy Lectures, Oct 18 2016, [Online] Available: http://www.scipy-lectures.org/advanced/interfacing_with_c/interfacing_with_c.html#id13
     """
 
+    # TODO : check if these conversions are correct
+    c_py_arg_proto_lookup = {
+        'doublereal *': 'np.ndarray[double, ndim=1, mode="c"] {py_arg_name:s} not None',
+        'integer *': 'np.ndarray[long int, ndim=1, mode="c"] {py_arg_name:s} not None',
+        'ftnlen': '{py_arg_name:s}',
+        'char *': '{py_arg_name:s}',
+    }
+
     def __init__(self, input_dict, row_selection_list):
         super(Dict2Cython, self).__init__(input_dict, row_selection_list=row_selection_list)
 
@@ -55,6 +63,12 @@ np.import_array()
 
     def get_function_prototype_text(self, function_name):
         return super().get_third_and_latter_row_text(function_name)
+
+    def get_py_func_arg_list_txt(self, c_function_name):
+        raise NotImplementedError()
+
+    def get_def_py_func_block(self, c_function_name):
+        raise NotImplementedError()
 
     def get_cdef_c_func_block(self, c_function_name, header_name=None):
         """
