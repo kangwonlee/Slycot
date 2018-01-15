@@ -361,6 +361,31 @@ def scan_f2c():
     return reader
 
 
+class RecursivelyCheckNotDefined(object):
+    def __init__(self, big_table_dict, not_defined_dict, function_selection_list):
+        self.big_table_dict = big_table_dict
+        self.not_defined_dict = not_defined_dict
+        self.function_list = function_selection_list
+        self.not_defined_set = set()
+        self.checked_set = set()
+
+    def check_list(self):
+        for function_name in self.function_list:
+            self.check_function(function_name)
+
+    def check_function(self, function_name):
+        if function_name in self.checked_set:
+            return
+
+        if function_name in self.not_defined_dict:
+            self.not_defined_set.add(function_name)
+
+        for callee_name in self.big_table_dict[function_name].get('calls', []):
+            self.check_function(callee_name)
+
+        self.checked_set.add(function_name)
+
+
 def main():
     function_selection_list = ['sb02md_', 'sb02mt_', 'sb03md_', 'tb04ad_', 'td04ad_', 'sg02ad_', 'sg03ad_', 'tb01pd_',
                                'ab09ad_', 'ab09md_', 'ab09nd_', 'sb01bd_', 'sb02od_', 'sb03od_', 'sb04md_', 'sb04qd_',
@@ -400,6 +425,11 @@ def main():
         [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, {'name': 'called in'}]
     )
     print(not_defined_table_converter)
+
+    checker = RecursivelyCheckNotDefined(reader.big_table, definition_missing, function_selection_list)
+    checker.check_list()
+    print('not defined :')
+    print(checker.not_defined_set)
 
 
 def unique_list_ordered(function_selection_list):
