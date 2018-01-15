@@ -18,6 +18,9 @@ class Dict2Cython(Dict2MDTable):
 
         # wrap the c function
         def {python_function_name:s} ({python_argument_list}):
+
+            {argument_conversion}
+
             # c_function_argument_list may contain appropriate type casting
             {c_function_name:s} ({c_function_argument_list})
 
@@ -46,7 +49,11 @@ class Dict2Cython(Dict2MDTable):
         'doublereal *': 'np.ndarray[double, ndim=1, mode="c"] {py_arg_name:s} not None',
         'integer *': 'np.ndarray[long int, ndim=1, mode="c"] {py_arg_name:s} not None',
         'ftnlen': '{py_arg_name:s}',
-        'char *': '{py_arg_name:s}',
+        'char *': 'str {py_arg_name:s}',
+    }
+
+    c_py_arg_conv_lookup = {
+        'char *': 'cdef {py_arg_name:s}_bytes = {py_arg_name:s}.encode()',
     }
 
     def __init__(self, input_dict, row_selection_list):
