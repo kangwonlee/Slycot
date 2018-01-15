@@ -81,6 +81,8 @@ class F2cpReader(object):
         # first line : c definitions
         # second line and after : list of other functions called
 
+        new_functions = set()
+
         for line in lines:
             line = line.strip()
 
@@ -89,9 +91,12 @@ class F2cpReader(object):
                 info = self.find_function_info(line)
                 if b_verbose:
                     print(info)
+                new_functions.add(info['name'])
             else:
                 # functions used inside
                 info = self.find_calling_function_info(line)
+                called_set = info.get('used in', set())
+                info['used in'] = new_functions.union(called_set)
             self.update_big_table(info)
 
     def get_lib_name_from_p_file_path(self, f2c_p_file_path):
