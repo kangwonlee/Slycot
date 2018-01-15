@@ -354,10 +354,8 @@ def main():
     # size of the big table
     print('total functions: %d\n' % len(reader.big_table))
 
-    function_selection_list = unique_list_ordered(
-        ['sb03md_', 'sb04md_', 'sg03ad_', 'sb04qd_', 'sb02md_', 'sb02mt_', 'sg02ad_', 'ab09md_', 'ab09md_', 'ab09nd_',
-         'sb10hd_', 'sb10hd_', 'sb10hd_', 'sb03od_', 'tb01pd_', 'td04ad_', 'td04ad_', 'sb02od_', ]
-    )
+    function_selection_list = ['sb03md_', 'sb04md_', 'sg03ad_', 'sb04qd_', 'sb02md_', 'sb02mt_', 'sg02ad_', 'ab09md_',
+                               'ab09nd_', 'sb10hd_', 'sb03od_', 'tb01pd_', 'td04ad_', 'sb02od_']
 
     big_table_printer = Dict2MDTable(
         reader.big_table,
