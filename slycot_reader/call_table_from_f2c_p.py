@@ -81,7 +81,8 @@ class F2cpReader(object):
         # first line : c definitions
         # second line and after : list of other functions called
 
-        new_functions = set()
+        caller_set = set()
+        callee_set = set()
 
         for line in lines:
             line = line.strip()
@@ -91,13 +92,22 @@ class F2cpReader(object):
                 info = self.find_function_info(line)
                 if b_verbose:
                     print(info)
-                new_functions.add(info['name'])
+                caller_set.add(info['name'])
             else:
                 # functions used inside
                 info = self.find_calling_function_info(line)
-                called_set = info.get('used in', set())
-                info['used in'] = new_functions.union(called_set)
+                callee_set.add(info['name'])
+
             self.update_big_table(info)
+
+        # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
+        for caller in caller_set:
+            calls_set = self.big_table[caller].get('calls', callee_set)
+            self.big_table[caller]['calls'] = calls_set.union(callee_set)
+
+        for callee in callee_set:
+            called_set = self.big_table[callee].get('called in', caller_set)
+            self.big_table[callee]['called in'] = called_set.union(caller_set)
 
     def get_lib_name_from_p_file_path(self, f2c_p_file_path):
         """
@@ -354,7 +364,7 @@ def scan_f2c():
 def main():
     function_selection_list = ['sb02md_', 'sb02mt_', 'sb03md_', 'tb04ad_', 'td04ad_', 'sg02ad_', 'sg03ad_', 'tb01pd_',
                                'ab09ad_', 'ab09md_', 'ab09nd_', 'sb01bd_', 'sb02od_', 'sb03od_', 'sb04md_', 'sb04qd_',
-                               'sb10ad_', 'sb10hd_', ]
+                               'sb10ad_', 'sb10hd_', 'lsame_']
 
     # scan through f2c folders
     reader = scan_f2c()
@@ -387,7 +397,7 @@ def main():
     print('not defined %d\n' % len(definition_missing))
     not_defined_table_converter = Dict2MDTable(
         definition_missing,
-        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
+        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, {'name': 'called in'}]
     )
     print(not_defined_table_converter)
 
