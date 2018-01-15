@@ -353,13 +353,18 @@ def main():
     pprint.pprint(reader.arg_type_lookup)
     # size of the big table
     print('total functions: %d\n' % len(reader.big_table))
+
+    function_selection_list = unique_list_ordered(
+        ['sb03md_', 'sb04md_', 'sg03ad_', 'sb04qd_', 'sb02md_', 'sb02mt_', 'sg02ad_', 'ab09md_', 'ab09md_', 'ab09nd_',
+         'sb10hd_', 'sb10hd_', 'sb10hd_', 'sb03od_', 'tb01pd_', 'td04ad_', 'td04ad_', 'sb02od_', ]
+    )
+
     big_table_printer = Dict2MDTable(
         reader.big_table,
         [{'name': 'return type'}, {'name': '# arg'}, {'name': 'arg list'}, {'name': 'lib'},
          {'name': 'path', 'align': 'left'},
          ],
-        ['sb03md_', 'sb04md_', 'sg03ad_', 'sb04qd_', 'sb02md_', 'sb02mt_', 'sg02ad_', 'ab09md_', 'ab09md_', 'ab09nd_',
-         'sb10hd_', 'sb10hd_', 'sb10hd_', 'sb03od_', 'tb01pd_', 'td04ad_', 'td04ad_', 'sb02od_', ],
+        function_selection_list,
     )
     print(big_table_printer)
 
@@ -381,6 +386,20 @@ def main():
         [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
     )
     print(not_defined_table_converter)
+
+
+def unique_list_ordered(function_selection_list):
+    """
+    Generate a list of unique elements preserving the first appearance order
+
+    :param list function_selection_list: a list of possibly duplicated elements 
+    :return: a list of unique elements
+    """
+    function_selection_unique = []
+    for function_name in function_selection_list:
+        if function_name not in function_selection_unique:
+            function_selection_unique.append(function_name)
+    return function_selection_unique
 
 
 if __name__ == '__main__':
