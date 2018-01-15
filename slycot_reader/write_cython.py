@@ -52,8 +52,12 @@ class Dict2Cython(Dict2MDTable):
         'char *': 'str {py_arg_name:s}',
     }
 
+    c_call_arg_name_lookup = {
+        'char *': '{py_arg_name:s}_bytes',
+    }
+
     c_py_arg_conv_lookup = {
-        'char *': 'cdef {py_arg_name:s}_bytes = {py_arg_name:s}.encode()',
+        'char *': 'cdef {c_call_arg_name:s} = {py_arg_name:s}.encode()',
     }
 
     def __init__(self, input_dict, row_selection_list):
