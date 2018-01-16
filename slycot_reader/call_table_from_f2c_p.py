@@ -77,40 +77,42 @@ class F2cpReader(object):
 
     def parse_f2c_p(self, f2c_p_file_path, b_verbose=False):
 
-        self.get_lib_name_from_p_file_path(f2c_p_file_path)
+        if os.path.exists('.'.join([os.path.splitext(f2c_p_file_path)[0], 'c'])):
 
-        with open(f2c_p_file_path) as f:
-            lines = f.readlines()
-        # first line : c definitions
-        # second line and after : list of other functions called
+            self.get_lib_name_from_p_file_path(f2c_p_file_path)
 
-        caller_set = SetMdQuote()
-        callee_set = SetMdQuote()
+            with open(f2c_p_file_path) as f:
+                lines = f.readlines()
+            # first line : c definitions
+            # second line and after : list of other functions called
 
-        for line in lines:
-            line = line.strip()
+            caller_set = SetMdQuote()
+            callee_set = SetMdQuote()
 
-            if not line.startswith('/*'):
-                # functions defined
-                info = self.find_function_info(line)
-                if b_verbose:
-                    print(info)
-                caller_set.add(info['name'])
-            else:
-                # functions used inside
-                info = self.find_calling_function_info(line)
-                callee_set.add(info['name'])
+            for line in lines:
+                line = line.strip()
 
-            self.update_big_table(info)
+                if not line.startswith('/*'):
+                    # functions defined
+                    info = self.find_function_info(line)
+                    if b_verbose:
+                        print(info)
+                    caller_set.add(info['name'])
+                else:
+                    # functions used inside
+                    info = self.find_calling_function_info(line)
+                    callee_set.add(info['name'])
 
-        # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
-        for caller in caller_set:
-            calls_set = self.big_table[caller].get('calls', callee_set)
-            self.big_table[caller]['calls'] = calls_set.union(callee_set)
+                self.update_big_table(info)
 
-        for callee in callee_set:
-            called_set = self.big_table[callee].get('called in', caller_set)
-            self.big_table[callee]['called in'] = called_set.union(caller_set)
+            # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
+            for caller in caller_set:
+                calls_set = self.big_table[caller].get('calls', callee_set)
+                self.big_table[caller]['calls'] = calls_set.union(callee_set)
+
+            for callee in callee_set:
+                called_set = self.big_table[callee].get('called in', caller_set)
+                self.big_table[callee]['called in'] = called_set.union(caller_set)
 
     def get_lib_name_from_p_file_path(self, f2c_p_file_path):
         """
