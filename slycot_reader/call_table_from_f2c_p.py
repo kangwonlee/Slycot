@@ -431,6 +431,15 @@ def main():
     print('not defined :')
     print(checker.not_defined_set)
 
+    # list all the functions related to the slycot
+    print('related :')
+    related_table = Dict2MDTable(
+        reader.big_table,
+        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, {'name': 'calls'}],
+        checker.checked_set
+    )
+    print(related_table)
+
 
 def unique_list_ordered(function_selection_list):
     """
