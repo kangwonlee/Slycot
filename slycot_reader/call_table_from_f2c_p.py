@@ -81,8 +81,8 @@ class F2cpReader(object):
         # first line : c definitions
         # second line and after : list of other functions called
 
-        caller_set = set()
-        callee_set = set()
+        caller_set = SetMdQuote()
+        callee_set = SetMdQuote()
 
         for line in lines:
             line = line.strip()
@@ -215,8 +215,8 @@ class F2cpReader(object):
         return result
 
     def find_any_missing_function(self):
-        definition_missing_set = set(self.big_table.keys())
-        never_called_set = set(self.big_table.keys())
+        definition_missing_set = SetMdQuote(self.big_table.keys())
+        never_called_set = SetMdQuote(self.big_table.keys())
 
         # function loop
         for function_name, function_info in self.big_table.items():
@@ -282,7 +282,7 @@ class Dict2MDTable(object):
 
         # column selection
         if column_order_list is None:
-            one_sample = self.input_dict[set(self.input_dict.keys()).pop()]
+            one_sample = self.input_dict[SetMdQuote(self.input_dict.keys()).pop()]
             self.column_order_list = {'name': key for key in one_sample}
         elif isinstance(column_order_list, (list, tuple)):
             self.column_order_list = column_order_list
@@ -366,8 +366,8 @@ class RecursivelyCheckNotDefined(object):
         self.big_table_dict = big_table_dict
         self.not_defined_dict = not_defined_dict
         self.function_list = function_selection_list
-        self.not_defined_set = set()
-        self.checked_set = set()
+        self.not_defined_set = SetMdQuote()
+        self.checked_set = SetMdQuote()
 
     def check_list(self):
         for function_name in self.function_list:
@@ -453,6 +453,18 @@ def unique_list_ordered(function_selection_list):
         if function_name not in function_selection_unique:
             function_selection_unique.append(function_name)
     return function_selection_unique
+
+
+class SetMdQuote(set):
+    """
+    Replace small quote of set string with ` for github markdown
+    """
+
+    def __str__(self):
+        return super().__str__().replace("'", '`')
+
+    def union(self, *other):
+        return SetMdQuote(super().union(*other))
 
 
 if __name__ == '__main__':
