@@ -1,4 +1,5 @@
 import os
+import pprint
 import re
 
 default_path_dict = {
@@ -80,6 +81,9 @@ class F2cpReader(object):
         # first line : c definitions
         # second line and after : list of other functions called
 
+        caller_set = set()
+        callee_set = set()
+
         for line in lines:
             line = line.strip()
 
@@ -88,10 +92,22 @@ class F2cpReader(object):
                 info = self.find_function_info(line)
                 if b_verbose:
                     print(info)
+                caller_set.add(info['name'])
             else:
                 # functions used inside
                 info = self.find_calling_function_info(line)
+                callee_set.add(info['name'])
+
             self.update_big_table(info)
+
+        # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
+        for caller in caller_set:
+            calls_set = self.big_table[caller].get('calls', callee_set)
+            self.big_table[caller]['calls'] = calls_set.union(callee_set)
+
+        for callee in callee_set:
+            called_set = self.big_table[callee].get('called in', caller_set)
+            self.big_table[callee]['called in'] = called_set.union(caller_set)
 
     def get_lib_name_from_p_file_path(self, f2c_p_file_path):
         """
@@ -268,10 +284,10 @@ class Dict2MDTable(object):
         if column_order_list is None:
             one_sample = self.input_dict[set(self.input_dict.keys()).pop()]
             self.column_order_list = {'name': key for key in one_sample}
-        elif isinstance(column_order_list, dict):
+        elif isinstance(column_order_list, (list, tuple)):
             self.column_order_list = column_order_list
         else:
-            raise ValueError('expect column_order_list to be a dict')
+            raise ValueError('expect column_order_list to be a list or tuple')
 
     def first_row(self):
         space = '    '
@@ -295,26 +311,24 @@ class Dict2MDTable(object):
         return result
 
     def third_and_latter_row(self):
-        row_list = []
+        # run get_third_and_latter_row_text() across self.row_selection_list and join with '\n'
+        return '\n'.join(
+            [self.get_third_and_latter_row_text(function_name) for function_name in self.row_selection_list])
 
-        # row loop
-        for function_name in self.row_selection_list:
-            function_info_dict = self.input_dict[function_name]
-
-            column_list = self.get_column_list_third_and_latter_row(function_info_dict, function_name)
-
-            row_text = ' '.join(column_list)
-            # this completes one row
-
-            row_list.append(row_text)
-        # this completes all rows
-
-        result = '\n'.join(row_list)
-
-        return result
+    def get_third_and_latter_row_text(self, function_name):
+        """
+        Prepare third row text on the given function
+        
+        :param function_name: 
+        :return: 
+        """
+        function_info_dict = self.input_dict[function_name]
+        column_list = self.get_column_list_third_and_latter_row(function_info_dict, function_name)
+        row_text = ' '.join(column_list)
+        return row_text
 
     def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
-        column_list = ['|', str(function_name), '|']
+        column_list = ['|', '`%s`' % str(function_name), '|']
         # first column
         # loop for the following columns
         for column in self.column_order_list:
@@ -334,26 +348,6 @@ class Dict2MDTable(object):
         return result
 
 
-class Dict2Cython(Dict2MDTable):
-    def __init__(self, input_dict, row_selection_list):
-        super(Dict2Cython, self).__init__(input_dict, row_selection_list=row_selection_list)
-
-    def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
-        column_list = [
-            function_info_dict['return type'],
-            function_info_dict['name'],
-            '(',
-            ', '.join([' '.join(arg_type_name) for arg_type_name in function_info_dict['arg list']]),
-            ')'
-        ]
-        return column_list
-
-    def __str__(self):
-        result = self.third_and_latter_row()
-
-        return result
-
-
 def scan_f2c():
     reader = F2cpReader()
     for lib, lib_path in f2c_path_dict['f2c'].items():
@@ -367,21 +361,98 @@ def scan_f2c():
     return reader
 
 
+class RecursivelyCheckNotDefined(object):
+    def __init__(self, big_table_dict, not_defined_dict, function_selection_list):
+        self.big_table_dict = big_table_dict
+        self.not_defined_dict = not_defined_dict
+        self.function_list = function_selection_list
+        self.not_defined_set = set()
+        self.checked_set = set()
+
+    def check_list(self):
+        for function_name in self.function_list:
+            self.check_function(function_name)
+
+    def check_function(self, function_name):
+        if function_name in self.checked_set:
+            return
+
+        if function_name in self.not_defined_dict:
+            self.not_defined_set.add(function_name)
+
+        for callee_name in self.big_table_dict[function_name].get('calls', []):
+            self.check_function(callee_name)
+
+        self.checked_set.add(function_name)
+
+
 def main():
-    function_selection_list = ['sb03md_', 'sb04md_', 'sg03ad_', 'sb04qd_', 'sb02md_', 'sb02mt_', 'sg02ad_', 'ab09md_',
-                               'ab09md_', 'ab09nd_', 'sb10hd_', 'sb10hd_', 'sb10hd_', 'sb03od_', 'tb01pd_', 'td04ad_',
-                               'td04ad_', 'sb02od_', ]
+    function_selection_list = ['sb02md_', 'sb02mt_', 'sb03md_', 'tb04ad_', 'td04ad_', 'sg02ad_', 'sg03ad_', 'tb01pd_',
+                               'ab09ad_', 'ab09md_', 'ab09nd_', 'sb01bd_', 'sb02od_', 'sb03od_', 'sb04md_', 'sb04qd_',
+                               'sb10ad_', 'sb10hd_', 'lsame_']
 
-    # scan through f2c folders to build database
+    # scan through f2c folders
     reader = scan_f2c()
-
+    # argument_type_id vs argument_type lookup table
+    pprint.pprint(reader.arg_type_lookup)
     # size of the big table
     print('total functions: %d\n' % len(reader.big_table))
-    cython_writer = Dict2Cython(
+
+    big_table_printer = Dict2MDTable(
         reader.big_table,
-        function_selection_list
+        [{'name': 'return type'}, {'name': '# arg'}, {'name': 'arg list'}, {'name': 'lib'},
+         {'name': 'path', 'align': 'left'},
+         ],
+        function_selection_list,
     )
-    print(cython_writer)
+    print(big_table_printer)
+
+    # find functions not defined or not used
+    definition_missing, never_called = reader.find_any_missing_function()
+
+    # never called table
+    print('never used %d\n' % len(never_called))
+    never_called_table_converter = Dict2MDTable(
+        never_called,
+        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
+    )
+    print(never_called_table_converter)
+
+    # not defined table
+    print('not defined %d\n' % len(definition_missing))
+    not_defined_table_converter = Dict2MDTable(
+        definition_missing,
+        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, {'name': 'called in'}]
+    )
+    print(not_defined_table_converter)
+
+    checker = RecursivelyCheckNotDefined(reader.big_table, definition_missing, function_selection_list)
+    checker.check_list()
+    print('not defined :')
+    print(checker.not_defined_set)
+
+    # list all the functions related to the slycot
+    print('related :')
+    related_table = Dict2MDTable(
+        reader.big_table,
+        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, {'name': 'calls'}],
+        checker.checked_set
+    )
+    print(related_table)
+
+
+def unique_list_ordered(function_selection_list):
+    """
+    Generate a list of unique elements preserving the first appearance order
+
+    :param list function_selection_list: a list of possibly duplicated elements 
+    :return: a list of unique elements
+    """
+    function_selection_unique = []
+    for function_name in function_selection_list:
+        if function_name not in function_selection_unique:
+            function_selection_unique.append(function_name)
+    return function_selection_unique
 
 
 if __name__ == '__main__':
