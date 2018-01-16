@@ -81,8 +81,8 @@ class F2cpReader(object):
         # first line : c definitions
         # second line and after : list of other functions called
 
-        caller_set = set()
-        callee_set = set()
+        caller_set = SetMdQuote()
+        callee_set = SetMdQuote()
 
         for line in lines:
             line = line.strip()
@@ -215,8 +215,8 @@ class F2cpReader(object):
         return result
 
     def find_any_missing_function(self):
-        definition_missing_set = set(self.big_table.keys())
-        never_called_set = set(self.big_table.keys())
+        definition_missing_set = SetMdQuote(self.big_table.keys())
+        never_called_set = SetMdQuote(self.big_table.keys())
 
         # function loop
         for function_name, function_info in self.big_table.items():
@@ -282,7 +282,7 @@ class Dict2MDTable(object):
 
         # column selection
         if column_order_list is None:
-            one_sample = self.input_dict[set(self.input_dict.keys()).pop()]
+            one_sample = self.input_dict[SetMdQuote(self.input_dict.keys()).pop()]
             self.column_order_list = {'name': key for key in one_sample}
         elif isinstance(column_order_list, (list, tuple)):
             self.column_order_list = column_order_list
@@ -348,6 +348,31 @@ class Dict2MDTable(object):
         return result
 
 
+class Dict2MDTableSorted(Dict2MDTable):
+    def __init__(self, input_dict, column_order_list=None, row_selection_list=None, sort_order=None):
+        super().__init__(input_dict=input_dict,
+                         column_order_list=column_order_list,
+                         row_selection_list=row_selection_list)
+
+        if sort_order is None:
+            self.sort_order = {'name': 'lib', 'direction': 'descending'}
+        elif isinstance(sort_order, (dict,)):
+            self.sort_order = sort_order
+        else:
+            raise ValueError('expect sort_order to be a dict')
+
+    def third_and_latter_row(self):
+
+        # sort row_selection_list based on sort_order
+        list_to_sort = list(self.row_selection_list)
+        list_to_sort.sort(key=lambda key: self.input_dict[key][self.sort_order['name']],
+                          reverse=('descending' == self.sort_order['direction']))
+
+        # run get_third_and_latter_row_text() across self.row_selection_list and join with '\n'
+        return '\n'.join(
+            [self.get_third_and_latter_row_text(function_name) for function_name in list_to_sort])
+
+
 def scan_f2c():
     reader = F2cpReader()
     for lib, lib_path in f2c_path_dict['f2c'].items():
@@ -366,8 +391,8 @@ class RecursivelyCheckNotDefined(object):
         self.big_table_dict = big_table_dict
         self.not_defined_dict = not_defined_dict
         self.function_list = function_selection_list
-        self.not_defined_set = set()
-        self.checked_set = set()
+        self.not_defined_set = SetMdQuote()
+        self.checked_set = SetMdQuote()
 
     def check_list(self):
         for function_name in self.function_list:
@@ -433,7 +458,7 @@ def main():
 
     # list all the functions related to the slycot
     print('related :')
-    related_table = Dict2MDTable(
+    related_table = Dict2MDTableSorted(
         reader.big_table,
         [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, {'name': 'calls'}],
         checker.checked_set
@@ -453,6 +478,18 @@ def unique_list_ordered(function_selection_list):
         if function_name not in function_selection_unique:
             function_selection_unique.append(function_name)
     return function_selection_unique
+
+
+class SetMdQuote(set):
+    """
+    Replace small quote of set string with ` for github markdown
+    """
+
+    def __str__(self):
+        return super().__str__().replace("'", '`').replace('SetMdQuote', '').replace('(', '').replace(')', '')
+
+    def union(self, *other):
+        return SetMdQuote(super().union(*other))
 
 
 if __name__ == '__main__':
