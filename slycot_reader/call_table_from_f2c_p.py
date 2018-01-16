@@ -328,7 +328,7 @@ class Dict2MDTable(object):
         return row_text
 
     def get_column_list_third_and_latter_row(self, function_info_dict, function_name):
-        column_list = ['|', str(function_name), '|']
+        column_list = ['|', '`%s`' % str(function_name), '|']
         # first column
         # loop for the following columns
         for column in self.column_order_list:
