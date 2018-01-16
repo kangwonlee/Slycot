@@ -10,6 +10,7 @@ default_path_dict = {
     'lapack': {
         'src': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'SRC'),
         'f2c': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'src-f2c'),
+        'install-f2c': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'install-f2c'),
     },
     'blas': {
         'src': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'BLAS', 'SRC'),
@@ -25,6 +26,8 @@ f2c_path_dict = {
 for lib, path_dict in default_path_dict.items():
     f2c_path_dict['src'][lib] = path_dict['src']
     f2c_path_dict['f2c'][lib] = path_dict['f2c']
+
+f2c_path_dict['f2c']['lapack-install'] = default_path_dict['lapack']['install-f2c']
 
 
 class F2cpReader(object):
