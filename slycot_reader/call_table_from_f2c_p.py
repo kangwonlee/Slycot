@@ -352,6 +352,12 @@ class F2cpReaderDF(F2cpReader):
         df_def2.set_index('name')
         self.df_use = pd.concat([self.df_use, df_def2])
 
+    def find_any_missing_function(self):
+        definition_missing_df = self.df_use[~self.df_use['name'].isin(self.df_def['name'])]
+        never_used_df = self.df_def[~self.df_def['name'].isin(self.df_use['name'])]
+
+        return definition_missing_df, never_used_df
+
 
 class Dict2MDTable(object):
     """
@@ -562,18 +568,17 @@ def main():
     # find functions not defined or not used
     time_start = time.time()
     definition_missing, never_called = reader.find_any_missing_function()
-    print('\nfind_any_missing_function() time end = %f\n' % (time.time() - time_start))
+    print('\nreader.find_any_missing_function() time end = %f\n' % (time.time() - time_start))
+
+    time_start = time.time()
+    definition_missing_df, never_called_df = reader_df.find_any_missing_function()
+    print('\nreader_df.find_any_missing_function() time end = %f\n' % (time.time() - time_start))
 
     # never called table
-    print('never used %d\n' % len(never_called))
-    never_called_table_converter = Dict2MDTable(
-        never_called,
-        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, ]
-    )
-    print(never_called_table_converter)
+    print('never used %d %d\n' % (len(never_called), len(never_called_df.index)))
 
     # not defined table
-    print('not defined %d\n' % len(definition_missing))
+    print('not defined %d %d\n' % (len(definition_missing), len(definition_missing_df.index)))
     not_defined_table_converter = Dict2MDTable(
         definition_missing,
         [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, {'name': 'called in'}]
