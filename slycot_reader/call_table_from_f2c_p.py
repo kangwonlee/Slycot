@@ -282,10 +282,16 @@ class F2cpReaderDF(F2cpReader):
         self.df_use = pd.DataFrame(columns=('name', 'lib', 'return type', '# arg', 'path', 'arg types', 'called in'))
         self.df_use.set_index('name')
 
+        self.dict_def = {}
+        self.dict_use = {}
+
     def __del__(self):
         super(F2cpReaderDF, self).__del__()
         del self.df_def
         del self.df_use
+
+        del self.dict_def
+        del self.dict_use
 
     def parse_f2c_p(self, f2c_p_file_path, b_verbose=False):
 
@@ -314,6 +320,8 @@ class F2cpReaderDF(F2cpReader):
                         print(info)
                     caller_set.add(info['name'])
 
+                    self.dict_def.update({info['name']: info})
+
                     caller_list.append(info)
 
                 else:
@@ -321,18 +329,14 @@ class F2cpReaderDF(F2cpReader):
                     info = self.find_calling_function_info(line)
                     callee_set.add(info['name'])
 
+                    self.dict_use.update({info['name']: info})
+
                     callee_list.append(info)
 
             # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
-            for k, caller_dict in enumerate(caller_list):
-                if caller_dict['name'] in self.df_def:
-                    calls_set = self.df_def[caller_dict['name']]['calls']
-                else:
-                    calls_set = callee_set
-                caller_list[k]['calls'] = calls_set.union(callee_set)
-
-            df_caller = pd.DataFrame(caller_list)
-            self.df_def = pd.concat([self.df_def, df_caller], ignore_index=True)
+            for caller_name in caller_set:
+                calls_set = self.dict_def[caller_name].get('calls', callee_set)
+                self.dict_def[caller_name]['calls'] = calls_set.union(callee_set)
 
             for k, callee_dict in enumerate(callee_list):
                 if callee_dict['name'] in self.df_use:
@@ -343,6 +347,12 @@ class F2cpReaderDF(F2cpReader):
 
             df_callee = pd.DataFrame(callee_list)
             self.df_use = pd.concat([self.df_use, df_callee], ignore_index=True)
+
+    def scan_f2c(self):
+        super(F2cpReaderDF, self).scan_f2c()
+        df_def1 = pd.DataFrame(data=list(self.dict_def.values()))
+        df_def1.set_index('name')
+        self.df_def = pd.concat([self.df_def, df_def1])
 
 
 class Dict2MDTable(object):
