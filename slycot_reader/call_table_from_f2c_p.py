@@ -2,32 +2,35 @@ import os
 import pprint
 import re
 
-default_path_dict = {
-    'slycot': {
-        'src': os.path.join(os.pardir, 'slycot', 'src'),
-        'f2c': os.path.join(os.pardir, 'slycot', 'src-f2c'),
-    },
-    'lapack': {
-        'src': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'SRC'),
-        'f2c': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'src-f2c'),
-        'install-f2c': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'install-f2c'),
-    },
-    'blas': {
-        'src': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'BLAS', 'SRC'),
-        'f2c': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'BLAS', 'src-f2c'),
-    },
-}
+import pandas as pd
 
-f2c_path_dict = {
-    'src': {},
-    'f2c': {},
-}
+folders = pd.DataFrame(
+    {
+        'lib': ['slycot', 'slycot', 'lapack', 'lapack', 'lapack', 'blas', 'blas', ],
+        'subcategory': ['fortran', 'f2c', 'fortran', 'f2c', 'install-f2c', 'fortran', 'f2c', ],
+        'lang': ['fortran', 'c', 'fortran', 'c', 'c', 'fortran', 'c', ],
+        'path': [
+            os.path.join(os.pardir, 'slycot', 'src'),
+            os.path.join(os.pardir, 'slycot', 'src-f2c'),
+            os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'SRC'),
+            os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'src-f2c'),
+            os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'install-f2c'),
+            os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'BLAS', 'SRC'),
+            os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'BLAS', 'src-f2c'),
+        ],
+        'fork repository root': [
+            'https://github.com/autodrive/Slycot/tree/master/slycot/src',
+            'https://github.com/autodrive/Slycot/tree/develop/slycot/src-f2c',
+            'https://github.com/autodrive/lapack-release/tree/lapack-3.5.0/SRC',
+            'https://github.com/autodrive/lapack-release/tree/feature/f2c/3.5.0/src-f2c',
+            'https://github.com/autodrive/lapack-release/tree/feature/f2c/3.5.0/install-f2c',
+            'https://github.com/autodrive/lapack-release/tree/lapack-3.5.0/BLAS/SRC',
+            'https://github.com/autodrive/lapack-release/tree/feature/f2c/3.5.0/BLAS/src-f2c',
+        ],
+    }
+)
 
-for lib, path_dict in default_path_dict.items():
-    f2c_path_dict['src'][lib] = path_dict['src']
-    f2c_path_dict['f2c'][lib] = path_dict['f2c']
-
-f2c_path_dict['f2c']['lapack-install'] = default_path_dict['lapack']['install-f2c']
+print(folders)
 
 
 class F2cpReader(object):
@@ -378,7 +381,13 @@ class Dict2MDTableSorted(Dict2MDTable):
 
 def scan_f2c():
     reader = F2cpReader()
-    for lib, lib_path in f2c_path_dict['f2c'].items():
+    # library subcategory loop
+
+    df_c = folders['c' == folders.lang]
+
+    # https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
+    for index, row in df_c.iterrows():
+        lib, lib_path = row['lib'], row['path']
         reader.lib_name = lib
         for dir_name, dir_list, file_list in os.walk(lib_path):
             for file_name in file_list:
