@@ -464,7 +464,7 @@ def main():
     print('\n' + ('related : %d' % len(checker.checked_set)) + '\n')
     related_table = Dict2MDTableSorted(
         reader.big_table,
-        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, {'name': 'calls'}],
+        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'calls'}],
         checker.checked_set
     )
     print(related_table)
