@@ -211,9 +211,6 @@ class F2cpReaderDict(F2cpReader):
             caller_set = SetMdQuote()
             callee_set = SetMdQuote()
 
-            caller_list = []
-            callee_list = []
-
             for line in lines:
                 line = line.strip()
 
@@ -224,26 +221,21 @@ class F2cpReaderDict(F2cpReader):
                         print(info)
                     caller_set.add(info['name'])
 
-                    caller_list.append(info)
-
                 else:
                     # functions used inside
                     info = self.find_calling_function_info(line)
                     callee_set.add(info['name'])
 
-                    callee_list.append(info)
-
                 self.update_big_table(info)
 
             # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
-            for k, caller_dict in enumerate(caller_list):
-                calls_set = self.big_table[caller_dict['name']].get('calls', callee_set)
-                self.big_table[caller_dict['name']]['calls'] = caller_list[k]['calls'] = calls_set.union(callee_set)
+            for caller_name in caller_set:
+                calls_set = self.big_table[caller_name].get('calls', callee_set)
+                self.big_table[caller_name]['calls'] = calls_set.union(callee_set)
 
-            for k, callee_dict in enumerate(callee_list):
-                called_set = self.big_table[callee_dict['name']].get('called in', caller_set)
-                self.big_table[callee_dict['name']]['called in'] = callee_list[k]['called in'] = called_set.union(
-                    caller_set)
+            for callee_name in callee_set:
+                called_set = self.big_table[callee_name].get('called in', caller_set)
+                self.big_table[callee_name]['called in'] = called_set.union(caller_set)
 
     def update_big_table(self, info_dict):
         big_table_entry = self.big_table.get(info_dict['name'], {})
