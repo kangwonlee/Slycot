@@ -40,6 +40,8 @@ class F2cpReader(object):
         self.re_first_line = self.get_first_line_pattern()
         self.re_arg_type_name_split = self.get_arg_type_name_split()
         self.big_table = {}
+        self.df_def = pd.DataFrame(columns=('name', 'lib', 'return type', '# arg', 'path', 'arg list', 'calls',))
+        self.df_use = pd.DataFrame(columns=('name', 'lib', 'return type', '# arg', 'path', 'arg types', 'called in'))
         self.arg_type_lookup = {}
         self.p_file_name = ''
         self.lib_name = ''
@@ -51,6 +53,8 @@ class F2cpReader(object):
         del self.re_first_line
         del self.re_arg_type_name_split
         del self.big_table
+        del self.df_def
+        del self.df_use
         del self.arg_type_lookup
 
     @staticmethod
@@ -92,6 +96,9 @@ class F2cpReader(object):
             caller_set = SetMdQuote()
             callee_set = SetMdQuote()
 
+            caller_list = []
+            callee_list = []
+
             for line in lines:
                 line = line.strip()
 
@@ -101,12 +108,23 @@ class F2cpReader(object):
                     if b_verbose:
                         print(info)
                     caller_set.add(info['name'])
+
+                    caller_list.append(info)
+
                 else:
                     # functions used inside
                     info = self.find_calling_function_info(line)
                     callee_set.add(info['name'])
 
+                    callee_list.append(info)
+
                 self.update_big_table(info)
+
+            df_caller = pd.DataFrame(caller_list)
+            self.df_def = pd.concat([self.df_def, df_caller], ignore_index=True)
+
+            df_callee = pd.DataFrame(callee_list)
+            self.df_use = pd.concat([self.df_use, df_callee], ignore_index=True)
 
             # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
             for caller in caller_set:
@@ -436,14 +454,8 @@ def main():
     # size of the big table
     print('total functions: %d\n' % len(reader.big_table))
 
-    big_table_printer = Dict2MDTable(
-        reader.big_table,
-        [{'name': 'return type'}, {'name': '# arg'}, {'name': 'arg list'}, {'name': 'lib'},
-         {'name': 'path', 'align': 'left'},
-         ],
-        function_selection_list,
-    )
-    print(big_table_printer)
+    # https://stackoverflow.com/questions/17071871/select-rows-from-a-dataframe-based-on-values-in-a-column-in-pandas
+    print(reader.df_def[reader.df_def['name'].isin(function_selection_list)])
 
     # find functions not defined or not used
     definition_missing, never_called = reader.find_any_missing_function()
