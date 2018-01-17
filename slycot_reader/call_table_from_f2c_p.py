@@ -120,9 +120,6 @@ class F2cpReader(object):
 
                 self.update_big_table(info)
 
-            df_callee = pd.DataFrame(callee_list)
-            self.df_use = pd.concat([self.df_use, df_callee], ignore_index=True)
-
             # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
             for k, caller_dict in enumerate(caller_list):
                 calls_set = self.big_table[caller_dict['name']].get('calls', callee_set)
@@ -131,9 +128,13 @@ class F2cpReader(object):
             df_caller = pd.DataFrame(caller_list)
             self.df_def = pd.concat([self.df_def, df_caller], ignore_index=True)
 
-            for callee in callee_set:
-                called_set = self.big_table[callee].get('called in', caller_set)
-                self.big_table[callee]['called in'] = called_set.union(caller_set)
+            for k, callee_dict in enumerate(callee_list):
+                called_set = self.big_table[callee_dict['name']].get('called in', caller_set)
+                self.big_table[callee_dict['name']]['called in'] = callee_list[k]['called in'] = called_set.union(
+                    caller_set)
+
+            df_callee = pd.DataFrame(callee_list)
+            self.df_use = pd.concat([self.df_use, df_callee], ignore_index=True)
 
     def get_lib_name_from_p_file_path(self, f2c_p_file_path):
         """
