@@ -40,7 +40,6 @@ class F2cpReader(object):
         self.re_latter_line = self.get_latter_lines_pattern()
         self.re_first_line = self.get_first_line_pattern()
         self.re_arg_type_name_split = self.get_arg_type_name_split()
-        self.big_table = {}
         self.arg_type_lookup = {}
         self.p_file_name = ''
         self.lib_name = ''
@@ -51,7 +50,6 @@ class F2cpReader(object):
         del self.re_latter_line
         del self.re_first_line
         del self.re_arg_type_name_split
-        del self.big_table
         del self.arg_type_lookup
 
     @staticmethod
@@ -79,54 +77,6 @@ class F2cpReader(object):
         # 'char a' -> ('char', 'a')
         return re.compile(r'(?P<type>(\(.+\s+\*\))|(.+\s+\*)|(\w+))\s?(?P<name>.+)')
 
-    def parse_f2c_p(self, f2c_p_file_path, b_verbose=False):
-
-        if os.path.exists('.'.join([os.path.splitext(f2c_p_file_path)[0], 'c'])):
-
-            self.get_lib_name_from_p_file_path(f2c_p_file_path)
-
-            with open(f2c_p_file_path) as f:
-                lines = f.readlines()
-            # first line : c definitions
-            # second line and after : list of other functions called
-
-            caller_set = SetMdQuote()
-            callee_set = SetMdQuote()
-
-            caller_list = []
-            callee_list = []
-
-            for line in lines:
-                line = line.strip()
-
-                if not line.startswith('/*'):
-                    # functions defined
-                    info = self.find_function_info(line)
-                    if b_verbose:
-                        print(info)
-                    caller_set.add(info['name'])
-
-                    caller_list.append(info)
-
-                else:
-                    # functions used inside
-                    info = self.find_calling_function_info(line)
-                    callee_set.add(info['name'])
-
-                    callee_list.append(info)
-
-                self.update_big_table(info)
-
-            # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
-            for k, caller_dict in enumerate(caller_list):
-                calls_set = self.big_table[caller_dict['name']].get('calls', callee_set)
-                self.big_table[caller_dict['name']]['calls'] = caller_list[k]['calls'] = calls_set.union(callee_set)
-
-            for k, callee_dict in enumerate(callee_list):
-                called_set = self.big_table[callee_dict['name']].get('called in', caller_set)
-                self.big_table[callee_dict['name']]['called in'] = callee_list[k]['called in'] = called_set.union(
-                    caller_set)
-
     def get_lib_name_from_p_file_path(self, f2c_p_file_path):
         """
 
@@ -148,17 +98,6 @@ class F2cpReader(object):
             self.lib_name = 'slycot'
         else:
             raise ValueError('library unknown')
-
-    def update_big_table(self, info_dict):
-        big_table_entry = self.big_table.get(info_dict['name'], {})
-
-        # if already know return type in a string, do not update
-        if not (('return type' in big_table_entry) and (isinstance(big_table_entry['return type'], str))):
-            big_table_entry.update(info_dict)
-            self.big_table[info_dict['name']] = big_table_entry
-        # end if already know return type in a string, do not update
-
-        self.update_arg_type_lookup(big_table_entry)
 
     def update_arg_type_lookup(self, big_table_entry):
         if ('arg types' in big_table_entry) and ('arg list' in big_table_entry):
@@ -230,6 +169,93 @@ class F2cpReader(object):
 
         return result
 
+    def parse_f2c_p(self, f2c_p_file_path, b_verbose=False):
+        raise NotImplementedError
+
+    def scan_f2c(self):
+        # library subcategory loop
+        df_c = folders['c' == folders.lang]
+
+        # https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
+        for index, row in df_c.iterrows():
+            lib, lib_path = row['lib'], row['path']
+            self.lib_name = lib
+            for dir_name, dir_list, file_list in os.walk(lib_path):
+                for file_name in file_list:
+                    if '.P' == os.path.splitext(file_name)[-1]:
+                        self.p_file_path = dir_name
+                        self.p_file_name = file_name
+                        self.parse_f2c_p(os.path.join(dir_name, file_name))
+
+
+class F2cpReaderDict(F2cpReader):
+    def __init__(self):
+        super(F2cpReaderDict, self).__init__()
+        self.big_table = {}
+
+    def __del__(self):
+        super(F2cpReaderDict, self).__del__()
+        del self.big_table
+
+    def parse_f2c_p(self, f2c_p_file_path, b_verbose=False):
+
+        if os.path.exists('.'.join([os.path.splitext(f2c_p_file_path)[0], 'c'])):
+
+            self.get_lib_name_from_p_file_path(f2c_p_file_path)
+
+            with open(f2c_p_file_path) as f:
+                lines = f.readlines()
+            # first line : c definitions
+            # second line and after : list of other functions called
+
+            caller_set = SetMdQuote()
+            callee_set = SetMdQuote()
+
+            caller_list = []
+            callee_list = []
+
+            for line in lines:
+                line = line.strip()
+
+                if not line.startswith('/*'):
+                    # functions defined
+                    info = self.find_function_info(line)
+                    if b_verbose:
+                        print(info)
+                    caller_set.add(info['name'])
+
+                    caller_list.append(info)
+
+                else:
+                    # functions used inside
+                    info = self.find_calling_function_info(line)
+                    callee_set.add(info['name'])
+
+                    callee_list.append(info)
+
+                self.update_big_table(info)
+
+            # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
+            for k, caller_dict in enumerate(caller_list):
+                calls_set = self.big_table[caller_dict['name']].get('calls', callee_set)
+                self.big_table[caller_dict['name']]['calls'] = caller_list[k]['calls'] = calls_set.union(callee_set)
+
+            for k, callee_dict in enumerate(callee_list):
+                called_set = self.big_table[callee_dict['name']].get('called in', caller_set)
+                self.big_table[callee_dict['name']]['called in'] = callee_list[k]['called in'] = called_set.union(
+                    caller_set)
+
+    def update_big_table(self, info_dict):
+        big_table_entry = self.big_table.get(info_dict['name'], {})
+
+        # if already know return type in a string, do not update
+        if not (('return type' in big_table_entry) and (isinstance(big_table_entry['return type'], str))):
+            big_table_entry.update(info_dict)
+            self.big_table[info_dict['name']] = big_table_entry
+        # end if already know return type in a string, do not update
+
+        self.update_arg_type_lookup(big_table_entry)
+
     def find_any_missing_function(self):
         definition_missing_set = SetMdQuote(self.big_table.keys())
         never_called_set = SetMdQuote(self.big_table.keys())
@@ -254,21 +280,6 @@ class F2cpReader(object):
             never_called_dict[function_name].pop('arg types', None)
 
         return definition_missing_dict, never_called_dict
-
-    def scan_f2c(self):
-        # library subcategory loop
-        df_c = folders['c' == folders.lang]
-
-        # https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
-        for index, row in df_c.iterrows():
-            lib, lib_path = row['lib'], row['path']
-            self.lib_name = lib
-            for dir_name, dir_list, file_list in os.walk(lib_path):
-                for file_name in file_list:
-                    if '.P' == os.path.splitext(file_name)[-1]:
-                        self.p_file_path = dir_name
-                        self.p_file_name = file_name
-                        self.parse_f2c_p(os.path.join(dir_name, file_name))
 
 
 class F2cpReaderDF(F2cpReader):
@@ -476,7 +487,7 @@ class Dict2MDTableSorted(Dict2MDTable):
 
 
 def scan_f2c():
-    reader = F2cpReader()
+    reader = F2cpReaderDict()
     # library subcategory loop
 
     df_c = folders['c' == folders.lang]
@@ -527,7 +538,7 @@ def main():
 
     time_start = time.time()
     # scan through f2c folders
-    reader = F2cpReader()
+    reader = F2cpReaderDict()
     reader.scan_f2c()
     print('\nreader.scan_f2c() time end = %f\n' % (time.time() - time_start))
 
