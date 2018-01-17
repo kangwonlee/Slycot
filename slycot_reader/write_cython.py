@@ -1,4 +1,4 @@
-from slycot_reader.call_table_from_f2c_p import Dict2MDTable, scan_f2c
+from slycot_reader.call_table_from_f2c_p import Dict2MDTable, F2cpReaderDict
 
 
 class Dict2Cython(Dict2MDTable):
@@ -126,7 +126,8 @@ def main():
                                'sb03od_', 'tb01pd_', 'td04ad_', 'sb02od_', ]
 
     # scan through f2c folders to build database
-    reader = scan_f2c()
+    reader = F2cpReaderDict()
+    reader.scan_f2c()
 
     # size of the big table
     print('total functions: %d\n' % len(reader.big_table))
