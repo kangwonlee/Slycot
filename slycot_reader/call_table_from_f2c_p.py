@@ -120,16 +120,16 @@ class F2cpReader(object):
 
                 self.update_big_table(info)
 
-            df_caller = pd.DataFrame(caller_list)
-            self.df_def = pd.concat([self.df_def, df_caller], ignore_index=True)
-
             df_callee = pd.DataFrame(callee_list)
             self.df_use = pd.concat([self.df_use, df_callee], ignore_index=True)
 
             # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
-            for caller in caller_set:
-                calls_set = self.big_table[caller].get('calls', callee_set)
-                self.big_table[caller]['calls'] = calls_set.union(callee_set)
+            for k, caller_dict in enumerate(caller_list):
+                calls_set = self.big_table[caller_dict['name']].get('calls', callee_set)
+                self.big_table[caller_dict['name']]['calls'] = caller_list[k]['calls'] = calls_set.union(callee_set)
+
+            df_caller = pd.DataFrame(caller_list)
+            self.df_def = pd.concat([self.df_def, df_caller], ignore_index=True)
 
             for callee in callee_set:
                 called_set = self.big_table[callee].get('called in', caller_set)
