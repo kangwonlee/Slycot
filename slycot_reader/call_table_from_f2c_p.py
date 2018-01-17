@@ -41,8 +41,6 @@ class F2cpReader(object):
         self.re_first_line = self.get_first_line_pattern()
         self.re_arg_type_name_split = self.get_arg_type_name_split()
         self.big_table = {}
-        self.df_def = pd.DataFrame(columns=('name', 'lib', 'return type', '# arg', 'path', 'arg list', 'calls',))
-        self.df_use = pd.DataFrame(columns=('name', 'lib', 'return type', '# arg', 'path', 'arg types', 'called in'))
         self.arg_type_lookup = {}
         self.p_file_name = ''
         self.lib_name = ''
@@ -54,8 +52,6 @@ class F2cpReader(object):
         del self.re_first_line
         del self.re_arg_type_name_split
         del self.big_table
-        del self.df_def
-        del self.df_use
         del self.arg_type_lookup
 
     @staticmethod
@@ -126,16 +122,10 @@ class F2cpReader(object):
                 calls_set = self.big_table[caller_dict['name']].get('calls', callee_set)
                 self.big_table[caller_dict['name']]['calls'] = caller_list[k]['calls'] = calls_set.union(callee_set)
 
-            df_caller = pd.DataFrame(caller_list)
-            self.df_def = pd.concat([self.df_def, df_caller], ignore_index=True)
-
             for k, callee_dict in enumerate(callee_list):
                 called_set = self.big_table[callee_dict['name']].get('called in', caller_set)
                 self.big_table[callee_dict['name']]['called in'] = callee_list[k]['called in'] = called_set.union(
                     caller_set)
-
-            df_callee = pd.DataFrame(callee_list)
-            self.df_use = pd.concat([self.df_use, df_callee], ignore_index=True)
 
     def get_lib_name_from_p_file_path(self, f2c_p_file_path):
         """
@@ -264,6 +254,87 @@ class F2cpReader(object):
             never_called_dict[function_name].pop('arg types', None)
 
         return definition_missing_dict, never_called_dict
+
+    def scan_f2c(self):
+        # library subcategory loop
+        df_c = folders['c' == folders.lang]
+
+        # https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
+        for index, row in df_c.iterrows():
+            lib, lib_path = row['lib'], row['path']
+            self.lib_name = lib
+            for dir_name, dir_list, file_list in os.walk(lib_path):
+                for file_name in file_list:
+                    if '.P' == os.path.splitext(file_name)[-1]:
+                        self.p_file_path = dir_name
+                        self.p_file_name = file_name
+                        self.parse_f2c_p(os.path.join(dir_name, file_name))
+
+
+class F2cpReaderDF(F2cpReader):
+    def __init__(self):
+        super(F2cpReaderDF, self).__init__()
+        self.df_def = pd.DataFrame(columns=('name', 'lib', 'return type', '# arg', 'path', 'arg list', 'calls',))
+        self.df_use = pd.DataFrame(columns=('name', 'lib', 'return type', '# arg', 'path', 'arg types', 'called in'))
+
+    def __del__(self):
+        super(F2cpReaderDF, self).__del__()
+        del self.df_def
+        del self.df_use
+
+    def parse_f2c_p(self, f2c_p_file_path, b_verbose=False):
+
+        if os.path.exists('.'.join([os.path.splitext(f2c_p_file_path)[0], 'c'])):
+
+            self.get_lib_name_from_p_file_path(f2c_p_file_path)
+
+            with open(f2c_p_file_path) as f:
+                lines = f.readlines()
+            # first line : c definitions
+            # second line and after : list of other functions called
+
+            caller_set = SetMdQuote()
+            callee_set = SetMdQuote()
+
+            caller_list = []
+            callee_list = []
+
+            for line in lines:
+                line = line.strip()
+
+                if not line.startswith('/*'):
+                    # functions defined
+                    info = self.find_function_info(line)
+                    if b_verbose:
+                        print(info)
+                    caller_set.add(info['name'])
+
+                    caller_list.append(info)
+
+                else:
+                    # functions used inside
+                    info = self.find_calling_function_info(line)
+                    callee_set.add(info['name'])
+
+                    callee_list.append(info)
+
+                self.update_big_table(info)
+
+            # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
+            for k, caller_dict in enumerate(caller_list):
+                calls_set = self.big_table[caller_dict['name']].get('calls', callee_set)
+                self.big_table[caller_dict['name']]['calls'] = caller_list[k]['calls'] = calls_set.union(callee_set)
+
+            df_caller = pd.DataFrame(caller_list)
+            self.df_def = pd.concat([self.df_def, df_caller], ignore_index=True)
+
+            for k, callee_dict in enumerate(callee_list):
+                called_set = self.big_table[callee_dict['name']].get('called in', caller_set)
+                self.big_table[callee_dict['name']]['called in'] = callee_list[k]['called in'] = called_set.union(
+                    caller_set)
+
+            df_callee = pd.DataFrame(callee_list)
+            self.df_use = pd.concat([self.df_use, df_callee], ignore_index=True)
 
 
 class Dict2MDTable(object):
@@ -451,8 +522,15 @@ def main():
 
     time_start = time.time()
     # scan through f2c folders
-    reader = scan_f2c()
-    print('\nscan_f2c() time end = %f\n' % (time.time() - time_start))
+    reader = F2cpReader()
+    reader.scan_f2c()
+    print('\nreader.scan_f2c() time end = %f\n' % (time.time() - time_start))
+
+    time_start = time.time()
+    # scan through f2c folders
+    reader_df = F2cpReaderDF()
+    reader_df.scan_f2c()
+    print('\nreader_df.scan_f2c() time end = %f\n' % (time.time() - time_start))
 
     # argument_type_id vs argument_type lookup table
     pprint.pprint(reader.arg_type_lookup)
@@ -461,9 +539,9 @@ def main():
 
     # https://stackoverflow.com/questions/17071871/select-rows-from-a-dataframe-based-on-values-in-a-column-in-pandas
     print('\nfunction selection definition '.ljust(60, '*'))
-    print(reader.df_def[reader.df_def['name'].isin(function_selection_list)])
+    print(reader_df.df_def[reader_df.df_def['name'].isin(function_selection_list)])
     print('\nfunction selection usage '.ljust(60, '*'))
-    print(reader.df_use[reader.df_use['name'].isin(function_selection_list)])
+    print(reader_df.df_use[reader_df.df_use['name'].isin(function_selection_list)])
 
     # find functions not defined or not used
     time_start = time.time()
