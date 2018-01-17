@@ -338,21 +338,19 @@ class F2cpReaderDF(F2cpReader):
                 calls_set = self.dict_def[caller_name].get('calls', callee_set)
                 self.dict_def[caller_name]['calls'] = calls_set.union(callee_set)
 
-            for k, callee_dict in enumerate(callee_list):
-                if callee_dict['name'] in self.df_use:
-                    called_set = self.df_use[callee_dict['name']]['called in']
-                else:
-                    called_set = caller_set
-                callee_list[k]['called in'] = called_set.union(caller_set)
-
-            df_callee = pd.DataFrame(callee_list)
-            self.df_use = pd.concat([self.df_use, df_callee], ignore_index=True)
+            for callee_name in callee_set:
+                called_set = self.dict_use[callee_name].get('called in', caller_set)
+                self.dict_use[callee_name]['called in'] = called_set.union(caller_set)
 
     def scan_f2c(self):
         super(F2cpReaderDF, self).scan_f2c()
         df_def1 = pd.DataFrame(data=list(self.dict_def.values()))
         df_def1.set_index('name')
         self.df_def = pd.concat([self.df_def, df_def1])
+
+        df_def2 = pd.DataFrame(data=list(self.dict_use.values()))
+        df_def2.set_index('name')
+        self.df_use = pd.concat([self.df_use, df_def2])
 
 
 class Dict2MDTable(object):
