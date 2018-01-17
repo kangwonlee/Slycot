@@ -275,7 +275,9 @@ class F2cpReaderDF(F2cpReader):
     def __init__(self):
         super(F2cpReaderDF, self).__init__()
         self.df_def = pd.DataFrame(columns=('name', 'lib', 'return type', '# arg', 'path', 'arg list', 'calls',))
+        self.df_def.set_index('name')
         self.df_use = pd.DataFrame(columns=('name', 'lib', 'return type', '# arg', 'path', 'arg types', 'called in'))
+        self.df_use.set_index('name')
 
     def __del__(self):
         super(F2cpReaderDF, self).__del__()
@@ -318,20 +320,23 @@ class F2cpReaderDF(F2cpReader):
 
                     callee_list.append(info)
 
-                self.update_big_table(info)
-
             # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
             for k, caller_dict in enumerate(caller_list):
-                calls_set = self.big_table[caller_dict['name']].get('calls', callee_set)
-                self.big_table[caller_dict['name']]['calls'] = caller_list[k]['calls'] = calls_set.union(callee_set)
+                if caller_dict['name'] in self.df_def:
+                    calls_set = self.df_def[caller_dict['name']]['calls']
+                else:
+                    calls_set = callee_set
+                caller_list[k]['calls'] = calls_set.union(callee_set)
 
             df_caller = pd.DataFrame(caller_list)
             self.df_def = pd.concat([self.df_def, df_caller], ignore_index=True)
 
             for k, callee_dict in enumerate(callee_list):
-                called_set = self.big_table[callee_dict['name']].get('called in', caller_set)
-                self.big_table[callee_dict['name']]['called in'] = callee_list[k]['called in'] = called_set.union(
-                    caller_set)
+                if callee_dict['name'] in self.df_use:
+                    called_set = self.df_use[callee_dict['name']]['called in']
+                else:
+                    called_set = caller_set
+                callee_list[k]['called in'] = called_set.union(caller_set)
 
             df_callee = pd.DataFrame(callee_list)
             self.df_use = pd.concat([self.df_use, df_callee], ignore_index=True)
