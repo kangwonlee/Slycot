@@ -456,7 +456,10 @@ def main():
     print('total functions: %d\n' % len(reader.big_table))
 
     # https://stackoverflow.com/questions/17071871/select-rows-from-a-dataframe-based-on-values-in-a-column-in-pandas
+    print('\nfunction selection definition '.ljust(60, '*'))
     print(reader.df_def[reader.df_def['name'].isin(function_selection_list)])
+    print('\nfunction selection usage '.ljust(60, '*'))
+    print(reader.df_use[reader.df_use['name'].isin(function_selection_list)])
 
     # find functions not defined or not used
     definition_missing, never_called = reader.find_any_missing_function()
