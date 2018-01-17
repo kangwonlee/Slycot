@@ -127,7 +127,9 @@ class F2cpReader(object):
         # and blas is a a subfolder of lapack
         if 'blas' in path_lower:
             self.lib_name = 'blas'
-        elif 'lapack' in path_lower:
+        elif 'install-f2c' in path_lower:
+            self.lib_name = 'lapack install'
+        elif ('lapack' in path_lower) and ('src-f2c' in path_lower):
             self.lib_name = 'lapack'
         elif 'slycot' in path_lower:
             self.lib_name = 'slycot'
@@ -135,17 +137,13 @@ class F2cpReader(object):
             raise ValueError('library unknown')
 
     def update_big_table(self, info_dict):
-        # begin update big table using the info_dict
         big_table_entry = self.big_table.get(info_dict['name'], {})
 
         # if already know return type in a string, do not update
-        if ('return type' in big_table_entry) and (isinstance(big_table_entry['return type'], str)):
-            info_dict.pop('return type', None)
+        if not (('return type' in big_table_entry) and (isinstance(big_table_entry['return type'], str))):
+            big_table_entry.update(info_dict)
+            self.big_table[info_dict['name']] = big_table_entry
         # end if already know return type in a string, do not update
-
-        big_table_entry.update(info_dict)
-        self.big_table[info_dict['name']] = big_table_entry
-        # end update big table using the first line info
 
         self.update_arg_type_lookup(big_table_entry)
 
@@ -417,9 +415,10 @@ class RecursivelyCheckNotDefined(object):
 
 
 def main():
-    function_selection_list = ['sb02md_', 'sb02mt_', 'sb03md_', 'tb04ad_', 'td04ad_', 'sg02ad_', 'sg03ad_', 'tb01pd_',
-                               'ab09ad_', 'ab09md_', 'ab09nd_', 'sb01bd_', 'sb02od_', 'sb03od_', 'sb04md_', 'sb04qd_',
-                               'sb10ad_', 'sb10hd_', 'lsame_']
+    function_selection_list = ['sb02md_', 'sb02mt_', 'sb03md_', 'tb04ad_', 'td04ad_',
+                               'sg02ad_', 'sg03ad_', 'tb01pd_', 'ab09ad_', 'ab09md_',
+                               'ab09nd_', 'sb01bd_', 'sb02od_', 'sb03od_', 'sb04md_',
+                               'sb04qd_', 'sb10ad_', 'sb10hd_', ]
 
     # scan through f2c folders
     reader = scan_f2c()
