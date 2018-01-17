@@ -1,6 +1,7 @@
 import os
 import pprint
 import re
+import time
 
 import pandas as pd
 
@@ -448,8 +449,11 @@ def main():
                                'ab09nd_', 'sb01bd_', 'sb02od_', 'sb03od_', 'sb04md_',
                                'sb04qd_', 'sb10ad_', 'sb10hd_', ]
 
+    time_start = time.time()
     # scan through f2c folders
     reader = scan_f2c()
+    print('\nscan_f2c() time end = %f\n' % (time.time() - time_start))
+
     # argument_type_id vs argument_type lookup table
     pprint.pprint(reader.arg_type_lookup)
     # size of the big table
@@ -462,7 +466,9 @@ def main():
     print(reader.df_use[reader.df_use['name'].isin(function_selection_list)])
 
     # find functions not defined or not used
+    time_start = time.time()
     definition_missing, never_called = reader.find_any_missing_function()
+    print('\nfind_any_missing_function() time end = %f\n' % (time.time() - time_start))
 
     # never called table
     print('never used %d\n' % len(never_called))
@@ -480,8 +486,10 @@ def main():
     )
     print(not_defined_table_converter)
 
+    time_start = time.time()
     checker = RecursivelyCheckNotDefined(reader.big_table, definition_missing, function_selection_list)
     checker.check_list()
+    print('\ncheck_list() time end = %f\n' % (time.time() - time_start))
     print('not defined :')
     print(checker.not_defined_set)
 
