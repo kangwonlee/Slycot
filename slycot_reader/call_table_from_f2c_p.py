@@ -10,6 +10,7 @@ default_path_dict = {
     'lapack': {
         'src': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'SRC'),
         'f2c': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'src-f2c'),
+        'install-f2c': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'install-f2c'),
     },
     'blas': {
         'src': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'BLAS', 'SRC'),
@@ -25,6 +26,8 @@ f2c_path_dict = {
 for lib, path_dict in default_path_dict.items():
     f2c_path_dict['src'][lib] = path_dict['src']
     f2c_path_dict['f2c'][lib] = path_dict['f2c']
+
+f2c_path_dict['f2c']['lapack-install'] = default_path_dict['lapack']['install-f2c']
 
 
 class F2cpReader(object):
@@ -74,40 +77,42 @@ class F2cpReader(object):
 
     def parse_f2c_p(self, f2c_p_file_path, b_verbose=False):
 
-        self.get_lib_name_from_p_file_path(f2c_p_file_path)
+        if os.path.exists('.'.join([os.path.splitext(f2c_p_file_path)[0], 'c'])):
 
-        with open(f2c_p_file_path) as f:
-            lines = f.readlines()
-        # first line : c definitions
-        # second line and after : list of other functions called
+            self.get_lib_name_from_p_file_path(f2c_p_file_path)
 
-        caller_set = SetMdQuote()
-        callee_set = SetMdQuote()
+            with open(f2c_p_file_path) as f:
+                lines = f.readlines()
+            # first line : c definitions
+            # second line and after : list of other functions called
 
-        for line in lines:
-            line = line.strip()
+            caller_set = SetMdQuote()
+            callee_set = SetMdQuote()
 
-            if not line.startswith('/*'):
-                # functions defined
-                info = self.find_function_info(line)
-                if b_verbose:
-                    print(info)
-                caller_set.add(info['name'])
-            else:
-                # functions used inside
-                info = self.find_calling_function_info(line)
-                callee_set.add(info['name'])
+            for line in lines:
+                line = line.strip()
 
-            self.update_big_table(info)
+                if not line.startswith('/*'):
+                    # functions defined
+                    info = self.find_function_info(line)
+                    if b_verbose:
+                        print(info)
+                    caller_set.add(info['name'])
+                else:
+                    # functions used inside
+                    info = self.find_calling_function_info(line)
+                    callee_set.add(info['name'])
 
-        # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
-        for caller in caller_set:
-            calls_set = self.big_table[caller].get('calls', callee_set)
-            self.big_table[caller]['calls'] = calls_set.union(callee_set)
+                self.update_big_table(info)
 
-        for callee in callee_set:
-            called_set = self.big_table[callee].get('called in', caller_set)
-            self.big_table[callee]['called in'] = called_set.union(caller_set)
+            # TODO: if more than one caller functions in one .P file, which function is calling which function(s)?
+            for caller in caller_set:
+                calls_set = self.big_table[caller].get('calls', callee_set)
+                self.big_table[caller]['calls'] = calls_set.union(callee_set)
+
+            for callee in callee_set:
+                called_set = self.big_table[callee].get('called in', caller_set)
+                self.big_table[callee]['called in'] = called_set.union(caller_set)
 
     def get_lib_name_from_p_file_path(self, f2c_p_file_path):
         """
@@ -122,7 +127,9 @@ class F2cpReader(object):
         # and blas is a a subfolder of lapack
         if 'blas' in path_lower:
             self.lib_name = 'blas'
-        elif 'lapack' in path_lower:
+        elif 'install-f2c' in path_lower:
+            self.lib_name = 'lapack install'
+        elif ('lapack' in path_lower) and ('src-f2c' in path_lower):
             self.lib_name = 'lapack'
         elif 'slycot' in path_lower:
             self.lib_name = 'slycot'
@@ -130,17 +137,13 @@ class F2cpReader(object):
             raise ValueError('library unknown')
 
     def update_big_table(self, info_dict):
-        # begin update big table using the info_dict
         big_table_entry = self.big_table.get(info_dict['name'], {})
 
         # if already know return type in a string, do not update
-        if ('return type' in big_table_entry) and (isinstance(big_table_entry['return type'], str)):
-            info_dict.pop('return type', None)
+        if not (('return type' in big_table_entry) and (isinstance(big_table_entry['return type'], str))):
+            big_table_entry.update(info_dict)
+            self.big_table[info_dict['name']] = big_table_entry
         # end if already know return type in a string, do not update
-
-        big_table_entry.update(info_dict)
-        self.big_table[info_dict['name']] = big_table_entry
-        # end update big table using the first line info
 
         self.update_arg_type_lookup(big_table_entry)
 
@@ -412,9 +415,10 @@ class RecursivelyCheckNotDefined(object):
 
 
 def main():
-    function_selection_list = ['sb02md_', 'sb02mt_', 'sb03md_', 'tb04ad_', 'td04ad_', 'sg02ad_', 'sg03ad_', 'tb01pd_',
-                               'ab09ad_', 'ab09md_', 'ab09nd_', 'sb01bd_', 'sb02od_', 'sb03od_', 'sb04md_', 'sb04qd_',
-                               'sb10ad_', 'sb10hd_', 'lsame_']
+    function_selection_list = ['sb02md_', 'sb02mt_', 'sb03md_', 'tb04ad_', 'td04ad_',
+                               'sg02ad_', 'sg03ad_', 'tb01pd_', 'ab09ad_', 'ab09md_',
+                               'ab09nd_', 'sb01bd_', 'sb02od_', 'sb03od_', 'sb04md_',
+                               'sb04qd_', 'sb10ad_', 'sb10hd_', ]
 
     # scan through f2c folders
     reader = scan_f2c()
@@ -457,10 +461,10 @@ def main():
     print(checker.not_defined_set)
 
     # list all the functions related to the slycot
-    print('related :')
+    print('\n' + ('related : %d' % len(checker.checked_set)) + '\n')
     related_table = Dict2MDTableSorted(
         reader.big_table,
-        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'path'}, {'name': 'calls'}],
+        [{'name': 'lib'}, {'name': '# arg'}, {'name': 'return type'}, {'name': 'calls'}],
         checker.checked_set
     )
     print(related_table)
