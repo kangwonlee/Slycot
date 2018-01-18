@@ -268,6 +268,20 @@ class PyfReader(object):
 
         return new_lines
 
+    def get_includes_in_wrapper(self, input_list=None):
+        if input_list is None:
+            input_list = self.read_wrapper()
+        lines_no_comment = self.remove_comments(input_list)
+
+        includes_list = []
+
+        for line in lines_no_comment:
+            line_split = line.split()
+            if 'include' in line_split:
+                includes_list.append(line_split[line_split.index('include') + 1].strip('"'))
+
+        return includes_list
+
 
 def get_function_list_from_pyf(pyf_file_name, comment_start='!'):
     """

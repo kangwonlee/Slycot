@@ -150,3 +150,13 @@ end python module slycot
         [
             self.assertFalse(self.pyf_comment_char in line) for line in new_lines
         ]
+
+    def test_parse_wrapper(self):
+        input_list = self.wrapper_example.splitlines()
+
+        # method under test
+        result_list = self.pyf_reader.get_includes_in_wrapper(input_list)
+
+        expected_set = {"analysis.pyf", "math.pyf", "synthesis.pyf", "transform.pyf", }
+
+        self.assertSetEqual(expected_set, set(result_list))
