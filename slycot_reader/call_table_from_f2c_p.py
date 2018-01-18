@@ -6,6 +6,7 @@ default_path_dict = {
     'slycot': {
         'src': os.path.join(os.pardir, 'slycot', 'src'),
         'f2c': os.path.join(os.pardir, 'slycot', 'src-f2c'),
+        'pyf': os.path.join(os.pardir, 'slycot', 'src'),
     },
     'lapack': {
         'src': os.path.join(os.pardir, 'slycot', 'src-f2c', 'lapack', 'SRC'),
