@@ -244,6 +244,31 @@ class F2cpReader(object):
         return definition_missing_dict, never_called_dict
 
 
+class PyfReader(object):
+    """
+    Objective : Read .pyf files in slycot/src and collect information
+    """
+
+    wrapper_name = '_wrapper.pyf'
+    comment_char = '!'
+
+    def __init__(self):
+        pass
+
+    def read_wrapper(self):
+        with open(os.path.join(default_path_dict['slycot']['pyf'], self.wrapper_name), 'r') as f:
+            txt_lines = f.readlines()
+        return txt_lines
+
+    def remove_comments(self, lines):
+        new_lines = []
+        for line in lines:
+            where = line.find(self.comment_char)
+            new_lines.append(line[:where])
+
+        return new_lines
+
+
 def get_function_list_from_pyf(pyf_file_name, comment_start='!'):
     """
     Objective : to make a list of functions in a .pyf file of f2py
