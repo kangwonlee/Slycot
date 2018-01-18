@@ -72,6 +72,10 @@ cimport numpy as np
 np.import_array()
 """
 
+    @staticmethod
+    def get_h_header():
+        return '#include "f2c.h"\n'
+
     def get_function_prototype_text(self, function_name):
         return super().get_third_and_latter_row_text(function_name)
 
