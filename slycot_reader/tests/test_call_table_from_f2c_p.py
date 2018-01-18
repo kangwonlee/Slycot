@@ -121,3 +121,32 @@ class TestF2cP(unittest.TestCase):
             result = p.search(type_name)
             self.assertIsNotNone(result)
             self.assertSequenceEqual(expected, (result.group('type'), result.group('name')))
+
+
+class TestPyfReader(unittest.TestCase):
+    wrapper_example = '''!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module _wrapper ! in 
+    interface  ! in :wrapper
+		include "analysis.pyf"
+		include "math.pyf"
+		include "synthesis.pyf"
+		include "transform.pyf"
+    end interface 
+end python module slycot
+'''
+    pyf_comment_char = '!'
+
+    def setUp(self):
+        self.pyf_reader = cp.PyfReader()
+
+    def tearDown(self):
+        del self.pyf_reader
+
+    def test_remove_comments(self):
+        input_list = self.wrapper_example.splitlines()
+        new_lines = self.pyf_reader.remove_comments(input_list)
+        [
+            self.assertFalse(self.pyf_comment_char in line) for line in new_lines
+        ]
