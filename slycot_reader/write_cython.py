@@ -64,7 +64,7 @@ class Dict2Cython(Dict2MDTable):
         super(Dict2Cython, self).__init__(input_dict, row_selection_list=row_selection_list)
 
     @staticmethod
-    def write_pyx_header():
+    def get_pyx_header():
         return """from f2c cimport *
 
 cimport numpy as np
