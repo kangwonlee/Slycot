@@ -54,6 +54,7 @@ install:
   # lapack cannot be found in the check
   # with --override-channels to make sure the locally built slycot is installed
   #
+  - conda list
   - if [[ $TEST_CONDA == 1 ]]; then
       conda config --append channels conda-forge;
       conda build --python "$TRAVIS_PYTHON_VERSION" conda-recipe;
