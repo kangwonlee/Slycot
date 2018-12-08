@@ -88,8 +88,11 @@ script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   # Get python-control from source and install
-  - git clone https://github.com/python-control/python-control.git control
-  - cd control; python setup.py test
+  - git clone https://github.com/kangwonlee/python-control.git control
+  - cd control
+  - git checkout feature/test-python2-error
+  - python ../set_nose_cfg.py
+  - python setup.py test
 
 after_success:
   - coveralls
