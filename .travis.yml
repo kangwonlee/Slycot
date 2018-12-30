@@ -18,6 +18,7 @@ os:
 
 cache:
   pip: true
+  brew: true
   directories:
     - $HOME/.cache/pip
 
@@ -41,8 +42,14 @@ before_install:
   # will handle this through the build recipe)
   #
   - if [[ $TEST_CONDA == 0 ]]; then
-      sudo apt-get install liblapack-dev libblas-dev;
-      sudo apt-get install gfortran;
+      if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        sudo apt-get install liblapack-dev libblas-dev;
+        sudo apt-get install gfortran;
+      fi;
+      if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+        sudo brew install liblapack-dev libblas-dev;
+        sudo brew install gfortran;
+      fi;
     fi
 
 install:
