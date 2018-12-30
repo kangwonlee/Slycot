@@ -1,16 +1,40 @@
 # Travis configuration file for slycot
 language: shell
 
-python:
-  - "2.7"
-  - "3.5"
-  - "3.6"
 
 env:
-  - TEST_CONDA=0
-  - TEST_CONDA=1
+  - CONDA_PYTHON=2.7 TEST_CONDA=0
+  - CONDA_PYTHON=2.7 TEST_CONDA=1
+  - CONDA_PYTHON=3.5 TEST_CONDA=0
+  - CONDA_PYTHON=3.5 TEST_CONDA=1
+  - CONDA_PYTHON=3.6 TEST_CONDA=0
+  - CONDA_PYTHON=3.6 TEST_CONDA=1
+
+
+os:
+  - linux
+  - osx
+
+
+cache:
+  pip: true
+  directories:
+    - $HOME/.cache/pip
+
 
 before_install:
+  # Miniconda version
+  - if [[ "$CONDA_PYTHON" == "2.7" ]]; then
+      export VER_MINICONDA="2";
+    else
+      export VER_MINICONDA="3";
+    fi
+  # Miniconda OS
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      export OS_MINICONDA="Linux";
+    elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      export OS_MINICONDA="MacOSX";
+    fi
   #
   # Install fortran compiler, if not using Conda's
   # If not using conda, then install liblapack here (conda version
@@ -26,11 +50,7 @@ install:
   # Install miniconda to allow quicker installation of dependencies
   # See https://conda.io/docs/user-guide/tasks/use-conda-with-travis-ci.html
   #
-  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
-      wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh;
-    else
-      wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-    fi
+  - wget http://repo.continuum.io/miniconda/Miniconda${VER_MINICONDA}-latest-${OS_MINICONDA}-x86_64.sh -O miniconda.sh;
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH="$HOME/miniconda/bin:$PATH"
   - hash -r
@@ -40,7 +60,7 @@ install:
   - conda info -a
   #
   # Set up a test environment for testing everything out
-  - conda create -q -n test-environment python="$TRAVIS_PYTHON_VERSION" pip coverage nose numpy
+  - conda create -q -n test-environment python="$CONDA_PYTHON" pip coverage nose numpy
   - source activate test-environment
   #
   # Make sure that fortran compiler can find conda libraries
@@ -56,7 +76,7 @@ install:
   #
   - if [[ $TEST_CONDA == 1 ]]; then
       conda config --append channels conda-forge;
-      conda build --python "$TRAVIS_PYTHON_VERSION" conda-recipe;
+      conda build --python "$CONDA_PYTHON" conda-recipe;
       conda install -c conda-forge lapack;
       conda install --override-channels -c local slycot;
     else
