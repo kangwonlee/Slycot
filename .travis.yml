@@ -23,6 +23,16 @@ cache:
     - $HOME/.cache/pip
 
 
+
+addons:
+  apt:
+    packages:
+      - xvfb
+  brew:
+    packages:
+      - xvfb
+
+
 before_install:
   # Miniconda version
   - if [[ "$CONDA_PYTHON" == "2.7" ]]; then
