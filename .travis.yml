@@ -23,14 +23,26 @@ cache:
     - $HOME/.cache/pip
 
 
+# Install display manager to allow testing of plotting functions
 
+#
+# Install fortran compiler, if not using Conda's
+# If not using conda, then install liblapack here (conda version
+# will handle this through the build recipe)
+#
 addons:
   apt:
     packages:
       - xvfb
+      - gfortran
+      - liblapack-dev
+      - libblas-dev
   brew:
     packages:
       - xvfb
+      - gfortran
+      - liblapack-dev
+      - libblas-dev
 
 
 before_install:
@@ -45,21 +57,6 @@ before_install:
       export OS_MINICONDA="Linux";
     elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       export OS_MINICONDA="MacOSX";
-    fi
-  #
-  # Install fortran compiler, if not using Conda's
-  # If not using conda, then install liblapack here (conda version
-  # will handle this through the build recipe)
-  #
-  - if [[ $TEST_CONDA == 0 ]]; then
-      if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-        sudo apt-get install liblapack-dev libblas-dev;
-        sudo apt-get install gfortran;
-      fi;
-      if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        sudo brew install liblapack-dev libblas-dev;
-        sudo brew install gfortran;
-      fi;
     fi
   # start display manager to allow testing of plotting functions
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
