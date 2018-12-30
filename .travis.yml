@@ -1,5 +1,5 @@
 # Travis configuration file for slycot
-language: python
+language: shell
 
 python:
   - "2.7"
