@@ -107,6 +107,18 @@ matrix:
       services: xvfb
       env: SLYCOT_PYTHON_VERSION=3.7.3 TEST_CONDA=1
 
+    - name: "Ubuntu 16.04, Python 3.8-dev, TEST_CONDA=0"
+      os: linux
+      dist: xenial
+      services: xvfb
+      env: SLYCOT_PYTHON_VERSION=3.8-dev TEST_CONDA=0
+
+    - name: "Ubuntu 16.04, Python 3.8-dev, TEST_CONDA=1"
+      os: linux
+      dist: xenial
+      services: xvfb
+      env: SLYCOT_PYTHON_VERSION=3.8-dev TEST_CONDA=1
+
 before_install:
   - if [[ $TEST_CONDA == 0 && $TRAVIS_OS_NAME != linux ]]; then
       echo "Only Linux supported for non-Conda builds";
