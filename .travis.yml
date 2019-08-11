@@ -27,6 +27,10 @@ matrix:
       os: osx
       env: SLYCOT_PYTHON_VERSION=3.7 TEST_CONDA=1
 
+    - name: "OSX, Python 3.7.1, TEST_CONDA=1"
+      os: osx
+      env: SLYCOT_PYTHON_VERSION=3.7.1 TEST_CONDA=1
+
     - name: "Ubuntu 16.04, Python 2.7, TEST_CONDA=0"
       os: linux
       dist: xenial
