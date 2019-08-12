@@ -11,113 +11,113 @@ matrix:
       env: SLYCOT_PYTHON_VERSION=2.7 TEST_CONDA=1
 
   include:
-    - name: "OSX, Python 2.7, TEST_CONDA=1"
-      os: osx
-      env: SLYCOT_PYTHON_VERSION=2.7 TEST_CONDA=1
+    # - name: "OSX, Python 2.7, TEST_CONDA=1"
+    #   os: osx
+    #   env: SLYCOT_PYTHON_VERSION=2.7 TEST_CONDA=1
 
-    - name: "OSX, Python 3.5, TEST_CONDA=1"
-      os: osx
-      env: SLYCOT_PYTHON_VERSION=3.5 TEST_CONDA=1
+    # - name: "OSX, Python 3.5, TEST_CONDA=1"
+    #   os: osx
+    #   env: SLYCOT_PYTHON_VERSION=3.5 TEST_CONDA=1
 
-    - name: "OSX, Python 3.6, TEST_CONDA=1"
-      os: osx
-      env: SLYCOT_PYTHON_VERSION=3.6 TEST_CONDA=1
+    # - name: "OSX, Python 3.6, TEST_CONDA=1"
+    #   os: osx
+    #   env: SLYCOT_PYTHON_VERSION=3.6 TEST_CONDA=1
 
     - name: "OSX, Python 3.7, TEST_CONDA=1"
       os: osx
       env: SLYCOT_PYTHON_VERSION=3.7 TEST_CONDA=1
 
-    - name: "OSX, Python 3.7.1, TEST_CONDA=1"
-      os: osx
-      env: SLYCOT_PYTHON_VERSION=3.7.1 TEST_CONDA=1
+    # - name: "OSX, Python 3.7.1, TEST_CONDA=1"
+    #   os: osx
+    #   env: SLYCOT_PYTHON_VERSION=3.7.1 TEST_CONDA=1
 
-    - name: "OSX, Python 3.7.3, TEST_CONDA=1"
-      os: osx
-      env: SLYCOT_PYTHON_VERSION=3.7.3 TEST_CONDA=1
+    # - name: "OSX, Python 3.7.3, TEST_CONDA=1"
+    #   os: osx
+    #   env: SLYCOT_PYTHON_VERSION=3.7.3 TEST_CONDA=1
 
-    - name: "Ubuntu 16.04, Python 2.7, TEST_CONDA=0"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=2.7 TEST_CONDA=0
+    # - name: "Ubuntu 16.04, Python 2.7, TEST_CONDA=0"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=2.7 TEST_CONDA=0
 
-    - name: "Ubuntu 16.04, Python 2.7, TEST_CONDA=1"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=2.7 TEST_CONDA=1
+    # - name: "Ubuntu 16.04, Python 2.7, TEST_CONDA=1"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=2.7 TEST_CONDA=1
 
-    - name: "Ubuntu 16.04, Python 3.5, TEST_CONDA=0"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=3.5 TEST_CONDA=0
+    # - name: "Ubuntu 16.04, Python 3.5, TEST_CONDA=0"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=3.5 TEST_CONDA=0
 
-    - name: "Ubuntu 16.04, Python 3.5, TEST_CONDA=1"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=3.5 TEST_CONDA=1
+    # - name: "Ubuntu 16.04, Python 3.5, TEST_CONDA=1"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=3.5 TEST_CONDA=1
 
-    - name: "Ubuntu 16.04, Python 3.6, TEST_CONDA=0"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=3.6 TEST_CONDA=0
+    # - name: "Ubuntu 16.04, Python 3.6, TEST_CONDA=0"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=3.6 TEST_CONDA=0
 
-    - name: "Ubuntu 16.04, Python 3.6, TEST_CONDA=1"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=3.6 TEST_CONDA=1
+    # - name: "Ubuntu 16.04, Python 3.6, TEST_CONDA=1"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=3.6 TEST_CONDA=1
 
-    - name: "Ubuntu 16.04, Python 3.7, TEST_CONDA=0"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=3.7 TEST_CONDA=0
+    # - name: "Ubuntu 16.04, Python 3.7, TEST_CONDA=0"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=3.7 TEST_CONDA=0
 
-    - name: "Ubuntu 16.04, Python 3.7, TEST_CONDA=1"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=3.7 TEST_CONDA=1
+    # - name: "Ubuntu 16.04, Python 3.7, TEST_CONDA=1"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=3.7 TEST_CONDA=1
 
-    - name: "Ubuntu 16.04, Python 3.7.1, TEST_CONDA=0"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=3.7.1 TEST_CONDA=0
+    # - name: "Ubuntu 16.04, Python 3.7.1, TEST_CONDA=0"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=3.7.1 TEST_CONDA=0
 
-    - name: "Ubuntu 16.04, Python 3.7.1, TEST_CONDA=1"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=3.7.1 TEST_CONDA=1
+    # - name: "Ubuntu 16.04, Python 3.7.1, TEST_CONDA=1"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=3.7.1 TEST_CONDA=1
 
-    - name: "Ubuntu 16.04, Python 3.7.3, TEST_CONDA=0"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=3.7.3 TEST_CONDA=0
+    # - name: "Ubuntu 16.04, Python 3.7.3, TEST_CONDA=0"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=3.7.3 TEST_CONDA=0
 
-    - name: "Ubuntu 16.04, Python 3.7.3, TEST_CONDA=1"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=3.7.3 TEST_CONDA=1
+    # - name: "Ubuntu 16.04, Python 3.7.3, TEST_CONDA=1"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=3.7.3 TEST_CONDA=1
 
-    - name: "Ubuntu 16.04, Python 3.7.4, TEST_CONDA=0"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=3.7.4 TEST_CONDA=0
+    # - name: "Ubuntu 16.04, Python 3.7.4, TEST_CONDA=0"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=3.7.4 TEST_CONDA=0
 
-    - name: "Ubuntu 16.04, Python 3.7.4, TEST_CONDA=1"
-      os: linux
-      dist: xenial
-      services: xvfb
-      env: SLYCOT_PYTHON_VERSION=3.7.4 TEST_CONDA=1
+    # - name: "Ubuntu 16.04, Python 3.7.4, TEST_CONDA=1"
+    #   os: linux
+    #   dist: xenial
+    #   services: xvfb
+    #   env: SLYCOT_PYTHON_VERSION=3.7.4 TEST_CONDA=1
 
 before_install:
   - if [[ $TEST_CONDA == 0 && $TRAVIS_OS_NAME != linux ]]; then
