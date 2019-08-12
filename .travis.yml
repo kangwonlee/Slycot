@@ -155,7 +155,7 @@ install:
   - conda info -a
   #
   # Set up a test environment for testing everything out
-  - conda create -q -n --copy test-environment python="$SLYCOT_PYTHON_VERSION" pip coverage nose numpy openblas
+  - conda create -q --copy -n test-environment python="$SLYCOT_PYTHON_VERSION" pip coverage nose numpy openblas
   - source activate test-environment
 
   #
