@@ -1,14 +1,13 @@
-name: CI
+name: CI linux
 
 on : [push]
 
 jobs:
   build:
     name: Python ${{ matrix.python }} with TEST_CONDA=${{ matrix.test_conda }}
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-16.04
     strategy:
       matrix:
-        os: [macOS-10.14, ubuntu-16.04]
         python: [2.7, 3.5, 3.6, 3.7]
         test_conda: [0, 1]
     steps:
