@@ -21,3 +21,5 @@ jobs:
         SLYCOT_PYTHON_VERSION: ${{ matrix.os }}
         TEST_CONDA: ${{ matrix.test_conda }}
       run: bash ./.github/workflows/install.sh
+    - name: run tests
+      run: bash ./.github/workflows/run_tests.sh
