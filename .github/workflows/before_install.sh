@@ -1,5 +1,4 @@
-echo "RUNNER_OS = $RUNNER_OS"
-if [[ $TEST_CONDA == 0 && $RUNNER_OS != "linux" ]]; then
+if [[ $TEST_CONDA == 0 && $RUNNER_OS != "Linux" ]]; then
     echo "Only Linux supported for non-Conda builds";
     exit 1;
 fi
