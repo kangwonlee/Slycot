@@ -1,5 +1,11 @@
 # Local unit tests
 # TODO: replace with nose?
+
+echo "install xvfb ==============="
+apt-get install xvfb
+Xvfb :99 &
+export DISPLAY=:99
+
 . ./.github/workflows/set_os_env.sh
 
 echo "source activate test-environment ==============="

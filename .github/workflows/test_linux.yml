@@ -25,9 +25,6 @@ jobs:
         source ./.github/workflows/install.sh
     - name: run tests
       run: 
-        apt-get install xvfb
-        Xvfb :99 &
-        export DISPLAY=:99
         source ./.github/workflows/run_tests.sh
     - name: coverall
       run: coveralls
