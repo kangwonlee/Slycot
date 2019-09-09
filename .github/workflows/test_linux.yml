@@ -27,4 +27,6 @@ jobs:
       run: 
         source ./.github/workflows/run_tests.sh
     - name: coverall
-      run: coveralls
+      run: 
+        pip install coveralls
+        coveralls

@@ -45,6 +45,3 @@ if [[ $TEST_CONDA == 1 ]]; then
 else
     CMAKE_GENERATOR="Unix Makefiles" python setup.py install;
 fi
-#
-# coveralls not in conda repos :-(
-pip install coveralls
