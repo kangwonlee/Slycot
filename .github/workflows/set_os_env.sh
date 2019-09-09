@@ -1,3 +1,4 @@
+echo "exporting env vars ============================="
 
 if [[ $RUNNER_OS ==  "Linux" ]]; then
     export MINICONDA_PATH=$CONDA
@@ -15,3 +16,8 @@ fi
 
 export MINICONDA_SUB_PATH=$MINICONDA_PATH/$CONDA_SCRIPT
 export MINICONDA_PYTEST=$MINICONDA_PATH/envs/test-environment/$CONDA_SCRIPT/py.test
+#
+# Make sure that fortran compiler can find conda libraries
+#
+export LIBRARY_PATH="$MINICONDA_PATH/envs/test-environment/lib";
+export PATH="$MINICONDA_PATH:$MINICONDA_SUB_PATH:$PATH"
