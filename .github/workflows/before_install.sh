@@ -1,4 +1,5 @@
-if [[ $TEST_CONDA == 0 && $TRAVIS_OS_NAME != linux ]]; then
+echo "RUNNER_OS = $RUNNER_OS"
+if [[ $TEST_CONDA == 0 && $RUNNER_OS != "linux" ]]; then
     echo "Only Linux supported for non-Conda builds";
     exit 1;
 fi
