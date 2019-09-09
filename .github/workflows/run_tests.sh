@@ -1,8 +1,7 @@
 # Local unit tests
 # TODO: replace with nose?
 
-echo "install xvfb ==============="
-apt-get install xvfb
+echo "start xvfb ====================================="
 Xvfb :99 &
 export DISPLAY=:99
 
