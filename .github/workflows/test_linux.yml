@@ -23,3 +23,5 @@ jobs:
       run: bash ./.github/workflows/install.sh
     - name: run tests
       run: bash ./.github/workflows/run_tests.sh
+    - name: coverall
+      run: coveralls
