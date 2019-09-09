@@ -16,7 +16,7 @@ jobs:
       env:
         TEST_CONDA: ${{ matrix.test_conda }}
       run: bash ./.github/workflows/before_install.sh
-    - name: before install
+    - name: install
       env:
         SLYCOT_PYTHON_VERSION: ${{ matrix.os }}
         TEST_CONDA: ${{ matrix.test_conda }}
